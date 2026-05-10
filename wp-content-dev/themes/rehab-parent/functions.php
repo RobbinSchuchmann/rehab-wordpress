@@ -57,6 +57,7 @@ function rehab_parent_enqueue(): void {
 
 	$stylesheets = [
 		'rehab-tokens'     => [ "$base_uri/css/tokens.css", [] ],
+		'rehab-base'       => [ "$base_uri/css/base.css", [ 'rehab-tokens' ] ],
 		'rehab-typography' => [ "$base_uri/css/typography.css", [ 'rehab-tokens' ] ],
 		'rehab-layout'     => [ "$base_uri/css/layout.css", [ 'rehab-tokens' ] ],
 		'rehab-buttons'    => [ "$base_uri/css/buttons.css", [ 'rehab-tokens' ] ],

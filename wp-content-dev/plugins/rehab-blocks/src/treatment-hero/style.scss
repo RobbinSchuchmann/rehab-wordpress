@@ -15,9 +15,7 @@
 }
 
 .rehab-treatment-hero__eyebrow {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.65rem;
+	display: block;
 	margin: 0 0 1.25rem;
 	font-family: var(--rehab-font-body);
 	font-weight: 500;
@@ -25,6 +23,15 @@
 	letter-spacing: 0.2em;
 	text-transform: uppercase;
 	color: var(--rehab-sage-text);
+	overflow-wrap: anywhere;
+}
+
+.rehab-treatment-hero__eyebrow .diamond {
+	display: inline-block;
+	margin-right: 0.55rem;
+	font-size: 0.55rem;
+	opacity: 0.7;
+	vertical-align: 1px;
 }
 
 .rehab-treatment-hero__eyebrow .diamond {
@@ -58,6 +65,16 @@
 	gap: 0.75rem;
 	align-items: center;
 	margin-bottom: 1.5rem;
+
+	/* On narrow mobile, let buttons span full width and break their long
+	   uppercase labels onto two lines so they never push past the container. */
+	@media (max-width: 480px) {
+		.rehab-btn {
+			width: 100%;
+			white-space: normal;
+			line-height: 1.3;
+		}
+	}
 }
 
 .rehab-treatment-hero__helper {

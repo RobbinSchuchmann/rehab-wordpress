@@ -1,6 +1,7 @@
 /* Layout primitives. Containers, section spacing. */
 
 .rehab-container {
+	box-sizing: border-box;
 	width: 100%;
 	max-width: var(--rehab-container-max);
 	margin-left: auto;
