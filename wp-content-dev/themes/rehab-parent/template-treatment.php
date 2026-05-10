@@ -16,11 +16,30 @@ while ( have_posts() ) :
 	?>
 	<div class="rehab-treatment">
 
+		<?php
+		// Breadcrumb category between "Treatments" and the page title.
+		// Pulled from a per-page meta (_rehab_breadcrumb_category) if set;
+		// otherwise inferred from the slug. Substance pages → "Substance addiction".
+		$crumb_cat = get_post_meta( $current_id, '_rehab_breadcrumb_category', true );
+		if ( ! $crumb_cat && $post = get_post( $current_id ) ) {
+			$slug = $post->post_name;
+			if ( preg_match( '/(cocaine|ice-addiction|meth|heroin|alcohol|crack|ecstasy|ghb|marijuana|cannabis)/i', $slug ) ) {
+				$crumb_cat = 'Substance addiction';
+			} elseif ( preg_match( '/(xanax|valium|oxycontin|tramadol|ritalin|adderall|prescription)/i', $slug ) ) {
+				$crumb_cat = 'Prescription drug';
+			} elseif ( preg_match( '/(anxiety|depression|ptsd|trauma|burnout|insomnia|gambling|sex-addiction|codependency)/i', $slug ) ) {
+				$crumb_cat = 'Mental health';
+			}
+		}
+		?>
 		<nav class="rehab-breadcrumb" aria-label="Breadcrumb">
 			<div class="rehab-container">
 				<ol class="rehab-breadcrumb__list">
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>">Treatments</a></li>
+					<?php if ( $crumb_cat ) : ?>
+						<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>"><?php echo esc_html( $crumb_cat ); ?></a></li>
+					<?php endif; ?>
 					<li aria-current="page"><?php the_title(); ?></li>
 				</ol>
 			</div>

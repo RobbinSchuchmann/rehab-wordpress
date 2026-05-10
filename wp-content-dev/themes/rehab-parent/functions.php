@@ -718,3 +718,43 @@ function rehab_parent_image_dimensions( string $content ): string {
 	);
 }
 add_filter( 'the_content', 'rehab_parent_image_dimensions', 20 );
+
+/**
+ * Allow inline SVGs in post_content so block markup that includes icons
+ * (rehab/pillars, rehab/signs-grid, doctor cards, final-cta contact icons)
+ * survives wp_kses_post on save.
+ *
+ * Gutenberg post content is sanitized via kses_post when wp_update_post is
+ * called. Default kses_allowed_html['post'] does not include <svg>, <path>,
+ * <circle>, <polyline>, <rect> etc — so any inline icon gets stripped.
+ *
+ * Only adds SVG tags to the 'post' context, not 'data' or other contexts.
+ */
+function rehab_parent_allow_svg_in_post( $tags, $context ) {
+	if ( $context !== 'post' ) return $tags;
+	$svg_attrs = [
+		'xmlns' => true, 'viewbox' => true, 'fill' => true, 'stroke' => true,
+		'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true,
+		'width' => true, 'height' => true, 'class' => true, 'aria-hidden' => true,
+		'role' => true, 'focusable' => true, 'preserveaspectratio' => true,
+		'transform' => true, 'opacity' => true, 'fill-rule' => true, 'clip-rule' => true,
+	];
+	$path_attrs = [
+		'd' => true, 'fill' => true, 'stroke' => true, 'transform' => true,
+		'opacity' => true, 'class' => true,
+	];
+	$tags['svg']      = $svg_attrs;
+	$tags['path']     = $path_attrs;
+	$tags['circle']   = [ 'cx' => true, 'cy' => true, 'r' => true, 'fill' => true, 'stroke' => true ];
+	$tags['rect']     = [ 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true, 'ry' => true, 'fill' => true, 'stroke' => true ];
+	$tags['line']     = [ 'x1' => true, 'y1' => true, 'x2' => true, 'y2' => true, 'stroke' => true ];
+	$tags['polyline'] = [ 'points' => true, 'fill' => true, 'stroke' => true ];
+	$tags['polygon']  = [ 'points' => true, 'fill' => true, 'stroke' => true ];
+	$tags['g']        = [ 'fill' => true, 'stroke' => true, 'transform' => true ];
+	$tags['defs']     = [];
+	$tags['use']      = [ 'href' => true, 'xlink:href' => true ];
+	$tags['title']    = [];
+	$tags['desc']     = [];
+	return $tags;
+}
+add_filter( 'wp_kses_allowed_html', 'rehab_parent_allow_svg_in_post', 10, 2 );
