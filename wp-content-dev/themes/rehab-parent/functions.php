@@ -302,8 +302,33 @@ function rehab_parent_seo_meta(): void {
 	$is_single = is_singular();
 	$is_front  = is_front_page();
 	$post      = $is_single ? get_post() : null;
+	$post_id   = $post ? $post->ID : 0;
 
-	$title       = $is_single ? wp_get_document_title() : ( get_bloginfo( 'name' ) . ' — ' . get_bloginfo( 'description' ) );
+	// Phase 1: read Rank Math postmeta where set; fall back to our own logic.
+	// 236 pages have rank_math_focus_keyword, 196 have descriptions, 43 have
+	// custom titles — that's real human SEO work we want to preserve.
+	$rm_title    = $post_id ? trim( (string) get_post_meta( $post_id, 'rank_math_title', true ) ) : '';
+	$rm_desc     = $post_id ? trim( (string) get_post_meta( $post_id, 'rank_math_description', true ) ) : '';
+	$rm_og_desc  = $post_id ? trim( (string) get_post_meta( $post_id, 'rank_math_facebook_description', true ) ) : '';
+	$rm_og_image = $post_id ? trim( (string) get_post_meta( $post_id, 'rank_math_facebook_image', true ) ) : '';
+	if ( ! $rm_og_image && $post_id ) {
+		$rm_og_image = trim( (string) get_post_meta( $post_id, 'rank_math_og_content_image', true ) );
+	}
+	// Rank Math title supports tokens like %title%, %sep%, %sitename% — expand
+	// them naively. (Full token expansion would re-implement the Rank Math
+	// engine; this covers the common ones.)
+	if ( $rm_title ) {
+		$rm_title = strtr( $rm_title, [
+			'%title%'    => $post ? get_the_title( $post ) : $site_name,
+			'%sitename%' => $site_name,
+			'%site_name%'=> $site_name,
+			'%sep%'      => '|',
+			'%page%'     => '',
+		] );
+		$rm_title = trim( preg_replace( '/\s+/', ' ', $rm_title ) );
+	}
+
+	$title       = $rm_title ?: ( $is_single ? wp_get_document_title() : ( get_bloginfo( 'name' ) . ' — ' . get_bloginfo( 'description' ) ) );
 	$description = '';
 	$image       = get_stylesheet_directory_uri() . '/assets/img/hero/pool-pavilion.avif';
 	if ( ! file_exists( get_stylesheet_directory() . '/assets/img/hero/pool-pavilion.avif' ) ) {
@@ -315,8 +340,9 @@ function rehab_parent_seo_meta(): void {
 	$brand_default_description = 'Doctor-led, residential drug and alcohol rehab in Hua Hin, Thailand. Maximum 12 clients at a time, absolute confidentiality, lifetime aftercare. Voted #1 by The Thaiger.';
 
 	if ( $post ) {
-		// Prefer manual excerpt; else first <p> paragraph from content; else brand default.
-		$excerpt = trim( $post->post_excerpt );
+		// Description priority: Rank Math → manual excerpt → first <p> → default.
+		$excerpt = $rm_desc;
+		if ( ! $excerpt ) $excerpt = trim( $post->post_excerpt );
 		if ( ! $excerpt ) {
 			$content = $post->post_content;
 			if ( preg_match( '/<p[^>]*>(.+?)<\/p>/is', $content, $pm ) ) {
@@ -331,9 +357,14 @@ function rehab_parent_seo_meta(): void {
 		}
 		$description = $excerpt;
 
-		$thumb_url = get_the_post_thumbnail_url( $post, 'large' );
-		if ( $thumb_url ) {
-			$image = $thumb_url;
+		// Image priority: Rank Math FB image → featured thumbnail → brand default.
+		if ( $rm_og_image ) {
+			$image = $rm_og_image;
+		} else {
+			$thumb_url = get_the_post_thumbnail_url( $post, 'large' );
+			if ( $thumb_url ) {
+				$image = $thumb_url;
+			}
 		}
 	} else {
 		$description = $brand_default_description;
@@ -346,14 +377,29 @@ function rehab_parent_seo_meta(): void {
 		$description = mb_substr( $description, 0, 197 ) . '…';
 	}
 
+	// OG description can be different from meta description.
+	$og_description = $rm_og_desc ? trim( wp_strip_all_tags( $rm_og_desc ) ) : $description;
+
+	// Robots: respect rank_math_robots (a serialized array) for noindex/nofollow.
+	$robots_meta = '';
+	if ( $post_id ) {
+		$rm_robots = get_post_meta( $post_id, 'rank_math_robots', true );
+		if ( is_array( $rm_robots ) && ! empty( $rm_robots ) ) {
+			$robots_meta = implode( ', ', array_map( 'sanitize_text_field', $rm_robots ) );
+		}
+	}
+
 	$tags = [];
+	if ( $robots_meta ) {
+		$tags[] = '<meta name="robots" content="' . esc_attr( $robots_meta ) . '">';
+	}
 	if ( $description ) {
 		$tags[] = '<meta name="description" content="' . esc_attr( $description ) . '">';
 	}
 	$tags[] = '<meta property="og:type" content="' . esc_attr( $type ) . '">';
 	$tags[] = '<meta property="og:title" content="' . esc_attr( $title ) . '">';
-	if ( $description ) {
-		$tags[] = '<meta property="og:description" content="' . esc_attr( $description ) . '">';
+	if ( $og_description ) {
+		$tags[] = '<meta property="og:description" content="' . esc_attr( $og_description ) . '">';
 	}
 	$tags[] = '<meta property="og:url" content="' . esc_url( $url ) . '">';
 	$tags[] = '<meta property="og:site_name" content="' . esc_attr( $site_name ) . '">';
@@ -361,14 +407,35 @@ function rehab_parent_seo_meta(): void {
 	$tags[] = '<meta property="og:image:alt" content="' . esc_attr( $title ) . '">';
 	$tags[] = '<meta name="twitter:card" content="summary_large_image">';
 	$tags[] = '<meta name="twitter:title" content="' . esc_attr( $title ) . '">';
-	if ( $description ) {
-		$tags[] = '<meta name="twitter:description" content="' . esc_attr( $description ) . '">';
+	if ( $og_description ) {
+		$tags[] = '<meta name="twitter:description" content="' . esc_attr( $og_description ) . '">';
 	}
 	$tags[] = '<meta name="twitter:image" content="' . esc_url( $image ) . '">';
 
 	echo "\n\t" . implode( "\n\t", $tags ) . "\n";
 }
 add_action( 'wp_head', 'rehab_parent_seo_meta', 5 );
+
+/**
+ * Override <title> tag to use Rank Math's custom title where set.
+ * Hooks `pre_get_document_title` so wp_get_document_title() returns the
+ * Rank Math title verbatim. Tokens like %title%, %sep%, %sitename% are
+ * expanded; full Rank Math token expansion is intentionally out of scope.
+ */
+function rehab_parent_rank_math_title( $title ) {
+	if ( is_admin() || is_feed() ) return $title;
+	if ( ! is_singular() ) return $title;
+	$rm = trim( (string) get_post_meta( get_queried_object_id(), 'rank_math_title', true ) );
+	if ( ! $rm ) return $title;
+	return trim( preg_replace( '/\s+/', ' ', strtr( $rm, [
+		'%title%'    => get_the_title(),
+		'%sitename%' => get_bloginfo( 'name' ),
+		'%site_name%'=> get_bloginfo( 'name' ),
+		'%sep%'      => '|',
+		'%page%'     => '',
+	] ) ) );
+}
+add_filter( 'pre_get_document_title', 'rehab_parent_rank_math_title', 9 );
 
 /**
  * Emit JSON-LD structured data: Organization (sitewide), WebSite with

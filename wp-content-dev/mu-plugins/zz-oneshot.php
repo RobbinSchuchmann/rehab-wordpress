@@ -2078,6 +2078,75 @@ add_action( 'init', function () {
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cocaine page (design v2, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
+		case 'inspect-db':
+			global $wpdb;
+			echo "=== ACTIVE PLUGINS ===\n";
+			foreach ( (array) get_option( 'active_plugins' ) as $p ) echo "  $p\n";
+			echo "\n=== POST TYPES (counts) ===\n";
+			$pts = $wpdb->get_results( "SELECT post_type, COUNT(*) AS n FROM {$wpdb->posts} WHERE post_status NOT IN ('auto-draft','trash') GROUP BY post_type ORDER BY n DESC" );
+			foreach ( $pts as $row ) echo sprintf( "  %-30s %d\n", $row->post_type, $row->n );
+			echo "\n=== ACF FIELD GROUPS (acf-field-group post type) ===\n";
+			$acf_groups = $wpdb->get_col( "SELECT post_title FROM {$wpdb->posts} WHERE post_type='acf-field-group' AND post_status='publish'" );
+			if ( $acf_groups ) foreach ( $acf_groups as $g ) echo "  $g\n";
+			else echo "  (none)\n";
+			echo "\n=== POSTMETA WITH ACF KEY PREFIX (counts top 10) ===\n";
+			$meta = $wpdb->get_results( "SELECT meta_key, COUNT(*) AS n FROM {$wpdb->postmeta} WHERE meta_key LIKE '\\_acf%' OR meta_key NOT LIKE '\\_%' GROUP BY meta_key ORDER BY n DESC LIMIT 20" );
+			foreach ( $meta as $row ) echo sprintf( "  %-50s %d\n", $row->meta_key, $row->n );
+			echo "\n=== TAXONOMIES (counts) ===\n";
+			$tax = $wpdb->get_results( "SELECT taxonomy, COUNT(*) AS n FROM {$wpdb->term_taxonomy} GROUP BY taxonomy ORDER BY n DESC" );
+			foreach ( $tax as $row ) echo sprintf( "  %-30s %d\n", $row->taxonomy, $row->n );
+			echo "\n=== ACTIVE THEME ===\n";
+			echo "  Stylesheet: " . get_option( 'stylesheet' ) . "\n";
+			echo "  Template:   " . get_option( 'template' ) . "\n";
+			echo "\n=== PAGE TEMPLATES IN USE (counts) ===\n";
+			$tpls = $wpdb->get_results( "SELECT meta_value, COUNT(*) AS n FROM {$wpdb->postmeta} WHERE meta_key='_wp_page_template' AND meta_value != '' GROUP BY meta_value ORDER BY n DESC" );
+			foreach ( $tpls as $row ) echo sprintf( "  %-40s %d\n", $row->meta_value, $row->n );
+			break;
+
+		case 'inspect-faq-cpt':
+			global $wpdb;
+			echo "=== FAQ CPT — 5 sample records ===\n";
+			$rows = $wpdb->get_results( "SELECT ID, post_title, post_status FROM {$wpdb->posts} WHERE post_type='faq' AND post_status NOT IN ('auto-draft','trash') LIMIT 5" );
+			foreach ( $rows as $r ) {
+				echo "  #$r->ID [$r->post_status] $r->post_title\n";
+				$content = $wpdb->get_var( $wpdb->prepare( "SELECT post_content FROM {$wpdb->posts} WHERE ID=%d", $r->ID ) );
+				echo "    body (first 200): " . substr( wp_strip_all_tags( $content ), 0, 200 ) . "\n";
+				$meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, LEFT(meta_value, 80) AS v FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key NOT LIKE '_wp_%' AND meta_key NOT LIKE 'rank_math_%' AND meta_key NOT LIKE 'wp-smush%' LIMIT 5", $r->ID ) );
+				foreach ( $meta as $m ) echo "    meta $m->meta_key = $m->v\n";
+			}
+			echo "\n=== Pages that link to FAQs via faq_ids meta ===\n";
+			$rows = $wpdb->get_results( "SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key='faq_ids' LIMIT 5" );
+			foreach ( $rows as $r ) echo "  page #$r->post_id → faq_ids: $r->meta_value\n";
+			echo "  total pages with faq_ids meta: " . $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key='faq_ids'" ) . "\n";
+			break;
+
+		case 'inspect-rank-math':
+			global $wpdb;
+			echo "=== Rank Math meta keys & coverage ===\n";
+			$rows = $wpdb->get_results( "SELECT meta_key, COUNT(*) AS n FROM {$wpdb->postmeta} WHERE meta_key LIKE 'rank_math_%' GROUP BY meta_key ORDER BY n DESC LIMIT 25" );
+			foreach ( $rows as $r ) echo sprintf( "  %-50s %d\n", $r->meta_key, $r->n );
+			echo "\n=== Sample for cocaine page (post 853) ===\n";
+			$rows = $wpdb->get_results( "SELECT meta_key, LEFT(meta_value, 200) AS v FROM {$wpdb->postmeta} WHERE post_id=853 AND meta_key LIKE 'rank_math_%'" );
+			foreach ( $rows as $r ) echo "  $r->meta_key = $r->v\n";
+			break;
+
+		case 'inspect-categories':
+			global $wpdb;
+			echo "=== Categories ===\n";
+			$cats = $wpdb->get_results( "SELECT t.term_id, t.name, t.slug, tt.count FROM {$wpdb->terms} t JOIN {$wpdb->term_taxonomy} tt ON tt.term_id=t.term_id WHERE tt.taxonomy='category'" );
+			foreach ( $cats as $c ) echo "  #$c->term_id  $c->name ($c->slug)  — $c->count posts\n";
+			echo "\n=== Pages → categories sample ===\n";
+			$rows = $wpdb->get_results( "SELECT p.ID, p.post_title, GROUP_CONCAT(t.name) AS cats FROM {$wpdb->posts} p JOIN {$wpdb->term_relationships} tr ON tr.object_id=p.ID JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id=tr.term_taxonomy_id JOIN {$wpdb->terms} t ON t.term_id=tt.term_id WHERE tt.taxonomy='category' AND p.post_status='publish' GROUP BY p.ID LIMIT 10" );
+			foreach ( $rows as $r ) echo "  #$r->ID $r->post_title → $r->cats\n";
+			break;
+
+		case 'inspect-builder-pages':
+			global $wpdb;
+			echo "=== Pages still using template-builder.php ===\n";
+			$rows = $wpdb->get_results( "SELECT p.ID, p.post_title, p.post_name, p.post_status FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} pm ON pm.post_id=p.ID WHERE pm.meta_key='_wp_page_template' AND pm.meta_value='template-builder.php'" );
+			foreach ( $rows as $r ) echo "  #$r->ID [$r->post_status] /$r->post_name/ — $r->post_title\n";
+			break;
+
 		case 'set-homepage-template':
 			$page_id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 6;
 			$tpl     = isset( $_GET['tpl'] ) ? sanitize_text_field( $_GET['tpl'] ) : 'page-homepage.php';
