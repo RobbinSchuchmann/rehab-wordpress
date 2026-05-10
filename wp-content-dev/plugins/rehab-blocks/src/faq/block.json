@@ -23,9 +23,15 @@
     "heading": {
       "type": "string",
       "default": "Frequently Asked Questions"
+    },
+    "cptIds": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "number" }
     }
   },
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
 }

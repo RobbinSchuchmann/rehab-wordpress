@@ -135,14 +135,41 @@ function rehab_block_cards_grid( string $heading, string $subheading, array $car
 
 /**
  * Build a `rehab/faq` block.
- * $items = array of [ 'question', 'answer' ].
+ *
+ * Each $items element is either:
+ *   - [ 'question' => '...', 'answer' => '...' ]   — inline content
+ *   - [ 'cptId' => 32 ]                            — pull from FAQ CPT post by ID
+ *   - 32 (raw int)                                 — same, shorthand
+ *
+ * cptId-based items resolve to the FAQ post's title (question) and content
+ * (answer) at migration time, so the resulting block is fully static — the
+ * editor remains a normal editing experience and the FAQ CPT records remain
+ * the canonical source.
  */
 function rehab_block_faq( string $heading, array $items, string $bg = 'cream' ): string {
-	$faq_attrs = rehab_block_attrs( [ 'background' => $bg, 'heading' => $heading ] );
+	$faq_attrs   = rehab_block_attrs( [ 'background' => $bg, 'heading' => $heading ] );
+	$resolved    = [];
+	$source_ids  = [];
+	foreach ( $items as $item ) {
+		// int → cptId shorthand
+		if ( is_int( $item ) ) $item = [ 'cptId' => $item ];
+		// resolve cptId → question/answer
+		if ( ! empty( $item['cptId'] ) ) {
+			$post = get_post( (int) $item['cptId'] );
+			if ( ! $post || $post->post_type !== 'faq' || $post->post_status !== 'publish' ) continue;
+			$source_ids[] = (int) $post->ID;
+			$resolved[] = [
+				'question' => $post->post_title,
+				'answer'   => trim( wp_strip_all_tags( $post->post_content ) ),
+			];
+			continue;
+		}
+		if ( ! empty( $item['question'] ) ) $resolved[] = $item;
+	}
 	$h  = '<section class="wp-block-rehab-faq rehab-faq rehab-bg-' . esc_attr( $bg ) . '">';
 	$h .= '<div class="rehab-container rehab-container--narrow"><h2 class="rehab-faq__heading">' . esc_html( $heading ) . '</h2>';
 	$h .= '<div class="rehab-faq__list">';
-	foreach ( $items as $item ) {
+	foreach ( $resolved as $item ) {
 		$ia = rehab_block_attrs( $item );
 		$item_html = '<details class="rehab-faq-item"><summary class="rehab-faq-item__summary"><span>' . esc_html( $item['question'] ) . '</span><span class="rehab-faq-item__icon" aria-hidden="true"></span></summary><div class="rehab-faq-item__answer"><p>' . esc_html( $item['answer'] ) . '</p></div></details>';
 		$h .= "<!-- wp:rehab/faq-item " . $ia . " -->\n" . $item_html . "\n<!-- /wp:rehab/faq-item -->\n";

@@ -1732,13 +1732,13 @@ add_action( 'init', function () {
 				[], '', '', 'white'
 			);
 
-			// 11. FAQ
+			// 11. FAQ — pulled from FAQ CPT records (Phase 3)
 			$blocks .= rehab_block_faq(
 				'Frequently asked questions',
 				[
-					[ 'question' => 'What is the process of rehabilitation?', 'answer' => 'The process may differ — programs are customised based on what the patient needs and the severity of the addiction or co-occurring mental illness. The goal is always to ensure the individual\'s well-being. Most treatment programs include evaluation, detox, psychological treatments, education sessions, and supportive services.' ],
-					[ 'question' => 'Are 28 days of rehab enough?', 'answer' => 'This depends on the individual case. After consulting with our psychiatrist, we will give you a recommendation on the number of days in treatment that is advised.' ],
-					[ 'question' => 'Can clients leave the rehab?', 'answer' => 'Clients can only leave the property under the care of our therapeutic team.' ],
+					[ 'cptId' => 32 ],   // What is the process of rehabilitation?
+					[ 'cptId' => 3435 ], // Are 28 days of rehab enough?
+					[ 'cptId' => 204 ],  // Can clients leave the rehab?
 				]
 			);
 
@@ -2056,13 +2056,13 @@ add_action( 'init', function () {
 				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
 			] );
 
-			// 11. FAQ
+			// 11. FAQ — pulled from FAQ CPT records (Phase 3)
 			$blocks .= rehab_block_faq(
 				'Frequently asked questions',
 				[
-					[ 'question' => 'What is the process of rehabilitation?', 'answer' => 'The process may differ — programs are customised based on what the patient needs and the severity of the addiction or co-occurring mental illness. The goal is always to ensure the individual\'s well-being. Most treatment programs include evaluation, detox, psychological treatments, education sessions, and supportive services.' ],
-					[ 'question' => 'Are 28 days of rehab enough?', 'answer' => 'This depends on the individual case. After consulting with our psychiatrist, we will give you a recommendation on the number of days in treatment that is advised.' ],
-					[ 'question' => 'Can clients leave the rehab?', 'answer' => 'Clients can only leave the property under the care of our therapeutic team.' ],
+					[ 'cptId' => 32 ],   // What is the process of rehabilitation?
+					[ 'cptId' => 3435 ], // Are 28 days of rehab enough?
+					[ 'cptId' => 204 ],  // Can clients leave the rehab?
 				]
 			);
 
@@ -2138,6 +2138,17 @@ add_action( 'init', function () {
 			echo "\n=== Pages → categories sample ===\n";
 			$rows = $wpdb->get_results( "SELECT p.ID, p.post_title, GROUP_CONCAT(t.name) AS cats FROM {$wpdb->posts} p JOIN {$wpdb->term_relationships} tr ON tr.object_id=p.ID JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id=tr.term_taxonomy_id JOIN {$wpdb->terms} t ON t.term_id=tt.term_id WHERE tt.taxonomy='category' AND p.post_status='publish' GROUP BY p.ID LIMIT 10" );
 			foreach ( $rows as $r ) echo "  #$r->ID $r->post_title → $r->cats\n";
+			break;
+
+		case 'faq-search':
+			global $wpdb;
+			$q = isset( $_GET['q'] ) ? sanitize_text_field( $_GET['q'] ) : '';
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type='faq' AND post_status='publish' AND post_title LIKE %s ORDER BY ID",
+				'%' . $wpdb->esc_like( $q ) . '%'
+			) );
+			foreach ( $rows as $r ) echo "  #$r->ID  $r->post_title\n";
+			echo "(" . count( $rows ) . " matches)\n";
 			break;
 
 		case 'inspect-builder-pages':

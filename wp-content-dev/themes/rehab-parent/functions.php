@@ -438,6 +438,51 @@ function rehab_parent_rank_math_title( $title ) {
 add_filter( 'pre_get_document_title', 'rehab_parent_rank_math_title', 9 );
 
 /**
+ * Resolve a breadcrumb category label for a post. Used by template-treatment
+ * and template-article. Priority:
+ *
+ *   1. Per-page meta override `_rehab_breadcrumb_category` (string)
+ *   2. Rank Math primary category (term_id stored in `rank_math_primary_category`)
+ *   3. First `category` taxonomy term assigned to the post
+ *   4. Slug-based regex inference (substance / prescription / mental health)
+ *   5. Empty string if nothing matches
+ */
+function rehab_breadcrumb_category( int $post_id ): string {
+	// Categories considered too generic to use as a breadcrumb segment because
+	// they duplicate the parent "Treatments" / "Articles" segment.
+	$generic_slugs = [ 'uncategorized', 'page', 'treatment', 'information', 'article' ];
+
+	$override = get_post_meta( $post_id, '_rehab_breadcrumb_category', true );
+	if ( $override ) return (string) $override;
+
+	$primary_id = (int) get_post_meta( $post_id, 'rank_math_primary_category', true );
+	if ( $primary_id > 0 ) {
+		$term = get_term( $primary_id, 'category' );
+		if ( $term && ! is_wp_error( $term ) && ! in_array( strtolower( $term->slug ), $generic_slugs, true ) ) {
+			return $term->name;
+		}
+	}
+
+	$cats = get_the_category( $post_id );
+	if ( $cats && ! is_wp_error( $cats ) ) {
+		foreach ( $cats as $c ) {
+			if ( in_array( strtolower( $c->slug ), $generic_slugs, true ) ) continue;
+			return $c->name;
+		}
+	}
+
+	$post = get_post( $post_id );
+	if ( $post ) {
+		$slug = $post->post_name;
+		if ( preg_match( '/(cocaine|ice-addiction|meth|heroin|alcohol|crack|ecstasy|ghb|marijuana|cannabis)/i', $slug ) ) return 'Substance addiction';
+		if ( preg_match( '/(xanax|valium|oxycontin|tramadol|ritalin|adderall|prescription)/i', $slug ) ) return 'Prescription drug';
+		if ( preg_match( '/(anxiety|depression|ptsd|trauma|burnout|insomnia|gambling|sex-addiction|codependency)/i', $slug ) ) return 'Mental health';
+	}
+
+	return '';
+}
+
+/**
  * Emit JSON-LD structured data: Organization (sitewide), WebSite with
  * SearchAction (sitewide), Article (on template-article pages),
  * BreadcrumbList (on template-treatment pages).

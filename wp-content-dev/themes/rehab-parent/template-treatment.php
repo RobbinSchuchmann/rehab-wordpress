@@ -18,19 +18,12 @@ while ( have_posts() ) :
 
 		<?php
 		// Breadcrumb category between "Treatments" and the page title.
-		// Pulled from a per-page meta (_rehab_breadcrumb_category) if set;
-		// otherwise inferred from the slug. Substance pages → "Substance addiction".
-		$crumb_cat = get_post_meta( $current_id, '_rehab_breadcrumb_category', true );
-		if ( ! $crumb_cat && $post = get_post( $current_id ) ) {
-			$slug = $post->post_name;
-			if ( preg_match( '/(cocaine|ice-addiction|meth|heroin|alcohol|crack|ecstasy|ghb|marijuana|cannabis)/i', $slug ) ) {
-				$crumb_cat = 'Substance addiction';
-			} elseif ( preg_match( '/(xanax|valium|oxycontin|tramadol|ritalin|adderall|prescription)/i', $slug ) ) {
-				$crumb_cat = 'Prescription drug';
-			} elseif ( preg_match( '/(anxiety|depression|ptsd|trauma|burnout|insomnia|gambling|sex-addiction|codependency)/i', $slug ) ) {
-				$crumb_cat = 'Mental health';
-			}
-		}
+		// Resolution priority:
+		//   1. Per-page override meta (_rehab_breadcrumb_category)
+		//   2. Rank Math primary category (editor-chosen)
+		//   3. First assigned `category` taxonomy term
+		//   4. Slug-based inference (last-resort)
+		$crumb_cat = rehab_breadcrumb_category( $current_id );
 		?>
 		<nav class="rehab-breadcrumb" aria-label="Breadcrumb">
 			<div class="rehab-container">
