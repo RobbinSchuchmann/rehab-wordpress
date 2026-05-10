@@ -352,10 +352,14 @@ function rehab_block_intro_doctor_card( array $a ): string {
 		'doctorLabel' => 'Speak with our Director', 'doctorName' => '',
 		'doctorPhone' => '', 'doctorPhoneHref' => '',
 	];
+	// Convert plain \n\n-separated body to <p>-wrapped HTML so RichText
+	// (multiline="p") in the editor can parse + edit it.
+	$paragraphs = array_filter( array_map( 'trim', preg_split( "/\n\s*\n/", trim( (string) $a['body'] ) ) ) );
+	$body_html  = implode( '', array_map( fn( $p ) => '<p>' . esc_html( $p ) . '</p>', $paragraphs ) );
+	$a['body']  = $body_html;
 	$a = array_merge( $defaults, $a );
 	$attrs = rehab_block_attrs( $a );
 	$phone_svg = '<svg width="14" height="14" viewBox="0 0 15 16" aria-hidden="true"><path d="M14.8 13.1c-.8 2-2.8 2.4-3.5 2.4-.2 0-3.2.2-7.4-3.9C.5 8.3 0 4.8 0 4.1 0 3.4.2 1.8 2.4.6c.3-.2.8-.2 1-.1.1.1 1.9 3.2 2 3.3 0 .1.1.2.1.3 0 .1-.1.3-.3.5l-.7.7c-.3.1-.5.3-.7.5-.2.2-.3.4-.3.5 0 .3.3 1.5 2.3 3.3C7.9 11.5 8.9 12 9 12c.1 0 .2.1.2.1.1 0 .3-.1.5-.3.2-.2.9-1.1 1.1-1.3.2-.2.4-.3.5-.3.1 0 .2 0 .3.1.1 0 3.2 1.9 3.3 1.9.2.1.1.6-.1.9" fill="currentColor"/></svg>';
-	$paragraphs = preg_split( "/\n\s*\n/", trim( (string) $a['body'] ) );
 	$h  = '<section class="wp-block-rehab-intro-doctor-card rehab-intro-doctor-card rehab-bg-' . esc_attr( $a['background'] ) . '"><div class="rehab-container">';
 	$h .= '<div class="rehab-intro-doctor-card__grid">';
 	$h .= '<div>';
@@ -375,12 +379,8 @@ function rehab_block_intro_doctor_card( array $a ): string {
 		$h .= '</div></div>';
 	}
 	$h .= '</div>';
-	$h .= '<div class="rehab-intro-doctor-card__copy">';
-	foreach ( $paragraphs as $p ) {
-		if ( trim( $p ) === '' ) continue;
-		$h .= '<p>' . esc_html( trim( $p ) ) . '</p>';
-	}
-	$h .= '</div></div></div></section>';
+	$h .= '<div class="rehab-intro-doctor-card__copy">' . $body_html . '</div>';
+	$h .= '</div></div></section>';
 	return "<!-- wp:rehab/intro-doctor-card " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/intro-doctor-card -->\n\n";
 }
 
@@ -395,11 +395,15 @@ function rehab_block_article_row( array $a ): string {
 		'primaryText' => '', 'primaryUrl' => '',
 		'secondaryText' => '', 'secondaryUrl' => '',
 	];
+	// Convert plain \n\n-separated body to <p>-wrapped HTML so RichText
+	// (multiline="p") in the editor can parse + edit it.
+	$paragraphs = array_filter( array_map( 'trim', preg_split( "/\n\s*\n/", trim( (string) $a['body'] ) ) ) );
+	$body_html  = implode( '', array_map( fn( $p ) => '<p>' . esc_html( $p ) . '</p>', $paragraphs ) );
+	$a['body']  = $body_html;
 	$a = array_merge( $defaults, $a );
 	$attrs = rehab_block_attrs( $a );
 	$reverse_class = $a['imageSide'] === 'right' ? ' rehab-article-row--reverse' : '';
 	$aspect_class  = $a['imageAspect'] === 'wide' ? ' rehab-article-row__media--wide' : '';
-	$paragraphs = preg_split( "/\n\s*\n/", trim( (string) $a['body'] ) );
 	$h  = '<section class="wp-block-rehab-article-row rehab-article-row-section rehab-bg-' . esc_attr( $a['background'] ) . '"><div class="rehab-container">';
 	$h .= '<div class="rehab-article-row' . $reverse_class . '">';
 	$h .= '<div class="rehab-article-row__media' . $aspect_class . '">';
@@ -412,10 +416,7 @@ function rehab_block_article_row( array $a ): string {
 	$h .= '<div class="rehab-article-row__text">';
 	if ( $a['eyebrow'] ) $h .= '<span class="rehab-article-row__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
 	$h .= '<h2 class="rehab-article-row__heading">' . esc_html( $a['heading'] ) . '</h2>';
-	foreach ( $paragraphs as $p ) {
-		if ( trim( $p ) === '' ) continue;
-		$h .= '<p>' . esc_html( trim( $p ) ) . '</p>';
-	}
+	$h .= $body_html;
 	if ( $a['primaryText'] || $a['secondaryText'] ) {
 		$h .= '<div class="rehab-article-row__cta">';
 		if ( $a['primaryText'] ) $h .= '<a href="' . esc_url( $a['primaryUrl'] ) . '" class="rehab-btn rehab-btn--luxury">' . esc_html( $a['primaryText'] ) . '</a>';

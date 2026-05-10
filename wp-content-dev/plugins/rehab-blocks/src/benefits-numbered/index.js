@@ -1,25 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, TextareaControl, Button } from '@wordpress/components';
+import { useBlockProps, RichText, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, Button } from '@wordpress/components';
 import metadata from './block.json';
 import './style.scss';
-
-function Markup( { a } ) {
-	const items = Array.isArray( a.items ) ? a.items : [];
-	return (
-		<div className="rehab-benefits-numbered">
-			{ items.map( ( item, i ) => (
-				<div className="rehab-benefit" key={ i }>
-					<div className="rehab-benefit__num">{ String( i + 1 ).padStart( 2, '0' ) }</div>
-					<div className="rehab-benefit__body">
-						<h4>{ item.title }</h4>
-						<p>{ item.body }</p>
-					</div>
-				</div>
-			) ) }
-		</div>
-	);
-}
 
 registerBlockType( metadata.name, {
 	edit( { attributes, setAttributes } ) {
@@ -37,10 +20,9 @@ registerBlockType( metadata.name, {
 			<>
 				<InspectorControls>
 					<PanelBody title="Benefits" initialOpen>
-						{ items.map( ( item, i ) => (
-							<div key={ i } style={ { borderBottom: '1px solid #e5e5e5', paddingBottom: '1rem', marginBottom: '1rem' } }>
-								<TextControl label={ `Benefit ${ i + 1 } title` } value={ item.title } onChange={ ( v ) => update( i, 'title', v ) } />
-								<TextareaControl label="Body" value={ item.body } onChange={ ( v ) => update( i, 'body', v ) } />
+						{ items.map( ( _item, i ) => (
+							<div key={ i } style={ { display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' } }>
+								<span>Benefit { i + 1 }</span>
 								<Button variant="link" isDestructive onClick={ () => remove( i ) }>Remove</Button>
 							</div>
 						) ) }
@@ -48,12 +30,36 @@ registerBlockType( metadata.name, {
 					</PanelBody>
 				</InspectorControls>
 				<div { ...blockProps }>
-					<Markup a={ a } />
+					<div className="rehab-benefits-numbered">
+						{ items.map( ( item, i ) => (
+							<div className="rehab-benefit" key={ i }>
+								<div className="rehab-benefit__num">{ String( i + 1 ).padStart( 2, '0' ) }</div>
+								<div className="rehab-benefit__body">
+									<RichText tagName="h4" value={ item.title } onChange={ ( v ) => update( i, 'title', v ) } placeholder="Benefit title" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
+									<RichText tagName="p" value={ item.body } onChange={ ( v ) => update( i, 'body', v ) } placeholder="Benefit body…" allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] } />
+								</div>
+							</div>
+						) ) }
+					</div>
 				</div>
 			</>
 		);
 	},
 	save( { attributes } ) {
-		return <Markup a={ attributes } />;
+		const a = attributes;
+		const items = Array.isArray( a.items ) ? a.items : [];
+		return (
+			<div className="rehab-benefits-numbered">
+				{ items.map( ( item, i ) => (
+					<div className="rehab-benefit" key={ i }>
+						<div className="rehab-benefit__num">{ String( i + 1 ).padStart( 2, '0' ) }</div>
+						<div className="rehab-benefit__body">
+							<RichText.Content tagName="h4" value={ item.title } />
+							<RichText.Content tagName="p" value={ item.body } />
+						</div>
+					</div>
+				) ) }
+			</div>
+		);
 	},
 } );
