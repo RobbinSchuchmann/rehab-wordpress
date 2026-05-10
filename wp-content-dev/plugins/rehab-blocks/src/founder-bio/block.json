@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/founder-bio",
+  "version": "0.1.0",
+  "title": "Founder Bio",
+  "category": "rehab",
+  "icon": "businessperson",
+  "description": "Founder profile section. Portrait + quote + bio + signature.",
+  "keywords": ["founder", "owner", "bio", "leadership"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "imageUrl": { "type": "string" },
+    "imageId": { "type": "number" },
+    "imageAlt": { "type": "string", "default": "" },
+    "quote": { "type": "string", "default": "We built this place because we know recovery is possible — we have lived it ourselves." },
+    "body": { "type": "string", "default": "After founding the rehab in 2015, our mission has remained simple: provide a private, doctor-led environment where every individual gets the time and care needed for lasting recovery." },
+    "name": { "type": "string", "default": "Theo & Panwadee de Vries" },
+    "role": { "type": "string", "default": "Founders" }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

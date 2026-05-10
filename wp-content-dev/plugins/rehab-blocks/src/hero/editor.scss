@@ -1,0 +1,7 @@
+.rehab-hero {
+	[contenteditable='true']:focus,
+	[contenteditable='true']:hover {
+		outline: 1px dashed rgba(255, 255, 255, 0.5);
+		outline-offset: 4px;
+	}
+}

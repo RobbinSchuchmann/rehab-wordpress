@@ -1,0 +1,27 @@
+// Diamond CTA — translated from drt-cta-bridge / drt-final-cta to rehab namespace.
+
+.rehab-cta {
+	padding: 3rem 0;
+}
+
+.rehab-cta__inner {
+	text-align: center;
+}
+
+.rehab-cta__inner .rehab-heading {
+	margin-bottom: 2rem;
+}
+
+.rehab-cta__body {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.75;
+	margin-bottom: 2rem;
+}
+
+.rehab-cta__helper {
+	font-size: 0.75rem;
+	color: var(--rehab-soft-charcoal);
+	margin-top: 1rem;
+}

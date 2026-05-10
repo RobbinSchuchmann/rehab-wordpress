@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/feature",
+  "version": "0.1.0",
+  "title": "Feature",
+  "category": "rehab",
+  "icon": "yes-alt",
+  "description": "Single feature: icon (text glyph or uploaded image), title, body.",
+  "parent": ["rehab/features-list"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "inserter": true, "reusable": false },
+  "attributes": {
+    "icon": { "type": "string", "default": "✦" },
+    "iconImage": { "type": "string", "default": "" },
+    "title": { "type": "string", "default": "Feature title" },
+    "body": { "type": "string", "default": "Short description of this feature." }
+  },
+  "editorScript": "file:./index.js"
+}

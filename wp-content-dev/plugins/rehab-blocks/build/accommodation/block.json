@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/accommodation",
+  "version": "0.1.0",
+  "title": "Accommodation",
+  "category": "rehab",
+  "icon": "admin-home",
+  "description": "Facilities / accommodation showcase. Image + headline + body + bullet features.",
+  "keywords": [
+    "accommodation",
+    "facility",
+    "rooms",
+    "amenities"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "imagePosition": {
+      "type": "string",
+      "default": "left",
+      "enum": [
+        "left",
+        "right"
+      ]
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "imageId": {
+      "type": "number"
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Accommodation"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Private rooms in a 5-star sanctuary"
+    },
+    "body": {
+      "type": "string",
+      "default": "Each suite is designed for restorative privacy. Ensuite bathrooms, premium linens, and panoramic views of the surrounding tropical gardens."
+    },
+    "features": {
+      "type": "array",
+      "default": [
+        "Ensuite bathroom with rainfall shower",
+        "King-size bed with premium linens",
+        "Panoramic garden or pool views",
+        "Daily housekeeping & turndown service",
+        "Complimentary high-speed Wi-Fi"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

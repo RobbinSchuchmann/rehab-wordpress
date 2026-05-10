@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/contact-form",
+  "version": "0.1.0",
+  "title": "Contact Form",
+  "category": "rehab",
+  "icon": "email",
+  "description": "Wraps a Forminator form (or any shortcode) inside a styled contact section.",
+  "keywords": [
+    "contact",
+    "form",
+    "forminator"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "Contact our admissions team"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "Free, confidential, no obligation. We respond within an hour, 24/7."
+    },
+    "shortcode": {
+      "type": "string",
+      "default": "[forminator_form id=\"1\"]"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/program",
+  "version": "0.1.0",
+  "title": "Program",
+  "category": "rehab",
+  "icon": "id",
+  "description": "Single treatment program card.",
+  "parent": [
+    "rehab/programs-list"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "inserter": true,
+    "reusable": false
+  },
+  "attributes": {
+    "duration": {
+      "type": "string",
+      "default": "4 weeks"
+    },
+    "title": {
+      "type": "string",
+      "default": "Essential Program"
+    },
+    "price": {
+      "type": "string",
+      "default": "$24,000"
+    },
+    "priceSuffix": {
+      "type": "string",
+      "default": "USD all-inclusive"
+    },
+    "body": {
+      "type": "string",
+      "default": "Foundation program for individuals beginning their recovery journey. Includes assessment, individual therapy, group sessions, and full board."
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Learn more"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js"
+}

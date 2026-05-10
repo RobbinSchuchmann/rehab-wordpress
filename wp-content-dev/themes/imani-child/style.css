@@ -1,0 +1,27 @@
+/*
+Theme Name: Imani
+Template: rehab-parent
+Description: Imani Recovery brand. Warm earth tones — clay, ochre, deep umber.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+:root {
+	--rehab-color-bg: #FCF8F2;
+	--rehab-color-cream: #EFE4D2;
+	--rehab-color-fg: #2E2118;
+
+	--rehab-sage:           #C68A4F;
+	--rehab-sage-dark:      #8E5C2D;
+	--rehab-sage-text:      #6F441E;
+	--rehab-ethereal-sage:  #F5E5D0;
+	--rehab-tan:            #A07B5A;
+
+	--rehab-warm-charcoal:  #2E2118;
+	--rehab-soft-charcoal:  #533F2D;
+
+	--rehab-radius-sm: 4px;
+	--rehab-radius-md: 8px;
+	--rehab-radius-lg: 16px;
+}

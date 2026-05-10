@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/cta",
+  "version": "0.1.0",
+  "title": "CTA",
+  "category": "rehab",
+  "icon": "megaphone",
+  "description": "Call-to-action band: heading, optional body, button, and helper text. Used between sections or at the end of a page.",
+  "keywords": [
+    "cta",
+    "call to action",
+    "banner"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "variant": {
+      "type": "string",
+      "default": "default",
+      "enum": [
+        "default",
+        "compact"
+      ]
+    },
+    "background": {
+      "type": "string",
+      "default": "sage-mist",
+      "enum": [
+        "sage-mist",
+        "white",
+        "cream"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "Your journey to full recovery begins with a single, confidential step."
+    },
+    "body": {
+      "type": "string",
+      "default": "Join the select individuals who have successfully reclaimed their lives at our private rehab."
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Contact our team 24/7"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/contact-us/"
+    },
+    "helper": {
+      "type": "string",
+      "default": "Free, confidential, and no-obligation."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

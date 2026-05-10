@@ -1,0 +1,72 @@
+/* Shared button system. Used by all blocks via .rehab-btn + variant. */
+
+.rehab-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	font-family: var(--rehab-font-body);
+	font-size: 1rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	transition: all 0.3s var(--rehab-ease);
+	white-space: nowrap;
+	border-radius: 0;
+}
+
+.rehab-btn:focus-visible {
+	outline: 2px solid var(--rehab-sage-text);
+	outline-offset: 3px;
+}
+
+/* Primary action — filled with brand sage */
+.rehab-btn--luxury {
+	background-color: var(--rehab-sage);
+	color: var(--rehab-warm-charcoal);
+	padding: 1.125rem 2.5rem;
+}
+
+.rehab-btn--luxury:hover {
+	background-color: var(--rehab-sage-dark);
+	color: var(--rehab-color-cream);
+	transform: translateY(-1px);
+	box-shadow: var(--rehab-shadow-elevated);
+	text-decoration: none;
+}
+
+/* Outline — transparent with charcoal border */
+.rehab-btn--outline {
+	background: transparent;
+	color: var(--rehab-warm-charcoal);
+	border: 1px solid rgba(186, 195, 161, 0.4);
+	padding: 0.625rem 1.5rem;
+}
+
+.rehab-btn--outline:hover {
+	background: rgba(186, 195, 161, 0.1);
+	border-color: rgba(186, 195, 161, 0.6);
+	text-decoration: none;
+}
+
+/* Ghost — for placement over images */
+.rehab-btn--ghost {
+	background: transparent;
+	color: var(--rehab-color-cream);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	padding: 0.625rem 1.5rem;
+	backdrop-filter: blur(8px);
+}
+
+.rehab-btn--ghost:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.6);
+	text-decoration: none;
+}
+
+/* Size modifier */
+.rehab-btn--sm { padding: 0.5rem 1rem; font-size: 0.8125rem; }
+.rehab-btn--lg { padding: 1.125rem 2.75rem; font-size: 1rem; }

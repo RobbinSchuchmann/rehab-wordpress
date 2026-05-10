@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/hero",
+  "version": "0.2.0",
+  "title": "Hero",
+  "category": "rehab",
+  "icon": "format-image",
+  "description": "Split-layout hero with eyebrow text, multi-line headline, body, CTA, trust items, and image with optional video.",
+  "keywords": [
+    "hero",
+    "banner",
+    "header"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Voted #1 by The Thaiger"
+    },
+    "headline": {
+      "type": "string",
+      "default": "The leading luxury<br>drug and alcohol rehab<br>in Thailand"
+    },
+    "body": {
+      "type": "string",
+      "default": "Thai hospitality meets Western clinical excellence. Set within a private 5-star sanctuary, our 12-client cap ensures your recovery is handled with absolute discretion."
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Check Availability"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/contact-us/"
+    },
+    "buttonHelper": {
+      "type": "string",
+      "default": "Free, confidential, and no-obligation."
+    },
+    "trustItem1": {
+      "type": "string",
+      "default": "Exclusive 12-client intake"
+    },
+    "trustItem2": {
+      "type": "string",
+      "default": "Intl. multi-disciplinary team"
+    },
+    "trustItem3": {
+      "type": "string",
+      "default": "Relapse prevention guarantee"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "imageId": {
+      "type": "number"
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "videoId": {
+      "type": "string",
+      "default": ""
+    },
+    "showDeco": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/column",
+  "version": "0.1.0",
+  "title": "Column",
+  "category": "rehab",
+  "icon": "align-pull-left",
+  "description": "Single column inside a rehab/columns block.",
+  "parent": ["rehab/columns"],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "inserter": false,
+    "reusable": false
+  },
+  "editorScript": "file:./index.js"
+}

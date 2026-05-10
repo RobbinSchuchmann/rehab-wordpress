@@ -1,0 +1,49 @@
+/* Baseline accessibility: focus rings + reduced-motion. */
+
+/* Visible focus ring for keyboard users on any interactive element. */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+	outline: 2px solid var(--rehab-sage-dark, #8A9674);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* Mouse-only users don't need a ring on click — :focus-visible already handles that. */
+
+/* Don't trap users at low contrast: ensure links have a clear underline (or close to one). */
+.rehab-prose__inner a,
+.rehab-article__body a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+.rehab-prose__inner a:hover,
+.rehab-article__body a:hover {
+	text-decoration-thickness: 2px;
+}
+
+/* Suppress decorative motion for users who request it. */
+/* Hide broken (404) images gracefully — relies on the optional
+   `data-broken="true"` attr added by `rehab_parent_image_error_handler.js`. */
+img[data-broken="true"] {
+	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.rehab-marquee__track {
+		animation: none !important;
+	}
+}

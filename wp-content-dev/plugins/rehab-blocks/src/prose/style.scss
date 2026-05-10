@@ -1,0 +1,152 @@
+.rehab-prose {
+	padding: 3rem 0;
+
+	@media (min-width: 768px) { padding: 4rem 0; }
+	@media (min-width: 1024px) { padding: 5rem 0; }
+}
+
+.rehab-prose__inner > * + * {
+	margin-top: 1.25rem;
+}
+
+/* Split layout — image on one side, text on the other (desktop only).
+   Image is a smaller column (~40%); text gets the wider reading column (~60%). */
+.rehab-prose--split .rehab-prose__inner,
+.rehab-prose--split-reverse .rehab-prose__inner {
+	@media (min-width: 1024px) {
+		display: grid;
+		grid-template-columns: 5fr 7fr;
+		gap: 3rem;
+		align-items: start;
+
+		> * { grid-column: 2; min-width: 0; }
+		> * + * { margin-top: 1.25rem; }
+
+		.wp-block-image {
+			grid-column: 1;
+			grid-row: 1 / -1;
+			align-self: start;
+			margin: 0;
+			position: sticky;
+			top: 6rem;
+		}
+
+		.wp-block-image img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+			max-height: 480px;
+		}
+	}
+}
+
+/* Reverse: image right, text left. Image column is the smaller one. */
+.rehab-prose--split-reverse .rehab-prose__inner {
+	@media (min-width: 1024px) {
+		grid-template-columns: 7fr 5fr;
+		> * { grid-column: 1; }
+		.wp-block-image { grid-column: 2; }
+	}
+}
+
+/* Image radii. */
+.rehab-prose--split .rehab-prose__inner .wp-block-image img {
+	border-top-right-radius: 60px;
+}
+
+.rehab-prose--split-reverse .rehab-prose__inner .wp-block-image img {
+	border-top-left-radius: 60px;
+}
+
+/* Mobile/tablet — image stacks above the text. */
+.rehab-prose--split .rehab-prose__inner .wp-block-image img,
+.rehab-prose--split-reverse .rehab-prose__inner .wp-block-image img {
+	width: 100%;
+	height: auto;
+}
+
+/* Wider container when in split mode — needs more horizontal room. */
+.rehab-prose--split .rehab-container--text,
+.rehab-prose--split-reverse .rehab-container--text {
+	max-width: 1120px;
+}
+
+/* Tighten the prose section padding when split — sections shouldn't feel as airy. */
+.rehab-prose--split,
+.rehab-prose--split-reverse {
+	@media (min-width: 1024px) {
+		padding: 3.5rem 0;
+	}
+}
+
+.rehab-prose__inner h2 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.875rem;
+	line-height: 1.2;
+	color: var(--rehab-warm-charcoal);
+	letter-spacing: -0.02em;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+
+	@media (min-width: 768px) { font-size: 2.25rem; }
+}
+
+.rehab-prose__inner h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.5rem;
+	color: var(--rehab-warm-charcoal);
+	margin-top: 2rem;
+	margin-bottom: 0.75rem;
+}
+
+.rehab-prose__inner p {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1.0625rem;
+	line-height: 1.75;
+	color: var(--rehab-warm-charcoal);
+	margin: 0;
+}
+
+.rehab-prose__inner ul,
+.rehab-prose__inner ol {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1.0625rem;
+	line-height: 1.8;
+	color: var(--rehab-warm-charcoal);
+	padding-left: 1.5rem;
+}
+
+.rehab-prose__inner li + li {
+	margin-top: 0.5rem;
+}
+
+.rehab-prose__inner blockquote {
+	font-family: var(--rehab-font-display);
+	font-style: italic;
+	font-size: 1.5rem;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal);
+	border-left: 3px solid var(--rehab-sage);
+	padding: 0.5rem 0 0.5rem 1.5rem;
+	margin: 2rem 0;
+}
+
+.rehab-prose__inner img {
+	max-width: 100%;
+	height: auto;
+	margin: 2rem 0;
+}
+
+.rehab-prose__inner a {
+	color: var(--rehab-sage-text);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
+.rehab-prose__inner a:hover {
+	color: var(--rehab-sage-dark);
+}

@@ -1,0 +1,29 @@
+/*
+Theme Name: Cherrywood
+Template: rehab-parent
+Description: Cherrywood Recovery brand. Warm cherry + walnut palette overrides for the rehab parent theme.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+:root {
+	/* Surfaces */
+	--rehab-color-bg: #FAF6F1;
+	--rehab-color-cream: #F2E9DC;
+	--rehab-color-fg: #2A1B14;
+
+	/* Brand accent: cherry burgundy */
+	--rehab-sage:           #8C2D2A;
+	--rehab-sage-dark:      #5E1B19;
+	--rehab-sage-text:      #5E1B19;
+	--rehab-ethereal-sage:  #F4E1DF;
+	--rehab-tan:            #C29065;
+
+	--rehab-warm-charcoal:  #2A1B14;
+	--rehab-soft-charcoal:  #4D362C;
+
+	--rehab-radius-sm: 4px;
+	--rehab-radius-md: 8px;
+	--rehab-radius-lg: 16px;
+}

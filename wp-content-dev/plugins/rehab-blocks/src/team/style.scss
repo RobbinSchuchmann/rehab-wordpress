@@ -1,0 +1,108 @@
+.rehab-team {
+	padding: 3rem 0;
+
+	@media (min-width: 768px) { padding: 5rem 0; }
+}
+
+.rehab-team__header {
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.rehab-team__grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.rehab-team--cols-2 .rehab-team__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+}
+.rehab-team--cols-3 .rehab-team__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+}
+.rehab-team--cols-4 .rehab-team__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+	@media (min-width: 1024px) { grid-template-columns: repeat(4, 1fr); }
+}
+.rehab-team--cols-5 .rehab-team__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+	@media (min-width: 1024px) { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Team member */
+.rehab-team-member {
+	position: relative;
+	aspect-ratio: 3 / 4;
+	overflow: hidden;
+	background: rgba(186, 195, 161, 0.1);
+	cursor: default;
+}
+
+.rehab-team-member__photo {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s var(--rehab-ease);
+}
+
+.rehab-team-member:hover .rehab-team-member__photo {
+	transform: scale(1.03);
+}
+
+.rehab-team-member__overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 1rem 0.75rem;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 60%);
+	transition: background 0.3s var(--rehab-ease);
+}
+
+.rehab-team-member:hover .rehab-team-member__overlay {
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent 70%);
+}
+
+.rehab-team-member__name {
+	font-family: var(--rehab-font-display);
+	font-size: 0.875rem;
+	color: #fff;
+	text-align: center;
+	font-weight: 600;
+	line-height: 1.3;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+	margin: 0;
+	opacity: 0;
+	transition: opacity 0.3s var(--rehab-ease);
+
+	@media (min-width: 1024px) { font-size: 1rem; }
+}
+
+.rehab-team-member__title {
+	font-family: var(--rehab-font-body);
+	font-size: 0.6875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #fff;
+	margin: 0.25rem 0 0;
+	text-align: center;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+	opacity: 0;
+	transition: opacity 0.3s var(--rehab-ease);
+}
+
+.rehab-team-member:hover .rehab-team-member__name,
+.rehab-team-member:hover .rehab-team-member__title {
+	opacity: 1;
+}
+
+/* Editor visibility — show name/title without hover */
+.rehab-team-member.is-editor .rehab-team-member__name,
+.rehab-team-member.is-editor .rehab-team-member__title {
+	opacity: 1;
+}

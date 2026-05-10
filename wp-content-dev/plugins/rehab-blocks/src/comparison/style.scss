@@ -1,0 +1,183 @@
+/* Comparison table — design language ported from Diamond reference homepage
+   (drt-comparison). Desktop: full table with the "ours" column highlighted in
+   sage-mist with rounded corners + subtle shadow. Mobile: stacked cards with
+   the Diamond row pulled out as a sage-mist tinted block. */
+
+.rehab-comparison {
+	padding: 4rem 0;
+	@media (min-width: 768px) { padding: 6rem 0; }
+}
+
+.rehab-comparison__header {
+	text-align: center;
+	margin-bottom: 4rem;
+	max-width: 56rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Desktop layout: table-like grid with the Diamond column visually pulled out. */
+.rehab-comparison__grid {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr 1fr;
+	gap: 0;
+}
+
+.rehab-comparison__col,
+.rehab-comparison__cell {
+	padding: 1.5rem 2rem;
+	border-bottom: 1px solid rgba(186, 195, 161, 0.15);
+	font-family: var(--rehab-font-body);
+	font-size: 0.9375rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.5;
+}
+
+@media (min-width: 1024px) {
+	.rehab-comparison__col,
+	.rehab-comparison__cell { padding: 2rem 2.5rem; }
+}
+
+/* Header row */
+.rehab-comparison__col--header {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.875rem;
+	letter-spacing: 0.02em;
+	color: var(--rehab-soft-charcoal);
+	padding-top: 2.5rem;
+	padding-bottom: 2rem;
+	background: transparent;
+	text-transform: none;
+	vertical-align: top;
+}
+
+/* Diamond column — header gets rounded top corners + box-shadow */
+.rehab-comparison__col--ours.rehab-comparison__col--header {
+	color: var(--rehab-warm-charcoal);
+	background: var(--rehab-ethereal-sage);
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	border-left: 1px solid rgba(190, 179, 158, 0.15);
+	border-right: 1px solid rgba(190, 179, 158, 0.15);
+	border-top: 1px solid rgba(190, 179, 158, 0.15);
+	font-weight: 500;
+}
+
+/* Diamond column — body cells */
+.rehab-comparison__cell--ours {
+	background: var(--rehab-ethereal-sage);
+	border-left: 1px solid rgba(190, 179, 158, 0.15);
+	border-right: 1px solid rgba(190, 179, 158, 0.15);
+	color: var(--rehab-warm-charcoal);
+}
+
+/* Topic column (first cell of each row) */
+.rehab-comparison__cell--topic {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.9375rem;
+	color: var(--rehab-warm-charcoal);
+}
+
+/* Highlight rows render slightly bolder for the Diamond cell */
+.rehab-comparison__cell--highlight.rehab-comparison__cell--ours {
+	font-weight: 500;
+}
+
+/* Last row: round bottom corners on the Diamond column for the pulled-out look. */
+.rehab-comparison__cell--ours.rehab-comparison__cell--last {
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom: 1px solid rgba(190, 179, 158, 0.15);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.rehab-comparison__remove {
+	background: none;
+	border: none;
+	color: var(--rehab-sage-text);
+	cursor: pointer;
+	font-size: 1rem;
+	padding: 0 0.25rem;
+	margin-left: 0.5rem;
+	opacity: 0.5;
+}
+
+.rehab-comparison__remove:hover { opacity: 1; }
+
+/* Mobile (≤768px): stacked card layout. Each row becomes a card with
+   Western on top + Diamond pulled out below in sage-mist. */
+@media (max-width: 768px) {
+	.rehab-comparison__grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	/* Header row hidden on mobile — labels appear inside each card instead. */
+	.rehab-comparison__col--header { display: none; }
+
+	/* Each row group becomes a self-contained card. We use the topic cell as
+	   the card header, then ours/theirs render as labelled stacked blocks. */
+	.rehab-comparison__cell {
+		padding: 1rem 1.25rem;
+		border: none;
+	}
+
+	.rehab-comparison__cell--topic {
+		background: rgba(249, 247, 242, 0.5);
+		padding: 0.75rem 1.25rem;
+		font-weight: 500;
+		font-size: 0.875rem;
+		color: var(--rehab-warm-charcoal);
+		border-radius: 0.75rem 0.75rem 0 0;
+		border: 1px solid rgba(186, 195, 161, 0.1);
+		border-bottom: 1px solid rgba(186, 195, 161, 0.1);
+		text-transform: none;
+		letter-spacing: normal;
+	}
+
+	.rehab-comparison__cell:not(.rehab-comparison__cell--topic):not(.rehab-comparison__cell--ours) {
+		background: #fff;
+		border-left: 1px solid rgba(186, 195, 161, 0.1);
+		border-right: 1px solid rgba(186, 195, 161, 0.1);
+		border-bottom: 1px solid rgba(186, 195, 161, 0.1);
+		font-size: 0.875rem;
+		color: var(--rehab-soft-charcoal);
+	}
+
+	.rehab-comparison__cell--ours {
+		background: var(--rehab-ethereal-sage);
+		border-left: 1px solid rgba(186, 195, 161, 0.1);
+		border-right: 1px solid rgba(186, 195, 161, 0.1);
+		border-bottom: 1px solid rgba(186, 195, 161, 0.1);
+		border-radius: 0 0 0.75rem 0.75rem;
+		font-size: 0.875rem;
+	}
+
+	/* Inline labels prefix the body text on mobile */
+	.rehab-comparison__cell--ours::before {
+		content: 'Diamond Rehab';
+		display: block;
+		font-size: 0.6875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: rgba(74, 74, 74, 0.6);
+		margin-bottom: 0.25rem;
+		font-weight: 500;
+	}
+
+	.rehab-comparison__cell:not(.rehab-comparison__cell--topic):not(.rehab-comparison__cell--ours)::before {
+		content: 'Western rehab';
+		display: block;
+		font-size: 0.6875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: rgba(74, 74, 74, 0.6);
+		margin-bottom: 0.25rem;
+		font-weight: 500;
+	}
+}

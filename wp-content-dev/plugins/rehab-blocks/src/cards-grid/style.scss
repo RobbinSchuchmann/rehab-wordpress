@@ -1,0 +1,134 @@
+.rehab-cards-grid {
+	padding: 3rem 0;
+
+	@media (min-width: 768px) { padding: 5rem 0; }
+	@media (min-width: 1024px) { padding: 7rem 0; }
+}
+
+.rehab-cards-grid__header {
+	text-align: center;
+	max-width: 56rem;
+	margin: 0 auto 3rem;
+}
+
+.rehab-cards-grid__header .rehab-heading {
+	margin-bottom: 1rem;
+}
+
+.rehab-cards-grid__subheading {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1.125rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.75;
+}
+
+.rehab-cards-grid__grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: 1fr;
+}
+
+.rehab-cards-grid--cols-2 .rehab-cards-grid__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.rehab-cards-grid--cols-3 .rehab-cards-grid__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+	@media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.rehab-cards-grid--cols-4 .rehab-cards-grid__grid {
+	@media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+	@media (min-width: 1024px) { grid-template-columns: repeat(4, 1fr); }
+}
+.rehab-card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid rgba(190, 179, 158, 0.2);
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	height: 100%;
+	min-height: 200px;
+	transition: border-color 0.3s var(--rehab-ease);
+}
+
+a.rehab-card:hover {
+	border-color: rgba(190, 179, 158, 0.4);
+	text-decoration: none;
+	color: inherit;
+}
+
+.rehab-card__image {
+	height: 180px;
+	overflow: hidden;
+	position: relative;
+	background: var(--rehab-ethereal-sage);
+}
+
+.rehab-card__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s var(--rehab-ease);
+	filter: saturate(0.9) contrast(1.02);
+}
+
+a.rehab-card:hover .rehab-card__image img {
+	transform: scale(1.05);
+}
+
+.rehab-card__body {
+	padding: 1.25rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.rehab-card__title {
+	font-family: var(--rehab-font-display);
+	font-size: 1.25rem;
+	font-weight: 400;
+	color: var(--rehab-warm-charcoal);
+	margin: 0 0 0.75rem;
+	line-height: 1.3;
+	transition: color 0.3s var(--rehab-ease);
+}
+
+a.rehab-card:hover .rehab-card__title {
+	color: var(--rehab-sage-dark);
+}
+
+.rehab-card__description {
+	font-family: var(--rehab-font-body);
+	font-size: 0.875rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.75;
+	margin: 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* Horizontal card layout — image left, text right (used by default in cards-grid) */
+.rehab-cards-grid--card-horizontal .rehab-card {
+	@media (min-width: 640px) {
+		flex-direction: row;
+	}
+}
+
+.rehab-cards-grid--card-horizontal .rehab-card__image {
+	@media (min-width: 640px) {
+		width: 40%;
+		height: auto;
+		flex-shrink: 0;
+	}
+}
+
+.rehab-cards-grid--card-horizontal .rehab-card__body {
+	@media (min-width: 640px) {
+		width: 60%;
+	}
+}

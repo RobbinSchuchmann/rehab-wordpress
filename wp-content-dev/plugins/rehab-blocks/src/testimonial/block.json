@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/testimonial",
+  "version": "0.1.0",
+  "title": "Testimonial",
+  "category": "rehab",
+  "icon": "format-quote",
+  "description": "Single testimonial card. Quote + author + optional star rating.",
+  "parent": ["rehab/testimonials"],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "inserter": true,
+    "reusable": false
+  },
+  "attributes": {
+    "quote": {
+      "type": "string",
+      "default": "This place changed my life. The staff treated me with dignity and the program gave me the tools I needed to recover."
+    },
+    "name": {
+      "type": "string",
+      "default": "Anonymous"
+    },
+    "role": {
+      "type": "string",
+      "default": "Former client"
+    },
+    "rating": {
+      "type": "number",
+      "default": 5,
+      "minimum": 0,
+      "maximum": 5
+    }
+  },
+  "editorScript": "file:./index.js"
+}

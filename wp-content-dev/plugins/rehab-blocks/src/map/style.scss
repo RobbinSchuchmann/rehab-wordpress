@@ -1,0 +1,58 @@
+.rehab-map {
+	padding: 3rem 0;
+	@media (min-width: 768px) { padding: 5rem 0; }
+}
+
+.rehab-map__grid {
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: 1fr;
+	align-items: center;
+
+	@media (min-width: 1024px) {
+		grid-template-columns: 2fr 3fr;
+		gap: 4rem;
+	}
+}
+
+.rehab-map__info {
+	max-width: 480px;
+}
+
+.rehab-map__info .rehab-heading {
+	margin-bottom: 1rem;
+}
+
+.rehab-map__address {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.75;
+	margin: 0;
+}
+
+.rehab-map__embed {
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	background: var(--rehab-ethereal-sage);
+}
+
+.rehab-map__embed iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	display: block;
+}
+
+.rehab-map__placeholder {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--rehab-sage-text);
+	font-size: 0.875rem;
+	text-align: center;
+	padding: 2rem;
+}

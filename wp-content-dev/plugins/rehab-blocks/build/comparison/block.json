@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/comparison",
+  "version": "0.1.0",
+  "title": "Comparison",
+  "category": "rehab",
+  "icon": "tablet",
+  "description": "Side-by-side comparison (e.g. us vs traditional rehab). Two columns with rows of points.",
+  "keywords": [
+    "comparison",
+    "us vs",
+    "differences"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "What sets us apart"
+    },
+    "leftLabel": {
+      "type": "string",
+      "default": "The Diamond Rehab"
+    },
+    "rightLabel": {
+      "type": "string",
+      "default": "Traditional rehab"
+    },
+    "rows": {
+      "type": "array",
+      "default": [
+        {
+          "topic": "Client capacity",
+          "left": "Maximum 12 clients",
+          "right": "100+ clients per facility"
+        },
+        {
+          "topic": "Treatment plan",
+          "left": "Personalized, doctor-led",
+          "right": "Standardized program"
+        },
+        {
+          "topic": "Privacy",
+          "left": "NDAs, secluded facility",
+          "right": "Shared rooms, group settings"
+        },
+        {
+          "topic": "Aftercare",
+          "left": "Lifetime aftercare plan included",
+          "right": "Often costs extra"
+        }
+      ],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

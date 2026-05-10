@@ -1,0 +1,128 @@
+/* ==========================================================
+ *  HOMEPAGE FOOTER — Light theme (matching Loveable design)
+ *  Loaded only on homepage via the homepage CSS pipeline.
+ * ========================================================== */
+
+/* --- Main footer background — clean white --- */
+body:has(.drt-homepage) .site-footer,
+body.page-template-page-homepage .site-footer {
+	background-color: #fff;
+	margin-top: 0;
+}
+
+/* --- Footer logo block --- */
+body:has(.drt-homepage) .drt-footer-logo-block,
+body.page-template-page-homepage .drt-footer-logo-block {
+	border-bottom-color: rgba(190, 179, 158, 0.2);
+}
+
+/* --- Hide parent theme footer logo on homepage (we have the centered one) --- */
+body:has(.drt-homepage) .site-footer-row_col.-logo .footer_logo-link,
+body.page-template-page-homepage .site-footer-row_col.-logo .footer_logo-link {
+	display: none;
+}
+
+/* --- Contact column heading — match menu headings style --- */
+body:has(.drt-homepage) .drt-footer-contact-heading,
+body.page-template-page-homepage .drt-footer-contact-heading {
+	text-transform: uppercase;
+	font-size: 1.1rem;
+	letter-spacing: 0.05em;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	color: #2C2C2C;
+}
+
+/* --- Contact column border & text --- */
+body:has(.drt-homepage) .site-footer .site-footer-row_col.-logo,
+body.page-template-page-homepage .site-footer .site-footer-row_col.-logo {
+	border-right-color: #dfd9ce;
+	color: #333;
+}
+
+/* --- Address text --- */
+body:has(.drt-homepage) .drt-footer-address,
+body.page-template-page-homepage .drt-footer-address {
+	color: #555;
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+
+/* --- Phone numbers --- */
+body:has(.drt-homepage) .drt-footer-phones a,
+body.page-template-page-homepage .drt-footer-phones a {
+	color: #333;
+}
+
+body:has(.drt-homepage) .drt-footer-phones a:hover,
+body.page-template-page-homepage .drt-footer-phones a:hover {
+	color: #8A9674;
+}
+
+/* --- Social icons --- */
+body:has(.drt-homepage) .site-footer .list-socials li .icon,
+body.page-template-page-homepage .site-footer .list-socials li .icon {
+	color: #333;
+}
+
+body:has(.drt-homepage) .site-footer .list-socials li:hover .icon,
+body.page-template-page-homepage .site-footer .list-socials li:hover .icon {
+	color: #8A9674;
+}
+
+/* --- Menu headings --- */
+body:has(.drt-homepage) .site-footer .footer-menu li.uppercase,
+body.page-template-page-homepage .site-footer .footer-menu li.uppercase {
+	color: #2C2C2C;
+	opacity: 1;
+}
+
+/* --- Menu link colors --- */
+body:has(.drt-homepage) .site-footer .footer-menu li a,
+body.page-template-page-homepage .site-footer .footer-menu li a {
+	color: #555;
+}
+
+body:has(.drt-homepage) .site-footer .footer-menu li a:hover,
+body.page-template-page-homepage .site-footer .footer-menu li a:hover {
+	color: #8A9674;
+}
+
+/* --- Column dividers --- */
+body:has(.drt-homepage) .site-footer .footer-col-divider,
+body.page-template-page-homepage .site-footer .footer-col-divider {
+	background-color: #dfd9ce;
+}
+
+/* --- Licensed By column --- */
+body:has(.drt-homepage) .site-footer-row_col.-licensed,
+body.page-template-page-homepage .site-footer-row_col.-licensed {
+	color: #2C2C2C;
+}
+
+body:has(.drt-homepage) .drt-footer-licensed-heading,
+body.page-template-page-homepage .drt-footer-licensed-heading {
+	color: #2C2C2C;
+	opacity: 1;
+}
+
+/* --- Subfooter / bottom bar --- */
+body:has(.drt-homepage) .site-footer .site-footer_bottom,
+body.page-template-page-homepage .site-footer .site-footer_bottom {
+	background-color: #f5f5f0;
+}
+
+body:has(.drt-homepage) .site-footer .footer-copyright,
+body.page-template-page-homepage .site-footer .footer-copyright {
+	color: #6b6e6e;
+}
+
+body:has(.drt-homepage) .site-footer .site-footer_bottom_row .subfooter-menu ul li a,
+body.page-template-page-homepage .site-footer .site-footer_bottom_row .subfooter-menu ul li a {
+	color: #6b6e6e;
+}
+
+body:has(.drt-homepage) .site-footer .site-footer_bottom_row .subfooter-menu ul li a:hover,
+body.page-template-page-homepage .site-footer .site-footer_bottom_row .subfooter-menu ul li a:hover {
+	color: #8A9674;
+}

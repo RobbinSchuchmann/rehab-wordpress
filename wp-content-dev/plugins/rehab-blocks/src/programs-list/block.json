@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/programs-list",
+  "version": "0.1.0",
+  "title": "Programs List",
+  "category": "rehab",
+  "icon": "list-view",
+  "description": "Treatment programs / packages list. Each program: title, summary, key inclusions, price, CTA.",
+  "keywords": ["programs", "packages", "treatments"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "cream", "enum": ["white", "cream", "sage-mist"] },
+    "heading": { "type": "string", "default": "Treatment programs" },
+    "subheading": { "type": "string", "default": "Programs designed for sustainable recovery." }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

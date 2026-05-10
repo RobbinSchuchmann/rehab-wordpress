@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/steps",
+  "version": "0.1.0",
+  "title": "Steps",
+  "category": "rehab",
+  "icon": "list-view",
+  "description": "Numbered process steps. Use for admissions, onboarding, treatment journey.",
+  "keywords": ["steps", "process", "admissions", "journey"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "layout": { "type": "string", "default": "horizontal", "enum": ["horizontal", "vertical"] },
+    "heading": { "type": "string", "default": "Your journey to recovery" },
+    "subheading": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

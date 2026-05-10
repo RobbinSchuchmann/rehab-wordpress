@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/card",
+  "version": "0.1.0",
+  "title": "Card",
+  "category": "rehab",
+  "icon": "id",
+  "description": "Treatment / service card with image, title, description, and link. Used inside Cards Grid.",
+  "parent": ["rehab/cards-grid"],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "inserter": true,
+    "reusable": false
+  },
+  "attributes": {
+    "imageUrl": { "type": "string" },
+    "imageId": { "type": "number" },
+    "imageAlt": { "type": "string", "default": "" },
+    "title": { "type": "string", "default": "Card title" },
+    "description": { "type": "string", "default": "Card description text. Replace with your own content." },
+    "url": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js"
+}

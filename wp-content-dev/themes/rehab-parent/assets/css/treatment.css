@@ -1,0 +1,108 @@
+.rehab-breadcrumb {
+	padding-block: var(--rehab-space-3);
+	border-bottom: 1px solid var(--rehab-color-line, #e6e2d8);
+	background: var(--rehab-color-white, #fff);
+	font-size: 0.85rem;
+}
+
+/* When a hero follows a breadcrumb, suppress its top padding (the breadcrumb
+   already accounts for the visual separation from the sticky header). */
+.rehab-breadcrumb + .rehab-hero,
+.rehab-breadcrumb + section.rehab-hero,
+.rehab-breadcrumb + .wp-block-rehab-hero {
+	padding-top: var(--rehab-space-6, 3rem);
+	min-height: 0;
+}
+
+.rehab-breadcrumb + .rehab-hero .rehab-hero__grid,
+.rehab-breadcrumb + .wp-block-rehab-hero .rehab-hero__grid {
+	min-height: 0;
+}
+
+.rehab-breadcrumb__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--rehab-space-2);
+	color: var(--rehab-color-ink-soft, #5a5a55);
+}
+
+.rehab-breadcrumb__list li {
+	display: inline-flex;
+	align-items: center;
+}
+
+.rehab-breadcrumb__list li + li::before {
+	content: "›";
+	margin-right: var(--rehab-space-2);
+	color: var(--rehab-color-line, #c8c4b8);
+}
+
+.rehab-breadcrumb__list a {
+	color: var(--rehab-color-ink-soft, #5a5a55);
+	text-decoration: none;
+	transition: color 0.15s ease;
+	display: inline-block;
+	padding: 0.4rem 0;
+	min-height: 2rem;
+}
+
+.rehab-breadcrumb__list a:hover {
+	color: var(--rehab-color-sage-deep, #6f7449);
+}
+
+.rehab-breadcrumb__list [aria-current="page"] {
+	color: var(--rehab-color-ink, #1f1f1d);
+	font-weight: 500;
+}
+
+.rehab-related-treatments {
+	padding-block: var(--rehab-space-8);
+}
+
+.rehab-related-treatments__heading {
+	text-align: center;
+	margin: 0 0 var(--rehab-space-6);
+}
+
+.rehab-related-treatments__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: var(--rehab-space-4);
+	max-width: 960px;
+	margin-inline: auto;
+}
+
+.rehab-related-treatments__item a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--rehab-space-4) var(--rehab-space-5);
+	background: var(--rehab-color-white, #fff);
+	border: 1px solid var(--rehab-color-line, #e6e2d8);
+	border-radius: 4px;
+	color: var(--rehab-color-ink, #1f1f1d);
+	text-decoration: none;
+	font-family: var(--rehab-font-serif);
+	transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.rehab-related-treatments__item a:hover {
+	border-color: var(--rehab-color-sage, #b3b88e);
+	transform: translateX(2px);
+}
+
+.rehab-related-treatments__title {
+	font-size: 1.05rem;
+}
+
+.rehab-related-treatments__arrow {
+	color: var(--rehab-color-sage-deep, #6f7449);
+	font-size: 1.2rem;
+	margin-left: var(--rehab-space-3);
+}

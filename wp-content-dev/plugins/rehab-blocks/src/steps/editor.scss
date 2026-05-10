@@ -1,0 +1,13 @@
+.rehab-steps [contenteditable='true']:focus {
+	outline: 1px dashed rgba(122, 133, 106, 0.4);
+	outline-offset: 4px;
+}
+
+.rehab-steps--horizontal .rehab-steps__list {
+	grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.rehab-steps__list .block-editor-inner-blocks,
+.rehab-steps__list .block-editor-block-list__layout {
+	display: contents;
+}

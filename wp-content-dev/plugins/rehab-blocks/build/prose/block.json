@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/prose",
+  "version": "0.1.0",
+  "title": "Prose",
+  "category": "rehab",
+  "icon": "editor-paragraph",
+  "description": "Long-form article content with proper typography. Use for blog posts and content-heavy pages.",
+  "keywords": [
+    "prose",
+    "article",
+    "content",
+    "text"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "width": {
+      "type": "string",
+      "default": "text",
+      "enum": [
+        "text",
+        "narrow",
+        "default"
+      ]
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

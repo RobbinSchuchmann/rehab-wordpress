@@ -1,0 +1,27 @@
+/*
+Theme Name: Afkick
+Template: rehab-parent
+Description: Afkick (Dutch detox) brand. Clinical blue + clean ivory palette.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+:root {
+	--rehab-color-bg: #FFFFFF;
+	--rehab-color-cream: #EEF2F6;
+	--rehab-color-fg: #14233A;
+
+	--rehab-sage:           #2C5DA0;
+	--rehab-sage-dark:      #1B4078;
+	--rehab-sage-text:      #1B4078;
+	--rehab-ethereal-sage:  #DDE7F4;
+	--rehab-tan:            #6B7F95;
+
+	--rehab-warm-charcoal:  #14233A;
+	--rehab-soft-charcoal:  #324560;
+
+	--rehab-radius-sm: 2px;
+	--rehab-radius-md: 4px;
+	--rehab-radius-lg: 8px;
+}

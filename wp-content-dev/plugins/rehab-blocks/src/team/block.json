@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/team",
+  "version": "0.1.0",
+  "title": "Team",
+  "category": "rehab",
+  "icon": "groups",
+  "description": "Team member grid. Each member: photo, name, title. Hover reveals overlay.",
+  "keywords": ["team", "staff", "people"],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["full"]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": ["white", "cream", "sage-mist"]
+    },
+    "columns": {
+      "type": "number",
+      "default": 4,
+      "enum": [2, 3, 4, 5]
+    },
+    "heading": {
+      "type": "string",
+      "default": "Our team"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

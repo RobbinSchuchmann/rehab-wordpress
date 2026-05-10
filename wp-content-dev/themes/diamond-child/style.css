@@ -1,0 +1,18 @@
+/*
+Theme Name: Diamond Rehab
+Template: rehab-parent
+Description: Diamond Rehab Thailand brand. Overrides parent theme tokens for Diamond brand.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+/*
+ * BRAND OVERRIDES — only redefine tokens here.
+ * No new selectors. No layout rules. No block CSS.
+ * If you need new structural CSS, add it to the parent theme so other brands inherit it.
+ */
+:root {
+	/* Diamond uses parent defaults already (Diamond IS the design reference). */
+	/* This file exists so other brands can fork it as a template. */
+}

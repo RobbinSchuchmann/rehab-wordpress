@@ -1,0 +1,11 @@
+.rehab-tabs [contenteditable='true']:focus {
+	outline: 1px dashed rgba(122, 133, 106, 0.4);
+	outline-offset: 4px;
+}
+
+/* In editor: show all tab panels stacked since there's no runtime JS */
+.editor-styles-wrapper .rehab-tab + .rehab-tab {
+	margin-top: 2rem;
+	padding-top: 2rem;
+	border-top: 1px dashed rgba(186, 195, 161, 0.4);
+}

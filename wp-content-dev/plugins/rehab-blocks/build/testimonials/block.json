@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/testimonials",
+  "version": "0.1.0",
+  "title": "Testimonials",
+  "category": "rehab",
+  "icon": "format-quote",
+  "description": "Grid of testimonial cards. Each card: quote, author name, role, optional star rating.",
+  "keywords": [
+    "testimonials",
+    "reviews",
+    "quotes"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "columns": {
+      "type": "number",
+      "default": 3,
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "Real results, real people"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "Hear directly from those who achieved full recovery."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

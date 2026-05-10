@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/faq",
+  "version": "0.1.0",
+  "title": "FAQ",
+  "category": "rehab",
+  "icon": "editor-help",
+  "description": "Frequently Asked Questions accordion. Add as many question/answer items as you need.",
+  "keywords": [
+    "faq",
+    "questions",
+    "accordion",
+    "help"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

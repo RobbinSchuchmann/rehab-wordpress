@@ -1,0 +1,59 @@
+/* Type system. Display font from --rehab-font-display, body from --rehab-font-body. */
+
+body {
+	font-family: var(--rehab-font-body);
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--rehab-warm-charcoal);
+	-webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.rehab-heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	color: var(--rehab-warm-charcoal);
+	letter-spacing: -0.025em;
+	line-height: 1.11;
+	margin: 0 0 var(--rehab-space-sm);
+}
+
+.rehab-heading--xl { font-size: 2.25rem; }
+.rehab-heading--lg { font-size: 1.875rem; }
+.rehab-heading--md { font-size: 1.5rem; }
+.rehab-heading--sm { font-size: 1.25rem; }
+
+@media (min-width: 768px) {
+	.rehab-heading--xl { font-size: 3rem; }
+	.rehab-heading--lg { font-size: 2.25rem; }
+	.rehab-heading--md { font-size: 1.875rem; }
+}
+
+.rehab-eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	letter-spacing: 0.08em;
+	color: var(--rehab-sage-text);
+	text-transform: uppercase;
+}
+
+.rehab-lead {
+	font-size: 1.125rem;
+	line-height: 1.75;
+	font-weight: 300;
+}
+
+p { margin: 0 0 var(--rehab-space-sm); }
+
+a {
+	color: var(--rehab-sage-text);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+a:hover { color: var(--rehab-sage-dark); }
+
+strong { font-weight: 500; }

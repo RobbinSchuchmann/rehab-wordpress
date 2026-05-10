@@ -1,0 +1,39 @@
+.rehab-marquee__editor-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 2rem;
+	padding: 1rem 1.5rem;
+}
+
+.rehab-marquee__editor-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-family: var(--rehab-font-body);
+	font-size: 0.875rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-marquee__editor-item::before {
+	content: '◆';
+	color: var(--rehab-sage);
+	font-size: 0.625rem;
+}
+
+.rehab-marquee__remove {
+	background: none;
+	border: none;
+	color: var(--rehab-sage-text);
+	cursor: pointer;
+	font-size: 0.875rem;
+	opacity: 0.4;
+}
+
+.rehab-marquee__remove:hover { opacity: 1; }
+
+.rehab-marquee [contenteditable='true']:focus {
+	outline: 1px dashed rgba(122, 133, 106, 0.4);
+	outline-offset: 4px;
+}

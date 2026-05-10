@@ -1,0 +1,13 @@
+.rehab-programs [contenteditable='true']:focus {
+	outline: 1px dashed rgba(122, 133, 106, 0.4);
+	outline-offset: 4px;
+}
+
+.rehab-programs__list {
+	grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.rehab-programs__list .block-editor-inner-blocks,
+.rehab-programs__list .block-editor-block-list__layout {
+	display: contents;
+}

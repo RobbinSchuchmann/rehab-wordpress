@@ -1,0 +1,27 @@
+/*
+Theme Name: Ankerhuis FI
+Template: rehab-parent
+Description: Ankerhuis Finland brand. Cool Nordic palette — slate, fjord, snow.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+:root {
+	--rehab-color-bg: #FAFBFC;
+	--rehab-color-cream: #E5EAEE;
+	--rehab-color-fg: #1A222B;
+
+	--rehab-sage:           #4A6B7C;
+	--rehab-sage-dark:      #2E4A5C;
+	--rehab-sage-text:      #2E4A5C;
+	--rehab-ethereal-sage:  #DBE5EB;
+	--rehab-tan:            #94A3AD;
+
+	--rehab-warm-charcoal:  #1A222B;
+	--rehab-soft-charcoal:  #3A4651;
+
+	--rehab-radius-sm: 0;
+	--rehab-radius-md: 2px;
+	--rehab-radius-lg: 4px;
+}

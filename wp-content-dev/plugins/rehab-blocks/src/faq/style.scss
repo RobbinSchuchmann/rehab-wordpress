@@ -1,0 +1,88 @@
+.rehab-faq {
+	padding: 3rem 0;
+
+	@media (min-width: 768px) { padding: 5rem 0; }
+}
+
+.rehab-faq__heading {
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.rehab-faq__list {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	max-width: 56rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Native <details>-based accordion item — no JS, accessible by default.
+   Design language ported from drt-accordion: tan borders top+bottom, ivymode
+   trigger text, chevron rotation on expand, soft hover background. */
+.rehab-faq-item {
+	border-top: 1px solid rgba(190, 179, 158, 0.3);
+}
+
+.rehab-faq-item:last-child {
+	border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+}
+
+.rehab-faq-item summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	padding: 2rem 0;
+	cursor: pointer;
+	list-style: none;
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.375rem;
+	color: var(--rehab-warm-charcoal);
+	letter-spacing: -0.01em;
+	transition: background-color 0.3s var(--rehab-ease), color 0.2s var(--rehab-ease), padding 0.3s var(--rehab-ease);
+}
+
+.rehab-faq-item summary::-webkit-details-marker { display: none; }
+.rehab-faq-item summary::marker { content: ''; }
+
+.rehab-faq-item summary:hover {
+	background-color: #F6F7F2;
+	color: var(--rehab-sage-dark);
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+/* Chevron icon — CSS-only via rotated borders, rotates 180° on expand */
+.rehab-faq-item summary::after {
+	content: '';
+	display: inline-block;
+	width: 0.625rem;
+	height: 0.625rem;
+	border-right: 1.5px solid var(--rehab-tan);
+	border-bottom: 1.5px solid var(--rehab-tan);
+	transform: rotate(45deg);
+	margin-bottom: 0.25rem;
+	transition: transform 0.3s var(--rehab-ease), border-color 0.2s var(--rehab-ease);
+	flex-shrink: 0;
+}
+
+.rehab-faq-item[open] summary::after {
+	transform: rotate(225deg);
+	margin-bottom: -0.25rem;
+	border-color: var(--rehab-sage-dark);
+}
+
+.rehab-faq-item__answer {
+	padding: 0 0 2rem;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1rem;
+	line-height: 1.75;
+	color: var(--rehab-soft-charcoal);
+	max-width: 56rem;
+}
+
+.rehab-faq-item__answer p:last-child { margin-bottom: 0; }

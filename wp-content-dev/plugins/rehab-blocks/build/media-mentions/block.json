@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/media-mentions",
+  "version": "0.1.0",
+  "title": "Media Mentions",
+  "category": "rehab",
+  "icon": "awards",
+  "description": "\"As seen in\" press / media logos grid.",
+  "keywords": [
+    "media",
+    "press",
+    "as seen in",
+    "logos"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "As seen in"
+    },
+    "logos": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

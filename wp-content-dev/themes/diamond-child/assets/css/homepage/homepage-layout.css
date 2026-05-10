@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Homepage Layout — Container & Grid System
+   Reusable across future Diamond Rehab Thailand pages.
+   ========================================================================== */
+
+/* ---- Containers ---- */
+.drt-container {
+	width: 100%;
+	max-width: 1440px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+.drt-container--narrow {
+	max-width: 1200px;
+}
+
+.drt-container--xs {
+	max-width: 1024px;
+}
+
+.drt-container--text {
+	max-width: 896px;
+}
+
+@media (min-width: 1024px) {
+	.drt-container {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
+@media (min-width: 1440px) {
+	.drt-container {
+		padding-left: 3rem;
+		padding-right: 3rem;
+	}
+}
+
+/* ---- Section Padding ---- */
+.drt-section {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}
+
+.drt-section--sm {
+	padding-top: 2.5rem;
+	padding-bottom: 2.5rem;
+}
+
+.drt-section--lg {
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+}
+
+/* ---- Background Colors ---- */
+.drt-bg-white {
+	background-color: var(--drt-background);
+}
+
+.drt-bg-cream {
+	background-color: var(--drt-cream);
+}
+
+.drt-bg-sage-mist {
+	background-color: var(--drt-ethereal-sage);
+}
+
+/* ---- Grid helpers ---- */
+.drt-grid {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.drt-grid--2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.drt-grid--3 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.drt-grid--4 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+	.drt-grid--3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.drt-grid--4 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.drt-grid {
+		gap: 2rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.drt-grid--4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* ---- Section text centering ---- */
+.drt-section-header {
+	text-align: center;
+	max-width: 56rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 3rem;
+}
+
+.drt-section-header p {
+	margin-top: 1rem;
+}
+
+/* ---- Borders ---- */
+.drt-border-sage {
+	border-color: rgba(186, 195, 161, 0.3);
+}
+
+.drt-border-tan {
+	border-color: rgba(190, 179, 158, 0.3);
+}
+
+/* ---- Text balance utility ---- */
+.drt-text-balance {
+	text-wrap: balance;
+}

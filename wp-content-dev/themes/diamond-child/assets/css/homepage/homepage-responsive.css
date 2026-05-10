@@ -1,0 +1,325 @@
+/* ==========================================================================
+   Homepage Responsive — Media queries (mobile-first)
+   Breakpoints: 640px (sm), 768px (md), 1024px (lg), 1366px (laptop), 1440px (xl)
+   ========================================================================== */
+
+/* ---- sm: 640px ---- */
+@media (min-width: 640px) {
+	/* Reduce hero top padding on larger screens */
+	.drt-hero {
+		padding-top: 120px;
+	}
+
+	.drt-hero__headline {
+		font-size: 3rem;
+	}
+
+	.drt-hero__br-sm {
+		display: inline;
+	}
+
+	.drt-hero__trust {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+	}
+
+	.drt-hero__image-wrap {
+		max-height: 70vh;
+	}
+
+	.drt-founder__signature {
+		flex-direction: row;
+		gap: 2.5rem;
+	}
+
+	.drt-founder__bio {
+		text-align: left;
+	}
+
+	.drt-founder__quote {
+		font-size: 2.25rem;
+	}
+
+	.drt-authority__pillars {
+		flex-direction: row;
+		justify-content: center;
+		gap: 2rem;
+	}
+
+	.drt-authority__partners {
+		gap: 1.5rem;
+	}
+
+	.drt-authority__pillar {
+		flex-direction: row;
+		gap: 1rem;
+		text-align: left;
+	}
+
+	.drt-authority__divider {
+		display: block;
+		width: 1px;
+		height: 3rem;
+		background: rgba(186, 195, 161, 0.5);
+	}
+
+	.drt-mobile-sticky {
+		display: none !important;
+	}
+
+	/* Comparison br hidden on desktop */
+	.drt-comparison__br-sm {
+		display: block;
+	}
+}
+
+/* ---- md: 768px ---- */
+@media (min-width: 768px) {
+	/* Testimonials: show video grid, hide mobile */
+	.drt-testimonials__videos-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+		max-width: 64rem;
+		margin: 0 auto 6rem;
+	}
+
+	.drt-testimonials__videos-mobile {
+		display: none;
+	}
+
+	/* Comparison: show desktop table, hide mobile */
+	.drt-comparison__desktop {
+		display: block;
+	}
+
+	.drt-comparison__mobile {
+		display: none;
+	}
+
+	/* Media logos: flex wrap centered */
+	.drt-media__grid {
+		gap: 2.5rem 3.5rem;
+	}
+
+	.drt-media__item .drt-partner-logo {
+		height: 2rem;
+	}
+
+	/* Authority partners: flex row */
+	.drt-authority__partners {
+		display: flex;
+		justify-content: center;
+		gap: 3rem;
+	}
+
+	/* Content grid: 3 columns */
+	.drt-content-grid__grid {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	/* Treatment grid visible, swiper hidden */
+	.drt-treat__grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5rem;
+		max-width: 64rem;
+		margin: 0 auto;
+	}
+
+	.drt-treat__swiper {
+		display: none;
+	}
+
+	/* Recovery Journey: show full label */
+	.drt-recovery__label-short {
+		display: none;
+	}
+
+	.drt-recovery__label-full {
+		display: inline;
+	}
+
+	/* Concierge form: 2 cols */
+	.drt-concierge__form-wrap {
+		padding: 3rem;
+	}
+
+	.drt-concierge__grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem 3rem;
+	}
+
+	.drt-concierge__field--full {
+		grid-column: span 2;
+	}
+
+	/* Concierge avatar bigger */
+	.drt-concierge__avatar img {
+		width: 6rem;
+		height: 6rem;
+	}
+
+	/* Dots hidden on desktop for gallery + reviews + team */
+	.drt-tour__dots,
+	.drt-testimonials__dots,
+	.drt-team__dots {
+		display: none;
+	}
+
+	/* Show arrows on desktop (hidden on mobile) */
+	.drt-swiper-arrow {
+		display: flex !important;
+	}
+
+	/* At md breakpoint, position arrows inside the carousel edges */
+	.swiper-button-prev.drt-swiper-arrow {
+		left: 1rem;
+	}
+
+	.swiper-button-next.drt-swiper-arrow {
+		right: 1rem;
+	}
+
+	/* What We Treat: wider tab-to-content gap */
+	.drt-treat .drt-tabs__nav {
+		margin-bottom: 4rem;
+	}
+
+	/* Admissions: more bottom padding on desktop */
+	.drt-admissions {
+		padding-bottom: 6rem;
+	}
+
+	/* Content Grid: larger padding on desktop */
+	.drt-content-grid {
+		padding: 6rem 0;
+	}
+}
+
+/* ---- lg: 1024px ---- */
+@media (min-width: 1024px) {
+	/* Reduce hero top padding on desktop */
+	.drt-hero {
+		padding-top: 100px;
+	}
+
+	/* Move arrows outside carousel at large screens */
+	.swiper-button-prev.drt-swiper-arrow {
+		left: -3rem;
+	}
+
+	.swiper-button-next.drt-swiper-arrow {
+		right: -3rem;
+	}
+
+	/* Hero: 55/45 grid */
+	.drt-hero__grid {
+		grid-template-columns: 55% 45%;
+		gap: 3rem;
+		max-height: calc(100vh - 160px);
+	}
+
+	.drt-hero__headline {
+		font-size: 3.75rem;
+	}
+
+	.drt-hero__image-wrap {
+		aspect-ratio: 3 / 4;
+		max-height: 60vh;
+	}
+
+	/* Authority pillars: wider gap */
+	.drt-authority__pillars {
+		gap: 3rem;
+	}
+
+	/* Clinical: 4 cols */
+	.drt-clinical__grid {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0;
+	}
+
+	.drt-clinical__stat--bordered {
+		border-right: 1px solid rgba(186, 195, 161, 0.2);
+	}
+
+	/* Admissions: show desktop, hide mobile */
+	.drt-admissions__desktop {
+		display: block;
+		position: relative;
+		overflow: visible;
+	}
+
+	.drt-admissions__mobile {
+		display: none;
+	}
+
+	.drt-admissions__steps {
+		gap: 1.5rem;
+	}
+
+	/* Accommodation: horizontal layout */
+	.drt-accommodation__layout {
+		flex-direction: row;
+		gap: 3rem;
+	}
+
+	.drt-accommodation__tabs {
+		width: 33%;
+	}
+
+	.drt-accommodation__content {
+		width: 67%;
+	}
+
+	/* Location: grid columns */
+	.drt-location__grid {
+		grid-template-columns: 2fr 3fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.drt-location__map {
+		aspect-ratio: 16 / 10;
+	}
+
+	/* Content grid: 4 columns */
+	.drt-content-grid__grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	/* Tour shortcuts desktop visible */
+	.drt-tour__shortcuts--desktop {
+		display: flex;
+	}
+
+	.drt-tour__shortcuts--mobile {
+		display: none;
+	}
+
+	/* Team name visible on larger screens */
+	.drt-team__name {
+		font-size: 1rem;
+	}
+}
+
+/* ---- laptop: 1366px ---- */
+@media (min-width: 1366px) {
+	.drt-hero__image-wrap {
+		max-height: 55vh;
+	}
+
+	.drt-admissions__steps {
+		gap: 1.5rem;
+	}
+}
+
+/* ---- xl: 1440px ---- */
+@media (min-width: 1440px) {
+	.drt-hero__image-wrap {
+		max-height: 65vh;
+	}
+}

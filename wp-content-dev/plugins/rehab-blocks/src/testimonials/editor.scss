@@ -1,0 +1,21 @@
+.rehab-testimonials [contenteditable='true']:focus {
+	outline: 1px dashed rgba(122, 133, 106, 0.4);
+	outline-offset: 4px;
+}
+
+/* Force the desktop grid layout in the editor regardless of canvas width,
+   so writers see the final column count while composing. */
+.rehab-testimonials--cols-2 .rehab-testimonials__grid {
+	grid-template-columns: repeat(2, 1fr) !important;
+}
+.rehab-testimonials--cols-3 .rehab-testimonials__grid {
+	grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* Gutenberg wraps <InnerBlocks /> children in a .block-editor-block-list__layout
+   div in the editor only — the wrapper has no equivalent in the saved markup.
+   Make it transparent for layout so children become direct grid items. */
+.rehab-testimonials__grid .block-editor-inner-blocks,
+.rehab-testimonials__grid .block-editor-block-list__layout {
+	display: contents;
+}

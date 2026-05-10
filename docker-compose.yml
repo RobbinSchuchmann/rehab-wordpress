@@ -1,0 +1,68 @@
+services:
+  db:
+    image: mariadb:11
+    container_name: rehab-wp-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: diamond
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wppass
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ../diamond-rehab-wordpress-folder/xscstqwwnp.sql:/docker-entrypoint-initdb.d/01-diamond.sql:ro
+    networks:
+      - rehab
+
+  wp:
+    image: wordpress:6.4-php8.3-apache
+    container_name: rehab-wp
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: diamond
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'http://' . $$_SERVER['HTTP_HOST']);
+        define('WP_SITEURL', 'http://' . $$_SERVER['HTTP_HOST']);
+        define('FS_METHOD', 'direct');
+    volumes:
+      - wpdata:/var/www/html
+      - ./wp-content-dev:/var/www/html/wp-content
+      - ../diamond-rehab-wordpress-folder/wp-content/uploads:/var/www/html/wp-content/uploads:ro
+    ports:
+      - "0.0.0.0:8081:80"
+    networks:
+      - rehab
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    container_name: rehab-wp-cli
+    depends_on:
+      - db
+      - wp
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: diamond
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wppass
+    volumes:
+      - wpdata:/var/www/html
+      - ./wp-content-dev:/var/www/html/wp-content
+    networks:
+      - rehab
+    profiles: ["cli"]
+
+volumes:
+  dbdata:
+  wpdata:
+
+networks:
+  rehab:
+    driver: bridge

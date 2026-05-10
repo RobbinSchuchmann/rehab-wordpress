@@ -1,0 +1,51 @@
+.rehab-phone-cta {
+	padding: 1rem 0;
+}
+
+.rehab-phone-cta--bg-charcoal {
+	background: var(--rehab-warm-charcoal);
+	color: #fff;
+}
+
+.rehab-phone-cta--bg-charcoal .rehab-phone-cta__label {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.rehab-phone-cta--bg-charcoal .rehab-phone-cta__number {
+	color: #fff;
+}
+
+.rehab-phone-cta__inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	text-align: center;
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+		justify-content: center;
+		gap: 1.5rem;
+	}
+}
+
+.rehab-phone-cta__label {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	color: var(--rehab-soft-charcoal);
+}
+
+.rehab-phone-cta__number {
+	font-family: var(--rehab-font-display);
+	font-size: 1.5rem;
+	color: var(--rehab-warm-charcoal);
+	text-decoration: none;
+	font-weight: 400;
+	transition: color 0.2s var(--rehab-ease);
+}
+
+.rehab-phone-cta__number:hover {
+	color: var(--rehab-sage-dark);
+	text-decoration: none;
+}

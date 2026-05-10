@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Editor / OS
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Build outputs (blocks plugin)
+# We track wp-content-dev/plugins/rehab-blocks/build/ on purpose — the site
+# loads from there. If you add a build step to CI, switch this to ignore it.
+
+# Local screenshots (one-off debug captures)
+editor-state.png
+*.local.png
+
+# WordPress runtime / transient
+wp-content-dev/upgrade/
+wp-content-dev/cache/
+wp-content-dev/uploads/
+wp-content-dev/wp-cache-config.php
+
+# Default WP themes — bundled with the docker image, not our work
+wp-content-dev/themes/twentytwenty*/
+
+# Diamond plugin Freemius / accounts blobs
+wp-content-dev/plugins/*/freemius/
+
+# WP-CLI history
+.wp-cli/
+
+# Env-specific overrides
+docker-compose.override.yml
+.env
+.env.local
+
+# Misc
+*.pid
+*.bak

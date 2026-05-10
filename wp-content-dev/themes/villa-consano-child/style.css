@@ -1,0 +1,27 @@
+/*
+Theme Name: Villa Consano
+Template: rehab-parent
+Description: Villa Consano brand. Mediterranean terracotta + olive palette.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+:root {
+	--rehab-color-bg: #FAF5EE;
+	--rehab-color-cream: #F1E6D2;
+	--rehab-color-fg: #3A2B1B;
+
+	--rehab-sage:           #B7704A;
+	--rehab-sage-dark:      #834E2F;
+	--rehab-sage-text:      #834E2F;
+	--rehab-ethereal-sage:  #F2DCC8;
+	--rehab-tan:            #8A8543;
+
+	--rehab-warm-charcoal:  #3A2B1B;
+	--rehab-soft-charcoal:  #5E4632;
+
+	--rehab-radius-sm: 6px;
+	--rehab-radius-md: 12px;
+	--rehab-radius-lg: 20px;
+}

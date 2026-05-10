@@ -1,0 +1,40 @@
+/* Design tokens — Diamond brand defaults. Child themes override these per brand. */
+:root {
+	/* Colors */
+	--rehab-color-bg: #FFFFFF;
+	--rehab-color-cream: #F7F4EC;
+	--rehab-color-fg: #2C2C2C;
+
+	--rehab-sage: #BAC3A1;
+	--rehab-sage-dark: #8A9674;
+	--rehab-sage-text: #7A856A;
+	--rehab-ethereal-sage: #ECF0E8;
+	--rehab-tan: #BEB39E;
+
+	--rehab-warm-charcoal: #2C2C2C;
+	--rehab-soft-charcoal: #4A4A4A;
+
+	/* Easing & shadows */
+	--rehab-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--rehab-ease-out: cubic-bezier(0, 0, 0.2, 1);
+	--rehab-shadow-subtle: 0 4px 30px -8px rgba(0, 0, 0, 0.08);
+	--rehab-shadow-elevated: 0 20px 60px -20px rgba(0, 0, 0, 0.12);
+	--rehab-shadow-dramatic: 0 40px 80px -30px rgba(0, 0, 0, 0.15);
+
+	/* Type */
+	--rehab-font-body: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--rehab-font-display: Ivymode, Georgia, "Times New Roman", serif;
+
+	/* Spacing & layout */
+	--rehab-space-xs: 0.5rem;
+	--rehab-space-sm: 1rem;
+	--rehab-space-md: 1.5rem;
+	--rehab-space-lg: 3rem;
+	--rehab-space-xl: 5rem;
+
+	--rehab-container-max: 1440px;
+	--rehab-radius-sm: 4px;
+	--rehab-radius-md: 8px;
+	--rehab-radius-lg: 16px;
+	--rehab-radius-pill: 999px;
+}

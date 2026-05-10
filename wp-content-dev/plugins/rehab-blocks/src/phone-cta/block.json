@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/phone-cta",
+  "version": "0.1.0",
+  "title": "Phone CTA",
+  "category": "rehab",
+  "icon": "phone",
+  "description": "Strip with a phone number CTA — used on contact pages or as a sticky band.",
+  "keywords": ["phone", "call", "contact"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "sage-mist", "enum": ["sage-mist", "white", "cream", "charcoal"] },
+    "label": { "type": "string", "default": "Speak with our admissions team — 24/7" },
+    "phoneText": { "type": "string", "default": "+66 2 056 8987" },
+    "phoneNumber": { "type": "string", "default": "+6620568987" }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

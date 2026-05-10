@@ -1,0 +1,36 @@
+/*
+Theme Name: Anker Holding
+Template: rehab-parent
+Description: Anker Holding brand. Token overrides for the Anker brand variant of the rehab parent theme.
+Version: 0.1.0
+Author: Rehab Platform
+License: GPL-2.0+
+*/
+
+/*
+ * BRAND OVERRIDES — only redefine tokens here.
+ * No new selectors. No layout rules. No block CSS.
+ * Anker palette: navy + warm stone — clinical, Northern European feel.
+ */
+:root {
+	/* Surfaces */
+	--rehab-color-bg: #FAF8F4;
+	--rehab-color-cream: #F4EFE6;
+	--rehab-color-fg: #1A2533;
+
+	/* Brand accent shifts from sage to navy/teal */
+	--rehab-sage:           #4F6D7A;
+	--rehab-sage-dark:      #2E4A57;
+	--rehab-sage-text:      #2E4A57;
+	--rehab-ethereal-sage:  #E4ECEF;
+	--rehab-tan:            #B89F84;
+
+	/* Body / display type */
+	--rehab-warm-charcoal:  #1A2533;
+	--rehab-soft-charcoal:  #404A57;
+
+	/* Sharper, more clinical edges */
+	--rehab-radius-sm: 2px;
+	--rehab-radius-md: 4px;
+	--rehab-radius-lg: 8px;
+}

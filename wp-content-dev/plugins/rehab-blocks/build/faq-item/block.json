@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/faq-item",
+  "version": "0.1.0",
+  "title": "FAQ Item",
+  "category": "rehab",
+  "icon": "editor-help",
+  "description": "A single question/answer pair inside a FAQ block.",
+  "parent": [
+    "rehab/faq"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "inserter": true,
+    "reusable": false
+  },
+  "attributes": {
+    "question": {
+      "type": "string",
+      "default": "Question?"
+    },
+    "answer": {
+      "type": "string",
+      "default": "Answer."
+    }
+  },
+  "editorScript": "file:./index.js"
+}

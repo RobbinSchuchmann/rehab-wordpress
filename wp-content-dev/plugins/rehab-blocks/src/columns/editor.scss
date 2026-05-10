@@ -1,0 +1,13 @@
+.rehab-columns__col {
+	min-height: 4rem;
+}
+
+/* Force 2-col grid in editor regardless of canvas width */
+.rehab-columns__grid {
+	grid-template-columns: 1fr 1fr !important;
+}
+
+.rehab-columns__grid .block-editor-inner-blocks,
+.rehab-columns__grid .block-editor-block-list__layout {
+	display: contents;
+}

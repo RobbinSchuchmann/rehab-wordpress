@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/team-member",
+  "version": "0.1.0",
+  "title": "Team Member",
+  "category": "rehab",
+  "icon": "admin-users",
+  "description": "Single team member: photo, name, role.",
+  "parent": ["rehab/team"],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "inserter": true,
+    "reusable": false
+  },
+  "attributes": {
+    "imageUrl": { "type": "string" },
+    "imageId": { "type": "number" },
+    "imageAlt": { "type": "string", "default": "" },
+    "name": { "type": "string", "default": "Team member name" },
+    "role": { "type": "string", "default": "Role / Title" }
+  },
+  "editorScript": "file:./index.js"
+}

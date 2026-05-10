@@ -1,0 +1,39 @@
+/* Layout primitives. Containers, section spacing. */
+
+.rehab-container {
+	width: 100%;
+	max-width: var(--rehab-container-max);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+	.rehab-container { padding-left: 2rem; padding-right: 2rem; }
+}
+
+@media (min-width: 1440px) {
+	.rehab-container { padding-left: 3rem; padding-right: 3rem; }
+}
+
+.rehab-container--narrow { max-width: 1200px; }
+.rehab-container--xs { max-width: 1024px; }
+.rehab-container--text { max-width: 896px; }
+
+/* Section padding scale */
+.rehab-section { padding-top: 3rem; padding-bottom: 3rem; }
+
+@media (min-width: 768px) {
+	.rehab-section { padding-top: 4rem; padding-bottom: 4rem; }
+}
+
+@media (min-width: 1024px) {
+	.rehab-section { padding-top: 5rem; padding-bottom: 5rem; }
+	.rehab-section--lg { padding-top: 7rem; padding-bottom: 7rem; }
+}
+
+/* Background utilities — token-driven */
+.rehab-bg-white { background-color: var(--rehab-color-bg); }
+.rehab-bg-cream { background-color: var(--rehab-color-cream); }
+.rehab-bg-sage-mist { background-color: var(--rehab-ethereal-sage); }

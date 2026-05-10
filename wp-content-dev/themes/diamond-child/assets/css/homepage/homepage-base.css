@@ -1,0 +1,311 @@
+/* ==========================================================================
+   Homepage Base — Design Tokens & Typography
+   Reusable across future Diamond Rehab Thailand pages.
+   ========================================================================== */
+
+/* Load Inter Light (300) - not loaded by parent theme */
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url('../../../../diamond/assets/fonts/subset-Inter-Light.woff2') format('woff2'),
+	     url('../../../../diamond/assets/fonts/subset-Inter-Light.woff') format('woff');
+}
+
+/* Override parent theme's responsive root font-size for homepage
+   Parent theme sets: 16px (≥1590px), 13px (1200-1589px), 14px (576-1199px), 16px (≤575px)
+   We need consistent 16px to match Loveable design */
+html:has(.drt-homepage) {
+	font-size: 16px !important;
+}
+
+/* ---- Homepage Header Fix ----
+   Make header elements visible on white background */
+
+/* Menu icon and text - dark on white */
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item {
+	color: #2C2C2C !important;
+	fill: #2C2C2C !important;
+}
+
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon svg,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon svg {
+	fill: #2C2C2C !important;
+}
+
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item_title,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item_title {
+	color: #2C2C2C !important;
+	display: block !important;
+}
+
+/* Show dark logo, hide light logo */
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .custom-logo-link,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .custom-logo-link {
+	opacity: 1 !important;
+}
+
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .header_light_logo-link,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .header_light_logo-link {
+	opacity: 0 !important;
+}
+
+/* When header is pinned (scrolled), keep dark styling with white background */
+body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed),
+body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed) {
+	background-color: #fff;
+	border-bottom: 1px solid rgba(186, 195, 161, 0.3);
+}
+
+body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item,
+body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item {
+	color: #2C2C2C !important;
+	fill: #2C2C2C !important;
+}
+
+body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item_icon svg,
+body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item_icon svg {
+	fill: #2C2C2C !important;
+}
+
+/* Ensure "Get In Touch" is visible */
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell.-side a.explore-navbar_cell_item,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell.-side a.explore-navbar_cell_item {
+	color: #2C2C2C !important;
+}
+
+/* Make menu hamburger icon visible */
+body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon.-mobile svg,
+body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon.-mobile svg {
+	fill: #2C2C2C !important;
+	stroke: #2C2C2C !important;
+}
+
+/* Hide the duplicate (light) logo on homepage - prevent two logos showing */
+body:has(.drt-homepage) .explore-navbar-logo .custom-logo-link:nth-child(2),
+body.page-template-page-homepage .explore-navbar-logo .custom-logo-link:nth-child(2) {
+	display: none !important;
+}
+
+/* Hide "MENU" text next to hamburger — just show the icon like Lovable */
+body:has(.drt-homepage) .explore-navbar .drt-menu-toggle .explore-navbar_cell_item_title,
+body.page-template-page-homepage .explore-navbar .drt-menu-toggle .explore-navbar_cell_item_title {
+	display: none !important;
+}
+
+/* Phone number button in header (matching Lovable style) */
+.drt-header-phone {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.625rem 1.25rem;
+	border: 1px solid var(--drt-warm-charcoal, #2C2C2C);
+	color: var(--drt-warm-charcoal, #2C2C2C) !important;
+	text-decoration: none !important;
+	font-family: 'Inter', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 300;
+	letter-spacing: 0.02em;
+	transition: all 0.3s ease;
+	white-space: nowrap;
+}
+
+.drt-header-phone:hover {
+	background: var(--drt-warm-charcoal, #2C2C2C);
+	color: #fff !important;
+	text-decoration: none !important;
+}
+
+/* Hide phone number button on mobile — matches Lovable behavior */
+@media (max-width: 767px) {
+	.drt-header-phone {
+		display: none !important;
+	}
+}
+
+/* Hide superannuation button on homepage */
+body:has(.drt-homepage) .custom-button-super,
+body.page-template-page-homepage .custom-button-super {
+	display: none !important;
+}
+
+:root {
+	/* ---- Brand Palette ---- */
+	--drt-sage: #BAC3A1;
+	--drt-sage-dark: #8A9674;
+	--drt-sage-text: #7A856A;
+	--drt-warm-charcoal: #2C2C2C;
+	--drt-soft-charcoal: #4A4A4A;
+	--drt-ethereal-sage: #ECF0E8;
+	--drt-cream: #FFFFFF;
+	--drt-background: #FFFFFF;
+	--drt-tan: #BEB39E;
+
+	/* ---- Shadows ---- */
+	--drt-shadow-subtle: 0 4px 30px -8px rgba(0, 0, 0, 0.08);
+	--drt-shadow-elevated: 0 20px 60px -20px rgba(0, 0, 0, 0.12);
+	--drt-shadow-dramatic: 0 40px 80px -30px rgba(0, 0, 0, 0.15);
+
+	/* ---- Transitions ---- */
+	--drt-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--drt-ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* ---- Typography Base ---- */
+.drt-homepage {
+	font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+	font-weight: 300 !important;
+	color: var(--drt-warm-charcoal);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+}
+
+/* Override parent Bootstrap body font-weight for all descendants */
+.drt-homepage,
+.drt-homepage p,
+.drt-homepage span,
+.drt-homepage div,
+.drt-homepage li,
+.drt-homepage a {
+	font-weight: 300 !important;
+}
+
+.drt-eyebrow {
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	color: var(--drt-sage-text);
+}
+
+.drt-heading {
+	font-family: Ivymode, Georgia, serif;
+	font-weight: 300;
+	color: var(--drt-warm-charcoal);
+	letter-spacing: -0.025em;
+	line-height: 1.11;
+}
+
+/* Override parent theme heading styles - use Ivymode Light (weight 300) */
+.drt-homepage h1,
+.drt-homepage h2,
+.drt-homepage h3,
+.drt-homepage h4,
+.drt-homepage h5,
+.drt-homepage h6 {
+	font-family: Ivymode, Georgia, serif !important;
+	font-weight: 300 !important;
+	color: var(--drt-warm-charcoal);
+	letter-spacing: -0.025em;
+	line-height: 1.11;
+}
+
+.drt-body {
+	font-family: 'Inter', sans-serif;
+	font-weight: 300;
+	color: var(--drt-soft-charcoal);
+	line-height: 1.75;
+}
+
+/* Stronger font weight on mobile for better readability */
+@media (max-width: 640px) {
+	.drt-homepage {
+		font-weight: 400;
+	}
+}
+
+/* ---- Heading Sizes ---- */
+.drt-heading--xl {
+	font-size: 2.25rem;
+}
+
+.drt-heading--lg {
+	font-size: 1.875rem;
+}
+
+.drt-heading--md {
+	font-size: 1.5rem;
+}
+
+.drt-heading--sm {
+	font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+	.drt-heading--xl {
+		font-size: 3rem;
+	}
+
+	.drt-heading--lg {
+		font-size: 2.25rem;
+	}
+
+	.drt-heading--md {
+		font-size: 1.875rem;
+	}
+}
+
+/* ---- Animations ---- */
+@keyframes drt-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes drt-fade-in-left {
+	from {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes drt-fade-in-right {
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes drt-luxury-pulse {
+	0%, 100% {
+		transform: scale(1);
+		filter: brightness(1);
+	}
+	50% {
+		transform: scale(1.03);
+		filter: brightness(1.05);
+	}
+}
+
+.drt-animate-fade-in {
+	animation: drt-fade-in 0.6s var(--drt-ease) both;
+}
+
+.drt-animate-fade-in-left {
+	animation: drt-fade-in-left 0.8s var(--drt-ease) both;
+}
+
+.drt-animate-fade-in-right {
+	animation: drt-fade-in-right 0.8s var(--drt-ease) both;
+}
+
+.drt-animate-luxury-pulse {
+	animation: drt-luxury-pulse 3s ease-in-out infinite;
+}

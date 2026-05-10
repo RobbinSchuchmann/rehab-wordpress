@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/columns",
+  "version": "0.1.0",
+  "title": "Columns (2-up)",
+  "category": "rehab",
+  "icon": "columns",
+  "description": "2-column section. Each column accepts any inner blocks (paragraph, list, image, button, etc.). Variants: default, divided.",
+  "keywords": ["columns", "two", "split"],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["full"]
+  },
+  "attributes": {
+    "variant": {
+      "type": "string",
+      "default": "default",
+      "enum": ["default", "divided"]
+    },
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": ["white", "cream", "sage-mist"]
+    },
+    "verticalAlign": {
+      "type": "string",
+      "default": "top",
+      "enum": ["top", "center", "bottom"]
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

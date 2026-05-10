@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/map",
+  "version": "0.1.0",
+  "title": "Map",
+  "category": "rehab",
+  "icon": "location",
+  "description": "Location map (Google Maps embed) with optional heading and address details.",
+  "keywords": ["map", "location", "address", "google maps"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "heading": { "type": "string", "default": "Find us" },
+    "address": { "type": "string", "default": "Diamond Rehab Thailand, Bang Tao Beach, Phuket" },
+    "embedUrl": {
+      "type": "string",
+      "default": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31696.0!2d98.291!3d7.997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPhuket!5e0!3m2!1sen!2sus!4v0"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,83 @@
+.rehab-founder {
+	padding: 4rem 0;
+	@media (min-width: 768px) { padding: 6rem 0; }
+}
+
+.rehab-founder__grid {
+	display: grid;
+	gap: 3rem;
+	grid-template-columns: 1fr;
+	align-items: center;
+
+	@media (min-width: 1024px) {
+		grid-template-columns: 1fr 1fr;
+		gap: 5rem;
+	}
+}
+
+.rehab-founder__media {
+	max-width: 480px;
+	margin: 0 auto;
+}
+
+.rehab-founder__photo {
+	width: 100%;
+	height: auto;
+	display: block;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	background: var(--rehab-ethereal-sage);
+}
+
+.rehab-founder__quote {
+	font-family: var(--rehab-font-display);
+	font-style: italic;
+	font-weight: 300;
+	font-size: 1.5rem;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal);
+	margin: 0 0 2rem;
+	padding: 0;
+	border: none;
+	letter-spacing: -0.01em;
+
+	@media (min-width: 768px) { font-size: 2.25rem; }
+}
+
+.rehab-founder__quote::before { content: '"'; }
+.rehab-founder__quote::after { content: '"'; }
+
+.rehab-founder__body {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1.0625rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.75;
+	margin: 0 0 2rem;
+}
+
+.rehab-founder__signature {
+	display: flex;
+	flex-direction: column;
+	gap: 0.125rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(186, 195, 161, 0.4);
+}
+
+.rehab-founder__name {
+	font-family: var(--rehab-font-display);
+	font-weight: 400;
+	font-size: 1.125rem;
+	color: var(--rehab-warm-charcoal);
+	margin: 0;
+}
+
+.rehab-founder__role {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--rehab-sage-text);
+	margin: 0;
+}

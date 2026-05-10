@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/gallery",
+  "version": "0.1.0",
+  "title": "Gallery",
+  "category": "rehab",
+  "icon": "format-gallery",
+  "description": "Image gallery. Variants: grid, masonry. Pick a section heading and any number of images.",
+  "keywords": ["gallery", "images", "photos"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "variant": { "type": "string", "default": "grid", "enum": ["grid", "masonry"] },
+    "columns": { "type": "number", "default": 3, "enum": [2, 3, 4] },
+    "heading": { "type": "string", "default": "" },
+    "images": { "type": "array", "default": [], "items": { "type": "object" } }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

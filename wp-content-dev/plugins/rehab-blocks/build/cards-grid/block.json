@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/cards-grid",
+  "version": "0.1.0",
+  "title": "Cards Grid",
+  "category": "rehab",
+  "icon": "grid-view",
+  "description": "Grid of cards (treatments, services, programs). Each card: image, title, description, link.",
+  "keywords": [
+    "cards",
+    "grid",
+    "treatments",
+    "services"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "columns": {
+      "type": "number",
+      "default": 2,
+      "enum": [
+        2,
+        3,
+        4
+      ]
+    },
+    "cardLayout": {
+      "type": "string",
+      "default": "horizontal",
+      "enum": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "default": "What we treat"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "World-class drug and alcohol addiction treatment, personalized for every individual."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
