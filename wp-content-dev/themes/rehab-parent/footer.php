@@ -142,6 +142,15 @@ $intl_lines = array_filter(
 	</div>
 </footer>
 
+<?php
+// Sticky bottom-of-screen mobile CTA. Hidden on viewports ≥720px via CSS.
+$sticky_phone_tel = preg_replace( '/[^0-9+]/', '', get_theme_mod( 'rehab_phone_number', '+66965823832' ) );
+?>
+<div class="rehab-sticky-cta" aria-label="<?php esc_attr_e( 'Quick contact actions', 'rehab-parent' ); ?>">
+	<a href="tel:<?php echo esc_attr( $sticky_phone_tel ); ?>" class="rehab-btn rehab-btn--outline"><?php esc_html_e( 'Call now', 'rehab-parent' ); ?></a>
+	<a href="#assessment" class="rehab-btn rehab-btn--luxury"><?php esc_html_e( 'Free assessment', 'rehab-parent' ); ?></a>
+</div>
+
 <?php wp_footer(); ?>
 </body>
 </html>

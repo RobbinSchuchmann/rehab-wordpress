@@ -1,0 +1,103 @@
+/* Site-wide top utility bar — small dark strip above the navbar with key
+   trust signals (left) and quick-contact links (right). Hides the left
+   items on small mobile to keep the bar clean. */
+
+/* Utility bar is currently hidden — kept in header.php so we can flip it
+   back on later via a theme mod (or by removing this rule). */
+.rehab-utility-bar {
+	display: none;
+	background: var(--rehab-warm-charcoal);
+	color: #ECE9E0;
+	font-family: var(--rehab-font-body);
+	font-size: 0.8rem;
+	font-weight: 300;
+}
+
+.rehab-utility-bar__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.55rem 1.5rem;
+	max-width: 1440px;
+	margin: 0 auto;
+	gap: 1rem;
+}
+
+.rehab-utility-bar__left {
+	display: flex;
+	gap: 1.75rem;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.rehab-utility-bar__left span {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	opacity: 0.8;
+}
+
+.rehab-utility-bar__dot {
+	color: var(--rehab-sage);
+	font-size: 0.55rem;
+}
+
+.rehab-utility-bar__right {
+	display: flex;
+	gap: 1.5rem;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.rehab-utility-bar a {
+	color: #ECE9E0;
+	text-decoration: none;
+}
+
+.rehab-utility-bar a:hover {
+	color: var(--rehab-sage);
+}
+
+@media (max-width: 720px) {
+	.rehab-utility-bar__left {
+		display: none;
+	}
+	.rehab-utility-bar__inner {
+		justify-content: center;
+	}
+	.rehab-utility-bar__right {
+		gap: 1rem;
+	}
+}
+
+/* Sticky bottom mobile CTA — only visible on small screens. */
+.rehab-sticky-cta {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 60;
+	background: #fff;
+	padding: 0.75rem 1rem;
+	border-top: 1px solid rgba(190, 179, 158, 0.3);
+	box-shadow: 0 -4px 30px -8px rgba(0, 0, 0, 0.08);
+	gap: 0.5rem;
+}
+
+.rehab-sticky-cta .rehab-btn {
+	flex: 1;
+	padding: 0.85rem 0.8rem;
+	font-size: 0.8rem;
+	letter-spacing: 0.1em;
+	white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+	.rehab-sticky-cta {
+		display: flex;
+	}
+	body {
+		padding-bottom: 76px;
+	}
+}

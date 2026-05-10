@@ -535,3 +535,70 @@ function rehab_block_final_cta( array $a = [] ): string {
 	$h .= '</div></section>';
 	return "<!-- wp:rehab/final-cta " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/final-cta -->\n\n";
 }
+
+
+/**
+ * Build a `rehab/treatment-phases` block — self-contained tabs widget.
+ * All content is in attributes (no parent/child blocks) so the page is
+ * canonicalize-safe.
+ *
+ * $phases = array of:
+ *   [ 'phase' => 'PHASE 01', 'label' => 'Medical detox',
+ *     'h3' => '...', 'paragraphs' => [...], 'listItems' => [...] (optional, inserted after para 2),
+ *     'asideQuote' => '...', 'asideMetaLabel' => 'Quoted by', 'asideMetaValue' => 'Theo de Vries' ]
+ */
+function rehab_block_treatment_phases( string $eyebrow, string $heading, string $subheading, array $phases, string $bg = 'white' ): string {
+	$attrs = rehab_block_attrs( [
+		'background' => $bg, 'eyebrow' => $eyebrow, 'heading' => $heading,
+		'subheading' => $subheading, 'phases' => $phases,
+	] );
+	$h  = '<section class="wp-block-rehab-treatment-phases rehab-treatment-phases rehab-bg-' . esc_attr( $bg ) . '">';
+	$h .= '<div class="rehab-container">';
+	if ( $eyebrow || $heading || $subheading ) {
+		$h .= '<div class="rehab-treatment-phases__head">';
+		if ( $eyebrow )    $h .= '<span class="rehab-treatment-phases__eyebrow">' . esc_html( $eyebrow ) . '</span>';
+		if ( $heading )    $h .= '<h2 class="rehab-treatment-phases__heading">' . esc_html( $heading ) . '</h2>';
+		if ( $subheading ) $h .= '<p class="rehab-treatment-phases__sub">' . esc_html( $subheading ) . '</p>';
+		$h .= '</div>';
+	}
+	// Tab nav
+	$h .= '<div class="rehab-treatment-phases__nav" role="tablist">';
+	foreach ( $phases as $i => $phase ) {
+		$active = $i === 0 ? ' is-active' : '';
+		$selected = $i === 0 ? 'true' : 'false';
+		$h .= '<button type="button" role="tab" class="rehab-treatment-phases__tab' . $active . '" data-tab="' . $i . '" aria-selected="' . $selected . '"><span>';
+		if ( ! empty( $phase['phase'] ) ) $h .= '<span class="num">' . esc_html( $phase['phase'] ) . '</span>';
+		$h .= '<span>' . esc_html( $phase['label'] ?? ( 'Phase ' . ( $i + 1 ) ) ) . '</span>';
+		$h .= '</span></button>';
+	}
+	$h .= '</div>';
+	// Panels
+	$h .= '<div class="rehab-treatment-phases__panels">';
+	foreach ( $phases as $i => $phase ) {
+		$phase = array_merge( [ 'phase' => '', 'label' => '', 'h3' => '', 'paragraphs' => [], 'listItems' => [], 'asideQuote' => '', 'asideMetaLabel' => 'Quoted by', 'asideMetaValue' => '' ], $phase );
+		$hidden = $i === 0 ? '' : ' hidden';
+		$h .= '<div class="rehab-treatment-phases__panel" data-label="' . esc_attr( $phase['label'] ) . '" data-phase="' . esc_attr( $phase['phase'] ) . '"' . $hidden . '>';
+		$h .= '<div class="rehab-treatment-phases__main">';
+		if ( $phase['h3'] ) $h .= '<h3>' . esc_html( $phase['h3'] ) . '</h3>';
+		foreach ( $phase['paragraphs'] as $j => $p ) {
+			$h .= '<p>' . esc_html( $p ) . '</p>';
+			if ( $j === 1 && ! empty( $phase['listItems'] ) ) {
+				$h .= '<ul>';
+				foreach ( $phase['listItems'] as $li ) {
+					$h .= '<li>' . wp_kses( $li, [ 'strong' => [], 'em' => [] ] ) . '</li>';
+				}
+				$h .= '</ul>';
+			}
+		}
+		$h .= '</div>';
+		if ( $phase['asideQuote'] ) {
+			$h .= '<aside class="rehab-treatment-phases__aside">';
+			$h .= '<p class="quote">' . esc_html( $phase['asideQuote'] ) . '</p>';
+			$h .= '<div class="meta"><strong>' . esc_html( $phase['asideMetaLabel'] ) . '</strong>' . esc_html( $phase['asideMetaValue'] ) . '</div>';
+			$h .= '</aside>';
+		}
+		$h .= '</div>';
+	}
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/treatment-phases " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/treatment-phases -->\n\n";
+}

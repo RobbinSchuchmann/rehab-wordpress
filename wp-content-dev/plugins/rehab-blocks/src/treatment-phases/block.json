@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/treatment-phases",
+  "version": "0.1.0",
+  "title": "Treatment phases (tabs)",
+  "category": "rehab",
+  "icon": "list-view",
+  "description": "Bordered tabbed widget for treatment phases. Each phase has phase number + label + main content (H3 + paragraphs + optional list) + aside (quote + meta).",
+  "keywords": ["tabs", "phases", "treatment"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "eyebrow":    { "type": "string", "default": "The treatment phases" },
+    "heading":    { "type": "string", "default": "Three pillars of cocaine recovery" },
+    "subheading": { "type": "string", "default": "" },
+    "phases": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "object" }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "viewScript":   "file:./view.js"
+}

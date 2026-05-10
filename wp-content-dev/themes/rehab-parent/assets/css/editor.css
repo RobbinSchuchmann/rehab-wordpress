@@ -1,0 +1,44 @@
+/* Editor canvas width — match frontend so blocks render at near-real size.
+   Without this, the canvas is ~580-800px and our split / 3-up grids look
+   crammed. Writers see something different from what they ship. */
+
+.editor-styles-wrapper .wp-block,
+.editor-styles-wrapper [data-block] {
+	max-width: none;
+}
+
+/* Top-level page editor canvas — bump to wide-design width */
+.editor-styles-wrapper {
+	max-width: 1440px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Inside a block, default widths (e.g. core/paragraph) get text-readable
+   width, but our rehab/* blocks already manage their own containers
+   (.rehab-container) so let them span the canvas. */
+.editor-styles-wrapper .wp-block-rehab-treatment-hero,
+.editor-styles-wrapper .wp-block-rehab-authority-ribbon,
+.editor-styles-wrapper .wp-block-rehab-pillars,
+.editor-styles-wrapper .wp-block-rehab-article-row,
+.editor-styles-wrapper .wp-block-rehab-intro-doctor-card,
+.editor-styles-wrapper .wp-block-rehab-signs-grid,
+.editor-styles-wrapper .wp-block-rehab-journey-steps,
+.editor-styles-wrapper .wp-block-rehab-benefits-numbered,
+.editor-styles-wrapper .wp-block-rehab-tabs,
+.editor-styles-wrapper .wp-block-rehab-faq,
+.editor-styles-wrapper .wp-block-rehab-final-cta,
+.editor-styles-wrapper .wp-block-rehab-cta,
+.editor-styles-wrapper .wp-block-rehab-hero,
+.editor-styles-wrapper .wp-block-rehab-cards-grid,
+.editor-styles-wrapper .wp-block-rehab-comparison,
+.editor-styles-wrapper .wp-block-rehab-prose {
+	max-width: 100%;
+	width: 100%;
+}
+
+/* Suppress the editor's narrow safe-area on full-width blocks */
+.editor-styles-wrapper .is-root-container {
+	padding-left: 0;
+	padding-right: 0;
+}

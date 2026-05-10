@@ -1946,7 +1946,7 @@ add_action( 'init', function () {
 			] );
 
 			// 6b. TREATMENT PHASES TABS
-			$blocks .= rehab_block_treatment_tabs(
+			$blocks .= rehab_block_treatment_phases(
 				'The treatment phases',
 				'Three pillars of cocaine recovery',
 				'From the medical detox through to the holistic work that supports long-term sobriety — every phase is supervised by our multi-disciplinary team.',

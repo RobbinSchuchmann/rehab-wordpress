@@ -33,6 +33,7 @@ function rehab_parent_setup(): void {
 		'assets/css/buttons.css',
 		'assets/css/layout.css',
 		'assets/css/utilities.css',
+		'assets/css/editor.css',
 	] );
 
 	register_nav_menus(
@@ -61,6 +62,7 @@ function rehab_parent_enqueue(): void {
 		'rehab-buttons'    => [ "$base_uri/css/buttons.css", [ 'rehab-tokens' ] ],
 		'rehab-utilities'  => [ "$base_uri/css/utilities.css", [ 'rehab-tokens' ] ],
 		'rehab-header'     => [ "$base_uri/css/header.css", [ 'rehab-tokens' ] ],
+		'rehab-utility-bar' => [ "$base_uri/css/utility-bar.css", [ 'rehab-tokens', 'rehab-buttons' ] ],
 		'rehab-footer'     => [ "$base_uri/css/footer.css", [ 'rehab-tokens' ] ],
 		'rehab-article'    => [ "$base_uri/css/article.css", [ 'rehab-tokens', 'rehab-typography' ] ],
 		'rehab-articles-index' => [ "$base_uri/css/articles-index.css", [ 'rehab-tokens' ] ],

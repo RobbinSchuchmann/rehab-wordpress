@@ -1,0 +1,213 @@
+.rehab-treatment-phases {
+	padding: 5rem 0;
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-treatment-phases__head {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 3rem;
+}
+
+.rehab-treatment-phases__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-treatment-phases__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	color: var(--rehab-warm-charcoal);
+	text-wrap: balance;
+}
+
+.rehab-treatment-phases__sub {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+.rehab-treatment-phases__nav {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	margin: 0;
+	padding: 0;
+
+	@media (max-width: 720px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.rehab-treatment-phases__tab {
+	background: transparent;
+	border: 0;
+	border-right: 1px solid rgba(190, 179, 158, 0.3);
+	padding: 1.5rem 1.25rem;
+	cursor: pointer;
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.15rem;
+	color: var(--rehab-soft-charcoal);
+	transition: all 0.25s var(--rehab-ease);
+	text-align: left;
+
+	&:last-child { border-right: 0; }
+
+	@media (max-width: 720px) {
+		border-right: 0;
+		border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+		&:last-child { border-bottom: 0; }
+	}
+}
+
+.rehab-treatment-phases__tab .num {
+	font-family: var(--rehab-font-body);
+	font-size: 0.72rem;
+	letter-spacing: 0.18em;
+	color: var(--rehab-sage-text);
+	font-weight: 500;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: 0.25rem;
+}
+
+.rehab-treatment-phases__tab:hover {
+	background: var(--rehab-color-cream, #F7F4EC);
+}
+
+.rehab-treatment-phases__tab.is-active {
+	background: var(--rehab-warm-charcoal);
+	color: #fff;
+}
+
+.rehab-treatment-phases__tab.is-active .num {
+	color: var(--rehab-sage);
+}
+
+.rehab-treatment-phases__panel[hidden] { display: none; }
+
+.rehab-treatment-phases__panel:not([hidden]) {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr;
+	gap: 3rem;
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	border-top: 0;
+	padding: 3rem;
+	animation: rehab-treatment-phases-fade 0.4s var(--rehab-ease) both;
+
+	@media (max-width: 900px) {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		padding: 2rem 1.5rem;
+	}
+}
+
+.rehab-treatment-phases__main h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.5rem;
+	letter-spacing: -0.01em;
+	margin: 0 0 1rem;
+	line-height: 1.2;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-treatment-phases__main p {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1rem;
+	line-height: 1.75;
+	font-weight: 300;
+}
+
+.rehab-treatment-phases__main p + p,
+.rehab-treatment-phases__main ul + p {
+	margin-top: 1rem;
+}
+
+.rehab-treatment-phases__main ul {
+	padding: 0;
+	margin: 1rem 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.55rem;
+
+	@media (max-width: 560px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.rehab-treatment-phases__main li {
+	position: relative;
+	padding-left: 1.4rem;
+	font-size: 0.95rem;
+	color: var(--rehab-soft-charcoal);
+	font-weight: 300;
+}
+
+.rehab-treatment-phases__main li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
+	width: 0.55rem;
+	height: 0.55rem;
+	border-left: 1.5px solid var(--rehab-sage);
+	border-bottom: 1.5px solid var(--rehab-sage);
+	transform: rotate(-45deg);
+}
+
+.rehab-treatment-phases__aside {
+	background: var(--rehab-ethereal-sage);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1.5rem;
+	border-left: 3px solid var(--rehab-sage);
+}
+
+.rehab-treatment-phases__aside .quote {
+	font-family: var(--rehab-font-display);
+	font-style: italic;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	color: var(--rehab-warm-charcoal);
+	text-wrap: balance;
+	margin: 0;
+}
+
+.rehab-treatment-phases__aside .meta {
+	font-size: 0.85rem;
+	color: var(--rehab-soft-charcoal);
+}
+
+.rehab-treatment-phases__aside .meta strong {
+	display: block;
+	font-weight: 500;
+	color: var(--rehab-warm-charcoal);
+	margin-bottom: 0.25rem;
+	font-size: 0.72rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+
+@keyframes rehab-treatment-phases-fade {
+	from { opacity: 0; transform: translateY(4px); }
+	to   { opacity: 1; transform: translateY(0); }
+}

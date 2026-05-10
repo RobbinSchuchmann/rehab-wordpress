@@ -21,7 +21,29 @@
 $phone_text   = get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' );
 $phone_number = get_theme_mod( 'rehab_phone_number', '+66965823832' );
 $phone_tel    = preg_replace( '/[^0-9+]/', '', $phone_number );
+
+// Site-wide utility bar (top). Items filterable per-brand via 'rehab_utility_bar_items'.
+$utility_left    = apply_filters( 'rehab_utility_bar_items', [
+	'Confidential intake, 24/7',
+	'Licensed by Thai Ministry of Public Health',
+	'Only 12 clients at a time',
+] );
+$whatsapp_number = get_theme_mod( 'rehab_whatsapp_number', '66965823832' );
 ?>
+
+<div class="rehab-utility-bar">
+	<div class="rehab-utility-bar__inner">
+		<div class="rehab-utility-bar__left">
+			<?php foreach ( $utility_left as $item ) : ?>
+				<span><span class="rehab-utility-bar__dot" aria-hidden="true">◆</span><?php echo esc_html( $item ); ?></span>
+			<?php endforeach; ?>
+		</div>
+		<div class="rehab-utility-bar__right">
+			<a href="tel:<?php echo esc_attr( $phone_tel ); ?>"><?php esc_html_e( 'UK / EU / Intl call back', 'rehab-parent' ); ?></a>
+			<a href="https://wa.me/<?php echo esc_attr( $whatsapp_number ); ?>"><?php esc_html_e( 'WhatsApp', 'rehab-parent' ); ?></a>
+		</div>
+	</div>
+</div>
 
 <header class="rehab-navbar" id="rehab-navbar" data-rehab-navbar>
 	<div class="rehab-navbar__cell rehab-navbar__cell--start">

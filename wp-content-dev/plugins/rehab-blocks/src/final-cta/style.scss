@@ -28,6 +28,10 @@
 	margin: 0 auto;
 	padding: 0 1.5rem;
 
+	/* Allow grid items to shrink below their content's intrinsic min-width
+	   so wide forms / inputs don't push the column past the viewport. */
+	> * { min-width: 0; }
+
 	@media (max-width: 900px) {
 		grid-template-columns: 1fr;
 		gap: 2rem;
@@ -93,6 +97,13 @@
 }
 
 /* Form */
+.rehab-final-cta__form,
+.rehab-final-cta__form *,
+.rehab-final-cta__form *::before,
+.rehab-final-cta__form *::after {
+	box-sizing: border-box;
+}
+
 .rehab-final-cta__form {
 	background: #fff;
 	color: var(--rehab-warm-charcoal);
@@ -101,6 +112,12 @@
 	flex-direction: column;
 	gap: 1rem;
 	border-top: 3px solid var(--rehab-sage);
+	min-width: 0;
+
+	/* Tighten on small mobile */
+	@media (max-width: 480px) {
+		padding: 1.5rem;
+	}
 }
 
 .rehab-final-cta__form-title {
