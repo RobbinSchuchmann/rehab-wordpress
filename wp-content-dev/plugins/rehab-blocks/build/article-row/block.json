@@ -1,0 +1,88 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/article-row",
+  "version": "0.1.0",
+  "title": "Article row (image + text)",
+  "category": "rehab",
+  "icon": "align-left",
+  "description": "Two-column article section. Image on one side with curved corner + brand color filter, text on the other (eyebrow + H2 + paragraphs + optional CTAs).",
+  "keywords": [
+    "article",
+    "split",
+    "image-text"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "imageSide": {
+      "type": "string",
+      "default": "left",
+      "enum": [
+        "left",
+        "right"
+      ]
+    },
+    "imageAspect": {
+      "type": "string",
+      "default": "tall",
+      "enum": [
+        "tall",
+        "wide"
+      ]
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "body": {
+      "type": "string",
+      "default": ""
+    },
+    "primaryText": {
+      "type": "string",
+      "default": ""
+    },
+    "primaryUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "secondaryText": {
+      "type": "string",
+      "default": ""
+    },
+    "secondaryUrl": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,114 @@
+.rehab-intro-doctor-card {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) {
+		padding: 3rem 0;
+	}
+}
+
+.rehab-intro-doctor-card__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2.5rem;
+	align-items: start;
+
+	@media (min-width: 900px) {
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+	}
+}
+
+.rehab-intro-doctor-card__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-intro-doctor-card__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1.25rem;
+	color: var(--rehab-warm-charcoal);
+	text-wrap: balance;
+}
+
+.rehab-intro-doctor-card__copy p {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1.05rem;
+	line-height: 1.75;
+	font-weight: 300;
+	margin: 0;
+}
+
+.rehab-intro-doctor-card__copy p + p {
+	margin-top: 1rem;
+}
+
+/* Doctor card */
+.rehab-doctor-card {
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	padding: 1.75rem;
+	display: flex;
+	gap: 1.25rem;
+	align-items: center;
+	margin-top: 2rem;
+	max-width: 460px;
+}
+
+.rehab-doctor-card__avatar {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	overflow: hidden;
+	flex: none;
+	background: var(--rehab-ethereal-sage);
+}
+
+.rehab-doctor-card__avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.rehab-doctor-card__label {
+	font-size: 0.72rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: rgba(74, 74, 74, 0.7);
+	margin-bottom: 0.25rem;
+}
+
+.rehab-doctor-card__name {
+	font-family: var(--rehab-font-display);
+	font-size: 1.2rem;
+	line-height: 1.2;
+	margin: 0 0 0.35rem;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-doctor-card__phone {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	color: var(--rehab-warm-charcoal);
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 0.95rem;
+}
+
+.rehab-doctor-card__phone svg {
+	color: var(--rehab-sage-text);
+}
+
+.rehab-doctor-card__phone:hover {
+	color: var(--rehab-sage-dark);
+}

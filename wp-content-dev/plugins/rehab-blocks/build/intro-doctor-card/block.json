@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/intro-doctor-card",
+  "version": "0.1.0",
+  "title": "Intro + Doctor card",
+  "category": "rehab",
+  "icon": "id-alt",
+  "description": "Two-column intro section. Left: eyebrow + H2 + doctor/director card. Right: body copy paragraphs.",
+  "keywords": [
+    "intro",
+    "doctor",
+    "director",
+    "card"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "body": {
+      "type": "string",
+      "default": ""
+    },
+    "doctorImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "doctorImageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "doctorLabel": {
+      "type": "string",
+      "default": "Speak with our Director"
+    },
+    "doctorName": {
+      "type": "string",
+      "default": ""
+    },
+    "doctorPhone": {
+      "type": "string",
+      "default": ""
+    },
+    "doctorPhoneHref": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

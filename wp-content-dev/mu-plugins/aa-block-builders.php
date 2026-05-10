@@ -342,3 +342,88 @@ function rehab_block_benefits_numbered( array $items ): string {
 	$h .= '</div>';
 	return "<!-- wp:rehab/benefits-numbered " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/benefits-numbered -->\n\n";
 }
+
+
+/**
+ * Build a `rehab/intro-doctor-card` block.
+ */
+function rehab_block_intro_doctor_card( array $a ): string {
+	$defaults = [
+		'background' => 'white', 'eyebrow' => '', 'heading' => '', 'body' => '',
+		'doctorImageUrl' => '', 'doctorImageAlt' => '',
+		'doctorLabel' => 'Speak with our Director', 'doctorName' => '',
+		'doctorPhone' => '', 'doctorPhoneHref' => '',
+	];
+	$a = array_merge( $defaults, $a );
+	$attrs = rehab_block_attrs( $a );
+	$phone_svg = '<svg width="14" height="14" viewBox="0 0 15 16" aria-hidden="true"><path d="M14.8 13.1c-.8 2-2.8 2.4-3.5 2.4-.2 0-3.2.2-7.4-3.9C.5 8.3 0 4.8 0 4.1 0 3.4.2 1.8 2.4.6c.3-.2.8-.2 1-.1.1.1 1.9 3.2 2 3.3 0 .1.1.2.1.3 0 .1-.1.3-.3.5l-.7.7c-.3.1-.5.3-.7.5-.2.2-.3.4-.3.5 0 .3.3 1.5 2.3 3.3C7.9 11.5 8.9 12 9 12c.1 0 .2.1.2.1.1 0 .3-.1.5-.3.2-.2.9-1.1 1.1-1.3.2-.2.4-.3.5-.3.1 0 .2 0 .3.1.1 0 3.2 1.9 3.3 1.9.2.1.1.6-.1.9" fill="currentColor"/></svg>';
+	$paragraphs = preg_split( "/\n\s*\n/", trim( (string) $a['body'] ) );
+	$h  = '<section class="wp-block-rehab-intro-doctor-card rehab-intro-doctor-card rehab-bg-' . esc_attr( $a['background'] ) . '"><div class="rehab-container">';
+	$h .= '<div class="rehab-intro-doctor-card__grid">';
+	$h .= '<div>';
+	if ( $a['eyebrow'] ) $h .= '<span class="rehab-intro-doctor-card__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
+	$h .= '<h2 class="rehab-intro-doctor-card__heading">' . esc_html( $a['heading'] ) . '</h2>';
+	if ( $a['doctorName'] || $a['doctorImageUrl'] ) {
+		$h .= '<div class="rehab-doctor-card">';
+		$h .= '<div class="rehab-doctor-card__avatar">';
+		if ( $a['doctorImageUrl'] ) $h .= '<img src="' . esc_url( $a['doctorImageUrl'] ) . '" alt="' . esc_attr( $a['doctorImageAlt'] ) . '"/>';
+		$h .= '</div><div>';
+		if ( $a['doctorLabel'] ) $h .= '<div class="rehab-doctor-card__label">' . esc_html( $a['doctorLabel'] ) . '</div>';
+		$h .= '<p class="rehab-doctor-card__name">' . esc_html( $a['doctorName'] ) . '</p>';
+		if ( $a['doctorPhone'] ) {
+			$href = $a['doctorPhoneHref'] !== '' ? $a['doctorPhoneHref'] : 'tel:' . preg_replace( '/[^+\d]/', '', $a['doctorPhone'] );
+			$h .= '<a href="' . esc_url( $href ) . '" class="rehab-doctor-card__phone">' . $phone_svg . esc_html( $a['doctorPhone'] ) . '</a>';
+		}
+		$h .= '</div></div>';
+	}
+	$h .= '</div>';
+	$h .= '<div class="rehab-intro-doctor-card__copy">';
+	foreach ( $paragraphs as $p ) {
+		if ( trim( $p ) === '' ) continue;
+		$h .= '<p>' . esc_html( trim( $p ) ) . '</p>';
+	}
+	$h .= '</div></div></div></section>';
+	return "<!-- wp:rehab/intro-doctor-card " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/intro-doctor-card -->\n\n";
+}
+
+/**
+ * Build a `rehab/article-row` block.
+ */
+function rehab_block_article_row( array $a ): string {
+	$defaults = [
+		'background' => 'white', 'imageSide' => 'left', 'imageAspect' => 'tall',
+		'imageUrl' => '', 'imageAlt' => '',
+		'eyebrow' => '', 'heading' => '', 'body' => '',
+		'primaryText' => '', 'primaryUrl' => '',
+		'secondaryText' => '', 'secondaryUrl' => '',
+	];
+	$a = array_merge( $defaults, $a );
+	$attrs = rehab_block_attrs( $a );
+	$reverse_class = $a['imageSide'] === 'right' ? ' rehab-article-row--reverse' : '';
+	$aspect_class  = $a['imageAspect'] === 'wide' ? ' rehab-article-row__media--wide' : '';
+	$paragraphs = preg_split( "/\n\s*\n/", trim( (string) $a['body'] ) );
+	$h  = '<section class="wp-block-rehab-article-row rehab-article-row-section rehab-bg-' . esc_attr( $a['background'] ) . '"><div class="rehab-container">';
+	$h .= '<div class="rehab-article-row' . $reverse_class . '">';
+	$h .= '<div class="rehab-article-row__media' . $aspect_class . '">';
+	if ( $a['imageUrl'] ) {
+		$h .= '<img src="' . esc_url( $a['imageUrl'] ) . '" alt="' . esc_attr( $a['imageAlt'] ) . '"/>';
+	} else {
+		$h .= '<div class="rehab-article-row__media-placeholder"><span>' . esc_html( $a['imageAlt'] ?: 'Image' ) . '</span></div>';
+	}
+	$h .= '</div>';
+	$h .= '<div class="rehab-article-row__text">';
+	if ( $a['eyebrow'] ) $h .= '<span class="rehab-article-row__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
+	$h .= '<h2 class="rehab-article-row__heading">' . esc_html( $a['heading'] ) . '</h2>';
+	foreach ( $paragraphs as $p ) {
+		if ( trim( $p ) === '' ) continue;
+		$h .= '<p>' . esc_html( trim( $p ) ) . '</p>';
+	}
+	if ( $a['primaryText'] || $a['secondaryText'] ) {
+		$h .= '<div class="rehab-article-row__cta">';
+		if ( $a['primaryText'] ) $h .= '<a href="' . esc_url( $a['primaryUrl'] ) . '" class="rehab-btn rehab-btn--luxury">' . esc_html( $a['primaryText'] ) . '</a>';
+		if ( $a['secondaryText'] ) $h .= '<a href="' . esc_url( $a['secondaryUrl'] ) . '" class="rehab-btn rehab-btn--outline">' . esc_html( $a['secondaryText'] ) . '</a>';
+		$h .= '</div>';
+	}
+	$h .= '</div></div></div></section>';
+	return "<!-- wp:rehab/article-row " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/article-row -->\n\n";
+}
