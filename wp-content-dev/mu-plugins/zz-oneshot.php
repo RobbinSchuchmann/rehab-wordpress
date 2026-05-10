@@ -1860,6 +1860,184 @@ add_action( 'init', function () {
 			echo "(" . count( $rows ) . " pages)\n";
 			break;
 
+		case 'rebuild-cocaine-design':
+			$page_id = 853;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 853\n"; break; }
+
+			$base = '/wp-content/uploads/';
+			$theme = get_stylesheet_directory_uri();
+			$blocks = '';
+
+			// 1. TREATMENT HERO
+			$blocks .= rehab_block_treatment_hero( [
+				'eyebrow'  => 'Cocaine addiction treatment · Hua Hin, Thailand',
+				'headline' => 'Effective cocaine addiction treatment at Thailand\'s leading luxury centre',
+				'lede'     => 'The Diamond Rehab Thailand provides evidence-based cocaine rehab treatment to help you break the cycle of addiction once and for all.',
+				'primaryText' => 'Schedule a free assessment', 'primaryUrl' => '#assessment',
+				'secondaryText' => 'Explore the program', 'secondaryUrl' => '#program',
+				'helper' => 'Free, confidential, no-obligation · Replies within 1 hour',
+				'stat1Num' => '12', 'stat1Label' => 'Maximum clients on site at any time',
+				'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team availability',
+				'stat3Num' => '14+', 'stat3Label' => 'Years treating cocaine addiction',
+				'imageUrl' => $theme . '/assets/img/treatment/hero-pool-pavilion.avif',
+				'imageAlt' => 'Luxury private pavilion at The Diamond Rehab Thailand',
+				'badgeImageUrl' => $theme . '/assets/img/treatment/ministry-public-health-badge.webp',
+				'badgeTitle' => 'Thai-licensed facility',
+				'badgeText' => 'Ministry of Public Health · Hospital-affiliated detox',
+			] );
+
+			// 2. AUTHORITY RIBBON
+			$blocks .= rehab_block_authority_ribbon( 'As featured in', [
+				[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider' ],
+				[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
+				[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good' ],
+				[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central' ],
+				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
+				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
+			] );
+
+			// 3. INTRO + DOCTOR CARD — using a prose split section for now (placeholder for dedicated block later)
+			$blocks .= rehab_block_prose(
+				'This is where life-changing transformations happen.',
+				[
+					'Nestled in the peaceful mountains of tropical Hua Hin, our five-star cocaine rehab centre is the perfect place to start your treatment and recovery journey. Fully equipped facilities, five-star accommodation and world-class addiction experts — we\'ve assembled everything you need to overcome your cocaine addiction. The only thing missing is you.',
+					'Contact us today to learn more about our admission process, or read on to find out how our cocaine rehab treatment program can help you kickstart your recovery.',
+				],
+				[],
+				$theme . '/assets/img/treatment/founder-theo.avif',
+				'Theo de Vries, Founder',
+				'white',
+				'split-reverse'
+			);
+
+			// 4. PILLARS — Why Diamond
+			$blocks .= rehab_block_pillars(
+				'Why Diamond Rehab',
+				'Three reasons families choose us for cocaine recovery',
+				'Discreet, doctor-led and deeply personal — every aspect of our program is designed for sustainable, long-term sobriety.',
+				[
+					[ 'num' => '01 — Holistic & evidence-based', 'title' => 'Eastern and Western therapy, combined', 'body' => 'Our highly experienced clinicians use a combination of Eastern and Western therapeutic techniques — addressing both the symptoms of cocaine use and the underlying factors that fuel it: trauma, relationships, past experiences and mental health.' ],
+					[ 'num' => '02 — Personalised, never templated', 'title' => 'A program shaped to your condition', 'body' => 'There\'s no silver bullet for cocaine addiction. We provide fully customised cocaine rehab programs based on a clinical assessment, monitor your progress continuously and adjust your recovery plan as you advance.' ],
+					[ 'num' => '03 — Supported around the clock', 'title' => 'Available 24/7 — when cravings hit hardest', 'body' => 'Our clinical team is fully committed to providing the support, expertise and guidance required to achieve a positive outcome. Inpatient care reduces the risk of relapse during the most critical first weeks of withdrawal.' ],
+				],
+				'sage-mist'
+			);
+
+			// 5. ARTICLE: COCAINE TREATMENT (split-reverse)
+			$blocks .= rehab_block_prose(
+				'A holistic approach to a complex addiction',
+				[
+					'Cocaine rehab statistics show that professional intervention is the most effective treatment for cocaine addiction. Here at The Diamond Rehab Thailand, we take a holistic approach to treatment that addresses both the symptoms of cocaine use and the underlying factors — previous experiences, relationships, mental health issues, past trauma, and more — that contribute to addiction.',
+					'Our highly experienced clinicians use a combination of Eastern and Western therapeutic techniques to effectively rehab cocaine addiction. Available 24/7, our clinical team is fully committed to providing you with the support, expertise, and guidance required to achieve a positive outcome.',
+				],
+				[],
+				$base . '2024/05/1-1-session-room-1.jpg',
+				'1-on-1 session room',
+				'white',
+				'split-reverse'
+			);
+
+			// 6. ARTICLE: PERSONALISED (split, sage bg)
+			$blocks .= rehab_block_prose(
+				'No two recovery plans look the same',
+				[
+					'As one of the leading cocaine rehab centers in Thailand, we understand that there\'s no silver bullet when it comes to treating cocaine addiction and achieving long-term sobriety.',
+					'That\'s why we provide fully customised cocaine rehab programs based on a clinical assessment of your condition. During your stay in our luxury cocaine rehab facilities, we\'ll continuously monitor your progress and adjust your recovery plan as you advance through your program to ensure your treatment is as effective as possible.',
+				],
+				[],
+				$base . '2024/05/Closer-up-dining-2.jpg',
+				'Dining pavilion',
+				'sage-mist',
+				'split'
+			);
+
+			// 7. SIGNS / WITHDRAWAL grid + dark CTA
+			$blocks .= rehab_block_signs_grid( [
+				'background' => 'cream',
+				'eyebrow' => 'Is it time to consider rehab?',
+				'heading' => 'Recognise the signs of cocaine addiction',
+				'subheading' => 'Cocaine is notoriously addictive due to the profound impact it has on the chemistry of your brain. Acknowledging the signs is the first step towards recovery — for yourself or for someone you love.',
+				'card1Title' => 'Common signs of cocaine addiction',
+				'card1Items' => [ 'Nervousness and restlessness', 'Severe weight loss', 'Sexual dysfunction', 'Depression', 'Frequent nightmares', 'Decreased ability to focus', 'Increased or involuntary movements' ],
+				'card2Title' => 'Withdrawal symptoms during detox',
+				'card2Items' => [ 'Strong cravings for cocaine', 'Depression', 'Suicidal thoughts', 'Restlessness', 'Lethargy', 'Nightmares' ],
+				'showCta' => true,
+				'ctaTitle' => 'If any of this feels familiar, please reach out.',
+				'ctaBody' => 'Our intake team will speak with you confidentially — no commitment, no pressure. Call us, message us on WhatsApp, or book a free assessment.',
+				'ctaButton' => 'Book free assessment', 'ctaUrl' => '/contact-us/',
+			] );
+
+			// 8. INPATIENT BENEFITS — prose split + 4-up numbered grid
+			$blocks .= rehab_block_prose(
+				'Why families choose inpatient treatment for cocaine addiction',
+				[
+					'The Diamond Rehab Thailand is an inpatient treatment center. Inpatient rehabilitation is widely regarded as the most effective form of cocaine addiction treatment because it allows you to break away from your daily routines and the social triggers that fuel substance use disorders.',
+					'Located in a peaceful part of Hua Hin, our facility is worlds away from the distractions of everyday life — so you can focus all your time and energy on recovery.',
+				],
+				[],
+				$base . '2024/05/Close-up-chairs-3.jpg',
+				'Treatment grounds',
+				'white',
+				'split'
+			);
+			$blocks .= rehab_block_benefits_numbered( [
+				[ 'title' => 'Distance from triggers', 'body' => 'Isolating from your usual lifestyle and social circles eliminates the risk of giving in to cravings during the most fragile early weeks.' ],
+				[ 'title' => 'Round-the-clock supervision', 'body' => 'Resort-style amenities backed by a full team of qualified medical professionals with extensive experience treating cocaine drug rehab.' ],
+				[ 'title' => 'Custom-built treatment plan', 'body' => 'Our addiction experts guide you through the crucial first weeks of a custom-made program tailored to your specific clinical picture.' ],
+				[ 'title' => 'A genuine therapeutic community', 'body' => 'With a hard cap of 12 clients, you receive deeper attention and form trusted connections that support your long-term recovery.' ],
+			] );
+
+			// 9. ADMISSION JOURNEY (4-step)
+			$blocks .= rehab_block_journey_steps(
+				'Your next step',
+				'What happens when you reach out',
+				'From the first confidential call to your arrival in Hua Hin — here\'s what you can expect in your first week with The Diamond Rehab.',
+				[
+					[ 'label' => 'STEP 01', 'title' => 'Confidential call', 'body' => 'A free, no-obligation consultation with our intake team. We listen, answer questions, and take the time to understand your situation.' ],
+					[ 'label' => 'STEP 02', 'title' => 'Clinical assessment', 'body' => 'Our psychiatrist evaluates the severity of the addiction, mental-health needs, and recommends a length of stay that fits your case.' ],
+					[ 'label' => 'STEP 03', 'title' => 'Arrival & onboarding', 'body' => 'We arrange airport collection, settle you into private accommodation, and walk you through the next 28 days of structured care.' ],
+					[ 'label' => 'STEP 04', 'title' => 'Treatment begins', 'body' => 'Detox if required, then your bespoke program — therapy, holistic work, fitness, and continuous adjustment of your recovery plan.' ],
+				],
+				'sage-mist'
+			);
+
+			// 10. CLOSING ARTICLE (split-reverse) + dual CTA
+			$blocks .= rehab_block_prose(
+				'You\'ve already done the hardest part — recognising it',
+				[
+					'Recovering from cocaine addiction is hard work — but our exceptional cocaine rehab success rate proves that it\'s possible. Sometimes, all you need is a helping hand.',
+					'If you\'re ready to seek treatment, The Diamond Rehab Thailand is here to help. Drawing on our extensive experience as addiction experts, we\'ll guide you through a fully tailored treatment plan that sets the foundation for a healthy, positive and fulfilling life.',
+				],
+				[],
+				$base . '2024/05/Bungalow-evening-2.jpg',
+				'Quiet reading area',
+				'white',
+				'split-reverse'
+			);
+
+			// 11. FAQ
+			$blocks .= rehab_block_faq(
+				'Frequently asked questions',
+				[
+					[ 'question' => 'What is the process of rehabilitation?', 'answer' => 'The process may differ — programs are customised based on what the patient needs and the severity of the addiction or co-occurring mental illness. The goal is always to ensure the individual\'s well-being. Most treatment programs include evaluation, detox, psychological treatments, education sessions, and supportive services.' ],
+					[ 'question' => 'Are 28 days of rehab enough?', 'answer' => 'This depends on the individual case. After consulting with our psychiatrist, we will give you a recommendation on the number of days in treatment that is advised.' ],
+					[ 'question' => 'Can clients leave the rehab?', 'answer' => 'Clients can only leave the property under the care of our therapeutic team.' ],
+				]
+			);
+
+			// 12. FINAL CTA (using existing CTA — form is intentionally deferred until mailer is wired)
+			$blocks .= rehab_block_cta( [
+				'heading'    => 'Are you ready to begin?',
+				'body'       => 'Reach out for a confidential call from our client relations team. We\'re available 24/7. Free, confidential, no-obligation — just a conversation.',
+				'buttonText' => 'Speak with admissions',
+				'buttonUrl'  => '/contact-us/',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cocaine page (design v2, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
 		case 'set-homepage-template':
 			$page_id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 6;
 			$tpl     = isset( $_GET['tpl'] ) ? sanitize_text_field( $_GET['tpl'] ) : 'page-homepage.php';

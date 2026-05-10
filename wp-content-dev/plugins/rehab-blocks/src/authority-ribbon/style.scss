@@ -1,0 +1,37 @@
+.rehab-authority-ribbon {
+	border-top: 1px solid rgba(186, 195, 161, 0.3);
+	border-bottom: 1px solid rgba(186, 195, 161, 0.3);
+	background: var(--rehab-color-cream, #F7F4EC);
+	padding: 2.5rem 0;
+}
+
+.rehab-authority-ribbon__label {
+	text-align: center;
+	font-size: 0.72rem;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	color: rgba(74, 74, 74, 0.7);
+	margin: 0 0 1.5rem;
+}
+
+.rehab-authority-ribbon__logos {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2.5rem 3.5rem;
+}
+
+.rehab-authority-ribbon__logos img {
+	height: 28px;
+	max-width: 130px;
+	object-fit: contain;
+	filter: grayscale(100%) brightness(1.1) contrast(0.65);
+	opacity: 0.65;
+	transition: opacity 0.3s, filter 0.3s;
+}
+
+.rehab-authority-ribbon__logos img:hover {
+	opacity: 1;
+	filter: none;
+}

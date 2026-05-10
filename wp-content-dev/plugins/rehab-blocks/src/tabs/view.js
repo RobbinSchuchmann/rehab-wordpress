@@ -31,11 +31,24 @@
 			panel.setAttribute( 'aria-labelledby', `${ panel.id }-tab` );
 			if ( idx !== 0 ) panel.hidden = true;
 
+			const phase = panel.getAttribute( 'data-phase' ) || '';
 			const btn = document.createElement( 'button' );
 			btn.type = 'button';
 			btn.className = 'rehab-tabs__tab' + ( idx === 0 ? ' is-active' : '' );
 			btn.id = `${ panel.id }-tab`;
-			btn.textContent = label;
+			if ( phase ) {
+				const numEl = document.createElement( 'span' );
+				numEl.className = 'num';
+				numEl.textContent = phase;
+				const labelEl = document.createElement( 'span' );
+				labelEl.textContent = label;
+				const wrap = document.createElement( 'span' );
+				wrap.appendChild( numEl );
+				wrap.appendChild( labelEl );
+				btn.appendChild( wrap );
+			} else {
+				btn.textContent = label;
+			}
 			btn.setAttribute( 'role', 'tab' );
 			btn.setAttribute( 'aria-controls', panel.id );
 			btn.setAttribute( 'aria-selected', idx === 0 ? 'true' : 'false' );

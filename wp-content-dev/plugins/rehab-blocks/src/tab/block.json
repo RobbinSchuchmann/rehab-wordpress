@@ -11,7 +11,8 @@
   "textdomain": "rehab-blocks",
   "supports": { "html": false, "inserter": true, "reusable": false },
   "attributes": {
-    "label": { "type": "string", "default": "Tab" }
+    "label": { "type": "string", "default": "Tab" },
+    "phaseNumber": { "type": "string", "default": "" }
   },
   "editorScript": "file:./index.js"
 }

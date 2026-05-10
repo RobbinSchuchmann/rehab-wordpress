@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/journey-steps",
+  "version": "0.1.0",
+  "title": "Journey steps",
+  "category": "rehab",
+  "icon": "feedback",
+  "description": "Numbered admission journey — section-head + N step cards (e.g. STEP 01 → 04).",
+  "keywords": [
+    "journey",
+    "steps",
+    "process",
+    "admission"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "sage-mist",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Your next step"
+    },
+    "heading": {
+      "type": "string",
+      "default": "What happens when you reach out"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "From the first confidential call to your arrival — here's what you can expect."
+    },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/pillars",
+  "version": "0.1.0",
+  "title": "Pillars (3-up)",
+  "category": "rehab",
+  "icon": "columns",
+  "description": "3-up pillar grid with icon + numbered eyebrow + heading + body. Used for 'Why us' / 'Three reasons' sections.",
+  "keywords": ["pillars", "three", "why us"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "sage-mist", "enum": ["white", "cream", "sage-mist"] },
+    "eyebrow":    { "type": "string", "default": "Why Diamond Rehab" },
+    "heading":    { "type": "string", "default": "Three reasons families choose us" },
+    "subheading": { "type": "string", "default": "Discreet, doctor-led and deeply personal — every aspect of our program is designed for sustainable, long-term sobriety." },
+    "items": {
+      "type": "array",
+      "default": [
+        { "num": "01 — Holistic & evidence-based", "title": "Eastern and Western therapy, combined", "body": "Our highly experienced clinicians use a combination of Eastern and Western therapeutic techniques." },
+        { "num": "02 — Personalised, never templated", "title": "A program shaped to your condition", "body": "There's no silver bullet — we provide fully customised programs based on a clinical assessment." },
+        { "num": "03 — Supported around the clock", "title": "Available 24/7 — when cravings hit hardest", "body": "Our clinical team is fully committed to providing the support, expertise and guidance required." }
+      ],
+      "items": { "type": "object" }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css"
+}

@@ -170,3 +170,175 @@ function rehab_block_cta( array $a ): string {
 	$h = '<section class="' . esc_attr( $class ) . '" aria-label="Call to action"><div class="rehab-container rehab-container--narrow"><div class="rehab-cta__inner"><h2 class="rehab-heading rehab-heading--lg">' . esc_html( $a['heading'] ) . '</h2><p class="rehab-cta__body">' . esc_html( $a['body'] ) . '</p><a class="rehab-btn rehab-btn--luxury" href="' . esc_url( $a['buttonUrl'] ) . '">' . esc_html( $a['buttonText'] ) . '</a><p class="rehab-cta__helper">' . esc_html( $a['helper'] ) . '</p></div></div></section>';
 	return "<!-- wp:rehab/cta " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/cta -->\n\n";
 }
+
+
+/**
+ * Build a `rehab/treatment-hero` block.
+ */
+function rehab_block_treatment_hero( array $a ): string {
+	$defaults = [
+		'eyebrow' => '', 'headline' => '', 'lede' => '',
+		'primaryText' => 'Schedule a free assessment', 'primaryUrl' => '#assessment',
+		'secondaryText' => 'Explore the program', 'secondaryUrl' => '#program',
+		'helper' => 'Free, confidential, no-obligation · Replies within 1 hour',
+		'stat1Num' => '12', 'stat1Label' => 'Maximum clients on site at any time',
+		'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team availability',
+		'stat3Num' => '14+', 'stat3Label' => 'Years treating cocaine addiction',
+		'imageUrl' => '', 'imageAlt' => '',
+		'badgeImageUrl' => '', 'badgeTitle' => 'Thai-licensed facility',
+		'badgeText' => 'Ministry of Public Health · Hospital-affiliated detox',
+	];
+	$a = array_merge( $defaults, $a );
+	$attrs = rehab_block_attrs( $a );
+	$h  = '<section class="wp-block-rehab-treatment-hero rehab-treatment-hero">';
+	$h .= '<div class="rehab-container"><div class="rehab-treatment-hero__grid">';
+	$h .= '<div>';
+	if ( $a['eyebrow'] ) $h .= '<p class="rehab-treatment-hero__eyebrow"><span class="diamond" aria-hidden="true">◆</span>' . esc_html( $a['eyebrow'] ) . '</p>';
+	$h .= '<h1 class="rehab-treatment-hero__h1">' . esc_html( $a['headline'] ) . '</h1>';
+	if ( $a['lede'] ) $h .= '<p class="rehab-treatment-hero__lede">' . esc_html( $a['lede'] ) . '</p>';
+	$h .= '<div class="rehab-treatment-hero__cta-row">';
+	$h .= '<a href="' . esc_url( $a['primaryUrl'] ) . '" class="rehab-btn rehab-btn--luxury">' . esc_html( $a['primaryText'] ) . '</a>';
+	$h .= '<a href="' . esc_url( $a['secondaryUrl'] ) . '" class="rehab-btn rehab-btn--outline">' . esc_html( $a['secondaryText'] ) . '</a>';
+	$h .= '</div>';
+	if ( $a['helper'] ) $h .= '<p class="rehab-treatment-hero__helper"><span class="dot" aria-hidden="true"></span>' . esc_html( $a['helper'] ) . '</p>';
+	$h .= '<div class="rehab-treatment-hero__trust">';
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$h .= '<div class="rehab-treatment-hero__trust-item"><div class="num">' . esc_html( $a[ "stat{$i}Num" ] ) . '</div><div class="lbl">' . esc_html( $a[ "stat{$i}Label" ] ) . '</div></div>';
+	}
+	$h .= '</div></div>';
+	$h .= '<div class="rehab-treatment-hero__media"><div class="rehab-treatment-hero__image-wrap">';
+	if ( $a['imageUrl'] ) $h .= '<img src="' . esc_url( $a['imageUrl'] ) . '" alt="' . esc_attr( $a['imageAlt'] ) . '"/>';
+	$h .= '<div class="rehab-treatment-hero__image-overlay" aria-hidden="true"></div></div>';
+	if ( $a['badgeTitle'] || $a['badgeImageUrl'] ) {
+		$h .= '<div class="rehab-treatment-hero__badge">';
+		if ( $a['badgeImageUrl'] ) $h .= '<img src="' . esc_url( $a['badgeImageUrl'] ) . '" alt=""/>';
+		$h .= '<div class="rehab-treatment-hero__badge-text"><strong>' . esc_html( $a['badgeTitle'] ) . '</strong>' . esc_html( $a['badgeText'] ) . '</div>';
+		$h .= '</div>';
+	}
+	$h .= '</div></div></div></section>';
+	return "<!-- wp:rehab/treatment-hero " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/treatment-hero -->\n\n";
+}
+
+/**
+ * Build a `rehab/authority-ribbon` block.
+ * $logos = array of [ 'url', 'alt' ]
+ */
+function rehab_block_authority_ribbon( string $label, array $logos ): string {
+	$attrs = rehab_block_attrs( [ 'label' => $label, 'logos' => $logos ] );
+	$h  = '<section class="wp-block-rehab-authority-ribbon rehab-authority-ribbon"><div class="rehab-container">';
+	$h .= '<p class="rehab-authority-ribbon__label">' . esc_html( $label ) . '</p>';
+	$h .= '<div class="rehab-authority-ribbon__logos">';
+	foreach ( $logos as $logo ) {
+		$h .= '<img src="' . esc_url( $logo['url'] ) . '" alt="' . esc_attr( $logo['alt'] ?? '' ) . '"/>';
+	}
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/authority-ribbon " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/authority-ribbon -->\n\n";
+}
+
+/**
+ * Build a `rehab/pillars` block.
+ * $items = [ ['num','title','body'], ... ]
+ */
+function rehab_block_pillars( string $eyebrow, string $heading, string $subheading, array $items, string $bg = 'sage-mist' ): string {
+	$attrs = rehab_block_attrs( [ 'background' => $bg, 'eyebrow' => $eyebrow, 'heading' => $heading, 'subheading' => $subheading, 'items' => $items ] );
+	$h  = '<section class="wp-block-rehab-pillars rehab-pillars rehab-bg-' . esc_attr( $bg ) . '"><div class="rehab-container">';
+	$h .= '<div class="rehab-pillars__head"><span class="rehab-pillars__eyebrow">' . esc_html( $eyebrow ) . '</span>';
+	$h .= '<h2 class="rehab-pillars__heading">' . esc_html( $heading ) . '</h2>';
+	if ( $subheading ) $h .= '<p class="rehab-pillars__sub">' . esc_html( $subheading ) . '</p>';
+	$h .= '</div><div class="rehab-pillars__grid">';
+	foreach ( $items as $item ) {
+		$h .= '<div class="rehab-pillar">';
+		$h .= '<div class="rehab-pillar__icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>';
+		$h .= '<span class="rehab-pillar__num">' . esc_html( $item['num'] ) . '</span>';
+		$h .= '<h3 class="rehab-pillar__title">' . esc_html( $item['title'] ) . '</h3>';
+		$h .= '<p class="rehab-pillar__body">' . esc_html( $item['body'] ) . '</p>';
+		$h .= '</div>';
+	}
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/pillars " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/pillars -->\n\n";
+}
+
+/**
+ * Build a `rehab/signs-grid` block.
+ */
+function rehab_block_signs_grid( array $a ): string {
+	$defaults = [
+		'background' => 'cream', 'eyebrow' => '', 'heading' => '', 'subheading' => '',
+		'card1Title' => '', 'card1Items' => [],
+		'card2Title' => '', 'card2Items' => [],
+		'showCta' => true, 'ctaTitle' => '', 'ctaBody' => '',
+		'ctaButton' => 'Book free assessment', 'ctaUrl' => '/contact-us/',
+	];
+	$a = array_merge( $defaults, $a );
+	$attrs = rehab_block_attrs( $a );
+	$check = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>';
+	$icon1 = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>';
+	$icon2 = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>';
+	$render_card = function ( $title, $icon, $items ) use ( $check ) {
+		$html  = '<div class="rehab-signs-card">';
+		$html .= '<div class="rehab-signs-card__head"><div class="rehab-signs-card__icon" aria-hidden="true">' . $icon . '</div>';
+		$html .= '<h3 class="rehab-signs-card__title">' . esc_html( $title ) . '</h3></div>';
+		$html .= '<ul class="rehab-signs-card__list">';
+		foreach ( $items as $item ) $html .= '<li>' . $check . esc_html( $item ) . '</li>';
+		$html .= '</ul></div>';
+		return $html;
+	};
+	$h  = '<section class="wp-block-rehab-signs-grid rehab-signs-grid rehab-bg-' . esc_attr( $a['background'] ) . '"><div class="rehab-container">';
+	$h .= '<div class="rehab-signs-grid__head">';
+	if ( $a['eyebrow'] )    $h .= '<span class="rehab-signs-grid__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
+	$h .= '<h2 class="rehab-signs-grid__heading">' . esc_html( $a['heading'] ) . '</h2>';
+	if ( $a['subheading'] ) $h .= '<p class="rehab-signs-grid__sub">' . esc_html( $a['subheading'] ) . '</p>';
+	$h .= '</div><div class="rehab-signs-grid__cards">';
+	$h .= $render_card( $a['card1Title'], $icon1, $a['card1Items'] );
+	$h .= $render_card( $a['card2Title'], $icon2, $a['card2Items'] );
+	$h .= '</div>';
+	if ( $a['showCta'] ) {
+		$h .= '<div class="rehab-signs-grid__cta">';
+		$h .= '<div class="rehab-signs-grid__cta-text"><h3>' . esc_html( $a['ctaTitle'] ) . '</h3><p>' . esc_html( $a['ctaBody'] ) . '</p></div>';
+		$h .= '<a href="' . esc_url( $a['ctaUrl'] ) . '" class="rehab-btn rehab-btn--luxury">' . esc_html( $a['ctaButton'] ) . '</a>';
+		$h .= '</div>';
+	}
+	$h .= '</div></section>';
+	return "<!-- wp:rehab/signs-grid " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/signs-grid -->\n\n";
+}
+
+/**
+ * Build a `rehab/journey-steps` block.
+ * $items = [ ['label','title','body'], ... ]
+ */
+function rehab_block_journey_steps( string $eyebrow, string $heading, string $subheading, array $items, string $bg = 'sage-mist' ): string {
+	$attrs = rehab_block_attrs( [ 'background' => $bg, 'eyebrow' => $eyebrow, 'heading' => $heading, 'subheading' => $subheading, 'items' => $items ] );
+	$h  = '<section class="wp-block-rehab-journey-steps rehab-journey-steps rehab-bg-' . esc_attr( $bg ) . '"><div class="rehab-container">';
+	$h .= '<div class="rehab-journey-steps__head">';
+	if ( $eyebrow )    $h .= '<span class="rehab-journey-steps__eyebrow">' . esc_html( $eyebrow ) . '</span>';
+	$h .= '<h2 class="rehab-journey-steps__heading">' . esc_html( $heading ) . '</h2>';
+	if ( $subheading ) $h .= '<p class="rehab-journey-steps__sub">' . esc_html( $subheading ) . '</p>';
+	$h .= '</div><div class="rehab-journey-steps__grid">';
+	foreach ( $items as $i => $item ) {
+		$label = ! empty( $item['label'] ) ? $item['label'] : ( 'STEP ' . str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) );
+		$h .= '<div class="rehab-journey-step">';
+		$h .= '<span class="rehab-journey-step__num">' . esc_html( $label ) . '</span>';
+		$h .= '<h4 class="rehab-journey-step__title">' . esc_html( $item['title'] ) . '</h4>';
+		$h .= '<p class="rehab-journey-step__body">' . esc_html( $item['body'] ) . '</p>';
+		$h .= '</div>';
+	}
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/journey-steps " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/journey-steps -->\n\n";
+}
+
+/**
+ * Build a `rehab/benefits-numbered` block.
+ * $items = [ ['title','body'], ... ]
+ */
+function rehab_block_benefits_numbered( array $items ): string {
+	$attrs = rehab_block_attrs( [ 'items' => $items ] );
+	$h  = '<div class="wp-block-rehab-benefits-numbered rehab-benefits-numbered">';
+	foreach ( $items as $i => $item ) {
+		$h .= '<div class="rehab-benefit">';
+		$h .= '<div class="rehab-benefit__num">' . str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) . '</div>';
+		$h .= '<div class="rehab-benefit__body"><h4>' . esc_html( $item['title'] ) . '</h4><p>' . esc_html( $item['body'] ) . '</p></div>';
+		$h .= '</div>';
+	}
+	$h .= '</div>';
+	return "<!-- wp:rehab/benefits-numbered " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/benefits-numbered -->\n\n";
+}

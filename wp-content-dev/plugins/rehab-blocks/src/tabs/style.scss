@@ -1,84 +1,234 @@
-/* Tabs — design language ported from drt-tabs.
-   Mobile: vertical stack with left-border accent on active.
-   Desktop ≥768px: horizontal centered nav with bottom-border accent. */
+/* Tabs — design language ported from Diamond reference treatment design.
+   Mobile (≤720px): vertical nav stack with bordered cells.
+   Desktop ≥720px: bordered horizontal grid nav with phase-number eyebrows.
+   Active tab is dark warm-charcoal; panel below has 2-col grid (content + aside). */
 
 .rehab-tabs {
-	padding: 3rem 0;
-	@media (min-width: 768px) { padding: 5rem 0; }
+	padding: 5rem 0;
+
+	@media (max-width: 768px) {
+		padding: 3rem 0;
+	}
+}
+
+.rehab-tabs__head {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 3rem;
+}
+
+.rehab-tabs__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text);
+	display: block;
+	margin-bottom: 1rem;
 }
 
 .rehab-tabs__heading {
-	text-align: center;
-	margin-bottom: 3rem;
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	text-wrap: balance;
 }
 
+.rehab-tabs__sub {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+/* Tab nav — bordered grid, no underline. */
 .rehab-tabs__nav {
-	display: flex;
-	flex-direction: column;
-	margin: 0 0 2.5rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	margin: 0;
 	padding: 0;
 	list-style: none;
+
+	@media (max-width: 720px) {
+		grid-template-columns: 1fr;
+	}
 }
 
 .rehab-tabs__tab {
-	background: 0 0;
-	border: none;
-	padding: 0.75rem 1rem;
-	margin: 0;
+	background: transparent;
+	border: 0;
+	border-right: 1px solid rgba(190, 179, 158, 0.3);
+	padding: 1.5rem 1.25rem;
 	cursor: pointer;
-	font-family: var(--rehab-font-body);
-	font-size: 0.875rem;
-	font-weight: 400;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.15rem;
+	color: var(--rehab-soft-charcoal);
+	transition: all 0.25s var(--rehab-ease);
 	text-align: left;
-	white-space: nowrap;
-	color: rgba(74, 74, 74, 0.5);
-	border-left: 2px solid transparent;
-	transition: all 0.3s var(--rehab-ease);
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	letter-spacing: normal;
+	text-transform: none;
+	min-height: auto;
+
+	&:last-child {
+		border-right: 0;
+	}
+
+	@media (max-width: 720px) {
+		border-right: 0;
+		border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+
+		&:last-child { border-bottom: 0; }
+	}
 }
 
-.rehab-tabs__tab:hover { color: rgba(74, 74, 74, 0.8); }
+.rehab-tabs__tab .num {
+	font-family: var(--rehab-font-body);
+	font-size: 0.72rem;
+	letter-spacing: 0.18em;
+	color: var(--rehab-sage-text);
+	font-weight: 500;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: 0.25rem;
+}
+
+.rehab-tabs__tab:hover {
+	background: var(--rehab-color-cream, #F7F4EC);
+}
 
 .rehab-tabs__tab.is-active {
-	border-left-color: var(--rehab-soft-charcoal);
+	background: var(--rehab-warm-charcoal);
+	color: #fff;
+	border-bottom-color: var(--rehab-warm-charcoal);
+}
+
+.rehab-tabs__tab.is-active .num {
+	color: var(--rehab-sage);
+}
+
+/* Tab panel — 2-col grid (content + aside). Reuses .rehab-tab as the panel root.
+   Hidden by default (managed via JS via [hidden]). */
+.rehab-tab[hidden] { display: none; }
+
+.rehab-tab:not([hidden]) {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr;
+	gap: 3rem;
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	border-top: 0;
+	padding: 3rem;
+	animation: rehab-tabs-fade-in 0.4s var(--rehab-ease) both;
+
+	@media (max-width: 900px) {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		padding: 2rem 1.5rem;
+	}
+}
+
+.rehab-tab__main h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.5rem;
+	letter-spacing: -0.01em;
+	margin: 0 0 1rem;
+	line-height: 1.2;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-tab__main p {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1rem;
+	line-height: 1.75;
+	font-weight: 300;
+}
+
+.rehab-tab__main p + p,
+.rehab-tab__main ul + p {
+	margin-top: 1rem;
+}
+
+.rehab-tab__main ul {
+	padding: 0;
+	margin: 1rem 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.55rem;
+
+	@media (max-width: 560px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.rehab-tab__main li {
+	position: relative;
+	padding-left: 1.4rem;
+	font-size: 0.95rem;
+	color: var(--rehab-soft-charcoal);
+	font-weight: 300;
+}
+
+.rehab-tab__main li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
+	width: 0.55rem;
+	height: 0.55rem;
+	border-left: 1.5px solid var(--rehab-sage);
+	border-bottom: 1.5px solid var(--rehab-sage);
+	transform: rotate(-45deg);
+}
+
+.rehab-tab__aside {
+	background: var(--rehab-ethereal-sage);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1.5rem;
+	border-left: 3px solid var(--rehab-sage);
+}
+
+.rehab-tab__aside .quote {
+	font-family: var(--rehab-font-display);
+	font-style: italic;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	color: var(--rehab-warm-charcoal);
+	text-wrap: balance;
+	margin: 0;
+}
+
+.rehab-tab__aside .meta {
+	font-size: 0.85rem;
 	color: var(--rehab-soft-charcoal);
 }
 
-@media (min-width: 768px) {
-	.rehab-tabs__nav {
-		flex-direction: row;
-		justify-content: center;
-		border-bottom: 1px solid rgba(190, 179, 158, 0.4);
-		max-width: 40rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.rehab-tabs__tab {
-		flex: 1;
-		text-align: center;
-		border-left: 0;
-		border-bottom: 2px solid transparent;
-		padding-left: 0;
-		padding-right: 0;
-		margin-bottom: -1px;
-	}
-
-	.rehab-tabs__tab.is-active {
-		border-left-color: transparent;
-		border-bottom-color: var(--rehab-warm-charcoal);
-		color: var(--rehab-warm-charcoal);
-	}
+.rehab-tab__aside .meta strong {
+	display: block;
+	font-weight: 500;
+	color: var(--rehab-warm-charcoal);
+	margin-bottom: 0.25rem;
+	font-size: 0.72rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
 }
-
-.rehab-tab[hidden] { display: none; }
 
 @keyframes rehab-tabs-fade-in {
 	from { opacity: 0; transform: translateY(4px); }
 	to   { opacity: 1; transform: translateY(0); }
-}
-
-.rehab-tab:not([hidden]) {
-	animation: rehab-tabs-fade-in 0.4s var(--rehab-ease) both;
 }

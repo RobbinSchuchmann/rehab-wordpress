@@ -1,0 +1,88 @@
+.rehab-journey-steps {
+	padding: 5rem 0;
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-journey-steps__head {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 3rem;
+}
+
+.rehab-journey-steps__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-journey-steps__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	text-wrap: balance;
+}
+
+.rehab-journey-steps__sub {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+.rehab-journey-steps__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1.25rem;
+	margin-top: 2.5rem;
+	position: relative;
+
+	@media (max-width: 900px) {
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	@media (max-width: 560px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.rehab-journey-step {
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	padding: 1.75rem 1.5rem;
+	position: relative;
+}
+
+.rehab-journey-step__num {
+	display: inline-block;
+	font-family: var(--rehab-font-display);
+	font-size: 0.9rem;
+	color: var(--rehab-sage-text);
+	letter-spacing: 0.12em;
+	margin-bottom: 0.85rem;
+}
+
+.rehab-journey-step__title {
+	font-family: var(--rehab-font-display);
+	font-size: 1.2rem;
+	font-weight: 300;
+	margin: 0 0 0.5rem;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-journey-step__body {
+	font-size: 0.88rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.6;
+	margin: 0;
+	font-weight: 300;
+}

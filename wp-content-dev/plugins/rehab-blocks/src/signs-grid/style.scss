@@ -1,0 +1,143 @@
+.rehab-signs-grid {
+	padding: 5rem 0;
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-signs-grid__head {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 3rem;
+}
+
+.rehab-signs-grid__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-signs-grid__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	text-wrap: balance;
+}
+
+.rehab-signs-grid__sub {
+	color: var(--rehab-soft-charcoal);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+.rehab-signs-grid__cards {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+	margin-top: 2.5rem;
+
+	@media (max-width: 800px) { grid-template-columns: 1fr; }
+}
+
+.rehab-signs-card {
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.rehab-signs-card__head {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	padding-bottom: 1.25rem;
+	border-bottom: 1px solid rgba(190, 179, 158, 0.15);
+}
+
+.rehab-signs-card__icon {
+	width: 36px;
+	height: 36px;
+	background: var(--rehab-ethereal-sage);
+	display: grid;
+	place-items: center;
+	color: var(--rehab-sage-dark);
+	flex: none;
+}
+
+.rehab-signs-card__title {
+	font-family: var(--rehab-font-display);
+	font-size: 1.35rem;
+	font-weight: 300;
+	margin: 0;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-signs-card__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.65rem;
+}
+
+.rehab-signs-card__list li {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.65rem;
+	font-size: 0.95rem;
+	color: var(--rehab-soft-charcoal);
+	font-weight: 300;
+	padding: 0.35rem 0;
+}
+
+.rehab-signs-card__list li svg {
+	flex: none;
+	margin-top: 0.25rem;
+	color: var(--rehab-sage-dark);
+}
+
+.rehab-signs-grid__cta {
+	background: var(--rehab-warm-charcoal);
+	color: #fff;
+	padding: 2rem;
+	margin-top: 1.5rem;
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	justify-content: space-between;
+
+	@media (max-width: 720px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.rehab-signs-grid__cta-text {
+	max-width: 56ch;
+}
+
+.rehab-signs-grid__cta-text h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.35rem;
+	margin: 0 0 0.5rem;
+	color: #fff;
+}
+
+.rehab-signs-grid__cta-text p {
+	font-size: 0.9rem;
+	color: rgba(255, 255, 255, 0.75);
+	margin: 0;
+	line-height: 1.6;
+}

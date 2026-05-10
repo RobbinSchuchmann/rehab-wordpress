@@ -1,0 +1,53 @@
+.rehab-benefits-numbered {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0;
+	margin-top: 2.5rem;
+	border: 1px solid rgba(190, 179, 158, 0.3);
+
+	@media (max-width: 720px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.rehab-benefit {
+	padding: 1.75rem;
+	border-right: 1px solid rgba(190, 179, 158, 0.3);
+	border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+	display: flex;
+	gap: 1rem;
+}
+
+.rehab-benefit:nth-child(2n) { border-right: 0; }
+.rehab-benefit:nth-last-child(-n+2) { border-bottom: 0; }
+
+@media (max-width: 720px) {
+	.rehab-benefit { border-right: 0; }
+	.rehab-benefit:nth-last-child(2) { border-bottom: 1px solid rgba(190, 179, 158, 0.3); }
+}
+
+.rehab-benefit__num {
+	font-family: var(--rehab-font-display);
+	font-size: 1.35rem;
+	color: var(--rehab-sage-text);
+	flex: none;
+	line-height: 1;
+	padding-top: 0.15rem;
+}
+
+.rehab-benefit__body h4 {
+	font-family: var(--rehab-font-display);
+	font-size: 1.15rem;
+	font-weight: 400;
+	margin: 0 0 0.4rem;
+	line-height: 1.25;
+	color: var(--rehab-warm-charcoal);
+}
+
+.rehab-benefit__body p {
+	font-size: 0.92rem;
+	color: var(--rehab-soft-charcoal);
+	line-height: 1.6;
+	margin: 0;
+	font-weight: 300;
+}

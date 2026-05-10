@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/authority-ribbon",
+  "version": "0.1.0",
+  "title": "Authority Ribbon",
+  "category": "rehab",
+  "icon": "awards",
+  "description": "Press / authority logo strip — 'As featured in' label + grayscale logo row that color on hover.",
+  "keywords": ["press", "logos", "authority"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "label": { "type": "string", "default": "As featured in" },
+    "logos": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "object" }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css"
+}

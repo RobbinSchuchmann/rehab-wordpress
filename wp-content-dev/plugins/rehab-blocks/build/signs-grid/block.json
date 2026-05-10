@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/signs-grid",
+  "version": "0.1.0",
+  "title": "Signs grid (checklist)",
+  "category": "rehab",
+  "icon": "list-view",
+  "description": "Two checklist cards (e.g. Signs / Withdrawal symptoms) followed by an optional dark CTA bar.",
+  "keywords": [
+    "signs",
+    "symptoms",
+    "checklist"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Is it time to consider rehab?"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Recognise the signs of cocaine addiction"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "Acknowledging the signs is the first step towards recovery — for yourself or for someone you love."
+    },
+    "card1Title": {
+      "type": "string",
+      "default": "Common signs of cocaine addiction"
+    },
+    "card1Items": {
+      "type": "array",
+      "default": []
+    },
+    "card2Title": {
+      "type": "string",
+      "default": "Withdrawal symptoms during detox"
+    },
+    "card2Items": {
+      "type": "array",
+      "default": []
+    },
+    "ctaTitle": {
+      "type": "string",
+      "default": "If any of this feels familiar, please reach out."
+    },
+    "ctaBody": {
+      "type": "string",
+      "default": "Our intake team will speak with you confidentially — no commitment, no pressure."
+    },
+    "ctaButton": {
+      "type": "string",
+      "default": "Book free assessment"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": "/contact-us/"
+    },
+    "showCta": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}
