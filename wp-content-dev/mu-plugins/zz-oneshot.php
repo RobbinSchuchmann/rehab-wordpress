@@ -2066,12 +2066,12 @@ add_action( 'init', function () {
 				]
 			);
 
-			// 12. FINAL CTA (using existing CTA — form is intentionally deferred until mailer is wired)
-			$blocks .= rehab_block_cta( [
-				'heading'    => 'Are you ready to begin?',
-				'body'       => 'Reach out for a confidential call from our client relations team. We\'re available 24/7. Free, confidential, no-obligation — just a conversation.',
-				'buttonText' => 'Speak with admissions',
-				'buttonUrl'  => '/contact-us/',
+			// 12. FINAL CTA — dark contact + form layout (form posts to nothing until mailer is wired)
+			$blocks .= rehab_block_final_cta( [
+				'anchorId' => 'assessment',
+				'eyebrow'  => 'Take the next step',
+				'heading'  => 'Are you ready to begin?',
+				'lead'     => "Fill out the form and our client relations team will call you back, confidentially, within an hour during business hours. No pressure, no commitment — just a conversation.",
 			] );
 
 			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );

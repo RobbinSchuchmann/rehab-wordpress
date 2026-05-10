@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/final-cta",
+  "version": "0.1.0",
+  "title": "Final CTA (contact + form)",
+  "category": "rehab",
+  "icon": "email-alt",
+  "description": "Dark final-CTA section. Left: eyebrow + H2 + lead + call/whatsapp/email links. Right: assessment form (name, email, phone, country, message).",
+  "keywords": [
+    "cta",
+    "form",
+    "contact",
+    "assessment"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "anchorId": {
+      "type": "string",
+      "default": "assessment"
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Take the next step"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Are you ready to begin?"
+    },
+    "lead": {
+      "type": "string",
+      "default": "Fill out the form and our client relations team will call you back, confidentially, within an hour during business hours. No pressure, no commitment — just a conversation."
+    },
+    "phoneText": {
+      "type": "string",
+      "default": "+66 3 313 5303"
+    },
+    "phoneHref": {
+      "type": "string",
+      "default": "tel:+6633135303"
+    },
+    "whatsappText": {
+      "type": "string",
+      "default": "+66 96 582 3832"
+    },
+    "whatsappHref": {
+      "type": "string",
+      "default": "https://wa.me/66965823832"
+    },
+    "emailText": {
+      "type": "string",
+      "default": "info@diamondrehabthailand.com"
+    },
+    "emailHref": {
+      "type": "string",
+      "default": "mailto:info@diamondrehabthailand.com"
+    },
+    "formTitle": {
+      "type": "string",
+      "default": "Free, confidential assessment"
+    },
+    "formSub": {
+      "type": "string",
+      "default": "We'll reply within one hour during business hours."
+    },
+    "formSubmit": {
+      "type": "string",
+      "default": "Schedule free assessment"
+    },
+    "formLegal": {
+      "type": "string",
+      "default": "Your details are confidential and never shared. By submitting you agree to be contacted by The Diamond Rehab Thailand."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

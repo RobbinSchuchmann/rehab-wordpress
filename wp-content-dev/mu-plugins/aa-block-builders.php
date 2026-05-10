@@ -139,18 +139,16 @@ function rehab_block_cards_grid( string $heading, string $subheading, array $car
  */
 function rehab_block_faq( string $heading, array $items, string $bg = 'cream' ): string {
 	$faq_attrs = rehab_block_attrs( [ 'background' => $bg, 'heading' => $heading ] );
-	$inner = '<div class="rehab-container rehab-container--narrow"><h2 class="rehab-faq__heading">' . esc_html( $heading ) . '</h2><div class="rehab-faq__list">';
-	$gut   = '';
+	$h  = '<section class="wp-block-rehab-faq rehab-faq rehab-bg-' . esc_attr( $bg ) . '">';
+	$h .= '<div class="rehab-container rehab-container--narrow"><h2 class="rehab-faq__heading">' . esc_html( $heading ) . '</h2>';
+	$h .= '<div class="rehab-faq__list">';
 	foreach ( $items as $item ) {
 		$ia = rehab_block_attrs( $item );
-		$h  = '<details class="rehab-faq-item"><summary class="rehab-faq-item__summary"><span>' . esc_html( $item['question'] ) . '</span><span class="rehab-faq-item__icon" aria-hidden="true"></span></summary><div class="rehab-faq-item__answer"><p>' . esc_html( $item['answer'] ) . '</p></div></details>';
-		$gut   .= "<!-- wp:rehab/faq-item " . $ia . " -->\n" . $h . "\n<!-- /wp:rehab/faq-item -->\n";
-		$inner .= $h;
+		$item_html = '<details class="rehab-faq-item"><summary class="rehab-faq-item__summary"><span>' . esc_html( $item['question'] ) . '</span><span class="rehab-faq-item__icon" aria-hidden="true"></span></summary><div class="rehab-faq-item__answer"><p>' . esc_html( $item['answer'] ) . '</p></div></details>';
+		$h .= "<!-- wp:rehab/faq-item " . $ia . " -->\n" . $item_html . "\n<!-- /wp:rehab/faq-item -->\n";
 	}
-	$inner .= '</div></div>';
-	return "<!-- wp:rehab/faq " . $faq_attrs . " -->\n" .
-		'<section class="wp-block-rehab-faq rehab-faq rehab-bg-' . $bg . '">' . $inner . $gut . '</section>' .
-		"\n<!-- /wp:rehab/faq -->\n\n";
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/faq " . $faq_attrs . " -->\n" . $h . "\n<!-- /wp:rehab/faq -->\n\n";
 }
 
 /**
@@ -488,4 +486,52 @@ function rehab_block_treatment_tabs( string $eyebrow, string $heading, string $s
 	$h .= $inner;
 	$h .= '</div></div></section>';
 	return "<!-- wp:rehab/tabs " . $tabs_attrs . " -->\n" . $h . "\n<!-- /wp:rehab/tabs -->\n\n";
+}
+
+
+/**
+ * Build a `rehab/final-cta` block — dark contact + form section.
+ */
+function rehab_block_final_cta( array $a = [] ): string {
+	$defaults = [
+		'anchorId' => 'assessment',
+		'eyebrow' => 'Take the next step',
+		'heading' => 'Are you ready to begin?',
+		'lead' => "Fill out the form and our client relations team will call you back, confidentially, within an hour during business hours. No pressure, no commitment — just a conversation.",
+		'phoneText' => '+66 3 313 5303', 'phoneHref' => 'tel:+6633135303',
+		'whatsappText' => '+66 96 582 3832', 'whatsappHref' => 'https://wa.me/66965823832',
+		'emailText' => 'info@diamondrehabthailand.com', 'emailHref' => 'mailto:info@diamondrehabthailand.com',
+		'formTitle' => 'Free, confidential assessment',
+		'formSub' => "We'll reply within one hour during business hours.",
+		'formSubmit' => 'Schedule free assessment',
+		'formLegal' => 'Your details are confidential and never shared. By submitting you agree to be contacted by The Diamond Rehab Thailand.',
+	];
+	$a = array_merge( $defaults, $a );
+	$attrs = rehab_block_attrs( $a );
+	$phone_svg    = '<svg width="20" height="20" viewBox="0 0 15 16" aria-hidden="true"><path d="M14.8 13.1c-.8 2-2.8 2.4-3.5 2.4-.2 0-3.2.2-7.4-3.9C.5 8.3 0 4.8 0 4.1 0 3.4.2 1.8 2.4.6c.3-.2.8-.2 1-.1.1.1 1.9 3.2 2 3.3 0 .1.1.2.1.3 0 .1-.1.3-.3.5l-.7.7c-.3.1-.5.3-.7.5-.2.2-.3.4-.3.5 0 .3.3 1.5 2.3 3.3C7.9 11.5 8.9 12 9 12c.1 0 .2.1.2.1.1 0 .3-.1.5-.3.2-.2.9-1.1 1.1-1.3.2-.2.4-.3.5-.3.1 0 .2 0 .3.1.1 0 3.2 1.9 3.3 1.9.2.1.1.6-.1.9" fill="currentColor"/></svg>';
+	$whatsapp_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A8 8 0 0 0 4 12a7.8 7.8 0 0 0 1.1 4L4 20l4.1-1.1a8 8 0 0 0 9.5-12.6Zm-5.6 12.4a7.1 7.1 0 0 1-3.6-1l-.3-.1L5.7 18l.6-2.4-.2-.3a6.6 6.6 0 1 1 5.9 3.4Zm3.7-4.9c-.2 0-1.2-.6-1.4-.7s-.3 0-.5.2-.5.6-.6.7-.3.1-.5 0a5.4 5.4 0 0 1-2.7-2.4c-.2-.3 0-.5.1-.6l.4-.4.1-.3v-.3l-.7-1.7c-.2-.4-.3-.4-.5-.4h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.7 1.8 4.3 4.3 0 0 0 .9 2.3 9.7 9.7 0 0 0 3.7 3.3 3.5 3.5 0 0 0 1.5.4 2.4 2.4 0 0 0 1.7-1 2 2 0 0 0 .1-1.2Z"/></svg>';
+	$email_svg    = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>';
+	$h  = '<section class="wp-block-rehab-final-cta rehab-final-cta"' . ( $a['anchorId'] ? ' id="' . esc_attr( $a['anchorId'] ) . '"' : '' ) . '>';
+	$h .= '<div class="rehab-final-cta__inner">';
+	$h .= '<div>';
+	if ( $a['eyebrow'] ) $h .= '<span class="rehab-final-cta__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
+	$h .= '<h2 class="rehab-final-cta__heading">' . esc_html( $a['heading'] ) . '</h2>';
+	if ( $a['lead'] ) $h .= '<p class="rehab-final-cta__lead">' . esc_html( $a['lead'] ) . '</p>';
+	$h .= '<div class="rehab-final-cta__contact">';
+	if ( $a['phoneText'] )    $h .= '<a href="' . esc_url( $a['phoneHref'] ) . '">' . $phone_svg . 'Call <strong>' . esc_html( $a['phoneText'] ) . '</strong></a>';
+	if ( $a['whatsappText'] ) $h .= '<a href="' . esc_url( $a['whatsappHref'] ) . '">' . $whatsapp_svg . 'WhatsApp <strong>' . esc_html( $a['whatsappText'] ) . '</strong></a>';
+	if ( $a['emailText'] )    $h .= '<a href="' . esc_url( $a['emailHref'] ) . '">' . $email_svg . 'Email <strong>' . esc_html( $a['emailText'] ) . '</strong></a>';
+	$h .= '</div></div>';
+	$h .= '<form class="rehab-final-cta__form" onsubmit="event.preventDefault(); alert(\'Thank you — our team will be in touch.\');">';
+	$h .= '<p class="rehab-final-cta__form-title">' . esc_html( $a['formTitle'] ) . '</p>';
+	$h .= '<p class="rehab-final-cta__form-sub">' . esc_html( $a['formSub'] ) . '</p>';
+	$h .= '<input type="text" placeholder="Full name" required>';
+	$h .= '<div class="rehab-final-cta__form-row"><input type="email" placeholder="E-mail" required><input type="tel" placeholder="Phone (with country code)" required></div>';
+	$h .= '<input type="text" placeholder="Country">';
+	$h .= '<textarea placeholder="Tell us briefly what\'s happening (optional)" maxlength="180"></textarea>';
+	$h .= '<button type="submit" class="rehab-btn rehab-btn--luxury" style="width:100%">' . esc_html( $a['formSubmit'] ) . '</button>';
+	$h .= '<p class="rehab-final-cta__form-legal">' . esc_html( $a['formLegal'] ) . '</p>';
+	$h .= '</form>';
+	$h .= '</div></section>';
+	return "<!-- wp:rehab/final-cta " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/final-cta -->\n\n";
 }

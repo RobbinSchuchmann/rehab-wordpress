@@ -29,7 +29,14 @@ while ( have_posts() ) :
 		<?php the_content(); ?>
 
 		<?php
-		$related = get_posts( [
+		// "Other treatments" cross-link section is suppressed when the page's
+		// content already ends with a final-CTA / contact-form block — those
+		// pages own their full bottom-of-page experience.
+		$page_content = get_the_content();
+		$has_own_final = (
+			false !== strpos( $page_content, 'wp:rehab/final-cta' )
+		);
+		$related = $has_own_final ? [] : get_posts( [
 			'post_type'      => 'page',
 			'posts_per_page' => 4,
 			'meta_key'       => '_wp_page_template',
