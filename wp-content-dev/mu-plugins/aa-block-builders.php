@@ -427,3 +427,65 @@ function rehab_block_article_row( array $a ): string {
 	$h .= '</div></div></div></section>';
 	return "<!-- wp:rehab/article-row " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/article-row -->\n\n";
 }
+
+
+/**
+ * Build a `rehab/tabs` + `rehab/tab` block stack for the treatment-phases pattern.
+ * Each tab gets a phase eyebrow, a label, a content panel (h3 + paragraphs + optional list),
+ * and a sage-mist aside (quote + meta).
+ *
+ * $tabs = array of:
+ *   [ 'phase' => 'PHASE 01', 'label' => 'Medical detox',
+ *     'h3' => '...', 'paragraphs' => [...], 'listItems' => [...] (optional),
+ *     'asideQuote' => '...', 'asideMetaLabel' => 'Quoted by', 'asideMetaValue' => 'Theo de Vries, Founder' ]
+ */
+function rehab_block_treatment_tabs( string $eyebrow, string $heading, string $subheading, array $tabs, string $bg = 'white' ): string {
+	$tabs_attrs = rehab_block_attrs( [ 'background' => $bg, 'heading' => '' ] );
+	// Outer head/wrapper renders eyebrow + heading + subheading above the nav.
+	$h  = '<section class="wp-block-rehab-tabs rehab-tabs rehab-bg-' . esc_attr( $bg ) . '" data-rehab-tabs="">';
+	$h .= '<div class="rehab-container">';
+	$h .= '<div class="rehab-tabs__head">';
+	if ( $eyebrow )    $h .= '<span class="rehab-tabs__eyebrow">' . esc_html( $eyebrow ) . '</span>';
+	$h .= '<h2 class="rehab-tabs__heading">' . esc_html( $heading ) . '</h2>';
+	if ( $subheading ) $h .= '<p class="rehab-tabs__sub">' . esc_html( $subheading ) . '</p>';
+	$h .= '</div>';
+	$h .= '<div class="rehab-tabs__inner">';
+
+	$inner = '';
+	foreach ( $tabs as $tab ) {
+		$tab = array_merge( [
+			'phase' => '', 'label' => '',
+			'h3' => '', 'paragraphs' => [], 'listItems' => [],
+			'asideQuote' => '', 'asideMetaLabel' => 'Quoted by', 'asideMetaValue' => '',
+		], $tab );
+		$tab_attrs = rehab_block_attrs( [ 'label' => $tab['label'], 'phaseNumber' => $tab['phase'] ] );
+
+		$panel  = '<div class="rehab-tab" data-label="' . esc_attr( $tab['label'] ) . '" data-phase="' . esc_attr( $tab['phase'] ) . '">';
+		$panel .= '<div class="rehab-tab__main">';
+		$panel .= '<h3>' . esc_html( $tab['h3'] ) . '</h3>';
+		foreach ( $tab['paragraphs'] as $i => $p ) {
+			$panel .= '<p>' . esc_html( $p ) . '</p>';
+			// Insert list right after the second paragraph if present (matches design pattern).
+			if ( $i === 1 && ! empty( $tab['listItems'] ) ) {
+				$panel .= '<ul>';
+				foreach ( $tab['listItems'] as $li ) {
+					$panel .= '<li>' . wp_kses( $li, [ 'strong' => [] ] ) . '</li>';
+				}
+				$panel .= '</ul>';
+			}
+		}
+		$panel .= '</div>';
+		if ( $tab['asideQuote'] ) {
+			$panel .= '<aside class="rehab-tab__aside">';
+			$panel .= '<p class="quote">' . esc_html( $tab['asideQuote'] ) . '</p>';
+			$panel .= '<div class="meta"><strong>' . esc_html( $tab['asideMetaLabel'] ) . '</strong>' . esc_html( $tab['asideMetaValue'] ) . '</div>';
+			$panel .= '</aside>';
+		}
+		$panel .= '</div>';
+
+		$inner .= "<!-- wp:rehab/tab " . $tab_attrs . " -->\n" . $panel . "\n<!-- /wp:rehab/tab -->\n";
+	}
+	$h .= $inner;
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/tabs " . $tabs_attrs . " -->\n" . $h . "\n<!-- /wp:rehab/tabs -->\n\n";
+}

@@ -1945,6 +1945,57 @@ add_action( 'init', function () {
 				'body' => "As one of the leading cocaine rehab centers in Thailand, we understand that there's no silver bullet when it comes to treating cocaine addiction and achieving long-term sobriety.\n\nThat's why we provide fully customised cocaine rehab programs based on a clinical assessment of your condition. During your stay in our luxury cocaine rehab facilities, we'll continuously monitor your progress and adjust your recovery plan as you advance through your program to ensure your treatment is as effective as possible.",
 			] );
 
+			// 6b. TREATMENT PHASES TABS
+			$blocks .= rehab_block_treatment_tabs(
+				'The treatment phases',
+				'Three pillars of cocaine recovery',
+				'From the medical detox through to the holistic work that supports long-term sobriety — every phase is supervised by our multi-disciplinary team.',
+				[
+					[
+						'phase' => 'PHASE 01', 'label' => 'Medical detox',
+						'h3' => 'Detox: an important part of the cocaine rehab process',
+						'paragraphs' => [
+							'Depending on the severity of your addiction, our clinical team may recommend starting your coke rehab treatment program with a detox. We\'ll provide you with a safe environment and monitor your symptoms to make the process as comfortable as possible.',
+							'During the detoxification process, you may experience a range of cocaine withdrawal symptoms, including:',
+							'During withdrawal, the cravings for cocaine can be extremely intense. Entering inpatient care at a cocaine rehab center reduces the risk of relapse during this critical time. The detoxification process for cocaine is relatively quick compared to other drugs, but some symptoms may persist for weeks or months after completing your cocaine rehab programme.',
+						],
+						'listItems' => [ 'Strong cravings for cocaine', 'Depression', 'Suicidal thoughts', 'Restlessness', 'Lethargy', 'Nightmares' ],
+						'asideQuote' => '"The first question is not why the addiction — it\'s why the pain?"',
+						'asideMetaLabel' => 'Quoted by',
+						'asideMetaValue' => 'Theo de Vries, Founder',
+					],
+					[
+						'phase' => 'PHASE 02', 'label' => 'Behavioural therapy',
+						'h3' => 'The role of behavioural therapy in rehab for cocaine addiction',
+						'paragraphs' => [
+							'Addiction is so much more than a physical dependence on drugs or alcohol. Many people with substance abuse and addiction disorders have deep-rooted psychological and emotional issues that must be addressed in order to achieve lasting wellness.',
+							'Therapy provides a crucial support system for people recovering from substance use disorders and is an important component of our substance abuse rehabilitation programs. We offer an intimate, judgment-free space where you can speak honestly about your past and ambitions for the future.',
+							'You\'ll learn to identify the personal triggers — stressors, environmental cues and social circles — that lead to relapse and, together with your therapist, develop a recovery plan to manage these triggers in the short and long term. Education and awareness give rise to positive change.',
+						],
+						'listItems' => [],
+						'asideQuote' => '"During rehab, our counsellors will help you dissect the behavioural issues and psychosocial factors that contribute to addiction."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab clinical team',
+					],
+					[
+						'phase' => 'PHASE 03', 'label' => 'Holistic therapy',
+						'h3' => 'Holistic therapy used in the treatment of cocaine addiction',
+						'paragraphs' => [
+							'We believe that successful cocaine addiction rehab relies on addressing every aspect of your health and wellbeing. Our rehab for cocaine addiction includes a range of holistic therapeutic techniques that are effective in the treatment of cocaine addiction.',
+						],
+						'listItems' => [
+							'<strong>Yoga</strong> — Strengthen the bond between mind and body. A combination of physical exercise, breath control and mindfulness, suitable for any level of fitness.',
+							'<strong>Mindfulness</strong> — Steeped in Buddhist culture, Thailand is the perfect place to learn how to be more present, live with intent and process negative thoughts.',
+							'<strong>Fitness</strong> — Whether you want to swim, run, box, cycle or lift weights, our trainers will guide you through a tailored program that reduces the risk of relapse.',
+						],
+						'asideQuote' => '"Holistic approach for successful cocaine addiction recovery."',
+						'asideMetaLabel' => 'Set within',
+						'asideMetaValue' => 'A private 5-star sanctuary in Hua Hin',
+					],
+				],
+				'white'
+			);
+
 			// 7. SIGNS / WITHDRAWAL grid + dark CTA
 			$blocks .= rehab_block_signs_grid( [
 				'background' => 'cream',
