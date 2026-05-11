@@ -1715,6 +1715,88 @@ add_action( 'init', function () {
 			}
 			break;
 
+		case 'bulk-migrate-acf':
+			// Run rehab_acf_migrate_page() across a cohort of pages.
+			// Usage:
+			//   ?rehab_oneshot=bulk-migrate-acf&template=template-article.php
+			//   ?rehab_oneshot=bulk-migrate-acf&template=template-article.php&dry=1
+			//   ?rehab_oneshot=bulk-migrate-acf&ids=884,902,946[&dry=1][&force=1][&nochrome=1]
+			//
+			// Skips pages whose layouts include anything the mapper doesn't
+			// know (unless &force=1, which still won't help — unknown layouts
+			// become HTML comments). Skips already-backed-up pages unless
+			// &force=1. Default cohort: all template-article.php pages.
+			global $wpdb;
+			$known     = [ 'banner','columns','article','tabs','faq','global','cta','pages' ];
+			$ids_param = isset( $_GET['ids'] ) ? sanitize_text_field( $_GET['ids'] ) : '';
+			$template  = isset( $_GET['template'] ) ? sanitize_text_field( $_GET['template'] ) : '';
+			$dry       = isset( $_GET['dry'] ) && '1' === $_GET['dry'];
+			$force     = isset( $_GET['force'] ) && '1' === $_GET['force'];
+			$chrome    = ! ( isset( $_GET['nochrome'] ) && '1' === $_GET['nochrome'] );
+			$limit     = isset( $_GET['limit'] ) ? (int) $_GET['limit'] : 0;
+
+			if ( $ids_param ) {
+				$ids = array_filter( array_map( 'intval', explode( ',', $ids_param ) ) );
+			} elseif ( $template ) {
+				$ids = array_map( 'intval', $wpdb->get_col( $wpdb->prepare(
+					"SELECT pm.post_id FROM {$wpdb->postmeta} pm
+					 JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = pm.post_id AND pm2.meta_key = 'sections'
+					 JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_status = 'publish'
+					 WHERE pm.meta_key = '_wp_page_template' AND pm.meta_value = %s",
+					$template
+				) ) );
+			} else {
+				echo "Provide &ids=... or &template=...\n";
+				break;
+			}
+
+			if ( $limit > 0 ) {
+				$ids = array_slice( $ids, 0, $limit );
+			}
+
+			echo "Cohort: " . count( $ids ) . " page IDs\n";
+			echo "Mode:   " . ( $dry ? 'DRY-RUN (no DB writes)' : 'WRITE' ) . "\n";
+			echo "Chrome: " . ( $chrome ? 'ON' : 'OFF' ) . "\n";
+			echo "Force:  " . ( $force ? 'YES' : 'no' ) . "\n\n";
+
+			$stats = [ 'ok' => 0, 'skipped_unknown' => 0, 'skipped_backup' => 0, 'failed' => 0 ];
+			foreach ( $ids as $id ) {
+				$sections = rehab_acf_get_sections( $id );
+				$layouts  = array_map( fn( $s ) => $s['_layout'] ?? '?', $sections );
+				$unknowns = array_diff( $layouts, $known );
+				$title    = get_the_title( $id );
+
+				if ( ! empty( $unknowns ) ) {
+					echo sprintf( "  SKIP-UNK  #%-5d %-50s (unknown: %s)\n", $id, mb_substr( $title, 0, 50 ), implode( ',', array_unique( $unknowns ) ) );
+					$stats['skipped_unknown']++;
+					continue;
+				}
+
+				if ( $dry ) {
+					$mapped = $chrome ? rehab_acf_map_sections_with_chrome( $sections ) : rehab_acf_map_sections( $sections );
+					preg_match_all( "/<!-- wp:(rehab\\/[a-z0-9-]+)/i", $mapped, $m );
+					echo sprintf( "  DRY       #%-5d %-50s %d sec → %d blocks, %d bytes\n", $id, mb_substr( $title, 0, 50 ), count( $sections ), count( $m[1] ), strlen( $mapped ) );
+					$stats['ok']++;
+					continue;
+				}
+
+				$res = rehab_acf_migrate_page( $id, $force, $chrome );
+				if ( $res['ok'] ) {
+					echo sprintf( "  OK        #%-5d %-50s %d sec → %d bytes\n", $id, mb_substr( $title, 0, 50 ), count( $sections ), $res['mapped_bytes'] );
+					$stats['ok']++;
+				} elseif ( false !== strpos( $res['msg'], 'Backup already exists' ) ) {
+					echo sprintf( "  SKIP-BAK  #%-5d %-50s (already migrated)\n", $id, mb_substr( $title, 0, 50 ) );
+					$stats['skipped_backup']++;
+				} else {
+					echo sprintf( "  FAIL      #%-5d %s\n", $id, $res['msg'] );
+					$stats['failed']++;
+				}
+			}
+
+			echo "\n=== Summary ===\n";
+			foreach ( $stats as $k => $v ) echo "  $k: $v\n";
+			break;
+
 		case 'rollback-acf-page':
 			// Restores post_content from the migration backup postmeta.
 			// Usage: ?rehab_oneshot=rollback-acf-page&id=853

@@ -68,8 +68,21 @@ function rehab_acf_map_sections( array $sections ): string {
 function rehab_acf_map_sections_with_chrome( array $sections, array $opts = [] ): string {
 	$opts = array_merge( [ 'authority' => true, 'benefits' => true, 'journey' => true ], $opts );
 
-	// Locate the injection target for mid-page chrome: prefer the FAQ
-	// section; fall back to the close-out section (global/cta).
+	// Chrome is only appropriate for "treatment-page-shaped" content: a
+	// banner section at the top and a faq/global/cta close-out. Single-
+	// section bios, intake forms, and other one-off pages don't qualify
+	// — appending generic benefits + journey copy there would be noise.
+	$layouts            = array_map( fn( $s ) => $s['_layout'] ?? '', $sections );
+	$has_banner         = in_array( 'banner', $layouts, true );
+	$has_close_out      = (bool) array_intersect( $layouts, [ 'faq', 'global', 'cta' ] );
+	$looks_like_treatment = $has_banner && $has_close_out;
+
+	if ( ! $looks_like_treatment ) {
+		return rehab_acf_map_sections( $sections );
+	}
+
+	// Locate the mid-page injection target: prefer FAQ, fall back to the
+	// close-out section (global/cta).
 	$mid_target_idx = null;
 	foreach ( $sections as $i => $s ) {
 		if ( 'faq' === ( $s['_layout'] ?? '' ) ) {
@@ -91,7 +104,6 @@ function rehab_acf_map_sections_with_chrome( array $sections, array $opts = [] )
 	$mid_emitted       = false;
 
 	foreach ( $sections as $i => $section ) {
-		// Before this section: mid-page chrome if we're at the injection point.
 		if ( null !== $mid_target_idx && $i === $mid_target_idx && ! $mid_emitted ) {
 			if ( $opts['benefits'] ) {
 				$out .= rehab_chrome_benefits_numbered();
@@ -104,20 +116,9 @@ function rehab_acf_map_sections_with_chrome( array $sections, array $opts = [] )
 
 		$out .= rehab_acf_map_section( $section );
 
-		// After this section: authority-ribbon directly after the hero.
 		if ( $opts['authority'] && ! $authority_emitted && 'banner' === ( $section['_layout'] ?? '' ) ) {
 			$out .= rehab_chrome_authority_ribbon();
 			$authority_emitted = true;
-		}
-	}
-
-	// Fallback: page had no FAQ/global/cta — append chrome at the end.
-	if ( ! $mid_emitted ) {
-		if ( $opts['benefits'] ) {
-			$out .= rehab_chrome_benefits_numbered();
-		}
-		if ( $opts['journey'] ) {
-			$out .= rehab_chrome_journey_steps();
 		}
 	}
 
