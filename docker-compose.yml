@@ -35,6 +35,7 @@ services:
       - wpdata:/var/www/html
       - ./wp-content-dev:/var/www/html/wp-content
       - ../diamond-rehab-wordpress-folder/wp-content/uploads:/var/www/html/wp-content/uploads:ro
+      - ./config/php-uploads.ini:/usr/local/etc/php/conf.d/zz-uploads.ini:ro
     ports:
       - "0.0.0.0:8081:80"
     networks:

@@ -33,6 +33,12 @@ wp-content-dev/themes/twentytwenty*/
 # Diamond plugin Freemius / accounts blobs
 wp-content-dev/plugins/*/freemius/
 
+# Third-party plugins — fetch separately, don't commit.
+# Rank Math (free) is public on wordpress.org; Pro is licensed and must
+# not be redistributed via git.
+wp-content-dev/plugins/seo-by-rank-math/
+wp-content-dev/plugins/seo-by-rank-math-pro/
+
 # WP-CLI history
 .wp-cli/
 
