@@ -823,102 +823,6 @@ add_action( 'init', function () {
 			}
 			break;
 
-		case 'rebuild-whyus-testimonials':
-			$page_id = 825;
-			$post = get_post( $page_id );
-			if ( ! $post ) { echo "no why-us page\n"; break; }
-			$file = WP_CONTENT_DIR . '/diamond-reviews.json';
-			$reviews = json_decode( file_get_contents( $file ), true );
-			if ( ! is_array( $reviews ) ) { echo "bad reviews\n"; break; }
-			// Hand-pick reviews that end on complete sentences (no mid-word truncation).
-			$picks_idx = [ 1, 3, 4 ]; // Alexander Evans, Gavin Gleeson, Maaike
-			$picks = array_map( fn( $i ) => $reviews[ $i ], $picks_idx );
-
-			$star_svg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 15.1,8.6 22,9.5 17,14.4 18.2,21.5 12,18 5.8,21.5 7,14.4 2,9.5 8.9,8.6"></polygon></svg>';
-			$stars = str_repeat( $star_svg, 5 );
-
-			$inner = '';
-			foreach ( $picks as $r ) {
-				$name  = wp_kses_post( $r['name'] );
-				$quote = wp_kses_post( html_entity_decode( $r['text'], ENT_QUOTES ) );
-				$attrs = wp_json_encode( [
-					'rating' => 5,
-					'quote'  => $quote,
-					'name'   => $name,
-					'role'   => 'Former client',
-				] );
-				$inner .= '<!-- wp:rehab/testimonial ' . $attrs . " -->\n";
-				$inner .= '<div class="wp-block-rehab-testimonial rehab-testimonial"><div class="rehab-testimonial__stars" aria-label="5 out of 5 stars">' . $stars . '</div><p class="rehab-testimonial__quote">' . esc_html( $quote ) . '</p><div class="rehab-testimonial__author"><p class="rehab-testimonial__name">' . esc_html( $name ) . '</p><p class="rehab-testimonial__role">Former client</p></div></div>' . "\n";
-				$inner .= "<!-- /wp:rehab/testimonial -->\n\n";
-			}
-
-			$wrap_attrs = wp_json_encode( [
-				'background' => 'white',
-				'columns'    => 3,
-				'heading'    => 'Real results, real people',
-				'subheading' => 'Hear directly from those who achieved full recovery.',
-			] );
-			$new_block = '<!-- wp:rehab/testimonials ' . $wrap_attrs . " -->\n" .
-				'<section class="wp-block-rehab-testimonials rehab-testimonials rehab-bg-white rehab-testimonials--cols-3"><div class="rehab-container"><header class="rehab-testimonials__header"><h2 class="rehab-heading rehab-heading--lg">Real results, real people</h2><p class="rehab-testimonials__subheading">Hear directly from those who achieved full recovery.</p></header><div class="rehab-testimonials__grid">' . "\n" .
-				$inner .
-				'</div></div></section>' . "\n" .
-				"<!-- /wp:rehab/testimonials -->";
-
-			$updated = preg_replace(
-				'/<!--\s*wp:rehab\/testimonials\b.*?<!--\s*\/wp:rehab\/testimonials\s*-->/is',
-				$new_block,
-				$post->post_content,
-				1
-			);
-			if ( $updated === $post->post_content ) { echo "no change\n"; break; }
-			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $updated ) ], true );
-			echo is_wp_error( $res ) ? 'ERR ' . $res->get_error_message() : "OK why-us testimonials\n";
-			break;
-
-		case 'rebuild-faq-page':
-			$file = WP_CONTENT_DIR . '/diamond-faq.json';
-			if ( ! file_exists( $file ) ) { echo "no faq json\n"; break; }
-			$items = json_decode( file_get_contents( $file ), true );
-			if ( ! is_array( $items ) ) { echo "bad json\n"; break; }
-			// Group: privacy (0-3) / treatment & care (4-7) / logistics (8-11)
-			$groups = [
-				[
-					'heading' => 'Privacy &amp; confidentiality',
-					'bg'      => 'cream',
-					'items'   => array_slice( $items, 0, 4 ),
-				],
-				[
-					'heading' => 'Treatment &amp; care',
-					'bg'      => 'white',
-					'items'   => array_slice( $items, 4, 4 ),
-				],
-				[
-					'heading' => 'Location, cost &amp; logistics',
-					'bg'      => 'cream',
-					'items'   => array_slice( $items, 8, 4 ),
-				],
-			];
-			$out = '';
-			foreach ( $groups as $g ) {
-				$inner_blocks = '';
-				$inner_html   = '';
-				foreach ( $g['items'] as $it ) {
-					$q = wp_kses_post( $it['q'] );
-					$a = wp_kses_post( $it['a'] );
-					$inner_blocks .= '<!-- wp:rehab/faq-item ' . wp_json_encode( [ 'question' => $q, 'answer' => $a ] ) . " -->\n";
-					$inner_blocks .= '<details class="wp-block-rehab-faq-item rehab-faq__item"><summary class="rehab-faq__question"><span>' . $q . '</span><span class="rehab-faq__icon" aria-hidden="true"></span></summary><div class="rehab-faq__answer"><p>' . $a . '</p></div></details>' . "\n";
-					$inner_blocks .= "<!-- /wp:rehab/faq-item -->\n";
-					$inner_html   .= '<details class="wp-block-rehab-faq-item rehab-faq__item"><summary class="rehab-faq__question"><span>' . $q . '</span><span class="rehab-faq__icon" aria-hidden="true"></span></summary><div class="rehab-faq__answer"><p>' . $a . '</p></div></details>';
-				}
-				$attrs = wp_json_encode( [ 'background' => $g['bg'], 'heading' => $g['heading'] ] );
-				$out .= '<!-- wp:rehab/faq ' . $attrs . " -->\n";
-				$out .= '<section class="wp-block-rehab-faq rehab-faq rehab-bg-' . $g['bg'] . '" aria-label="Frequently Asked Questions"><div class="rehab-container rehab-container--narrow"><h2 class="rehab-heading rehab-heading--lg rehab-faq__heading">' . $g['heading'] . '</h2><div class="rehab-faq__list">' . $inner_html . '</div></div></section>' . "\n";
-				$out .= "<!-- /wp:rehab/faq -->\n\n";
-			}
-			$res = wp_update_post( [ 'ID' => 1197, 'post_content' => wp_slash( $out ) ], true );
-			echo is_wp_error( $res ) ? 'ERR ' . $res->get_error_message() : "OK rebuilt faq\n";
-			break;
-
 		case 'list-articles':
 			$ids = get_posts( [
 				'post_type'      => 'page',
@@ -1247,86 +1151,6 @@ add_action( 'init', function () {
 			echo $post->post_content;
 			break;
 
-		case 'rebuild-faq-page-v2':
-			$json_path = '/var/www/html/wp-content/diamond-faq.json';
-			if ( ! file_exists( $json_path ) ) { echo "no diamond-faq.json\n"; break; }
-			$flat = json_decode( file_get_contents( $json_path ), true );
-			if ( ! is_array( $flat ) ) { echo "bad json\n"; break; }
-
-			// Index by question lowercase for matching.
-			$by_q = [];
-			foreach ( $flat as $row ) {
-				$by_q[ strtolower( trim( $row['q'] ?? '' ) ) ] = $row;
-			}
-			$find = function( $needle ) use ( $by_q ) {
-				$needle = strtolower( $needle );
-				foreach ( $by_q as $key => $row ) {
-					if ( strpos( $key, $needle ) !== false ) return $row;
-				}
-				return null;
-			};
-
-			$groups = [
-				[
-					'title' => 'Privacy & confidentiality',
-					'qs'    => [
-						'completely confidential',
-						'sign ndas',
-						'high-profile client',
-						'alias during my stay',
-					],
-				],
-				[
-					'title' => 'Treatment & care',
-					'qs'    => [
-						'kind of therapies',
-						'is the diamond rehab thailand licensed',
-						'family members visit',
-					],
-				],
-				[
-					'title' => 'Location, cost & logistics',
-					'qs'    => [
-						'where is the facility located',
-						'how do i travel',
-						'climate like',
-						'kind of visa',
-						'thailand a safe place',
-					],
-				],
-			];
-
-			$out = '';
-			foreach ( $groups as $g ) {
-				$attrs_faq = wp_json_encode( [ 'heading' => $g['title'] ] );
-				$inner_items = '';
-				foreach ( $g['qs'] as $needle ) {
-					$row = $find( $needle );
-					if ( ! $row ) continue;
-					$q = trim( $row['q'] );
-					$a = trim( $row['a'] );
-					$item_attrs = wp_json_encode( [ 'question' => $q, 'answer' => $a ] );
-					$inner_items .=
-						'<!-- wp:rehab/faq-item ' . $item_attrs . " -->\n" .
-						'<details class="wp-block-rehab-faq-item rehab-faq-item"><summary>' . esc_html( $q ) . '</summary><div class="rehab-faq-item__answer">' . wp_kses_post( $a ) . "</div></details>\n" .
-						"<!-- /wp:rehab/faq-item -->\n\n";
-				}
-				if ( ! $inner_items ) continue;
-
-				$out .=
-					'<!-- wp:rehab/faq ' . $attrs_faq . " -->\n" .
-					'<section class="wp-block-rehab-faq rehab-faq"><div class="rehab-container rehab-container--narrow"><h2 class="rehab-heading rehab-heading--lg">' . esc_html( $g['title'] ) . "</h2><div class=\"rehab-faq__list\">\n" .
-					$inner_items .
-					"</div></div></section>\n" .
-					"<!-- /wp:rehab/faq -->\n\n";
-			}
-
-			if ( ! $out ) { echo "no groups produced\n"; break; }
-
-			wp_update_post( [ 'ID' => 1197, 'post_content' => $out ] );
-			echo "OK faq rebuilt — " . substr_count( $out, 'wp:rehab/faq-item' ) . " items across " . substr_count( $out, 'wp:rehab/faq ' ) . " groups\n";
-			break;
-
 		case 'find-faq-json':
 			$paths = [
 				ABSPATH,
@@ -1432,422 +1256,6 @@ add_action( 'init', function () {
 			}
 			echo "OK media-mirror — downloaded $ok, failed $fail\n";
 			break;
-
-		case 'rebuild-cocaine-page':
-			$page_id = 853;
-			$post = get_post( $page_id );
-			if ( ! $post ) { echo "no post 853\n"; break; }
-
-			$base = '/wp-content/uploads/';
-			$blocks = '';
-
-			// 1. HERO
-			$blocks .= rehab_block_hero( [
-				'eyebrow'    => 'Cocaine & stimulant addiction treatment',
-				'headline'   => 'Effective cocaine addiction treatment at Thailand\'s leading luxury centre',
-				'body'       => 'Doctor-led residential rehab for cocaine and stimulant addiction at our private 5-star sanctuary in Hua Hin, Thailand. Maximum 12 clients at a time, with absolute confidentiality.',
-				'imageUrl'   => 'http://5.223.87.211:8081' . $base . '2024/05/1-1-session-room-1.jpg',
-				'imageAlt'   => 'Diamond Rehab Hua Hin Thailand — 1:1 session room',
-			] );
-
-			// 2. Overcome your Cocaine addiction (white)
-			$blocks .= rehab_block_prose(
-				'Overcome your Cocaine addiction in Thailand',
-				[
-					'This is where life-changing transformations happen. Nestled in the peaceful mountains of tropical Hua Hin, our five-star cocaine rehab centre is the perfect place to start your cocaine addiction treatment and recovery journey. Fully equipped cocaine rehab facilities, five-star accommodation options and world-class addiction experts — we\'ve assembled everything you need to overcome your cocaine addiction. The only thing missing is you.',
-					'Contact us today to learn more about our admission process or read on to find out how our cocaine rehab treatment program can help you kickstart your recovery.',
-				],
-				[],
-				$base . '2024/05/1-1-session-room-1.jpg',
-				'Diamond Rehab Hua Hin Thailand',
-				'white',
-				'split'
-			);
-
-			// 3. Cocaine addiction treatment (cream)
-			$blocks .= rehab_block_prose(
-				'Cocaine addiction treatment',
-				[
-					'Cocaine rehab statistics show that professional intervention is the most effective treatment for cocaine addiction. Here at The Diamond Rehab Thailand, we take a holistic approach to treatment that addresses both the symptoms of cocaine use and the underlying factors — previous experiences, relationships, mental health issues, past trauma, and more — that contribute to addiction.',
-					'Our highly experienced clinicians use a combination of Eastern and Western therapeutic techniques to effectively rehab cocaine addiction. Available 24/7, our clinical team is fully committed to providing you with the support, expertise, and guidance required to achieve a positive outcome.',
-				],
-				[],
-				$base . '2024/05/Closer-up-dining-2.jpg',
-				'Drug treatment center in Hua Hin',
-				'cream',
-				'split-reverse'
-			);
-
-			// 4. Personalised program options intro (white)
-			$blocks .= rehab_block_prose(
-				'Personalised Cocaine addiction treatment program options',
-				[
-					'As one of the leading cocaine rehab centers in Thailand, we understand that there\'s no silver bullet when it comes to treating cocaine addiction and achieving long-term sobriety.',
-					'That\'s why we provide fully customized cocaine rehab programs based on a clinical assessment of your condition.',
-					'During your stay in our luxury cocaine rehab facilities, we\'ll continuously monitor your progress and adjust your recovery plan as you advance through your program to ensure your treatment is as effective as possible.',
-				],
-				[], '', '', 'white'
-			);
-
-			// 5. Three pillars cards-grid (sage-mist)
-			$blocks .= rehab_block_cards_grid(
-				'Three pillars of our cocaine rehab program',
-				'Each program is fully customized — these are the modalities we draw from.',
-				[
-					[ 'title' => 'Medical detox', 'description' => 'Safe, medically supervised withdrawal in our private rehab facility. Symptoms managed by qualified clinicians; resort-style amenities to keep you comfortable.', 'imageUrl' => $base . '2024/05/Bungalow-evening.jpg', 'imageAlt' => 'Luxury detox center Thailand', 'url' => '' ],
-					[ 'title' => 'Behavioral therapy', 'description' => 'Evidence-based 1:1 and group therapy. Identify the triggers behind cocaine use and build the recovery plan that prevents relapse long-term.', 'imageUrl' => $base . '2024/05/Closer-up-dining-2.jpg', 'imageAlt' => 'Behavioral therapy room', 'url' => '' ],
-					[ 'title' => 'Holistic therapy', 'description' => 'Yoga, mindfulness, and personalized fitness — restorative practices that bring mind and body back into harmony alongside clinical treatment.', 'imageUrl' => $base . '2022/09/people-on-top-of-a-mountain-watching-the-sunrise.jpg', 'imageAlt' => 'People on top of a mountain watching the sunrise', 'url' => '' ],
-				],
-				3, 'sage-mist'
-			);
-
-			// 6. Detox deep section (white) + bullet list
-			$blocks .= rehab_block_prose(
-				'Detox: an important part of the cocaine rehab process',
-				[
-					'Depending on the severity of your addiction, our clinical team may recommend starting your cocaine rehab treatment program with a detox. We\'ll provide you with a safe environment and monitor your symptoms to make the process as comfortable as possible.',
-					'During the detoxification process, you may experience a range of cocaine withdrawal symptoms, including:',
-				],
-				[ 'Strong cravings for cocaine', 'Depression', 'Suicidal thoughts', 'Restlessness', 'Lethargy', 'Nightmares' ],
-				'', '', 'white'
-			);
-			$blocks .= rehab_block_prose(
-				'',
-				[
-					'During withdrawal, the cravings for cocaine can be extremely intense. Entering inpatient care at a cocaine rehab center reduces the risk of relapse during this critical time.',
-					'The detoxification process for cocaine is relatively quick compared to other drugs, but some symptoms may persist for weeks or even months after completing your cocaine rehab programme. We\'ll do everything we can to make the process as comfortable as possible, providing you with resort-style amenities and a full team of qualified medical professionals who have extensive experience with cocaine drug rehab.',
-				],
-				[], '', '', 'white'
-			);
-
-			// 7. Behavioral therapy deep section (cream)
-			$blocks .= rehab_block_prose(
-				'The role of behavioral therapy in rehab for cocaine addiction',
-				[
-					'Addiction is so much more than a physical dependence on drugs or alcohol. Many people with substance abuse and addiction disorders have deep-rooted psychological and emotional issues that must be addressed in order to achieve lasting wellness.',
-					'Therapy provides a crucial support system for people recovering from substance use disorders and is an important component of our substance abuse rehabilitation programs. We offer an intimate, judgment-free space, where you can speak honestly about your past and ambitions for the future. During rehab for substance abuse, our fully qualified counselors will work with you to help you dissect the behavioral issues and psychosocial factors that contribute to addiction.',
-					'You\'ll learn to identify the personal triggers — stressors, environmental cues, and social circles — that lead to relapse and, together with your therapist, develop a recovery plan to manage these triggers in the short- and long-term.',
-					'Education and awareness give rise to positive change. You\'ll graduate from your substance abuse treatment with a stronger understanding of yourself and your triggers, which will help you reduce the risk of relapse in the years ahead.',
-				],
-				[], '', '', 'cream'
-			);
-
-			// 8. Holistic therapy deep section (white)
-			$blocks .= rehab_block_prose(
-				'Holistic therapy used in the treatment of cocaine addiction',
-				[
-					'Here at The Diamond Rehab Thailand, we believe that successful cocaine addiction rehab relies on addressing every aspect of your health and wellbeing.',
-					'That\'s why we take a holistic approach to the cocaine rehab process, which aims to bring harmony to your mind and body while equipping you with all the tools necessary for achieving life-long sobriety.',
-					'Our rehab for cocaine addiction includes a range of holistic therapeutic techniques that are effective in the treatment of cocaine addiction:',
-				],
-				[
-					'Yoga: Strengthen the neglected bond between mind and body. A combination of physical exercise, breath control, and mindfulness, the ancient art of yoga is an excellent tool for improving strength and flexibility while healing emotional trauma.',
-					'Mindfulness: Steeped in Buddhist culture, Thailand is the perfect place to practice mindfulness and reconnect with yourself during cocaine rehab. Through our mindfulness program, you\'ll learn to be more present, live with intent, and process negative thoughts.',
-					'Fitness: Rebuilding strength and physical awareness are critical for healthy habits. Studies show exercise programs help reduce the risk of relapse during and after cocaine rehab — swim, run, box, cycle, or lift weights with our professional trainers.',
-				],
-				$base . '2024/05/Dining-area-2.jpg',
-				'Holistic therapy and dining at Diamond Rehab Thailand',
-				'white',
-				'split'
-			);
-
-			// 9. Advantages of inpatient (cream)
-			$blocks .= rehab_block_prose(
-				'Advantages of inpatient treatment for cocaine addiction',
-				[
-					'The Diamond Rehab Thailand is an inpatient treatment center. Inpatient rehabilitation is widely regarded as the most effective form of cocaine addiction treatment as it allows you to break away from your daily routines and social triggers that contribute to substance use disorders.',
-					'Isolating yourself from your usual lifestyle and social circles eliminates the risk of giving in to drug cravings. Located in a peaceful part of Hua Hin, our luxury cocaine addiction rehab facility is worlds away from the distractions of everyday life, allowing you to focus all your time and energy on your recovery journey.',
-					'In our world-class cocaine addiction treatment center, our addiction experts will guide you through the crucial first weeks of your custom-made treatment program as you settle into your daily recovery routine. We\'ll provide you with all the support you need to not only overcome the physical symptoms of your addiction, but also the underlying psychological factors that fuel substance abuse.',
-				],
-				[], '', '', 'cream'
-			);
-
-			// 10. Is it time to consider rehab (white)
-			$blocks .= rehab_block_prose(
-				'Is it time to consider rehab for cocaine addiction?',
-				[
-					'Cocaine is a powerful stimulant and a highly addictive drug. Originally used as an active ingredient in a range of medicinal products, cocaine is now regarded as a widely available party drug that carries a high addiction potential.',
-					'Cocaine is notoriously addictive due to the profound impact it has on the chemistry of your brain. The use of cocaine triggers the release of dopamine, a hormone that produces feelings of pleasure, happiness, and satisfaction. When the effects wear off, users often experience a severe crash characterized by feelings of anxiety, fatigue, and an intense craving to use the drug again.',
-					'It\'s easy for occasional cocaine abuse to quickly snowball into a pattern of misuse. Cocaine cravings can be difficult to resist, which leads to repeated substance abuse. Over time, users build up a tolerance to cocaine and need to take more to achieve the desired effects.',
-					'Checking into a cocaine drug rehab center is an effective way to break cocaine dependence. Below are some of the most common signs of cocaine addiction:',
-				],
-				[ 'Nervousness', 'Severe weight loss', 'Sexual dysfunction', 'Depression', 'Frequent nightmares', 'Decreased ability to focus', 'Increased and/or involuntary movements' ],
-				$base . '2024/05/Close-up-chairs-3.jpg',
-				'Luxury treatment lounge',
-				'white',
-				'split-reverse'
-			);
-
-			// 11. Taking the next step (cream)
-			$blocks .= rehab_block_prose(
-				'Taking the next step in your cocaine addiction rehab journey',
-				[
-					'Recovering from cocaine addiction is hard work — but our exceptional cocaine rehab success rate proves that it\'s possible. Sometimes, all you need is a helping hand.',
-					'That\'s where we come in. If you\'re ready to seek treatment, The Diamond Rehab Thailand is here to help. Drawing on our extensive experience as addiction experts in cocaine rehab, we\'ll guide you through a fully tailored treatment plan that sets the foundation for a healthy, positive and fulfilling life.',
-					'Want to learn more about our cocaine addiction treatment options? Give us a call today to find out more about our world-class cocaine addiction treatment center and take the next step in your recovery journey.',
-				],
-				[], '', '', 'cream'
-			);
-
-			// 12. FAQ
-			$blocks .= rehab_block_faq(
-				'Frequently asked questions',
-				[
-					[ 'question' => 'What is the process of rehabilitation?', 'answer' => 'The process may differ — programs are customised based on what the patient needs and the severity of the addiction or co-occurring mental illness. The goal is always to ensure the individual\'s well-being. Most treatment programs include evaluation, detox, psychological treatments, education sessions, and supportive services. When you transition to outpatient therapy, you may continue with one-on-one or group sessions.' ],
-					[ 'question' => 'Are 28 days of rehab enough?', 'answer' => 'This depends on the individual case. After consulting with our psychiatrist, we will give you a recommendation on the number of days in treatment that is advised.' ],
-					[ 'question' => 'Can clients leave the rehab?', 'answer' => 'Clients can only leave the property under the care of our therapeutic team.' ],
-				]
-			);
-
-			// 13. CTA
-			$blocks .= rehab_block_cta( [
-				'heading'    => 'Are you ready to take the next step?',
-				'body'       => 'Reach out for a confidential call from our client relations team. We\'re available 24/7.',
-			] );
-
-			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
-			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cocaine page (" . strlen( $blocks ) . " bytes)\n";
-			break;
-
-		case 'rebuild-ice-page':
-			$page_id = 867;
-			$post = get_post( $page_id );
-			if ( ! $post ) { echo "no post 867\n"; break; }
-
-			$base = '/wp-content/uploads/';
-			$blocks = '';
-
-			// 1. HERO
-			$blocks .= rehab_block_hero( [
-				'eyebrow'    => 'Meth & ice (crystal meth) addiction treatment',
-				'headline'   => 'Meth and ice addiction treatment at Thailand\'s leading luxury rehab centre',
-				'body'       => 'Intensive residential rehabilitation for methamphetamine addiction. 24/7 medical care, structured therapy, and full lifestyle reconstruction in a private, secure 5-star setting.',
-				'imageUrl'   => 'http://5.223.87.211:8081' . $base . '2024/05/Bungalow-evening-2.jpg',
-				'imageAlt'   => 'Luxury bungalow evening — Diamond Rehab Thailand',
-			] );
-
-			// 2. Luxury Crystal Meth addiction treatment (white)
-			$blocks .= rehab_block_prose(
-				'Luxury crystal meth addiction treatment in Thailand',
-				[
-					'Methamphetamine — known as ice or crystal meth — is one of the most addictive stimulants in the world. The journey out of meth addiction is rarely something anyone can do alone. At The Diamond Rehab Thailand, our experienced clinical team provides a structured, medically supervised environment to help you fully recover.',
-					'Our private 5-star rehab in Hua Hin combines world-class clinical care with the seclusion and comfort needed to reset both mind and body. Whether you\'re seeking treatment for yourself or a loved one, contact us today to learn how our crystal meth rehab program can help.',
-				],
-				[],
-				$base . '2024/05/Bungalow-evening-2.jpg',
-				'Luxury bungalow at Diamond Rehab Thailand',
-				'white',
-				'split'
-			);
-
-			// 3. Our approach to rehab for Ice addiction (cream)
-			$blocks .= rehab_block_prose(
-				'Our approach to rehab for ice addiction',
-				[
-					'Successful methamphetamine addiction treatment requires more than physical detox. Crystal meth addiction rewires the brain\'s reward system — sustainable recovery means addressing the psychological dependence as well as the physical.',
-					'Our holistic ice addiction treatment program combines evidence-based clinical care with structured therapy and lifestyle reconstruction. Available 24/7, our team gives you the medical safety, therapeutic depth, and personal support needed to break free from crystal meth.',
-				],
-				[],
-				$base . '2024/05/Dining-area-2.jpg',
-				'Dining area — Diamond Rehab Thailand',
-				'cream',
-				'split-reverse'
-			);
-
-			// 4. World-class rehab for Ice intro (white)
-			$blocks .= rehab_block_prose(
-				'World-class rehab for ice (meth) addiction',
-				[
-					'There is no one-size-fits-all approach to crystal meth addiction. We design every program around the individual — medical history, severity of addiction, co-occurring mental health conditions, and personal goals.',
-					'Two pillars anchor every program: safe medical detox, and relapse prevention through evidence-based therapy. Both are delivered by our resident clinical team in our private 5-star facility.',
-				],
-				[], '', '', 'white'
-			);
-
-			// 5. Two pillars cards-grid (sage-mist)
-			$blocks .= rehab_block_cards_grid(
-				'The two pillars of our ice addiction program',
-				'Every program is fully customized around your circumstances.',
-				[
-					[ 'title' => 'Safe medical detox', 'description' => 'Medically supervised withdrawal in a luxurious private setting. Our doctors monitor symptoms 24/7 and adjust care as your body recovers.', 'imageUrl' => $base . '2024/05/Bungalow-evening.jpg', 'imageAlt' => 'Luxury detox bungalow', 'url' => '' ],
-					[ 'title' => 'Preventing relapse', 'description' => 'Behavioral therapy, group counseling, and skills-based recovery work that gives you the tools to stay sober long after you leave the facility.', 'imageUrl' => $base . '2024/05/Closer-up-dining-2.jpg', 'imageAlt' => 'Therapy room', 'url' => '' ],
-				],
-				2, 'sage-mist'
-			);
-
-			// 6. Safe medical detox deep section (white)
-			$blocks .= rehab_block_prose(
-				'Safe medical detox for ice drug rehab',
-				[
-					'Methamphetamine withdrawal can be physically and psychologically severe. The first 1-2 weeks are typically the hardest — our medical team monitors you continuously and provides the medications and support you need to get through them safely.',
-					'Common withdrawal symptoms include:',
-				],
-				[ 'Intense fatigue and excessive sleeping', 'Increased appetite', 'Severe depression and irritability', 'Strong cravings for crystal meth', 'Anxiety and paranoia', 'Difficulty experiencing pleasure (anhedonia)' ],
-				'', '', 'white'
-			);
-
-			// 7. Preventing relapse deep section (cream)
-			$blocks .= rehab_block_prose(
-				'Preventing relapse after ice addiction treatment',
-				[
-					'Recovery from crystal meth doesn\'t end with detox — it begins there. The risk of relapse is highest in the first 90 days, which is why our program focuses heavily on the structured therapy and skill-building that follows medical stabilization.',
-					'You\'ll work 1:1 with your therapist to identify the personal triggers — stressors, environments, relationships — that fuelled use, and develop a personal recovery plan to manage them. Group sessions, family work where appropriate, and lifetime aftercare ensure you have ongoing support long after discharge.',
-					'Our holistic modalities — yoga, mindfulness, fitness, nutrition — give your body and mind the tools to rebuild around sobriety, not just escape from addiction.',
-				],
-				[], '', '', 'cream'
-			);
-
-			// 8. Rehabilitation treatment for Ice addiction (white)
-			$blocks .= rehab_block_prose(
-				'Rehabilitation treatment for ice addiction',
-				[
-					'Our ice rehabilitation program is designed for inpatient residential treatment — you stay at our facility for the duration of your program. This separates you from the people, places, and routines that maintained your meth use, and gives you a structured day around recovery.',
-					'A typical day combines clinical work (1:1 therapy, group sessions, medical reviews) with restorative activity (fitness, yoga, mindfulness, nutrition, leisure). You\'re never alone in the work — our staff is there 24/7.',
-					'Programs run from 28 days minimum to 12 weeks or longer. The right length depends on your circumstances. After consulting with our psychiatrist, we\'ll give you a recommendation tailored to you.',
-				],
-				[], '', '', 'white'
-			);
-
-			// 9. Ice Addiction treatment & rehabilitation at The Diamond Rehab (cream)
-			$blocks .= rehab_block_prose(
-				'Ice addiction treatment & rehabilitation at The Diamond Rehab Thailand',
-				[
-					'Our facility was purpose-built for clients who need the highest level of clinical care alongside the discretion of a private 5-star resort. With a maximum 12-client cap, your treatment is genuinely personal — your therapist knows your story; your doctor knows your medical history; your aftercare plan is built around you.',
-					'Diamond Rehab is operated by an international clinical team with deep expertise in stimulant addiction, dual diagnosis, and trauma-informed care. We take referrals from clients across Australia, the UK, the US, and Europe.',
-				],
-				[],
-				$base . '2024/05/Close-up-chairs-3.jpg',
-				'Treatment lounge',
-				'cream',
-				'split'
-			);
-
-			// 10. Methamphetamine rehabilitation for Ice (white)
-			$blocks .= rehab_block_prose(
-				'Methamphetamine rehabilitation for ice (crystal meth) addicts',
-				[
-					'Crystal meth addiction has high relapse rates without proper rehabilitation. The good news: with structured residential treatment, evidence-based therapy, and ongoing aftercare, recovery is absolutely achievable.',
-					'If you or someone you love is using crystal meth, the next step is the most important one. Our admissions team will speak with you confidentially, answer your questions, and walk you through the practicalities of starting treatment.',
-				],
-				[], '', '', 'white'
-			);
-
-			// 11. FAQ — pulled from FAQ CPT records (Phase 3)
-			$blocks .= rehab_block_faq(
-				'Frequently asked questions',
-				[
-					[ 'cptId' => 32 ],   // What is the process of rehabilitation?
-					[ 'cptId' => 3435 ], // Are 28 days of rehab enough?
-					[ 'cptId' => 204 ],  // Can clients leave the rehab?
-				]
-			);
-
-			// 12. CTA
-			$blocks .= rehab_block_cta( [
-				'heading'    => 'Are you ready to take the next step?',
-				'body'       => 'Reach out for a confidential call from our admissions team — we\'re available 24/7.',
-			] );
-
-			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
-			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt ice page (" . strlen( $blocks ) . " bytes)\n";
-			break;
-
-		case 'rebuild-alltreats-page':
-			$page_id = 1219;
-			$post = get_post( $page_id );
-			if ( ! $post ) { echo "no post 1219\n"; break; }
-
-			$base = '/wp-content/uploads/';
-			$blocks = '';
-
-			// 1. HERO
-			$blocks .= rehab_block_hero( [
-				'eyebrow'    => 'Full-spectrum addiction & mental-health treatment',
-				'headline'   => 'All treatments at The Diamond Rehab Thailand',
-				'body'       => 'We treat the full spectrum of substance and behavioral addictions, prescription dependence, eating disorders, and mental-health conditions. Every program is built individually around your medical history, life circumstances, and recovery goals.',
-				'imageUrl'   => 'http://5.223.87.211:8081' . $base . '2024/05/1-1-session-room-1.jpg',
-				'imageAlt'   => '1:1 session room — Diamond Rehab Thailand',
-			] );
-
-			// 2. Intro prose (white)
-			$blocks .= rehab_block_prose(
-				'',
-				[
-					'Below is the full list of conditions we treat at our private 5-star rehab in Hua Hin. Each program is delivered by our resident multi-disciplinary clinical team — psychiatrists, doctors, therapists, holistic practitioners — with a maximum 12-client cap so every client gets genuinely personal care.',
-					'Don\'t see your specific situation listed? Get in touch — we treat dual-diagnosis cases and complex co-occurring conditions, and we\'ll be honest with you about whether our program fits.',
-				],
-				[], '', '', 'white'
-			);
-
-			// 3. Substance addiction (cream)
-			$blocks .= rehab_block_cards_grid(
-				'Substance addiction treatment',
-				'Residential rehab for drug and alcohol addiction.',
-				[
-					[ 'title' => 'Cocaine addiction treatment', 'description' => 'Detox and behavioural therapy for cocaine and stimulant dependence.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/cocaine-addiction-treatment-rehab-thailand/' ],
-					[ 'title' => 'Meth & ice addiction treatment', 'description' => 'Structured rehab for methamphetamine and crystal meth addiction.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/ice-addiction-treatment-rehab-thailand/' ],
-					[ 'title' => 'Alcohol addiction', 'description' => 'Medically supervised alcohol detox and long-term recovery program.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/alcohol-addiction/' ],
-					[ 'title' => 'Heroin & opiate addiction', 'description' => 'Specialist opiate rehab covering heroin, prescription opioids, and synthetic opioids.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/heroin-addiction/' ],
-					[ 'title' => 'Crack addiction & detox', 'description' => 'Inpatient detox and recovery for crack-cocaine dependence.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/crack-cocaine-addiction/' ],
-					[ 'title' => 'Marijuana / cannabis addiction', 'description' => 'Behavioural treatment for chronic cannabis use and dependence.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/marijuana-addiction-symptoms-and-treatment/' ],
-				],
-				3, 'cream'
-			);
-
-			// 4. Prescription drug rehab (white)
-			$blocks .= rehab_block_cards_grid(
-				'Prescription drug rehab',
-				'Specialist treatment for prescription medication dependence.',
-				[
-					[ 'title' => 'Xanax (alprazolam) addiction', 'description' => 'Benzodiazepine detox and recovery program.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/what-is-xanax-addiction/' ],
-					[ 'title' => 'OxyContin (oxycodone) addiction', 'description' => 'Opioid dependence treatment with medical detox.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/what-is-oxycontin-addiction/' ],
-					[ 'title' => 'Valium (diazepam) addiction', 'description' => 'Long-acting benzodiazepine taper and recovery.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/what-is-valium-addiction/' ],
-					[ 'title' => 'Tramadol addiction & detox', 'description' => 'Detox and rehabilitation for tramadol dependence.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/what-is-tramadol-addiction/' ],
-					[ 'title' => 'Ritalin (methylphenidate) addiction', 'description' => 'Stimulant medication dependence treatment.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/what-is-ritalin-addiction/' ],
-					[ 'title' => 'Adderall addiction & treatment', 'description' => 'Recovery program for amphetamine-based ADHD medications.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/adderall-addiction-symptoms-signs-withdrawal-and-treatment/' ],
-				],
-				3, 'white'
-			);
-
-			// 5. Mental health rehab (cream)
-			$blocks .= rehab_block_cards_grid(
-				'Mental health rehab',
-				'Inpatient programs for anxiety, mood, trauma, and behavioral conditions.',
-				[
-					[ 'title' => 'Anxiety treatment & rehab', 'description' => 'Treatment for generalized anxiety, panic, and stress-related conditions.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/anxiety-treatment/' ],
-					[ 'title' => 'Depression treatment', 'description' => 'Inpatient treatment for major depression and persistent depressive disorder.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/depression-retreat-thailand/' ],
-					[ 'title' => 'PTSD & trauma treatment', 'description' => 'Trauma-informed therapy for post-traumatic stress and complex trauma.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/post-traumatic-stress-disorder/' ],
-					[ 'title' => 'Burnout treatment for executives', 'description' => 'Restorative inpatient program for chronic burnout and overwork.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/burnout-retreat/' ],
-					[ 'title' => 'Sex addiction treatment', 'description' => 'Behavioral treatment for compulsive sexual behavior.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/sex-addiction/' ],
-					[ 'title' => 'Insomnia & sleep disorder treatment', 'description' => 'Inpatient sleep restoration and circadian-rhythm reset.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/insomnia-causes-symptoms-and-treatment/' ],
-					[ 'title' => 'Codependency treatment', 'description' => 'Therapy for relational dependence and codependent patterns.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/codependency-causes-and-treatment/' ],
-					[ 'title' => 'Gambling addiction', 'description' => 'Treatment for compulsive gambling and process addiction.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/gambling-symptoms-and-treatment/' ],
-				],
-				4, 'cream'
-			);
-
-			// 6. Eating disorders (white)
-			$blocks .= rehab_block_cards_grid(
-				'Eating disorder rehab',
-				'Inpatient treatment for disordered eating and food-related conditions.',
-				[
-					[ 'title' => 'Anorexia treatment', 'description' => 'Medically supervised treatment for anorexia nervosa.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/anorexia-rehab/' ],
-					[ 'title' => 'Bulimia treatment', 'description' => 'Therapy and nutritional rehabilitation for bulimia nervosa.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/bulimia-rehab/' ],
-					[ 'title' => 'Binge eating & overeating', 'description' => 'Behavioral therapy for binge-eating disorder and compulsive overeating.', 'imageUrl' => '', 'imageAlt' => '', 'url' => '/binge-eating-disorder/' ],
-				],
-				3, 'white'
-			);
-
-			// 7. CTA
-			$blocks .= rehab_block_cta( [
-				'heading'    => 'Don\'t see your specific situation listed?',
-				'body'       => 'Get in touch — we treat dual-diagnosis and complex co-occurring conditions, and will be straight with you about whether our program is the right fit.',
-			] );
-
-			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
-			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt all-treatments page (" . strlen( $blocks ) . " bytes)\n";
-			break;
-
 
 		case 'find-block':
 			global $wpdb;
@@ -2163,6 +1571,105 @@ add_action( 'init', function () {
 				echo "(no FAQ block in post_content)\n";
 				echo "First 500 chars:\n" . substr( $post->post_content, 0, 500 ) . "\n";
 			}
+			break;
+
+		case 'inspect-acf-section':
+			// Dump every non-empty key for a single section index.
+			$id  = isset( $_GET['id'] )  ? (int) $_GET['id']  : 853;
+			$sec = isset( $_GET['sec'] ) ? (int) $_GET['sec'] : 4;
+			global $wpdb;
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT meta_key, meta_value FROM {$wpdb->postmeta}
+				 WHERE post_id=%d AND meta_key LIKE %s AND meta_value != '' AND meta_value != '0'
+				 ORDER BY meta_key",
+				$id,
+				"sections_{$sec}_%"
+			) );
+			foreach ( $rows as $r ) {
+				$v = $r->meta_value;
+				if ( strlen( $v ) > 300 ) $v = substr( $v, 0, 300 ) . '…';
+				echo sprintf( "  %-70s %s\n", $r->meta_key, $v );
+			}
+			break;
+
+		case 'inspect-acf-sections':
+			$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 853;
+			global $wpdb;
+			// The top-level 'sections' meta key stores the serialized list of section types.
+			$sections = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key='sections'", $id ) );
+			if ( $sections ) {
+				$sections = maybe_unserialize( $sections );
+				echo "=== Section types on page #$id ===\n";
+				if ( is_array( $sections ) ) {
+					foreach ( $sections as $i => $type ) echo "  section_$i: $type\n";
+				} else {
+					echo "  raw: $sections\n";
+				}
+			} else {
+				echo "no 'sections' key found — checking for first sections_* key:\n";
+				$keys = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key LIKE 'sections\\_%' ORDER BY meta_key", $id ) );
+				// Look for patterns sections_N_<TYPE_HINT>
+				$top_level = [];
+				foreach ( $keys as $k ) {
+					if ( preg_match( '/^sections_(\d+)_([a-z_]+)$/', $k, $m ) ) {
+						$top_level[ $m[1] ][ $m[2] ] = true;
+					}
+				}
+				ksort( $top_level );
+				foreach ( $top_level as $idx => $sub ) {
+					echo "  section_$idx top-level fields: " . implode( ', ', array_keys( $sub ) ) . "\n";
+				}
+			}
+			echo "\n=== Non-empty content per section (heading_title, heading_subtitle, etc.) ===\n";
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT meta_key, meta_value FROM {$wpdb->postmeta}
+				 WHERE post_id=%d
+				   AND meta_key REGEXP '^sections_[0-9]+_(heading_(title|subtitle|label)|left_column_(title|description|heading_title)|right_column_(title|description)|content|description|title|body|text|button_text)\$'
+				   AND meta_value != ''
+				 ORDER BY meta_key",
+				$id
+			) );
+			foreach ( $rows as $r ) echo "  $r->meta_key:\n    " . substr( $r->meta_value, 0, 200 ) . "\n";
+			break;
+
+		case 'inspect-treatment-acf':
+			$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 853;
+			global $wpdb;
+			$post = get_post( $id );
+			if ( ! $post ) { echo "no post $id\n"; break; }
+			echo "=== Page #$id — $post->post_title ===\n";
+			$meta = $wpdb->get_results( $wpdb->prepare(
+				"SELECT meta_key, meta_value FROM {$wpdb->postmeta} WHERE post_id=%d ORDER BY meta_key",
+				$id
+			) );
+			// Group: ACF flex (sections_*), rank_math_*, _wp_*, other
+			$groups = [ 'sections' => [], 'rank_math' => [], 'wp_internal' => [], 'smush' => [], 'other' => [] ];
+			foreach ( $meta as $m ) {
+				if ( str_starts_with( $m->meta_key, 'sections_' ) ) $groups['sections'][] = $m;
+				elseif ( str_starts_with( $m->meta_key, 'rank_math_' ) ) $groups['rank_math'][] = $m;
+				elseif ( str_starts_with( $m->meta_key, '_wp_' ) || str_starts_with( $m->meta_key, '_edit' ) ) $groups['wp_internal'][] = $m;
+				elseif ( str_starts_with( $m->meta_key, 'wp-smush' ) || str_starts_with( $m->meta_key, 'wp-smpro' ) ) $groups['smush'][] = $m;
+				else $groups['other'][] = $m;
+			}
+			echo "\n--- sections_* (ACF flex content, " . count( $groups['sections'] ) . " keys) ---\n";
+			foreach ( $groups['sections'] as $m ) echo sprintf( "  %-70s %s\n", $m->meta_key, substr( $m->meta_value, 0, 80 ) );
+			echo "\n--- other meta (" . count( $groups['other'] ) . " keys) ---\n";
+			foreach ( $groups['other'] as $m ) echo sprintf( "  %-50s %s\n", $m->meta_key, substr( $m->meta_value, 0, 150 ) );
+			break;
+
+		case 'inspect-global-section':
+			global $wpdb;
+			$rows = $wpdb->get_results( "SELECT ID, post_title, post_status FROM {$wpdb->posts} WHERE post_type='global_section' ORDER BY ID" );
+			foreach ( $rows as $r ) {
+				echo "  #$r->ID [$r->post_status] $r->post_title\n";
+				$content_len = strlen( (string) get_post_field( 'post_content', $r->ID ) );
+				echo "    body len: $content_len chars\n";
+				$meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, LEFT(meta_value, 60) AS v FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key NOT LIKE '_wp%' AND meta_key NOT LIKE 'wp-smush%' LIMIT 6", $r->ID ) );
+				foreach ( $meta as $m ) echo "    $m->meta_key = $m->v\n";
+			}
+			echo "\nPages referencing global_section by ID anywhere?\n";
+			$rows = $wpdb->get_results( "SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_value REGEXP '^[0-9]+\$' AND meta_value IN (SELECT ID FROM {$wpdb->posts} WHERE post_type='global_section') LIMIT 5" );
+			foreach ( $rows as $r ) echo "  page #$r->post_id → global_section #$r->meta_value\n";
 			break;
 
 		case 'inspect-igmap':
