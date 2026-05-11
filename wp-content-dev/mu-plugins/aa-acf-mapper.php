@@ -333,10 +333,15 @@ function rehab_acf_map_generic( array $s ): string {
 		$out .= '<h2 class="wp-block-heading">' . esc_html( $s['title'] ) . "</h2>\n";
 		$out .= "<!-- /wp:heading -->\n\n";
 	}
+	// `generic_content` is the canonical body, but a lot of legacy
+	// generic-layout pages (privacy / confidentiality / careers copy)
+	// instead stuffed their entire body into `heading_subtitle` — fall
+	// back to it when the explicit content field is empty.
 	$html = trim( (string) ( $s['html'] ?? '' ) );
+	if ( '' === $html ) {
+		$html = trim( (string) ( $s['subtitle'] ?? '' ) );
+	}
 	if ( '' !== $html ) {
-		// The legacy CMS stored sanitised HTML here, so we pass it through
-		// to a wp:html block (which round-trips the raw markup verbatim).
 		$out .= "<!-- wp:html -->\n" . $html . "\n<!-- /wp:html -->\n\n";
 	}
 	return $out;
