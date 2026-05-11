@@ -1692,6 +1692,53 @@ add_action( 'init', function () {
 			foreach ( $rows as $r ) echo "  #$r->ID [$r->post_status] /$r->post_name/ — $r->post_title\n";
 			break;
 
+		case 'inspect-acf-reader':
+			// Validates rehab_acf_get_sections() output against the legacy ACF flex schema.
+			// Usage: ?rehab_oneshot=inspect-acf-reader&id=853
+			$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 853;
+			if ( ! function_exists( 'rehab_acf_get_sections' ) ) {
+				echo "rehab_acf_get_sections() not loaded — check aa-acf-reader.php\n";
+				break;
+			}
+			$post = get_post( $id );
+			echo "=== Page #$id — " . ( $post ? $post->post_title : 'NOT FOUND' ) . " ===\n";
+			$sections = rehab_acf_get_sections( $id );
+			echo count( $sections ) . " sections:\n";
+			foreach ( $sections as $sec ) {
+				echo "\n--- [$sec[_idx]] $sec[_layout] ---\n";
+				foreach ( $sec as $k => $v ) {
+					if ( in_array( $k, [ '_idx', '_layout' ], true ) ) {
+						continue;
+					}
+					if ( is_array( $v ) ) {
+						echo "  $k = (array) " . count( $v ) . " items\n";
+						foreach ( $v as $i => $item ) {
+							if ( is_array( $item ) ) {
+								echo "    [$i] " . wp_json_encode( array_map( fn( $x ) => is_string( $x ) ? mb_substr( $x, 0, 80 ) : $x, $item ) ) . "\n";
+							} else {
+								echo "    [$i] $item\n";
+							}
+						}
+					} else {
+						$display = is_string( $v ) ? mb_substr( $v, 0, 120 ) : $v;
+						echo "  $k = " . var_export( $display, true ) . "\n";
+					}
+				}
+				// Resolve global section recursively
+				if ( 'global' === $sec['_layout'] ) {
+					$global = rehab_acf_get_global_section( $sec['global_section_id'] );
+					if ( $global ) {
+						echo "  → resolves to global_section #$global[id] '$global[title]' with " . count( $global['sections'] ) . " inner sections\n";
+						foreach ( $global['sections'] as $g ) {
+							echo "    · [$g[_idx]] $g[_layout]\n";
+						}
+					} else {
+						echo "  → global_section NOT FOUND\n";
+					}
+				}
+			}
+			break;
+
 		case 'set-homepage-template':
 			$page_id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 6;
 			$tpl     = isset( $_GET['tpl'] ) ? sanitize_text_field( $_GET['tpl'] ) : 'page-homepage.php';
