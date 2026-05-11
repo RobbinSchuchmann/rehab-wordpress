@@ -23,10 +23,12 @@ const REHAB_ACF_META_KEY   = '_rehab_acf_migration_meta';
  *
  * Refuses to overwrite an existing backup unless $force is true — that
  * way an accidental second run can't blow away the rollback target.
+ * $chrome controls whether the three generic decoration blocks
+ * (authority-ribbon, benefits-numbered, journey-steps) are injected.
  *
  * @return array { ok: bool, msg: string, original_bytes?: int, mapped_bytes?: int, layouts?: string[] }
  */
-function rehab_acf_migrate_page( int $post_id, bool $force = false ): array {
+function rehab_acf_migrate_page( int $post_id, bool $force = false, bool $chrome = true ): array {
 	$post = get_post( $post_id );
 	if ( ! $post ) {
 		return [ 'ok' => false, 'msg' => "Post $post_id not found." ];
@@ -45,7 +47,9 @@ function rehab_acf_migrate_page( int $post_id, bool $force = false ): array {
 		];
 	}
 
-	$mapped = rehab_acf_map_sections( $sections );
+	$mapped = $chrome
+		? rehab_acf_map_sections_with_chrome( $sections )
+		: rehab_acf_map_sections( $sections );
 	if ( '' === trim( $mapped ) ) {
 		return [ 'ok' => false, 'msg' => "Mapper returned empty output — refusing to wipe post_content." ];
 	}

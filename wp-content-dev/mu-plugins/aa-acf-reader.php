@@ -167,6 +167,26 @@ function rehab_acf_read_section( int $post_id, int $idx, string $layout ): array
 				'photo_id'       => (int) $get( 'photo' ),
 			];
 
+		case 'pages':
+			// Directory layout used by the all-treatments index. Each
+			// chapter pairs a category link (serialized {title,url,target}
+			// array) with an ordered list of child page IDs (also serialized).
+			$chapter_count = (int) $get( 'chapters' );
+			$chapters      = [];
+			for ( $j = 0; $j < $chapter_count; $j++ ) {
+				$title_raw    = maybe_unserialize( $get( "chapters_{$j}_title" ) );
+				$page_ids_raw = maybe_unserialize( $get( "chapters_{$j}_page_ids" ) );
+				$chapters[]   = [
+					'title'    => is_array( $title_raw ) ? (string) ( $title_raw['title'] ?? '' ) : '',
+					'url'      => is_array( $title_raw ) ? (string) ( $title_raw['url'] ?? '' ) : '',
+					'page_ids' => is_array( $page_ids_raw ) ? array_values( array_map( 'intval', $page_ids_raw ) ) : [],
+				];
+			}
+			return $base + [
+				'title'    => (string) $get( 'heading_title' ),
+				'chapters' => $chapters,
+			];
+
 		default:
 			return $base + [ '_unknown' => true ];
 	}

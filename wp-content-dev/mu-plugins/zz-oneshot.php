@@ -1694,15 +1694,18 @@ add_action( 'init', function () {
 
 		case 'migrate-acf-page':
 			// Writes the mapper output to the page's post_content. Refuses
-			// to overwrite an existing backup unless &force=1.
-			// Usage: ?rehab_oneshot=migrate-acf-page&id=853[&force=1]
-			$id    = isset( $_GET['id'] ) ? (int) $_GET['id'] : 0;
-			$force = isset( $_GET['force'] ) && '1' === $_GET['force'];
+			// to overwrite an existing backup unless &force=1. Chrome
+			// injection is on by default; pass &nochrome=1 to suppress.
+			// Usage: ?rehab_oneshot=migrate-acf-page&id=853[&force=1][&nochrome=1]
+			$id       = isset( $_GET['id'] ) ? (int) $_GET['id'] : 0;
+			$force    = isset( $_GET['force'] ) && '1' === $_GET['force'];
+			$chrome   = ! ( isset( $_GET['nochrome'] ) && '1' === $_GET['nochrome'] );
 			if ( ! $id ) {
-				echo "Usage: ?rehab_oneshot=migrate-acf-page&id=POST_ID[&force=1]\n";
+				echo "Usage: ?rehab_oneshot=migrate-acf-page&id=POST_ID[&force=1][&nochrome=1]\n";
 				break;
 			}
-			$res = rehab_acf_migrate_page( $id, $force );
+			echo "Chrome injection: " . ( $chrome ? 'ON' : 'OFF' ) . "\n";
+			$res = rehab_acf_migrate_page( $id, $force, $chrome );
 			echo ( $res['ok'] ? 'OK ' : 'ERR ' ) . $res['msg'] . "\n";
 			if ( $res['ok'] ) {
 				echo "  layouts:  " . implode( ', ', $res['layouts'] ) . "\n";
