@@ -1692,6 +1692,38 @@ add_action( 'init', function () {
 			foreach ( $rows as $r ) echo "  #$r->ID [$r->post_status] /$r->post_name/ — $r->post_title\n";
 			break;
 
+		case 'migrate-acf-page':
+			// Writes the mapper output to the page's post_content. Refuses
+			// to overwrite an existing backup unless &force=1.
+			// Usage: ?rehab_oneshot=migrate-acf-page&id=853[&force=1]
+			$id    = isset( $_GET['id'] ) ? (int) $_GET['id'] : 0;
+			$force = isset( $_GET['force'] ) && '1' === $_GET['force'];
+			if ( ! $id ) {
+				echo "Usage: ?rehab_oneshot=migrate-acf-page&id=POST_ID[&force=1]\n";
+				break;
+			}
+			$res = rehab_acf_migrate_page( $id, $force );
+			echo ( $res['ok'] ? 'OK ' : 'ERR ' ) . $res['msg'] . "\n";
+			if ( $res['ok'] ) {
+				echo "  layouts:  " . implode( ', ', $res['layouts'] ) . "\n";
+				echo "  original: $res[original_bytes] bytes\n";
+				echo "  mapped:   $res[mapped_bytes] bytes\n";
+				echo "  delta:    " . ( $res['mapped_bytes'] - $res['original_bytes'] ) . " bytes\n";
+			}
+			break;
+
+		case 'rollback-acf-page':
+			// Restores post_content from the migration backup postmeta.
+			// Usage: ?rehab_oneshot=rollback-acf-page&id=853
+			$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 0;
+			if ( ! $id ) {
+				echo "Usage: ?rehab_oneshot=rollback-acf-page&id=POST_ID\n";
+				break;
+			}
+			$res = rehab_acf_rollback_page( $id );
+			echo ( $res['ok'] ? 'OK ' : 'ERR ' ) . $res['msg'] . "\n";
+			break;
+
 		case 'preview-acf-mapped':
 			// Renders rehab_acf_map_sections() output as raw markup so we
 			// can eyeball the migration before writing anything to the DB.
