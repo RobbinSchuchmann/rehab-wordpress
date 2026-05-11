@@ -27,5 +27,6 @@
     "formLegal":    { "type": "string", "default": "Your details are confidential and never shared. By submitting you agree to be contacted by The Diamond Rehab Thailand." }
   },
   "editorScript": "file:./index.js",
-  "style":        "file:./style-index.css"
+  "style":        "file:./style-index.css",
+  "viewScript":   "file:./view.js"
 }

@@ -870,6 +870,51 @@ function rehab_parent_allow_svg_in_post( $tags, $context ) {
 	$tags['use']      = [ 'href' => true, 'xlink:href' => true ];
 	$tags['title']    = [];
 	$tags['desc']     = [];
+
+	// Form elements — needed by rehab/final-cta which renders a real contact
+	// form into post_content. WP's default 'post' context strips form/input/
+	// textarea/button/label without this.
+	$tags['form']     = [
+		'class' => true, 'id' => true, 'action' => true, 'method' => true,
+		'enctype' => true, 'novalidate' => true, 'autocomplete' => true,
+		'data-rehab-contact-form' => true, 'aria-label' => true,
+	];
+	$tags['input']    = [
+		'class' => true, 'id' => true, 'name' => true, 'type' => true,
+		'value' => true, 'placeholder' => true, 'required' => true,
+		'disabled' => true, 'readonly' => true, 'autocomplete' => true,
+		'tabindex' => true, 'maxlength' => true, 'minlength' => true,
+		'min' => true, 'max' => true, 'step' => true, 'pattern' => true,
+		'inputmode' => true, 'aria-label' => true, 'aria-describedby' => true,
+		'data-*' => true,
+	];
+	$tags['textarea'] = [
+		'class' => true, 'id' => true, 'name' => true, 'placeholder' => true,
+		'rows' => true, 'cols' => true, 'maxlength' => true, 'minlength' => true,
+		'required' => true, 'disabled' => true, 'autocomplete' => true,
+		'aria-label' => true, 'aria-describedby' => true,
+	];
+	$tags['button']   = [
+		'class' => true, 'id' => true, 'type' => true, 'name' => true,
+		'value' => true, 'disabled' => true, 'aria-label' => true,
+		'aria-expanded' => true, 'aria-controls' => true, 'aria-selected' => true,
+		'role' => true, 'data-*' => true, 'style' => true,
+	];
+	$tags['label']    = [ 'class' => true, 'for' => true, 'id' => true ];
+	$tags['select']   = [ 'class' => true, 'id' => true, 'name' => true, 'required' => true, 'disabled' => true ];
+	$tags['option']   = [ 'value' => true, 'selected' => true, 'disabled' => true ];
+	$tags['fieldset'] = [ 'class' => true, 'disabled' => true ];
+	$tags['legend']   = [ 'class' => true ];
+
+	// Make sure div allows data-* attributes (used by tab panels etc).
+	if ( isset( $tags['div'] ) && is_array( $tags['div'] ) ) {
+		$tags['div']['data-*'] = true;
+		$tags['div']['hidden'] = true;
+		$tags['div']['role']   = true;
+		$tags['div']['aria-label']  = true;
+		$tags['div']['aria-hidden'] = true;
+	}
+
 	return $tags;
 }
 add_filter( 'wp_kses_allowed_html', 'rehab_parent_allow_svg_in_post', 10, 2 );

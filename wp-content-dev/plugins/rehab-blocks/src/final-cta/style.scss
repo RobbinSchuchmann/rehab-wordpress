@@ -173,3 +173,27 @@
 	color: rgba(74, 74, 74, 0.7);
 	line-height: 1.5;
 }
+
+/* Honeypot — off-screen but accessible to bots that just fill all fields. */
+.rehab-final-cta__honeypot {
+	position: absolute;
+	left: -10000px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* Submit status (rendered by view.js after submission) */
+.rehab-final-cta__form-status {
+	font-size: 0.85rem;
+	margin: 0;
+	min-height: 1.2em;
+	line-height: 1.5;
+
+	&:empty { display: none; }
+
+	&[data-state="pending"] { color: rgba(74, 74, 74, 0.7); }
+	&[data-state="success"] { color: var(--rehab-sage-dark); font-weight: 500; }
+	&[data-state="error"]   { color: #b54040; }
+}
+

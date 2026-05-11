@@ -74,19 +74,24 @@ registerBlockType( metadata.name, {
 							<a href={ a.emailHref }><EmailSvg />Email <strong><RichText.Content value={ a.emailText } /></strong></a>
 						</div>
 					</div>
-					<form className="rehab-final-cta__form" onSubmit={ ( e ) => { e.preventDefault(); alert( 'Thank you — our team will be in touch.' ); } }>
+					<form className="rehab-final-cta__form" data-rehab-contact-form>
 						<RichText.Content tagName="p" className="rehab-final-cta__form-title" value={ a.formTitle } />
 						<RichText.Content tagName="p" className="rehab-final-cta__form-sub" value={ a.formSub } />
-						<input type="text" placeholder="Full name" required />
-						<div className="rehab-final-cta__form-row">
-							<input type="email" placeholder="E-mail" required />
-							<input type="tel" placeholder="Phone (with country code)" required />
+						{ /* Honeypot — hidden from real users, bots will fill it */ }
+						<div className="rehab-final-cta__honeypot" aria-hidden="true">
+							<label>Don't fill this in:<input type="text" name="_hp" tabIndex="-1" autoComplete="off" /></label>
 						</div>
-						<input type="text" placeholder="Country" />
-						<textarea placeholder="Tell us briefly what's happening (optional)" maxLength={ 180 } />
+						<input type="text" name="name" placeholder="Full name" required autoComplete="name" />
+						<div className="rehab-final-cta__form-row">
+							<input type="email" name="email" placeholder="E-mail" required autoComplete="email" />
+							<input type="tel" name="phone" placeholder="Phone (with country code)" required autoComplete="tel" />
+						</div>
+						<input type="text" name="country" placeholder="Country" autoComplete="country-name" />
+						<textarea name="message" placeholder="Tell us briefly what's happening (optional)" maxLength={ 500 } />
 						<button type="submit" className="rehab-btn rehab-btn--luxury" style={ { width: '100%' } }>
 							<RichText.Content value={ a.formSubmit } />
 						</button>
+						<p className="rehab-final-cta__form-status" role="status" aria-live="polite" />
 						<RichText.Content tagName="p" className="rehab-final-cta__form-legal" value={ a.formLegal } />
 					</form>
 				</div>
