@@ -148,6 +148,18 @@ function rehab_acf_map_section( array $section ): string {
 			return rehab_acf_map_global( $section );
 		case 'pages':
 			return rehab_acf_map_pages_index( $section );
+		case 'generic':
+			return rehab_acf_map_generic( $section );
+		case 'hero':
+			return rehab_acf_map_hero( $section );
+		case 'team':
+			return rehab_acf_map_team( $section );
+		case 'moodboard':
+			return rehab_acf_map_moodboard( $section );
+		case 'features':
+			return rehab_acf_map_features( $section );
+		case 'logos':
+			return rehab_acf_map_logos( $section );
 		default:
 			return "<!-- acf-mapper: skipped unsupported layout '" . esc_html( $layout ) . "' (section " . (int) ( $section['_idx'] ?? -1 ) . ") -->\n\n";
 	}
@@ -312,6 +324,138 @@ function rehab_acf_map_pages_index( array $s ): string {
 		}
 	}
 	return $out;
+}
+
+function rehab_acf_map_generic( array $s ): string {
+	$out = '';
+	if ( '' !== ( $s['title'] ?? '' ) ) {
+		$out .= "<!-- wp:heading {\"level\":2} -->\n";
+		$out .= '<h2 class="wp-block-heading">' . esc_html( $s['title'] ) . "</h2>\n";
+		$out .= "<!-- /wp:heading -->\n\n";
+	}
+	$html = trim( (string) ( $s['html'] ?? '' ) );
+	if ( '' !== $html ) {
+		// The legacy CMS stored sanitised HTML here, so we pass it through
+		// to a wp:html block (which round-trips the raw markup verbatim).
+		$out .= "<!-- wp:html -->\n" . $html . "\n<!-- /wp:html -->\n\n";
+	}
+	return $out;
+}
+
+function rehab_acf_map_hero( array $s ): string {
+	$bg = rehab_acf_image( (int) ( $s['bg_image'] ?? 0 ) );
+	// Reuse the treatment-hero block: the image goes on the side rather
+	// than as a CSS background, which is the cleaner pattern in the new
+	// design system.
+	return rehab_block_treatment_hero( [
+		'eyebrow'  => $s['eyebrow'] ?? '',
+		'headline' => $s['title'] ?? '',
+		'lede'     => $s['subtitle'] ?? '',
+		'imageUrl' => $bg['url'] ?? '',
+		'imageAlt' => $bg['alt'] ?? ( $s['title'] ?? '' ),
+	] );
+}
+
+function rehab_acf_map_team( array $s ): string {
+	$members = $s['members'] ?? [];
+	if ( empty( $members ) ) {
+		return '';
+	}
+	$heading    = trim( (string) ( $s['title'] ?? '' ) );
+	$subheading = trim( (string) ( $s['subtitle'] ?? '' ) );
+
+	$out  = "<!-- wp:rehab/team " . rehab_block_attrs( [ 'heading' => $heading, 'subheading' => $subheading ] ) . " -->\n";
+	$out .= '<section class="wp-block-rehab-team rehab-team rehab-bg-white"><div class="rehab-container">';
+	if ( '' !== $heading || '' !== $subheading ) {
+		$out .= '<div class="rehab-team__head">';
+		if ( '' !== $heading )    $out .= '<h2 class="rehab-team__heading">' . esc_html( $heading ) . '</h2>';
+		if ( '' !== $subheading ) $out .= '<p class="rehab-team__sub">' . esc_html( $subheading ) . '</p>';
+		$out .= '</div>';
+	}
+	$out .= '<div class="rehab-team__grid">';
+
+	foreach ( $members as $m ) {
+		$photo = rehab_acf_image( (int) ( $m['photo_id'] ?? 0 ) );
+		$name  = (string) ( $m['name'] ?? '' );
+		$role  = (string) ( $m['position'] ?? '' );
+		$bio   = rehab_acf_html_to_text( $m['message'] ?? '' );
+
+		$member_attrs = rehab_block_attrs( [
+			'name'     => $name,
+			'role'     => $role,
+			'bio'      => $bio,
+			'imageUrl' => $photo['url'] ?? '',
+			'imageAlt' => $photo['alt'] ?? $name,
+		] );
+		$out .= "<!-- wp:rehab/team-member " . $member_attrs . " -->\n";
+		$out .= '<article class="wp-block-rehab-team-member rehab-team-member">';
+		if ( ! empty( $photo['url'] ) ) {
+			$out .= '<div class="rehab-team-member__photo"><img src="' . esc_url( $photo['url'] ) . '" alt="' . esc_attr( $photo['alt'] ?? $name ) . '"/></div>';
+		}
+		$out .= '<div class="rehab-team-member__body">';
+		if ( '' !== $name ) $out .= '<h3 class="rehab-team-member__name">' . esc_html( $name ) . '</h3>';
+		if ( '' !== $role ) $out .= '<p class="rehab-team-member__role">' . esc_html( $role ) . '</p>';
+		if ( '' !== $bio )  $out .= '<p class="rehab-team-member__bio">' . esc_html( $bio ) . '</p>';
+		$out .= '</div></article>';
+		$out .= "\n<!-- /wp:rehab/team-member -->\n";
+	}
+
+	$out .= '</div></div></section>';
+	$out .= "\n<!-- /wp:rehab/team -->\n\n";
+	return $out;
+}
+
+function rehab_acf_map_moodboard( array $s ): string {
+	$image = rehab_acf_image( (int) ( $s['image_id'] ?? 0 ) );
+	// Two-column with the image flipping side based on `reverse`.
+	return rehab_block_article_row( [
+		'background' => 'white',
+		'imageSide'  => ( $s['reverse'] ?? false ) ? 'right' : 'left',
+		'imageUrl'   => $image['url'] ?? '',
+		'imageAlt'   => $image['alt'] ?? ( $s['title'] ?? '' ),
+		'eyebrow'    => $s['eyebrow'] ?? '',
+		'heading'    => $s['title'] ?? '',
+		'body'       => rehab_acf_html_to_text( $s['subtitle'] ?? '' ),
+	] );
+}
+
+function rehab_acf_map_features( array $s ): string {
+	// Map the legacy 4-icon "features" section to the design system's
+	// pillars block (also 3-4 numbered cards with bodies). Icon IDs are
+	// dropped because the new block uses a single SVG shield icon.
+	$items = [];
+	foreach ( ( $s['features'] ?? [] ) as $i => $f ) {
+		$items[] = [
+			'num'   => sprintf( '%02d', $i + 1 ),
+			'title' => (string) ( $f['title'] ?? '' ),
+			'body'  => rehab_acf_html_to_text( $f['description'] ?? '' ),
+		];
+	}
+	return rehab_block_pillars(
+		(string) ( $s['eyebrow'] ?? '' ),
+		(string) ( $s['title'] ?? '' ),
+		rehab_acf_html_to_text( (string) ( $s['subtitle'] ?? '' ) ),
+		$items,
+		'sage-mist'
+	);
+}
+
+function rehab_acf_map_logos( array $s ): string {
+	$logos = [];
+	foreach ( ( $s['logos'] ?? [] ) as $row ) {
+		$img = rehab_acf_image( (int) ( $row['logo_id'] ?? 0 ) );
+		if ( ! $img ) {
+			continue;
+		}
+		$logos[] = [ 'url' => $img['url'], 'alt' => $img['alt'] ?: '' ];
+	}
+	if ( empty( $logos ) ) {
+		return '';
+	}
+	return rehab_block_authority_ribbon(
+		(string) ( $s['title'] ?? 'Featured on' ),
+		$logos
+	);
 }
 
 function rehab_acf_map_global( array $s ): string {

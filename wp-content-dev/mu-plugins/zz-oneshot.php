@@ -1794,7 +1794,7 @@ add_action( 'init', function () {
 			// become HTML comments). Skips already-backed-up pages unless
 			// &force=1. Default cohort: all template-article.php pages.
 			global $wpdb;
-			$known     = [ 'banner','columns','article','tabs','faq','global','cta','pages' ];
+			$known     = [ 'banner','columns','article','tabs','faq','global','cta','pages','generic','hero','team','moodboard','features','logos' ];
 			$ids_param = isset( $_GET['ids'] ) ? sanitize_text_field( $_GET['ids'] ) : '';
 			$template  = isset( $_GET['template'] ) ? sanitize_text_field( $_GET['template'] ) : '';
 			$dry       = isset( $_GET['dry'] ) && '1' === $_GET['dry'];

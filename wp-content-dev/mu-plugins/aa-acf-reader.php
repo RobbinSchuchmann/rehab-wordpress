@@ -167,6 +167,94 @@ function rehab_acf_read_section( int $post_id, int $idx, string $layout ): array
 				'photo_id'       => (int) $get( 'photo' ),
 			];
 
+		case 'generic':
+			// Free-form HTML block. `generic_content` carries the body;
+			// `settings_custom_styles` is an extra style override we ignore.
+			return $base + [
+				'eyebrow'    => (string) $get( 'heading_label' ),
+				'title'      => (string) $get( 'heading_title' ),
+				'subtitle'   => (string) $get( 'heading_subtitle' ),
+				'html'       => (string) $get( 'generic_content' ),
+				'bg_color'   => (string) $get( 'settings_background_color' ),
+				'text_color' => (string) $get( 'settings_text_color' ),
+			];
+
+		case 'hero':
+			// Like `banner` but with a background image + overlay rather
+			// than a separate image-side slot.
+			return $base + [
+				'eyebrow'    => (string) $get( 'heading_label' ),
+				'title'      => (string) $get( 'heading_title' ),
+				'subtitle'   => (string) $get( 'heading_subtitle' ),
+				'bg_image'   => (int) $get( 'settings_background_image' ),
+				'overlay'    => (int) $get( 'overlay' ),
+				'text_color' => (string) $get( 'settings_text_color' ),
+			];
+
+		case 'team':
+			// Repeater of team-member cards. `members` holds the count;
+			// each member has photo / name / position / message fields.
+			$count   = (int) $get( 'members' );
+			$members = [];
+			for ( $j = 0; $j < $count; $j++ ) {
+				$members[] = [
+					'photo_id' => (int) $get( "members_{$j}_photo" ),
+					'name'     => (string) $get( "members_{$j}_member_name" ),
+					'position' => (string) $get( "members_{$j}_position" ),
+					'message'  => (string) $get( "members_{$j}_message" ),
+				];
+			}
+			return $base + [
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'members'  => $members,
+			];
+
+		case 'moodboard':
+			// Two-column "image on one side" layout. `image_first` is the
+			// hero image; `reverse` flips the side.
+			return $base + [
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'eyebrow'  => (string) $get( 'heading_label' ),
+				'image_id' => (int) $get( 'image_first' ),
+				'reverse'  => '1' === $get( 'reverse' ),
+			];
+
+		case 'features':
+			// Repeater of icon + title + description. `features` holds count.
+			$count    = (int) $get( 'features' );
+			$features = [];
+			for ( $j = 0; $j < $count; $j++ ) {
+				$features[] = [
+					'icon_id'     => (int) $get( "features_{$j}_icon" ),
+					'title'       => (string) $get( "features_{$j}_title" ),
+					'description' => (string) $get( "features_{$j}_description" ),
+				];
+			}
+			return $base + [
+				'eyebrow'  => (string) $get( 'heading_label' ),
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'features' => $features,
+			];
+
+		case 'logos':
+			// Press / partner logos. `logos` holds count; each row is
+			// logo (attachment ID) + link (URL).
+			$count = (int) $get( 'logos' );
+			$logos = [];
+			for ( $j = 0; $j < $count; $j++ ) {
+				$logos[] = [
+					'logo_id' => (int) $get( "logos_{$j}_logo" ),
+					'url'     => (string) $get( "logos_{$j}_link" ),
+				];
+			}
+			return $base + [
+				'title' => (string) $get( 'heading_title' ),
+				'logos' => $logos,
+			];
+
 		case 'pages':
 			// Directory layout used by the all-treatments index. Each
 			// chapter pairs a category link (serialized {title,url,target}
