@@ -1692,6 +1692,36 @@ add_action( 'init', function () {
 			foreach ( $rows as $r ) echo "  #$r->ID [$r->post_status] /$r->post_name/ — $r->post_title\n";
 			break;
 
+		case 'preview-acf-mapped':
+			// Renders rehab_acf_map_sections() output as raw markup so we
+			// can eyeball the migration before writing anything to the DB.
+			// Usage: ?rehab_oneshot=preview-acf-mapped&id=853
+			$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 853;
+			if ( ! function_exists( 'rehab_acf_map_sections' ) ) {
+				echo "rehab_acf_map_sections() not loaded — check aa-acf-mapper.php\n";
+				break;
+			}
+			$post = get_post( $id );
+			echo "=== Page #$id — " . ( $post ? $post->post_title : 'NOT FOUND' ) . " ===\n";
+			$sections = rehab_acf_get_sections( $id );
+			echo count( $sections ) . " sections from ACF, mapping...\n\n";
+			$markup = rehab_acf_map_sections( $sections );
+			echo "Output: " . strlen( $markup ) . " bytes, " . substr_count( $markup, '<!-- wp:rehab/' ) . " rehab blocks\n";
+			echo "Block list:\n";
+			if ( preg_match_all( '/<!-- wp:(rehab\/[a-z0-9-]+)/i', $markup, $m ) ) {
+				foreach ( $m[1] as $i => $name ) {
+					echo "  " . ( $i + 1 ) . ". $name\n";
+				}
+			}
+			$skipped = substr_count( $markup, '<!-- acf-mapper: skipped' );
+			if ( $skipped ) {
+				echo "Skipped sections: $skipped\n";
+			}
+			echo "\n--- First 4000 bytes of markup ---\n";
+			echo substr( $markup, 0, 4000 );
+			echo "\n[…]\n";
+			break;
+
 		case 'inspect-acf-reader':
 			// Validates rehab_acf_get_sections() output against the legacy ACF flex schema.
 			// Usage: ?rehab_oneshot=inspect-acf-reader&id=853
