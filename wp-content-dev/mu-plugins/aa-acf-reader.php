@@ -255,6 +255,124 @@ function rehab_acf_read_section( int $post_id, int $idx, string $layout ): array
 				'logos' => $logos,
 			];
 
+		case 'gallery':
+			// Image grid. `gallery_ids` is the count of media entries;
+			// each row's `_photo` is the attachment ID. `_url` is rarely
+			// set (only when the media is an external video).
+			$count = (int) $get( 'gallery_ids' );
+			$items = [];
+			for ( $j = 0; $j < $count; $j++ ) {
+				$items[] = [
+					'photo_id' => (int) $get( "gallery_ids_{$j}_photo" ),
+					'url'      => (string) $get( "gallery_ids_{$j}_url" ),
+				];
+			}
+			return $base + [
+				'eyebrow'  => (string) $get( 'heading_label' ),
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'items'    => $items,
+			];
+
+		case 'cards':
+			// Linked image cards. `cards_N_link` is a serialized
+			// {title,url,target} array.
+			$count = (int) $get( 'cards' );
+			$cards = [];
+			for ( $j = 0; $j < $count; $j++ ) {
+				$link_raw = maybe_unserialize( $get( "cards_{$j}_link" ) );
+				$cards[]  = [
+					'title'    => (string) $get( "cards_{$j}_title" ),
+					'image_id' => (int) $get( "cards_{$j}_image" ),
+					'url'      => is_array( $link_raw ) ? (string) ( $link_raw['url'] ?? '' ) : '',
+				];
+			}
+			return $base + [
+				'eyebrow'  => (string) $get( 'heading_label' ),
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'cards'    => $cards,
+			];
+
+		case 'cards-columns':
+			// Two-column "related posts" list. left_posts / right_posts
+			// are serialized arrays of post IDs; left_link / right_link
+			// are serialized {title,url,target} arrays for the "View
+			// all" cta below each column.
+			$left_posts_raw  = maybe_unserialize( $get( 'left_posts' ) );
+			$right_posts_raw = maybe_unserialize( $get( 'right_posts' ) );
+			$left_link_raw   = maybe_unserialize( $get( 'left_link' ) );
+			$right_link_raw  = maybe_unserialize( $get( 'right_link' ) );
+			return $base + [
+				'title'           => (string) $get( 'heading_title' ),
+				'left_title'      => (string) $get( 'left_title' ),
+				'left_post_ids'   => is_array( $left_posts_raw ) ? array_map( 'intval', $left_posts_raw ) : [],
+				'left_link_title' => is_array( $left_link_raw ) ? (string) ( $left_link_raw['title'] ?? '' ) : '',
+				'left_link_url'   => is_array( $left_link_raw ) ? (string) ( $left_link_raw['url'] ?? '' ) : '',
+				'right_title'     => (string) $get( 'right_title' ),
+				'right_post_ids'  => is_array( $right_posts_raw ) ? array_map( 'intval', $right_posts_raw ) : [],
+				'right_link_title'=> is_array( $right_link_raw ) ? (string) ( $right_link_raw['title'] ?? '' ) : '',
+				'right_link_url'  => is_array( $right_link_raw ) ? (string) ( $right_link_raw['url'] ?? '' ) : '',
+			];
+
+		case 'message':
+			// Pull-quote with attribution + portrait. The "quote" lives
+			// in heading_title (despite the name).
+			return $base + [
+				'eyebrow'  => (string) $get( 'heading_label' ),
+				'quote'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'photo_id' => (int) $get( 'photo' ),
+				'cite'     => (string) $get( 'cite' ),
+			];
+
+		case 'map':
+			// Embeds a map. `location` is a serialized ACF Google Map
+			// field: { address, lat, lng, ... }.
+			$loc = maybe_unserialize( $get( 'location' ) );
+			$loc = is_array( $loc ) ? $loc : [];
+			return $base + [
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'address'  => (string) ( $loc['address'] ?? '' ),
+				'lat'      => isset( $loc['lat'] ) ? (float) $loc['lat'] : 0.0,
+				'lng'      => isset( $loc['lng'] ) ? (float) $loc['lng'] : 0.0,
+			];
+
+		case 'steps':
+			// Multi-row card grid (rows 1/2/3). Each row has its own
+			// `_N_title` / `_N_text` items with the count in `row_N`.
+			$rows = [];
+			for ( $r = 1; $r <= 3; $r++ ) {
+				$count = (int) $get( "row_{$r}" );
+				if ( ! $count ) {
+					continue;
+				}
+				$items = [];
+				for ( $j = 0; $j < $count; $j++ ) {
+					$items[] = [
+						'title' => (string) $get( "row_{$r}_{$j}_title" ),
+						'text'  => (string) $get( "row_{$r}_{$j}_text" ),
+					];
+				}
+				$rows[] = $items;
+			}
+			return $base + [
+				'eyebrow'  => (string) $get( 'heading_label' ),
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+				'rows'     => $rows,
+			];
+
+		case 'contacts':
+			// Contact-form section. `form` is the legacy forminator
+			// shortcode — we drop it in favour of the rehab/final-cta
+			// REST-based form.
+			return $base + [
+				'title'    => (string) $get( 'heading_title' ),
+				'subtitle' => (string) $get( 'heading_subtitle' ),
+			];
+
 		case 'pages':
 			// Directory layout used by the all-treatments index. Each
 			// chapter pairs a category link (serialized {title,url,target}

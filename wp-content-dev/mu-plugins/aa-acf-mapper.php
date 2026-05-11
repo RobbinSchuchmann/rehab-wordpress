@@ -160,6 +160,20 @@ function rehab_acf_map_section( array $section ): string {
 			return rehab_acf_map_features( $section );
 		case 'logos':
 			return rehab_acf_map_logos( $section );
+		case 'gallery':
+			return rehab_acf_map_gallery( $section );
+		case 'cards':
+			return rehab_acf_map_cards( $section );
+		case 'cards-columns':
+			return rehab_acf_map_cards_columns( $section );
+		case 'message':
+			return rehab_acf_map_message( $section );
+		case 'map':
+			return rehab_acf_map_map( $section );
+		case 'steps':
+			return rehab_acf_map_steps( $section );
+		case 'contacts':
+			return rehab_acf_map_contacts( $section );
 		default:
 			return "<!-- acf-mapper: skipped unsupported layout '" . esc_html( $layout ) . "' (section " . (int) ( $section['_idx'] ?? -1 ) . ") -->\n\n";
 	}
@@ -461,6 +475,221 @@ function rehab_acf_map_logos( array $s ): string {
 		(string) ( $s['title'] ?? 'Featured on' ),
 		$logos
 	);
+}
+
+function rehab_acf_map_gallery( array $s ): string {
+	$ids = [];
+	foreach ( ( $s['items'] ?? [] ) as $item ) {
+		$pid = (int) ( $item['photo_id'] ?? 0 );
+		if ( $pid > 0 ) {
+			$ids[] = $pid;
+		}
+	}
+	if ( empty( $ids ) ) {
+		return '';
+	}
+
+	$out = '';
+	if ( '' !== ( $s['title'] ?? '' ) ) {
+		$out .= "<!-- wp:heading {\"level\":2} -->\n";
+		$out .= '<h2 class="wp-block-heading">' . esc_html( $s['title'] ) . "</h2>\n";
+		$out .= "<!-- /wp:heading -->\n\n";
+	}
+
+	// core/gallery is the path of least resistance — universal Gutenberg
+	// support, no custom block needed. innerBlocks are core/image.
+	$inner = '';
+	foreach ( $ids as $pid ) {
+		$url = wp_get_attachment_image_url( $pid, 'large' );
+		if ( ! $url ) {
+			continue;
+		}
+		$alt = (string) get_post_meta( $pid, '_wp_attachment_image_alt', true );
+		$inner .= "<!-- wp:image {\"id\":{$pid},\"sizeSlug\":\"large\"} -->\n";
+		$inner .= '<figure class="wp-block-image size-large"><img src="' . esc_url( $url ) . '" alt="' . esc_attr( $alt ) . '" class="wp-image-' . $pid . '"/></figure>' . "\n";
+		$inner .= "<!-- /wp:image -->\n";
+	}
+
+	$attrs = wp_json_encode( [ 'columns' => 3, 'linkTo' => 'none' ] );
+	$out  .= "<!-- wp:gallery {$attrs} -->\n";
+	$out  .= '<figure class="wp-block-gallery has-nested-images columns-3">' . "\n";
+	$out  .= $inner;
+	$out  .= "</figure>\n";
+	$out  .= "<!-- /wp:gallery -->\n\n";
+	return $out;
+}
+
+function rehab_acf_map_cards( array $s ): string {
+	$cards = [];
+	foreach ( ( $s['cards'] ?? [] ) as $c ) {
+		$img = rehab_acf_image( (int) ( $c['image_id'] ?? 0 ) );
+		$cards[] = [
+			'title'    => (string) ( $c['title'] ?? '' ),
+			'href'     => (string) ( $c['url'] ?? '' ),
+			'imageUrl' => $img['url'] ?? '',
+			'imageAlt' => $img['alt'] ?? ( $c['title'] ?? '' ),
+		];
+	}
+	return rehab_block_cards_grid(
+		(string) ( $s['title'] ?? '' ),
+		rehab_acf_html_to_text( $s['subtitle'] ?? '' ),
+		$cards,
+		3,        // columns
+		'cream'   // background
+	);
+}
+
+function rehab_acf_map_cards_columns( array $s ): string {
+	// Two side-by-side "related posts" columns. Renders as a core/columns
+	// block: each column has a heading, a bullet list of linked post
+	// titles, and an optional "View all" cta. core/columns handles the
+	// responsive 2-up grid for us.
+	$render_col = static function ( string $heading, array $post_ids, string $link_title, string $link_url ): string {
+		$items_html = '';
+		foreach ( $post_ids as $pid ) {
+			$p = get_post( $pid );
+			if ( ! $p || 'publish' !== $p->post_status ) {
+				continue;
+			}
+			$perm = get_permalink( $pid );
+			if ( ! $perm ) {
+				continue;
+			}
+			$items_html .= "<!-- wp:list-item -->\n";
+			$items_html .= '<li><a href="' . esc_url( $perm ) . '">' . esc_html( get_the_title( $pid ) ) . "</a></li>\n";
+			$items_html .= "<!-- /wp:list-item -->\n";
+		}
+		$inner  = "<!-- wp:heading {\"level\":3} -->\n";
+		$inner .= '<h3 class="wp-block-heading">' . esc_html( $heading ) . "</h3>\n";
+		$inner .= "<!-- /wp:heading -->\n\n";
+		if ( '' !== $items_html ) {
+			$inner .= "<!-- wp:list -->\n<ul class=\"wp-block-list\">\n" . $items_html . "</ul>\n<!-- /wp:list -->\n\n";
+		}
+		if ( '' !== $link_url ) {
+			$label  = '' !== $link_title ? $link_title : 'View all';
+			$inner .= "<!-- wp:paragraph -->\n";
+			$inner .= '<p><a href="' . esc_url( $link_url ) . '">' . esc_html( $label ) . " →</a></p>\n";
+			$inner .= "<!-- /wp:paragraph -->\n\n";
+		}
+		return $inner;
+	};
+
+	$out = '';
+	if ( '' !== ( $s['title'] ?? '' ) ) {
+		$out .= "<!-- wp:heading {\"level\":2} -->\n";
+		$out .= '<h2 class="wp-block-heading">' . esc_html( $s['title'] ) . "</h2>\n";
+		$out .= "<!-- /wp:heading -->\n\n";
+	}
+	$out .= "<!-- wp:columns -->\n<div class=\"wp-block-columns\">\n";
+	$out .= "<!-- wp:column -->\n<div class=\"wp-block-column\">\n";
+	$out .= $render_col(
+		(string) ( $s['left_title'] ?? '' ),
+		$s['left_post_ids'] ?? [],
+		(string) ( $s['left_link_title'] ?? '' ),
+		(string) ( $s['left_link_url'] ?? '' )
+	);
+	$out .= "</div>\n<!-- /wp:column -->\n\n";
+	$out .= "<!-- wp:column -->\n<div class=\"wp-block-column\">\n";
+	$out .= $render_col(
+		(string) ( $s['right_title'] ?? '' ),
+		$s['right_post_ids'] ?? [],
+		(string) ( $s['right_link_title'] ?? '' ),
+		(string) ( $s['right_link_url'] ?? '' )
+	);
+	$out .= "</div>\n<!-- /wp:column -->\n";
+	$out .= "</div>\n<!-- /wp:columns -->\n\n";
+	return $out;
+}
+
+function rehab_acf_map_message( array $s ): string {
+	// Pull-quote with attribution. core/quote is universal and round-
+	// trips cleanly; the legacy `photo` field is dropped (the quote is
+	// the focus, the portrait was decorative).
+	$quote = trim( (string) ( $s['quote'] ?? '' ) );
+	if ( '' === $quote ) {
+		return '';
+	}
+	$cite = trim( (string) ( $s['cite'] ?? '' ) );
+	$out  = "<!-- wp:quote -->\n";
+	$out .= '<blockquote class="wp-block-quote">';
+	$out .= "<!-- wp:paragraph -->\n<p>" . esc_html( $quote ) . "</p>\n<!-- /wp:paragraph -->";
+	if ( '' !== $cite ) {
+		// cite may contain inline HTML (<span>CEO</span>); strip to plain.
+		$out .= '<cite>' . esc_html( wp_strip_all_tags( $cite ) ) . '</cite>';
+	}
+	$out .= "</blockquote>\n<!-- /wp:quote -->\n\n";
+	return $out;
+}
+
+function rehab_acf_map_map( array $s ): string {
+	// rehab/map is a registered block; render the canonical markup so the
+	// editor recognises it. Falls back to a plain address paragraph if
+	// coords are missing.
+	$lat     = (float) ( $s['lat'] ?? 0 );
+	$lng     = (float) ( $s['lng'] ?? 0 );
+	$address = (string) ( $s['address'] ?? '' );
+	$title   = (string) ( $s['title'] ?? '' );
+
+	$out = '';
+	if ( '' !== $title ) {
+		$out .= "<!-- wp:heading {\"level\":2} -->\n";
+		$out .= '<h2 class="wp-block-heading">' . esc_html( $title ) . "</h2>\n";
+		$out .= "<!-- /wp:heading -->\n\n";
+	}
+
+	if ( 0.0 === $lat && 0.0 === $lng ) {
+		// No usable coords — just emit the address.
+		if ( '' !== $address ) {
+			$out .= "<!-- wp:paragraph -->\n<p>" . esc_html( $address ) . "</p>\n<!-- /wp:paragraph -->\n\n";
+		}
+		return $out;
+	}
+
+	$attrs = wp_json_encode( [ 'lat' => $lat, 'lng' => $lng, 'address' => $address, 'zoom' => 15 ] );
+	$out  .= "<!-- wp:rehab/map {$attrs} -->\n";
+	$out  .= '<section class="wp-block-rehab-map rehab-map"><div class="rehab-container"><div class="rehab-map__embed" data-lat="' . esc_attr( (string) $lat ) . '" data-lng="' . esc_attr( (string) $lng ) . '"></div>';
+	if ( '' !== $address ) {
+		$out .= '<p class="rehab-map__address">' . esc_html( $address ) . '</p>';
+	}
+	$out .= '</div></section>' . "\n";
+	$out .= "<!-- /wp:rehab/map -->\n\n";
+	return $out;
+}
+
+function rehab_acf_map_steps( array $s ): string {
+	// Renders the heading once, then one cards-grid per legacy row.
+	// Items per row vary (typically 4); column count tracks that.
+	$rows = $s['rows'] ?? [];
+	if ( empty( $rows ) ) {
+		return '';
+	}
+	$out = '';
+	if ( '' !== ( $s['title'] ?? '' ) ) {
+		$out .= "<!-- wp:heading {\"level\":2} -->\n";
+		$out .= '<h2 class="wp-block-heading">' . esc_html( $s['title'] ) . "</h2>\n";
+		$out .= "<!-- /wp:heading -->\n\n";
+	}
+	foreach ( $rows as $row ) {
+		$cards = [];
+		foreach ( $row as $item ) {
+			$cards[] = [
+				'title' => wp_strip_all_tags( (string) ( $item['title'] ?? '' ) ),
+				'body'  => rehab_acf_html_to_text( $item['text'] ?? '' ),
+			];
+		}
+		$columns = min( 4, max( 1, count( $cards ) ) );
+		$out    .= rehab_block_cards_grid( '', '', $cards, $columns, 'white' );
+	}
+	return $out;
+}
+
+function rehab_acf_map_contacts( array $s ): string {
+	// Drop the legacy forminator shortcode in favour of the rehab/
+	// final-cta block (our REST-based contact form).
+	return rehab_block_final_cta( [
+		'heading' => (string) ( $s['title'] ?? 'Get in touch' ),
+		'lead'    => rehab_acf_html_to_text( $s['subtitle'] ?? '' ),
+	] );
 }
 
 function rehab_acf_map_global( array $s ): string {
