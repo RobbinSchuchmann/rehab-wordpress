@@ -2151,6 +2151,33 @@ add_action( 'init', function () {
 			echo "(" . count( $rows ) . " matches)\n";
 			break;
 
+		case 'dump-post-content':
+			$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 853;
+			$post = get_post( $id );
+			if ( ! $post ) { echo "no post\n"; break; }
+			echo "=== post_content of #$id ===\n";
+			// Find FAQ block specifically
+			if ( preg_match( '/<!-- wp:rehab\/faq.*?<!-- \/wp:rehab\/faq -->/s', $post->post_content, $m ) ) {
+				echo $m[0] . "\n";
+			} else {
+				echo "(no FAQ block in post_content)\n";
+				echo "First 500 chars:\n" . substr( $post->post_content, 0, 500 ) . "\n";
+			}
+			break;
+
+		case 'inspect-igmap':
+			global $wpdb;
+			$rows = $wpdb->get_results( "SELECT ID, post_title, post_status FROM {$wpdb->posts} WHERE post_type='igmap' ORDER BY ID" );
+			foreach ( $rows as $r ) {
+				echo "  #$r->ID [$r->post_status] $r->post_title\n";
+				$meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, LEFT(meta_value, 200) AS v FROM {$wpdb->postmeta} WHERE post_id=%d AND meta_key NOT LIKE '_%' AND meta_key NOT LIKE 'rank_math_%' AND meta_key NOT LIKE 'wp-smush%' LIMIT 10", $r->ID ) );
+				foreach ( $meta as $m ) echo "    $m->meta_key = $m->v\n";
+			}
+			echo "\n=== Pages embedding igmap (shortcode or post_content reference) ===\n";
+			$rows = $wpdb->get_results( "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_content LIKE '%igmap%' OR post_content LIKE '%interactive-geo-map%' LIMIT 5" );
+			foreach ( $rows as $r ) echo "  #$r->ID $r->post_title\n";
+			break;
+
 		case 'inspect-builder-pages':
 			global $wpdb;
 			echo "=== Pages still using template-builder.php ===\n";
@@ -2169,4 +2196,4 @@ add_action( 'init', function () {
 			echo "unknown task\n";
 	}
 	exit;
-} );
+}, 999 );

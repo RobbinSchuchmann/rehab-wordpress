@@ -147,9 +147,8 @@ function rehab_block_cards_grid( string $heading, string $subheading, array $car
  * the canonical source.
  */
 function rehab_block_faq( string $heading, array $items, string $bg = 'cream' ): string {
-	$faq_attrs   = rehab_block_attrs( [ 'background' => $bg, 'heading' => $heading ] );
-	$resolved    = [];
-	$source_ids  = [];
+	$resolved   = [];
+	$source_ids = [];
 	foreach ( $items as $item ) {
 		// int → cptId shorthand
 		if ( is_int( $item ) ) $item = [ 'cptId' => $item ];
@@ -166,6 +165,12 @@ function rehab_block_faq( string $heading, array $items, string $bg = 'cream' ):
 		}
 		if ( ! empty( $item['question'] ) ) $resolved[] = $item;
 	}
+	// Persist cptIds on the block attrs so render.php can re-resolve at
+	// request time — keeps the CPT as the canonical source.
+	$block_attrs = [ 'background' => $bg, 'heading' => $heading ];
+	if ( ! empty( $source_ids ) ) $block_attrs['cptIds'] = $source_ids;
+	$faq_attrs = rehab_block_attrs( $block_attrs );
+
 	$h  = '<section class="wp-block-rehab-faq rehab-faq rehab-bg-' . esc_attr( $bg ) . '">';
 	$h .= '<div class="rehab-container rehab-container--narrow"><h2 class="rehab-faq__heading">' . esc_html( $heading ) . '</h2>';
 	$h .= '<div class="rehab-faq__list">';

@@ -295,8 +295,18 @@ add_filter( 'render_block', 'rehab_parent_testimonial_truncation', 11, 2 );
  * description from the post's first paragraph (or excerpt). Falls back to a
  * brand default image when the page has no featured image.
  */
+/**
+ * True when Rank Math plugin is active. When it is, we stand down — Rank
+ * Math owns <title>, meta description, OG tags, schema markup. When it
+ * isn't, our filter reads the same postmeta and emits everything itself.
+ */
+function rehab_parent_rank_math_active(): bool {
+	return class_exists( 'RankMath\Helper' ) || function_exists( 'rank_math' );
+}
+
 function rehab_parent_seo_meta(): void {
 	if ( is_admin() || is_feed() || is_search() || is_404() ) return;
+	if ( rehab_parent_rank_math_active() ) return; // Let Rank Math own SEO output.
 
 	$site_name = get_bloginfo( 'name' );
 	$is_single = is_singular();
@@ -424,6 +434,7 @@ add_action( 'wp_head', 'rehab_parent_seo_meta', 5 );
  */
 function rehab_parent_rank_math_title( $title ) {
 	if ( is_admin() || is_feed() ) return $title;
+	if ( rehab_parent_rank_math_active() ) return $title; // Rank Math will set it itself.
 	if ( ! is_singular() ) return $title;
 	$rm = trim( (string) get_post_meta( get_queried_object_id(), 'rank_math_title', true ) );
 	if ( ! $rm ) return $title;
@@ -489,6 +500,7 @@ function rehab_breadcrumb_category( int $post_id ): string {
  */
 function rehab_parent_jsonld(): void {
 	if ( is_admin() || is_feed() || is_search() || is_404() ) return;
+	if ( rehab_parent_rank_math_active() ) return; // Let Rank Math emit schema.
 
 	$site_url   = home_url( '/' );
 	$site_name  = get_bloginfo( 'name' );

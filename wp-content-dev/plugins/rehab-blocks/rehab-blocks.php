@@ -52,3 +52,46 @@ function rehab_blocks_category( array $categories ): array {
 	);
 }
 add_filter( 'block_categories_all', 'rehab_blocks_category' );
+
+/**
+ * Register the `faq` custom post type. The DB already has 85 FAQ records
+ * (legacy from the previous theme); registering the type here keeps them
+ * queryable, editable in admin, and accessible via REST so the FAQ block's
+ * picker UI can list them.
+ *
+ * Uses post_type_exists() guard so this is a no-op if another plugin
+ * (e.g. an FAQ plugin we install later) registers it first.
+ */
+function rehab_blocks_register_faq_cpt(): void {
+	if ( post_type_exists( 'faq' ) ) {
+		return;
+	}
+	register_post_type( 'faq', [
+		'labels' => [
+			'name'          => __( 'FAQs', 'rehab-blocks' ),
+			'singular_name' => __( 'FAQ', 'rehab-blocks' ),
+			'menu_name'     => __( 'FAQs', 'rehab-blocks' ),
+			'add_new'       => __( 'Add FAQ', 'rehab-blocks' ),
+			'add_new_item'  => __( 'Add New FAQ', 'rehab-blocks' ),
+			'edit_item'     => __( 'Edit FAQ', 'rehab-blocks' ),
+			'new_item'      => __( 'New FAQ', 'rehab-blocks' ),
+			'view_item'     => __( 'View FAQ', 'rehab-blocks' ),
+			'search_items'  => __( 'Search FAQs', 'rehab-blocks' ),
+			'all_items'     => __( 'All FAQs', 'rehab-blocks' ),
+		],
+		'public'              => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_rest'        => true, // needed by the FAQ block picker
+		'rest_base'           => 'faq',
+		'has_archive'         => false,
+		'rewrite'             => false,
+		'exclude_from_search' => true,
+		'publicly_queryable'  => false,
+		'menu_icon'           => 'dashicons-editor-help',
+		'menu_position'       => 24,
+		'capability_type'     => 'post',
+		'supports'            => [ 'title', 'editor', 'custom-fields', 'revisions' ],
+	] );
+}
+add_action( 'init', 'rehab_blocks_register_faq_cpt' );
