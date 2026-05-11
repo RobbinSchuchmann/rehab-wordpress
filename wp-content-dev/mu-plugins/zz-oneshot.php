@@ -1715,6 +1715,73 @@ add_action( 'init', function () {
 			}
 			break;
 
+		case 'bulk-set-template':
+			// Switch _wp_page_template across a cohort. Saves the prior value
+			// into postmeta `_rehab_template_backup` for easy rollback.
+			// Usage: ?rehab_oneshot=bulk-set-template&ids=884,902,...&template=template-treatment.php
+			$ids_param = isset( $_GET['ids'] ) ? sanitize_text_field( $_GET['ids'] ) : '';
+			$template  = isset( $_GET['template'] ) ? sanitize_text_field( $_GET['template'] ) : '';
+			if ( ! $ids_param || ! $template ) {
+				echo "Usage: ?rehab_oneshot=bulk-set-template&ids=N,N,N&template=NAME\n";
+				break;
+			}
+			$ids = array_filter( array_map( 'intval', explode( ',', $ids_param ) ) );
+			echo "Cohort: " . count( $ids ) . " pages → template=$template\n\n";
+			$stats = [ 'changed' => 0, 'unchanged' => 0, 'missing' => 0 ];
+			foreach ( $ids as $id ) {
+				$p = get_post( $id );
+				if ( ! $p ) {
+					echo "  MISS  #$id (not found)\n";
+					$stats['missing']++;
+					continue;
+				}
+				$current = get_post_meta( $id, '_wp_page_template', true );
+				if ( $current === $template ) {
+					echo sprintf( "  SAME  #%-5d %s (already %s)\n", $id, mb_substr( $p->post_title, 0, 40 ), $template );
+					$stats['unchanged']++;
+					continue;
+				}
+				// One-time backup (only on the first swap so re-runs don't clobber).
+				if ( '' === get_post_meta( $id, '_rehab_template_backup', true ) ) {
+					update_post_meta( $id, '_rehab_template_backup', $current ?: '(default)' );
+				}
+				update_post_meta( $id, '_wp_page_template', $template );
+				echo sprintf( "  OK    #%-5d %-40s %s → %s\n", $id, mb_substr( $p->post_title, 0, 40 ), $current ?: '(default)', $template );
+				$stats['changed']++;
+			}
+			echo "\n=== Summary ===\n";
+			foreach ( $stats as $k => $v ) echo "  $k: $v\n";
+			break;
+
+		case 'bulk-rollback-acf':
+			// Roll back rehab_acf_migrate_page() for a list of IDs.
+			// Usage: ?rehab_oneshot=bulk-rollback-acf&ids=N,N,N
+			$ids_param = isset( $_GET['ids'] ) ? sanitize_text_field( $_GET['ids'] ) : '';
+			if ( ! $ids_param ) {
+				echo "Usage: ?rehab_oneshot=bulk-rollback-acf&ids=N,N,N\n";
+				break;
+			}
+			$ids   = array_filter( array_map( 'intval', explode( ',', $ids_param ) ) );
+			echo "Cohort: " . count( $ids ) . " pages\n\n";
+			$stats = [ 'ok' => 0, 'no_backup' => 0, 'failed' => 0 ];
+			foreach ( $ids as $id ) {
+				$title = get_the_title( $id );
+				$res   = rehab_acf_rollback_page( $id );
+				if ( $res['ok'] ) {
+					echo sprintf( "  OK    #%-5d %-50s restored %d bytes\n", $id, mb_substr( $title, 0, 50 ), $res['restored_bytes'] );
+					$stats['ok']++;
+				} elseif ( false !== strpos( $res['msg'], 'No backup' ) ) {
+					echo sprintf( "  NONE  #%-5d %s\n", $id, $res['msg'] );
+					$stats['no_backup']++;
+				} else {
+					echo sprintf( "  FAIL  #%-5d %s\n", $id, $res['msg'] );
+					$stats['failed']++;
+				}
+			}
+			echo "\n=== Summary ===\n";
+			foreach ( $stats as $k => $v ) echo "  $k: $v\n";
+			break;
+
 		case 'bulk-migrate-acf':
 			// Run rehab_acf_migrate_page() across a cohort of pages.
 			// Usage:

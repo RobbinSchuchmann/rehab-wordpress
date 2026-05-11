@@ -88,16 +88,20 @@ function rehab_acf_migrate_page( int $post_id, bool $force = false, bool $chrome
 /**
  * Restore the pre-migration post_content from the sidecar backup.
  * Leaves the backup postmeta in place — a second rollback is a no-op.
+ *
+ * An empty-string backup is a valid rollback target (pages whose
+ * post_content was empty before migration); we only refuse when no
+ * backup key exists at all.
  */
 function rehab_acf_rollback_page( int $post_id ): array {
-	$backup = get_post_meta( $post_id, REHAB_ACF_BACKUP_KEY, true );
-	if ( '' === (string) $backup ) {
+	if ( ! metadata_exists( 'post', $post_id, REHAB_ACF_BACKUP_KEY ) ) {
 		return [ 'ok' => false, 'msg' => "No backup found for post $post_id." ];
 	}
+	$backup = (string) get_post_meta( $post_id, REHAB_ACF_BACKUP_KEY, true );
 
 	$res = wp_update_post( [
 		'ID'           => $post_id,
-		'post_content' => wp_slash( (string) $backup ),
+		'post_content' => wp_slash( $backup ),
 	], true );
 
 	if ( is_wp_error( $res ) ) {
@@ -106,8 +110,8 @@ function rehab_acf_rollback_page( int $post_id ): array {
 
 	return [
 		'ok'             => true,
-		'msg'            => "Rolled back post $post_id from backup (" . strlen( (string) $backup ) . " bytes).",
-		'restored_bytes' => strlen( (string) $backup ),
+		'msg'            => "Rolled back post $post_id from backup (" . strlen( $backup ) . " bytes).",
+		'restored_bytes' => strlen( $backup ),
 	];
 }
 
