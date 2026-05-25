@@ -201,12 +201,14 @@ function rehab_acf_map_columns( array $s ): string {
 	//
 	// (a) Team-profile shape — page is *about* a single staff member.
 	//     Left column = portrait, right column = name (right_title) + bio
-	//     (right_subtitle) + role label (right_label). The role label is
-	//     the discriminator that separates this from a generic image card
-	//     (e.g. /discover-hua-hin/ location cards have the same column
-	//     geometry but no role label). Renders as intro-doctor-card with
-	//     the portrait wired in and the default doctor-card chrome
-	//     suppressed.
+	//     (right_subtitle) + role label (right_label) + page-primary
+	//     heading tag (right_tag h1/h2). The role label discriminates
+	//     against location cards (Hua Hin has the same geometry, empty
+	//     label). The h1/h2 tag discriminates against a few "how we
+	//     work"-style subsections on treatment pages (e.g. /cost/ sec#6)
+	//     that carry a section label but render the title as h3 — those
+	//     should be image cards, not bios. Renders as intro-doctor-card
+	//     with the portrait wired in and default chrome suppressed.
 	//
 	// (b) Generic image card — same column geometry as (a) but no role
 	//     label. Used for location cards (Pa La-U waterfalls etc.) and
@@ -222,12 +224,14 @@ function rehab_acf_map_columns( array $s ): string {
 	$right_title    = trim( (string) ( $s['right_title'] ?? '' ) );
 	$right_subtitle = (string) ( $s['right_subtitle'] ?? '' );
 	$right_label    = trim( (string) ( $s['right_label'] ?? '' ) );
+	$right_tag      = strtolower( trim( (string) ( $s['right_tag'] ?? '' ) ) );
 	$left_image     = rehab_acf_image( (int) ( $s['left_image_id'] ?? 0 ) );
 	$reversed       = ! empty( $s['reversed'] );
 
 	$has_image_card_shape = ( '' === $left_title ) && ( null !== $left_image ) && ( '' !== $right_title );
+	$title_is_page_heading = in_array( $right_tag, [ 'h1', 'h2' ], true );
 
-	if ( $has_image_card_shape && '' !== $right_label ) {
+	if ( $has_image_card_shape && '' !== $right_label && $title_is_page_heading ) {
 		// (a) team profile
 		return rehab_block_intro_doctor_card( [
 			'eyebrow'        => (string) ( $s['top_title'] ?? '' ),
