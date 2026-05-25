@@ -195,24 +195,40 @@ function rehab_acf_map_banner( array $s ): string {
 }
 
 function rehab_acf_map_columns( array $s ): string {
-	// Two shapes share the legacy `columns` layout:
+	// The legacy `columns` layout is overloaded across three shapes,
+	// distinguished by which column carries the heading and whether the
+	// right column carries a role/credential label:
 	//
-	// 1. Treatment-page shape — left column carries the section heading,
-	//    right column carries the body copy. No image. Renders as the
-	//    intro-doctor-card with the writer's heading + body.
+	// (a) Team-profile shape — page is *about* a single staff member.
+	//     Left column = portrait, right column = name (right_title) + bio
+	//     (right_subtitle) + role label (right_label). The role label is
+	//     the discriminator that separates this from a generic image card
+	//     (e.g. /discover-hua-hin/ location cards have the same column
+	//     geometry but no role label). Renders as intro-doctor-card with
+	//     the portrait wired in and the default doctor-card chrome
+	//     suppressed.
 	//
-	// 2. Team-profile shape — the page is *about* a single staff member.
-	//    Left column has the photo (left_image_id) but no title; right
-	//    column has the name (right_title) and bio (right_subtitle). We
-	//    wire the photo into doctorImageUrl and surface the name as the
-	//    block heading so the photo doesn't silently disappear.
+	// (b) Generic image card — same column geometry as (a) but no role
+	//     label. Used for location cards (Pa La-U waterfalls etc.) and
+	//     in-page info sections that pair a photo with a heading and
+	//     prose. Renders as article-row, which is the right block for
+	//     image + heading + body without pretending to be a doctor card.
+	//
+	// (c) Treatment-page intro shape — left column carries the section
+	//     heading, no image. Renders as intro-doctor-card with the
+	//     writer's heading + body (chrome supplies the doctor portrait
+	//     and contact info).
 	$left_title     = trim( (string) ( $s['left_title'] ?? '' ) );
 	$right_title    = trim( (string) ( $s['right_title'] ?? '' ) );
 	$right_subtitle = (string) ( $s['right_subtitle'] ?? '' );
+	$right_label    = trim( (string) ( $s['right_label'] ?? '' ) );
 	$left_image     = rehab_acf_image( (int) ( $s['left_image_id'] ?? 0 ) );
+	$reversed       = ! empty( $s['reversed'] );
 
-	$is_team_profile = ( '' === $left_title ) && ( null !== $left_image ) && ( '' !== $right_title );
-	if ( $is_team_profile ) {
+	$has_image_card_shape = ( '' === $left_title ) && ( null !== $left_image ) && ( '' !== $right_title );
+
+	if ( $has_image_card_shape && '' !== $right_label ) {
+		// (a) team profile
 		return rehab_block_intro_doctor_card( [
 			'eyebrow'        => (string) ( $s['top_title'] ?? '' ),
 			'heading'        => $right_title,
@@ -224,6 +240,19 @@ function rehab_acf_map_columns( array $s ): string {
 		] );
 	}
 
+	if ( $has_image_card_shape ) {
+		// (b) generic image card — location / info section with a photo
+		return rehab_block_article_row( [
+			'background' => 'white',
+			'imageSide'  => $reversed ? 'right' : 'left',
+			'imageUrl'   => $left_image['url'],
+			'imageAlt'   => $left_image['alt'] ?: $right_title,
+			'heading'    => $right_title,
+			'body'       => rehab_acf_html_to_text( $right_subtitle ),
+		] );
+	}
+
+	// (c) treatment-page intro shape
 	return rehab_block_intro_doctor_card( [
 		'eyebrow' => (string) ( $s['top_title'] ?? '' ),
 		'heading' => $left_title,

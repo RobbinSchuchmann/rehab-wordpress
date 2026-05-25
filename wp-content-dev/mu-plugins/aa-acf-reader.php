@@ -109,6 +109,7 @@ function rehab_acf_read_section( int $post_id, int $idx, string $layout ): array
 				'left_image_id'  => (int) $get( 'left_column_media_image' ),
 				'right_title'    => (string) $get( 'right_column_heading_title' ),
 				'right_subtitle' => (string) $get( 'right_column_heading_subtitle' ),
+				'right_label'    => (string) $get( 'right_column_heading_label' ),
 				'right_image_id' => (int) $get( 'right_column_media_image' ),
 				'insert_cta'     => '1' === $get( 'insert_cta' ),
 				'reversed'       => '1' === $get( 'reversed' ),
