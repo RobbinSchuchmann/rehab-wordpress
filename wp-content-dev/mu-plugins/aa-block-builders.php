@@ -122,7 +122,8 @@ function rehab_block_cards_grid( string $heading, string $subheading, array $car
 		if ( ! empty( $card['url'] ) ) $ch .= '<a href="' . esc_url( $card['url'] ) . '">' . esc_html( $card['title'] ) . '</a>';
 		else                          $ch .= esc_html( $card['title'] );
 		$ch .= '</h3>';
-		if ( ! empty( $card['description'] ) ) $ch .= '<p class="rehab-card__desc">' . esc_html( $card['description'] ) . '</p>';
+		$desc = $card['description'] ?? ( $card['body'] ?? '' );
+		if ( $desc !== '' ) $ch .= '<p class="rehab-card__desc">' . esc_html( $desc ) . '</p>';
 		$ch .= '</div></article>';
 		$gut_cards  .= "<!-- wp:rehab/card " . $ca . " -->\n" . $ch . "\n<!-- /wp:rehab/card -->\n";
 		$inner_html .= $ch;
@@ -424,6 +425,7 @@ function rehab_block_article_row( array $a ): string {
 		'background' => 'white', 'imageSide' => 'left', 'imageAspect' => 'tall',
 		'imageUrl' => '', 'imageAlt' => '',
 		'eyebrow' => '', 'heading' => '', 'body' => '',
+		'listItems' => [],
 		'primaryText' => '', 'primaryUrl' => '',
 		'secondaryText' => '', 'secondaryUrl' => '',
 	];
@@ -449,6 +451,13 @@ function rehab_block_article_row( array $a ): string {
 	if ( $a['eyebrow'] ) $h .= '<span class="rehab-article-row__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
 	$h .= '<h2 class="rehab-article-row__heading">' . esc_html( $a['heading'] ) . '</h2>';
 	$h .= $body_html;
+	if ( ! empty( $a['listItems'] ) ) {
+		$h .= '<ul class="rehab-article-row__list">';
+		foreach ( $a['listItems'] as $li ) {
+			$h .= '<li>' . wp_kses( $li, [ 'strong' => [], 'em' => [], 'a' => [ 'href' => [], 'title' => [], 'target' => [], 'rel' => [] ] ] ) . '</li>';
+		}
+		$h .= '</ul>';
+	}
 	if ( $a['primaryText'] || $a['secondaryText'] ) {
 		$h .= '<div class="rehab-article-row__cta">';
 		if ( $a['primaryText'] ) $h .= '<a href="' . esc_url( $a['primaryUrl'] ) . '" class="rehab-btn rehab-btn--luxury">' . esc_html( $a['primaryText'] ) . '</a>';

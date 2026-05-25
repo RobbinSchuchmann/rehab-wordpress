@@ -49,6 +49,13 @@ registerBlockType( metadata.name, {
 										placeholder="Body paragraphs…"
 										allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
 									/>
+									{ a.listItems && a.listItems.length > 0 ? (
+										<ul className="rehab-article-row__list">
+											{ a.listItems.map( ( li, i ) => (
+												<li key={ i } dangerouslySetInnerHTML={ { __html: li } } />
+											) ) }
+										</ul>
+									) : null }
 									{ ( a.primaryText || a.secondaryText ) || true ? (
 										<div className="rehab-article-row__cta">
 											<span className="rehab-btn rehab-btn--luxury"><RichText tagName="span" value={ a.primaryText } onChange={ set( 'primaryText' ) } placeholder="Primary CTA (optional)…" allowedFormats={ [] } /></span>
@@ -78,6 +85,13 @@ registerBlockType( metadata.name, {
 							<RichText.Content tagName="span" className="rehab-article-row__eyebrow" value={ a.eyebrow } />
 							<RichText.Content tagName="h2" className="rehab-article-row__heading" value={ a.heading } />
 							<RichText.Content tagName="div" value={ a.body } />
+							{ a.listItems && a.listItems.length > 0 ? (
+								<ul className="rehab-article-row__list">
+									{ a.listItems.map( ( li, i ) => (
+										<li key={ i } dangerouslySetInnerHTML={ { __html: li } } />
+									) ) }
+								</ul>
+							) : null }
 							{ ( a.primaryText || a.secondaryText ) ? (
 								<div className="rehab-article-row__cta">
 									{ a.primaryText ? <a href={ a.primaryUrl } className="rehab-btn rehab-btn--luxury"><RichText.Content value={ a.primaryText } /></a> : null }

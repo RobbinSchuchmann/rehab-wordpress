@@ -66,6 +66,13 @@
       "type": "string",
       "default": ""
     },
+    "listItems": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
     "primaryText": {
       "type": "string",
       "default": ""

@@ -108,6 +108,34 @@
 	margin-top: 1rem;
 }
 
+.rehab-article-row__list {
+	list-style: none;
+	padding: 0;
+	margin: 1.25rem 0 0;
+	display: grid;
+	gap: 0.65rem;
+
+	li {
+		position: relative;
+		padding-left: 1.5rem;
+		color: var(--rehab-soft-charcoal);
+		font-size: 1.025rem;
+		line-height: 1.6;
+		font-weight: 300;
+	}
+
+	li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55rem;
+		width: 0.4rem;
+		height: 0.4rem;
+		border-radius: 50%;
+		background: var(--rehab-sage-text);
+	}
+}
+
 .rehab-article-row__cta {
 	display: flex;
 	gap: 0.75rem;
