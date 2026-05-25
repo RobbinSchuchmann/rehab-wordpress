@@ -195,14 +195,39 @@ function rehab_acf_map_banner( array $s ): string {
 }
 
 function rehab_acf_map_columns( array $s ): string {
-	// Legacy columns layout drives the intro-doctor-card on treatment pages:
-	// left column = heading text, right column = body copy. The doctor card
-	// chrome is supplied by template defaults (name/phone in the builder
-	// itself), so we don't try to mine them from ACF here.
+	// Two shapes share the legacy `columns` layout:
+	//
+	// 1. Treatment-page shape — left column carries the section heading,
+	//    right column carries the body copy. No image. Renders as the
+	//    intro-doctor-card with the writer's heading + body.
+	//
+	// 2. Team-profile shape — the page is *about* a single staff member.
+	//    Left column has the photo (left_image_id) but no title; right
+	//    column has the name (right_title) and bio (right_subtitle). We
+	//    wire the photo into doctorImageUrl and surface the name as the
+	//    block heading so the photo doesn't silently disappear.
+	$left_title     = trim( (string) ( $s['left_title'] ?? '' ) );
+	$right_title    = trim( (string) ( $s['right_title'] ?? '' ) );
+	$right_subtitle = (string) ( $s['right_subtitle'] ?? '' );
+	$left_image     = rehab_acf_image( (int) ( $s['left_image_id'] ?? 0 ) );
+
+	$is_team_profile = ( '' === $left_title ) && ( null !== $left_image ) && ( '' !== $right_title );
+	if ( $is_team_profile ) {
+		return rehab_block_intro_doctor_card( [
+			'eyebrow'        => (string) ( $s['top_title'] ?? '' ),
+			'heading'        => $right_title,
+			'body'           => rehab_acf_html_to_text( $right_subtitle ),
+			'doctorImageUrl' => $left_image['url'],
+			'doctorImageAlt' => $left_image['alt'] ?: $right_title,
+			'doctorLabel'    => '',  // suppress the default "Speak with our Director"
+			'doctorName'     => '',  // name is already the heading; no duplicate
+		] );
+	}
+
 	return rehab_block_intro_doctor_card( [
-		'eyebrow' => $s['top_title'] ?? '',
-		'heading' => $s['left_title'] ?? '',
-		'body'    => rehab_acf_html_to_text( $s['right_subtitle'] ?? '' ),
+		'eyebrow' => (string) ( $s['top_title'] ?? '' ),
+		'heading' => $left_title,
+		'body'    => rehab_acf_html_to_text( $right_subtitle ),
 	] );
 }
 
@@ -215,25 +240,94 @@ function rehab_acf_map_article( array $s ): string {
 	$bg_class = (string) ( $s['bg_class'] ?? '' );
 	$bg       = str_contains( $bg_class, 'bg-light-green' ) ? 'sage' : 'white';
 
-	// Body is the long-form copy. The article-row helper splits on blank
-	// lines and esc_html()s each chunk — so we strip HTML first to avoid
-	// rendering literal `<p>` text.
-	$body = rehab_acf_html_to_text( $s['content'] ?? '' );
-
-	// If `content` was empty, the subtitle carries the prose instead (see
-	// section 5 on cocaine).
-	if ( '' === trim( $body ) ) {
-		$body = rehab_acf_html_to_text( $s['subtitle'] ?? '' );
+	$content = (string) ( $s['content'] ?? '' );
+	if ( '' === trim( $content ) ) {
+		$content = (string) ( $s['subtitle'] ?? '' );
 	}
 
-	return rehab_block_article_row( [
+	// Legacy article `content` fields often contain inline <h2>–<h4>
+	// banners (e.g. "THE BENEFITS OF INPATIENT HEROIN REHAB", or the
+	// <h4> sub-questions on /stages-of-change-addiction/) that the
+	// live site renders as separate sections. Split the content on those
+	// boundaries so we can emit them as standalone heading blocks rather
+	// than flattening them into the article-row body. The first text
+	// chunk (everything before the first inline heading) stays inside the
+	// article-row's body for the lede look; subsequent chunks render as
+	// full-width heading + paragraph blocks below.
+	$chunks = rehab_acf_split_html_into_blocks( $content );
+
+	$first_body = '';
+	if ( ! empty( $chunks ) && 'paragraphs' === $chunks[0][0] ) {
+		$first_body = array_shift( $chunks )[1];
+	}
+
+	$out = rehab_block_article_row( [
 		'background' => $bg,
 		'imageSide'  => ( $s['reverse'] ?? false ) ? 'right' : 'left',
 		'imageUrl'   => $image['url'] ?? '',
 		'imageAlt'   => $image['alt'] ?? ( $s['title'] ?? '' ),
 		'heading'    => $s['title'] ?? '',
-		'body'       => $body,
+		'body'       => $first_body,
 	] );
+
+	foreach ( $chunks as $chunk ) {
+		if ( 'heading' === $chunk[0] ) {
+			$level = (int) ( $chunk[2] ?? 2 );
+			$attrs = 2 === $level ? '' : '{"level":' . $level . '} ';
+			$out  .= "<!-- wp:heading {$attrs}-->\n";
+			$out  .= '<h' . $level . ' class="wp-block-heading">' . esc_html( $chunk[1] ) . '</h' . $level . ">\n";
+			$out  .= "<!-- /wp:heading -->\n\n";
+		} else {
+			foreach ( preg_split( "/\n\s*\n/", trim( $chunk[1] ) ) as $para ) {
+				$para = trim( $para );
+				if ( '' === $para ) {
+					continue;
+				}
+				$out .= "<!-- wp:paragraph -->\n<p>" . esc_html( $para ) . "</p>\n<!-- /wp:paragraph -->\n\n";
+			}
+		}
+	}
+
+	return $out;
+}
+
+/**
+ * Split a rich-text HTML blob on inline <h2>–<h4> boundaries.
+ *
+ * Returns a sequence of `[type, text, ...]` tuples:
+ *   [ 'paragraphs', "text\n\nmore text" ]
+ *   [ 'heading',    "THE BENEFITS",   2 ]   // level captured from the source tag
+ *
+ * Heading inner-text is flattened to plain text (any inline <strong> etc.
+ * is dropped); paragraph chunks are run through rehab_acf_html_to_text()
+ * to preserve paragraph breaks while stripping the rest.
+ */
+function rehab_acf_split_html_into_blocks( string $html ): array {
+	// PREG_SPLIT_DELIM_CAPTURE returns: [text, level, heading_text, text, level, heading_text, ...]
+	$parts = preg_split(
+		'#<\s*h([2-4])[^>]*>(.*?)<\s*/\s*h\1\s*>#is',
+		(string) $html,
+		-1,
+		PREG_SPLIT_DELIM_CAPTURE
+	);
+
+	$out = [];
+	$n   = count( $parts );
+	$i   = 0;
+	while ( $i < $n ) {
+		$text = rehab_acf_html_to_text( (string) $parts[ $i++ ] );
+		if ( '' !== $text ) {
+			$out[] = [ 'paragraphs', $text ];
+		}
+		if ( $i < $n ) {
+			$level   = (int) $parts[ $i++ ];
+			$heading = trim( wp_strip_all_tags( (string) ( $parts[ $i++ ] ?? '' ) ) );
+			if ( '' !== $heading ) {
+				$out[] = [ 'heading', $heading, $level ];
+			}
+		}
+	}
+	return $out;
 }
 
 function rehab_acf_map_tabs( array $s ): string {
@@ -275,9 +369,24 @@ function rehab_acf_map_faq( array $s ): string {
 	// Pass int IDs straight through — the builder resolves each via the FAQ
 	// CPT and persists `cptIds` on the block attrs so render.php can
 	// re-query them at request time.
+	//
+	// When `faq_ids` is empty, the legacy layout was a "show every FAQ"
+	// index (the /faq/ landing page is the canonical example). Falls back
+	// to a query of every published FAQ post, capped at 100.
+	$ids = $s['faq_ids'] ?? [];
+	if ( empty( $ids ) ) {
+		$ids = get_posts( [
+			'post_type'      => 'faq',
+			'post_status'    => 'publish',
+			'posts_per_page' => 100,
+			'fields'         => 'ids',
+			'orderby'        => 'menu_order title',
+			'order'          => 'ASC',
+		] );
+	}
 	return rehab_block_faq(
 		$s['title'] ?? 'Frequently Asked Questions',
-		$s['faq_ids'] ?? [],
+		$ids,
 		'cream'
 	);
 }
