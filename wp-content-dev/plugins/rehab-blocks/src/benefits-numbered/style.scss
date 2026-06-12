@@ -1,9 +1,28 @@
+/* This block renders as a top-level block with no `.rehab-container` wrapper
+   (unlike every other rehab/* section). On a wide viewport that left it
+   spanning full-bleed while sibling sections cap at the container width.
+   Mirror the `.rehab-container` content box here so the grid's border aligns
+   exactly with the content edge of every other section, at every breakpoint.
+   Padding scale matches .rehab-container: 1.5rem / 2rem (≥1024) / 3rem (≥1440). */
 .rehab-benefits-numbered {
+	box-sizing: border-box;
+	width: calc(100% - 3rem);
+	max-width: calc(var(--rehab-container-max) - 3rem);
+	margin: 2.5rem auto 0;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 0;
-	margin-top: 2.5rem;
 	border: 1px solid rgba(190, 179, 158, 0.3);
+
+	@media (min-width: 1024px) {
+		width: calc(100% - 4rem);
+		max-width: calc(var(--rehab-container-max) - 4rem);
+	}
+
+	@media (min-width: 1440px) {
+		width: calc(100% - 6rem);
+		max-width: calc(var(--rehab-container-max) - 6rem);
+	}
 
 	@media (max-width: 720px) {
 		grid-template-columns: 1fr;
