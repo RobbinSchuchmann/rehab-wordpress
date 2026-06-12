@@ -50,3 +50,6 @@ docker-compose.override.yml
 # Misc
 *.pid
 *.bak
+
+# Linear/gh workflow — local secrets (keep .mcp.json and .mcp.env.example tracked)
+.mcp.env
