@@ -29,6 +29,384 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function rehab_treatment_v3_specs(): array {
 	return [
+		4611 => [
+			'slug' => 'substance-abuse-treatment',
+			'programTag' => 'substance abuse program',
+			'hero' => [
+				'eyebrow' => 'Substance abuse treatment · Hua Hin',
+				'headline' => 'Break free from substance abuse, privately, in Thailand',
+				'lede' => "A discreet, doctor-led residential program at Thailand's leading luxury rehab. Medical detox, evidence-based therapy and a hard cap of twelve clients, so recovery is built around you and never a template.",
+				'stat3Label' => 'Years treating substance addiction',
+			],
+			'signs' => [
+				'heading' => 'Recognising the signs is the first step',
+				'subheading' => "Substance abuse rarely announces itself. It builds quietly, until casual use starts to take control. If several of these feel familiar, it's worth a conversation.",
+				'card1Title' => 'Common signs of substance abuse',
+				'card1Items' => [
+					'Needing larger amounts to feel the same effect as your tolerance builds',
+					'Lasting fatigue, weight changes, bloodshot eyes or a decline in personal hygiene',
+					'Using the substance to feel normal rather than for any original reason',
+					'Anxiety, low mood or disrupted sleep that worsens between uses',
+					'Hiding how much you use from family, friends or your doctor',
+				],
+				'card2Title' => 'Withdrawal symptoms during detox',
+				'card2Items' => [
+					'Flu-like symptoms when stopping opioids: muscle aches, restlessness and diarrhea',
+					'Rebound anxiety, agitation and insomnia, with seizures possible in severe cases',
+					'A heavy crash after stopping stimulants: fatigue, low mood and long hours of sleep',
+					'Irregular heart rate and blood pressure in the early days of withdrawal',
+					'Strong cravings for the substance, often strongest when symptoms peak',
+				],
+			],
+			'holistic' => [
+				'eyebrow' => 'Our approach',
+				'heading' => 'A holistic approach to substance abuse treatment',
+				'body' => "Overcoming substance abuse asks for more than abstinence or strong will. It means looking honestly at the root causes. Substance abuse describes using a substance in a way it was never intended, or in amounts beyond the recommended dose, and over time that casual use can harden into a substance use disorder where the body craves more and withdrawal sets in without it. Our holistic therapies do not treat the disorder alone, they find and deal with what sits underneath it.\n\nMany people who come to us for substance use treatment are also living with a mental health condition. Where most rehabs treat one or the other, our dual-diagnosis approach tackles the physical dependence and the accompanying mental illness at the same time. All of it happens in a private, resort-style setting in Hua Hin, with a clinical team beside you at every step.",
+			],
+			'phases' => [
+				'heading' => 'Three pillars of substance abuse recovery',
+				'items' => [
+					[
+						'phase' => 'PHASE 01',
+						'label' => 'Medical detox',
+						'h3' => 'A safe, supervised withdrawal',
+						'paragraphs' => [
+							'Clearing a substance from the body can be painful, and with some drug classes, dangerous.',
+							'Our medical team designs detox around the substance itself: medication-assisted withdrawal for opioids, supported rest through a stimulant crash, and careful management of alcohol and sedative withdrawal where seizures are a risk. You are monitored around the clock in a private, controlled environment, with comfort medication prescribed to ease symptoms where appropriate.',
+						],
+						'listItems' => [
+							'Round-the-clock care from a certified medical team',
+							'Protocols matched to the substance and severity',
+							'Comfort medication to ease withdrawal symptoms',
+						],
+						'asideQuote' => '"Withdrawal is different for everyone. Our job is to keep it safe, and to make it as comfortable as it can be."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 02',
+						'label' => 'Behavioural therapy',
+						'h3' => 'Understanding why the substance took hold',
+						'paragraphs' => [
+							'Clearing the substance from your body is the start. The deeper work is understanding why you came to depend on it.',
+							'In private one-on-one sessions, our therapists help you examine the moments that led to the dependence and the cues, cravings and automatic responses that keep it going. Because so many clients also carry a mental health condition, that work runs alongside treatment for the anxiety, depression or trauma underneath, so you leave with practical strategies for staying well long after you go home.',
+						],
+						'listItems' => [
+							'Private one-on-one therapy sessions',
+							'Dual-diagnosis care for the issues beneath the addiction',
+							'Practical relapse-prevention strategies',
+						],
+						'asideQuote' => '"Stopping the substance is the beginning. Understanding why you needed it is the recovery."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 03',
+						'label' => 'Holistic & aftercare',
+						'h3' => 'Rebuilding a life without the substance',
+						'paragraphs' => [
+							'Lasting recovery means treating the body and mind as one, and finding new ways to meet the needs the substance once filled.',
+							'Mindfulness meditation is woven into your daily routine, guided by experienced coaches, alongside wellness practices that rebuild sleep, calm and stability. Before you leave, we build a structured aftercare plan so the foundation you set in Hua Hin holds at home.',
+						],
+						'listItems' => [
+							'Guided mindfulness meditation coaching',
+							'Wellness practices built into the daily routine',
+							'A structured aftercare plan for life at home',
+						],
+						'asideQuote' => '"Mindfulness puts a pause between an impulse and a decision. That pause is where recovery lives."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+				],
+			],
+			'inpatient' => [
+				'body' => 'Quitting a substance at home is hard for a simple reason: the supply is rarely far away, and the routines and social circles that built the dependence are everywhere you look. Inpatient treatment at The Diamond removes you from those daily triggers during the most fragile early weeks, and places you in a calm, private setting where nothing distracts from recovery. With a maximum of twelve clients, your detox, therapy schedule and daily rhythm are shaped around you, never around a template.',
+			],
+			'prose' => [
+				'heading' => 'Is it time to consider substance abuse rehab?',
+				'paragraphs' => [
+					"Substance abuse describes using a substance in a way it was never intended, or in amounts that exceed the recommended dose, with harmful consequences for a person's health. The substances involved range widely: alcohol, illicit drugs and prescription medication. The most commonly abused include marijuana, alcohol, opiates such as codeine, morphine and heroin, cocaine, and methamphetamine. Each carries its own risks, but all share the same trajectory when use is left unchecked.",
+					"Abuse and addiction are not the same thing. Substance abuse indicates that a person still has control over their life and their habit, and is still able to stop and regain control. Substance addiction, also known as substance use disorder, describes a state where a person is physically or psychologically dependent: the body craves increased doses, and withdrawal symptoms appear when the substance is not taken. At that stage, professional help is needed.",
+					"The shift from one to the other is rarely sudden. Without timely and effective intervention, casual use turns into severe abuse, and then into addiction. Tolerance builds, so the same amount does less and more is needed to reach the original effect. Stopping brings on withdrawal, which makes it harder to quit and easier to keep using just to feel normal, and as the cycle tightens, the original reason for using is no longer what is driving it.",
+					'If any of this feels familiar, in your own life or in someone you love, acknowledging it is the hardest step, and the most important one. Recovering alone is close to impossible once dependence sets in; a medically supervised detox followed by structured, personalised therapy gives recovery a far stronger footing. Our team at The Diamond Rehab Thailand can talk you through the admissions process confidentially and help you decide whether residential treatment is the right next step.',
+				],
+			],
+			'faqCptIds' => [],
+			'faqNew' => [
+				[
+					'question' => 'What is substance abuse?',
+					'answer' => 'Substance abuse describes using a substance in a way it was never intended, or in amounts beyond the recommended dose, in a way that harms your health. Left unchecked, it can develop into substance addiction, also known as substance use disorder. At The Diamond Rehab Thailand our clinical team treats the full range, from early misuse to entrenched dependence, in a private residential setting in Hua Hin.',
+				],
+				[
+					'question' => 'Which substances do you treat at The Diamond Rehab?',
+					'answer' => 'We treat dependence on alcohol, illicit drugs and prescription medication, including marijuana, opioids such as codeine, morphine and heroin, cocaine and methamphetamine. Detox is matched to the specific substance and the severity of use, and your therapy program is then built around your individual clinical picture.',
+				],
+				[
+					'question' => "What is the difference between substance abuse and substance addiction?",
+					'answer' => 'Substance abuse means a person still has a measure of control and can still stop and regain it. Substance addiction, or substance use disorder, is a state of physical or psychological dependence where the body craves increased doses and withdrawal symptoms appear when the substance is stopped. The earlier the point at which help is sought, the easier recovery tends to be.',
+				],
+				[
+					'question' => 'Why choose residential treatment in Thailand?',
+					'answer' => 'Inpatient care removes you from the supply, routines and social circles that sustain a habit during the most fragile early weeks. At The Diamond Rehab Thailand you recover in a private, resort-style setting in Hua Hin, with round-the-clock access to doctors and therapists and a hard cap of twelve clients, so world-class treatment comes at a fraction of the cost of comparable Western rehabs.',
+				],
+				[
+					'question' => 'What happens in the first week?',
+					'answer' => 'It begins with a free, confidential call with our intake team, followed by a clinical assessment in which our psychiatrist evaluates the severity of the addiction and any mental-health needs and recommends a length of stay. We then arrange airport collection, settle you into private accommodation, and begin your bespoke program, starting with medically supervised detox if it is required.',
+				],
+			],
+		],
+		8340 => [
+			'slug' => 'couples-treatment-thailand',
+			'programTag' => 'couples program',
+			'hero' => [
+				'eyebrow' => 'Couples treatment · Hua Hin',
+				'headline' => "Recover together at Thailand's leading rehab center",
+				'lede' => "A discreet, doctor-led residential program for couples facing addiction together, at The Diamond Rehab Thailand. Individual and joint therapy, a bespoke in-patient plan and a hard cap of twelve clients, so your recovery and your relationship are rebuilt side by side.",
+				'stat3Label' => 'Years treating couples in recovery',
+			],
+			'signs' => [
+				'heading' => 'Recognising the signs is the first step',
+				'subheading' => "When two people are caught in addiction, the patterns become hard to see from the inside. The signs show up in the substance use and in the relationship itself. If several feel familiar, it's worth a conversation.",
+				'card1Title' => 'Signs addiction is affecting your relationship',
+				'card1Items' => [
+					'Drinking or using has become the centre of your time together',
+					'Arguments, broken promises and rising mistrust',
+					'One partner covering for, or enabling, the other',
+					'Emotional or financial strain that keeps deepening',
+					'Growing distance, secrecy and lost intimacy',
+				],
+				'card2Title' => 'Signs you may benefit from couples rehab',
+				'card2Items' => [
+					'Past attempts to cut down on your own have not held',
+					'Each partner triggers the other back into use',
+					'You want to recover together rather than apart',
+					'Codependent patterns are holding the addiction in place',
+					'You are ready to rebuild communication and trust',
+				],
+			],
+			'holistic' => [
+				'eyebrow' => 'Two people, one shared recovery',
+				'heading' => 'A holistic approach to couples treatment',
+				'body' => "Addiction rarely lives in one person alone. When both partners are using, the patterns of one feed the patterns of the other, and willpower at home seldom breaks a cycle that the relationship keeps reinforcing. Treating couples together means treating those patterns directly, not just the substance.\n\nAt The Diamond each couple's needs and circumstances are carefully considered, and our therapists build a bespoke in-patient plan around you both. You'll move through individual sessions and joint therapy, supported by holistic practice such as yoga, beach walk meditation and art therapy, all inside a calm, private setting designed to make honest work possible.",
+			],
+			'phases' => [
+				'heading' => 'Three phases of couples recovery',
+				'items' => [
+					[
+						'phase' => 'PHASE 01',
+						'label' => 'Medical detox & stabilisation',
+						'h3' => 'A safe, steady start for both partners',
+						'paragraphs' => [
+							'Recovery cannot begin while substances are still in the body, so the first days are about safety and stability for each of you.',
+							'Where detox is required, it is medically supervised by our doctor-led clinical team, with round-the-clock care through the most fragile early weeks. Both partners are stabilised and settled into a calm daily routine, so the real therapeutic work can follow on solid ground.',
+						],
+						'listItems' => [
+							'Medically supervised detox where required',
+							'24/7 doctor-led clinical supervision',
+							'A steadying routine of rest, structure and care',
+						],
+						'asideQuote' => '"Before a couple can rebuild anything together, each person has to be safe and steady in their own recovery. That is where we begin."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 02',
+						'label' => 'Individual & couples therapy',
+						'h3' => 'Healing as people, and as partners',
+						'paragraphs' => [
+							'The heart of the program is therapy that works on two levels at once, the individual and the relationship.',
+							'Through one-to-one sessions each partner addresses their own addiction and its roots, while joint sessions rebuild communication, trust and healthier ways of relating. We draw on evidence-based therapies including cognitive behavioural therapy and dialectical behaviour therapy, so the patterns that held the addiction in place can be recognised and changed.',
+						],
+						'listItems' => [
+							'Individual one-to-one sessions for each partner',
+							'Joint couples therapy to rebuild trust and communication',
+							'CBT and DBT to change behavioural patterns',
+						],
+						'asideQuote' => '"Couples work asks each person to do their own recovery, and then to turn and face the relationship honestly. Both halves matter."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 03',
+						'label' => 'Holistic & aftercare',
+						'h3' => 'Built for life after the retreat',
+						'paragraphs' => [
+							'Recovery holds when a couple has shared practices and a clear plan to carry home.',
+							'Experiential workshops and wellness activities, from couples yoga and guided meditation to nature-based excursions, give partners a healthier foundation to build on together. Before you leave we design an aftercare plan for you both, with ongoing therapy and practical strategies, so the progress you make here travels home with you.',
+						],
+						'listItems' => [
+							'Experiential workshops and wellness activities together',
+							'Yoga, meditation and holistic daily practice',
+							'A personal aftercare plan for both partners',
+						],
+						'asideQuote' => '"Leaving is not the end of treatment. A couple goes home with shared tools, a plan, and people who still answer when you call."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+				],
+			],
+			'inpatient' => [
+				'body' => 'Trying to recover at home means waking every day inside the same environment, social circles and routines that feed the addiction for both of you. A residential retreat in Hua Hin puts real distance between you and those triggers and replaces them with structure: medically supervised care, daily therapy and round-the-clock support, so all of your energy as a couple goes into getting well.',
+			],
+			'prose' => [
+				'heading' => 'Is it time to consider couples rehab?',
+				'paragraphs' => [
+					"Couples addiction treatment is residential rehab designed for two partners who are both struggling with alcohol or drugs and want to recover at the same time, in the same place. Rather than sending each person to a separate facility, it treats the individuals and the relationship together, on the understanding that the two are deeply entangled.",
+					"What makes treating couples different is the dynamic between them. When both partners use, the behaviour of one routinely triggers the other, and patterns such as enabling and codependency can quietly hold the addiction in place. Recovering apart often means returning home to the very relationship that reinforced the problem, which is why a shared program can be so effective.",
+					"At The Diamond, each couple's unique needs and circumstances are carefully considered, and a team of experienced therapists and medical professionals develops a bespoke in-patient plan tailored to the relationship. The program combines individual and joint therapy with evidence-based approaches such as cognitive behavioural therapy and dialectical behaviour therapy, alongside complementary work like art therapy, beach walk meditation and yoga, so both the addiction and the relationship are addressed.",
+					'Acknowledging that you both need help takes real courage, and you do not have to find the way back on your own. If addiction has settled over your relationship and standard measures have not been enough, a quiet, confidential conversation with our team is a good place to start.',
+				],
+			],
+			'faqCptIds' => [],
+			'faqNew' => [
+				[
+					'question' => 'Can my partner and I attend rehab together?',
+					'answer' => 'Yes. Our couples treatment program is designed for two partners who are both facing addiction and want to recover at the same time. Each couple is assessed individually, and our team builds a bespoke in-patient plan around your shared situation, with individual sessions for each of you alongside joint therapy. Because we keep a hard cap of twelve clients on site, both partners receive close, personalised attention throughout the stay.',
+				],
+				[
+					'question' => 'How is couples rehab different from individual treatment?',
+					'answer' => 'Couples rehab treats the individuals and the relationship at the same time. You each do your own one-to-one work to address your addiction and its roots, while joint sessions focus on communication, trust and the patterns between you, such as enabling and codependency. The aim is that you return home to a relationship that supports recovery rather than one that quietly reinforced the addiction.',
+				],
+				[
+					'question' => 'What therapies are used in the couples program?',
+					'answer' => 'The program combines individual and joint therapy with evidence-based approaches including cognitive behavioural therapy and dialectical behaviour therapy. These are supported by complementary and experiential work such as art therapy, beach walk meditation, couples yoga and guided meditation. Our therapists tailor the mix to each couple so that both the addiction and the relationship are addressed.',
+				],
+				[
+					'question' => 'Do both partners need detox?',
+					'answer' => "Not always. Whether detox is required depends on each partner's substance use and clinical picture, so we assess you both individually on arrival. Where detox is needed it is medically supervised by our doctor-led clinical team, with round-the-clock care, so each of you is safe and stable before the therapeutic work begins.",
+				],
+				[
+					'question' => 'How long does couples treatment take?',
+					'answer' => "It depends on the severity of each partner's addiction and your circumstances as a couple. Residential programs typically run for 30, 60 or 90 days, and our psychiatrist will recommend the right length of stay after your initial assessment. Recovery does not end at discharge: you both leave with an aftercare plan, including ongoing therapy where appropriate, so your progress continues at home.",
+				],
+			],
+		],
+		4456 => [
+			'slug' => 'traumatic-reenactment',
+			'programTag' => 'trauma program',
+			'hero' => [
+				'eyebrow' => 'Traumatic reenactment treatment · Hua Hin',
+				'headline' => 'Break the cycle of traumatic reenactment, privately, in Thailand',
+				'lede' => "A discreet, doctor-led residential program at Thailand's leading luxury rehab. Psychiatric assessment, trauma-focused psychotherapy and a hard cap of twelve clients, so recovery is built around your history and never a template.",
+				'stat3Label' => 'Years treating trauma',
+			],
+			'signs' => [
+				'heading' => 'Recognising the pattern is the first step',
+				'subheading' => "Traumatic reenactment is unconscious, so it often goes unnamed for years. The same painful situations keep returning, and it can feel like fate rather than a pattern. If several of these feel familiar, it's worth a conversation.",
+				'card1Title' => 'Emotional and behavioural signs',
+				'card1Items' => [
+					'Feeling drawn again and again to people who hurt you',
+					'Reliving old feelings of neglect, abuse, betrayal or abandonment',
+					'Struggling to tell past emotional pain from the present moment',
+					'A compulsion to repeat or recreate the original trauma',
+					'Intense shame, helplessness or anger that seems out of proportion',
+				],
+				'card2Title' => 'How it shows up in daily life',
+				'card2Items' => [
+					'Repeating the same destructive dynamics across relationships',
+					'Slipping into fixed roles of victim, rescuer or persecutor',
+					'Choosing partners or situations that echo an early wound',
+					'Difficulty trusting, setting boundaries or feeling safe',
+					'Turning to risky behaviours to numb feelings you cannot process',
+				],
+			],
+			'holistic' => [
+				'eyebrow' => 'A pattern, not a character flaw',
+				'heading' => 'A holistic approach to traumatic reenactment',
+				'body' => "Traumatic reenactment is not weakness or bad luck. It is the mind's attempt to master pain it was never able to process, and willpower alone rarely breaks it, because the pattern runs beneath conscious awareness. Pushing through on your own tends to recreate the very situations that caused the harm.\n\nYou'll move through a thorough psychiatric assessment into daily trauma-focused psychotherapy, one-to-one and in small groups, supported by fitness, mindfulness and nutrition, all inside a calm, private setting in Hua Hin designed to make this sensitive work feel safe.",
+			],
+			'phases' => [
+				'heading' => 'Three pillars of trauma recovery',
+				'items' => [
+					[
+						'phase' => 'PHASE 01',
+						'label' => 'Assessment & stabilisation',
+						'h3' => 'A safe, careful start',
+						'paragraphs' => [
+							'Trauma work cannot begin until you feel safe, and the first days are about creating that stability.',
+							'Our psychiatrist begins with a comprehensive assessment to understand your history and what sits beneath the pattern, then builds a gentle early routine of rest, sleep and structure. Where appropriate, any medication is reviewed and adjusted by the psychiatrist, always as a support to therapy rather than the whole answer.',
+						],
+						'listItems' => [
+							'Comprehensive psychiatric assessment on arrival',
+							'A steadying routine of rest, sleep and structure',
+							'Medication review by a psychiatrist where appropriate',
+						],
+						'asideQuote' => '"You cannot process trauma while you still feel under threat. The first task is to make you feel safe, so the real work can begin."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 02',
+						'label' => 'Trauma-focused therapy',
+						'h3' => 'Getting to the root of the pattern',
+						'paragraphs' => [
+							'Trauma-focused psychotherapy sits at the centre of your days here, working to separate the past from the present.',
+							'Through daily one-to-one sessions and small group work, you will learn to recognise the reenactment pattern as it happens and respond differently, exploring the original wounds with experienced therapists rather than being driven by them. No group meeting is ever mandatory, and the pace is always yours.',
+						],
+						'listItems' => [
+							'Daily one-to-one sessions with experienced therapists',
+							'Trauma-focused work to address the original wound',
+							'Optional small group work, never mandatory',
+						],
+						'asideQuote' => '"Reenactment convinces you that the past is happening again. Therapy teaches you to recognise that voice, and then to answer it differently."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 03',
+						'label' => 'Holistic & aftercare',
+						'h3' => 'Built for life after the retreat',
+						'paragraphs' => [
+							'Recovery holds when mind and body are rebuilt together, and when new patterns have somewhere to take root.',
+							'Fitness, mindfulness, sleep and nutrition become part of your daily rhythm, and before you leave we design a personal aftercare plan, with ongoing therapy and practical strategies, so the progress you make here travels home with you.',
+						],
+						'listItems' => [
+							'Fitness, mindfulness, sleep and nutrition every day',
+							'A personal aftercare plan before you leave',
+							'Practical strategies for the months ahead',
+						],
+						'asideQuote' => '"Leaving is not the end of treatment. You go home with a plan, and with people who still answer when you call."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+				],
+			],
+			'inpatient' => [
+				'body' => 'Trying to heal at home means staying inside the same relationships and environments that keep the reenactment cycle alive. A residential retreat puts real distance between you and those triggers and replaces them with structure: daily light, movement and rest, regular trauma-focused therapy and round-the-clock support, so all of your energy goes into breaking the pattern.',
+			],
+			'prose' => [
+				'heading' => 'Is it time to consider a trauma retreat?',
+				'paragraphs' => [
+					'Traumatic reenactment is the reexperiencing of unresolved feelings of neglect, abuse, betrayal or abandonment. It happens in trauma survivors as a subconscious emotional response, where the original feelings are so intense that they were never fully processed, and the mind recreates the original trauma in an attempt to finally master it.',
+					"In his work Beyond the Pleasure Principle, Sigmund Freud described this as repetition compulsion, an attempt to take control of the psychological responses left behind by earlier trauma. In practice it often looks like being drawn, again and again, to the same toxic relationships and dynamics, struggling all the while to separate past emotional pain from what is actually happening in the present.",
+					'These dynamics are sometimes described through the trauma triangle, with its three roles of victim, rescuer and persecutor, each a different way of avoiding self-responsibility. The trauma underneath can be acute, following a single event, chronic, after repeated long-term harm such as domestic abuse, or complex, built from many traumatic experiences within relationships. Whatever its shape, the pattern tends to entrench over time, and some people turn to alcohol or other risky behaviours to numb feelings they cannot process.',
+					'Acknowledging that the same pain keeps returning takes real courage, and you do not have to break the cycle on your own. If traumatic reenactment has settled over your life, or the life of someone you love, and standard measures have not been enough, a quiet, confidential conversation with our team is a good place to start.',
+				],
+			],
+			'faqCptIds' => [],
+			'faqNew' => [
+				[
+					'question' => 'What is traumatic reenactment?',
+					'answer' => 'Traumatic reenactment is the reexperiencing of unresolved feelings of neglect, abuse, betrayal or abandonment. It occurs in trauma survivors as a subconscious emotional response: because the original feelings were too intense to process, the mind recreates the trauma in an attempt to master it. Sigmund Freud described this as repetition compulsion in Beyond the Pleasure Principle. In daily life it often shows up as being repeatedly drawn to the same painful relationships and situations.',
+				],
+				[
+					'question' => 'How is traumatic reenactment treated at a residential retreat?',
+					'answer' => 'Treatment moves through clear steps: a thorough psychiatric assessment to understand your history, a personalised treatment plan, then daily trauma-focused psychotherapy supported by holistic practice, with the plan reviewed and adjusted as you progress. Therapy is the core of the program, one-to-one and in optional small groups, alongside complementary approaches such as mindfulness, fitness and nutrition. Before discharge we prepare a personal aftercare plan so your progress continues at home.',
+				],
+				[
+					'question' => 'What is the trauma triangle?',
+					'answer' => 'The trauma triangle describes the relationship dynamics and roles often seen in trauma survivors, made up of three positions: the victim, who feels helpless and takes no responsibility; the rescuer, who controls the situation by focusing on others while neglecting their own feelings; and the persecutor, who blames others and reacts with anger. All three avoid self-responsibility in different ways, and recognising which role you fall into is often an important part of therapy.',
+				],
+				[
+					'question' => 'What are the three types of trauma?',
+					'answer' => 'Clinicians often distinguish three types. Acute trauma results from a single traumatic event. Chronic trauma develops from repeated, long-term experiences such as domestic abuse or sustained violence. Complex trauma builds from multiple traumatic events, often experienced within close relationships. Understanding which type underlies your reenactment pattern helps our psychiatrist and therapists shape the right approach for you.',
+				],
+				[
+					'question' => 'How long does trauma treatment take?',
+					'answer' => 'It depends on the depth of the trauma and your personal circumstances. Residential programs typically run for 30, 60 or 90 days, and a psychiatrist will recommend the right length of stay after your initial assessment. Trauma work is paced carefully and never rushed. Recovery does not end at discharge: you leave with an aftercare plan, including ongoing therapy where appropriate, to help the new patterns hold.',
+				],
+			],
+		],
 		867 => [
 			'slug' => 'ice',
 			'programTag' => 'ice program',
