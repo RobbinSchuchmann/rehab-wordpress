@@ -273,6 +273,10 @@
 	font-size: 1.0625rem;
 	line-height: 1.78;
 	color: var(--rehab-soft-charcoal);
+	/* Break long unbreakable tokens (chemical names like
+	   "3,4-Methylenedioxymethamphetamine", URLs, run-on words) instead of
+	   letting them overflow the narrow column and widen the page on mobile. */
+	overflow-wrap: break-word;
 }
 
 .rehab-article__body p { margin: 0 0 1.5rem; }
