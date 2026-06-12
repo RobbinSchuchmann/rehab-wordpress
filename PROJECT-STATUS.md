@@ -29,7 +29,7 @@ Project **"Website v3 rollout"**, team `REH`, assignee Robbin. Code work only. C
 | ID | Issue (imperative title) | Type | Priority | Note |
 |---|---|---|---|---|
 | REH-1 | Roll team-profile template across ~36 member pages | Feature | Medium | pilot done (Eugene Pretorius, page 11933) |
-| REH-2 | Close treatment-template leftovers (3 conversions + 6 article reclassifications) | Improvement | Medium | |
+| REH-2 | Close treatment-template leftovers (3 conversions + 6 article reclassifications) | Improvement | Medium | ✅ **Done** — 3 pages converted to v3, 6 reclassified to articles |
 | REH-3 | Design + implement article/blog template (355 pages) | Feature | High | blocked on design bundle |
 | REH-4 | Design + implement treatment hub (/all-treatments/) | Feature | Medium | blocked on design bundle |
 | REH-5 | Rebuild remaining core pages (Hua Hin, Testimonials, Programs, Careers, Superannuation, policies) | Feature | Medium | |
@@ -46,7 +46,8 @@ Project **"Website v3 rollout"**, team `REH`, assignee Robbin. Code work only. C
 
 Detailed build notes live in auto-memory: `memory/treatment-design-v3.md` (loads automatically each session). Summary:
 
-- **32 treatment pages** rebuilt to the v3 design (all substance, prescription, mental-health and behavioural conditions + the two hubs). Driven by `aa-treatment-v3-specs.php` + oneshots in `zz-oneshot.php`.
+- **35 treatment pages** rebuilt to the v3 design (the original 32 + the 3 REH-2 conversions: couples 8340, substance-abuse hub 4611, traumatic reenactment 4456). Driven by `aa-treatment-v3-specs.php` + oneshots in `zz-oneshot.php`. Group 2 leftovers are now closed except the `/all-treatments/` hub (1219 → REH-4, design-blocked).
+- **6 therapy-method pages reclassified** off the treatment template to `template-article.php` (REH-2): CBT 1323, DBT 1327, Mindfulness 1334, EMDR 1339, Stages of change 2853, sniffing-coke 1568. Interim look until the article-template redesign (REH-3) lands.
 - **Core pages done:** Cost (834), Contact (1189), Why Us (825), Team (722, real 21-person roster), FAQ (1197). Team-member **profile pilot**: Eugene (11933).
 - **Standard nav header** replaced the off-canvas-only header.
 - **Site-wide link check done:** 67 broken → 2 (the remaining 2 are the canada-dry widget, issue above). Fixes included 18 wrong article slugs hardcoded in the homepage content-grid theme partial — *these are also live-site bugs*.

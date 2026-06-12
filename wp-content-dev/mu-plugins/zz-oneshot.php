@@ -34,6 +34,38 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'reclassify-therapy-articles':
+			// REH-2 (reclassification half): six pages were sitting on the
+			// conversion-focused treatment template but are really educational
+			// articles, not condition landing pages. Move them to
+			// template-article.php so they render with the same editorial chrome
+			// as the other ~355 articles. Prior template is backed up to
+			// postmeta `_rehab_template_backup` (idempotent — safe to re-run).
+			$reclass = [
+				1323 => 'CBT (cognitive-behavioral-therapy)',
+				1327 => 'DBT (dialectical-behavior-therapy)',
+				1334 => 'Mindfulness',
+				1339 => 'EMDR',
+				2853 => 'Stages of change',
+				1568 => 'How to tell if someone is sniffing coke',
+			];
+			$target = 'template-article.php';
+			$changed = 0;
+			foreach ( $reclass as $id => $label ) {
+				$p = get_post( $id );
+				if ( ! $p ) { echo "  MISS  #{$id} {$label} (not found)\n"; continue; }
+				$current = get_post_meta( $id, '_wp_page_template', true );
+				if ( $current === $target ) { echo "  SAME  #{$id} {$label} (already {$target})\n"; continue; }
+				if ( '' === get_post_meta( $id, '_rehab_template_backup', true ) ) {
+					update_post_meta( $id, '_rehab_template_backup', $current ?: '(default)' );
+				}
+				update_post_meta( $id, '_wp_page_template', $target );
+				echo "  OK    #{$id} {$label}: " . ( $current ?: '(default)' ) . " → {$target}\n";
+				$changed++;
+			}
+			echo "\nReclassified {$changed} page(s) to {$target}.\n";
+			break;
+
 		case 'fix-canada-dry-lightbox':
 			// REH-6: disable the core/image "Expand on click" lightbox on the
 			// Dry January chart (page 5727). Core's lightbox overlay emits
