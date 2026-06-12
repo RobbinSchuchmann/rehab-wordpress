@@ -28,7 +28,11 @@
 	min-height: calc(100vh - 200px);
 
 	@media (min-width: 1024px) {
-		grid-template-columns: 55% 45%;
+		/* Fractional units (not 55%/45%) so the column gap is subtracted from the
+		   available width before distribution. Percentages sum to 100% and push
+		   the tracks past the container by the full gap width. minmax(0, …) also
+		   stops the image's intrinsic width from forcing further overflow. */
+		grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
 		gap: 3rem;
 		max-height: calc(100vh - 160px);
 	}
