@@ -2495,6 +2495,54 @@ add_action( 'init', function () {
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt FAQ page (design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
+		case 'rollout-team-profiles':
+			// REH-1: roll the approved team-member profile across the whole
+			// roster in one pass. Iterates rehab_team_member_roles() (the 21
+			// role-assigned members shown on the team grid, page 722) and
+			// rebuilds each profile from its existing intro-doctor-card, exactly
+			// as the single-page rebuild-team-profile does. Idempotent: the
+			// pre-v3 backup is taken once and every rebuild re-extracts from it,
+			// so re-runs (incl. the Eugene 11933 pilot) stay correct.
+			$roles = rehab_team_member_roles();
+			$done = 0; $skipped = 0;
+			foreach ( $roles as $pid => $role ) {
+				$post = get_post( $pid );
+				if ( ! $post ) { echo "  SKIP  #{$pid} (not found)\n"; $skipped++; continue; }
+				if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
+					update_post_meta( $pid, '_rehab_design_v2_backup', wp_slash( $post->post_content ) );
+				}
+				$original = get_post_meta( $pid, '_rehab_design_v2_backup', true ) ?: $post->post_content;
+				$m = rehab_extract_member_from_intro( $original );
+				if ( '' === $m['name'] ) { echo "  SKIP  #{$pid} (no intro-doctor-card / bio)\n"; $skipped++; continue; }
+				$photo  = wp_make_link_relative( $m['photoUrl'] );
+				$blocks = rehab_block_team_profile( [
+					'background' => 'white',
+					'backText' => 'All of our team', 'backUrl' => '/team/',
+					'role'  => $role,
+					'name'  => $m['name'],
+					'photoUrl' => $photo,
+					'photoAlt' => $m['photoAlt'] ?: $m['name'],
+					'quote' => $m['quote'],
+					'bio'   => $m['bio'],
+					'anchorId' => 'enquire',
+				] );
+				$blocks .= rehab_block_cta_band( [
+					'background' => 'dark',
+					'eyebrow'    => 'Take the next step',
+					'heading'    => 'The right person is ready to talk',
+					'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+					'primaryText' => 'Talk with admissions', 'primaryUrl' => '#enquire',
+					'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+					'helper'     => '',
+				] );
+				$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $blocks ) ], true );
+				if ( is_wp_error( $res ) ) { echo "  ERR   #{$pid} {$m['name']}: " . $res->get_error_message() . "\n"; $skipped++; continue; }
+				echo "  OK    #{$pid} " . sprintf( '%-28s', $m['name'] ) . ' (' . ( $role ?: 'NO ROLE' ) . ( $m['quote'] ? ', quote' : '' ) . ")\n";
+				$done++;
+			}
+			echo "\nRebuilt {$done} profile(s), skipped {$skipped}. Run recover-demo + check-editor to verify.\n";
+			break;
+
 		case 'rebuild-team-profile':
 			// Approved hi-fi team-member profile (team/Team Profile.html, June
 			// 2026): role · name · portrait · pull-quote (from the bio's own
