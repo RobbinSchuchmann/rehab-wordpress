@@ -34,6 +34,33 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'fix-canada-dry-lightbox':
+			// REH-6: disable the core/image "Expand on click" lightbox on the
+			// Dry January chart (page 5727). Core's lightbox overlay emits
+			// runtime-bound placeholder <img src="state.currentImage.currentSrc">
+			// tags that a static link audit flagged as the last 2 "broken"
+			// links. The chart renders fine on its own and the interactive
+			// Google Sheets iframe directly above it already gives an enlarged
+			// view, so click-to-enlarge is redundant here.
+			$pid  = 5727;
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			$before = $post->post_content;
+			$after  = preg_replace(
+				'/("lightbox"\s*:\s*\{\s*"enabled"\s*:\s*)true/',
+				'${1}false',
+				$before,
+				-1,
+				$count
+			);
+			if ( null === $after ) { echo "regex error\n"; break; }
+			if ( $count < 1 ) { echo "no lightbox:enabled:true in post {$pid} (already disabled?)\n"; break; }
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $after ) ], true );
+			echo is_wp_error( $res )
+				? "ERR: " . $res->get_error_message() . "\n"
+				: "OK disabled lightbox on {$count} image block(s) in post {$pid}\n";
+			break;
+
 		case 'fix-footer':
 			$address = "8 Moo 14, Soi Mon Mai Hin Lek Fai\nHua Hin District, Prachuap Khiri Khan\nThailand 77110";
 			$intl = "Australia|+61 2 7908 2277\nUSA / Canada|+1 330 822 5340\nUK|+44 330 822 5340\nEurope|+31 20 532 2548";
