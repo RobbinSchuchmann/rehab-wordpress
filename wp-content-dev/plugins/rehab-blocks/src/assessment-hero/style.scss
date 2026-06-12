@@ -1,0 +1,273 @@
+// Assessment-first treatment hero — copy + rating + signals left, admissions form card right.
+// Mirrors the approved Diamond treatment-page design (hero + .form-card).
+
+.rehab-assessment-hero {
+	background: var(--rehab-color-bg, #FFFFFF);
+}
+
+.rehab-assessment-hero__grid {
+	display: grid;
+	grid-template-columns: 1.05fr 0.95fr;
+	gap: clamp(36px, 5vw, 80px);
+	align-items: center;
+	padding: clamp(48px, 6vw, 84px) 0;
+
+	@media (max-width: 980px) { grid-template-columns: 1fr; }
+}
+
+.rehab-assessment-hero__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.8125rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	margin: 0 0 1.1rem;
+}
+
+.rehab-assessment-hero__eyebrow .diamond {
+	color: var(--rehab-sage, #BAC3A1);
+	font-size: 0.7em;
+}
+
+.rehab-assessment-hero__h1 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2.25rem, 4.4vw, 3.4rem);
+	line-height: 1.08;
+	letter-spacing: -0.025em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0 0 0.4em;
+	text-wrap: balance;
+}
+
+.rehab-assessment-hero__lede {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+	line-height: 1.7;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	margin: 0 0 1.6rem;
+	max-width: 56ch;
+}
+
+.rehab-assessment-hero__cta-row {
+	display: flex;
+	align-items: center;
+	gap: 22px;
+	flex-wrap: wrap;
+	margin-bottom: 26px;
+}
+
+.rehab-assessment-hero__rating {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+}
+
+.rehab-assessment-hero__rating strong {
+	font-weight: 600;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-assessment-hero__stars {
+	display: inline-flex;
+	gap: 2px;
+}
+
+.rehab-assessment-hero__stars svg {
+	width: 15px;
+	height: 15px;
+	fill: var(--rehab-gold-star, #FBBF24);
+}
+
+.rehab-assessment-hero__signals {
+	display: flex;
+	gap: 34px;
+	flex-wrap: wrap;
+	margin-top: 30px;
+	padding-top: 28px;
+	border-top: 1px solid rgba(186, 195, 161, 0.3);
+}
+
+.rehab-assessment-hero__signal .num {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 2.5rem;
+	line-height: 1;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-assessment-hero__signal .lbl {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.8125rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	margin-top: 8px;
+	max-width: 140px;
+	line-height: 1.5;
+}
+
+// ---------- Form card ----------
+.rehab-assessment-hero__form-card {
+	background: var(--rehab-sage-mist-2, #F1F3E9);
+	border: 1px solid rgba(190, 179, 158, 0.4);
+	padding: clamp(26px, 2.6vw, 36px);
+	scroll-margin-top: 110px;
+
+	@media (max-width: 980px) { max-width: 520px; }
+}
+
+.rehab-assessment-hero__form-eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.75rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	margin: 0;
+}
+
+.rehab-assessment-hero__form-title {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.625rem;
+	letter-spacing: -0.02em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 10px 0 8px;
+}
+
+.rehab-assessment-hero__form-sub {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	line-height: 1.6;
+	margin: 0 0 22px;
+}
+
+.rehab-assessment-hero__hp {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.rehab-assessment-hero__form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 18px;
+
+	@media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.rehab-assessment-hero__field {
+	margin-bottom: 16px;
+}
+
+.rehab-assessment-hero__field label {
+	display: block;
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.6875rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin-bottom: 8px;
+}
+
+.rehab-assessment-hero__field input,
+.rehab-assessment-hero__field select {
+	width: 100%;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1rem;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	padding: 10px 2px;
+	border: 0;
+	border-bottom: 1px solid var(--rehab-tan, #BEB39E);
+	background: transparent;
+	border-radius: 0;
+	transition: border-color 0.3s var(--rehab-ease);
+}
+
+.rehab-assessment-hero__field input::placeholder {
+	color: rgba(74, 74, 74, 0.45);
+}
+
+.rehab-assessment-hero__field input:focus,
+.rehab-assessment-hero__field select:focus {
+	outline: none;
+	border-bottom-color: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-assessment-hero__form-card .rehab-btn {
+	margin-top: 12px;
+}
+
+.rehab-assessment-hero__form-phone {
+	justify-content: center;
+	margin-top: 16px;
+	width: 100%;
+}
+
+.rehab-assessment-hero__form-status {
+	font-family: var(--rehab-font-body);
+	font-size: 0.8125rem;
+	margin: 12px 0 0;
+	min-height: 1em;
+}
+
+.rehab-assessment-hero__form-status[data-state="error"] {
+	color: #9c3c25;
+}
+
+.rehab-assessment-hero__form-status[data-state="success"] {
+	color: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-assessment-hero__consent {
+	font-family: var(--rehab-font-body);
+	font-size: 0.6875rem;
+	color: rgba(44, 44, 44, 0.55);
+	line-height: 1.5;
+	margin: 16px 0 0;
+}
+
+// ---------- Shared phone hyperlink sub-CTA (Filip's pattern) ----------
+.rehab-phone-link {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.9375rem;
+	letter-spacing: 0.02em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.rehab-phone-link svg {
+	width: 16px;
+	height: 16px;
+	stroke: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-phone-link u {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+	text-decoration-color: var(--rehab-tan, #BEB39E);
+}
+
+.rehab-phone-link:hover u {
+	text-decoration-color: var(--rehab-sage-dark, #8A9674);
+}

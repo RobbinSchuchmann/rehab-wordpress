@@ -45,8 +45,56 @@ $whatsapp_number = get_theme_mod( 'rehab_whatsapp_number', '66965823832' );
 	</div>
 </div>
 
+<?php
+// Standard nav (approved June 2026 design): brand left, inline links centre,
+// phone + CTA right. Burger appears on mobile only and opens the mega menu.
+$nav_cta_text = get_theme_mod( 'rehab_nav_cta_text', __( 'Talk with admissions', 'rehab-parent' ) );
+$nav_cta_url  = get_theme_mod( 'rehab_nav_cta_url', '/contact-us/' );
+?>
 <header class="rehab-navbar" id="rehab-navbar" data-rehab-navbar>
-	<div class="rehab-navbar__cell rehab-navbar__cell--start">
+	<div class="rehab-navbar__brand">
+		<?php
+		// Child theme can drop assets/img/logo.svg to provide a brand-specific logo.
+		$child_logo_path = get_stylesheet_directory() . '/assets/img/logo.svg';
+		if ( file_exists( $child_logo_path ) ) :
+			$svg = file_get_contents( $child_logo_path );
+			?>
+			<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+				<?php echo $svg; // SVG sourced from child theme — safe ?>
+			</a>
+		<?php elseif ( has_custom_logo() ) : ?>
+			<?php the_custom_logo(); ?>
+		<?php else : ?>
+			<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+				<span class="rehab-navbar__brand-text"><?php bloginfo( 'name' ); ?></span>
+			</a>
+		<?php endif; ?>
+	</div>
+
+	<nav class="rehab-navbar__links" aria-label="<?php esc_attr_e( 'Primary', 'rehab-parent' ); ?>">
+		<?php
+		wp_nav_menu(
+			[
+				'theme_location' => 'primary',
+				'menu_class'     => 'rehab-navbar__menu',
+				'container'      => false,
+				'fallback_cb'    => '__return_empty_string',
+				'depth'          => 2,
+			]
+		);
+		?>
+	</nav>
+
+	<div class="rehab-navbar__actions">
+		<a href="tel:<?php echo esc_attr( $phone_tel ); ?>" class="rehab-navbar__phone">
+			<span class="rehab-navbar__phone-icon" aria-hidden="true">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+				</svg>
+			</span>
+			<span class="rehab-navbar__phone-text"><?php echo esc_html( $phone_text ); ?></span>
+		</a>
+		<a href="<?php echo esc_url( $nav_cta_url ); ?>" class="rehab-btn rehab-btn--luxury rehab-btn--sm rehab-navbar__cta"><?php echo esc_html( $nav_cta_text ); ?></a>
 		<button
 			type="button"
 			class="rehab-navbar__toggle"
@@ -63,40 +111,7 @@ $whatsapp_number = get_theme_mod( 'rehab_whatsapp_number', '66965823832' );
 					<path d="M9.156 6.313 6.312 9.155 22.157 25 6.22 40.969l2.81 2.811L25 27.844 40.938 43.78l2.843-2.843L27.844 25 43.687 9.156l-2.843-2.844L25 22.157Z" fill="currentColor"/>
 				</svg>
 			</span>
-			<span class="rehab-navbar__toggle-text"><?php esc_html_e( 'Menu', 'rehab-parent' ); ?></span>
 		</button>
-	</div>
-
-	<div class="rehab-navbar__cell rehab-navbar__cell--center">
-		<div class="rehab-navbar__logo">
-			<?php
-			// Child theme can drop assets/img/logo.svg to provide a brand-specific logo.
-			$child_logo_path = get_stylesheet_directory() . '/assets/img/logo.svg';
-			if ( file_exists( $child_logo_path ) ) :
-				$svg = file_get_contents( $child_logo_path );
-				?>
-				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
-					<?php echo $svg; // SVG sourced from child theme — safe ?>
-				</a>
-			<?php elseif ( has_custom_logo() ) : ?>
-				<?php the_custom_logo(); ?>
-			<?php else : ?>
-				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<span class="rehab-navbar__brand-text"><?php bloginfo( 'name' ); ?></span>
-				</a>
-			<?php endif; ?>
-		</div>
-	</div>
-
-	<div class="rehab-navbar__cell rehab-navbar__cell--end">
-		<a href="tel:<?php echo esc_attr( $phone_tel ); ?>" class="rehab-navbar__phone">
-			<span class="rehab-navbar__phone-icon" aria-hidden="true">
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/>
-				</svg>
-			</span>
-			<span class="rehab-navbar__phone-text"><?php echo esc_html( $phone_text ); ?></span>
-		</a>
 	</div>
 </header>
 

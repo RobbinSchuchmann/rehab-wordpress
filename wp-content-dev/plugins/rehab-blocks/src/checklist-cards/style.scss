@@ -1,0 +1,171 @@
+// Themed checklist cards (what's included) + optional sage info panel.
+
+.rehab-checklist-cards {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-checklist-cards__head {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 3rem;
+}
+
+.rehab-checklist-cards__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-checklist-cards__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	text-wrap: balance;
+}
+
+.rehab-checklist-cards__lede {
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+.rehab-checklist-cards__grid {
+	display: grid;
+	gap: 1.75rem;
+
+	&--cols-2 { grid-template-columns: repeat(2, 1fr); }
+	&--cols-3 { grid-template-columns: repeat(3, 1fr); }
+	&--cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+	@media (max-width: 980px) { grid-template-columns: 1fr !important; }
+}
+
+.rehab-checklist-card {
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.2);
+	padding: 2.25rem 2.125rem;
+	transition: border-color 0.35s var(--rehab-ease);
+}
+
+.rehab-checklist-card:hover {
+	border-color: rgba(190, 179, 158, 0.4);
+}
+
+.rehab-checklist-card__icon {
+	width: 52px;
+	height: 52px;
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	color: var(--rehab-sage-dark, #8A9674);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.05rem;
+	margin-bottom: 1.375rem;
+}
+
+.rehab-checklist-card__kick {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.6875rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+}
+
+.rehab-checklist-card__title {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.5rem;
+	letter-spacing: -0.015em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0.25rem 0 0;
+}
+
+.rehab-checklist-card__list {
+	display: grid;
+	gap: 0.8rem;
+	margin: 1.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.rehab-checklist-card__list li,
+.rehab-checklist-cards__panel-list li {
+	display: flex;
+	gap: 0.75rem;
+	align-items: flex-start;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	line-height: 1.5;
+}
+
+.rehab-checklist-card__list svg,
+.rehab-checklist-cards__panel-list svg {
+	width: 18px;
+	height: 18px;
+	flex: none;
+	margin-top: 3px;
+	stroke: var(--rehab-sage-dark, #8A9674);
+}
+
+// ---------- Optional info panel (e.g. medical check-up) ----------
+.rehab-checklist-cards__panel {
+	margin-top: 1.75rem;
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	border: 1px solid rgba(186, 195, 161, 0.3);
+	padding: clamp(34px, 4vw, 52px);
+	display: grid;
+	grid-template-columns: 0.85fr 1.15fr;
+	gap: clamp(32px, 4vw, 56px);
+	align-items: center;
+
+	@media (max-width: 980px) { grid-template-columns: 1fr; }
+}
+
+.rehab-checklist-cards__panel-copy h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.75rem;
+	letter-spacing: -0.02em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0.75rem 0;
+}
+
+.rehab-checklist-cards__panel-copy p {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	margin: 0;
+	font-size: 0.9375rem;
+	line-height: 1.7;
+}
+
+.rehab-checklist-cards__panel-list {
+	columns: 2;
+	column-gap: 40px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	@media (max-width: 600px) { columns: 1; }
+}
+
+.rehab-checklist-cards__panel-list li {
+	break-inside: avoid;
+	padding: 0.5rem 0;
+	font-size: 0.9375rem;
+}

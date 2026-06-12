@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/faq-page",
+  "version": "0.1.0",
+  "title": "FAQ Page (categorised)",
+  "category": "rehab",
+  "icon": "editor-help",
+  "description": "Full FAQ page body: sticky category navigation, categorised accordion groups and a 'still have a question?' prompt.",
+  "keywords": ["faq", "questions", "categories"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "cream", "enum": ["white", "cream", "sage-mist"] },
+    "navLabel":   { "type": "string", "default": "Categories" },
+    "categories": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "object" }
+    },
+    "promptTitle":   { "type": "string", "default": "Still have a question?" },
+    "promptBody":    { "type": "string", "default": "A confidential call is the easiest place to start, free and no-obligation." },
+    "promptBtnText": { "type": "string", "default": "Talk with admissions" },
+    "promptBtnUrl":  { "type": "string", "default": "/contact-us/" },
+    "phoneText":     { "type": "string", "default": "+66 3 313 5303" },
+    "phoneHref":     { "type": "string", "default": "tel:+6633135303" }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "viewScript":   "file:./view.js",
+  "render":       "file:./render.php"
+}

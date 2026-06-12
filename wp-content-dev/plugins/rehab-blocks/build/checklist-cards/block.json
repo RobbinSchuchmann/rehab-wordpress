@@ -1,0 +1,76 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/checklist-cards",
+  "version": "0.1.0",
+  "title": "Checklist Cards",
+  "category": "rehab",
+  "icon": "yes",
+  "description": "Section of themed cards each carrying a checklist (e.g. what's included: clinical / wellness / comfort), with an optional sage panel holding one more checklist (e.g. the medical check-up).",
+  "keywords": [
+    "included",
+    "checklist",
+    "cards",
+    "cost"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "lede": {
+      "type": "string",
+      "default": ""
+    },
+    "cards": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    },
+    "panelEyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "panelTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "panelBody": {
+      "type": "string",
+      "default": ""
+    },
+    "panelItems": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

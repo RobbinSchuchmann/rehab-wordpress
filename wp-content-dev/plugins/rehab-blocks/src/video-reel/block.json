@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/video-reel",
+  "version": "0.1.0",
+  "title": "Video Testimonials (vertical reel)",
+  "category": "rehab",
+  "icon": "video-alt3",
+  "description": "Row of vertical (9:16) video testimonial cards with quote captions and an aggregate Google-rating chip. Supports anonymous and family-perspective formats.",
+  "keywords": ["video", "testimonials", "reel", "stories"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background":  { "type": "string", "default": "cream" },
+    "eyebrow":     { "type": "string", "default": "Real stories" },
+    "heading":     { "type": "string", "default": "Recovery, in their own words" },
+    "showRating":  { "type": "boolean", "default": true },
+    "ratingScore": { "type": "string", "default": "4.9" },
+    "ratingText":  { "type": "string", "default": "· 120+ Google reviews" },
+    "items": {
+      "type": "array",
+      "default": [
+        { "name": "James · cocaine program", "duration": "2:14", "tone": "1", "quote": "\"They gave me my life back.\"", "who": "Filmed with consent", "videoUrl": "", "posterUrl": "" },
+        { "name": "Anonymous · privacy-protected", "duration": "1:48", "tone": "4", "quote": "\"I didn't think I could stop. I was wrong.\"", "who": "Silhouette format", "videoUrl": "", "posterUrl": "" },
+        { "name": "A father, on his son", "duration": "3:02", "tone": "3", "quote": "\"We got our son back.\"", "who": "Family perspective", "videoUrl": "", "posterUrl": "" },
+        { "name": "Alumna · executive program", "duration": "2:31", "tone": "2", "quote": "\"The twelve-client cap changed everything.\"", "who": "Filmed with consent", "videoUrl": "", "posterUrl": "" }
+      ]
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}

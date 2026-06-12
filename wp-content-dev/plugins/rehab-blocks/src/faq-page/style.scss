@@ -1,0 +1,218 @@
+// Categorised FAQ page — sticky nav, grouped accordions, closing prompt.
+
+.rehab-faq-page {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-faq-page__layout {
+	display: grid;
+	grid-template-columns: 230px 1fr;
+	gap: clamp(36px, 6vw, 96px);
+	align-items: start;
+
+	@media (max-width: 980px) { grid-template-columns: 1fr; gap: 32px; }
+}
+
+// ---------- Sticky category nav ----------
+.rehab-faq-page__nav {
+	position: sticky;
+	top: 108px;
+
+	@media (max-width: 980px) { position: static; }
+}
+
+.rehab-faq-page__nav-label {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.6875rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	margin: 0 0 22px;
+}
+
+.rehab-faq-page__nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 14px;
+
+	@media (max-width: 980px) { grid-auto-flow: column; justify-content: start; gap: 22px; overflow-x: auto; }
+	@media (max-width: 600px) { grid-auto-flow: row; }
+}
+
+.rehab-faq-page__nav a {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.625rem;
+	letter-spacing: -0.015em;
+	color: var(--rehab-tan, #BEB39E);
+	text-decoration: none;
+	transition: color 0.3s var(--rehab-ease);
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+
+	@media (max-width: 980px) { font-size: 1.25rem; }
+}
+
+.rehab-faq-page__nav a::before {
+	content: "";
+	width: 0;
+	height: 1px;
+	background: var(--rehab-sage-dark, #8A9674);
+	transition: width 0.3s var(--rehab-ease);
+
+	@media (max-width: 980px) { display: none; }
+}
+
+.rehab-faq-page__nav a:hover {
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	text-decoration: none;
+}
+
+.rehab-faq-page__nav a.on {
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-faq-page__nav a.on::before {
+	width: 22px;
+}
+
+// ---------- Category groups + accordions ----------
+.rehab-faq-page__cat {
+	scroll-margin-top: 110px;
+}
+
+.rehab-faq-page__cat + .rehab-faq-page__cat {
+	margin-top: clamp(44px, 5vw, 68px);
+}
+
+.rehab-faq-page__cat > h2 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.875rem;
+	letter-spacing: -0.02em;
+	color: var(--rehab-sage-text, #7A856A);
+	margin: 0 0 8px;
+}
+
+.rehab-faq-page__list {
+	border-top: 1px solid var(--rehab-tan, #BEB39E);
+}
+
+.rehab-faq-page__item {
+	border-bottom: 1px solid var(--rehab-tan, #BEB39E);
+}
+
+.rehab-faq-page__item summary {
+	list-style: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 24px 0;
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.25rem;
+	letter-spacing: -0.01em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	transition: color 0.2s var(--rehab-ease);
+
+	@media (max-width: 600px) { font-size: 1.0625rem; }
+}
+
+.rehab-faq-page__item summary::-webkit-details-marker {
+	display: none;
+}
+
+.rehab-faq-page__item summary:hover {
+	color: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-faq-page__pm {
+	flex: none;
+	width: 24px;
+	height: 24px;
+	position: relative;
+}
+
+.rehab-faq-page__pm::before,
+.rehab-faq-page__pm::after {
+	content: "";
+	position: absolute;
+	background: var(--rehab-sage-dark, #8A9674);
+	transition: transform 0.4s var(--rehab-ease);
+}
+
+.rehab-faq-page__pm::before {
+	left: 2px;
+	right: 2px;
+	top: 11px;
+	height: 1.5px;
+}
+
+.rehab-faq-page__pm::after {
+	top: 2px;
+	bottom: 2px;
+	left: 11px;
+	width: 1.5px;
+}
+
+.rehab-faq-page__item[open] .rehab-faq-page__pm::after {
+	transform: scaleY(0);
+}
+
+.rehab-faq-page__answer {
+	padding: 0 0 26px;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	line-height: 1.75;
+	max-width: 70ch;
+}
+
+.rehab-faq-page__answer a {
+	color: var(--rehab-sage-dark, #8A9674);
+}
+
+// ---------- Closing prompt ----------
+.rehab-faq-page__prompt {
+	margin-top: clamp(40px, 5vw, 64px);
+	padding: clamp(30px, 3.5vw, 44px);
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	border: 1px solid rgba(186, 195, 161, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 26px;
+	flex-wrap: wrap;
+}
+
+.rehab-faq-page__prompt-text h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.5rem;
+	letter-spacing: -0.015em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0 0 6px;
+}
+
+.rehab-faq-page__prompt-text p {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.9375rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	margin: 0;
+}
+
+.rehab-faq-page__prompt-actions {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	flex-wrap: wrap;
+}

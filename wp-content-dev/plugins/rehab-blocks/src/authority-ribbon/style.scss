@@ -23,11 +23,11 @@
 }
 
 .rehab-authority-ribbon__logos img {
-	height: 28px;
-	max-width: 130px;
+	height: 32px;
+	max-width: 150px;
 	object-fit: contain;
-	filter: grayscale(100%) brightness(1.1) contrast(0.65);
-	opacity: 0.65;
+	filter: grayscale(100%);
+	opacity: 0.78;
 	transition: opacity 0.3s, filter 0.3s;
 }
 

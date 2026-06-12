@@ -1,0 +1,97 @@
+// "What sits outside the fee" — exclusions styled distinctly from included checklists.
+
+.rehab-exclusions {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-exclusions__head {
+	max-width: 680px;
+	margin-bottom: clamp(36px, 4.5vw, 60px);
+}
+
+.rehab-exclusions__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-exclusions__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	text-wrap: balance;
+}
+
+.rehab-exclusions__lede {
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+.rehab-exclusions__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 6px 56px;
+	max-width: 940px;
+
+	@media (max-width: 980px) { grid-template-columns: 1fr; gap: 0; }
+}
+
+.rehab-exclusions__item {
+	display: flex;
+	gap: 14px;
+	align-items: flex-start;
+	padding: 13px 0;
+	border-bottom: 1px solid rgba(190, 179, 158, 0.2);
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	line-height: 1.45;
+}
+
+.rehab-exclusions__x {
+	flex: none;
+	width: 20px;
+	height: 20px;
+	margin-top: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--rehab-tan, #BEB39E);
+	border-radius: 50%;
+}
+
+.rehab-exclusions__x::before {
+	content: "";
+	width: 9px;
+	height: 1.5px;
+	background: var(--rehab-tan, #BEB39E);
+}
+
+.rehab-exclusions__note {
+	margin: 28px 0 0;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.9375rem;
+	color: var(--rehab-sage-text, #7A856A);
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.rehab-exclusions__note .gem {
+	color: var(--rehab-sage, #BAC3A1);
+}

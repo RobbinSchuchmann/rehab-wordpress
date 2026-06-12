@@ -1,0 +1,205 @@
+// Vertical (9:16) video-testimonial reel — toned poster placeholders,
+// glassy play button, duration chip, name over legibility gradient.
+
+.rehab-video-reel {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-video-reel__head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 24px;
+	flex-wrap: wrap;
+	margin-bottom: 40px;
+}
+
+.rehab-video-reel__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	margin-bottom: 0.7rem;
+}
+
+.rehab-video-reel__eyebrow .diamond {
+	color: var(--rehab-sage, #BAC3A1);
+	font-size: 0.7em;
+}
+
+.rehab-video-reel__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(1.875rem, 3vw, 2.6rem);
+	line-height: 1.1;
+	letter-spacing: -0.025em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0;
+	text-wrap: balance;
+}
+
+.rehab-video-reel__rating {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+}
+
+.rehab-video-reel__rating strong {
+	font-weight: 600;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-video-reel__stars {
+	display: inline-flex;
+	gap: 2px;
+}
+
+.rehab-video-reel__stars svg {
+	width: 15px;
+	height: 15px;
+	fill: var(--rehab-gold-star, #FBBF24);
+}
+
+.rehab-video-reel__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 24px;
+
+	@media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+	@media (max-width: 600px) { grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+
+.rehab-video-card {
+	overflow: hidden;
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.2);
+	transition: border-color 0.35s var(--rehab-ease);
+}
+
+.rehab-video-card:hover {
+	border-color: rgba(190, 179, 158, 0.4);
+}
+
+.rehab-video-card:hover .rehab-video-card__play {
+	transform: scale(1.06);
+}
+
+.rehab-video-card__thumb {
+	position: relative;
+	display: block;
+	aspect-ratio: 9 / 16;
+	overflow: hidden;
+	background: radial-gradient(120% 80% at 50% 22%, #C9D2B4, #9BA682 78%);
+}
+
+.rehab-video-card__thumb--tone-2 { background: radial-gradient(120% 80% at 50% 22%, #B8C0A6, #6F7A63 80%); }
+.rehab-video-card__thumb--tone-3 { background: radial-gradient(120% 80% at 50% 24%, #D7CFBE, #A99F8A 80%); }
+.rehab-video-card__thumb--tone-4 { background: radial-gradient(120% 80% at 50% 22%, #444B3D, #23271F 82%); }
+
+.rehab-video-card__thumb::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(20, 20, 18, 0) 42%, rgba(20, 20, 18, 0.68));
+}
+
+.rehab-video-card__poster {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.rehab-video-card__play {
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 58px;
+	height: 58px;
+	border-radius: 50%;
+	z-index: 2;
+	background: rgba(255, 255, 255, 0.82);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--rehab-shadow-subtle);
+	transition: transform 0.4s var(--rehab-ease);
+}
+
+.rehab-video-card__play svg {
+	width: 20px;
+	height: 20px;
+	fill: var(--rehab-warm-charcoal, #2C2C2C);
+	margin-left: 3px;
+}
+
+.rehab-video-card__duration {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.625rem;
+	letter-spacing: 0.08em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	background: rgba(255, 255, 255, 0.85);
+	padding: 4px 9px;
+}
+
+.rehab-video-card__duration svg {
+	width: 9px;
+	height: 9px;
+	fill: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-video-card__name {
+	position: absolute;
+	left: 16px;
+	right: 16px;
+	bottom: 15px;
+	z-index: 2;
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.8125rem;
+	color: #fff;
+	letter-spacing: 0.01em;
+}
+
+.rehab-video-card__caption {
+	padding: 18px 20px 20px;
+}
+
+.rehab-video-card__quote {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.0625rem;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	line-height: 1.32;
+	letter-spacing: -0.01em;
+}
+
+.rehab-video-card__who {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.75rem;
+	color: var(--rehab-sage-text, #7A856A);
+	margin-top: 10px;
+}

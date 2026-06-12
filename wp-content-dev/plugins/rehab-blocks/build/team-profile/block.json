@@ -1,0 +1,110 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/team-profile",
+  "version": "0.1.0",
+  "title": "Team Profile",
+  "category": "rehab",
+  "icon": "id",
+  "description": "Individual team-member profile: role, name, portrait, optional pull-quote and bio, beside a sticky '[Name] is part of our team' enquiry form. Form posts to the shared rehab/v1/contact endpoint.",
+  "keywords": [
+    "team",
+    "profile",
+    "member",
+    "bio"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "white",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "backText": {
+      "type": "string",
+      "default": "All of our team"
+    },
+    "backUrl": {
+      "type": "string",
+      "default": "/team/"
+    },
+    "role": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "firstName": {
+      "type": "string",
+      "default": ""
+    },
+    "photoUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "photoAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "quote": {
+      "type": "string",
+      "default": ""
+    },
+    "quoteSrc": {
+      "type": "string",
+      "default": ""
+    },
+    "bioTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "bio": {
+      "type": "string",
+      "default": ""
+    },
+    "anchorId": {
+      "type": "string",
+      "default": "enquire"
+    },
+    "formEyebrow": {
+      "type": "string",
+      "default": "Get help"
+    },
+    "formSub": {
+      "type": "string",
+      "default": "Confidential and no-obligation. A clinician replies within the hour, not a call centre."
+    },
+    "formSubmit": {
+      "type": "string",
+      "default": "Talk with admissions"
+    },
+    "trustItems": {
+      "type": "array",
+      "default": [
+        "Free, confidential, and no-obligation",
+        "We reply within the hour, day or night",
+        "A real clinician, never a call centre"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

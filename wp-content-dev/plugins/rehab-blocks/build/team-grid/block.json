@@ -1,0 +1,102 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/team-grid",
+  "version": "0.1.0",
+  "title": "Team Grid (filterable)",
+  "category": "rehab",
+  "icon": "groups",
+  "description": "Filterable roster of team members: photo, name, role, excerpt, link to profile. Discipline filter chips per the approved Team design.",
+  "keywords": [
+    "team",
+    "staff",
+    "grid",
+    "people"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "A heart-forward team on a mission"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Expertise, experience & genuine care"
+    },
+    "lede": {
+      "type": "string",
+      "default": ""
+    },
+    "filters": {
+      "type": "array",
+      "default": [
+        {
+          "cat": "all",
+          "label": "All"
+        },
+        {
+          "cat": "lead",
+          "label": "Leadership"
+        },
+        {
+          "cat": "clinical",
+          "label": "Clinical"
+        },
+        {
+          "cat": "therapy",
+          "label": "Therapy"
+        },
+        {
+          "cat": "nursing",
+          "label": "Nursing"
+        },
+        {
+          "cat": "wellness",
+          "label": "Wellness"
+        },
+        {
+          "cat": "support",
+          "label": "Support"
+        },
+        {
+          "cat": "writers",
+          "label": "Medical writers"
+        }
+      ],
+      "items": {
+        "type": "object"
+      }
+    },
+    "members": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    },
+    "emptyText": {
+      "type": "string",
+      "default": "No team members in this discipline yet."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

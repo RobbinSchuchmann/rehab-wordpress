@@ -1,0 +1,205 @@
+// Filterable team roster — photo cards with name, arrow, role and excerpt.
+
+.rehab-team-grid {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-team-grid__head {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 2.5rem;
+}
+
+.rehab-team-grid__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-team-grid__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+	text-wrap: balance;
+}
+
+.rehab-team-grid__lede {
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	font-size: 1.05rem;
+	font-weight: 300;
+	line-height: 1.7;
+	margin: 0;
+}
+
+.rehab-team-grid__filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+	margin-bottom: clamp(36px, 4vw, 52px);
+}
+
+.rehab-team-grid__filter button {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.75rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	background: #fff;
+	border: 1px solid var(--rehab-tan, #BEB39E);
+	padding: 10px 18px;
+	cursor: pointer;
+	transition: all 0.3s var(--rehab-ease);
+}
+
+.rehab-team-grid__filter button:hover {
+	border-color: var(--rehab-sage-dark, #8A9674);
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-team-grid__filter button.on {
+	background: var(--rehab-sage, #BAC3A1);
+	border-color: var(--rehab-sage, #BAC3A1);
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-team-grid__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 40px);
+
+	@media (max-width: 980px) { grid-template-columns: 1fr 1fr; }
+	@media (max-width: 600px) { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.rehab-team-card {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	color: inherit;
+}
+
+.rehab-team-card:hover {
+	text-decoration: none;
+}
+
+.rehab-team-card.hide {
+	display: none;
+}
+
+.rehab-team-card__photo {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 4 / 5;
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	border: 1px solid rgba(190, 179, 158, 0.2);
+	border-top-left-radius: 64px;
+
+	@media (max-width: 600px) { border-top-left-radius: 48px; }
+}
+
+.rehab-team-card__photo img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
+	transition: transform 0.5s var(--rehab-ease);
+}
+
+.rehab-team-card:hover .rehab-team-card__photo img {
+	transform: scale(1.03);
+}
+
+.rehab-team-card__head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 14px;
+	margin-top: 22px;
+}
+
+.rehab-team-card__name {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.4375rem;
+	letter-spacing: -0.015em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	line-height: 1.2;
+	margin: 0;
+	transition: color 0.3s var(--rehab-ease);
+}
+
+.rehab-team-card:hover .rehab-team-card__name {
+	color: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-team-card__arrow {
+	flex: none;
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	border: 1px solid var(--rehab-tan, #BEB39E);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--rehab-sage-dark, #8A9674);
+	transition: all 0.3s var(--rehab-ease);
+}
+
+.rehab-team-card:hover .rehab-team-card__arrow {
+	background: var(--rehab-sage, #BAC3A1);
+	border-color: var(--rehab-sage, #BAC3A1);
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-team-card__arrow svg {
+	width: 17px;
+	height: 17px;
+}
+
+.rehab-team-card__role {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.6875rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	margin: 10px 0 0;
+	line-height: 1.5;
+}
+
+.rehab-team-card__excerpt {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.9375rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	line-height: 1.6;
+	margin: 14px 0 0;
+}
+
+.rehab-team-grid__empty {
+	display: none;
+	text-align: center;
+	padding: 40px 0;
+	font-family: var(--rehab-font-display);
+	font-style: italic;
+	color: var(--rehab-sage-text, #7A856A);
+	margin: 0;
+}
+
+.rehab-team-grid__empty.show {
+	display: block;
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/page-header",
+  "version": "0.1.0",
+  "title": "Page Header",
+  "category": "rehab",
+  "icon": "heading",
+  "description": "Centered page intro: eyebrow, H1 and lede. The standard opener for core pages (Contact, FAQ, Team).",
+  "keywords": ["header", "hero", "intro", "title"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "align":      { "type": "string", "default": "center", "enum": ["center", "left"] },
+    "eyebrow":    { "type": "string", "default": "" },
+    "heading":    { "type": "string", "default": "" },
+    "lede":       { "type": "string", "default": "" },
+    "imageUrl":   { "type": "string", "default": "" },
+    "imageAlt":   { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}

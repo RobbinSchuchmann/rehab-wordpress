@@ -88,41 +88,4 @@ function Edit( { attributes, setAttributes } ) {
 	);
 }
 
-function save( { attributes } ) {
-	const { imageUrl, imageAlt, title, description, url } = attributes;
-	const blockProps = useBlockProps.save( { className: 'rehab-card' } );
-
-	const inner = (
-		<>
-			{ imageUrl && (
-				<div className="rehab-card__image">
-					<img
-						src={ imageUrl }
-						alt={ imageAlt || '' }
-						loading="lazy"
-					/>
-				</div>
-			) }
-			<div className="rehab-card__body">
-				<RichText.Content
-					tagName="h3"
-					className="rehab-card__title"
-					value={ title }
-				/>
-				<RichText.Content
-					tagName="p"
-					className="rehab-card__description"
-					value={ description }
-				/>
-			</div>
-		</>
-	);
-
-	return url ? (
-		<a { ...blockProps } href={ url }>{ inner }</a>
-	) : (
-		<div { ...blockProps }>{ inner }</div>
-	);
-}
-
-registerBlockType( metadata.name, { edit: Edit, save } );
+registerBlockType( metadata.name, { edit: Edit, save: () => null } );

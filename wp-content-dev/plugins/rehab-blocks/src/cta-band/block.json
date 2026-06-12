@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/cta-band",
+  "version": "0.1.0",
+  "title": "CTA Band (sage / dark)",
+  "category": "rehab",
+  "icon": "megaphone",
+  "description": "Centered conversion band. Sage variant for the mid-page conversion moment, dark (concierge) variant for the closing band. Compact mode renders just the action row, e.g. under process steps.",
+  "keywords": ["cta", "conversion", "band", "concierge"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background":    { "type": "string", "default": "sage", "enum": ["sage", "dark", "none"] },
+    "compact":       { "type": "boolean", "default": false },
+    "cardStyle":     { "type": "boolean", "default": false },
+    "anchorId":      { "type": "string", "default": "" },
+    "eyebrow":       { "type": "string", "default": "Ready when you are" },
+    "heading":       { "type": "string", "default": "Recovery can begin this week" },
+    "lede":          { "type": "string", "default": "A confidential call is the first step. No pressure and no commitment to proceed." },
+    "primaryText":   { "type": "string", "default": "Talk with admissions" },
+    "primaryUrl":    { "type": "string", "default": "#assessment" },
+    "secondaryText": { "type": "string", "default": "" },
+    "secondaryUrl":  { "type": "string", "default": "" },
+    "phoneText":     { "type": "string", "default": "+66 3 313 5303" },
+    "phoneHref":     { "type": "string", "default": "tel:+6633135303" },
+    "helper":        { "type": "string", "default": "Free, confidential, and no-obligation." }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}

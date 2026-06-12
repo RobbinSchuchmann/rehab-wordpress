@@ -1,4 +1,6 @@
-/* Shared button system. Used by all blocks via .rehab-btn + variant. */
+/* Shared button system. Used by all blocks via .rehab-btn + variant.
+   Sizing per the approved treatment-page design (June 2026): 15px / 500 /
+   1.05rem 2.25rem. The PHP-rendered homepage keeps its own .drt-btn system. */
 
 .rehab-btn {
 	display: inline-flex;
@@ -6,8 +8,9 @@
 	justify-content: center;
 	gap: 0.5rem;
 	font-family: var(--rehab-font-body);
-	font-size: 1rem;
-	font-weight: 300;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	line-height: 1;
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
 	text-decoration: none;
@@ -27,14 +30,15 @@
 .rehab-btn--luxury {
 	background-color: var(--rehab-sage);
 	color: var(--rehab-warm-charcoal);
-	padding: 1.125rem 2.5rem;
+	padding: 1.05rem 2.25rem;
+	box-shadow: 0 10px 24px -10px rgba(138, 150, 116, 0.7);
 }
 
 .rehab-btn--luxury:hover {
 	background-color: var(--rehab-sage-dark);
 	color: var(--rehab-color-cream);
 	transform: translateY(-1px);
-	box-shadow: var(--rehab-shadow-elevated);
+	box-shadow: 0 14px 30px -10px rgba(138, 150, 116, 0.85);
 	text-decoration: none;
 }
 
@@ -67,9 +71,10 @@
 	text-decoration: none;
 }
 
-/* Size modifier */
+/* Size modifiers */
 .rehab-btn--sm { padding: 0.5rem 1rem; font-size: 0.8125rem; }
 .rehab-btn--lg { padding: 1.125rem 2.75rem; font-size: 1rem; }
+.rehab-btn--block { width: 100%; }
 
 /* Mobile safety — long uppercase button labels (e.g. "SCHEDULE A FREE
    ASSESSMENT") with white-space: nowrap will overflow narrow viewports.

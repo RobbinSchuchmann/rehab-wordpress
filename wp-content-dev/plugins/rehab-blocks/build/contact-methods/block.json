@@ -1,0 +1,124 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/contact-methods",
+  "version": "0.1.0",
+  "title": "Contact Methods + Form",
+  "category": "rehab",
+  "icon": "phone",
+  "description": "Contact-page core: tappable method cards (phone first), a 'what happens next' reassurance card and social links beside the enquiry form. Form posts to the shared rehab/v1/contact endpoint.",
+  "keywords": [
+    "contact",
+    "form",
+    "phone",
+    "whatsapp",
+    "methods"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "anchorId": {
+      "type": "string",
+      "default": "get-in-touch"
+    },
+    "railEyebrow": {
+      "type": "string",
+      "default": "Speak with us directly"
+    },
+    "railHeading": {
+      "type": "string",
+      "default": "However you'd rather reach us"
+    },
+    "methods": {
+      "type": "array",
+      "default": [
+        {
+          "icon": "phone",
+          "kick": "Call us · fastest, 24/7",
+          "value": "+66 3 313 5303",
+          "href": "tel:+6633135303"
+        },
+        {
+          "icon": "whatsapp",
+          "kick": "WhatsApp · for privacy & timezones",
+          "value": "Message us now",
+          "href": "https://wa.me/66965823832"
+        },
+        {
+          "icon": "email",
+          "kick": "Email · we reply within hours",
+          "value": "Send a message",
+          "href": "mailto:info@diamondrehabthailand.com"
+        }
+      ],
+      "items": {
+        "type": "object"
+      }
+    },
+    "nextTitle": {
+      "type": "string",
+      "default": "What happens when you reach out"
+    },
+    "nextItems": {
+      "type": "array",
+      "default": [
+        "A clinician replies within the hour, not a call centre",
+        "We listen, answer your questions, and never sell",
+        "Your enquiry is confidential, with no obligation to proceed"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "followLabel": {
+      "type": "string",
+      "default": "Follow us"
+    },
+    "socials": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    },
+    "formEyebrow": {
+      "type": "string",
+      "default": "Get in touch"
+    },
+    "formTitle": {
+      "type": "string",
+      "default": "Request a free, confidential assessment"
+    },
+    "formSub": {
+      "type": "string",
+      "default": "Tell us a little, and we'll be in touch on your terms. We never share your details."
+    },
+    "formSubmit": {
+      "type": "string",
+      "default": "Send message"
+    },
+    "formHelper": {
+      "type": "string",
+      "default": "Free, confidential, and no-obligation."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}
