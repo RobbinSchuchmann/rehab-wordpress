@@ -32,7 +32,7 @@ Project **"Website v3 rollout"**, team `REH`, assignee Robbin. Code work only. C
 | REH-2 | Close treatment-template leftovers (3 conversions + 6 article reclassifications) | Improvement | Medium | ✅ **Done** — 3 pages converted to v3, 6 reclassified to articles |
 | REH-3 | Design + implement article/blog template (355 pages) | Feature | High | blocked on design bundle |
 | REH-4 | Design + implement treatment hub (/all-treatments/) | Feature | Medium | blocked on design bundle |
-| REH-5 | Rebuild remaining core pages (Hua Hin, Testimonials, Programs, Careers, Superannuation, policies) | Feature | Medium | |
+| REH-5 | Rebuild remaining core pages (Hua Hin, Testimonials, Programs, Careers, Superannuation, policies) | Feature | Medium | ✅ **Done** (per decisions) — Careers polished, policies on utility template, Hua Hin/Programs/Super accepted; Testimonials deferred (content-gated) |
 | REH-6 | Fix canada-dry article's broken image-compare widget | Bug | Low | renders `src="state.currentImage.currentSrc"` |
 | REH-7 | Restructure repo to clean wp-content layout before deploy | Improvement | Low | deferred to end of build |
 | REH-8 | Commit workflow config files (.mcp.json, CLAUDE.md, PROJECT-STATUS.md) | Improvement | Medium | first end-to-end automation-loop test |
@@ -52,6 +52,7 @@ Detailed build notes live in auto-memory: `memory/treatment-design-v3.md` (loads
 - **Team-member profiles (REH-1): all 21 roster members** built to the approved hi-fi profile (role · portrait · pulled quote · bio + sticky enquiry form), via the `rollout-team-profiles` oneshot. The roster is 21, not the ~36 the issue estimated. All 21 editor-validated (0 recovery warnings).
 - **Standard nav header** replaced the off-canvas-only header.
 - **Site-wide link check done:** 67 broken → 2 (the remaining 2 are the canada-dry widget, issue above). Fixes included 18 wrong article slugs hardcoded in the homepage content-grid theme partial — *these are also live-site bugs*.
+- **Remaining core pages (REH-5):** Hua Hin (8177), Programs (857), Superannuation (8973) accepted as already-built; Careers (9015) polished (orphan SEO tail wrapped in prose containers via `polish-careers`); policy pages (Privacy 3, Confidentiality 4197, Policies & procedures 1546) put on a new `template-utility.php` (readable prose column, no content change). **Testimonials deferred** — page doesn't exist and needs confirmed review/video content (content-gated, like task 15). Intake forms (5440, 9557) left as-is.
 - **Dev stack is host-agnostic** (`aa-dynamic-host.php`): browse via `localhost:8081` or `5.223.87.211:8081`.
 
 **Git state:** the v3 rollout (`9a4783a`) **has been merged to `main`** — `origin/main` is now at the PR-#2 merge commit (`7aafd66`), which also includes **REH-9** (benefits-numbered full-bleed fix). The `v3-design-rollout` branch is deleted on origin (a stale local tracking ref may remain; `git remote prune origin`). The workflow config files (`.mcp.json`, `CLAUDE.md`, `.mcp.env.example`, `PROJECT-STATUS.md`, `.gitignore`) are still **uncommitted** — that's **REH-8**.

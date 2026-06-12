@@ -34,6 +34,67 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'dump-content':
+			// Dev helper: echo a page's raw post_content. Usage: ?rehab_oneshot=dump-content&id=N
+			$pid = (int) ( $_GET['id'] ?? 0 );
+			$p   = $pid ? get_post( $pid ) : null;
+			echo $p ? $p->post_content : "no post {$pid}\n";
+			break;
+
+		case 'polish-careers':
+			// REH-5: the Careers page (9015) has a clean v3 top, then a tail of
+			// orphan core blocks (wp:heading + wp:html) holding long SEO Q&A copy
+			// that rendered full-bleed and unstyled. Wrap each orphan heading+html
+			// pair in the rehab/prose container (white section, readable text
+			// column, prose typography) so it reads like an article body. Done as
+			// a freeform wp:html block so there is no block-validation risk, and
+			// all original markup (bold labels, lists) is preserved. Idempotent:
+			// once wrapped the heading+html adjacency no longer matches.
+			$pid  = 9015;
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $pid, '_rehab_design_v2_backup', wp_slash( $post->post_content ) );
+				echo "saved pre-polish backup to _rehab_design_v2_backup\n";
+			}
+			// Always rebuild from the original backup so the transform is re-runnable.
+			$source = get_post_meta( $pid, '_rehab_design_v2_backup', true ) ?: $post->post_content;
+			$pattern = '#<!-- wp:heading[^>]*-->\s*<h2[^>]*>(.*?)</h2>\s*<!-- /wp:heading -->\s*<!-- wp:html -->(.*?)<!-- /wp:html -->#s';
+			$count = 0;
+			$new = preg_replace_callback( $pattern, function ( $m ) use ( &$count ) {
+				$count++;
+				$title = trim( $m[1] );
+				$body  = trim( $m[2] );
+				// Unwrap the imported "font-weight: 400" spans (visually normal
+				// text) so the prose typography applies, then wrap each loose
+				// text run in a <p> for real paragraph spacing. <ul> lists pass
+				// through untouched.
+				$body = preg_replace( '#<span style="font-weight:\s*400;?">(.*?)</span>#s', '$1', $body );
+				$parts = preg_split( '#(<ul\b.*?</ul>)#s', $body, -1, PREG_SPLIT_DELIM_CAPTURE );
+				$inner = '';
+				foreach ( $parts as $part ) {
+					$t = trim( $part );
+					if ( '' === $t ) continue;
+					if ( preg_match( '#^<ul\b#', $t ) ) { $inner .= $t; continue; }
+					foreach ( preg_split( '#\n+#', $t ) as $line ) {
+						$line = trim( $line );
+						if ( '' !== $line ) $inner .= '<p>' . $line . '</p>';
+					}
+				}
+				return "<!-- wp:html -->\n"
+					. '<section class="wp-block-rehab-prose rehab-prose rehab-bg-white rehab-prose--text">'
+					. '<div class="rehab-container rehab-container--text"><div class="rehab-prose__inner">'
+					. '<h2 class="wp-block-heading">' . $title . '</h2>' . "\n" . $inner
+					. '</div></div></section>' . "\n<!-- /wp:html -->";
+			}, $source );
+			if ( null === $new ) { echo "regex error\n"; break; }
+			if ( $count < 1 ) { echo "no orphan heading+html pairs found (already polished?)\n"; break; }
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $new ) ], true );
+			echo is_wp_error( $res )
+				? "ERR: " . $res->get_error_message() . "\n"
+				: "OK wrapped {$count} orphan SEO section(s) in prose containers on page {$pid}\n";
+			break;
+
 		case 'reclassify-therapy-articles':
 			// REH-2 (reclassification half): six pages were sitting on the
 			// conversion-focused treatment template but are really educational
