@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/guarantee",
+  "version": "0.1.0",
+  "title": "Guarantee (copy + dark offer card)",
+  "category": "rehab",
+  "icon": "shield",
+  "description": "Split section: narrative copy on the left, dark charcoal offer card with terms checklist on the right. Built for the Relapse Prevention Guarantee; reusable for any promise/offer.",
+  "keywords": ["guarantee", "promise", "offer", "cost"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background":  { "type": "string", "default": "white", "enum": ["white", "cream", "sage-mist"] },
+    "eyebrow":     { "type": "string", "default": "Our promise" },
+    "heading":     { "type": "string", "default": "The Relapse Prevention Guarantee" },
+    "body":        { "type": "string", "default": "" },
+    "ghostText":   { "type": "string", "default": "" },
+    "ghostUrl":    { "type": "string", "default": "" },
+    "cardEyebrow": { "type": "string", "default": "" },
+    "cardBig":     { "type": "string", "default": "" },
+    "cardSub":     { "type": "string", "default": "" },
+    "terms":       { "type": "array", "default": [], "items": { "type": "string" } },
+    "cardBtnText": { "type": "string", "default": "" },
+    "cardBtnUrl":  { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}

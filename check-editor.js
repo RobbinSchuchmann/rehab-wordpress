@@ -9,7 +9,8 @@ const { chromium } = require( 'playwright' );
 	await page.fill( '#user_pass', 'dev123!' );
 	await page.click( '#wp-submit' );
 	await page.waitForLoadState( 'domcontentloaded' );
-	await page.goto( 'http://localhost:8081/wp-admin/post.php?post=12242&action=edit', { waitUntil: 'domcontentloaded' } );
+	const postId = process.argv[ 2 ] || '12242';
+	await page.goto( `http://localhost:8081/wp-admin/post.php?post=${ postId }&action=edit`, { waitUntil: 'domcontentloaded' } );
 	await page.waitForTimeout( 18000 );
 
 	// In each frame, dump every chunk of warning text and the parent block

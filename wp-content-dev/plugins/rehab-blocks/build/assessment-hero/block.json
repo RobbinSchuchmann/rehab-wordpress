@@ -1,0 +1,122 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/assessment-hero",
+  "version": "0.1.0",
+  "title": "Assessment Hero (form-first)",
+  "category": "rehab",
+  "icon": "feedback",
+  "description": "Treatment-page hero with copy, Google rating, trust signals and an inline admissions form. The primary conversion block for treatment pages.",
+  "keywords": [
+    "hero",
+    "form",
+    "assessment",
+    "treatment"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "anchorId": {
+      "type": "string",
+      "default": "assessment"
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Addiction treatment · Hua Hin"
+    },
+    "headline": {
+      "type": "string",
+      "default": "Break the grip of addiction, privately, in Thailand"
+    },
+    "lede": {
+      "type": "string",
+      "default": "A discreet, doctor-led residential program at Thailand's leading luxury rehab. Medical detox, evidence-based therapy and a hard cap of twelve clients, so recovery is built around you and never a template."
+    },
+    "primaryText": {
+      "type": "string",
+      "default": "Talk with admissions"
+    },
+    "primaryUrl": {
+      "type": "string",
+      "default": "#assessment"
+    },
+    "phoneText": {
+      "type": "string",
+      "default": "+66 3 313 5303"
+    },
+    "phoneHref": {
+      "type": "string",
+      "default": "tel:+6633135303"
+    },
+    "showRating": {
+      "type": "boolean",
+      "default": true
+    },
+    "ratingScore": {
+      "type": "string",
+      "default": "4.9"
+    },
+    "ratingText": {
+      "type": "string",
+      "default": "from 120+ Google reviews · families & alumni"
+    },
+    "stat1Num": {
+      "type": "string",
+      "default": "12"
+    },
+    "stat1Label": {
+      "type": "string",
+      "default": "Maximum clients on site at any time"
+    },
+    "stat2Num": {
+      "type": "string",
+      "default": "24/7"
+    },
+    "stat2Label": {
+      "type": "string",
+      "default": "Doctor & clinical team on call"
+    },
+    "stat3Num": {
+      "type": "string",
+      "default": "14+"
+    },
+    "stat3Label": {
+      "type": "string",
+      "default": "Years treating addiction"
+    },
+    "formEyebrow": {
+      "type": "string",
+      "default": "Free & confidential"
+    },
+    "formTitle": {
+      "type": "string",
+      "default": "Talk with our admissions team"
+    },
+    "formSub": {
+      "type": "string",
+      "default": "No pressure, no obligation. A clinician replies within the hour, not a call centre."
+    },
+    "formSubmit": {
+      "type": "string",
+      "default": "Talk with admissions"
+    },
+    "formPhoneLabel": {
+      "type": "string",
+      "default": "Or call +66 3 313 5303"
+    },
+    "formConsent": {
+      "type": "string",
+      "default": "By submitting you agree to a confidential call-back. We never share your details."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

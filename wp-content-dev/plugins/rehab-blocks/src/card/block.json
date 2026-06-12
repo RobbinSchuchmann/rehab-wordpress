@@ -22,5 +22,6 @@
     "description": { "type": "string", "default": "Card description text. Replace with your own content." },
     "url": { "type": "string", "default": "" }
   },
-  "editorScript": "file:./index.js"
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
 }

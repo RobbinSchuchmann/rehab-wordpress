@@ -1,0 +1,159 @@
+// Centered conversion band — sage mid-page strip / dark closing concierge.
+
+.rehab-cta-band {
+	padding: clamp(44px, 5vw, 76px) 0;
+	text-align: center;
+}
+
+.rehab-cta-band--sage { background: var(--rehab-sage, #BAC3A1); }
+.rehab-cta-band--dark { background: var(--rehab-warm-charcoal, #2C2C2C); padding: clamp(56px, 7vw, 100px) 0; }
+.rehab-cta-band--compact { padding: 0 0 clamp(44px, 5vw, 76px); background: transparent; }
+
+.rehab-cta-band__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.8125rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin: 0 0 1.1rem;
+}
+
+.rehab-cta-band--sage .rehab-cta-band__eyebrow { color: var(--rehab-warm-charcoal, #2C2C2C); }
+.rehab-cta-band--dark .rehab-cta-band__eyebrow { color: var(--rehab-sage, #BAC3A1); }
+
+.rehab-cta-band__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(1.875rem, 3vw, 2.6rem);
+	line-height: 1.1;
+	letter-spacing: -0.025em;
+	margin: 0 0 0.4em;
+	text-wrap: balance;
+}
+
+.rehab-cta-band--sage .rehab-cta-band__heading { color: var(--rehab-warm-charcoal, #2C2C2C); }
+.rehab-cta-band--dark .rehab-cta-band__heading { color: #fff; }
+
+.rehab-cta-band__lede {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+	line-height: 1.7;
+	max-width: 56ch;
+	margin: 0 auto 1.6rem;
+}
+
+.rehab-cta-band--sage .rehab-cta-band__lede { color: rgba(44, 44, 44, 0.82); }
+.rehab-cta-band--dark .rehab-cta-band__lede { color: rgba(255, 255, 255, 0.62); }
+
+.rehab-cta-band__actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.rehab-cta-band--sage .rehab-phone-link { color: var(--rehab-warm-charcoal, #2C2C2C); }
+.rehab-cta-band--sage .rehab-phone-link svg { stroke: var(--rehab-warm-charcoal, #2C2C2C); }
+.rehab-cta-band--sage .rehab-phone-link u { text-decoration-color: rgba(44, 44, 44, 0.4); }
+.rehab-cta-band--dark .rehab-phone-link { color: #fff; }
+.rehab-cta-band--dark .rehab-phone-link svg { stroke: var(--rehab-sage, #BAC3A1); }
+
+.rehab-cta-band__helper {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--rehab-font-body);
+	font-size: 0.8125rem;
+	letter-spacing: 0.02em;
+	margin: 1.1rem 0 0;
+}
+
+.rehab-cta-band__helper::before {
+	content: "";
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--rehab-sage-dark, #8A9674);
+	flex: none;
+}
+
+.rehab-cta-band--sage .rehab-cta-band__helper { color: rgba(44, 44, 44, 0.72); }
+.rehab-cta-band--sage .rehab-cta-band__helper::before { background: var(--rehab-warm-charcoal, #2C2C2C); }
+.rehab-cta-band--dark .rehab-cta-band__helper { color: rgba(255, 255, 255, 0.55); }
+
+// Card variant — bordered callout (e.g. the deferred-price card on Cost).
+.rehab-cta-band--card {
+	background: transparent;
+}
+
+.rehab-cta-band__card {
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.4);
+	padding: clamp(40px, 5vw, 64px);
+	box-shadow: var(--rehab-shadow-subtle);
+}
+
+.rehab-cta-band__gem {
+	display: block;
+	color: var(--rehab-sage, #BAC3A1);
+	font-size: 1.5rem;
+	margin-bottom: 16px;
+}
+
+.rehab-cta-band--card .rehab-cta-band__heading {
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	font-size: clamp(1.75rem, 3vw, 2.4rem);
+}
+
+.rehab-cta-band--card .rehab-cta-band__lede {
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	max-width: 52ch;
+}
+
+.rehab-cta-band--card .rehab-cta-band__helper {
+	color: rgba(44, 44, 44, 0.72);
+}
+
+.rehab-cta-band--card .rehab-phone-link {
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+// On the card variant the primary button is sage (white context).
+.rehab-cta-band--card .rehab-btn--dark {
+	background: var(--rehab-sage, #BAC3A1);
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	box-shadow: 0 10px 24px -10px rgba(138, 150, 116, 0.7);
+}
+
+.rehab-cta-band--card .rehab-btn--dark:hover {
+	background: var(--rehab-sage-dark, #8A9674);
+	color: #fff;
+}
+
+// Dark button used on the sage band.
+.rehab-btn--dark {
+	background: var(--rehab-warm-charcoal, #2C2C2C);
+	color: #fff;
+	box-shadow: 0 10px 24px -12px rgba(44, 44, 44, 0.6);
+}
+
+.rehab-btn--dark:hover {
+	background: #1b1b1b;
+	color: #fff;
+	transform: translateY(-1px);
+	box-shadow: var(--rehab-shadow-elevated);
+}
+
+// Light button used on the dark concierge band.
+.rehab-btn--light {
+	background: #fff;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+}
+
+.rehab-btn--light:hover {
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	transform: translateY(-1px);
+	box-shadow: var(--rehab-shadow-elevated);
+}

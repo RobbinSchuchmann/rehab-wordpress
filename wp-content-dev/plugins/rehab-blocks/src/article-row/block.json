@@ -19,6 +19,7 @@
     "eyebrow":      { "type": "string", "default": "" },
     "heading":      { "type": "string", "default": "" },
     "body":         { "type": "string", "default": "" },
+    "listItems":    { "type": "array",  "default": [], "items": { "type": "string" } },
     "primaryText":  { "type": "string", "default": "" },
     "primaryUrl":   { "type": "string", "default": "" },
     "secondaryText":{ "type": "string", "default": "" },

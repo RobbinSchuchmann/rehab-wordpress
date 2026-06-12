@@ -1,0 +1,201 @@
+// Rich image+copy split — chips, pull-quote, mini-stats, gem list variants.
+
+.rehab-feature-split {
+	padding: 5rem 0;
+
+	@media (max-width: 768px) { padding: 3rem 0; }
+}
+
+.rehab-feature-split__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(36px, 5vw, 76px);
+	align-items: center;
+
+	@media (max-width: 980px) { grid-template-columns: 1fr; }
+}
+
+.rehab-feature-split--image-right .rehab-feature-split__media {
+	order: 2;
+
+	@media (max-width: 980px) { order: 0; }
+}
+
+.rehab-feature-split__media {
+	overflow: hidden;
+	border-top-left-radius: 100px;
+}
+
+.rehab-feature-split__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 380px;
+	object-fit: cover;
+}
+
+.rehab-feature-split__placeholder {
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	border: 1px solid rgba(190, 179, 158, 0.2);
+	min-height: 380px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.rehab-feature-split__placeholder span {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-style: italic;
+	font-size: 1.0625rem;
+	letter-spacing: 0.04em;
+	color: var(--rehab-sage-text, #7A856A);
+	text-transform: uppercase;
+}
+
+.rehab-feature-split__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.rehab-feature-split__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2rem, 3.4vw, 2.75rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0 0 1.25rem;
+	text-wrap: balance;
+}
+
+.rehab-feature-split__copy > p {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	font-size: 1.0625rem;
+	line-height: 1.75;
+	margin: 0 0 1.1em;
+}
+
+.rehab-feature-split__chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 1.375rem;
+}
+
+.rehab-feature-split__chips span {
+	font-family: var(--rehab-font-body);
+	font-weight: 400;
+	font-size: 0.8125rem;
+	letter-spacing: 0.02em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	background: #fff;
+	border: 1px solid var(--rehab-tan, #BEB39E);
+	padding: 9px 16px;
+}
+
+.rehab-feature-split__quote {
+	background: var(--rehab-ethereal-sage, #ECF0E8);
+	border-left: 2px solid var(--rehab-sage, #BAC3A1);
+	padding: 26px 30px;
+	margin: 1.5rem 0 0;
+}
+
+.rehab-feature-split__quote p {
+	font-family: var(--rehab-font-display);
+	font-weight: 400;
+	font-style: italic;
+	font-size: 1.4375rem;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0;
+	text-wrap: balance;
+}
+
+.rehab-feature-split__quote cite {
+	display: block;
+	font-family: var(--rehab-font-body);
+	font-weight: 400;
+	font-style: normal;
+	font-size: 0.8125rem;
+	letter-spacing: 0.04em;
+	color: var(--rehab-sage-text, #7A856A);
+	margin-top: 16px;
+}
+
+.rehab-feature-split__stats {
+	display: flex;
+	gap: 36px;
+	flex-wrap: wrap;
+	margin-top: 28px;
+	padding-top: 24px;
+	border-top: 1px solid rgba(186, 195, 161, 0.3);
+
+	@media (max-width: 980px) { gap: 24px; }
+}
+
+.rehab-feature-split__stat .v {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 2.25rem;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	line-height: 1;
+}
+
+.rehab-feature-split__stat .v em {
+	font-style: normal;
+	color: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-feature-split__stat .k {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.8125rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	margin-top: 8px;
+	max-width: 150px;
+	line-height: 1.5;
+}
+
+.rehab-feature-split__gems {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px 28px;
+	margin: 1.375rem 0 0.5rem;
+
+	@media (max-width: 980px) { grid-template-columns: 1fr; }
+}
+
+.rehab-feature-split__gem {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 0.9375rem;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	line-height: 1.4;
+}
+
+.rehab-feature-split__gem span {
+	color: var(--rehab-sage, #BAC3A1);
+	flex: none;
+	font-size: 0.7em;
+	margin-top: 6px;
+}
+
+.rehab-feature-split__cta {
+	display: flex;
+	align-items: center;
+	gap: 22px;
+	flex-wrap: wrap;
+	margin-top: 1.5rem;
+}

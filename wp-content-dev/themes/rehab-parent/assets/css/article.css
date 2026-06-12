@@ -1,245 +1,348 @@
-/* Single article (blog post) styles. */
+/* Editorial article layout — implemented from the "Blog Page Redesign" design
+   (Variation 1 · Editorial Refined). Used by both single.php and
+   template-article.php via template-parts/article-page.php. */
 
-.rehab-article__hero {
-	padding: 4rem 0;
-	@media (min-width: 768px) { padding: 6rem 0 4rem; }
+/* ---- Tokens local to this file ----------------------------------------- */
+:root {
+	--rehab-article-line-sage: rgba(186, 195, 161, 0.30);
+	--rehab-article-line-tan:  rgba(190, 179, 158, 0.30);
+	--rehab-article-line-soft: rgba(190, 179, 158, 0.15);
+	--rehab-article-fg-3:      rgba(74, 74, 74, 0.7);
 }
 
-.rehab-article__eyebrow {
-	font-family: var(--rehab-font-body);
-	font-size: 0.75rem;
-	font-weight: 500;
-	text-transform: uppercase;
-	letter-spacing: 0.18em;
-	color: var(--rehab-sage-text);
-	margin: 0 0 1rem;
-}
-
-.rehab-article__title {
-	font-family: var(--rehab-font-display);
-	font-weight: 300;
-	font-size: 2rem;
-	line-height: 1.15;
-	letter-spacing: -0.02em;
-	color: var(--rehab-warm-charcoal);
-	margin: 0 0 1.5rem;
-
-	@media (min-width: 768px) { font-size: 2.75rem; }
-	@media (min-width: 1024px) { font-size: 3.25rem; }
-}
-
-.rehab-article__meta {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1.25rem;
-	font-family: var(--rehab-font-body);
-	font-size: 0.875rem;
-	color: var(--rehab-soft-charcoal);
-}
-
-.rehab-article__meta span {
-	position: relative;
-	padding-right: 1.25rem;
-}
-
-.rehab-article__meta span:not(:last-child)::after {
-	content: '';
-	position: absolute;
-	right: 0;
-	top: 50%;
-	width: 4px;
-	height: 4px;
-	border-radius: 50%;
-	background: var(--rehab-sage);
-	transform: translateY(-50%);
-}
-
-/* Authors */
-.rehab-article__authors-wrap {
+/* ---- Article shell ----------------------------------------------------- */
+.rehab-article {
 	background: #fff;
-	border-bottom: 1px solid rgba(186, 195, 161, 0.3);
-	padding: 1.5rem 0;
+	color: var(--rehab-warm-charcoal);
 }
 
-.rehab-article__authors {
-	display: grid;
-	gap: 1.5rem;
-	grid-template-columns: 1fr;
-
-	@media (min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+/* ---- Breadcrumb -------------------------------------------------------- */
+.rehab-article__crumb {
+	border-bottom: 1px solid var(--rehab-article-line-soft);
+	padding: 1.1rem 0 1rem;
 }
 
-.rehab-author {
-	display: block;
-	text-decoration: none;
-	color: inherit;
-	transition: opacity 0.2s var(--rehab-ease);
-}
-
-.rehab-author:hover { opacity: 0.85; }
-
-.rehab-author__label {
-	display: block;
-	font-family: var(--rehab-font-body);
-	font-size: 0.6875rem;
-	font-weight: 500;
-	text-transform: uppercase;
-	letter-spacing: 0.18em;
-	color: var(--rehab-sage-text);
-	margin-bottom: 0.5rem;
-}
-
-.rehab-author__body {
+.rehab-article__crumb > .rehab-container {
 	display: flex;
 	align-items: center;
-	gap: 0.75rem;
-}
-
-.rehab-author__photo {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	object-fit: cover;
-	flex-shrink: 0;
-}
-
-.rehab-author__name {
-	font-family: var(--rehab-font-display);
-	font-weight: 400;
-	font-size: 1rem;
-	color: var(--rehab-warm-charcoal);
-	margin: 0;
-	line-height: 1.2;
-}
-
-.rehab-author__role {
+	flex-wrap: wrap;
+	gap: 0.55rem;
 	font-family: var(--rehab-font-body);
-	font-size: 0.8125rem;
-	color: var(--rehab-soft-charcoal);
-	margin: 0.125rem 0 0;
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--rehab-article-fg-3);
 }
 
-/* Body layout: ToC sidebar + content */
-.rehab-article__body-wrap {
-	padding: 3rem 0;
-	@media (min-width: 768px) { padding: 4rem 0; }
+.rehab-article__crumb a {
+	color: var(--rehab-article-fg-3);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: color 0.2s var(--rehab-ease);
+}
+
+.rehab-article__crumb a:hover {
+	color: var(--rehab-sage-dark);
+	border-bottom-color: currentColor;
+}
+
+.rehab-article__crumb-sep {
+	color: rgba(122, 133, 106, 0.5);
+}
+
+.rehab-article__crumb-current {
+	color: var(--rehab-warm-charcoal);
+}
+
+/* ---- Main grid: article + sidebar ------------------------------------- */
+.rehab-article__main {
+	padding: 2.5rem 0 4rem;
+}
+
+@media (min-width: 1024px) {
+	.rehab-article__main {
+		padding: 3rem 0 5rem;
+	}
 }
 
 .rehab-article__layout {
 	display: grid;
 	gap: 2.5rem;
 	grid-template-columns: 1fr;
+}
 
-	@media (min-width: 1024px) {
-		grid-template-columns: 280px 1fr;
+@media (min-width: 1024px) {
+	.rehab-article__layout {
+		grid-template-columns: minmax(0, 1fr) 360px;
 		gap: 4rem;
 	}
 }
 
-/* Sticky table of contents */
-.rehab-article__toc {
-	@media (min-width: 1024px) {
-		position: sticky;
-		top: calc(var(--rehab-header-height) + 2rem);
-		max-height: calc(100vh - var(--rehab-header-height) - 4rem);
-		overflow-y: auto;
-		align-self: flex-start;
+/* Constrain the prose column so headings + paragraphs don't go ultra-wide
+   even when no sidebar is shown (mobile fallback layout). */
+.rehab-article__column {
+	min-width: 0;
+	max-width: 800px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+@media (min-width: 1024px) {
+	.rehab-article__column {
+		margin: 0;
+		max-width: none;
 	}
 }
 
-.rehab-article__toc-inner {
-	padding: 1.5rem;
-	background: var(--rehab-ethereal-sage);
-	border-radius: 4px;
-}
-
-.rehab-article__toc-title {
+/* ---- Eyebrow + title -------------------------------------------------- */
+.rehab-article__eyebrow {
 	font-family: var(--rehab-font-body);
-	font-size: 0.6875rem;
 	font-weight: 500;
+	font-size: 0.78rem;
+	letter-spacing: 0.22em;
 	text-transform: uppercase;
-	letter-spacing: 0.18em;
 	color: var(--rehab-sage-text);
-	margin: 0 0 0.75rem;
+	margin: 0 0 0.7rem;
 }
 
-.rehab-article__toc-list {
-	list-style: decimal;
-	padding-left: 1.25rem;
-	margin: 0;
+.rehab-article__title {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 2.25rem;
+	line-height: 1.08;
+	letter-spacing: -0.025em;
+	color: var(--rehab-warm-charcoal);
+	margin: 0 0 1.5rem;
+	max-width: 22ch;
+	text-wrap: balance;
+}
+
+@media (min-width: 768px)  { .rehab-article__title { font-size: 2.75rem; } }
+@media (min-width: 1024px) { .rehab-article__title { font-size: 3.25rem; } }
+
+/* ---- Meta strip (badge + reading time + updated) --------------------- */
+.rehab-article__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.25rem;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.rehab-article__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	background: var(--rehab-ethereal-sage);
+	padding: 0.45rem 0.85rem;
 	font-family: var(--rehab-font-body);
-	font-size: 0.875rem;
-	line-height: 1.6;
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: var(--rehab-sage-text);
+	border: 1px solid var(--rehab-article-line-sage);
 }
 
-.rehab-article__toc-list li { margin-bottom: 0; }
+.rehab-article__badge-icon { color: var(--rehab-sage-text); }
 
-.rehab-article__toc-list a {
-	color: var(--rehab-soft-charcoal);
+.rehab-article__meta-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-family: var(--rehab-font-body);
+	font-size: 0.82rem;
+	color: var(--rehab-article-fg-3);
+	font-weight: 400;
+}
+
+.rehab-article__meta-icon { color: currentColor; opacity: 0.8; }
+
+.rehab-article__meta-item--quiet { color: var(--rehab-article-fg-3); }
+
+/* ---- Author + reviewer split bar ------------------------------------- */
+.rehab-article__credit {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem 2.5rem;
+	border-top: 1px solid var(--rehab-article-line-sage);
+	border-bottom: 1px solid var(--rehab-article-line-sage);
+	padding: 1.25rem 0;
+	margin: 0 0 2.5rem;
+}
+
+.rehab-credit__cell {
+	display: flex;
+	gap: 0.85rem;
+	align-items: center;
 	text-decoration: none;
-	transition: color 0.2s var(--rehab-ease);
-	display: inline-block;
-	padding: 0.5rem 0;
-	min-height: 2rem;
+	color: inherit;
+	transition: opacity 0.2s var(--rehab-ease);
 }
 
-.rehab-article__toc-list a:hover { color: var(--rehab-sage-dark); }
+.rehab-credit__cell:hover { opacity: 0.85; }
 
-/* Article body — uses the same prose typography as rehab/prose block */
+.rehab-credit__avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: var(--rehab-ethereal-sage);
+	flex-shrink: 0;
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+	border: 1px solid var(--rehab-article-line-sage);
+}
+
+.rehab-credit__avatar-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.rehab-credit__initials {
+	font-family: var(--rehab-font-display);
+	font-size: 1rem;
+	color: var(--rehab-sage-text);
+}
+
+.rehab-credit__text { display: flex; flex-direction: column; }
+
+.rehab-credit__label {
+	font-family: var(--rehab-font-body);
+	font-size: 0.66rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-article-fg-3);
+	font-weight: 500;
+	margin-bottom: 2px;
+}
+
+.rehab-credit__name {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.9rem;
+	color: var(--rehab-warm-charcoal);
+	line-height: 1.3;
+}
+
+.rehab-credit__role {
+	font-family: var(--rehab-font-body);
+	font-size: 0.78rem;
+	color: var(--rehab-article-fg-3);
+	font-weight: 300;
+	margin-top: 2px;
+}
+
+/* ---- Featured image with Diamond top-left corner --------------------- */
+.rehab-article__featured {
+	margin: 0 0 2.5rem;
+}
+
+.rehab-article__featured-image {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: var(--rehab-ethereal-sage);
+	border-top-left-radius: 100px;
+}
+
+.rehab-article__featured-image::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to top right, rgba(186, 195, 161, 0.18), transparent 55%);
+	pointer-events: none;
+}
+
+.rehab-article__featured-img,
+.rehab-article__featured-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* ---- Article body typography -----------------------------------------
+   Body fills the article column (no internal max-width) so the featured
+   image and prose line up at the same width — matches the design. */
 .rehab-article__body {
 	font-family: var(--rehab-font-body);
 	font-weight: 300;
 	font-size: 1.0625rem;
-	line-height: 1.75;
-	color: var(--rehab-warm-charcoal);
-	max-width: 720px;
+	line-height: 1.78;
+	color: var(--rehab-soft-charcoal);
 }
 
-.rehab-article__body > * + * { margin-top: 1.25rem; }
+.rehab-article__body p { margin: 0 0 1.5rem; }
+.rehab-article__body p:last-child { margin-bottom: 0; }
+
+/* Stylised lede: first paragraph in the body gets a larger, lighter serif
+   treatment — matches the design's "lede" without requiring authors to mark
+   it up specially. */
+.rehab-article__body > p:first-of-type {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.4rem;
+	line-height: 1.45;
+	letter-spacing: -0.015em;
+	color: var(--rehab-warm-charcoal);
+	margin-bottom: 1.75rem;
+	text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+	.rehab-article__body > p:first-of-type { font-size: 1.5rem; }
+}
 
 .rehab-article__body h2 {
 	font-family: var(--rehab-font-display);
 	font-weight: 300;
-	font-size: 1.875rem;
-	line-height: 1.2;
-	color: var(--rehab-warm-charcoal);
+	font-size: 1.75rem;
 	letter-spacing: -0.02em;
-	margin-top: 3rem;
-	margin-bottom: 1rem;
-	scroll-margin-top: calc(var(--rehab-header-height) + 1rem);
+	line-height: 1.15;
+	color: var(--rehab-warm-charcoal);
+	margin: 3.25rem 0 1.25rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
 
-	@media (min-width: 768px) { font-size: 2.25rem; }
+@media (min-width: 768px) {
+	.rehab-article__body h2 { font-size: 2rem; }
 }
 
 .rehab-article__body h3 {
 	font-family: var(--rehab-font-display);
-	font-weight: 400;
-	font-size: 1.5rem;
+	font-weight: 300;
+	font-size: 1.375rem;
+	letter-spacing: -0.015em;
 	color: var(--rehab-warm-charcoal);
-	margin-top: 2rem;
-	margin-bottom: 0.75rem;
-	scroll-margin-top: calc(var(--rehab-header-height) + 1rem);
+	margin: 2.5rem 0 1rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
 }
 
-.rehab-article__body p {
-	margin: 0;
+@media (min-width: 768px) {
+	.rehab-article__body h3 { font-size: 1.5rem; }
 }
-
-.rehab-article__body ul,
-.rehab-article__body ol {
-	padding-left: 1.5rem;
-	line-height: 1.8;
-}
-
-.rehab-article__body li + li { margin-top: 0.5rem; }
 
 .rehab-article__body a {
 	color: var(--rehab-sage-text);
 	text-decoration: underline;
-	text-underline-offset: 0.2em;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.22em;
 }
 
 .rehab-article__body a:hover { color: var(--rehab-sage-dark); }
+
+.rehab-article__body strong { font-weight: 500; color: var(--rehab-warm-charcoal); }
+
+.rehab-article__body ul,
+.rehab-article__body ol {
+	padding-left: 1.4rem;
+	margin: 0 0 1.5rem;
+}
+
+.rehab-article__body li { margin-bottom: 0.5rem; }
 
 .rehab-article__body img {
 	max-width: 100%;
@@ -250,6 +353,7 @@
 .rehab-article__body blockquote {
 	font-family: var(--rehab-font-display);
 	font-style: italic;
+	font-weight: 400;
 	font-size: 1.5rem;
 	line-height: 1.4;
 	color: var(--rehab-warm-charcoal);
@@ -258,63 +362,311 @@
 	margin: 2rem 0;
 }
 
-/* Related posts */
-.rehab-article__related {
-	padding: 4rem 0;
-	@media (min-width: 768px) { padding: 6rem 0; }
+/* ---- Legacy WP color presets ----------------------------------------
+   Diamond's legacy content uses block colors (`has-beige-background-color`,
+   `has-primary-background-color`, etc.) that were registered in the old
+   diamond theme. Mirror those exact values here so legacy callouts retain
+   their colored backgrounds inside the new editorial body. Values lifted
+   from diamond/assets/css/main.min.css to match prod 1:1. */
+.rehab-article__body .has-beige-background-color    { background-color: #f9f7f2; }
+.rehab-article__body .has-secondary-background-color { background-color: #f6f7f2; }
+.rehab-article__body .has-primary-background-color  { background-color: rgba(187, 195, 161, 0.14); }
+.rehab-article__body .has-white-background-color    { background-color: #ffffff; }
+
+/* When a coloured block uses `has-global-padding` but the page-level root
+   padding is 0, the colour band has no breathing room. Force a reasonable
+   padding so the colour swatch reads as a callout, not a stripe. */
+.rehab-article__body .has-background.has-global-padding,
+.rehab-article__body .has-background:not(.wp-block-button__link):not(.wp-element-button) {
+	padding: 1.5rem 1.75rem;
 }
 
-.rehab-article__related-header {
-	text-align: center;
-	margin-bottom: 3rem;
+.rehab-article__body .has-background > :first-child { margin-top: 0; }
+.rehab-article__body .has-background > :last-child  { margin-bottom: 0; }
+
+/* Legacy "secondary" text color (used on small caption-style runs). */
+.rehab-article__body .has-secondary-color { color: var(--rehab-sage-text); }
+
+/* ---- TOC plugin (Easy Table of Contents) inline polish ---------------- */
+.rehab-article__body #ez-toc-container,
+.rehab-article__body .ez-toc-v2_0_72 {
+	background: var(--rehab-color-cream);
+	border: 1px solid var(--rehab-article-line-tan);
+	padding: 1.5rem 1.75rem !important;
+	margin: 2.5rem 0 !important;
+	border-radius: 0;
+	box-shadow: none !important;
+	width: 100%;
+	box-sizing: border-box;
 }
 
-.rehab-article__related-grid {
-	display: grid;
+.rehab-article__body .ez-toc-title-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.rehab-article__body .ez-toc-title {
+	font-family: var(--rehab-font-body) !important;
+	font-size: 0.75rem !important;
+	letter-spacing: 0.22em !important;
+	text-transform: uppercase !important;
+	font-weight: 500 !important;
+	color: var(--rehab-warm-charcoal) !important;
+}
+
+.rehab-article__body .ez-toc-list {
+	margin: 1.25rem 0 0 !important;
+	padding: 0 !important;
+	list-style: none !important;
+}
+
+.rehab-article__body .ez-toc-list li > a {
+	font-family: var(--rehab-font-body);
+	font-size: 0.95rem;
+	font-weight: 400;
+	color: var(--rehab-warm-charcoal);
+	text-decoration: none;
+	padding: 0.4rem 0;
+	display: inline-block;
+}
+
+.rehab-article__body .ez-toc-list li > a:hover {
+	color: var(--rehab-sage-dark);
+}
+
+/* ---- Inline talk-to-someone callout ---------------------------------- */
+.rehab-article__talk {
+	display: flex;
+	align-items: center;
 	gap: 1.5rem;
-	grid-template-columns: 1fr;
-
-	@media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+	flex-wrap: wrap;
+	background: #fff;
+	border: 1px solid var(--rehab-article-line-sage);
+	padding: 1.5rem 1.75rem;
+	margin: 3rem 0 0;
 }
 
-.rehab-article__related-card {
-	display: block;
+.rehab-article__talk-icon {
+	width: 52px;
+	height: 52px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background: var(--rehab-ethereal-sage);
+	display: grid;
+	place-items: center;
+	color: var(--rehab-sage-text);
+}
+
+.rehab-article__talk-text { flex: 1 1 250px; }
+
+.rehab-article__talk-title {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.25rem;
+	color: var(--rehab-warm-charcoal);
+	margin: 0 0 0.25rem;
+	letter-spacing: -0.015em;
+}
+
+.rehab-article__talk-sub {
+	font-family: var(--rehab-font-body);
+	font-size: 0.85rem;
+	color: var(--rehab-article-fg-3);
+	font-weight: 300;
+	margin: 0;
+}
+
+.rehab-article__talk-btn {
+	flex-shrink: 0;
+	font-size: 0.8125rem;
+	padding: 0.85rem 1.75rem;
+}
+
+/* ---- Sidebar shell ---------------------------------------------------- */
+.rehab-article__sidebar { min-width: 0; }
+
+.rehab-article__sidebar-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+	.rehab-article__sidebar-inner {
+		position: sticky;
+		top: calc(var(--rehab-header-height, 5rem) + 1.5rem);
+		max-height: calc(100vh - var(--rehab-header-height, 5rem) - 3rem);
+		overflow-y: auto;
+		padding-right: 0.25rem; /* room for scrollbar */
+	}
+}
+
+/* ---- Sidebar CTA card ------------------------------------------------- */
+.rehab-article__cta {
+	position: relative;
+	overflow: hidden;
 	background: #fff;
-	border: 1px solid rgba(186, 195, 161, 0.25);
+	border: 1px solid var(--rehab-article-line-sage);
+	display: flex;
+	flex-direction: column;
+}
+
+.rehab-article__cta-media {
+	aspect-ratio: 5 / 4;
+	background-image:
+		linear-gradient(135deg, rgba(122, 133, 106, 0.85), rgba(122, 133, 106, 0.55) 60%, transparent),
+		linear-gradient(135deg, #d9dec8 0%, #8a9674 100%);
+	background-size: cover;
+	background-position: center;
+	position: relative;
+}
+
+/* When the child theme ships a real photo, target it with a more specific
+   background-image override on a `.rehab-article__cta--photo` modifier. */
+.rehab-article__cta-media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to top, rgba(122, 133, 106, 0.65), rgba(122, 133, 106, 0.15) 55%, transparent);
+}
+
+.rehab-article__cta-overline {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	z-index: 2;
+	font-family: var(--rehab-font-body);
+	font-size: 0.65rem;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: #fff;
+	font-weight: 500;
+	opacity: 0.92;
+}
+
+.rehab-article__cta-title {
+	position: absolute;
+	bottom: 1.1rem;
+	left: 1.25rem;
+	right: 1.25rem;
+	z-index: 2;
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.7rem;
+	line-height: 1.05;
+	letter-spacing: -0.015em;
+	color: #fff;
+	text-wrap: balance;
+	margin: 0;
+}
+
+.rehab-article__cta-title em {
+	font-style: italic;
+	font-weight: 400;
+}
+
+.rehab-article__cta-body {
+	padding: 1.5rem 1.5rem 1.75rem;
+}
+
+.rehab-article__cta-copy {
+	font-family: var(--rehab-font-body);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	color: var(--rehab-soft-charcoal);
+	font-weight: 300;
+	margin: 0 0 1.25rem;
+}
+
+.rehab-article__cta-btn {
+	width: 100%;
+	text-align: center;
+	justify-content: center;
+	font-size: 0.8125rem;
+	padding: 0.85rem 1.75rem;
+}
+
+.rehab-article__cta-helper {
+	font-family: var(--rehab-font-body);
+	font-size: 0.72rem;
+	color: var(--rehab-article-fg-3);
+	font-weight: 300;
+	text-align: center;
+	margin: 0.65rem 0 0;
+	letter-spacing: 0.02em;
+}
+
+/* ---- Sidebar related articles ---------------------------------------- */
+.rehab-article__related-side {
+	border-top: 1px solid var(--rehab-article-line-tan);
+	padding-top: 1.5rem;
+}
+
+.rehab-article__related-eyebrow {
+	font-family: var(--rehab-font-body);
+	font-size: 0.72rem;
+	font-weight: 500;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--rehab-tan);
+	margin: 0 0 1.25rem;
+}
+
+.rehab-article__related-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.rehab-article__related-item {
+	padding: 1rem 0;
+	border-top: 1px solid rgba(190, 179, 158, 0.18);
+	display: flex;
+	gap: 0.9rem;
+	align-items: flex-start;
+}
+
+.rehab-article__related-item:first-child {
+	border-top: 0;
+	padding-top: 0.25rem;
+}
+
+.rehab-article__related-num {
+	font-family: var(--rehab-font-display);
+	font-size: 0.95rem;
+	color: var(--rehab-sage-text);
+	flex-shrink: 0;
+	padding-top: 1px;
+	letter-spacing: 0.04em;
+}
+
+.rehab-article__related-link {
+	display: block;
 	text-decoration: none;
 	color: inherit;
-	transition: border-color 0.3s var(--rehab-ease), transform 0.3s var(--rehab-ease);
-	overflow: hidden;
-}
-
-.rehab-article__related-card:hover {
-	border-color: rgba(186, 195, 161, 0.5);
-	transform: translateY(-2px);
-}
-
-.rehab-article__related-image {
-	aspect-ratio: 16 / 10;
-	overflow: hidden;
-	background: var(--rehab-ethereal-sage);
-}
-
-.rehab-article__related-image img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 0.5s var(--rehab-ease);
-}
-
-.rehab-article__related-card:hover .rehab-article__related-image img {
-	transform: scale(1.04);
 }
 
 .rehab-article__related-title {
-	padding: 1.25rem 1.5rem;
-	font-family: var(--rehab-font-display);
+	display: block;
+	font-family: var(--rehab-font-body);
+	font-size: 0.92rem;
 	font-weight: 400;
-	font-size: 1.0625rem;
-	line-height: 1.35;
 	color: var(--rehab-warm-charcoal);
-	margin: 0;
+	line-height: 1.45;
+	transition: color 0.2s var(--rehab-ease);
+}
+
+.rehab-article__related-link:hover .rehab-article__related-title {
+	color: var(--rehab-sage-dark);
+}
+
+.rehab-article__related-meta {
+	display: block;
+	font-family: var(--rehab-font-body);
+	font-size: 0.72rem;
+	font-weight: 400;
+	color: var(--rehab-article-fg-3);
+	margin-top: 4px;
+	letter-spacing: 0.04em;
 }

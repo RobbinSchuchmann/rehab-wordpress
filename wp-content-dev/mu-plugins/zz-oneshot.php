@@ -1021,41 +1021,8 @@ add_action( 'init', function () {
 					'showDeco'     => true,
 				] );
 
-				// Build rendered HTML matching save.js output.
-				$trust_html = '';
-				foreach ( [ $cfg['t1'], $cfg['t2'], $cfg['t3'] ] as $item ) {
-					$trust_html .= '<div class="rehab-hero__trust-item"><span class="rehab-hero__diamond" aria-hidden="true">◆</span>' . esc_html( $item ) . '</div>';
-				}
-
-				$hero_html =
-					'<section class="wp-block-rehab-hero rehab-hero" aria-label="Hero">' .
-					'<div class="rehab-hero__container"><div class="rehab-hero__grid">' .
-						'<div class="rehab-hero__content">' .
-							'<h1 class="rehab-hero__h1">' .
-								'<span class="rehab-hero__eyebrow">' . esc_html( $cfg['eyebrow'] ) . '</span>' .
-								'<span class="rehab-hero__headline">' . wp_kses( $cfg['headline'], [ 'br' => [] ] ) . '</span>' .
-							'</h1>' .
-							'<p class="rehab-hero__body">' . esc_html( $cfg['body'] ) . '</p>' .
-							'<div class="rehab-hero__cta">' .
-								'<a class="rehab-btn rehab-btn--luxury" href="/contact-us/">Speak with admissions</a>' .
-								'<p class="rehab-hero__cta-helper">Free, confidential, no-obligation.</p>' .
-							'</div>' .
-							'<div class="rehab-hero__trust">' . $trust_html . '</div>' .
-						'</div>' .
-						'<div class="rehab-hero__media">' .
-							'<div class="rehab-hero__image-wrap">' .
-								'<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( $cfg['alt'] ) . '" class="rehab-hero__image" loading="eager" decoding="async"/>' .
-								'<div class="rehab-hero__overlay" aria-hidden="true"></div>' .
-							'</div>' .
-							'<div class="rehab-hero__deco" aria-hidden="true"></div>' .
-						'</div>' .
-					'</div></div>' .
-					'</section>';
-
-				$hero_block =
-					'<!-- wp:rehab/hero ' . $attrs . " -->\n" .
-					$hero_html . "\n" .
-					"<!-- /wp:rehab/hero -->";
+				// Dynamic block: rehab/hero render.php builds the markup from $attrs.
+				$hero_block = '<!-- wp:rehab/hero ' . $attrs . ' /-->';
 
 				// Replace the existing leading rehab/cta (the placeholder hero) with this rehab/hero.
 				$content = $post->post_content;
@@ -1274,7 +1241,7 @@ add_action( 'init', function () {
 			if ( ! $post ) { echo "no post 853\n"; break; }
 
 			$base = '/wp-content/uploads/';
-			$theme = get_stylesheet_directory_uri();
+			$theme = wp_make_link_relative( get_stylesheet_directory_uri() );
 			$blocks = '';
 
 			// 1. TREATMENT HERO
@@ -1486,6 +1453,340 @@ add_action( 'init', function () {
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cocaine page (design v2, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
+		case 'rebuild-cocaine-design-v3':
+			// Approved hi-fi design (treatment/Cocaine Addiction Rehab.html, June 2026).
+			// Assessment-first hero w/ inline form, symptom checklist moved up, sage
+			// mid-page CTA band, video-reel proof, SEO prose, stat band, in-content
+			// related programs, 6-item FAQ, dark concierge close. No em dashes.
+			$page_id = 853;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 853\n"; break; }
+
+			// Keep a one-time backup of the v2 content so it stays restorable.
+			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved v2 backup to _rehab_design_v2_backup\n";
+			}
+
+			$base   = '/wp-content/uploads/';
+			$theme  = wp_make_link_relative( get_stylesheet_directory_uri() );
+			$blocks = '';
+
+			// 1. ASSESSMENT-FIRST HERO (form in hero, anchor #assessment)
+			$blocks .= rehab_block_assessment_hero( [
+				'anchorId'    => 'assessment',
+				'eyebrow'     => 'Cocaine addiction treatment · Hua Hin',
+				'headline'    => 'Break the grip of cocaine, privately, in Thailand',
+				'lede'        => "A discreet, doctor-led residential program at Thailand's leading luxury rehab. Medical detox, evidence-based therapy and a hard cap of twelve clients, so recovery is built around you and never a template.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+				'ratingScore' => '4.9', 'ratingText' => 'from 120+ Google reviews · families & alumni',
+				'stat1Num' => '12',   'stat1Label' => 'Maximum clients on site at any time',
+				'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team on call',
+				'stat3Num' => '14+',  'stat3Label' => 'Years treating stimulant addiction',
+				'formEyebrow' => 'Free & confidential',
+				'formTitle'   => 'Talk with our admissions team',
+				'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
+				'formSubmit'  => 'Talk with admissions',
+				'formPhoneLabel' => 'Or call +66 3 313 5303',
+				'formConsent' => 'By submitting you agree to a confidential call-back. We never share your details.',
+			] );
+
+			// 2. AUTHORITY RIBBON (press logos)
+			$blocks .= rehab_block_authority_ribbon( 'As featured in', [
+				[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider' ],
+				[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
+				[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good' ],
+				[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central' ],
+				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
+				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
+			] );
+
+			// 3. SYMPTOM CHECKLIST (moved up: symptom hook early) + dark CTA
+			$blocks .= rehab_block_signs_grid( [
+				'background' => 'cream',
+				'eyebrow'    => 'Is this you, or someone you love?',
+				'heading'    => 'Recognising the signs is the first step',
+				'subheading' => "Cocaine dependence rarely announces itself. These are the patterns families notice first. If several feel familiar, it's worth a conversation.",
+				'card1Title' => 'Common signs of cocaine addiction',
+				'card1Items' => [
+					'Restlessness, agitation and disrupted sleep',
+					'Noticeable weight loss and loss of appetite',
+					'Secrecy around money and whereabouts',
+					'Mood swings, irritability and low motivation',
+					'Declining performance at work or home',
+				],
+				'card2Title' => 'Withdrawal symptoms during detox',
+				'card2Items' => [
+					'Intense cravings and preoccupation',
+					'Depression and emotional flatness',
+					'Fatigue, lethargy and "crashing"',
+					'Vivid, unsettling dreams and poor sleep',
+					'Anxiety and, at times, suicidal thoughts',
+				],
+				'showCta'   => true,
+				'ctaTitle'  => 'If any of this feels familiar, please reach out.',
+				'ctaBody'   => "Call, message on WhatsApp, or speak with admissions. There's no pressure and nothing to commit to.",
+				'ctaButton' => 'Talk with admissions', 'ctaUrl' => '#assessment',
+			] );
+
+			// 4. WHY US (3-up)
+			$blocks .= rehab_block_pillars(
+				'Why Diamond Rehab',
+				'Three reasons families choose us',
+				'',
+				[
+					[ 'num' => '01 · Evidence-based & holistic', 'title' => 'Western clinical care, Eastern calm', 'body' => 'Medical detox and proven therapies including CBT, trauma work and family therapy, alongside fitness, nutrition and mindfulness that rebuild the whole person.' ],
+					[ 'num' => '02 · Never templated', 'title' => 'A program shaped around you', 'body' => 'With only twelve clients on site, your plan is built by a psychiatrist for your history, not slotted into a fixed curriculum.' ],
+					[ 'num' => '03 · Support around the clock', 'title' => 'Care when cravings hit hardest', 'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the night and the hardest moments.' ],
+				],
+				'white'
+			);
+
+			// 5. HOLISTIC SPLIT
+			$blocks .= rehab_block_article_row( [
+				'background' => 'cream',
+				'imageSide' => 'right', 'imageAspect' => 'tall',
+				'imageUrl' => $base . '2024/05/1-1-session-room-1.jpg',
+				'imageAlt' => '1-on-1 therapy room',
+				'eyebrow' => 'A complex addiction',
+				'heading' => 'A holistic approach to a stubborn dependency',
+				'body' => "Cocaine reshapes the brain's reward system, which is why willpower alone so rarely works. Our program treats the dependency and the reasons beneath it: trauma, stress and burnout, at the same time.\n\nYou'll move through medically supervised detox into one-to-one therapy, group work and holistic practices, all inside a calm, private setting designed to make the work possible.",
+			] );
+
+			// 6. TREATMENT PHASES (tabs with team-voice quotes)
+			$blocks .= rehab_block_treatment_phases(
+				'The treatment phases',
+				'Three pillars of cocaine recovery',
+				'',
+				[
+					[
+						'phase' => 'PHASE 01', 'label' => 'Medical detox',
+						'h3' => 'A safe, supervised start',
+						'paragraphs' => [
+							'Detox is where recovery becomes possible.',
+							'Our medical team manages withdrawal around the clock, keeping you comfortable and safe while your body clears and stabilises.',
+						],
+						'listItems' => [ '24/7 nursing and physician oversight', 'Medication to ease cravings and sleep', 'Hospital-affiliated, fully licensed care' ],
+						'asideQuote' => '"Entering inpatient care reduces the risk of relapse during the most critical window of withdrawal."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 02', 'label' => 'Behavioural therapy',
+						'h3' => 'Understanding the why',
+						'paragraphs' => [
+							'Once detox is complete, the real work begins.',
+							'One-to-one and group therapy help you understand the triggers, beliefs and pain that drive use, then build practical tools to live differently.',
+						],
+						'listItems' => [ 'Cognitive behavioural therapy (CBT)', 'Trauma-focused and one-to-one sessions', 'Family therapy and relapse-prevention planning' ],
+						'asideQuote' => '"Our fully qualified counsellors work with you to dissect the behavioural issues and psychosocial factors that contribute to addiction."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+					[
+						'phase' => 'PHASE 03', 'label' => 'Holistic & aftercare',
+						'h3' => 'Rebuilding a life worth staying for',
+						'paragraphs' => [
+							'Lasting recovery is about more than stopping.',
+							'Fitness, nutrition, mindfulness and purpose restore body and mind, and a structured aftercare plan supports you long after you fly home.',
+						],
+						'listItems' => [ 'Personal training, yoga and spa wellness', 'Nutrition and sleep restoration', '12 months of structured aftercare' ],
+						'asideQuote' => '"Lasting recovery is built on routine, purpose and support that continues long after you return home."',
+						'asideMetaLabel' => 'Statement',
+						'asideMetaValue' => 'The Diamond Rehab Team',
+					],
+				],
+				'white'
+			);
+
+			// 7. SAGE CONVERSION BAND (post-phases CRO moment)
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'sage',
+				'eyebrow'    => 'Ready when you are',
+				'heading'    => 'Recovery can begin this week',
+				'lede'       => 'A confidential call is the first step. No pressure and no commitment to proceed.',
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+				'helper'     => 'Free, confidential, and no-obligation.',
+			] );
+
+			// 8. VIDEO TESTIMONIALS (vertical reel; placeholders until consented clips exist)
+			$blocks .= rehab_block_video_reel( [
+				'background' => 'cream',
+				'eyebrow'    => 'Real stories',
+				'heading'    => 'Recovery, in their own words',
+				'ratingScore' => '4.9', 'ratingText' => '· 120+ Google reviews',
+			] );
+
+			// 9. INPATIENT ADVANTAGE (text-first split + 4-up numbered)
+			$blocks .= rehab_block_article_row( [
+				'background' => 'white',
+				'imageSide' => 'left', 'imageAspect' => 'wide',
+				'imageUrl' => $base . '2024/05/Close-up-chairs-3.jpg',
+				'imageAlt' => 'The grounds at Hua Hin',
+				'eyebrow' => 'The advantage of inpatient care',
+				'heading' => 'Why distance makes recovery possible',
+				'body' => 'Trying to recover at home means recovering beside the same triggers, routines and relationships that fuel use. Residential treatment in Thailand creates the space, and the safety, to actually change.',
+			] );
+			$blocks .= rehab_block_benefits_numbered( [
+				[ 'title' => 'Distance from triggers', 'body' => 'Away from the people, places and routines that keep the cycle turning.' ],
+				[ 'title' => 'Round-the-clock supervision', 'body' => 'Resort-calm surroundings backed by qualified medical staff, day and night.' ],
+				[ 'title' => 'A plan built for you', 'body' => 'A program tailored to your clinical picture, not a fixed curriculum.' ],
+				[ 'title' => 'A real therapeutic community', 'body' => 'A hard cap of twelve clients means genuine attention and deeper connection.' ],
+			] );
+
+			// 10. UNDERSTANDING (SEO / educational long-form)
+			$blocks .= rehab_block_prose(
+				'Is it time to consider cocaine rehab?',
+				[
+					'Cocaine is a powerful stimulant and one of the most addictive drugs in circulation. Once used as an ingredient in medicinal products, it is now a widely available party drug that carries a high potential for dependence.',
+					'It is so addictive because of the way it changes the chemistry of the brain. Cocaine triggers a surge of dopamine, the chemical behind feelings of pleasure and reward. When the effects wear off, that high is followed by a sharp crash of anxiety and fatigue, along with an intense urge to use again.',
+					'Occasional use can escalate into a pattern of misuse quickly. As tolerance builds, it takes more of the drug to reach the same effect, and the cravings become harder to resist on willpower alone.',
+					'Recognising that use has become a problem is often the hardest step, and many people reach that point with the help of those around them. If any of the signs above feel familiar, a confidential conversation is a safe place to start.',
+				],
+				[], '', '', 'cream'
+			);
+
+			// 11. PROCESS STEPS + compact CTA row
+			$blocks .= rehab_block_journey_steps(
+				'Your next step',
+				'What happens when you reach out',
+				"There's no commitment in making contact. Here's exactly how the first few days unfold.",
+				[
+					[ 'label' => 'STEP 01', 'title' => 'Confidential call', 'body' => "A free, no-obligation conversation with our admissions team, whenever you're ready." ],
+					[ 'label' => 'STEP 02', 'title' => 'Clinical assessment', 'body' => 'A psychiatrist reviews your situation and recommends the right length of stay.' ],
+					[ 'label' => 'STEP 03', 'title' => 'Arrival & onboarding', 'body' => 'We arrange airport collection and settle you into private accommodation.' ],
+					[ 'label' => 'STEP 04', 'title' => 'Treatment begins', 'body' => 'Medical detox if needed, then your bespoke program of therapy and wellness.' ],
+				],
+				'white'
+			);
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'none', 'compact' => true,
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+			] );
+
+			// 12. STAT BAND (figures pending confirmation by the team)
+			$blocks .= rehab_block_stat_band( [
+				'stat1Num' => '12',  'stat1Label' => 'Client cap, always',
+				'stat2Num' => '4:1', 'stat2Label' => 'Staff-to-client ratio',
+				'stat3Num' => '50+', 'stat3Label' => 'Specialist staff',
+				'stat4Num' => '28',  'stat4Label' => 'Day core program',
+			] );
+
+			// 13. RELATED PROGRAMS (in-content cards; theme auto-related is suppressed
+			// because the page closes with a dark cta-band)
+			$related_pages = get_posts( [
+				'post_type'      => 'page',
+				'posts_per_page' => 3,
+				'meta_key'       => '_wp_page_template',
+				'meta_value'     => 'template-treatment.php',
+				'post__not_in'   => [ $page_id ],
+				'orderby'        => 'modified',
+				'order'          => 'DESC',
+			] );
+			if ( $related_pages ) {
+				$cards = [];
+				foreach ( $related_pages as $rp ) {
+					$thumb  = get_the_post_thumbnail_url( $rp, 'medium_large' );
+					$cards[] = [
+						'title'       => get_the_title( $rp ),
+						'description' => get_the_excerpt( $rp ) ?: 'Discreet, doctor-led residential treatment in Hua Hin.',
+						'imageUrl'    => $thumb ?: '',
+						'imageAlt'    => get_the_title( $rp ),
+						'url'         => get_permalink( $rp ),
+					];
+				}
+				$blocks .= rehab_block_cards_grid( 'Other conditions we treat', '', $cards, 3, 'white' );
+			}
+
+			// 14. FAQ (6 items: 3 from CPT + 3 new from the approved design)
+			$faq_items = [ [ 'cptId' => 32 ], [ 'cptId' => 3435 ], [ 'cptId' => 204 ] ];
+			$design_faqs = [
+				[ 'question' => 'Is my stay completely confidential?', 'answer' => 'Yes. Discretion is fundamental to how we operate, from your first call through to your time on site and aftercare. Private accommodation and careful handling of every detail are standard.' ],
+				[ 'question' => 'What does treatment cost?', 'answer' => 'Our fee is all inclusive, covering accommodation, clinical care, therapy, meals and excursions in one transparent figure with no hidden extras. Because length of stay varies, we discuss specific numbers on a confidential call.' ],
+				[ 'question' => 'Can family be involved in the recovery?', 'answer' => 'Family therapy is part of our approach, and we keep loved ones appropriately informed and supported throughout. Recovery is far stronger when the people around you are part of it.' ],
+			];
+			foreach ( $design_faqs as $df ) {
+				// FAQ CPT is the single source of truth; the block renders cptIds
+				// only (inline items are ignored when cptIds is set). Reuse the
+				// matching record or create it so all six questions resolve.
+				$match = get_posts( [ 'post_type' => 'faq', 'title' => $df['question'], 'posts_per_page' => 1, 'fields' => 'ids' ] );
+				$faq_id = $match ? (int) $match[0] : wp_insert_post( [
+					'post_type'    => 'faq',
+					'post_status'  => 'publish',
+					'post_title'   => $df['question'],
+					'post_content' => $df['answer'],
+				] );
+				if ( $faq_id && ! is_wp_error( $faq_id ) ) {
+					$faq_items[] = [ 'cptId' => $faq_id ];
+					echo ( $match ? 'reused' : 'created' ) . " FAQ CPT {$faq_id}: {$df['question']}\n";
+				}
+			}
+			$blocks .= rehab_block_faq( 'Frequently asked questions', $faq_items );
+
+			// 15. DARK CONCIERGE CLOSE (the page's one high-contrast moment)
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => "You've already done the hardest part: recognising it",
+				'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cocaine page (design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'dump-acf-sections-json':
+			// Full JSON dump of the normalized legacy ACF sections for a page.
+			$pid = (int) ( $_GET['id'] ?? 0 );
+			if ( ! $pid ) { echo "pass &id=<page_id>\n"; break; }
+			echo wp_json_encode( rehab_acf_get_sections( $pid ), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
+			break;
+
+		case 'rebuild-treatment-v3':
+			// Generic design-v3 rebuild for any treatment page with a spec in
+			// aa-treatment-v3-specs.php. Keeps a one-time pre-v3 content backup.
+			$pid = (int) ( $_GET['id'] ?? 0 );
+			if ( ! $pid ) { echo "pass &id=<page_id>\n"; break; }
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			$specs = rehab_treatment_v3_specs();
+			if ( empty( $specs[ $pid ] ) ) { echo "no v3 spec for page {$pid}\n"; break; }
+
+			if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $pid, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+
+			$blocks = rehab_build_treatment_v3( $pid, $specs[ $pid ] );
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) && get_page_template_slug( $pid ) !== 'template-treatment.php' ) {
+				update_post_meta( $pid, '_wp_page_template', 'template-treatment.php' );
+				echo "set template-treatment.php\n";
+			}
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt page {$pid} ({$specs[$pid]['slug']}, design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'restore-treatment-v3':
+			// Roll any v3-rebuilt page back to its pre-v3 content.
+			$pid = (int) ( $_GET['id'] ?? 0 );
+			$backup = $pid ? get_post_meta( $pid, '_rehab_design_v2_backup', true ) : '';
+			if ( ! $backup ) { echo "no pre-v3 backup for {$pid}\n"; break; }
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $backup ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK restored page {$pid} to pre-v3 content\n";
+			break;
+
+		case 'restore-cocaine-design-v2':
+			// Roll the cocaine page back to the pre-v3 content saved by rebuild-cocaine-design-v3.
+			$page_id = 853;
+			$backup  = get_post_meta( $page_id, '_rehab_design_v2_backup', true );
+			if ( ! $backup ) { echo "no v2 backup found\n"; break; }
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $backup ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK restored cocaine page to v2 (" . strlen( $backup ) . " bytes)\n";
+			break;
+
 		case 'inspect-db':
 			global $wpdb;
 			echo "=== ACTIVE PLUGINS ===\n";
@@ -1557,6 +1858,708 @@ add_action( 'init', function () {
 			) );
 			foreach ( $rows as $r ) echo "  #$r->ID  $r->post_title\n";
 			echo "(" . count( $rows ) . " matches)\n";
+			break;
+
+		case 'rebuild-cost-v3':
+			// Approved hi-fi Cost design (cost/Cost.html, June 2026). Reuses
+			// treatment-hero, authority-ribbon, journey-steps, pillars, prose,
+			// gallery and cta-band; adds checklist-cards, exclusions-list,
+			// guarantee. Figure deferred to a confidential call (brand rule).
+			$page_id = 834;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 834\n"; break; }
+
+			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+
+			$base   = '/wp-content/uploads/';
+			$theme  = wp_make_link_relative( get_stylesheet_directory_uri() );
+			$blocks = '';
+
+			// 1. HERO (photo + all-inclusive badge; CTA wording = Check availability)
+			$blocks .= rehab_block_treatment_hero( [
+				'eyebrow'  => "Fees & what's included",
+				'headline' => 'Transparent, all-inclusive care: one private fee',
+				'lede'     => 'No hidden extras and nothing itemised after you arrive. Accommodation, clinical care, therapy, meals, wellness and excursions are gathered into a single, transparent figure, which we share with you on a confidential call.',
+				'primaryText' => 'Check availability', 'primaryUrl' => '#pricing',
+				'secondaryText' => '+66 3 313 5303', 'secondaryUrl' => 'tel:+6633135303',
+				'helper' => 'Free, confidential, and no-obligation.',
+				'stat1Num' => '1',  'stat1Label' => 'All-inclusive fee, no hidden extras',
+				'stat2Num' => '12', 'stat2Label' => 'Private bungalows, never more',
+				'stat3Num' => '28', 'stat3Label' => 'Day core program length',
+				'imageUrl' => $base . '2024/05/Bungalow-evening-2.jpg',
+				'imageAlt' => 'Private luxury bungalow at The Diamond Rehab Thailand',
+				'badgeImageUrl' => '',
+				'badgeTitle' => 'All-inclusive',
+				'badgeText'  => 'Accommodation · care · therapy · meals',
+			] );
+
+			// 2. ACCREDITATION RIBBON (real logo files only; Cigna/BlueCross/IC&RC pending assets)
+			$blocks .= rehab_block_authority_ribbon( 'Accredited & recognised by', [
+				[ 'url' => $theme . '/assets/img/treatment/ministry-public-health-badge.webp', 'alt' => 'Thai Ministry of Public Health' ],
+				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital' ],
+				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
+			] );
+
+			// 3. WHAT'S INCLUDED (3 themed cards + medical check-up panel)
+			$blocks .= rehab_block_checklist_cards( [
+				'background' => 'cream',
+				'eyebrow' => 'All-inclusive',
+				'heading' => 'Everything your stay includes',
+				'lede'    => 'Your investment covers the whole program: clinical, therapeutic, holistic and everyday comforts, so the figure you discuss is the figure you pay.',
+				'cards' => [
+					[
+						'kick'  => 'Clinical & therapeutic',
+						'title' => 'Doctor-led care',
+						'items' => [
+							'Initial and follow-up assessment with a psychiatrist',
+							'Three 1-on-1 sessions a week with a clinical psychologist or counsellor',
+							'Daily psycho-educational groups, lectures and therapeutic groups',
+							'MCMI (Millon Clinical Multiaxial Inventory) assessment',
+							'Comprehensive aftercare plan',
+						],
+					],
+					[
+						'kick'  => 'Wellness & lifestyle',
+						'title' => 'Restoring body & mind',
+						'items' => [
+							'One-hour massage every week',
+							'Two yoga sessions a week',
+							'Daily physical activity: gym, ice bath and sauna',
+							'One outing every week',
+							'Weekly park walk or hike',
+						],
+					],
+					[
+						'kick'  => 'Comfort & everyday',
+						'title' => 'Five-star surroundings',
+						'items' => [
+							'Private luxury bungalow accommodation',
+							'Gourmet dining, three exquisite meals daily',
+							'24/7 complimentary fibre-optic Wi-Fi',
+							'Complimentary airport transfers',
+						],
+					],
+				],
+				'panelEyebrow' => 'Included on arrival',
+				'panelTitle'   => 'A full medical check-up',
+				'panelBody'    => 'Every program includes a comprehensive health screening, so your care is grounded in a clear clinical picture from day one.',
+				'panelItems'   => [ 'Blood pressure', 'BMI', 'Complete blood count', 'Fasting blood glucose', 'Total lipid profile', 'Kidney function test', 'Liver function test', 'Inflammation marker (CRP)', 'Urine examination' ],
+			] );
+
+			// 4. PRICE CALLOUT (deferred figure, anchored #pricing)
+			$blocks .= rehab_block_cta_band( [
+				'anchorId'   => 'pricing',
+				'background' => 'none', 'cardStyle' => true,
+				'eyebrow'    => '',
+				'heading'    => 'One transparent fee, shared on a confidential call',
+				'lede'       => 'Because the right length of stay differs from person to person, we talk through the specific figure with you directly. No pressure, no obligation, just a clear answer and a clear next step.',
+				'primaryText' => 'Check availability', 'primaryUrl' => '/contact-us/',
+				'helper'     => 'Free, confidential, and no-obligation.',
+			] );
+
+			// 5. NOT INCLUDED (exclusions)
+			$blocks .= rehab_block_exclusions_list( [
+				'background' => 'cream',
+				'eyebrow' => 'Full transparency',
+				'heading' => 'What sits outside the fee',
+				'lede'    => "In the interest of clarity, a short list of things that aren't part of the program fee. We'll always be open about anything extra before it's arranged.",
+				'items' => [
+					'Flights to and from Bangkok',
+					'Full medical assessment with ECG and blood tests on arrival (optional, if necessary)',
+					'Extra massages',
+					'Extra sessions with the psychologist, therapist or psychiatrist',
+					'Extra yoga classes',
+					'Detox medications',
+					'Other medications',
+					'Hospital visits (we advise arranging travel insurance)',
+					'Additional doctor or specialist fees',
+				],
+				'note' => 'Anything outside your program fee is always discussed and agreed with you first.',
+			] );
+
+			// 6. RELAPSE PREVENTION GUARANTEE
+			$blocks .= rehab_block_guarantee( [
+				'background' => 'white',
+				'eyebrow' => 'Our promise',
+				'heading' => 'The Relapse Prevention Guarantee',
+				'body' => "We recognise the complexities of the recovery journey. On completing treatment with us, clients leave with the support, knowledge and tools to live a life of sustainable recovery, one that is genuinely worth living.\n\nIn the unfortunate event of a relapse within twelve months of discharge, the client is eligible to return for a complimentary twenty-eight-day refresher course, at no cost. This period helps identify areas of concern and recommence the path to recovery, underscoring our trust in the program and our commitment to our clients' wellbeing.",
+				'ghostText' => 'Contact the admissions team', 'ghostUrl' => '/contact-us/',
+				'cardEyebrow' => 'Included · 12+ week programs',
+				'cardBig' => '28 days, complimentary',
+				'cardSub' => "If relapse occurs within a year of discharge, you're welcome back for a full refresher course.",
+				'terms' => [
+					'A complimentary 28-day refresher course',
+					'Available within twelve months of discharge',
+					'Requires a minimum 12-week initial stay to qualify',
+				],
+				'cardBtnText' => 'Ask about the guarantee', 'cardBtnUrl' => '/contact-us/',
+			] );
+
+			// 7. BUNGALOW GALLERY (real facility photos)
+			$blocks .= rehab_block_gallery(
+				'Every guest stays in a private luxury bungalow',
+				[
+					[ 'url' => $base . '2024/05/Bungalow-evening-2.jpg', 'alt' => 'Private luxury bungalow' ],
+					[ 'url' => $base . '2024/05/Bedroom-1.jpg', 'alt' => 'Luxury bedroom' ],
+					[ 'url' => $base . '2024/05/Bungalow-swimmingpool-nice-sky.jpg', 'alt' => 'Pool and gardens' ],
+					[ 'url' => $base . '2024/05/Balcony-view.jpg', 'alt' => 'View from the balcony' ],
+					[ 'url' => $base . '2024/05/1-1-session-room-1.jpg', 'alt' => 'Therapy pavilion' ],
+					[ 'url' => $base . '2024/05/Beach-Hua-Hin-1.jpg', 'alt' => 'The grounds, Hua Hin' ],
+				],
+				'grid', 3, 'cream'
+			);
+
+			// 8. HOW BOOKING & PAYMENT WORKS (4 steps) + policy note
+			$blocks .= rehab_block_journey_steps(
+				'How we work',
+				'How booking and payment works',
+				"Straightforward, and built around a boutique center of only twelve bungalows. Here's exactly what to expect.",
+				[
+					[ 'label' => 'STEP 01', 'title' => '50% to reserve', 'body' => 'To hold your bungalow, we ask for 50% of the fee upfront when you book.' ],
+					[ 'label' => 'STEP 02', 'title' => '72-hour reassurance', 'body' => 'If you choose to leave within 72 hours of arrival, that 50% is refunded to your account within 14 days.' ],
+					[ 'label' => 'STEP 03', 'title' => 'Balance on arrival', 'body' => 'On arrival, the remaining 50% plus a USD 500 deposit for any incidental costs.' ],
+					[ 'label' => 'STEP 04', 'title' => 'Deposit returned', 'body' => 'When you leave, the unused balance of your deposit is returned within 14 days.' ],
+				],
+				'white'
+			);
+			$blocks .= rehab_block_prose(
+				'',
+				[ "In special cases we can make exceptions on the fee. Please contact us for more information. If you're wondering whether our program is the right choice, a confidential call is the easiest place to start." ],
+				[], '', '', 'white'
+			);
+
+			// 9. WHY A DEPOSIT (3-up rationale)
+			$blocks .= rehab_block_pillars(
+				'Boutique by design',
+				'Why we ask for a deposit upfront',
+				'With only twelve private bungalows, every booking matters to how we operate, and to the standard of care we can hold.',
+				[
+					[ 'num' => '01 · Limited availability', 'title' => 'Twelve bungalows, no more', 'body' => 'An unoccupied room significantly affects how we operate. If a booking is cancelled, it can take five to seven days to fill, leaving considerable downtime.' ],
+					[ 'num' => '02 · Operational costs', 'title' => 'Arranged before you arrive', 'body' => 'On confirming your booking we arrange a luxury SUV airport collection and schedule your intake with a psychiatrist, services that require payment upfront from us.' ],
+					[ 'num' => '03 · Client care', 'title' => 'Room for the unexpected', 'body' => 'Travel delays happen. Securing your deposit lets us accommodate those situations without compromising our ability to serve you or other clients.' ],
+				],
+				'cream'
+			);
+
+			// 10. DARK CONCIERGE CLOSE
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => "Let's talk through the figure, and the fit",
+				'lede'       => "A short, confidential call with our admissions team. We answer every question about cost, what's included and what comes next, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Check availability', 'primaryUrl' => '/contact-us/',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cost page (design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'rebuild-contact-v3':
+			// Approved hi-fi Contact design (contact/Contact.html, June 2026).
+			// page-header + contact-methods (new) + existing map carried over
+			// verbatim + dark concierge cta-band.
+			$page_id = 1189;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 1189\n"; break; }
+
+			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+
+			// Carry the configured map over BEFORE overwriting the content.
+			$map_block = rehab_block_copy_from_post( $page_id, 'rehab/map' );
+			echo $map_block ? "carried over existing rehab/map block\n" : "WARNING: no rehab/map block found to carry over\n";
+
+			$blocks = '';
+
+			// 1. PAGE HEADER (live page's approved copy, kept verbatim)
+			$blocks .= rehab_block_page_header( [
+				'background' => 'white',
+				'eyebrow' => "We're here, day or night",
+				'heading' => 'Get help with addiction',
+				'lede'    => 'Call The Diamond Rehab Thailand and start your journey to abstinence today. A real person, not a call centre. No pressure, and nothing to commit to.',
+			] );
+
+			// 2. CONTACT METHODS + FORM (phone first per CRO; socials = confirmed URLs only)
+			$blocks .= rehab_block_contact_methods( [
+				'background' => 'cream',
+				'anchorId'   => 'get-in-touch',
+				'railEyebrow' => 'Speak with us directly',
+				'railHeading' => "However you'd rather reach us",
+				'methods' => [
+					[ 'icon' => 'phone',    'kick' => 'Call us · fastest, 24/7',            'value' => '+66 3 313 5303', 'href' => 'tel:+6633135303' ],
+					[ 'icon' => 'whatsapp', 'kick' => 'WhatsApp · for privacy & timezones', 'value' => 'Message us now', 'href' => 'https://wa.me/66965823832' ],
+					[ 'icon' => 'email',    'kick' => 'Email · we reply within hours',      'value' => 'Send a message', 'href' => 'mailto:info@diamondrehabthailand.com' ],
+				],
+				'nextTitle' => 'What happens when you reach out',
+				'nextItems' => [
+					'A clinician replies within the hour, not a call centre',
+					'We listen, answer your questions, and never sell',
+					'Your enquiry is confidential, with no obligation to proceed',
+				],
+				'followLabel' => 'Follow us',
+				'socials' => [
+					[ 'network' => 'facebook',  'url' => 'https://www.facebook.com/diamondrehabthailand' ],
+					[ 'network' => 'instagram', 'url' => 'https://www.instagram.com/diamondrehabthailand' ],
+				],
+				'formEyebrow' => 'Get in touch',
+				'formTitle'   => 'Request a free, confidential assessment',
+				'formSub'     => "Tell us a little, and we'll be in touch on your terms. We never share your details.",
+				'formSubmit'  => 'Send message',
+				'formHelper'  => 'Free, confidential, and no-obligation.',
+			] );
+
+			// 3. GETTING HERE — the page's existing, configured map block
+			$blocks .= $map_block;
+
+			// 4. DARK CONCIERGE CLOSE
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => 'Start your journey to abstinence today',
+				'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#get-in-touch',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt contact page (design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'rebuild-whyus-v3':
+			// Approved hi-fi Why Us design (why-us/Why Us.html, June 2026).
+			// page-header (left + feature image) + feature-split ×4 + cards-grid
+			// treatment types + prose license band + dark concierge.
+			$page_id = 825;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 825\n"; break; }
+
+			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+
+			$base   = '/wp-content/uploads/';
+			$theme  = wp_make_link_relative( get_stylesheet_directory_uri() );
+			$blocks = '';
+
+			// 1. PAGE HEADER (left-aligned, full-width feature image)
+			$blocks .= rehab_block_page_header( [
+				'background' => 'white',
+				'align'   => 'left',
+				'eyebrow' => 'Why The Diamond Rehab Thailand',
+				'heading' => 'A luxury rehabilitation centre, built around one client at a time',
+				'lede'    => 'A private sanctuary on the Gulf of Thailand in the quiet city of Hua Hin, where Western clinical excellence, Thai hospitality and a hard cap of twelve clients come together for a recovery shaped entirely around you.',
+				'imageUrl' => $base . '2024/05/Closer-up-dining-2.jpg',
+				'imageAlt' => 'The Diamond living and dining pavilion',
+			] );
+
+			// 2. ABOUT — LUXURY STAY
+			$blocks .= rehab_block_feature_split( [
+				'background' => 'cream', 'imageSide' => 'left',
+				'imageUrl' => $base . '2024/05/Bungalow-swimmingpool-nice-sky.jpg',
+				'imageAlt' => 'Pool and private bungalow',
+				'eyebrow' => 'About the rehab',
+				'heading' => 'A luxury stay from start to abstinence',
+				'body' => "The Diamond Rehab Thailand is a unique centre near the coast of the Gulf of Thailand, in the peaceful city of Hua Hin. Every room is private and fitted with the amenities and creature comforts our clients need: SMART TV, 24/7 fibre-optic internet, fridge and more.\n\nAlongside your therapeutic programme, a range of outings lets you experience the rich culture and natural beauty Thailand has to offer, so the work of recovery happens inside a life worth returning to.",
+				'chips' => [ 'Private rooms', 'SMART TV', '24/7 fibre internet', 'Weekly outings' ],
+			] );
+
+			// 3. WHY HUA HIN / HOLISTIC APPROACH
+			$blocks .= rehab_block_feature_split( [
+				'background' => 'white', 'imageSide' => 'right',
+				'imageUrl' => $base . '2024/05/1-1-session-room-1.jpg',
+				'imageAlt' => 'Tropical gardens and therapy pavilion',
+				'eyebrow' => 'Why Hua Hin',
+				'heading' => 'A world-class team and a holistic approach',
+				'body' => "Our team treats addiction alongside the co-occurring issues that so often sit beneath it: depression, anxiety and burnout. We use CBT and DBT together with modalities like art therapy and beach-walk meditation to help you build a sustainable recovery.\n\nWe go to the root of the problem. We believe the substance is rarely the only problem, and the underlying issues need to be resolved to stay clean, sober and genuinely content.",
+				'chips' => [ 'CBT', 'DBT', 'Art therapy', 'Beach-walk meditation', 'Co-occurring care' ],
+			] );
+
+			// 4. FOUNDER STORY
+			$blocks .= rehab_block_feature_split( [
+				'background' => 'cream', 'imageSide' => 'left',
+				'imageUrl' => $theme . '/assets/img/treatment/founder-theo.avif',
+				'imageAlt' => 'Theo de Vries, founder of The Diamond Rehab Thailand',
+				'eyebrow' => 'Our founder',
+				'heading' => 'Why Theo de Vries built The Diamond',
+				'body' => "A pioneer in the rehab industry, Theo started one of Thailand's first and most successful centres in the north of the country eleven years ago. During a six-month sabbatical in 2019, he set out to create something new: a centre that didn't yet exist in Thailand, at a fair price.\n\nAfter months of searching for the right location, he found what he calls The Diamond: a centre offering two schedules, a shared weekly programme and a fully individual one, something not seen elsewhere in Thailand.",
+				'quote' => 'The substance is rarely the only problem. The underlying issues need to be resolved for recovery to last.',
+				'quoteSrc' => 'The philosophy behind The Diamond',
+				'stats' => [
+					[ 'v' => '2',  'k' => 'Schedules: shared weekly and fully individual' ],
+					[ 'v' => '12', 'k' => 'Clients maximum, to protect the calm' ],
+					[ 'v' => '11<em>+</em>', 'k' => 'Years pioneering rehab in Thailand' ],
+				],
+			] );
+
+			// 5. TREATMENT TYPES (real links; photos are stand-ins for category shots)
+			$blocks .= rehab_block_cards_grid(
+				'A personalised approach to every condition',
+				'Made to measure for each client, because every recovery is different. Explore the programs we offer.',
+				[
+					[ 'title' => 'Substance addiction', 'description' => 'Doctor-led residential treatment for substance dependence.', 'imageUrl' => $base . '2024/05/1-1-session-room-2.jpg', 'imageAlt' => 'Substance addiction treatment', 'url' => '/substance-abuse-treatment/' ],
+					[ 'title' => 'Alcohol addiction', 'description' => 'Medically supervised detox and residential therapy.', 'imageUrl' => $base . '2024/05/Dining-area-1.jpg', 'imageAlt' => 'Alcohol addiction treatment', 'url' => '/alcohol-addiction/' ],
+					[ 'title' => 'Prescription drug rehab', 'description' => 'Class-appropriate detox and recovery from prescription dependence.', 'imageUrl' => $base . '2024/05/Bedroom-2.jpg', 'imageAlt' => 'Prescription drug rehab', 'url' => '/prescribed-medication-rehab/' ],
+					[ 'title' => 'Mental health retreat', 'description' => 'Psychiatric assessment and evidence-based psychotherapy.', 'imageUrl' => $base . '2024/05/Balcony-view-1.jpg', 'imageAlt' => 'Mental health retreat', 'url' => '/mental-health-retreat-thailand/' ],
+					[ 'title' => 'Eating disorder rehab', 'description' => 'Medical and psychiatric care with supported nutrition.', 'imageUrl' => $base . '2024/05/Dining-area-3.jpg', 'imageAlt' => 'Eating disorder treatment', 'url' => '/eating-disorders/' ],
+					[ 'title' => 'GHB addiction rehab', 'description' => 'Carefully tapered, medically supervised GHB detox and therapy.', 'imageUrl' => $base . '2024/05/Bungalow-evening-7.jpg', 'imageAlt' => 'GHB addiction rehab', 'url' => '/ghb-addiction-rehab-thailand/' ],
+				],
+				3, 'white'
+			);
+
+			// 6. EXPERIENCE — FROM THE MOMENT YOU LAND
+			$blocks .= rehab_block_feature_split( [
+				'background' => 'cream', 'imageSide' => 'right',
+				'imageUrl' => $base . '2024/05/Beach-Hua-Hin-2.jpg',
+				'imageAlt' => 'Hua Hin coastline',
+				'eyebrow' => 'The experience',
+				'heading' => 'A luxurious experience from the moment you land',
+				'body' => 'Clients arrive in Hua Hin with a complimentary luxury airport transfer, to one of the best climates in Thailand: months of sun and clear skies, and warm, green rainy seasons. Outings run every weekend, teaching clients to enjoy life clean and sober.',
+				'gemItems' => [ 'Hiking and national parks', 'Horse riding on the beach', 'Golf', 'Kite surfing', 'Snorkelling', 'Waterfalls and sightseeing' ],
+				'footnote' => 'Our kitchen serves Thai and Western food to a high standard, and any special diet or allergy is catered for personally.',
+				'primaryText' => 'Get a consultation', 'primaryUrl' => '/contact-us/',
+				'phoneText' => '+66 3 313 5303', 'phoneHref' => 'tel:+6633135303',
+			] );
+
+			// 7. LICENSE PROOF
+			$blocks .= rehab_block_prose(
+				'Fully licensed by the Thai Ministry of Public Health',
+				[ 'The Diamond Rehab Thailand is officially licensed by the Thai Ministry of Public Health, Hin Lek Fai, Hua Hin.' ],
+				[],
+				$theme . '/assets/img/treatment/ministry-public-health-badge.webp',
+				'Thai Ministry of Public Health licence',
+				'white'
+			);
+
+			// 8. DARK CONCIERGE CLOSE
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => 'Are you ready to take the next step?',
+				'lede'       => "Reach out if you'd like a confidential call from our client-relations team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '/contact-us/',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt why-us page (design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'rebuild-team-v3':
+			// Approved hi-fi Team design (team/Team.html, June 2026) with the
+			// REAL roster: 21 members from the previous team page, real photos,
+			// real roles/bios, links to existing profile pages.
+			$page_id = 722;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 722\n"; break; }
+
+			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+
+			$base   = '/wp-content/uploads/';
+			$blocks = '';
+
+			// 1. TEAM HERO (split copy + real group photo, H1)
+			$blocks .= rehab_block_feature_split( [
+				'background' => 'white', 'imageSide' => 'right',
+				'headingTag' => 'h1',
+				'imageUrl' => $base . '2025/12/Team-Picture-scaled.png',
+				'imageAlt' => 'The full Diamond Rehab team, Hua Hin',
+				'eyebrow' => 'Our people',
+				'heading' => 'The Diamond Rehab Thailand team',
+				'body' => 'Meet the world-class professionals behind your care, where dedication meets diversity. Our multidisciplinary team brings decades of collective experience across CBT, DBT, trauma counselling, dual-diagnosis treatment and specialist care for depression, anxiety and burnout.',
+				'primaryText' => 'Contact us', 'primaryUrl' => '/contact-us/',
+				'phoneText' => '+66 3 313 5303', 'phoneHref' => 'tel:+6633135303',
+			] );
+
+			// 2. FILTERABLE TEAM GRID — real roster
+			$blocks .= rehab_block_team_grid( [
+				'background' => 'cream',
+				'eyebrow' => 'A heart-forward team on a mission',
+				'heading' => 'Expertise, experience & genuine care',
+				'lede'    => "Each team member's work is grounded in the will to help. Filter by discipline to find the specialist relevant to your care.",
+				'members' => [
+					[ 'cat' => 'lead', 'name' => 'Theo & Panwadee de Vries', 'role' => 'Founders', 'excerpt' => 'More than twelve years running Thai rehab centres, supporting over 2,000 clients on their path to recovery.', 'photoUrl' => $base . '2025/12/Theo-Panwadee-de-Vries-Founders-scaled.jpg', 'url' => '/team/theo-and-panwadee-de-vries/' ],
+					[ 'cat' => 'lead', 'name' => 'Sergio Pereira', 'role' => 'Director', 'excerpt' => 'Executive responsibility for governance, staff leadership, ethical integrity of admissions and organisational excellence.', 'photoUrl' => $base . '2026/01/Sergio-Website-pic--scaled-e1776766410877.jpeg', 'url' => '/team/sergio-pereira/' ],
+					[ 'cat' => 'clinical', 'name' => "Augustine D'Ewes", 'role' => 'Clinical Supervisor / Psychologist', 'excerpt' => 'Over four decades as clinician, supervisor and mentor, with an MA in Clinical Psychology and deep clinical wisdom.', 'photoUrl' => $base . '2025/12/Augustine-Supervision-scaled.png', 'url' => '/team/augustine-dewes/' ],
+					[ 'cat' => 'lead', 'name' => 'Jiraporn Takonchai', 'role' => 'General Manager', 'excerpt' => 'Seven years in addiction services, keeping the rehab running seamlessly, from housekeeping to admission schedules.', 'photoUrl' => $base . '2024/10/Jiraporn-Takonchai-new-profile-picture-scaled.jpg', 'url' => '/team/aor-general-manager/' ],
+					[ 'cat' => 'clinical', 'name' => 'Dr. Roshan Fernando', 'role' => 'Consultant Psychiatrist', 'excerpt' => 'MBBS, MDPsych with over 10 years in clinical, biological psychiatry and psychiatric epidemiology.', 'photoUrl' => $base . '2026/04/Dr.-Roshan-New-500x350-1.jpg', 'url' => '/team/dr-roshan-fernando/' ],
+					[ 'cat' => 'therapy', 'name' => 'Wei Ling', 'role' => 'Psychotherapist / Counselling Psychologist', 'excerpt' => '15+ years across clinical mental health, addiction and wellness. Advanced EMDR practitioner and family therapist.', 'photoUrl' => $base . '2025/12/Wei-Ling-Clinical-Psychologist-scaled.png', 'url' => '/team/wei-ling/' ],
+					[ 'cat' => 'therapy', 'name' => 'Eugene Pretorius', 'role' => 'Addiction Counsellor', 'excerpt' => 'Counselling as a vocation. Eight years in recovery himself, pursuing specialist ICDAC qualifications since 2020.', 'photoUrl' => $base . '2025/12/Eugine-Addiction-Counsellor-scaled.png', 'url' => '/team/eugene-pretorius/' ],
+					[ 'cat' => 'therapy', 'name' => 'Brian Tucker', 'role' => 'Addiction Counsellor', 'excerpt' => 'ICDAC-qualified counsellor from South Africa with 14+ years of sustained recovery and a decade in the field.', 'photoUrl' => $base . '2025/12/Brian-Addiction-Counsellor-scaled.png', 'url' => '/team/brian-tucker/' ],
+					[ 'cat' => 'therapy', 'name' => 'James Donovan', 'role' => 'Addiction Counsellor', 'excerpt' => '11 years in personal recovery and 9 in the profession, with a passion for supporting substance-use disorders.', 'photoUrl' => $base . '2025/12/James-Addiction-Counsellor-scaled.png', 'url' => '/team/james-donovan/' ],
+					[ 'cat' => 'nursing', 'name' => 'Thipada Sritongkom', 'role' => 'Nurse', 'excerpt' => '22+ years of nursing, the last 8 focused on mental health, with a lifelong mission to promote wellbeing.', 'photoUrl' => $base . '2024/05/Thipada-Sritongkom-Pui-nurse-e1718802196691.jpg', 'url' => '/team/thipada-sritongkom-nurse/' ],
+					[ 'cat' => 'nursing', 'name' => 'Ponsuppat Udom', 'role' => 'Nurse', 'excerpt' => '13+ years across emergency, geriatric and rehabilitation settings, compassionate and devoted to her clients.', 'photoUrl' => $base . '2024/10/Ponsuppat-Udom-new-profile-picture-scaled.jpg', 'url' => '/team/ponsuppat-udom-nurse/' ],
+					[ 'cat' => 'nursing', 'name' => 'Bongkotkarn Sirijunchuen', 'role' => 'Nurse', 'excerpt' => 'Over a decade specialising in addiction care, supporting recovery at centres across Thailand.', 'photoUrl' => $base . '2024/10/Bongkotkarn-Sirijunchuen-new-profile-picture-scaled.jpg', 'url' => '/team/bongkotkarn-sirijunchuen/' ],
+					[ 'cat' => 'wellness', 'name' => 'Kittikawin "Kwin" Rachawong', 'role' => 'Head Chef', 'excerpt' => 'A decade in professional European kitchens, crafting refined Thai and European cuisine from premium ingredients.', 'photoUrl' => $base . '2025/12/Chef-scaled.png', 'url' => '/team/kittikawin-kwin-rachawong/' ],
+					[ 'cat' => 'support', 'name' => 'Irene Grace Maghopoy', 'role' => 'Support Worker / Admissions', 'excerpt' => 'Psychology graduate and licensed psychometrician pairing empathy with evidence-based care.', 'photoUrl' => $base . '2025/12/Irene-Support-Staff-_-Admissions-1-scaled.png', 'url' => '/team/irene-grace-maghopoy/' ],
+					[ 'cat' => 'support', 'name' => 'Supanni Sanli', 'role' => 'Support Worker', 'excerpt' => 'A lifelong passion for service and hospitality, here to help clients every step of the way.', 'photoUrl' => $base . '2024/10/Ping-new-support-worker-text-will-follow-scaled.jpg', 'url' => '/team/supanni-sanli/' ],
+					[ 'cat' => 'support', 'name' => 'Wuttipong Wandee', 'role' => 'Support Worker', 'excerpt' => 'Known as Woody, with seven years dedicated to client support work in addiction care.', 'photoUrl' => $base . '2024/10/Woody-new-support-worker-text-will-follow-scaled.jpg', 'url' => '/team/wuttipong-wandee/' ],
+					[ 'cat' => 'support', 'name' => 'Saran Badod', 'role' => 'Admin / Support Worker', 'excerpt' => 'Manages internal operations and supports clients through treatment with comprehensive, joyful care.', 'photoUrl' => $base . '2025/12/Sunny-Administration-scaled.png', 'url' => '/team/saran-badod/' ],
+					[ 'cat' => 'wellness', 'name' => 'Ananyalak Sonin', 'role' => 'Yoga Teacher', 'excerpt' => 'A decade of holistic wellness experience and a 500-hour yoga certification from India.', 'photoUrl' => $base . '2024/10/Yoga-e1729503463291.png', 'url' => '/team/ananyalak-sonin/' ],
+					[ 'cat' => 'writers', 'name' => 'Dr. Harshi Dhingra', 'role' => 'Medical Writer · Doctor of Medicine', 'excerpt' => 'MBBS and MD in Pathology, with a decade of diagnostic, clinical, research and teaching experience.', 'photoUrl' => $base . '2023/02/Dr.-Harshi-Dhingra.png', 'url' => '/team/dr-harshi-dhingra/' ],
+					[ 'cat' => 'writers', 'name' => 'Vladimira Ivanova', 'role' => 'Medical Writer · Psychologist', 'excerpt' => 'Practises systemic individual, family and marital psychotherapy, raising awareness of addiction and recovery.', 'photoUrl' => $base . '2023/04/Psychologist-Vladimira-Ivanova.jpg', 'url' => '/team/vladimira-ivanova/' ],
+					[ 'cat' => 'writers', 'name' => 'Dr. Asif Baliyan', 'role' => 'Medical Writer', 'excerpt' => 'Associate Consultant in Histopathology & Cytopathology with expertise in oncopathology and AI pathology.', 'photoUrl' => $base . '2024/05/Writer.jpg', 'url' => '/team/asif-baliyan-md/' ],
+				],
+			] );
+
+			// 3. DARK CONCIERGE CLOSE
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => 'Let us provide the care you deserve',
+				'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '/contact-us/',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt team page (design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'rebuild-faqpage-v3':
+			// Approved hi-fi FAQ design (faq/FAQ.html, June 2026): page-header
+			// with feature image + categorised faq-page block + dark concierge.
+			$page_id = 1197;
+			$post = get_post( $page_id );
+			if ( ! $post ) { echo "no post 1197\n"; break; }
+
+			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
+				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+
+			$base   = '/wp-content/uploads/';
+			$blocks = '';
+
+			// 1. PAGE HEADER (left, feature image)
+			$blocks .= rehab_block_page_header( [
+				'background' => 'white',
+				'align'   => 'left',
+				'eyebrow' => 'Everything you want to know',
+				'heading' => 'Frequently asked questions',
+				'lede'    => "Admissions, treatment, travel and cost, answered plainly. If your question isn't here, a confidential call with our team is always the easiest place to start.",
+				'imageUrl' => $base . '2024/05/Balcony-bungalow.jpg',
+				'imageAlt' => 'Bungalow terraces and gardens, Hua Hin',
+			] );
+
+			// 2. CATEGORISED FAQ
+			$blocks .= rehab_block_faq_page( [
+				'background' => 'cream',
+				'categories' => [
+					[
+						'id' => 'general', 'label' => 'General',
+						'items' => [
+							[ 'q' => 'Is The Diamond Rehab Thailand licensed?', 'a' => 'Yes. We are fully licensed by the Thai Ministry of Public Health as a private addiction rehabilitation centre in Hua Hin.' ],
+							[ 'q' => 'What about confidentiality?', 'a' => 'Discretion is fundamental to how we work. From your first call through your stay and aftercare, every detail is handled privately, accommodation is private, and your identity is protected.' ],
+							[ 'q' => 'Do you offer shared rooms or private rooms?', 'a' => 'Every client stays in their own private luxury bungalow. We never use shared rooms; privacy is part of the treatment.' ],
+							[ 'q' => 'What is rehabilitation?', 'a' => 'A structured, medically supported process: detox where needed, followed by therapy and holistic care that addresses both the addiction and the issues beneath it.' ],
+							[ 'q' => 'What do I do next?', 'a' => "Reach out for a free, confidential call. A clinician listens, answers your questions and recommends the right next step. There's no obligation to proceed." ],
+							[ 'q' => 'What does a typical day at The Diamond look like?', 'a' => 'A balanced rhythm of individual and group therapy, psycho-educational sessions, fitness and wellness, good food and rest, with outings at the weekend.' ],
+							[ 'q' => 'How can I help my loved one?', 'a' => 'Start with a confidential conversation with our admissions team. Family involvement and family therapy are part of our approach to recovery.' ],
+							[ 'q' => 'Can clients leave the rehab?', 'a' => 'Treatment is voluntary and you are never held against your will. We do ask that you commit fully to the program, because consistency is what makes recovery work.' ],
+							[ 'q' => 'Do I have access to my laptop, phone, etc.?', 'a' => 'Access to devices is managed thoughtfully to protect your focus and the privacy of others, and arranged individually. Complimentary 24/7 Wi-Fi is available throughout your stay.' ],
+							[ 'q' => 'Can I have visitors and contact with loved ones?', 'a' => 'Yes. Appropriate contact and visits are supported and arranged in a way that protects both your recovery and the privacy of other clients.' ],
+						],
+					],
+					[
+						'id' => 'treatment', 'label' => 'Treatment',
+						'items' => [
+							[ 'q' => 'What is the process of rehabilitation?', 'a' => 'A confidential assessment, medically supervised detox where needed, then a personalised program of one-to-one therapy, group work and holistic care, followed by structured aftercare.' ],
+							[ 'q' => 'What is detox?', 'a' => 'Medically supervised withdrawal, with 24/7 nursing and physician oversight to keep you safe and comfortable while your body stabilises.' ],
+							[ 'q' => 'What does The Diamond treat?', 'a' => 'Substance and alcohol addiction, prescription-drug dependence, and co-occurring conditions such as depression, anxiety, burnout and eating disorders.' ],
+							[ 'q' => 'How long will it take?', 'a' => 'Length of stay depends on your history and goals; your psychiatrist recommends it after assessment. Many clients begin with a 28-day core program.' ],
+							[ 'q' => 'Am I free to leave treatment at any time?', 'a' => "Yes. Treatment is voluntary. We'll always encourage you to stay the course, but the choice is always yours." ],
+							[ 'q' => 'How much therapy do I get?', 'a' => 'Three individual sessions a week with a clinical psychologist or counsellor, plus daily group and psycho-educational sessions, with more one-to-one time on the fully individual schedule.' ],
+							[ 'q' => "What if support groups and other rehabs didn't work in the past?", 'a' => 'Our made-to-measure approach goes to the root causes beneath the addiction. With only twelve clients, your plan is built around you, not slotted into a fixed curriculum.' ],
+							[ 'q' => 'Is there an aftercare program?', 'a' => 'Yes. Every program includes a comprehensive aftercare plan, plus our Relapse Prevention Guarantee on stays of twelve weeks or more.' ],
+							[ 'q' => 'What is your success rate?', 'a' => "Recovery is personal, and we never make unverifiable claims. We're glad to talk through what outcomes look like and what shapes them on a confidential call." ],
+							[ 'q' => 'Are you a 12-step rehab?', 'a' => "We draw on evidence-based therapies such as CBT, DBT and trauma work, alongside holistic care, and can incorporate 12-step principles where they help. We're not limited to a single method." ],
+						],
+					],
+					[
+						'id' => 'location', 'label' => 'Location',
+						'items' => [
+							[ 'q' => 'How do I get to Thailand?', 'a' => 'Most clients fly into Bangkok (Suvarnabhumi). From there, we arrange a complimentary luxury transfer to our centre in Hua Hin.' ],
+							[ 'q' => 'Where is The Diamond Rehab located in Thailand?', 'a' => 'In Hua Hin, on the Gulf of Thailand: 8, Moo 14, Soi Mon Mai Hin Lek Fai, Hua Hin District, Chang Wat Prachuap Khiri Khan, 77110.' ],
+							[ 'q' => 'Will I be picked up at the airport?', 'a' => 'Yes. A complimentary luxury airport transfer is included for every client.' ],
+							[ 'q' => 'What kind of visa do I need?', 'a' => 'Most visitors enter on a standard tourist visa or visa exemption. Our team will advise based on your nationality and intended length of stay.' ],
+							[ 'q' => 'Do I need travel insurance?', 'a' => 'We strongly advise arranging travel insurance, including medical cover, before you travel.' ],
+							[ 'q' => 'Is Thailand a safe place for rehab?', 'a' => 'Yes. Hua Hin is calm, safe and welcoming, and our private grounds are secure and discreet.' ],
+							[ 'q' => 'What should I bring with me?', 'a' => "Comfortable clothing for a warm climate, any current medication, and personal essentials. We'll send a full pre-arrival checklist once your place is confirmed." ],
+							[ 'q' => "What's the weather like?", 'a' => "Hua Hin enjoys one of Thailand's best climates: months of sun and clear skies, warm year-round, with welcome green during the rainy season." ],
+						],
+					],
+					[
+						'id' => 'cost', 'label' => 'Cost',
+						'items' => [
+							[ 'q' => 'What if I am worried about the cost?', 'a' => "We understand. Our fee is all-inclusive and transparent, and we talk it through openly on a confidential call. There's no pressure and no obligation." ],
+							[ 'q' => 'What is included in the price?', 'a' => 'Accommodation, clinical care, therapy, meals, wellness, a full medical check-up and excursions, in one fee. See our <a href="/cost/">Cost page</a> for the full list.' ],
+							[ 'q' => 'Can I get a discount?', 'a' => 'In special cases we can make an exception on the fee. Please contact us to discuss your situation.' ],
+							[ 'q' => 'What if I leave earlier, do I get a refund?', 'a' => 'If you choose to leave within 72 hours of arrival, your 50% deposit is refunded to your account within 14 days.' ],
+							[ 'q' => 'Do I need to bring cash with me?', 'a' => 'Most things are included, so little cash is needed. A USD 500 deposit on arrival covers any incidental costs and the unused balance is returned to you.' ],
+							[ 'q' => 'Do I need to pay everything upfront?', 'a' => 'No. A 50% deposit reserves your place; the remaining balance, plus a USD 500 incidentals deposit, is paid on arrival.' ],
+							[ 'q' => 'Is aftercare included in the price?', 'a' => 'Yes. A comprehensive aftercare plan is included, with the Relapse Prevention Guarantee on programs of twelve weeks or more.' ],
+							[ 'q' => 'Is the plane ticket included in the price?', 'a' => "No. Flights to and from Bangkok aren't included, though your luxury airport transfer within Thailand is." ],
+						],
+					],
+				],
+				'promptTitle' => 'Still have a question?',
+				'promptBody'  => 'A confidential call is the easiest place to start, free and no-obligation.',
+				'promptBtnText' => 'Talk with admissions', 'promptBtnUrl' => '/contact-us/',
+			] );
+
+			// 3. DARK CONCIERGE CLOSE
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => "We'll answer anything, in confidence",
+				'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '/contact-us/',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt FAQ page (design v3, " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'rebuild-team-profile':
+			// Approved hi-fi team-member profile (team/Team Profile.html, June
+			// 2026): role · name · portrait · pull-quote (from the bio's own
+			// first line) · bio, beside a sticky "[Name] is part of our team"
+			// enquiry form. Reads the real bio/photo from the page's existing
+			// rehab/intro-doctor-card block. Usage: ?rehab_oneshot=rebuild-team-profile&id=N[&role=…]
+			$pid = (int) ( $_GET['id'] ?? 0 );
+			if ( ! $pid ) { echo "pass &id=<member_page_id>\n"; break; }
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+
+			if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
+				// Slash so the block-comment JSON keeps its backslash escapes
+				// (update_metadata unslashes the value before storing).
+				update_post_meta( $pid, '_rehab_design_v2_backup', wp_slash( $post->post_content ) );
+				echo "saved pre-v3 backup to _rehab_design_v2_backup\n";
+			}
+			// Always extract from the ORIGINAL content so re-runs stay correct.
+			$original = get_post_meta( $pid, '_rehab_design_v2_backup', true ) ?: $post->post_content;
+			$m = rehab_extract_member_from_intro( $original );
+			if ( '' === $m['name'] ) { echo "no intro-doctor-card found on {$pid}; cannot extract bio\n"; break; }
+
+			$roles = rehab_team_member_roles();
+			$role  = isset( $_GET['role'] ) ? sanitize_text_field( wp_unslash( $_GET['role'] ) ) : ( $roles[ $pid ] ?? '' );
+			$photo = wp_make_link_relative( $m['photoUrl'] );
+
+			$blocks  = rehab_block_team_profile( [
+				'background' => 'white',
+				'backText' => 'All of our team', 'backUrl' => '/team/',
+				'role'  => $role,
+				'name'  => $m['name'],
+				'photoUrl' => $photo,
+				'photoAlt' => $m['photoAlt'] ?: $m['name'],
+				'quote' => $m['quote'],
+				'bio'   => $m['bio'],
+				'anchorId' => 'enquire',
+			] );
+			$blocks .= rehab_block_cta_band( [
+				'background' => 'dark',
+				'eyebrow'    => 'Take the next step',
+				'heading'    => 'The right person is ready to talk',
+				'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#enquire',
+				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+				'helper'     => '',
+			] );
+
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $blocks ) ], true );
+			echo is_wp_error( $res )
+				? "ERR: " . $res->get_error_message() . "\n"
+				: "OK rebuilt profile {$pid}: {$m['name']} (" . ( $role ?: 'NO ROLE' ) . ( $m['quote'] ? ', quote pulled' : ', no quote' ) . ", " . strlen( $blocks ) . " bytes)\n";
+			break;
+
+		case 'fix-broken-links':
+			// Repair the broken internal links found by the June 2026 site-wide
+			// link check. The linked slugs 404 on BOTH dev and the live site;
+			// each target exists under its real slug (usually "what-is-…").
+			global $wpdb;
+			$map = [
+				'/chocolate-addiction/'    => '/what-is-chocolate-addiction/',
+				'/dopamine-addiction/'     => '/what-is-dopamine-addiction/',
+				'/energy-drink-addiction/' => '/what-is-energy-drink-addiction/',
+				'/exercise-addiction/'     => '/what-is-exercise-addiction/',
+				'/facebook-addiction/'     => '/what-is-facebook-addiction/',
+				'/food-addiction/'         => '/what-is-food-addiction/',
+				'/heroin-addiction/'       => '/what-is-heroin-addiction/',
+				'/hydrocodone-addiction/'  => '/what-is-hydrocodone-addiction/',
+				'/nicotine-addiction-symptoms-and-treatment/' => '/what-is-nicotine-addiction/',
+				'/online-gambling-addiction/' => '/what-is-online-gambling-addiction/',
+				'/opioid-addiction/'       => '/what-is-opioid-addiction/',
+				'/percocet-addiction/'     => '/what-is-percocet-addiction/',
+				'/pornography-addiction/'  => '/what-is-pornography-addiction/',
+				'/psychological-addiction/' => '/what-is-psychological-addiction/',
+				'/relationship-addiction/' => '/what-is-a-relationship-addiction/',
+				'/shopping-addiction/'     => '/what-is-shopping-addiction/',
+				'/social-media-addiction/' => '/what-is-social-media-addiction/',
+				'/work-addiction/'         => '/what-is-work-addiction/',
+				'/xanax-addiction/'        => '/what-is-xanax-addiction/',
+				'/what-is-Marijuana-addiction/' => '/marijuana-addiction-symptoms-and-treatment/',
+				'/what-is-marijuana-addiction/' => '/marijuana-addiction-symptoms-and-treatment/',
+				'/what-is-cybersex-addiction/(opens in a new tab)' => '/what-is-cybersex-addiction/',
+			];
+			// Also fix JSON-escaped (block-attr) and URL-encoded variants.
+			$expanded = [];
+			foreach ( $map as $from => $to ) {
+				$expanded[ $from ] = $to;
+				$expanded[ str_replace( '/', '\\/', $from ) ] = str_replace( '/', '\\/', $to );
+				$expanded[ str_replace( ' ', '%20', $from ) ] = str_replace( ' ', '%20', $to );
+			}
+			$map = $expanded;
+			$total_posts = 0;
+			$total_swaps = 0;
+			foreach ( $map as $from => $to ) {
+				$ids = $wpdb->get_col( $wpdb->prepare(
+					"SELECT ID FROM {$wpdb->posts} WHERE post_status='publish' AND post_type IN ('page','post') AND post_content LIKE %s",
+					'%' . $wpdb->esc_like( $from ) . '%'
+				) );
+				foreach ( $ids as $pid ) {
+					$p = get_post( $pid );
+					$n = substr_count( $p->post_content, $from );
+					if ( ! $n ) continue;
+					$new = str_replace( $from, $to, $p->post_content );
+					wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $new ) ] );
+					$total_posts++;
+					$total_swaps += $n;
+					echo "#{$pid}: {$from} -> {$to} ({$n}x)\n";
+				}
+			}
+			echo "DONE: {$total_swaps} link(s) fixed across {$total_posts} post update(s)\n";
+			break;
+
+		case 'dump-block':
+			// Print every instance of a named block (comment + inner HTML) from a page.
+			// Usage: ?rehab_oneshot=dump-block&id=853&block=rehab/authority-ribbon
+			$pid   = (int) ( $_GET['id'] ?? 853 );
+			$bname = sanitize_text_field( $_GET['block'] ?? 'rehab/authority-ribbon' );
+			$post  = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			foreach ( parse_blocks( $post->post_content ) as $b ) {
+				if ( $b['blockName'] === $bname ) {
+					echo "--- attrs ---\n" . wp_json_encode( $b['attrs'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) . "\n";
+					echo "--- innerHTML ---\n" . $b['innerHTML'] . "\n";
+				}
+			}
 			break;
 
 		case 'dump-post-content':

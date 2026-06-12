@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/exclusions-list",
+  "version": "0.1.0",
+  "title": "Exclusions List",
+  "category": "rehab",
+  "icon": "dismiss",
+  "description": "Transparency section: a two-column list of items that sit outside the fee, styled distinctly from included checklists, with a closing reassurance note.",
+  "keywords": [
+    "exclusions",
+    "not included",
+    "cost",
+    "transparency"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "background": {
+      "type": "string",
+      "default": "cream",
+      "enum": [
+        "white",
+        "cream",
+        "sage-mist"
+      ]
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Full transparency"
+    },
+    "heading": {
+      "type": "string",
+      "default": "What sits outside the fee"
+    },
+    "lede": {
+      "type": "string",
+      "default": ""
+    },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "note": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

@@ -36,27 +36,8 @@ function rehab_block_hero( array $a ): string {
 		'imageUrl' => '', 'imageAlt' => '', 'showDeco' => true,
 	];
 	$a = array_merge( $defaults, $a );
-	$attrs = rehab_block_attrs( $a );
-	$out  = '<section class="wp-block-rehab-hero rehab-hero" aria-label="Hero">';
-	$out .= '<div class="rehab-hero__container"><div class="rehab-hero__grid">';
-	$out .= '<div class="rehab-hero__content">';
-	if ( $a['eyebrow'] !== '' ) $out .= '<p class="rehab-hero__eyebrow">' . esc_html( $a['eyebrow'] ) . '</p>';
-	$out .= '<h1 class="rehab-hero__h1">' . esc_html( $a['headline'] ) . '</h1>';
-	if ( $a['body'] !== '' ) $out .= '<p class="rehab-hero__body">' . esc_html( $a['body'] ) . '</p>';
-	$out .= '<div class="rehab-hero__cta"><a class="rehab-btn rehab-btn--luxury" href="' . esc_url( $a['buttonUrl'] ) . '">' . esc_html( $a['buttonText'] ) . '</a><p class="rehab-hero__cta-helper">' . esc_html( $a['buttonHelper'] ) . '</p></div>';
-	$out .= '<div class="rehab-hero__trust">';
-	foreach ( [ $a['trustItem1'], $a['trustItem2'], $a['trustItem3'] ] as $t ) {
-		if ( $t === '' ) continue;
-		$out .= '<div class="rehab-hero__trust-item"><span class="rehab-hero__diamond" aria-hidden="true">◆</span>' . esc_html( $t ) . '</div>';
-	}
-	$out .= '</div></div>';
-	if ( $a['imageUrl'] !== '' ) {
-		$out .= '<div class="rehab-hero__media"><div class="rehab-hero__image-wrap"><img decoding="async" src="' . esc_url( $a['imageUrl'] ) . '" alt="' . esc_attr( $a['imageAlt'] ) . '" class="rehab-hero__image" loading="eager" width="1080" height="720"><div class="rehab-hero__overlay" aria-hidden="true"></div></div>';
-		if ( $a['showDeco'] ) $out .= '<div class="rehab-hero__deco" aria-hidden="true"></div>';
-		$out .= '</div>';
-	}
-	$out .= '</div></div></section>';
-	return "<!-- wp:rehab/hero " . $attrs . " -->\n" . $out . "\n<!-- /wp:rehab/hero -->\n\n";
+	// Dynamic block: render.php produces the markup from these attributes.
+	return "<!-- wp:rehab/hero " . rehab_block_attrs( $a ) . " /-->\n\n";
 }
 
 /**
@@ -110,27 +91,18 @@ function rehab_block_cards_grid( string $heading, string $subheading, array $car
 		'background' => $bg, 'columns' => $columns, 'cardLayout' => 'vertical',
 		'heading' => $heading, 'subheading' => $subheading,
 	] );
-	$inner_html = '<div class="rehab-cards-grid__header"><h2 class="rehab-cards-grid__heading">' . esc_html( $heading ) . '</h2>';
-	if ( $subheading !== '' ) $inner_html .= '<p class="rehab-cards-grid__sub">' . esc_html( $subheading ) . '</p>';
-	$inner_html .= '</div><div class="rehab-cards-grid__list rehab-cards-grid__list--' . $columns . '">';
-	$gut_cards  = '';
+	// Dynamic blocks: parent + child render from attributes (cards-grid/render.php,
+	// card/render.php). Emit only the comment delimiters — no HTML body.
+	$out = "<!-- wp:rehab/cards-grid " . $grid_attrs . " -->\n";
 	foreach ( $cards as $card ) {
-		$ca = rehab_block_attrs( $card );
-		$ch = '<article class="wp-block-rehab-card rehab-card">';
-		if ( ! empty( $card['imageUrl'] ) ) $ch .= '<figure class="rehab-card__media"><img src="' . esc_url( $card['imageUrl'] ) . '" alt="' . esc_attr( $card['imageAlt'] ?? '' ) . '"/></figure>';
-		$ch .= '<div class="rehab-card__body"><h3 class="rehab-card__title">';
-		if ( ! empty( $card['url'] ) ) $ch .= '<a href="' . esc_url( $card['url'] ) . '">' . esc_html( $card['title'] ) . '</a>';
-		else                          $ch .= esc_html( $card['title'] );
-		$ch .= '</h3>';
-		if ( ! empty( $card['description'] ) ) $ch .= '<p class="rehab-card__desc">' . esc_html( $card['description'] ) . '</p>';
-		$ch .= '</div></article>';
-		$gut_cards  .= "<!-- wp:rehab/card " . $ca . " -->\n" . $ch . "\n<!-- /wp:rehab/card -->\n";
-		$inner_html .= $ch;
+		if ( ! isset( $card['description'] ) && isset( $card['body'] ) ) {
+			$card['description'] = $card['body'];
+		}
+		unset( $card['body'] );
+		$out .= "<!-- wp:rehab/card " . rehab_block_attrs( $card ) . " /-->\n";
 	}
-	$inner_html .= '</div>';
-	return "<!-- wp:rehab/cards-grid " . $grid_attrs . " -->\n" .
-		'<section class="wp-block-rehab-cards-grid rehab-cards-grid rehab-bg-' . $bg . '"><div class="rehab-container">' . $inner_html . $gut_cards . '</div></section>' .
-		"\n<!-- /wp:rehab/cards-grid -->\n\n";
+	$out .= "<!-- /wp:rehab/cards-grid -->\n\n";
+	return $out;
 }
 
 /**
@@ -424,6 +396,7 @@ function rehab_block_article_row( array $a ): string {
 		'background' => 'white', 'imageSide' => 'left', 'imageAspect' => 'tall',
 		'imageUrl' => '', 'imageAlt' => '',
 		'eyebrow' => '', 'heading' => '', 'body' => '',
+		'listItems' => [],
 		'primaryText' => '', 'primaryUrl' => '',
 		'secondaryText' => '', 'secondaryUrl' => '',
 	];
@@ -449,6 +422,13 @@ function rehab_block_article_row( array $a ): string {
 	if ( $a['eyebrow'] ) $h .= '<span class="rehab-article-row__eyebrow">' . esc_html( $a['eyebrow'] ) . '</span>';
 	$h .= '<h2 class="rehab-article-row__heading">' . esc_html( $a['heading'] ) . '</h2>';
 	$h .= $body_html;
+	if ( ! empty( $a['listItems'] ) ) {
+		$h .= '<ul class="rehab-article-row__list">';
+		foreach ( $a['listItems'] as $li ) {
+			$h .= '<li>' . wp_kses( $li, [ 'strong' => [], 'em' => [], 'a' => [ 'href' => [], 'title' => [], 'target' => [], 'rel' => [] ] ] ) . '</li>';
+		}
+		$h .= '</ul>';
+	}
 	if ( $a['primaryText'] || $a['secondaryText'] ) {
 		$h .= '<div class="rehab-article-row__cta">';
 		if ( $a['primaryText'] ) $h .= '<a href="' . esc_url( $a['primaryUrl'] ) . '" class="rehab-btn rehab-btn--luxury">' . esc_html( $a['primaryText'] ) . '</a>';
@@ -636,4 +616,428 @@ function rehab_block_treatment_phases( string $eyebrow, string $heading, string 
 	}
 	$h .= '</div></div></section>';
 	return "<!-- wp:rehab/treatment-phases " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/treatment-phases -->\n\n";
+}
+
+
+/**
+ * Build a `rehab/assessment-hero` block (dynamic — self-closing comment).
+ * Assessment-first treatment hero: copy + rating + signals left, admissions form right.
+ */
+function rehab_block_assessment_hero( array $a ): string {
+	return "<!-- wp:rehab/assessment-hero " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/video-reel` block (dynamic — self-closing comment).
+ * $a['items'] = [ [ 'name', 'duration', 'tone' (1-4), 'quote', 'who', 'videoUrl', 'posterUrl' ], ... ]
+ */
+function rehab_block_video_reel( array $a ): string {
+	return "<!-- wp:rehab/video-reel " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/stat-band` block (dynamic — self-closing comment).
+ */
+function rehab_block_stat_band( array $a ): string {
+	return "<!-- wp:rehab/stat-band " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/cta-band` block (dynamic — self-closing comment).
+ * background: 'sage' (mid-page) | 'dark' (closing concierge) | 'none'; compact: actions row only.
+ */
+function rehab_block_cta_band( array $a ): string {
+	return "<!-- wp:rehab/cta-band " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+
+/**
+ * Build the full approved treatment-page v3 sequence from a per-condition spec.
+ *
+ * Shared sections (press ribbon, pillars, sage band, video reel, benefits,
+ * journey steps, compact CTA, stat band, related cards, concierge) come from
+ * defaults; the spec supplies only the condition-specific copy. See
+ * aa-treatment-v3-specs.php for the spec format and per-page entries.
+ *
+ * @param int   $page_id Page being rebuilt (used to exclude it from related cards).
+ * @param array $spec    Condition-specific content.
+ * @return string Block markup for post_content.
+ */
+function rehab_build_treatment_v3( int $page_id, array $spec ): string {
+	$base   = '/wp-content/uploads/';
+	$theme  = wp_make_link_relative( get_stylesheet_directory_uri() ); // host-relative so dev hosts interchange
+	$blocks = '';
+
+	$hero = $spec['hero'];
+	$blocks .= rehab_block_assessment_hero( array_merge( [
+		'anchorId'    => 'assessment',
+		'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+		'ratingScore' => '4.9', 'ratingText' => 'from 120+ Google reviews · families & alumni',
+		'stat1Num' => '12',   'stat1Label' => 'Maximum clients on site at any time',
+		'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team on call',
+		'stat3Num' => '14+',
+		'formEyebrow' => 'Free & confidential',
+		'formTitle'   => 'Talk with our admissions team',
+		'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
+		'formSubmit'  => 'Talk with admissions',
+		'formPhoneLabel' => 'Or call +66 3 313 5303',
+		'formConsent' => 'By submitting you agree to a confidential call-back. We never share your details.',
+	], $hero ) );
+
+	$blocks .= rehab_block_authority_ribbon( 'As featured in', [
+		[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider' ],
+		[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
+		[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good' ],
+		[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central' ],
+		[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
+		[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
+	] );
+
+	$blocks .= rehab_block_signs_grid( array_merge( [
+		'background' => 'cream',
+		'eyebrow'    => 'Is this you, or someone you love?',
+		'showCta'    => true,
+		'ctaTitle'   => 'If any of this feels familiar, please reach out.',
+		'ctaBody'    => "Call, message on WhatsApp, or speak with admissions. There's no pressure and nothing to commit to.",
+		'ctaButton'  => 'Talk with admissions', 'ctaUrl' => '#assessment',
+	], $spec['signs'] ) );
+
+	// Pillars: shared substance-page copy by default; mental-health specs
+	// override via $spec['pillars'] (the default mentions medical detox).
+	$blocks .= rehab_block_pillars(
+		'Why Diamond Rehab',
+		'Three reasons families choose us',
+		'',
+		$spec['pillars'] ?? [
+			[ 'num' => '01 · Evidence-based & holistic', 'title' => 'Western clinical care, Eastern calm', 'body' => 'Medical detox and proven therapies including CBT, trauma work and family therapy, alongside fitness, nutrition and mindfulness that rebuild the whole person.' ],
+			[ 'num' => '02 · Never templated', 'title' => 'A program shaped around you', 'body' => 'With only twelve clients on site, your plan is built by a psychiatrist for your history, not slotted into a fixed curriculum.' ],
+			[ 'num' => '03 · Support around the clock', 'title' => 'Care when cravings hit hardest', 'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the night and the hardest moments.' ],
+		],
+		'white'
+	);
+
+	$blocks .= rehab_block_article_row( array_merge( [
+		'background' => 'cream',
+		'imageSide' => 'right', 'imageAspect' => 'tall',
+		'imageUrl' => $base . '2024/05/1-1-session-room-1.jpg',
+		'imageAlt' => '1-on-1 therapy room',
+	], $spec['holistic'] ) );
+
+	$phases = $spec['phases'];
+	$blocks .= rehab_block_treatment_phases(
+		'The treatment phases',
+		$phases['heading'],
+		'',
+		$phases['items'],
+		'white'
+	);
+
+	$blocks .= rehab_block_cta_band( [
+		'background' => 'sage',
+		'eyebrow'    => 'Ready when you are',
+		'heading'    => 'Recovery can begin this week',
+		'lede'       => 'A confidential call is the first step. No pressure and no commitment to proceed.',
+		'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+		'helper'     => 'Free, confidential, and no-obligation.',
+	] );
+
+	$program_tag = $spec['programTag'] ?? 'program';
+	$blocks .= rehab_block_video_reel( [
+		'background' => 'cream',
+		'eyebrow'    => 'Real stories',
+		'heading'    => 'Recovery, in their own words',
+		'ratingScore' => '4.9', 'ratingText' => '· 120+ Google reviews',
+		'items' => [
+			[ 'name' => 'James · ' . $program_tag, 'duration' => '2:14', 'tone' => '1', 'quote' => '"They gave me my life back."', 'who' => 'Filmed with consent', 'videoUrl' => '', 'posterUrl' => '' ],
+			[ 'name' => 'Anonymous · privacy-protected', 'duration' => '1:48', 'tone' => '4', 'quote' => '"I didn\'t think I could stop. I was wrong."', 'who' => 'Silhouette format', 'videoUrl' => '', 'posterUrl' => '' ],
+			[ 'name' => 'A father, on his son', 'duration' => '3:02', 'tone' => '3', 'quote' => '"We got our son back."', 'who' => 'Family perspective', 'videoUrl' => '', 'posterUrl' => '' ],
+			[ 'name' => 'Alumna · executive program', 'duration' => '2:31', 'tone' => '2', 'quote' => '"The twelve-client cap changed everything."', 'who' => 'Filmed with consent', 'videoUrl' => '', 'posterUrl' => '' ],
+		],
+	] );
+
+	$blocks .= rehab_block_article_row( array_merge( [
+		'background' => 'white',
+		'imageSide' => 'left', 'imageAspect' => 'wide',
+		'imageUrl' => $base . '2024/05/Close-up-chairs-3.jpg',
+		'imageAlt' => 'The grounds at Hua Hin',
+		'eyebrow' => 'The advantage of inpatient care',
+		'heading' => 'Why distance makes recovery possible',
+	], $spec['inpatient'] ?? [] ) );
+	$blocks .= rehab_block_benefits_numbered( [
+		[ 'title' => 'Distance from triggers', 'body' => 'Away from the people, places and routines that keep the cycle turning.' ],
+		[ 'title' => 'Round-the-clock supervision', 'body' => 'Resort-calm surroundings backed by qualified medical staff, day and night.' ],
+		[ 'title' => 'A plan built for you', 'body' => 'A program tailored to your clinical picture, not a fixed curriculum.' ],
+		[ 'title' => 'A real therapeutic community', 'body' => 'A hard cap of twelve clients means genuine attention and deeper connection.' ],
+	] );
+
+	$blocks .= rehab_block_prose(
+		$spec['prose']['heading'],
+		$spec['prose']['paragraphs'],
+		[], '', '', 'cream'
+	);
+
+	// Journey steps: shared by default; mental-health specs override step 4
+	// via $spec['steps'] (the default mentions medical detox).
+	$blocks .= rehab_block_journey_steps(
+		'Your next step',
+		'What happens when you reach out',
+		"There's no commitment in making contact. Here's exactly how the first few days unfold.",
+		$spec['steps'] ?? [
+			[ 'label' => 'STEP 01', 'title' => 'Confidential call', 'body' => "A free, no-obligation conversation with our admissions team, whenever you're ready." ],
+			[ 'label' => 'STEP 02', 'title' => 'Clinical assessment', 'body' => 'A psychiatrist reviews your situation and recommends the right length of stay.' ],
+			[ 'label' => 'STEP 03', 'title' => 'Arrival & onboarding', 'body' => 'We arrange airport collection and settle you into private accommodation.' ],
+			[ 'label' => 'STEP 04', 'title' => 'Treatment begins', 'body' => 'Medical detox if needed, then your bespoke program of therapy and wellness.' ],
+		],
+		'white'
+	);
+	$blocks .= rehab_block_cta_band( [
+		'background' => 'none', 'compact' => true,
+		'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+	] );
+
+	$blocks .= rehab_block_stat_band( [
+		'stat1Num' => '12',  'stat1Label' => 'Client cap, always',
+		'stat2Num' => '4:1', 'stat2Label' => 'Staff-to-client ratio',
+		'stat3Num' => '50+', 'stat3Label' => 'Specialist staff',
+		'stat4Num' => '28',  'stat4Label' => 'Day core program',
+	] );
+
+	$related_pages = get_posts( [
+		'post_type'      => 'page',
+		'posts_per_page' => 3,
+		'meta_key'       => '_wp_page_template',
+		'meta_value'     => 'template-treatment.php',
+		'post__not_in'   => [ $page_id ],
+		'orderby'        => 'modified',
+		'order'          => 'DESC',
+	] );
+	if ( $related_pages ) {
+		$cards = [];
+		foreach ( $related_pages as $rp ) {
+			$thumb   = get_the_post_thumbnail_url( $rp, 'medium_large' );
+			$cards[] = [
+				'title'       => get_the_title( $rp ),
+				'description' => get_the_excerpt( $rp ) ?: 'Discreet, doctor-led residential treatment in Hua Hin.',
+				'imageUrl'    => $thumb ?: '',
+				'imageAlt'    => get_the_title( $rp ),
+				'url'         => get_permalink( $rp ),
+			];
+		}
+		$blocks .= rehab_block_cards_grid( 'Other conditions we treat', '', $cards, 3, 'white' );
+	}
+
+	// FAQ: cptIds pass through; faqNew items are created in the FAQ CPT
+	// (or matched by exact title) so the CPT stays the single source of truth.
+	$faq_items = array_map( static fn( $id ) => [ 'cptId' => (int) $id ], $spec['faqCptIds'] ?? [] );
+	foreach ( $spec['faqNew'] ?? [] as $df ) {
+		$match  = get_posts( [ 'post_type' => 'faq', 'title' => $df['question'], 'posts_per_page' => 1, 'fields' => 'ids' ] );
+		$faq_id = $match ? (int) $match[0] : wp_insert_post( [
+			'post_type'    => 'faq',
+			'post_status'  => 'publish',
+			'post_title'   => $df['question'],
+			'post_content' => $df['answer'],
+		] );
+		if ( $faq_id && ! is_wp_error( $faq_id ) ) {
+			$faq_items[] = [ 'cptId' => $faq_id ];
+			echo ( $match ? 'reused' : 'created' ) . " FAQ CPT {$faq_id}: {$df['question']}\n";
+		}
+	}
+	$blocks .= rehab_block_faq( 'Frequently asked questions', $faq_items );
+
+	$blocks .= rehab_block_cta_band( [
+		'background' => 'dark',
+		'eyebrow'    => 'Take the next step',
+		'heading'    => "You've already done the hardest part: recognising it",
+		'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
+		'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
+		'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
+		'helper'     => '',
+	] );
+
+	return $blocks;
+}
+
+
+/**
+ * Build a `rehab/checklist-cards` block (dynamic — self-closing comment).
+ * $a['cards'] = [ [ 'kick', 'title', 'items' => [...] ], ... ] plus optional panel* keys.
+ */
+function rehab_block_checklist_cards( array $a ): string {
+	return "<!-- wp:rehab/checklist-cards " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/exclusions-list` block (dynamic — self-closing comment).
+ */
+function rehab_block_exclusions_list( array $a ): string {
+	return "<!-- wp:rehab/exclusions-list " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/guarantee` block (dynamic — self-closing comment).
+ */
+function rehab_block_guarantee( array $a ): string {
+	return "<!-- wp:rehab/guarantee " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/gallery` block (static — emits save-compatible markup).
+ * $images = [ [ 'url', 'alt' ], ... ]
+ */
+function rehab_block_gallery( string $heading, array $images, string $variant = 'grid', int $columns = 3, string $bg = 'cream' ): string {
+	$attrs = rehab_block_attrs( [ 'background' => $bg, 'variant' => $variant, 'columns' => $columns, 'heading' => $heading, 'images' => $images ] );
+	$h  = '<section class="wp-block-rehab-gallery rehab-gallery rehab-bg-' . esc_attr( $bg ) . ' rehab-gallery--' . esc_attr( $variant ) . ' rehab-gallery--cols-' . esc_attr( (string) $columns ) . '"><div class="rehab-container">';
+	if ( $heading !== '' ) {
+		$h .= '<header class="rehab-gallery__header"><h2 class="rehab-heading rehab-heading--lg">' . esc_html( $heading ) . '</h2></header>';
+	}
+	$h .= '<div class="rehab-gallery__grid">';
+	foreach ( $images as $img ) {
+		$h .= '<figure class="rehab-gallery__item"><img src="' . esc_url( $img['url'] ) . '" alt="' . esc_attr( $img['alt'] ?? '' ) . '" loading="lazy"/></figure>';
+	}
+	$h .= '</div></div></section>';
+	return "<!-- wp:rehab/gallery " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/gallery -->\n\n";
+}
+
+
+/**
+ * Build a `rehab/page-header` block (dynamic — self-closing comment).
+ */
+function rehab_block_page_header( array $a ): string {
+	return "<!-- wp:rehab/page-header " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Build a `rehab/contact-methods` block (dynamic — self-closing comment).
+ */
+function rehab_block_contact_methods( array $a ): string {
+	return "<!-- wp:rehab/contact-methods " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Re-serialize the first instance of a named block from an existing post's
+ * content. Lets a rebuild carry over a working block (e.g. the contact page's
+ * configured rehab/map) verbatim instead of reconstructing it.
+ */
+function rehab_block_copy_from_post( int $post_id, string $block_name ): string {
+	$post = get_post( $post_id );
+	if ( ! $post ) return '';
+	foreach ( parse_blocks( $post->post_content ) as $b ) {
+		if ( $b['blockName'] === $block_name ) {
+			return serialize_block( $b ) . "\n\n";
+		}
+	}
+	return '';
+}
+
+
+/**
+ * Build a `rehab/feature-split` block (dynamic — self-closing comment).
+ */
+function rehab_block_feature_split( array $a ): string {
+	return "<!-- wp:rehab/feature-split " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+
+/**
+ * Build a `rehab/team-grid` block (dynamic — self-closing comment).
+ */
+function rehab_block_team_grid( array $a ): string {
+	return "<!-- wp:rehab/team-grid " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+
+/**
+ * Build a `rehab/faq-page` block (dynamic — self-closing comment).
+ */
+function rehab_block_faq_page( array $a ): string {
+	return "<!-- wp:rehab/faq-page " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+
+/**
+ * Build a `rehab/team-profile` block (dynamic — self-closing comment).
+ */
+function rehab_block_team_profile( array $a ): string {
+	return "<!-- wp:rehab/team-profile " . rehab_block_attrs( $a ) . " /-->\n\n";
+}
+
+/**
+ * Per-page role map for the team-profile rollout. Roles aren't stored on the
+ * legacy member pages (intro-doctor-card has no role field), so they live here,
+ * mirroring the approved Team grid.
+ */
+function rehab_team_member_roles(): array {
+	return [
+		4085  => 'Founders',
+		9156  => 'Director',
+		11930 => 'Clinical Supervisor / Psychologist',
+		8124  => 'General Manager',
+		8414  => 'Consultant Psychiatrist',
+		11926 => 'Psychotherapist / Counselling Psychologist',
+		11933 => 'Addiction Counsellor',
+		11931 => 'Addiction Counsellor',
+		11932 => 'Addiction Counsellor',
+		8125  => 'Nurse',
+		8126  => 'Nurse',
+		8407  => 'Nurse',
+		11935 => 'Head Chef',
+		11934 => 'Support Worker / Admissions',
+		9137  => 'Support Worker',
+		9138  => 'Support Worker',
+		9139  => 'Admin / Support Worker',
+		8408  => 'Yoga Teacher',
+		4088  => 'Medical Writer · Doctor of Medicine',
+		4454  => 'Medical Writer · Psychologist',
+		5340  => 'Medical Writer',
+	];
+}
+
+/**
+ * Extract { name, bio (\n\n paragraphs), photoUrl, photoAlt, quote } from a
+ * member page's existing `rehab/intro-doctor-card` block. Used by the
+ * team-profile rebuild so the real bio/photo carry over untouched.
+ *
+ * The pull-quote is taken from the first bio paragraph ONLY when it is short
+ * and written in the first person — i.e. it reads as the person speaking. This
+ * keeps the quote genuinely "pulled from the text", never invented.
+ */
+function rehab_extract_member_from_intro( string $content ): array {
+	$out = [ 'name' => '', 'bio' => '', 'photoUrl' => '', 'photoAlt' => '', 'quote' => '' ];
+	foreach ( parse_blocks( $content ) as $b ) {
+		if ( $b['blockName'] !== 'rehab/intro-doctor-card' ) continue;
+		$attrs = $b['attrs'];
+		$out['name']     = $attrs['heading'] ?? '';
+		$out['photoUrl'] = $attrs['doctorImageUrl'] ?? '';
+		$out['photoAlt'] = $attrs['doctorImageAlt'] ?? '';
+		$body = (string) ( $attrs['body'] ?? '' );
+		// Tolerate backups whose JSON unicode escapes lost their backslash
+		// (older update_post_meta unslashing): u003C -> < etc.
+		if ( false !== strpos( $body, 'u003C' ) && false === strpos( $body, '<' ) ) {
+			$body = str_replace( [ 'u003C', 'u003E', 'u002F', 'u0026' ], [ '<', '>', '/', '&' ], $body );
+		}
+		// Split <p>…</p> paragraphs into plain text. Normalise em/en dashes to a
+		// comma per the site-wide no-em-dash rule (these are real bios).
+		$norm = static function ( $t ) {
+			$t = trim( html_entity_decode( wp_strip_all_tags( $t ), ENT_QUOTES ) );
+			$t = preg_replace( '/\s*[—–]\s*/u', ', ', $t );
+			return $t;
+		};
+		preg_match_all( '#<p[^>]*>(.*?)</p>#is', $body, $m );
+		$paras = array_values( array_filter( array_map( $norm, $m[1] ) ) );
+		if ( ! $paras && trim( wp_strip_all_tags( $body ) ) !== '' ) {
+			$paras = array_values( array_filter( array_map( $norm, preg_split( "/\n\s*\n/", $body ) ) ) );
+		}
+		// Quote heuristic: short, first-person opener.
+		if ( $paras ) {
+			$first = $paras[0];
+			$is_first_person = (bool) preg_match( '/^(I |I\'|My |As a |As someone )/', $first );
+			if ( mb_strlen( $first ) <= 170 && $is_first_person ) {
+				$out['quote'] = $first;
+				$paras = array_slice( $paras, 1 );
+			}
+		}
+		$out['bio'] = implode( "\n\n", $paras );
+		break;
+	}
+	return $out;
 }

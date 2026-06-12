@@ -283,15 +283,21 @@ function rehab_acf_map_article( array $s ): string {
 	// <h4> sub-questions on /stages-of-change-addiction/) that the
 	// live site renders as separate sections. Split the content on those
 	// boundaries so we can emit them as standalone heading blocks rather
-	// than flattening them into the article-row body. The first text
-	// chunk (everything before the first inline heading) stays inside the
-	// article-row's body for the lede look; subsequent chunks render as
-	// full-width heading + paragraph blocks below.
+	// than flattening them into the article-row body. Everything up to
+	// the first inline heading stays inside the article-row's text
+	// column — including any <ul> bullets, which surface as the row's
+	// `listItems` and render as a checklist after the body paragraphs.
 	$chunks = rehab_acf_split_html_into_blocks( $content );
 
 	$first_body = '';
-	if ( ! empty( $chunks ) && 'paragraphs' === $chunks[0][0] ) {
-		$first_body = array_shift( $chunks )[1];
+	$first_list = [];
+	while ( ! empty( $chunks ) && 'heading' !== $chunks[0][0] ) {
+		$chunk = array_shift( $chunks );
+		if ( 'paragraphs' === $chunk[0] ) {
+			$first_body .= ( '' === $first_body ? '' : "\n\n" ) . $chunk[1];
+		} elseif ( 'list' === $chunk[0] ) {
+			$first_list = array_merge( $first_list, $chunk[1] );
+		}
 	}
 
 	$out = rehab_block_article_row( [
@@ -301,6 +307,7 @@ function rehab_acf_map_article( array $s ): string {
 		'imageAlt'   => $image['alt'] ?? ( $s['title'] ?? '' ),
 		'heading'    => $s['title'] ?? '',
 		'body'       => $first_body,
+		'listItems'  => $first_list,
 	] );
 
 	foreach ( $chunks as $chunk ) {
@@ -310,6 +317,12 @@ function rehab_acf_map_article( array $s ): string {
 			$out  .= "<!-- wp:heading {$attrs}-->\n";
 			$out  .= '<h' . $level . ' class="wp-block-heading">' . esc_html( $chunk[1] ) . '</h' . $level . ">\n";
 			$out  .= "<!-- /wp:heading -->\n\n";
+		} elseif ( 'list' === $chunk[0] ) {
+			$out .= "<!-- wp:list -->\n<ul class=\"wp-block-list\">\n";
+			foreach ( $chunk[1] as $item ) {
+				$out .= "<!-- wp:list-item -->\n<li>" . wp_kses( $item, [ 'strong' => [], 'em' => [], 'a' => [ 'href' => [], 'title' => [], 'target' => [], 'rel' => [] ] ] ) . "</li>\n<!-- /wp:list-item -->\n";
+			}
+			$out .= "</ul>\n<!-- /wp:list -->\n\n";
 		} else {
 			foreach ( preg_split( "/\n\s*\n/", trim( $chunk[1] ) ) as $para ) {
 				$para = trim( $para );
@@ -325,40 +338,93 @@ function rehab_acf_map_article( array $s ): string {
 }
 
 /**
- * Split a rich-text HTML blob on inline <h2>–<h4> boundaries.
+ * Split a rich-text HTML blob on structural boundaries: inline <h2>–<h4>
+ * banners and <ul> lists. Other prose flattens to plain-text paragraph
+ * runs.
  *
- * Returns a sequence of `[type, text, ...]` tuples:
+ * Returns a sequence of typed tuples in source order:
  *   [ 'paragraphs', "text\n\nmore text" ]
- *   [ 'heading',    "THE BENEFITS",   2 ]   // level captured from the source tag
+ *   [ 'heading',    "THE BENEFITS",  2 ]      // level captured from the source tag
+ *   [ 'list',       [ "item one", "<strong>two</strong>" ] ]
  *
- * Heading inner-text is flattened to plain text (any inline <strong> etc.
- * is dropped); paragraph chunks are run through rehab_acf_html_to_text()
- * to preserve paragraph breaks while stripping the rest.
+ * List items preserve inline <strong>/<em>/<a> (the treatment-phases and
+ * article-row builders render these via wp_kses with the same allowlist);
+ * heading inner-text is flattened to plain text.
  */
 function rehab_acf_split_html_into_blocks( string $html ): array {
-	// PREG_SPLIT_DELIM_CAPTURE returns: [text, level, heading_text, text, level, heading_text, ...]
-	$parts = preg_split(
-		'#<\s*h([2-4])[^>]*>(.*?)<\s*/\s*h\1\s*>#is',
-		(string) $html,
-		-1,
-		PREG_SPLIT_DELIM_CAPTURE
-	);
+	$html = (string) $html;
+	$out  = [];
+	$pos  = 0;
+	$len  = strlen( $html );
 
-	$out = [];
-	$n   = count( $parts );
-	$i   = 0;
-	while ( $i < $n ) {
-		$text = rehab_acf_html_to_text( (string) $parts[ $i++ ] );
-		if ( '' !== $text ) {
-			$out[] = [ 'paragraphs', $text ];
+	$pattern = '#<\s*(h[2-4])[^>]*>(.*?)<\s*/\s*\1\s*>|<\s*ul[^>]*>(.*?)<\s*/\s*ul\s*>#is';
+
+	while ( $pos < $len ) {
+		if ( ! preg_match( $pattern, $html, $m, PREG_OFFSET_CAPTURE, $pos ) ) {
+			$tail = rehab_acf_html_to_text( substr( $html, $pos ) );
+			if ( '' !== $tail ) {
+				$out[] = [ 'paragraphs', $tail ];
+			}
+			break;
 		}
-		if ( $i < $n ) {
-			$level   = (int) $parts[ $i++ ];
-			$heading = trim( wp_strip_all_tags( (string) ( $parts[ $i++ ] ?? '' ) ) );
+
+		$match_start = $m[0][1];
+		$match_end   = $match_start + strlen( $m[0][0] );
+
+		if ( $match_start > $pos ) {
+			$prose = rehab_acf_html_to_text( substr( $html, $pos, $match_start - $pos ) );
+			if ( '' !== $prose ) {
+				$out[] = [ 'paragraphs', $prose ];
+			}
+		}
+
+		if ( ! empty( $m[1][0] ) ) {
+			$level   = (int) substr( $m[1][0], 1 );
+			$heading = trim( wp_strip_all_tags( (string) $m[2][0] ) );
 			if ( '' !== $heading ) {
 				$out[] = [ 'heading', $heading, $level ];
 			}
+		} else {
+			$items = rehab_acf_parse_list_items( (string) $m[3][0] );
+			if ( ! empty( $items ) ) {
+				$out[] = [ 'list', $items ];
+			}
 		}
+
+		$pos = $match_end;
+	}
+
+	return $out;
+}
+
+/**
+ * Extract <li> inner content from a <ul>'s inner HTML, preserving inline
+ * emphasis and links. Items that flatten to empty strings (e.g. `<li>&nbsp;</li>`)
+ * are dropped.
+ */
+function rehab_acf_parse_list_items( string $inner ): array {
+	if ( ! preg_match_all( '#<\s*li[^>]*>(.*?)<\s*/\s*li\s*>#is', $inner, $matches ) ) {
+		return [];
+	}
+	$allowed = [
+		'strong' => [],
+		'em'     => [],
+		'a'      => [ 'href' => [], 'title' => [], 'target' => [], 'rel' => [] ],
+	];
+	$out = [];
+	foreach ( $matches[1] as $raw ) {
+		// Drop shortcodes the same way rehab_acf_html_to_text() does.
+		$raw  = preg_replace( '/\[\/?[a-z][a-z0-9_-]*\b[^\]]*\]/i', '', $raw );
+		$item = trim( wp_kses( $raw, $allowed ) );
+		// Collapse whitespace runs but keep single spaces.
+		$item = preg_replace( '/\s+/u', ' ', $item );
+		// Skip nbsp-only / whitespace-only items.
+		$plain = trim( wp_strip_all_tags( $item ) );
+		$plain = str_replace( "\xc2\xa0", '', $plain );
+		if ( '' === $plain ) {
+			continue;
+		}
+		$out[] = $item;
 	}
 	return $out;
 }
@@ -366,15 +432,37 @@ function rehab_acf_split_html_into_blocks( string $html ): array {
 function rehab_acf_map_tabs( array $s ): string {
 	$phases = [];
 	foreach ( ( $s['tabs'] ?? [] ) as $i => $tab ) {
-		$plain = rehab_acf_html_to_text( $tab['text'] ?? '' );
-		$paragraphs = preg_split( "/\n\s*\n/", trim( $plain ) );
-		$paragraphs = array_values( array_filter( array_map( 'trim', $paragraphs ?: [] ) ) );
+		$chunks = rehab_acf_split_html_into_blocks( (string) ( $tab['text'] ?? '' ) );
 
-		// First paragraph often opens with a UPPERCASE banner repeating the
-		// section heading — keep it as h3 only if it's short, else demote
-		// to a leading paragraph.
-		$h3 = '';
-		if ( $paragraphs && mb_strlen( $paragraphs[0] ) < 80 && strtoupper( $paragraphs[0] ) === $paragraphs[0] ) {
+		// Tab text usually opens with an UPPERCASE <h2> banner that repeats
+		// the tab title. Sentence-case it and use as the panel h3. Any later
+		// inline heading is folded into the surrounding paragraph stream so
+		// the panel stays a single coherent block.
+		$h3         = '';
+		$paragraphs = [];
+		$list_items = [];
+		foreach ( $chunks as $chunk ) {
+			if ( 'heading' === $chunk[0] ) {
+				if ( '' === $h3 ) {
+					$h3 = ucfirst( strtolower( (string) $chunk[1] ) );
+				} else {
+					$paragraphs[] = (string) $chunk[1];
+				}
+			} elseif ( 'list' === $chunk[0] ) {
+				$list_items = array_merge( $list_items, $chunk[1] );
+			} elseif ( 'paragraphs' === $chunk[0] ) {
+				foreach ( preg_split( "/\n\s*\n/", trim( $chunk[1] ) ) as $para ) {
+					$para = trim( str_replace( "\xc2\xa0", '', (string) $para ) );
+					if ( '' === $para ) {
+						continue;
+					}
+					$paragraphs[] = $para;
+				}
+			}
+		}
+
+		// Fallback for legacy text that wasn't wrapped in <h2> but uppercased the banner inline.
+		if ( '' === $h3 && $paragraphs && mb_strlen( $paragraphs[0] ) < 80 && strtoupper( $paragraphs[0] ) === $paragraphs[0] ) {
 			$h3 = ucfirst( strtolower( array_shift( $paragraphs ) ) );
 		}
 
@@ -382,8 +470,8 @@ function rehab_acf_map_tabs( array $s ): string {
 			'phase'          => sprintf( 'PHASE %02d', $i + 1 ),
 			'label'          => $tab['title'] ?? '',
 			'h3'             => $h3,
-			'paragraphs'     => $paragraphs,
-			'listItems'      => [],
+			'paragraphs'     => array_values( $paragraphs ),
+			'listItems'      => $list_items,
 			'asideQuote'     => $s['pull_quote'] ?? '',
 			'asideMetaLabel' => 'Quoted by',
 			'asideMetaValue' => $s['cite'] ?? '',

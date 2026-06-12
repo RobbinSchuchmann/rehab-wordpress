@@ -1,0 +1,65 @@
+// Centered page intro — eyebrow, H1, lede.
+
+.rehab-page-header {
+	padding: clamp(44px, 5vw, 76px) 0 clamp(28px, 3vw, 44px);
+	text-align: center;
+}
+
+.rehab-page-header__eyebrow {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.8125rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--rehab-sage-text, #7A856A);
+	display: block;
+	margin-bottom: 1.1rem;
+}
+
+.rehab-page-header__heading {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: clamp(2.25rem, 4.4vw, 3.4rem);
+	line-height: 1.08;
+	letter-spacing: -0.025em;
+	color: var(--rehab-warm-charcoal, #2C2C2C);
+	margin: 0 0 0.4em;
+	text-wrap: balance;
+}
+
+.rehab-page-header__lede {
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+	line-height: 1.7;
+	color: var(--rehab-soft-charcoal, #4A4A4A);
+	max-width: 56ch;
+	margin: 0 auto;
+}
+
+// Left-aligned variant (e.g. Why Us) with optional full-width feature image.
+.rehab-page-header--left {
+	text-align: left;
+}
+
+.rehab-page-header--left .rehab-page-header__copy {
+	max-width: 880px;
+}
+
+.rehab-page-header--left .rehab-page-header__lede {
+	margin: 0;
+}
+
+.rehab-page-header__media {
+	margin-top: clamp(28px, 4vw, 48px);
+	overflow: hidden;
+	border-top-left-radius: 100px;
+}
+
+.rehab-page-header__media img {
+	display: block;
+	width: 100%;
+	min-height: clamp(320px, 42vw, 560px);
+	max-height: 560px;
+	object-fit: cover;
+}

@@ -8,5 +8,15 @@
 		},
 		"appearanceTools": true,
 		"useRootPaddingAwareAlignments": true
+	},
+	"styles": {
+		"spacing": {
+			"padding": {
+				"top":    "1.75rem",
+				"right":  "1.75rem",
+				"bottom": "1.75rem",
+				"left":   "1.75rem"
+			}
+		}
 	}
 }

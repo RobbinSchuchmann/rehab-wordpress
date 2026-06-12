@@ -42,11 +42,13 @@ while ( have_posts() ) :
 
 		<?php
 		// "Other treatments" cross-link section is suppressed when the page's
-		// content already ends with a final-CTA / contact-form block — those
-		// pages own their full bottom-of-page experience.
+		// content already ends with a final-CTA / contact-form block or a dark
+		// closing concierge band — those pages own their full bottom-of-page
+		// experience (incl. in-content related-programs cards).
 		$page_content = get_the_content();
 		$has_own_final = (
 			false !== strpos( $page_content, 'wp:rehab/final-cta' )
+			|| ( false !== strpos( $page_content, 'wp:rehab/cta-band' ) && false !== strpos( $page_content, '"background":"dark"' ) )
 		);
 		$related = $has_own_final ? [] : get_posts( [
 			'post_type'      => 'page',
