@@ -34,6 +34,24 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'list-rehab-pages':
+			// REH-10 validation sweep helper: list every published page whose
+			// content contains rehab/* custom blocks (the set that can show
+			// Gutenberg "Attempt recovery" warnings). Outputs "id\tblockcount\tslug".
+			global $wpdb;
+			$rows = $wpdb->get_results(
+				"SELECT ID, post_name, post_content FROM {$wpdb->posts}
+				 WHERE post_type = 'page' AND post_status = 'publish'
+				 AND post_content LIKE '%wp:rehab/%' ORDER BY ID"
+			);
+			echo "id\tblocks\tslug\n";
+			foreach ( $rows as $r ) {
+				$n = substr_count( $r->post_content, '<!-- wp:rehab/' );
+				echo $r->ID . "\t" . $n . "\t" . $r->post_name . "\n";
+			}
+			echo "TOTAL: " . count( $rows ) . "\n";
+			break;
+
 		case 'dump-content':
 			// Dev helper: echo a page's raw post_content. Usage: ?rehab_oneshot=dump-content&id=N
 			$pid = (int) ( $_GET['id'] ?? 0 );
