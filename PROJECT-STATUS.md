@@ -38,6 +38,7 @@ Project **"Website v3 rollout"**, team `REH`, assignee Robbin. Code work only. C
 | REH-8 | Commit workflow config files (.mcp.json, CLAUDE.md, PROJECT-STATUS.md) | Improvement | Medium | first end-to-end automation-loop test |
 | REH-9 | Fix inconsistent section column width (benefits-numbered full-bleed) | Bug | Medium | ✅ **Done** — merged to main via PR #2 (`7aafd66`) |
 | REH-10 | Fix mobile/responsive horizontal overflow (hero, treatment-phases, article body) | Bug | Medium | ✅ **Done** — merged to main via PR #8 (`3365825`); full-site sweep 446 pages clean |
+| REH-11 | Recover latent invalid-block warnings across 28 pages (pre-go-live sweep) | Bug | Medium | ✅ **Done** — merged via PR #9 (`fb69f5b`); 91 pages swept, 28 recovered to 0 |
 
 **Excluded from Linear on purpose:** "Editor review gates" — content/business sign-off, not code. Per the `CLAUDE.md` rule (Linear = code work only) it stays out. Tracked in section 4 + the parent `SITE-PAGES-PLAN.md`.
 
@@ -61,6 +62,8 @@ Detailed build notes live in auto-memory: `memory/treatment-design-v3.md` (loads
 **Rebuild/verify pattern:** edit specs/builders → `?rehab_oneshot=<task>` → `node recover-demo.js <id>` → `node check-editor.js <id>` (expect 0 "Attempt recovery") → screenshot.
 
 **Responsive audit (REH-10):** `audit-responsive.js` scans any URL list across widths (default 360/390/768/1024/1440/2560; override with `WIDTHS=360,1024`), flags horizontal overflow and names offending elements. Last full-site run: **446 pages × {360,1024} = 0 overflow, 0 errors.** Three shared-CSS overflow fixes landed: `hero` grid (fractional fr columns), `treatment-phases` panel (`minmax(0,1fr)` + `overflow-wrap`), `.rehab-article__body` (`overflow-wrap:break-word` for long chemical names) — the last protects all ~355 article pages.
+
+**Block-validation sweep (REH-11):** `?rehab_oneshot=list-rehab-pages` lists every page with `wp:rehab/*` blocks; `validate-sweep.js <ids-file>` opens each in the editor, recovers + re-saves any with invalid-block ("Attempt recovery") warnings, re-verifies. Last run: **91 pages → 28 recovered to 0 warnings** (incl. homepage, hua-hin, programme, superannuation, CBT/DBT/EMDR/mindfulness, living-sober). Re-run before go-live or after bulk content edits. The recovered content lives in the DB (outside the repo), so it's not a git diff.
 
 ---
 
