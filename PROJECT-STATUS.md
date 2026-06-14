@@ -39,6 +39,7 @@ Project **"Website v3 rollout"**, team `REH`, assignee Robbin. Code work only. C
 | REH-9 | Fix inconsistent section column width (benefits-numbered full-bleed) | Bug | Medium | ✅ **Done** — merged to main via PR #2 (`7aafd66`) |
 | REH-10 | Fix mobile/responsive horizontal overflow (hero, treatment-phases, article body) | Bug | Medium | ✅ **Done** — merged to main via PR #8 (`3365825`); full-site sweep 446 pages clean |
 | REH-11 | Recover latent invalid-block warnings across 28 pages (pre-go-live sweep) | Bug | Medium | ✅ **Done** — merged via PR #9 (`fb69f5b`); 91 pages swept, 28 recovered to 0 |
+| REH-13 | Fix header nav overlap (mid-widths) + CTA-band button rendering | Bug | Medium | ✅ **Done** — merged via PR #10 (`7ba5edb`); tiered nav collapse + button padding |
 
 **Excluded from Linear on purpose:** "Editor review gates" — content/business sign-off, not code. Per the `CLAUDE.md` rule (Linear = code work only) it stays out. Tracked in section 4 + the parent `SITE-PAGES-PLAN.md`.
 
