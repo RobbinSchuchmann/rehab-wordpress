@@ -496,6 +496,14 @@
 	gap: 2rem;
 }
 
+/* The sidebar is a max-height, scrollable sticky column. Without this its flex
+   children shrink to fit instead of letting the column scroll — squashing the
+   CTA card, whose overflow:hidden then clips the "Ask a question" button. Pin
+   shrink to 0 so the children keep their natural height and the column scrolls. */
+.rehab-article__sidebar-inner > * {
+	flex-shrink: 0;
+}
+
 @media (min-width: 1024px) {
 	.rehab-article__sidebar-inner {
 		position: sticky;
