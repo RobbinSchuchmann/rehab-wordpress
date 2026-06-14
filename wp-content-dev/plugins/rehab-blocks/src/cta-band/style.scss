@@ -133,9 +133,12 @@
 }
 
 // Dark button used on the sage band.
+// Padding matches .rehab-btn--luxury — the base .rehab-btn carries no padding,
+// so without it the label renders as a flush, button-less text strip.
 .rehab-btn--dark {
 	background: var(--rehab-warm-charcoal, #2C2C2C);
 	color: #fff;
+	padding: 1.05rem 2.25rem;
 	box-shadow: 0 10px 24px -12px rgba(44, 44, 44, 0.6);
 }
 
@@ -150,6 +153,7 @@
 .rehab-btn--light {
 	background: #fff;
 	color: var(--rehab-warm-charcoal, #2C2C2C);
+	padding: 1.05rem 2.25rem;
 }
 
 .rehab-btn--light:hover {

@@ -205,8 +205,19 @@ body.rehab-menu-open .rehab-navbar {
 body.rehab-menu-open .rehab-navbar__toggle-icon-open { display: none; }
 body.rehab-menu-open .rehab-navbar__toggle-icon-close { display: block; }
 
-/* Responsive: collapse to burger below 1024px */
-@media (max-width: 1023px) {
+/* Mid-width (laptops / half-screen on large displays): the full inline nav
+   needs ~1366px to sit without the centred links sliding under the logo. In
+   the 1150-1365px band, reclaim space — drop the phone link and tighten the
+   gaps — so the links still fit inline rather than overlapping the brand.
+   The phone number stays reachable via the CTA and the footer. */
+@media (min-width: 1150px) and (max-width: 1365px) {
+	.rehab-navbar { gap: 16px; }
+	.rehab-navbar__menu { gap: 22px; }
+	.rehab-navbar__phone { display: none; }
+}
+
+/* Responsive: collapse to the burger once the inline nav can no longer fit. */
+@media (max-width: 1149px) {
 	.rehab-navbar__links { display: none; }
 	.rehab-navbar__phone { display: none; }
 	.rehab-navbar__toggle { display: inline-flex; }
