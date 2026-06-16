@@ -28,6 +28,49 @@
 			}
 		} );
 
+		// Disclosure parents in the inline desktop nav. The walker renders these
+		// as `<a role="button" aria-haspopup="true">` with no href (see
+		// functions.php). Hover reveals the submenu via CSS, but touch devices
+		// have no hover — so wire a click/keyboard toggle here. The mega menu
+		// (burger) shows its submenus permanently, so it needs no toggle.
+		const inlineNav = document.querySelector( '.rehab-navbar__menu' );
+		if ( inlineNav ) {
+			const parents = inlineNav.querySelectorAll( '[aria-haspopup="true"]' );
+
+			const closeParent = ( el ) => {
+				el.parentElement.classList.remove( 'is-open' );
+				el.setAttribute( 'aria-expanded', 'false' );
+			};
+
+			parents.forEach( ( el ) => {
+				const li = el.parentElement;
+
+				const toggleParent = ( e ) => {
+					e.preventDefault();
+					const willOpen = ! li.classList.contains( 'is-open' );
+					// Single open dropdown at a time.
+					parents.forEach( ( other ) => {
+						if ( other !== el ) closeParent( other );
+					} );
+					li.classList.toggle( 'is-open', willOpen );
+					el.setAttribute( 'aria-expanded', willOpen ? 'true' : 'false' );
+				};
+
+				el.addEventListener( 'click', toggleParent );
+				el.addEventListener( 'keydown', ( e ) => {
+					if ( e.key === 'Enter' || e.key === ' ' ) toggleParent( e );
+				} );
+			} );
+
+			// Close on outside click and on Escape.
+			document.addEventListener( 'click', ( e ) => {
+				if ( ! inlineNav.contains( e.target ) ) parents.forEach( closeParent );
+			} );
+			inlineNav.addEventListener( 'keydown', ( e ) => {
+				if ( e.key === 'Escape' ) parents.forEach( closeParent );
+			} );
+		}
+
 		// Sticky shrink + auto-hide on scroll-down behavior
 		let lastScroll = 0;
 		const onScroll = () => {
