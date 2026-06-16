@@ -140,9 +140,16 @@ body.rehab-menu-open .rehab-navbar {
 }
 
 .rehab-navbar__menu li:hover > .sub-menu,
-.rehab-navbar__menu li:focus-within > .sub-menu {
+.rehab-navbar__menu li:focus-within > .sub-menu,
+.rehab-navbar__menu li.is-open > .sub-menu {
 	opacity: 1;
 	visibility: visible;
+}
+
+/* Disclosure parents render as <a role="button"> (no href); keep the pointer
+   cursor so they read as interactive. header.js toggles `.is-open` on tap. */
+.rehab-navbar__menu > li.menu-item-has-children > [aria-haspopup="true"] {
+	cursor: pointer;
 }
 
 .rehab-navbar__menu .sub-menu a {

@@ -52,42 +52,55 @@ add_action( 'after_setup_theme', 'rehab_parent_setup' );
  * Enqueue parent theme stylesheets in dependency order.
  */
 function rehab_parent_enqueue(): void {
-	$theme_version = wp_get_theme()->get( 'Version' );
-	$base_uri      = get_template_directory_uri() . '/assets';
+	$base_uri  = get_template_directory_uri() . '/assets';
+	$base_path = get_template_directory() . '/assets';
+
+	/**
+	 * Version parent-theme assets by their own file mtime. These files are shared
+	 * by every child theme, so keying the cache-bust off the active child theme's
+	 * version (the old behaviour) meant editing an asset here didn't bust caches
+	 * unless someone also remembered to bump a child version. mtime busts the
+	 * cache automatically whenever the file actually changes.
+	 */
+	$asset_ver = static function ( string $rel ) use ( $base_path ): string {
+		$path = "$base_path/$rel";
+		$mtime = @filemtime( $path );
+		return $mtime ? (string) $mtime : (string) wp_get_theme()->get( 'Version' );
+	};
 
 	$stylesheets = [
-		'rehab-tokens'     => [ "$base_uri/css/tokens.css", [] ],
-		'rehab-base'       => [ "$base_uri/css/base.css", [ 'rehab-tokens' ] ],
-		'rehab-typography' => [ "$base_uri/css/typography.css", [ 'rehab-tokens' ] ],
-		'rehab-layout'     => [ "$base_uri/css/layout.css", [ 'rehab-tokens' ] ],
-		'rehab-buttons'    => [ "$base_uri/css/buttons.css", [ 'rehab-tokens' ] ],
-		'rehab-utilities'  => [ "$base_uri/css/utilities.css", [ 'rehab-tokens' ] ],
-		'rehab-header'     => [ "$base_uri/css/header.css", [ 'rehab-tokens' ] ],
-		'rehab-utility-bar' => [ "$base_uri/css/utility-bar.css", [ 'rehab-tokens', 'rehab-buttons' ] ],
-		'rehab-footer'     => [ "$base_uri/css/footer.css", [ 'rehab-tokens' ] ],
-		'rehab-article'    => [ "$base_uri/css/article.css", [ 'rehab-tokens', 'rehab-typography' ] ],
-		'rehab-articles-index' => [ "$base_uri/css/articles-index.css", [ 'rehab-tokens' ] ],
-		'rehab-treatment'  => [ "$base_uri/css/treatment.css", [ 'rehab-tokens' ] ],
-		'rehab-util-pages' => [ "$base_uri/css/util-pages.css", [ 'rehab-tokens' ] ],
-		'rehab-a11y'       => [ "$base_uri/css/a11y.css", [ 'rehab-tokens' ] ],
+		'rehab-tokens'     => [ 'css/tokens.css', [] ],
+		'rehab-base'       => [ 'css/base.css', [ 'rehab-tokens' ] ],
+		'rehab-typography' => [ 'css/typography.css', [ 'rehab-tokens' ] ],
+		'rehab-layout'     => [ 'css/layout.css', [ 'rehab-tokens' ] ],
+		'rehab-buttons'    => [ 'css/buttons.css', [ 'rehab-tokens' ] ],
+		'rehab-utilities'  => [ 'css/utilities.css', [ 'rehab-tokens' ] ],
+		'rehab-header'     => [ 'css/header.css', [ 'rehab-tokens' ] ],
+		'rehab-utility-bar' => [ 'css/utility-bar.css', [ 'rehab-tokens', 'rehab-buttons' ] ],
+		'rehab-footer'     => [ 'css/footer.css', [ 'rehab-tokens' ] ],
+		'rehab-article'    => [ 'css/article.css', [ 'rehab-tokens', 'rehab-typography' ] ],
+		'rehab-articles-index' => [ 'css/articles-index.css', [ 'rehab-tokens' ] ],
+		'rehab-treatment'  => [ 'css/treatment.css', [ 'rehab-tokens' ] ],
+		'rehab-util-pages' => [ 'css/util-pages.css', [ 'rehab-tokens' ] ],
+		'rehab-a11y'       => [ 'css/a11y.css', [ 'rehab-tokens' ] ],
 	];
 
-	foreach ( $stylesheets as $handle => [ $src, $deps ] ) {
-		wp_enqueue_style( $handle, $src, $deps, $theme_version );
+	foreach ( $stylesheets as $handle => [ $rel, $deps ] ) {
+		wp_enqueue_style( $handle, "$base_uri/$rel", $deps, $asset_ver( $rel ) );
 	}
 
 	wp_enqueue_script(
 		'rehab-header',
 		"$base_uri/js/header.js",
 		[],
-		$theme_version,
+		$asset_ver( 'js/header.js' ),
 		true
 	);
 	wp_enqueue_script(
 		'rehab-image-fallback',
 		"$base_uri/js/image-fallback.js",
 		[],
-		$theme_version,
+		$asset_ver( 'js/image-fallback.js' ),
 		true
 	);
 }
@@ -668,13 +681,16 @@ remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 /**
  * Strip `href="#"` from menu items that have children — those are disclosure
  * parents, not real links. Replacing with `role="button"` + `aria-haspopup="true"`
- * gives them proper semantics and prevents the page-jump behaviour when clicked.
+ * + `aria-expanded="false"` gives them proper semantics and prevents the page-jump
+ * behaviour when clicked. `header.js` wires the click/keyboard toggle that flips
+ * `aria-expanded` and reveals the submenu (so they work on touch, where there is
+ * no hover); `header.css` shows the submenu on the `.is-open` parent.
  */
 function rehab_parent_walker_menu_no_hash( string $item_html, $item, int $depth, $args ): string {
 	if ( strpos( $item_html, 'href="#"' ) !== false ) {
 		$item_html = str_replace(
 			'href="#"',
-			'role="button" tabindex="0" aria-haspopup="true"',
+			'role="button" tabindex="0" aria-haspopup="true" aria-expanded="false"',
 			$item_html
 		);
 	}
