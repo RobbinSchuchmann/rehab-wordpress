@@ -3149,6 +3149,27 @@ add_action( 'init', function () {
 			echo "OK page $page_id template -> $tpl (update: " . ( $res ? 'changed' : 'no-op' ) . ")\n";
 			break;
 
+		case 'dump-menu':
+			// Read-only: inspect a nav menu's items so we can see why some render
+			// as hrefless <a> (empty URL). Usage: ?rehab_oneshot=dump-menu&loc=primary
+			$loc       = isset( $_GET['loc'] ) ? sanitize_key( $_GET['loc'] ) : 'primary';
+			$locations = get_nav_menu_locations();
+			if ( empty( $locations[ $loc ] ) ) { echo "no menu at location '$loc'\n"; break; }
+			$items = wp_get_nav_menu_items( $locations[ $loc ] );
+			if ( ! $items ) { echo "no items\n"; break; }
+			$depth_of = [];
+			echo "id\tparent\ttype\tobject\tobject_id\tstatus\tURL\ttitle\n";
+			foreach ( $items as $it ) {
+				$obj_status = '';
+				if ( $it->type === 'post_type' && $it->object_id ) {
+					$obj_status = get_post_status( (int) $it->object_id ) ?: 'MISSING';
+				}
+				$url = trim( (string) $it->url );
+				$flag = ( $url === '' || $url === '#' ) ? '  <-- EMPTY/#' : '';
+				echo "{$it->ID}\t{$it->menu_item_parent}\t{$it->type}\t{$it->object}\t{$it->object_id}\t{$obj_status}\t{$url}\t{$it->title}{$flag}\n";
+			}
+			break;
+
 		default:
 			echo "unknown task\n";
 	}

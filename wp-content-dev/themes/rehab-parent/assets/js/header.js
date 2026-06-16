@@ -28,47 +28,62 @@
 			}
 		} );
 
-		// Disclosure parents in the inline desktop nav. The walker renders these
-		// as `<a role="button" aria-haspopup="true">` with no href (see
-		// functions.php). Hover reveals the submenu via CSS, but touch devices
-		// have no hover — so wire a click/keyboard toggle here. The mega menu
-		// (burger) shows its submenus permanently, so it needs no toggle.
-		const inlineNav = document.querySelector( '.rehab-navbar__menu' );
-		if ( inlineNav ) {
-			const parents = inlineNav.querySelectorAll( '[aria-haspopup="true"]' );
+		// Disclosure parents have no real href — the walker renders them as
+		// `<a role="button" aria-haspopup="true">` (see functions.php). They toggle
+		// their submenu open/closed so they work on touch, where there is no hover.
+		// Wired for both the inline navbar (hover still opens it via CSS) and the
+		// mega-menu accordion, at every depth.
+		const closeDisclosure = ( el ) => {
+			el.parentElement.classList.remove( 'is-open' );
+			el.setAttribute( 'aria-expanded', 'false' );
+		};
 
-			const closeParent = ( el ) => {
-				el.parentElement.classList.remove( 'is-open' );
-				el.setAttribute( 'aria-expanded', 'false' );
-			};
+		const wireDisclosure = ( scope, exclusive ) => {
+			const buttons = scope.querySelectorAll( '[aria-haspopup="true"]' );
 
-			parents.forEach( ( el ) => {
+			buttons.forEach( ( el ) => {
 				const li = el.parentElement;
 
-				const toggleParent = ( e ) => {
+				const toggle = ( e ) => {
 					e.preventDefault();
 					const willOpen = ! li.classList.contains( 'is-open' );
-					// Single open dropdown at a time.
-					parents.forEach( ( other ) => {
-						if ( other !== el ) closeParent( other );
-					} );
+					if ( exclusive ) {
+						// Close any sibling disclosure at the same level.
+						Array.from( li.parentElement.children ).forEach( ( sib ) => {
+							if ( sib === li ) return;
+							const sibBtn = sib.querySelector( ':scope > [aria-haspopup="true"]' );
+							if ( sibBtn ) closeDisclosure( sibBtn );
+						} );
+					}
 					li.classList.toggle( 'is-open', willOpen );
 					el.setAttribute( 'aria-expanded', willOpen ? 'true' : 'false' );
 				};
 
-				el.addEventListener( 'click', toggleParent );
+				el.addEventListener( 'click', toggle );
 				el.addEventListener( 'keydown', ( e ) => {
-					if ( e.key === 'Enter' || e.key === ' ' ) toggleParent( e );
+					if ( e.key === 'Enter' || e.key === ' ' ) toggle( e );
 				} );
 			} );
 
-			// Close on outside click and on Escape.
+			return buttons;
+		};
+
+		// Inline navbar: one dropdown open at a time; close on outside click / Esc.
+		const inlineNav = document.querySelector( '.rehab-navbar__menu' );
+		if ( inlineNav ) {
+			const buttons = wireDisclosure( inlineNav, true );
 			document.addEventListener( 'click', ( e ) => {
-				if ( ! inlineNav.contains( e.target ) ) parents.forEach( closeParent );
+				if ( ! inlineNav.contains( e.target ) ) buttons.forEach( closeDisclosure );
 			} );
 			inlineNav.addEventListener( 'keydown', ( e ) => {
-				if ( e.key === 'Escape' ) parents.forEach( closeParent );
+				if ( e.key === 'Escape' ) buttons.forEach( closeDisclosure );
 			} );
+		}
+
+		// Mega-menu (burger): independent accordion sections, expandable per depth.
+		const megaList = document.querySelector( '.rehab-mega-menu__list' );
+		if ( megaList ) {
+			wireDisclosure( megaList, false );
 		}
 
 		// Sticky shrink + auto-hide on scroll-down behavior
