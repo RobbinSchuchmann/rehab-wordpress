@@ -1,6 +1,6 @@
 # Project status & handoff
 
-*Last updated: 12 June 2026. Read this first after a restart — session task lists and chat context do not survive, but this file does.*
+*Last updated: 16 June 2026. Read this first after a restart — session task lists and chat context do not survive, but this file does.*
 
 ---
 
@@ -41,6 +41,9 @@ Project **"Website v3 rollout"**, team `REH`, assignee Robbin. Code work only. C
 | REH-11 | Recover latent invalid-block warnings across 28 pages (pre-go-live sweep) | Bug | Medium | ✅ **Done** — merged via PR #9 (`fb69f5b`); 91 pages swept, 28 recovered to 0 |
 | REH-13 | Fix header nav overlap (mid-widths) + CTA-band button rendering | Bug | Medium | ✅ **Done** — merged via PR #10 (`7ba5edb`); tiered nav collapse + button padding |
 | REH-14 | Extend audit (overlaps + zero-area buttons); fix clipped article-sidebar CTA button | Improvement | Medium | ✅ **Done** — merged via PR #11 (`c181d11`); audit now catches collisions + padding-less buttons |
+| REH-15 | Restore analytics & marketing tracking dropped with IHAF (GA4/GTM/Clarity, lead pixel, WhatsApp widget) | Feature | High | **go-live blocker** — host-gated mu-plugin; see "Migration plugin gaps" below |
+| REH-16 | Harden contact/intake forms for production (recipient, SMTP, deploy smoke test) | Improvement | High | **go-live blocker** — forms work but would silently lose leads (wrong recipient + no SMTP); see "Migration plugin gaps" below |
+| REH-17 | Migrate Diamond Rehab to a fresh Cloudways server (per-site runbook) | Improvement | High | step-by-step in `MIGRATION-RUNBOOK.md`; reusable template — each site gets its own server from the same git codebase |
 
 **Excluded from Linear on purpose:** "Editor review gates" — content/business sign-off, not code. Per the `CLAUDE.md` rule (Linear = code work only) it stays out. Tracked in section 4 + the parent `SITE-PAGES-PLAN.md`.
 
@@ -68,6 +71,40 @@ Detailed build notes live in auto-memory: `memory/treatment-design-v3.md` (loads
 **Responsive audit (REH-10 / extended REH-14):** `audit-responsive.js` scans any URL list across widths (default 360/390/768/1024/1440/2560; override with `WIDTHS=360,1024`) and flags three bug classes: (1) horizontal overflow, (2) element overlap (in-flow interactive/heading/brand collisions, scoped to positioning context — catches nav-under-logo without false-positiving fixed bars), (3) zero-area buttons (btn-class elements with a fill but no padding/height). `INJECT_CSS='<css>'` env hook reproduces regressions. Last full-site run: **446 pages × {360,1024} = 0 overflow, 0 errors**; broad 84-page × 6-width run: 0 overlaps, 0 bad buttons. Fixes landed: `hero` grid (fractional fr columns), `treatment-phases` panel (`minmax(0,1fr)` + `overflow-wrap`), `.rehab-article__body` (`overflow-wrap` for long chemical names, protects ~355 article pages), header nav tiered collapse (REH-13), CTA-band button padding (REH-13), article sidebar `flex-shrink:0` (REH-14, un-clips the "Ask a question" button).
 
 **Block-validation sweep (REH-11):** `?rehab_oneshot=list-rehab-pages` lists every page with `wp:rehab/*` blocks; `validate-sweep.js <ids-file>` opens each in the editor, recovers + re-saves any with invalid-block ("Attempt recovery") warnings, re-verifies. Runs: rehab-block pages **91 → 28 recovered** (incl. homepage, hua-hin, programme, superannuation, CBT/DBT/EMDR/mindfulness, living-sober); article-template pages **353 → 1 recovered** (3403 ketamine-addiction); team profiles (21) + remaining core/policy pages (privacy 3, all-articles 1218, policies 1546, confidentiality 4197) **→ all clean**. **Every published page (448) is now validation-checked; 29 recovered total, all re-verified clean.** Re-run before go-live or after bulk content edits. Recovered content lives in the DB (outside the repo), so it's not a git diff.
+
+**RankMath / schema sweep (15 Jun 2026) — VERIFIED clean.** `audit-seo.sh` (curl-based, reads the sitemap → `/tmp/seo-audit.csv`) confirmed **all 446 pages** emit title, meta description, OG tags, and a `rank-math-schema-pro` JSON-LD block — 0 gaps. The previous version's **custom schemas are intact and rendering on every page** (MedicalClinic, MedicalOrganization, LocalBusiness, WebPage/MedicalWebPage + WebSite/Person/Service graph). They survived all rebuilds because the oneshots only call `wp_update_post([ID, post_content])` and never touch `rank_math_*` postmeta. RankMath free + Pro both active.
+
+**🚦 Go-live SEO toggles (NOT yet applied — deploy-time, intentionally still in dev state):**
+1. **Set `blog_public = 1`** (live dev DB is `0`; the dump had `1`). Dev is `noindex,nofollow` sitewide as hygiene because the box is publicly reachable at `5.223.87.211:8081`. This also removes the canonical tag — RankMath strips `rel="canonical"` on any noindex page by design (`seo-by-rank-math/includes/frontend/class-head.php:237`). Setting `blog_public = 1` restores **both** indexing and canonicals automatically. Check current value via `?rehab_oneshot=check-search-engine`.
+2. **Run the replace-host oneshot** so schema `@id`/`logo`/`url` (and all baked URLs) use `diamondrehabthailand.com` instead of the dev IP. The dev IP in schema is a cosmetic artifact of `aa-dynamic-host.php` filtering `option_home`/`option_siteurl` to the request host — fine for dev, must be corrected for production.
+
+Re-run `audit-seo.sh` after toggle #1 to confirm `rel="canonical"` appears on all pages.
+
+**Migration plugin gaps (audited 15 Jun 2026).** The v3 migration dropped **19 of the old site's 23 plugins** in favour of custom blocks/theme. Most user-facing functions were cleanly replaced; a few were **not** and need attention before go-live. Verified against the old dump + live dev site.
+
+- **Forms — ✅ replaced & working.** Old **Forminator** (14 forms, `[forminator_form id=…]` shortcodes, `wp_frmt_*` entry tables) → custom `rehab/final-cta` block + REST endpoint `POST /wp-json/rehab/v1/contact` (live, validating) + `rehab_submission` CPT storage with admin email (CPT = fallback if `wp_mail()` drops). **0 leaked shortcodes across all 446 pages.** Contact (1189) + Intake Form (5440) carry working forms. Page **9557** (`intake-form-halfway-house`) is an old-theme page **intentionally 301-redirected to home** by `zz-redirects.php` (mirrors live-site behaviour) — verified, not a broken/missing form. ⚠️ Production hardening → **REH-16** (go-live blocker): notification recipient defaults to `admin_email` (= a dev/agency Gmail in the dump, not the client's intake inbox), and `wp_mail()` needs real SMTP (dev returns `emailed:false`). Verified end-to-end live (valid→stored, honeypot→dropped, bad input→400); endpoint is nonce-free so it's cache-safe, and the CPT stores every lead before email so leads are never lost regardless. **Cloudflare can't send mail** (Email Routing is inbound-only) — use a transactional provider + Cloudflare DNS for SPF/DKIM/DMARC.
+- **Analytics / marketing tracking — 🔴 missing → REH-15 (go-live blocker).** All injected via the dropped **Insert Headers & Footers** plugin; nothing restores it automatically. Missing: **GTM** (`GTM-…`), **GA4** (`G-…`) + legacy **UA-…**, **Microsoft Clarity**, **lead pixel** (`leads.internetdominators.app`, PxGrabber account `76381674`), **Elfsight WhatsApp chat widget**, and the **GSC verification meta** (`google-site-verification`, bundled in the same IHAF header field — dropping it loses Search Console access unless GSC is verified via DNS). Plan: host-gated mu-plugin (mirror `aa-dynamic-host.php`) firing only on the production domain.
+- **Article table of contents — 🟡 gap.** Old **Easy-TOC**; new articles have no TOC. UX/SEO nicety on long articles. (Out of REH-15 scope — separate item if wanted.)
+- **CallTrackingMetrics — 🟡 dropped.** Dynamic call-tracking phone numbers gone; numbers now static (lose call attribution). Business decision.
+- **Google Reviews widget — 🟡 dropped.** Tied to the deferred **Testimonials** page (content-gated).
+- **✅ Cleanly replaced (no action):** accordion-blocks → `rehab/faq` block (native `<details>`, also feeds FAQ schema); top-bar → custom utility-bar; interactive-geo-maps → Google Maps iframe (contact page); Breeze/Smush/Flying-Scripts → production-infra concern, not content.
+
+### 🚀 Cloudways INITIAL SEED — executed 16 Jun 2026 (REH-17)
+
+Diamond's Cloudways server is **seeded and serving** (initial seed only — **no DNS cutover**; editors work on the staging URL until launch). Done from the dev box over SSH (dev box ed25519 key authorized).
+
+- **Server:** `138.197.93.177`, user `master_pjydkfpusf`, app **`afsjjjgrnm`**, app path `/home/master/applications/afsjjjgrnm/public_html`. PHP 8.2.31 (runbook wanted 8.3+ — bump in panel). **Staging URL:** `https://wordpress-1636937-6489349.cloudwaysapps.com`.
+- **Done:** Phase 2 code (themes + `rehab-blocks` active; mu-plugin triage clean — only `zz-contact-form` + `zz-redirects`). Phase 3 export (dev DB via `mariadb-dump`, MariaDB 11). Phase 4 import (**448 pages**, `diamond-child` active, `blog_public=0`). Phase 5 cleanup (revisions/transients dropped; 18 orphan tables dropped — **Forminator lead tables `wp_frmt_form_entry`/`_meta` KEPT** as historical archive). Phase 6 hosts (8,499 replacements → staging URL). Phase 7 uploads (**22,428 files / 6.6 GB** rsynced; only `smush-webp-test.png` junk skipped).
+- **RankMath gap CLOSED:** prior session never installed RankMath. Copied `seo-by-rank-math` 1.0.269 + `seo-by-rank-math-pro` 3.0.112 from dev → activated. Meta now renders.
+- **Staging noindex guard:** `wp-content/mu-plugins/zz-staging-noindex.php` forces `noindex` (meta + `X-Robots-Tag`) on any non-prod host. **DELETE at cutover.** Verified via WP-CLI.
+- **Cache drop-ins parked:** `object-cache.php` + `advanced-cache.php` → `.migbak` (so the foreign DB wouldn't fatal OCP/Breeze). Re-enable Breeze + Object Cache Pro via the Cloudways panel near cutover.
+- **Rollback:** stock pre-seed DB at `/home/master/pre-seed-backup-2026-06-16.sql`. Dev dump at `~/diamond-dev-2026-06-16.sql.gz` (both boxes).
+
+**🔑 Pending MANUAL steps (can't do from CLI):**
+1. **Purge Varnish** (Cloudways panel → app → Purge Varnish). *Critical:* all HTTP responses are served from a stale cache predating RankMath+noindex — until purged the live HTML wrongly shows `robots=index` / no RankMath meta though the backend is already correct. (Master user has no `sudo`/`varnishadm` access.)
+2. **Register RankMath Pro** for this domain (wp-admin → RankMath → connect account). Pro license is domain-locked → `rank-math-schema` not rendering yet. Re-connect again for `diamondrehabthailand.com` at cutover.
+
+**Still open for go-live (per scope, after editors start):** REH-15 analytics mu-plugin, REH-16 forms SMTP/recipient, Phase 8 article re-sync, Phase 10 audit against staging, Phase 11 DNS cutover (+ delete the noindex guard, flip `blog_public=1`, re-replace staging URL → `diamondrehabthailand.com`).
 
 ---
 
