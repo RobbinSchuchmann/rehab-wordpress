@@ -173,6 +173,7 @@ add_action( 'customize_register', 'rehab_parent_customize_register' );
 require_once get_template_directory() . '/inc/patterns.php';
 require_once get_template_directory() . '/inc/cpt-team-member.php';
 require_once get_template_directory() . '/inc/article-helpers.php';
+require_once get_template_directory() . '/inc/page-categories.php';
 
 /**
  * Inject a fallback (email + phone CTA) into rehab/contact-form blocks when no
