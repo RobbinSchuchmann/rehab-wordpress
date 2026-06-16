@@ -314,9 +314,35 @@ body.rehab-menu-open .rehab-mega-menu {
 	text-decoration: none;
 }
 
+/* Accordion: submenus are collapsed; tapping the disclosure header opens them.
+   (No hover on touch, so reveal is driven purely by the .is-open class that
+   header.js toggles.) */
 .rehab-mega-menu__list .sub-menu {
+	display: none;
 	padding-left: 1rem;
 	margin-bottom: 0.5rem;
+}
+
+.rehab-mega-menu__list li.is-open > .sub-menu {
+	display: block;
+}
+
+/* Disclosure headers read as buttons — show a caret that flips when open. */
+.rehab-mega-menu__list [aria-haspopup="true"] {
+	cursor: pointer;
+}
+
+.rehab-mega-menu__list [aria-haspopup="true"]::after {
+	content: "\25BE";
+	display: inline-block;
+	margin-left: 0.5rem;
+	font-size: 0.6em;
+	vertical-align: middle;
+	transition: transform 0.2s var(--rehab-ease);
+}
+
+.rehab-mega-menu__list li.is-open > [aria-haspopup="true"]::after {
+	transform: rotate(180deg);
 }
 
 .rehab-mega-menu__list .sub-menu a {

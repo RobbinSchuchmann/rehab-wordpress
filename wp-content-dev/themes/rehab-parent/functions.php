@@ -679,21 +679,31 @@ remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 
 /**
- * Strip `href="#"` from menu items that have children — those are disclosure
- * parents, not real links. Replacing with `role="button"` + `aria-haspopup="true"`
- * + `aria-expanded="false"` gives them proper semantics and prevents the page-jump
- * behaviour when clicked. `header.js` wires the click/keyboard toggle that flips
- * `aria-expanded` and reveals the submenu (so they work on touch, where there is
- * no hover); `header.css` shows the submenu on the `.is-open` parent.
+ * Turn disclosure parents into button-like controls.
+ *
+ * Disclosure parents are menu items that have children but no real destination —
+ * they exist only to group and reveal their submenu. They're authored either as a
+ * "#" custom link or with an empty URL (which WordPress renders as a bare <a> with
+ * no href at all). Either way the anchor is not a real link, so we strip the
+ * placeholder href and mark it `role="button"` + `aria-haspopup` + `aria-expanded`.
+ * `header.js` wires the click/keyboard toggle (so they work on touch, where there
+ * is no hover) and `header.css` reveals the submenu on the `.is-open` parent.
+ * Real links — including parents that DO point somewhere — pass through untouched.
  */
 function rehab_parent_walker_menu_no_hash( string $item_html, $item, int $depth, $args ): string {
-	if ( strpos( $item_html, 'href="#"' ) !== false ) {
-		$item_html = str_replace(
-			'href="#"',
-			'role="button" tabindex="0" aria-haspopup="true" aria-expanded="false"',
-			$item_html
-		);
+	$classes      = is_array( $item->classes ?? null ) ? $item->classes : [];
+	$has_children = in_array( 'menu-item-has-children', $classes, true );
+	$url          = isset( $item->url ) ? trim( $item->url ) : '';
+
+	if ( ! $has_children || ( $url !== '' && $url !== '#' ) ) {
+		return $item_html;
 	}
+
+	$attrs = 'role="button" tabindex="0" aria-haspopup="true" aria-expanded="false"';
+	// Drop the placeholder href (`#` or empty) if present, then mark as a button.
+	$item_html = preg_replace( '/\s*href="(?:#|)"/', '', $item_html, 1 );
+	$item_html = preg_replace( '/<a\b/', '<a ' . $attrs, $item_html, 1 );
+
 	return $item_html;
 }
 add_filter( 'walker_nav_menu_start_el', 'rehab_parent_walker_menu_no_hash', 10, 4 );
