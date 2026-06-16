@@ -1,0 +1,49 @@
+name: Deploy to Cloudways
+
+# git = code, server = content. Ships only the allowlist in
+# scripts/deploy-to-cloudways.sh — never the dangerous dev mu-plugins.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wp-content-dev/themes/rehab-parent/**'
+      - 'wp-content-dev/themes/diamond-child/**'
+      - 'wp-content-dev/plugins/rehab-blocks/**'
+      - 'wp-content-dev/mu-plugins/zz-contact-form.php'
+      - 'wp-content-dev/mu-plugins/zz-redirects.php'
+      - 'scripts/deploy-to-cloudways.sh'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview, no changes)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-cloudways
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write deploy key
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.CLOUDWAYS_SSH_KEY }}" > ~/.ssh/cw_deploy
+          chmod 600 ~/.ssh/cw_deploy
+
+      - name: Deploy allowlist
+        env:
+          DEPLOY_HOST: ${{ secrets.CLOUDWAYS_HOST }}
+          DEPLOY_USER: ${{ secrets.CLOUDWAYS_USER }}
+          DEPLOY_PATH: ${{ secrets.CLOUDWAYS_PATH }}
+          DEPLOY_SSH_KEY: /home/runner/.ssh/cw_deploy
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: |
+          chmod +x scripts/deploy-to-cloudways.sh
+          ./scripts/deploy-to-cloudways.sh
