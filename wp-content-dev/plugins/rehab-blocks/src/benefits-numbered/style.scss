@@ -8,7 +8,9 @@
 	box-sizing: border-box;
 	width: calc(100% - 3rem);
 	max-width: calc(var(--rehab-container-max) - 3rem);
-	margin: 2.5rem auto 0;
+	/* 1rem bottom margin keeps the grid's lower border off the next
+	   section — without it the block sits flush against the following band. */
+	margin: 2.5rem auto 1rem;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 0;
