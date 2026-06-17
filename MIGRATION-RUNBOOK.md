@@ -207,3 +207,50 @@ Point the scripts at `https://<NEW_DOMAIN>` and confirm parity with the dev box:
 - Same repo/codebase via git; each site = **its own Cloudways server + its own DB/content**.
 - Differences per site: `<CHILD_THEME>`, `<OLD_DOMAIN>`/`<NEW_DOMAIN>`, the content seed, and the domain search-replace in Phase 6 (now a real replace, not a no-op).
 - Everything else (clean build, mu-plugin triage, hardening, verify) is identical. Keep the **dev stack as the factory** — build/iterate code there, deploy to each site's server via git.
+
+---
+
+## Appendix — Incremental changes (after a site is live)
+
+*The phases above are the **one-time** migration. Once a server is running, every ongoing change follows this much shorter loop. The golden rule still holds: **git carries code; DB/template/content changes are applied on the server by hand.***
+
+### The deploy loop
+
+1. **Build + verify on the dev stack** (localhost:8081), exactly as you did for the original build.
+2. **Land it in git the normal way:** issue → `reh-NN-…` branch → PR → merge to `main`. (Linear status rides the git events.)
+3. **Pull on each live server over SSH** — the app dir is a git checkout, so deploying = `git pull`:
+
+   ```bash
+   cd <APP_PATH>
+   git checkout main && git pull origin main
+   # sanity-check a changed theme file is live at the path WP actually uses:
+   wp eval 'echo file_exists(get_template_directory()."/<changed-file>.php") ? "OK\n" : "MISSING — path mapping\n";'
+   ```
+
+4. **Apply any DB/template/content step by hand** — `git pull` moves *code only*. Anything that lives in the DB (page-template assignment, an option, content) must be run with WP-CLI on the server, because **`zz-oneshot.php` is not deployed to prod** (Phase 2 triage). Example — repointing a page at a new template:
+
+   ```bash
+   ID=$(wp post list --post_type=page --name=<slug> --field=ID)
+   wp post meta update "$ID" _wp_page_template <template-file>.php
+   wp post meta get "$ID" _wp_page_template   # verify
+   ```
+
+   > If a dev change relied on a oneshot/builder task, port that task's effect into an explicit WP-CLI command here. Never deploy `zz-oneshot.php` to prod to "just run it" — if you must, deploy it **temporarily**, run, then delete (Phase 2 note).
+
+5. **Purge caches** — Breeze minification caches the combined CSS/JS bundle, so a CSS/markup change won't show until you purge:
+
+   ```bash
+   wp breeze purge varnish 2>/dev/null; wp breeze purge cache 2>/dev/null
+   # belt + braces: Cloudways panel -> Application -> Purge Varnish
+   ```
+
+6. **Verify on the live URL**, e.g. `curl -s -A Mozilla "https://<NEW_DOMAIN>/<path>/" | grep -c <expected-class>`, then eyeball desktop + mobile.
+
+### Rollback
+
+- **Code:** `git revert` the commit (or check out the previous SHA) → push → `git pull` on the server, then purge.
+- **A DB/template switch:** just set the meta back — it's reversible and content is untouched. E.g. `wp post meta update "$ID" _wp_page_template <old-template>.php` then purge Varnish.
+
+### Worked example — REH-24 "All Treatments hub" (17 Jun 2026)
+
+New `template-treatments-hub.php` + `treatments-hub.css` + a `functions.php` enqueue line, then on the server: `git pull` → `wp post meta update <all-treatments id> _wp_page_template template-treatments-hub.php` → purge Varnish/Breeze → verify 5 `rehab-tx-section` / 33 `rehab-tx-link`. The page's old plain-list content was left in the DB as a one-command rollback (`… template-treatment.php`).
