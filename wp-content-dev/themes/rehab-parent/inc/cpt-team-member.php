@@ -113,16 +113,26 @@ add_action(
  */
 add_action(
 	'add_meta_boxes',
-	static function (): void {
+	static function ( string $post_type, $post = null ): void {
+		$screens = [ 'post' ];
+		// Diamond's articles are pages using template-article.php — surface the
+		// byline picker there too, otherwise the migrated author/reviewer can't
+		// be edited in wp-admin.
+		if ( 'page' === $post_type && $post instanceof WP_Post
+			&& 'template-article.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+			$screens[] = 'page';
+		}
 		add_meta_box(
 			'rehab_post_authors',
 			__( 'Article author / reviewer', 'rehab-parent' ),
 			'rehab_parent_post_authors_meta_box',
-			'post',
+			$screens,
 			'side',
 			'default'
 		);
-	}
+	},
+	10,
+	2
 );
 
 function rehab_parent_post_authors_meta_box( WP_Post $post ): void {
@@ -163,8 +173,11 @@ function rehab_parent_post_authors_meta_box( WP_Post $post ): void {
 }
 
 add_action(
-	'save_post_post',
+	'save_post',
 	static function ( int $post_id ): void {
+		// Fires for every post type; the nonce gate below means we only ever
+		// write when our byline meta box was actually rendered (post + article
+		// page screens).
 		if ( ! isset( $_POST['rehab_post_authors_nonce'] ) || ! wp_verify_nonce( $_POST['rehab_post_authors_nonce'], 'rehab_post_authors' ) ) {
 			return;
 		}

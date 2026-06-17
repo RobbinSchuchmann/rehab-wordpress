@@ -113,11 +113,13 @@ function rehab_parent_render_credit_cell( int $member_id, string $label ): void 
 }
 
 /**
- * Build initials from a person's display name. Drops common honorifics so
- * "Dr. Harshi Dhingra" → "HD" rather than "DH".
+ * Build initials from a person's display name. Drops a leading honorific and a
+ * trailing credential suffix so "Dr. Harshi Dhingra" → "HD" and
+ * "Asif Baliyan, MD" → "AB" (not "AM" from the dangling "MD").
  */
 function rehab_parent_initials( string $name ): string {
 	$clean = preg_replace( '/^(Dr\.?|Mr\.?|Mrs\.?|Ms\.?|Prof\.?)\s+/i', '', trim( $name ) );
+	$clean = preg_replace( '/\s*,.*$/', '', (string) $clean ); // drop ", MD" / ", PhD" etc.
 	$parts = preg_split( '/\s+/', (string) $clean );
 	if ( ! $parts ) {
 		return '';
