@@ -138,6 +138,26 @@ $related_posts  = rehab_parent_resolve_related( $post_id, 4 );
 						</figure>
 					<?php endif; ?>
 
+					<?php
+					// Native table of contents from the article's H2s. Replaces the
+					// Easy Table of Contents plugin (dropped in the Cloudways
+					// migration). Anchors line up with the ids injected below. Only
+					// shown when there are at least two sections to jump between.
+					$toc_items = rehab_parent_extract_toc( $content );
+					if ( count( $toc_items ) >= 2 ) :
+						?>
+						<nav class="rehab-article__toc" aria-label="<?php esc_attr_e( 'Table of contents', 'rehab-parent' ); ?>">
+							<p class="rehab-article__toc-title"><?php esc_html_e( 'Table of contents', 'rehab-parent' ); ?></p>
+							<ol class="rehab-article__toc-list">
+								<?php foreach ( $toc_items as $toc_item ) : ?>
+									<li class="rehab-article__toc-item">
+										<a class="rehab-article__toc-link" href="#<?php echo esc_attr( $toc_item['id'] ); ?>"><?php echo esc_html( $toc_item['text'] ); ?></a>
+									</li>
+								<?php endforeach; ?>
+							</ol>
+						</nav>
+					<?php endif; ?>
+
 					<div class="rehab-article__body rehab-prose__inner">
 						<?php
 						$content_with_ids = rehab_parent_inject_heading_ids( apply_filters( 'the_content', $content ) );
