@@ -110,6 +110,15 @@
 	margin: 0;
 }
 
+/* The `margin: 0` reset above (specificity 0,0,1,1) out-specifies the generic
+   `.rehab-prose__inner > * + *` rhythm rule (0,0,1,0), which collapsed the gap
+   between consecutive paragraphs to zero. Re-assert the 1.25rem lead with
+   matching specificity, placed later so it wins — paragraphs only; headings,
+   blockquotes and images keep their own intentional margins. */
+.rehab-prose__inner > * + p {
+	margin-top: 1.25rem;
+}
+
 .rehab-prose__inner ul,
 .rehab-prose__inner ol {
 	font-family: var(--rehab-font-body);
