@@ -787,6 +787,16 @@ add_action( 'init', function () {
 			}
 			break;
 
+		case 'set-treatments-hub-template':
+			// REH-24: switch /all-treatments/ (page 1219) to the new directory-hub
+			// template. The old plain-list content is left intact in the DB as a
+			// reversible fallback — the template renders its own structured markup
+			// and ignores the_content().
+			update_post_meta( 1219, '_wp_page_template', 'template-treatments-hub.php' );
+			$tpl = get_post_meta( 1219, '_wp_page_template', true );
+			echo "OK template set for 1219: {$tpl}\n";
+			break;
+
 		case 'dump-cost':
 			$p = get_post( 834 );
 			if ( ! $p ) { echo "no cost page\n"; break; }

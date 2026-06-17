@@ -81,6 +81,7 @@ function rehab_parent_enqueue(): void {
 		'rehab-article'    => [ 'css/article.css', [ 'rehab-tokens', 'rehab-typography' ] ],
 		'rehab-articles-index' => [ 'css/articles-index.css', [ 'rehab-tokens' ] ],
 		'rehab-treatment'  => [ 'css/treatment.css', [ 'rehab-tokens' ] ],
+		'rehab-treatments-hub' => [ 'css/treatments-hub.css', [ 'rehab-tokens' ] ],
 		'rehab-util-pages' => [ 'css/util-pages.css', [ 'rehab-tokens' ] ],
 		'rehab-a11y'       => [ 'css/a11y.css', [ 'rehab-tokens' ] ],
 	];

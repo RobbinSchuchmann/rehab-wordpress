@@ -1,0 +1,132 @@
+/* ===========================================================
+   Rehab — All Treatments hub (template-treatments-hub.php)
+   A lean directory: compact hero + sticky category jump-nav +
+   styled category link lists. Translated from the Claude Design
+   "All Treatments" handoff into rehab-* classes / --rehab-* tokens.
+   Border/divider values are kept as literal rgba (tan #BEB39E /
+   sage #BAC3A1) to match the source design exactly.
+   =========================================================== */
+
+/* ---------- Compact page hero (cream, left-aligned) ---------- */
+.rehab-tx-hero {
+	background: var(--rehab-color-cream);
+	padding-top: clamp(34px, 4vw, 52px);
+	padding-bottom: clamp(22px, 2.6vw, 34px);
+}
+.rehab-tx-hero__breadcrumb {
+	margin-bottom: 18px;
+	font-size: 0.75rem;
+	letter-spacing: 0.04em;
+	color: rgba(74, 74, 74, 0.7);
+}
+.rehab-tx-hero__breadcrumb a {
+	color: inherit;
+	text-decoration: none;
+}
+.rehab-tx-hero__breadcrumb a:hover { color: var(--rehab-sage-dark); }
+.rehab-tx-hero__breadcrumb .sep { margin: 0 0.5em; color: rgba(74, 74, 74, 0.4); }
+.rehab-tx-hero__h1 { margin: 0 0 0.3em; }
+.rehab-tx-hero__lede {
+	max-width: 60ch;
+	margin: 0;
+	font-size: 1.0625rem;
+	line-height: 1.6;
+	color: var(--rehab-soft-charcoal);
+}
+
+/* ---------- Category jump chips (sticky lightweight nav) ---------- */
+.rehab-tx-nav {
+	background: var(--rehab-color-cream);
+	border-bottom: 1px solid rgba(190, 179, 158, 0.30);
+	position: sticky;
+	top: var(--rehab-header-height, 84px);
+	z-index: 30;
+}
+.rehab-tx-nav__inner {
+	display: flex;
+	justify-content: center;
+	gap: 9px;
+	flex-wrap: wrap;
+	min-height: 62px;
+	align-items: center;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+.rehab-tx-chip {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.6875rem;
+	letter-spacing: 0.10em;
+	text-transform: uppercase;
+	color: var(--rehab-soft-charcoal);
+	background: var(--rehab-color-cream);
+	border: 1px solid rgba(190, 179, 158, 0.40);
+	padding: 8px 15px;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background 0.3s var(--rehab-ease), color 0.3s var(--rehab-ease), border-color 0.3s var(--rehab-ease);
+}
+.rehab-tx-chip:hover {
+	background: rgba(186, 195, 161, 0.16);
+	border-color: var(--rehab-sage-dark);
+	color: var(--rehab-warm-charcoal);
+}
+@media (max-width: 860px) {
+	.rehab-tx-nav { top: 0; }
+}
+
+/* ---------- Category section ---------- */
+.rehab-tx-section {
+	padding-top: clamp(40px, 4.4vw, 64px);
+	padding-bottom: clamp(40px, 4.4vw, 64px);
+	scroll-margin-top: calc(var(--rehab-header-height, 84px) + 4rem);
+}
+.rehab-tx-section--white { background: var(--rehab-color-bg); }
+.rehab-tx-section--parch { background: var(--rehab-color-cream); }
+.rehab-tx-head {
+	margin-bottom: clamp(22px, 2.6vw, 34px);
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(186, 195, 161, 0.30);
+}
+.rehab-tx-head .rehab-eyebrow { display: block; margin-bottom: 0.7rem; }
+.rehab-tx-head .rehab-heading { margin: 0; }
+
+/* ---------- Treatment link list ---------- */
+.rehab-tx-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 0 clamp(28px, 4vw, 56px);
+}
+.rehab-tx-link {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 16px 4px;
+	border-bottom: 1px solid rgba(190, 179, 158, 0.20);
+	text-decoration: none;
+	color: var(--rehab-warm-charcoal);
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.1875rem;
+	letter-spacing: -0.01em;
+	line-height: 1.25;
+	transition: color 0.3s var(--rehab-ease), padding-left 0.3s var(--rehab-ease);
+}
+.rehab-tx-link:hover { color: var(--rehab-sage-dark); padding-left: 10px; }
+.rehab-tx-arrow {
+	flex: none;
+	width: 15px;
+	height: 15px;
+	stroke: var(--rehab-sage-dark);
+	fill: none;
+	opacity: 0.4;
+	transition: opacity 0.3s var(--rehab-ease), transform 0.3s var(--rehab-ease);
+}
+.rehab-tx-link:hover .rehab-tx-arrow { opacity: 1; transform: translate(2px, -2px); }
+
+@media (max-width: 600px) {
+	.rehab-tx-list { grid-template-columns: 1fr; }
+	.rehab-tx-link { font-size: 1.0625rem; }
+}
