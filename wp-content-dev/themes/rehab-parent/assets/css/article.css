@@ -329,6 +329,42 @@
 	.rehab-article__body h3 { font-size: 1.5rem; }
 }
 
+/* h4–h6 previously had no explicit size, so browsers fell back to their
+   defaults (h5 ≈ 0.83em, h6 ≈ 0.67em) — i.e. *smaller* than the 1.0625rem
+   body text. Size them into a clear descending hierarchy that stays at or
+   above body size. */
+.rehab-article__body h4 {
+	font-family: var(--rehab-font-display);
+	font-weight: 400;
+	font-size: 1.25rem;
+	letter-spacing: -0.01em;
+	line-height: 1.3;
+	color: var(--rehab-warm-charcoal);
+	margin: 2rem 0 0.75rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
+.rehab-article__body h5 {
+	font-family: var(--rehab-font-body);
+	font-weight: 600;
+	font-size: 1.125rem;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal);
+	margin: 1.75rem 0 0.5rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
+.rehab-article__body h6 {
+	font-family: var(--rehab-font-body);
+	font-weight: 600;
+	font-size: 1.0625rem;
+	letter-spacing: 0.01em;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal);
+	margin: 1.5rem 0 0.5rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
 .rehab-article__body a {
 	color: var(--rehab-sage-text);
 	text-decoration: underline;
@@ -390,6 +426,62 @@
 
 /* Legacy "secondary" text color (used on small caption-style runs). */
 .rehab-article__body .has-secondary-color { color: var(--rehab-sage-text); }
+
+/* ---- Native table of contents (rehab_parent_extract_toc) -------------- */
+.rehab-article__toc {
+	background: var(--rehab-color-cream);
+	border: 1px solid var(--rehab-article-line-tan);
+	padding: 1.5rem 1.75rem;
+	margin: 0 0 2.5rem;
+	box-sizing: border-box;
+}
+
+.rehab-article__toc-title {
+	font-family: var(--rehab-font-body);
+	font-size: 0.75rem;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: var(--rehab-warm-charcoal);
+	margin: 0;
+}
+
+.rehab-article__toc-list {
+	margin: 1.1rem 0 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: rehab-toc;
+}
+
+.rehab-article__toc-item {
+	margin: 0;
+	counter-increment: rehab-toc;
+}
+
+.rehab-article__toc-link {
+	display: flex;
+	gap: 0.6rem;
+	font-family: var(--rehab-font-body);
+	font-size: 0.95rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--rehab-warm-charcoal);
+	text-decoration: none;
+	padding: 0.4rem 0;
+}
+
+.rehab-article__toc-link::before {
+	content: counter(rehab-toc, decimal-leading-zero);
+	color: var(--rehab-sage-text);
+	font-variant-numeric: tabular-nums;
+	flex: none;
+}
+
+.rehab-article__toc-link:hover {
+	color: var(--rehab-sage-dark);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
 
 /* ---- TOC plugin (Easy Table of Contents) inline polish ---------------- */
 .rehab-article__body #ez-toc-container,
