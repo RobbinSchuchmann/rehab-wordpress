@@ -24,14 +24,22 @@ while ( have_posts() ) :
 		//   3. First assigned `category` taxonomy term
 		//   4. Slug-based inference (last-resort)
 		$crumb_cat = rehab_breadcrumb_category( $current_id );
+
+		// Some pages borrow this template purely for its block layout but aren't
+		// actually treatments (e.g. a location or funding explainer). Flag them
+		// with `_rehab_landing_page` to get a plain "Home / Title" breadcrumb and
+		// skip the "Other treatments" cross-links below.
+		$is_landing = (bool) get_post_meta( $current_id, '_rehab_landing_page', true );
 		?>
 		<nav class="rehab-breadcrumb" aria-label="Breadcrumb">
 			<div class="rehab-container">
 				<ol class="rehab-breadcrumb__list">
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>">Treatments</a></li>
-					<?php if ( $crumb_cat ) : ?>
-						<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>"><?php echo esc_html( $crumb_cat ); ?></a></li>
+					<?php if ( ! $is_landing ) : ?>
+						<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>">Treatments</a></li>
+						<?php if ( $crumb_cat ) : ?>
+							<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>"><?php echo esc_html( $crumb_cat ); ?></a></li>
+						<?php endif; ?>
 					<?php endif; ?>
 					<li aria-current="page"><?php the_title(); ?></li>
 				</ol>
@@ -50,7 +58,7 @@ while ( have_posts() ) :
 			false !== strpos( $page_content, 'wp:rehab/final-cta' )
 			|| ( false !== strpos( $page_content, 'wp:rehab/cta-band' ) && false !== strpos( $page_content, '"background":"dark"' ) )
 		);
-		$related = $has_own_final ? [] : get_posts( [
+		$related = ( $has_own_final || $is_landing ) ? [] : get_posts( [
 			'post_type'      => 'page',
 			'posts_per_page' => 4,
 			'meta_key'       => '_wp_page_template',
