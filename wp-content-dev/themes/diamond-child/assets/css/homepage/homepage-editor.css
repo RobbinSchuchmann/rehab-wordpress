@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Homepage — block EDITOR typography bridge (REH-38)
+
+   On the front end the homepage's display-font rules are scoped under the
+   `.drt-homepage` wrapper (see the inline critical typography in
+   page-homepage-blocks.php). The editor canvas has no `.drt-homepage`
+   ancestor, so those heading rules don't apply and headings fall back to the
+   editor default font.
+
+   This file re-applies the same rules scoped to the editor canvas root
+   (`.editor-styles-wrapper`) AND to the homepage's own `.drt-*` classes, so
+   it only ever affects homepage blocks — it's inert in any other page/post
+   editor (no `.drt-*` markup there). Inter is already loaded by
+   homepage-base.css; Ivymode is not self-hosted anywhere, so headings render
+   in the Georgia fallback exactly as they do on the live front end.
+   ========================================================================== */
+
+.editor-styles-wrapper .drt-heading,
+.editor-styles-wrapper .drt-hero__headline,
+.editor-styles-wrapper .drt-approach__title,
+.editor-styles-wrapper .drt-founder__quote,
+.editor-styles-wrapper .drt-clinical__value,
+.editor-styles-wrapper .drt-clinical__label,
+.editor-styles-wrapper .drt-card--treatment__title {
+	font-family: Ivymode, Georgia, serif !important;
+	font-weight: 300 !important;
+}
+
+.editor-styles-wrapper .drt-accordion__trigger-text {
+	font-family: 'ivymode', Georgia, serif !important;
+	font-weight: 300 !important;
+}
+
+.editor-styles-wrapper .drt-comparison__th {
+	font-family: 'Inter', sans-serif !important;
+	font-weight: 500 !important;
+}
+
+/* Homepage body copy uses Inter Light; scope to the homepage sections so it
+   doesn't touch other editors. */
+.editor-styles-wrapper [class*="drt-"] p,
+.editor-styles-wrapper [class*="drt-"] li,
+.editor-styles-wrapper .drt-body {
+	font-family: 'Inter', system-ui, sans-serif;
+	font-weight: 300;
+}
+
+.editor-styles-wrapper .drt-eyebrow {
+	font-weight: 500 !important;
+}
