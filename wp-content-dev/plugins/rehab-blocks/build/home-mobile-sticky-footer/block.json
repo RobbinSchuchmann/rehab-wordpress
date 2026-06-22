@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-mobile-sticky-footer",
+  "version": "0.1.0",
+  "title": "Home: Mobile Sticky Footer",
+  "category": "rehab",
+  "icon": "smartphone",
+  "description": "Mobile-only fixed bottom CTA bar — appears after scrolling on small screens. Matches the hardcoded Mobile Sticky Footer section.",
+  "keywords": [
+    "homepage",
+    "sticky",
+    "mobile",
+    "cta",
+    "footer"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "ariaLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaHref": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

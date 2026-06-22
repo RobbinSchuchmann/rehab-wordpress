@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-location",
+  "version": "0.1.0",
+  "title": "Home: Location",
+  "category": "rehab",
+  "icon": "location",
+  "description": "Homepage location section — heading, address and an embedded map. Matches the hardcoded Location section.",
+  "keywords": [
+    "homepage",
+    "location",
+    "map",
+    "address"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "placeName": {
+      "type": "string",
+      "default": ""
+    },
+    "address": {
+      "type": "string",
+      "default": ""
+    },
+    "mapSrc": {
+      "type": "string",
+      "default": ""
+    },
+    "mapTitle": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

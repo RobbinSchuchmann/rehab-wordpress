@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-content-grid",
+  "version": "0.1.0",
+  "title": "Home: Content Grid",
+  "category": "rehab",
+  "icon": "grid-view",
+  "description": "Homepage further-reading grid — a heading and a repeatable set of article cards (image + title + link). Matches the hardcoded Content Grid section.",
+  "keywords": [
+    "homepage",
+    "grid",
+    "articles",
+    "cards"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "articles": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

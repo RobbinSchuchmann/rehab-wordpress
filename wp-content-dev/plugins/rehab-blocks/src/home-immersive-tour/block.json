@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-immersive-tour",
+  "version": "0.1.0",
+  "title": "Home: Immersive Tour",
+  "category": "rehab",
+  "icon": "format-gallery",
+  "description": "Homepage immersive tour — 360° tour CTA with room shortcuts plus a Swiper gallery with Fancybox lightbox. Matches the hardcoded section-immersive-tour template-part.",
+  "keywords": ["homepage", "tour", "gallery", "fancybox", "swiper"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "tourUrl": { "type": "string", "default": "" },
+    "ctaText": { "type": "string", "default": "" },
+    "heroImage": { "type": "string", "default": "" },
+    "heroAlt": { "type": "string", "default": "" },
+    "rooms": { "type": "array", "default": [], "items": { "type": "object" } },
+    "gallery": { "type": "array", "default": [], "items": { "type": "object" } }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

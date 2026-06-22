@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-accommodation-amenities",
+  "version": "0.1.0",
+  "title": "Home: Accommodation & Amenities",
+  "category": "rehab",
+  "icon": "index-card",
+  "description": "Homepage accommodation & amenities section — section header plus vertical tabs (left) with image + content panels (right). Matches the hardcoded Accommodation & Amenities section.",
+  "keywords": [
+    "homepage",
+    "accommodation",
+    "amenities",
+    "tabs"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "intro": {
+      "type": "string",
+      "default": ""
+    },
+    "tabs": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

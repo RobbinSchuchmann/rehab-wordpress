@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-separator",
+  "version": "0.1.0",
+  "title": "Home: Separator",
+  "category": "rehab",
+  "icon": "minus",
+  "description": "Homepage decorative divider — a subtle horizontal line between sections. Matches the hardcoded separator section.",
+  "keywords": ["homepage", "separator", "divider"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

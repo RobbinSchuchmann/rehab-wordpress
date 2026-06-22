@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-comparison-table",
+  "version": "0.1.0",
+  "title": "Home: Comparison Table",
+  "category": "rehab",
+  "icon": "editor-table",
+  "description": "Homepage comparison table — heading, three column headers and repeatable feature rows. Matches the hardcoded section-comparison-table.php (desktop table + mobile cards/accordion).",
+  "keywords": ["homepage", "comparison", "table"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "" },
+    "heading": { "type": "string", "default": "" },
+    "headingEmphasis": { "type": "string", "default": "" },
+    "intro": { "type": "string", "default": "" },
+    "colFeature": { "type": "string", "default": "" },
+    "colWestern": { "type": "string", "default": "" },
+    "colDiamond": { "type": "string", "default": "" },
+    "cardWesternLabel": { "type": "string", "default": "" },
+    "cardDiamondLabel": { "type": "string", "default": "" },
+    "callText": { "type": "string", "default": "" },
+    "phoneHref": { "type": "string", "default": "" },
+    "footnote": { "type": "string", "default": "" },
+    "rows": { "type": "array", "default": [] }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
