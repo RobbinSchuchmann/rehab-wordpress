@@ -158,5 +158,18 @@ function drt_homepage_editor_assets(): void {
 		return;
 	}
 	drt_homepage_enqueue_bundle( false );
+
+	// Re-apply the front end's `.drt-homepage`-scoped heading typography to the
+	// editor canvas (which has no `.drt-homepage` wrapper). Scoped to homepage
+	// `.drt-*` classes, so it's inert in non-homepage editors.
+	$editor_css = get_stylesheet_directory() . '/assets/css/homepage/homepage-editor.css';
+	if ( file_exists( $editor_css ) ) {
+		wp_enqueue_style(
+			'drt-homepage-editor',
+			get_stylesheet_directory_uri() . '/assets/css/homepage/homepage-editor.css',
+			[ 'drt-homepage-base' ],
+			filemtime( $editor_css )
+		);
+	}
 }
 add_action( 'enqueue_block_assets', 'drt_homepage_editor_assets' );
