@@ -146,8 +146,17 @@ add_action( 'wp_enqueue_scripts', 'drt_homepage_assets', 20 );
 /**
  * Block editor: load the drt- CSS (no JS) so the homepage blocks preview
  * faithfully in the canvas.
+ *
+ * The editor renders blocks inside an iframe, so the stylesheets must come
+ * through `enqueue_block_assets` (which WP injects into the iframe) — NOT
+ * `enqueue_block_editor_assets`, which only reaches the editor's outer
+ * document and leaves the canvas unstyled. Guarded to admin so the front end
+ * keeps using the gated `drt_homepage_assets()` path and we never double-load.
  */
 function drt_homepage_editor_assets(): void {
+	if ( ! is_admin() ) {
+		return;
+	}
 	drt_homepage_enqueue_bundle( false );
 }
-add_action( 'enqueue_block_editor_assets', 'drt_homepage_editor_assets' );
+add_action( 'enqueue_block_assets', 'drt_homepage_editor_assets' );
