@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-testimonials-cta",
+  "version": "0.1.0",
+  "title": "Home: Testimonials CTA",
+  "category": "rehab",
+  "icon": "megaphone",
+  "description": "Homepage final call-to-action that appears after testimonials — heading, body, button and helper line. Matches the hardcoded Testimonials CTA section.",
+  "keywords": ["homepage", "cta", "testimonials"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "body": { "type": "string", "default": "" },
+    "buttonText": { "type": "string", "default": "" },
+    "buttonUrl": { "type": "string", "default": "" },
+    "helper": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

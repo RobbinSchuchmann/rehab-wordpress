@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-admissions-flowchart",
+  "version": "0.1.0",
+  "title": "Home: Admissions Flowchart",
+  "category": "rehab",
+  "icon": "networking",
+  "description": "Homepage admissions process — heading, intro and repeatable steps. Desktop horizontal SVG flow, mobile vertical timeline. Matches the hardcoded Admissions Flowchart section.",
+  "keywords": ["homepage", "admissions", "flowchart", "steps", "process"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "" },
+    "heading": { "type": "string", "default": "" },
+    "intro": { "type": "string", "default": "" },
+    "steps": { "type": "array", "default": [] },
+    "ctaText": { "type": "string", "default": "" },
+    "ctaUrl": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

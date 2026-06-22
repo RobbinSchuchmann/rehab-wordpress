@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-seo-faq",
+  "version": "0.1.0",
+  "title": "Home: SEO FAQ",
+  "category": "rehab",
+  "icon": "editor-help",
+  "description": "Homepage SEO FAQ — tabbed FAQ categories, each with repeatable question/answer accordion rows. Emits FAQPage JSON-LD across all categories. Matches the hardcoded section-seo-faq template-part.",
+  "keywords": ["homepage", "faq", "accordion", "tabs", "schema"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "heading": { "type": "string", "default": "Frequently Asked Questions" },
+    "categories": { "type": "array", "default": [] }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

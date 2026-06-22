@@ -1,0 +1,1 @@
+(()=>{"use strict";const e=window.React,r=window.wp.blocks,t=window.wp.blockEditor,a=JSON.parse('{"UU":"rehab/home-separator"}');(0,r.registerBlockType)(a.UU,{edit(){const r=(0,t.useBlockProps)({className:"drt-separator","aria-hidden":"true"});return(0,e.createElement)("div",{...r},(0,e.createElement)("div",{className:"drt-separator__line"}))},save:()=>null})})();

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-authority-ribbon",
+  "version": "0.1.0",
+  "title": "Home: Authority Ribbon",
+  "category": "rehab",
+  "icon": "awards",
+  "description": "Homepage trust ribbon — three credential pillars (license, Google, Recovery.com) plus a repeatable row of partner logos. Matches the hardcoded Authority Ribbon section.",
+  "keywords": ["homepage", "authority", "trust", "logos", "ribbon"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "ministryImageUrl":   { "type": "string", "default": "" },
+    "ministryAlt":        { "type": "string", "default": "" },
+    "ministryText":       { "type": "string", "default": "" },
+    "ministryTooltip":    { "type": "string", "default": "" },
+    "googleStarsLabel":   { "type": "string", "default": "" },
+    "googleText":         { "type": "string", "default": "" },
+    "googleTooltip":      { "type": "string", "default": "" },
+    "recoveryStarsLabel": { "type": "string", "default": "" },
+    "recoveryText":       { "type": "string", "default": "" },
+    "recoveryTooltip":    { "type": "string", "default": "" },
+    "logos":              { "type": "array", "default": [], "items": { "type": "object" } }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-testimonials",
+  "version": "0.1.0",
+  "title": "Home: Testimonials",
+  "category": "rehab",
+  "icon": "format-quote",
+  "description": "Homepage testimonials — video testimonials grid/Swiper plus a verified-review Swiper carousel. Matches the hardcoded section-testimonials template-part.",
+  "keywords": [
+    "homepage",
+    "testimonials",
+    "reviews",
+    "swiper"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "videoHeading": {
+      "type": "string",
+      "default": ""
+    },
+    "videoIntro": {
+      "type": "string",
+      "default": ""
+    },
+    "videos": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    },
+    "reviewsHeading": {
+      "type": "string",
+      "default": ""
+    },
+    "reviewsIntro": {
+      "type": "string",
+      "default": ""
+    },
+    "reviews": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

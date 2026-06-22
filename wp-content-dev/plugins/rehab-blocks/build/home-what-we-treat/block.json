@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-what-we-treat",
+  "version": "0.1.0",
+  "title": "Home: What We Treat",
+  "category": "rehab",
+  "icon": "grid-view",
+  "description": "Homepage 'What we treat' section — tabbed treatment categories, each with repeatable treatment cards. Matches the hardcoded section-what-we-treat template-part.",
+  "keywords": [
+    "homepage",
+    "treatments",
+    "tabs",
+    "cards"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "intro": {
+      "type": "string",
+      "default": ""
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

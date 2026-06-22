@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-team-carousel",
+  "version": "0.1.0",
+  "title": "Home: Team Carousel",
+  "category": "rehab",
+  "icon": "groups",
+  "description": "Homepage team Swiper carousel — section header plus repeatable team member slides with hover overlays. Matches the hardcoded section-team-carousel.php template-part.",
+  "keywords": ["homepage", "team", "carousel", "swiper", "staff"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "" },
+    "heading": { "type": "string", "default": "" },
+    "intro": { "type": "string", "default": "" },
+    "members": { "type": "array", "default": [] }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

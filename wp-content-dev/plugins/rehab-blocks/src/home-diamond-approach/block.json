@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-diamond-approach",
+  "version": "0.1.0",
+  "title": "Home: Diamond Approach",
+  "category": "rehab",
+  "icon": "align-center",
+  "description": "Homepage centered intro — eyebrow, heading and a paragraph. Matches the hardcoded Diamond Approach section.",
+  "keywords": ["homepage", "approach", "intro"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "sage-mist", "enum": ["white", "cream", "sage-mist"] },
+    "eyebrow": { "type": "string", "default": "" },
+    "heading": { "type": "string", "default": "" },
+    "body": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

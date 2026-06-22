@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-clinical-excellence",
+  "version": "0.1.0",
+  "title": "Home: Clinical Excellence",
+  "category": "rehab",
+  "icon": "chart-bar",
+  "description": "Homepage stat row — a set of value/label stat cards separated by dividers. Matches the hardcoded Clinical Excellence section.",
+  "keywords": [
+    "homepage",
+    "clinical",
+    "stats"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "stats": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

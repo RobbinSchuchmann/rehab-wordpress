@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-media-social-proof",
+  "version": "0.1.0",
+  "title": "Home: Media Social Proof",
+  "category": "rehab",
+  "icon": "awards",
+  "description": "Homepage press/media logo grid with CSS tooltips. Matches the hardcoded Media Social Proof section.",
+  "keywords": ["homepage", "media", "press", "logos", "featured"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "logos": { "type": "array", "default": [] }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

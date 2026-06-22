@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-hero",
+  "version": "0.1.0",
+  "title": "Home: Hero",
+  "category": "rehab",
+  "icon": "cover-image",
+  "description": "Homepage hero — 55/45 split with the page H1, CTA, trust signals and a video thumbnail. Matches the hardcoded section-hero template-part.",
+  "keywords": ["homepage", "hero", "h1"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "voted": { "type": "string", "default": "Voted #1 by The Thaiger" },
+    "headline": { "type": "string", "default": "The leading luxury<br>\ndrug and alcohol rehab<br class=\"drt-hero__br-sm\"> in Thailand" },
+    "body": { "type": "string", "default": "Thai hospitality meets Western clinical excellence. Set within a private 5-star sanctuary, our 12-client cap ensures your recovery is handled with absolute discretion." },
+    "ctaText": { "type": "string", "default": "Check Availability" },
+    "ctaUrl": { "type": "string", "default": "/contact-us/" },
+    "ctaHelper": { "type": "string", "default": "Free, confidential, and no-obligation." },
+    "trustItems": { "type": "array", "default": [] },
+    "imageUrl": { "type": "string", "default": "" },
+    "imageAlt": { "type": "string", "default": "Luxury Thai pool pavilion with traditional roof surrounded by tropical gardens" },
+    "videoId": { "type": "string", "default": "rlEKwU70eGY" }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

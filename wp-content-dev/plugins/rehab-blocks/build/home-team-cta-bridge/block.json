@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-team-cta-bridge",
+  "version": "0.1.0",
+  "title": "Home: Team CTA Bridge",
+  "category": "rehab",
+  "icon": "megaphone",
+  "description": "Homepage CTA bridge between team carousel and accommodation — heading, body, button and helper line. Matches the hardcoded Team CTA section.",
+  "keywords": [
+    "homepage",
+    "cta",
+    "team"
+  ],
+  "textdomain": "rehab-blocks",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "body": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "helper": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

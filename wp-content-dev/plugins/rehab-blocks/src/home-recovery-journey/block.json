@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/home-recovery-journey",
+  "version": "0.1.0",
+  "title": "Home: Recovery Journey",
+  "category": "rehab",
+  "icon": "list-view",
+  "description": "Homepage recovery journey — eyebrow, heading, intro and a set of staged tabs, each with accordion items. Matches the hardcoded Recovery Journey section.",
+  "keywords": ["homepage", "recovery", "journey", "tabs", "accordion"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "" },
+    "heading": { "type": "string", "default": "" },
+    "intro": { "type": "string", "default": "" },
+    "steps": { "type": "array", "default": [] }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
