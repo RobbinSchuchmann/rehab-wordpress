@@ -34,6 +34,40 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'seed-homepage-blocks':
+			// REH-37: replace the homepage (page 6) content with the editable
+			// rehab/home-* block markup that reproduces the hardcoded design,
+			// and switch it to the block-rendering template. The block markup
+			// lives in mu-plugins/homepage-seed.html (one self-closing dynamic
+			// block per line, in page order). Original content is backed up to
+			// post meta so 'revert-homepage-blocks' can restore it.
+			$pid = 6;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no homepage page $pid\n"; break; }
+			$seed_file = __DIR__ . '/homepage-seed.html';
+			if ( ! file_exists( $seed_file ) ) { echo "no seed file at $seed_file\n"; break; }
+			$seed = file_get_contents( $seed_file );
+			if ( ! $seed ) { echo "empty seed file\n"; break; }
+			if ( '' === (string) get_post_meta( $pid, '_drt_prev_homepage_content', true ) ) {
+				update_post_meta( $pid, '_drt_prev_homepage_content', wp_slash( $p->post_content ) );
+				update_post_meta( $pid, '_drt_prev_homepage_template', wp_slash( (string) get_post_meta( $pid, '_wp_page_template', true ) ) );
+			}
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $seed ) ] );
+			update_post_meta( $pid, '_wp_page_template', 'page-homepage-blocks.php' );
+			echo "OK seeded homepage page $pid with " . substr_count( $seed, '<!-- wp:rehab/home-' ) . " blocks; template -> page-homepage-blocks.php\n";
+			break;
+
+		case 'revert-homepage-blocks':
+			// REH-37: restore the homepage to its pre-seed content + template.
+			$pid  = 6;
+			$prev = get_post_meta( $pid, '_drt_prev_homepage_content', true );
+			$ptpl = get_post_meta( $pid, '_drt_prev_homepage_template', true );
+			if ( '' === (string) $prev ) { echo "no backup found; nothing reverted\n"; break; }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $prev ) ] );
+			update_post_meta( $pid, '_wp_page_template', $ptpl ?: 'page-homepage.php' );
+			echo "OK reverted homepage page $pid to template " . ( $ptpl ?: 'page-homepage.php' ) . "\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
