@@ -150,6 +150,20 @@
 	margin: 2rem 0;
 }
 
+/* Accreditation/licence badge in a stacked (non-split) text-prose column:
+   keep it small and centered, not blown up to the full reading width. Stacked
+   text-prose carries no other images — hero photos use the split/feature
+   blocks — so this only ever targets a logo/badge. */
+.rehab-prose:not(.rehab-prose--split):not(.rehab-prose--split-reverse) .rehab-prose__inner .wp-block-image {
+	text-align: center;
+}
+
+.rehab-prose:not(.rehab-prose--split):not(.rehab-prose--split-reverse) .rehab-prose__inner .wp-block-image img {
+	width: auto;
+	max-width: 200px;
+	height: auto;
+}
+
 .rehab-prose__inner a {
 	color: var(--rehab-sage-text);
 	text-decoration: underline;
