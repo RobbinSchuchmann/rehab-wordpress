@@ -54,6 +54,36 @@
 	flex-wrap: wrap;
 }
 
+// Shared .rehab-phone-link component — scoped here so cta-band is
+// self-contained (the icon-sizing rule otherwise only ships with assessment-hero).
+.rehab-cta-band__actions .rehab-phone-link {
+	font-family: var(--rehab-font-body);
+	font-weight: 500;
+	font-size: 0.9375rem;
+	letter-spacing: 0.02em;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.rehab-cta-band__actions .rehab-phone-link svg {
+	width: 16px;
+	height: 16px;
+	stroke: var(--rehab-sage-dark, #8A9674);
+}
+
+.rehab-cta-band__actions .rehab-phone-link u {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+	text-decoration-color: var(--rehab-tan, #BEB39E);
+}
+
+.rehab-cta-band__actions .rehab-phone-link:hover u {
+	text-decoration-color: var(--rehab-sage-dark, #8A9674);
+}
+
 .rehab-cta-band--sage .rehab-phone-link { color: var(--rehab-warm-charcoal, #2C2C2C); }
 .rehab-cta-band--sage .rehab-phone-link svg { stroke: var(--rehab-warm-charcoal, #2C2C2C); }
 .rehab-cta-band--sage .rehab-phone-link u { text-decoration-color: rgba(44, 44, 44, 0.4); }
