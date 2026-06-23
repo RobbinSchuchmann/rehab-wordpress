@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, RichText, InspectorControls, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { PanelBody, TextControl, SelectControl, Button } from '@wordpress/components';
+import { PanelBody, TextControl, TextareaControl, SelectControl, Button } from '@wordpress/components';
 import metadata from './block.json';
 import './style.scss';
 
@@ -25,6 +25,15 @@ registerBlockType( metadata.name, {
 						</MediaUploadCheck>
 						<TextControl label="Image URL" value={ a.imageUrl } onChange={ set( 'imageUrl' ) } />
 						<TextControl label="Image alt" value={ a.imageAlt } onChange={ set( 'imageAlt' ) } />
+					</PanelBody>
+					<PanelBody title="List items" initialOpen={ false }>
+						<TextareaControl
+							label="List items (one per line)"
+							help="Optional bullet list. Leave blank for none. Inline HTML (e.g. <strong>) is allowed."
+							value={ ( a.listItems || [] ).join( '\n' ) }
+							onChange={ ( v ) => setAttributes( { listItems: v.split( '\n' ).map( ( s ) => s.trim() ).filter( ( s ) => s !== '' ) } ) }
+							rows={ 5 }
+						/>
 					</PanelBody>
 					<PanelBody title="CTA buttons" initialOpen={ false }>
 						<TextControl label="Primary URL" value={ a.primaryUrl } onChange={ set( 'primaryUrl' ) } />

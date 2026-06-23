@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, RichText, InspectorControls, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { Button, PanelBody, SelectControl, TextControl } from '@wordpress/components';
+import { Button, PanelBody, SelectControl, TextControl, TextareaControl } from '@wordpress/components';
 import metadata from './block.json';
 import './style.scss';
 
@@ -26,6 +26,13 @@ registerBlockType( metadata.name, {
 						<TextControl label="Quote source" value={ a.quoteSrc } onChange={ set( 'quoteSrc' ) } help="Defaults to the full name." />
 						<TextControl label="Bio heading" value={ a.bioTitle } onChange={ set( 'bioTitle' ) } help="Defaults to 'About [first name]'." />
 						<TextControl label="Back link URL" value={ a.backUrl } onChange={ set( 'backUrl' ) } />
+						<TextareaControl
+							label="Trust items (one per line)"
+							help="Shown under the contact card. Leave blank for none."
+							value={ ( a.trustItems || [] ).join( '\n' ) }
+							onChange={ ( v ) => setAttributes( { trustItems: v.split( '\n' ).map( ( s ) => s.trim() ).filter( ( s ) => s !== '' ) } ) }
+							rows={ 4 }
+						/>
 					</PanelBody>
 				</InspectorControls>
 				<div { ...blockProps }>
