@@ -183,7 +183,7 @@ body.page-template-page-homepage .custom-button-super {
 }
 
 .drt-heading {
-	font-family: Ivymode, Georgia, serif;
+	font-family: "Playfair Display", Georgia, serif;
 	font-weight: 300;
 	color: var(--drt-warm-charcoal);
 	letter-spacing: -0.025em;
@@ -197,7 +197,7 @@ body.page-template-page-homepage .custom-button-super {
 .drt-homepage h4,
 .drt-homepage h5,
 .drt-homepage h6 {
-	font-family: Ivymode, Georgia, serif !important;
+	font-family: "Playfair Display", Georgia, serif !important;
 	font-weight: 300 !important;
 	color: var(--drt-warm-charcoal);
 	letter-spacing: -0.025em;

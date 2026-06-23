@@ -10,9 +10,9 @@
    This file re-applies the same rules scoped to the editor canvas root
    (`.editor-styles-wrapper`) AND to the homepage's own `.drt-*` classes, so
    it only ever affects homepage blocks — it's inert in any other page/post
-   editor (no `.drt-*` markup there). Inter is already loaded by
-   homepage-base.css; Ivymode is not self-hosted anywhere, so headings render
-   in the Georgia fallback exactly as they do on the live front end.
+   editor (no `.drt-*` markup there). Inter is loaded by homepage-base.css and
+   Playfair Display is enqueued in the editor by functions.php, so the canvas
+   headings match the live front end.
    ========================================================================== */
 
 .editor-styles-wrapper .drt-heading,
@@ -22,12 +22,12 @@
 .editor-styles-wrapper .drt-clinical__value,
 .editor-styles-wrapper .drt-clinical__label,
 .editor-styles-wrapper .drt-card--treatment__title {
-	font-family: Ivymode, Georgia, serif !important;
+	font-family: "Playfair Display", Georgia, serif !important;
 	font-weight: 300 !important;
 }
 
 .editor-styles-wrapper .drt-accordion__trigger-text {
-	font-family: 'ivymode', Georgia, serif !important;
+	font-family: "Playfair Display", Georgia, serif !important;
 	font-weight: 300 !important;
 }
 

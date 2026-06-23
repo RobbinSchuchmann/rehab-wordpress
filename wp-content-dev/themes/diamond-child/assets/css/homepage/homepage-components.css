@@ -155,7 +155,7 @@
 .drt-accordion__trigger-text,
 .drt-homepage .drt-accordion__trigger-text,
 .drt-faq .drt-accordion__trigger-text {
-	font-family: 'ivymode', Georgia, serif !important;
+	font-family: "Playfair Display", Georgia, serif !important;
 	font-size: 1.375rem !important;
 	font-weight: 300 !important;
 	color: var(--drt-warm-charcoal);
@@ -249,7 +249,7 @@
 }
 
 .drt-card--treatment__title {
-	font-family: 'ivymode', Georgia, serif;
+	font-family: "Playfair Display", Georgia, serif;
 	font-size: 1.25rem;
 	font-weight: 400;
 	color: var(--drt-warm-charcoal);
