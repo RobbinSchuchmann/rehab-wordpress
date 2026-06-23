@@ -89,8 +89,14 @@ function drt_has_homepage_blocks(): bool {
 function drt_homepage_enqueue_bundle( bool $with_js = true ): void {
 	$child_dir = get_stylesheet_directory();
 	$child_uri = get_stylesheet_directory_uri();
-	$css_path  = $child_dir . '/assets/css/homepage';
-	$css_uri   = $child_uri . '/assets/css/homepage';
+	// Structural homepage CSS now lives in the PARENT theme (shared across all
+	// brand children, token-driven — REH-42); only brand JS/images stay here.
+	$css_path  = get_template_directory() . '/assets/css/homepage';
+	$css_uri   = get_template_directory_uri() . '/assets/css/homepage';
+
+	// Body font: Inter 300/400/500 via Google Fonts. Replaces a dead self-hosted
+	// @font-face that 404'd; mirrors how the Playfair heading font is loaded.
+	wp_enqueue_style( 'inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap', [], null );
 
 	// Vendor CSS: Swiper + Fancybox (CDN).
 	wp_enqueue_style( 'swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], '11' );
@@ -167,11 +173,11 @@ function drt_homepage_editor_assets(): void {
 	// Re-apply the front end's `.drt-homepage`-scoped heading typography to the
 	// editor canvas (which has no `.drt-homepage` wrapper). Scoped to homepage
 	// `.drt-*` classes, so it's inert in non-homepage editors.
-	$editor_css = get_stylesheet_directory() . '/assets/css/homepage/homepage-editor.css';
+	$editor_css = get_template_directory() . '/assets/css/homepage/homepage-editor.css';
 	if ( file_exists( $editor_css ) ) {
 		wp_enqueue_style(
 			'drt-homepage-editor',
-			get_stylesheet_directory_uri() . '/assets/css/homepage/homepage-editor.css',
+			get_template_directory_uri() . '/assets/css/homepage/homepage-editor.css',
 			[ 'drt-homepage-base' ],
 			filemtime( $editor_css )
 		);
