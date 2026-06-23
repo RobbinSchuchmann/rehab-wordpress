@@ -18,6 +18,11 @@
 	--rehab-sage-mist-2: #F1F3E9;
 	--rehab-gold-star: #FBBF24;
 
+	/* Warm neutrals — homepage footer/surfaces (override per brand) */
+	--rehab-surface-tint: #F6F7F2;
+	--rehab-surface-muted: #F5F5F0;
+	--rehab-divider-warm: #DFD9CE;
+
 	/* Easing & shadows */
 	--rehab-ease: cubic-bezier(0.4, 0, 0.2, 1);
 	--rehab-ease-out: cubic-bezier(0, 0, 0.2, 1);

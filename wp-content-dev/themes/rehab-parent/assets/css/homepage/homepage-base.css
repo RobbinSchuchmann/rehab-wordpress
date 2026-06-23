@@ -1,17 +1,13 @@
 /* ==========================================================================
    Homepage Base — Design Tokens & Typography
-   Reusable across future Diamond Rehab Thailand pages.
+   Shared structural homepage CSS — lives in the parent theme so every brand
+   child inherits it and only overrides --rehab-* tokens (REH-42).
    ========================================================================== */
 
-/* Load Inter Light (300) - not loaded by parent theme */
-@font-face {
-	font-family: 'Inter';
-	font-style: normal;
-	font-weight: 300;
-	font-display: swap;
-	src: url('../../../../diamond/assets/fonts/subset-Inter-Light.woff2') format('woff2'),
-	     url('../../../../diamond/assets/fonts/subset-Inter-Light.woff') format('woff');
-}
+/* Inter (300/400/500) is loaded via Google Fonts in the homepage enqueue
+   bundle (see diamond-child functions.php). The previous self-hosted
+   @font-face pointed at a non-existent path (themes/diamond/…, HTTP 404) and
+   silently fell back to system fonts — fixed in REH-42. */
 
 /* Override parent theme's responsive root font-size for homepage
    Parent theme sets: 16px (≥1590px), 13px (1200-1589px), 14px (576-1199px), 16px (≤575px)
@@ -26,18 +22,18 @@ html:has(.drt-homepage) {
 /* Menu icon and text - dark on white */
 body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item,
 body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item {
-	color: #2C2C2C !important;
-	fill: #2C2C2C !important;
+	color: var(--rehab-warm-charcoal) !important;
+	fill: var(--rehab-warm-charcoal) !important;
 }
 
 body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon svg,
 body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon svg {
-	fill: #2C2C2C !important;
+	fill: var(--rehab-warm-charcoal) !important;
 }
 
 body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item_title,
 body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item_title {
-	color: #2C2C2C !important;
+	color: var(--rehab-warm-charcoal) !important;
 	display: block !important;
 }
 
@@ -61,26 +57,26 @@ body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed)
 
 body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item,
 body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item {
-	color: #2C2C2C !important;
-	fill: #2C2C2C !important;
+	color: var(--rehab-warm-charcoal) !important;
+	fill: var(--rehab-warm-charcoal) !important;
 }
 
 body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item_icon svg,
 body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item_icon svg {
-	fill: #2C2C2C !important;
+	fill: var(--rehab-warm-charcoal) !important;
 }
 
 /* Ensure "Get In Touch" is visible */
 body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell.-side a.explore-navbar_cell_item,
 body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell.-side a.explore-navbar_cell_item {
-	color: #2C2C2C !important;
+	color: var(--rehab-warm-charcoal) !important;
 }
 
 /* Make menu hamburger icon visible */
 body:has(.drt-homepage) .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon.-mobile svg,
 body.page-template-page-homepage .explore-navbar:not(.-exposed) .explore-navbar_cell_item_icon.-mobile svg {
-	fill: #2C2C2C !important;
-	stroke: #2C2C2C !important;
+	fill: var(--rehab-warm-charcoal) !important;
+	stroke: var(--rehab-warm-charcoal) !important;
 }
 
 /* Hide the duplicate (light) logo on homepage - prevent two logos showing */
@@ -101,8 +97,8 @@ body.page-template-page-homepage .explore-navbar .drt-menu-toggle .explore-navba
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.625rem 1.25rem;
-	border: 1px solid var(--drt-warm-charcoal, #2C2C2C);
-	color: var(--drt-warm-charcoal, #2C2C2C) !important;
+	border: 1px solid var(--rehab-warm-charcoal);
+	color: var(--rehab-warm-charcoal) !important;
 	text-decoration: none !important;
 	font-family: 'Inter', sans-serif;
 	font-size: 0.875rem;
@@ -113,7 +109,7 @@ body.page-template-page-homepage .explore-navbar .drt-menu-toggle .explore-navba
 }
 
 .drt-header-phone:hover {
-	background: var(--drt-warm-charcoal, #2C2C2C);
+	background: var(--rehab-warm-charcoal);
 	color: #fff !important;
 	text-decoration: none !important;
 }
@@ -131,33 +127,18 @@ body.page-template-page-homepage .custom-button-super {
 	display: none !important;
 }
 
-:root {
-	/* ---- Brand Palette ---- */
-	--drt-sage: #BAC3A1;
-	--drt-sage-dark: #8A9674;
-	--drt-sage-text: #7A856A;
-	--drt-warm-charcoal: #2C2C2C;
-	--drt-soft-charcoal: #4A4A4A;
-	--drt-ethereal-sage: #ECF0E8;
-	--drt-cream: #FFFFFF;
-	--drt-background: #FFFFFF;
-	--drt-tan: #BEB39E;
-
-	/* ---- Shadows ---- */
-	--drt-shadow-subtle: 0 4px 30px -8px rgba(0, 0, 0, 0.08);
-	--drt-shadow-elevated: 0 20px 60px -20px rgba(0, 0, 0, 0.12);
-	--drt-shadow-dramatic: 0 40px 80px -30px rgba(0, 0, 0, 0.15);
-
-	/* ---- Transitions ---- */
-	--drt-ease: cubic-bezier(0.4, 0, 0.2, 1);
-	--drt-ease-out: cubic-bezier(0, 0, 0.2, 1);
-}
+/*
+ * Brand palette / shadows / easing now come from the parent theme's
+ * tokens.css (`--rehab-*`). The old `--drt-*` aliases were verbatim copies
+ * of those tokens; they were removed (REH-42) so the homepage rebrands when a
+ * child theme overrides tokens, instead of staying hardcoded Diamond sage.
+ */
 
 /* ---- Typography Base ---- */
 .drt-homepage {
 	font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 	font-weight: 300 !important;
-	color: var(--drt-warm-charcoal);
+	color: var(--rehab-warm-charcoal);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
@@ -179,13 +160,13 @@ body.page-template-page-homepage .custom-button-super {
 	font-size: 0.875rem;
 	text-transform: uppercase;
 	letter-spacing: 0.2em;
-	color: var(--drt-sage-text);
+	color: var(--rehab-sage-text);
 }
 
 .drt-heading {
 	font-family: "Playfair Display", Georgia, serif;
 	font-weight: 300;
-	color: var(--drt-warm-charcoal);
+	color: var(--rehab-warm-charcoal);
 	letter-spacing: -0.025em;
 	line-height: 1.11;
 }
@@ -199,7 +180,7 @@ body.page-template-page-homepage .custom-button-super {
 .drt-homepage h6 {
 	font-family: "Playfair Display", Georgia, serif !important;
 	font-weight: 300 !important;
-	color: var(--drt-warm-charcoal);
+	color: var(--rehab-warm-charcoal);
 	letter-spacing: -0.025em;
 	line-height: 1.11;
 }
@@ -207,7 +188,7 @@ body.page-template-page-homepage .custom-button-super {
 .drt-body {
 	font-family: 'Inter', sans-serif;
 	font-weight: 300;
-	color: var(--drt-soft-charcoal);
+	color: var(--rehab-soft-charcoal);
 	line-height: 1.75;
 }
 
@@ -295,15 +276,15 @@ body.page-template-page-homepage .custom-button-super {
 }
 
 .drt-animate-fade-in {
-	animation: drt-fade-in 0.6s var(--drt-ease) both;
+	animation: drt-fade-in 0.6s var(--rehab-ease) both;
 }
 
 .drt-animate-fade-in-left {
-	animation: drt-fade-in-left 0.8s var(--drt-ease) both;
+	animation: drt-fade-in-left 0.8s var(--rehab-ease) both;
 }
 
 .drt-animate-fade-in-right {
-	animation: drt-fade-in-right 0.8s var(--drt-ease) both;
+	animation: drt-fade-in-right 0.8s var(--rehab-ease) both;
 }
 
 .drt-animate-luxury-pulse {

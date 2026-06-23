@@ -57,15 +57,15 @@
 
 /* ---- Background Colors ---- */
 .drt-bg-white {
-	background-color: var(--drt-background);
+	background-color: var(--rehab-color-bg);
 }
 
 .drt-bg-cream {
-	background-color: var(--drt-cream);
+	background-color: var(--rehab-color-bg);
 }
 
 .drt-bg-sage-mist {
-	background-color: var(--drt-ethereal-sage);
+	background-color: var(--rehab-ethereal-sage);
 }
 
 /* ---- Grid helpers ---- */
