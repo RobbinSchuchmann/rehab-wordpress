@@ -31,13 +31,13 @@ get_header(); ?>
 	.drt-homepage .drt-clinical__value,
 	.drt-homepage .drt-clinical__label,
 	.drt-homepage .drt-card--treatment__title {
-		font-family: Ivymode, Georgia, serif !important;
+		font-family: "Playfair Display", Georgia, serif !important;
 		font-weight: 300 !important;
 	}
 
 	/* Accordion trigger text uses Ivymode for Programs & FAQ (per Loveable) */
 	.drt-homepage .drt-accordion__trigger-text {
-		font-family: 'ivymode', Georgia, serif !important;
+		font-family: "Playfair Display", Georgia, serif !important;
 		font-weight: 300 !important;
 	}
 

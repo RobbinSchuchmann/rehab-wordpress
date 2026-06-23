@@ -159,6 +159,11 @@ function drt_homepage_editor_assets(): void {
 	}
 	drt_homepage_enqueue_bundle( false );
 
+	// The heading font (Playfair Display) is pulled in via a <link> in the page
+	// templates on the front end; the editor canvas has no such link, so load it
+	// here too or canvas headings would fall back to Georgia.
+	wp_enqueue_style( 'drt-playfair', 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap', [], null );
+
 	// Re-apply the front end's `.drt-homepage`-scoped heading typography to the
 	// editor canvas (which has no `.drt-homepage` wrapper). Scoped to homepage
 	// `.drt-*` classes, so it's inert in non-homepage editors.
