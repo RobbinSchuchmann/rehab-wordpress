@@ -24,7 +24,19 @@ const Card = ( { iconKind, title, items, onTitle, onItems, isEditor } ) => {
 					<li key={ i }>
 						<Check />
 						{ isEditor ? (
-							<RichText tagName="span" value={ item } onChange={ ( v ) => { const next = items.slice(); next[ i ] = v; onItems( next ); } } placeholder="Item…" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
+							<>
+								<RichText tagName="span" value={ item } onChange={ ( v ) => { const next = items.slice(); next[ i ] = v; onItems( next ); } } placeholder="Item…" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
+								<Button
+									className="rehab-signs-card__remove"
+									icon="trash"
+									label="Remove item"
+									showTooltip
+									isDestructive
+									size="small"
+									style={ { marginLeft: 'auto', flex: 'none' } }
+									onClick={ () => onItems( items.filter( ( _, j ) => j !== i ) ) }
+								/>
+							</>
 						) : <RichText.Content tagName="span" value={ item } /> }
 					</li>
 				) ) }
