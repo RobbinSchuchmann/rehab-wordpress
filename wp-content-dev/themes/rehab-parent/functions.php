@@ -538,7 +538,10 @@ function rehab_parent_jsonld(): void {
 		'description' => $site_desc,
 		'logo'        => $logo_url,
 		'image'       => $logo_url,
-		'telephone'   => '+66 96 582 3832',
+		// Derive from the phone setting so every brand child emits its own number
+		// (and so this fallback stays correct if RankMath is briefly inactive, e.g.
+		// during the Pro re-registration at cutover) — REH-45.
+		'telephone'   => get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' ),
 		'address'     => [
 			'@type'           => 'PostalAddress',
 			'streetAddress'   => '8 Moo 14, Soi Mon Mai Hin Lek Fai',
