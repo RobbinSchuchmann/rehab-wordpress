@@ -99,7 +99,6 @@
 				pagination: {
 					el: el.closest('.drt-tour__gallery') ? el.closest('.drt-tour__gallery').querySelector('.drt-swiper-dots') : null,
 					clickable: true,
-					dynamicBullets: true,
 				},
 				breakpoints: {
 					768: { slidesPerView: 2 },
@@ -127,7 +126,6 @@
 				pagination: {
 					el: el.closest('.drt-testimonials__reviews-carousel') ? el.closest('.drt-testimonials__reviews-carousel').querySelector('.drt-swiper-dots') : null,
 					clickable: true,
-					dynamicBullets: true,
 				},
 				breakpoints: {
 					768: { slidesPerView: 2 },
@@ -155,7 +153,6 @@
 				pagination: {
 					el: el.closest('.drt-team__carousel') ? el.closest('.drt-team__carousel').querySelector('.drt-swiper-dots') : null,
 					clickable: true,
-					dynamicBullets: true,
 				},
 				breakpoints: {
 					640: { slidesPerView: 3, spaceBetween: 8 },
@@ -299,11 +296,18 @@
 	}
 
 	function init() {
-		initSwipers();
-		initFancybox();
-		initVideoLightbox();
-		initReviewCards();
-		initMobileStickyFooter();
+		// Fancybox + delegated handlers bind first and each step is isolated, so a
+		// throw inside one carousel's Swiper init can't stop the gallery lightbox
+		// from binding (the cause of "clicking a gallery image does nothing" — REH-44).
+		[ initFancybox, initVideoLightbox, initReviewCards, initSwipers, initMobileStickyFooter ].forEach( function ( fn ) {
+			try {
+				fn();
+			} catch ( e ) {
+				if ( window.console && window.console.error ) {
+					window.console.error( '[homepage] init step failed:', e );
+				}
+			}
+		} );
 	}
 
 })();
