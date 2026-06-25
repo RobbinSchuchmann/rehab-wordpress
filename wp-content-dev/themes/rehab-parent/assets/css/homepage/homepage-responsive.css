@@ -5,9 +5,10 @@
 
 /* ---- sm: 640px ---- */
 @media (min-width: 640px) {
-	/* Reduce hero top padding on larger screens */
+	/* Slightly more breathing room on larger phones / small tablets. The fixed
+	   navbar is already cleared by body padding, so this stays modest (REH-44). */
 	.drt-hero {
-		padding-top: 120px;
+		padding-top: 4rem;
 	}
 
 	.drt-hero__headline {
@@ -301,7 +302,7 @@
 	}
 
 	/* Team name visible on larger screens */
-	.drt-team__name {
+	.drt-team__overlay .drt-team__name {
 		font-size: 1rem;
 	}
 }

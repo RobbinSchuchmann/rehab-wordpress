@@ -184,3 +184,33 @@ function drt_homepage_editor_assets(): void {
 	}
 }
 add_action( 'enqueue_block_assets', 'drt_homepage_editor_assets' );
+
+/**
+ * Brand contact details + social profiles (REH-44).
+ *
+ * These override the parent theme's `rehab_*` theme-mod defaults via the
+ * `theme_mod_{$name}` filter so the values ship with the code (the deploy is
+ * git-based; theme-mods set only in the DB wouldn't travel to production). The
+ * primary phone is the Australian admissions line; the Thai intl callback list
+ * and WhatsApp number are left untouched. To change any of these later, edit
+ * here rather than the Customizer (the filter always wins).
+ */
+function diamond_child_brand_contact( array $map ): void {
+	foreach ( $map as $mod => $value ) {
+		add_filter(
+			"theme_mod_{$mod}",
+			static function () use ( $value ) {
+				return $value;
+			}
+		);
+	}
+}
+diamond_child_brand_contact( [
+	'rehab_phone_display'   => '+61 2 7908 2277',
+	'rehab_phone_number'    => '+61279082277',
+	'rehab_social_facebook' => 'https://www.facebook.com/profile.php?id=100062157021886',
+	'rehab_social_instagram'=> 'https://www.instagram.com/diamondrehabthailand/',
+	'rehab_social_x'        => 'https://twitter.com/rehab_thailand',
+	'rehab_social_pinterest'=> 'https://www.pinterest.com/diamondrehabthailand/',
+	'rehab_social_threads'  => 'https://www.threads.net/@diamondrehabthailand',
+] );

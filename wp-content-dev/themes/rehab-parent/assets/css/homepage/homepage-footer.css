@@ -126,3 +126,23 @@ body:has(.drt-homepage) .site-footer .site-footer_bottom_row .subfooter-menu ul 
 body.page-template-page-homepage .site-footer .site-footer_bottom_row .subfooter-menu ul li a:hover {
 	color: var(--rehab-sage-dark);
 }
+
+/* --- Mobile sticky CTA: the homepage has its own scroll-triggered bar
+ *     (.drt-mobile-sticky), so suppress the generic parent-theme bar here to
+ *     avoid two stacked bars + the dead "Free assessment" button (REH-44). --- */
+body:has(.drt-homepage) .rehab-sticky-cta {
+	display: none !important;
+}
+
+/* --- Keep the footer confidentiality/legal line clear of the bottom-right,
+ *     where the WhatsApp chat widget (REH-15) sits, so it isn't covered —
+ *     mirrors the live site's left-shifted confidentiality text (REH-44). --- */
+body:has(.drt-homepage) .rehab-site-footer__bottom {
+	padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+	body:has(.drt-homepage) .rehab-site-footer__legal-menu {
+		margin-right: 4.5rem;
+	}
+}

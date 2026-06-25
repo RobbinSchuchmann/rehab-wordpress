@@ -18,7 +18,11 @@
 /* ---- Hero ---- */
 .drt-hero {
 	min-height: 85vh;
-	padding-top: 140px; /* Account for fixed header + promo bar on mobile */
+	/* The fixed navbar is already cleared by `body { padding-top }` (header.css)
+	   and the utility/promo bar is display:none on mobile, so the hero only needs
+	   a little breathing room here — a large offset double-counts the header and
+	   leaves dead whitespace above the headline on phones (REH-44). */
+	padding-top: 2.5rem;
 	padding-bottom: 2rem;
 }
 
@@ -998,16 +1002,28 @@ th.drt-comparison__th--diamond {
 	align-items: center;
 	justify-content: flex-end;
 	padding: 1rem 0.75rem;
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 60%);
-	opacity: 1;
-	transition: background 0.3s var(--rehab-ease);
-}
-
-.drt-team__member:hover .drt-team__overlay {
 	background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent 70%);
+	/* Reveal the name/role on interaction rather than showing it permanently
+	   (REH-44). On touch devices (no hover) it stays visible — see below. */
+	opacity: 0;
+	transition: opacity 0.3s var(--rehab-ease);
 }
 
-.drt-team__name {
+.drt-team__member:hover .drt-team__overlay,
+.drt-team__member:focus-within .drt-team__overlay {
+	opacity: 1;
+}
+
+/* Touch devices can't hover, so keep the label visible there. */
+@media (hover: none) {
+	.drt-team__overlay {
+		opacity: 1;
+	}
+}
+
+/* The base `.drt-homepage h3` rule would otherwise repaint the name charcoal;
+   scope here wins so the name stays legible on the dark gradient (REH-44). */
+.drt-team__overlay .drt-team__name {
 	font-family: "Playfair Display", Georgia, serif;
 	font-size: 0.875rem;
 	color: #fff;
@@ -1017,7 +1033,7 @@ th.drt-comparison__th--diamond {
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.drt-team__title {
+.drt-team__overlay .drt-team__title {
 	font-family: 'Inter', sans-serif;
 	font-size: 0.6875rem;
 	text-transform: uppercase;
@@ -1324,8 +1340,15 @@ th.drt-comparison__th--diamond {
 }
 
 .drt-swiper-dots .swiper-pagination-bullet {
+	/* Force a clean horizontal row. Swiper's dynamic-bullet transforms used to
+	   fight this flex container and stacked the dots vertically on mobile
+	   (REH-44); dynamicBullets is now off in homepage.js and these resets keep
+	   the bullets inline regardless of any vendor default. */
+	display: inline-block;
 	width: 8px;
 	height: 8px;
+	margin: 0;
+	transform: none;
 	background: rgba(186, 195, 161, 0.4);
 	opacity: 1;
 }
