@@ -26,12 +26,12 @@ add_action(
 			]
 		);
 
-		// Homepage pattern — Diamond-style flagship layout.
+		// Homepage pattern — flagship homepage layout.
 		register_block_pattern(
 			'rehab/homepage',
 			[
 				'title'       => __( 'Homepage', 'rehab-parent' ),
-				'description' => __( 'Hero + marquee + founder + features + comparison + cards + cta + team + testimonials + faq + map + final cta. Diamond-style.', 'rehab-parent' ),
+				'description' => __( 'Hero + marquee + founder + features + comparison + cards + cta + team + testimonials + faq + map + final cta. Flagship homepage layout.', 'rehab-parent' ),
 				'categories'  => [ 'rehab' ],
 				'content'     => rehab_parent_pattern_homepage(),
 			]

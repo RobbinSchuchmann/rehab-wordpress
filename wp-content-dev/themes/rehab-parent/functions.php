@@ -117,7 +117,7 @@ function rehab_parent_customize_register( WP_Customize_Manager $wp_customize ): 
 	] );
 
 	$wp_customize->add_setting( 'rehab_phone_display', [
-		'default'           => '+66 96 582 3832',
+		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
 	] );
 	$wp_customize->add_control( 'rehab_phone_display', [
@@ -127,18 +127,18 @@ function rehab_parent_customize_register( WP_Customize_Manager $wp_customize ): 
 	] );
 
 	$wp_customize->add_setting( 'rehab_phone_number', [
-		'default'           => '+66965823832',
+		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
 	] );
 	$wp_customize->add_control( 'rehab_phone_number', [
 		'label'       => __( 'Phone — tel: number', 'rehab-parent' ),
-		'description' => __( 'Digits + country code, e.g. +66965823832', 'rehab-parent' ),
+		'description' => __( 'Digits + country code, e.g. +614xxxxxxxx', 'rehab-parent' ),
 		'section'     => 'rehab_contact',
 		'type'        => 'text',
 	] );
 
 	$wp_customize->add_setting( 'rehab_menu_pitch_title', [
-		'default'           => __( 'In-patient luxury rehab in Thailand', 'rehab-parent' ),
+		'default'           => __( 'Private residential rehab', 'rehab-parent' ),
 		'sanitize_callback' => 'sanitize_text_field',
 	] );
 	$wp_customize->add_control( 'rehab_menu_pitch_title', [
@@ -181,6 +181,35 @@ function rehab_parent_customize_register( WP_Customize_Manager $wp_customize ): 
 			'type'    => $cfg['type'],
 		] );
 	}
+
+	// Business / SEO identity — drives the contact-form fallback, the default
+	// meta description, and the LocalBusiness schema. Brand-agnostic: every value
+	// is empty by default and supplied per brand (the child theme sets them via
+	// `theme_mod_*` filters, or an editor fills them in here) — REH-46.
+	$wp_customize->add_section( 'rehab_business', [
+		'title'    => __( 'Business / SEO', 'rehab-parent' ),
+		'priority' => 36,
+	] );
+	$business_fields = [
+		'rehab_contact_email'       => [ 'label' => 'Contact email', 'type' => 'text' ],
+		'rehab_default_description' => [ 'label' => 'Default meta description', 'type' => 'textarea' ],
+		'rehab_addr_street'         => [ 'label' => 'Schema — street address', 'type' => 'text' ],
+		'rehab_addr_locality'       => [ 'label' => 'Schema — city / locality', 'type' => 'text' ],
+		'rehab_addr_region'         => [ 'label' => 'Schema — region / state', 'type' => 'text' ],
+		'rehab_addr_postal'         => [ 'label' => 'Schema — postal code', 'type' => 'text' ],
+		'rehab_addr_country'        => [ 'label' => 'Schema — country code (e.g. TH)', 'type' => 'text' ],
+		'rehab_geo_lat'             => [ 'label' => 'Schema — latitude', 'type' => 'text' ],
+		'rehab_geo_lng'             => [ 'label' => 'Schema — longitude', 'type' => 'text' ],
+	];
+	foreach ( $business_fields as $key => $cfg ) {
+		$sanitize = $cfg['type'] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, [ 'default' => '', 'sanitize_callback' => $sanitize ] );
+		$wp_customize->add_control( $key, [
+			'label'   => $cfg['label'],
+			'section' => 'rehab_business',
+			'type'    => $cfg['type'],
+		] );
+	}
 }
 add_action( 'customize_register', 'rehab_parent_customize_register' );
 
@@ -207,12 +236,17 @@ function rehab_parent_contact_form_fallback( string $block_content, array $block
 			$block_content
 		);
 	}
-	$phone_text = get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' );
-	$phone_tel  = preg_replace( '/[^0-9+]/', '', get_theme_mod( 'rehab_phone_number', '+66965823832' ) );
+	$phone_text = get_theme_mod( 'rehab_phone_display', '' );
+	$phone_tel  = preg_replace( '/[^0-9+]/', '', get_theme_mod( 'rehab_phone_number', '' ) );
+	$email      = get_theme_mod( 'rehab_contact_email', get_option( 'admin_email' ) );
 	$fallback  = '<div class="rehab-contact-fallback">';
-	$fallback .= '<p class="rehab-contact-fallback__email">Email <a href="mailto:info@diamondrehabthailand.com">info@diamondrehabthailand.com</a></p>';
+	if ( $email ) {
+		$fallback .= '<p class="rehab-contact-fallback__email">Email <a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></p>';
+	}
 	$fallback .= '<p class="rehab-contact-fallback__sub">Or call our admissions team — available 24/7</p>';
-	$fallback .= '<a class="rehab-btn rehab-btn--luxury" href="tel:' . esc_attr( $phone_tel ) . '">' . esc_html( $phone_text ) . '</a>';
+	if ( $phone_text ) {
+		$fallback .= '<a class="rehab-btn rehab-btn--luxury" href="tel:' . esc_attr( $phone_tel ) . '">' . esc_html( $phone_text ) . '</a>';
+	}
 	$fallback .= '</div>';
 	return str_replace(
 		'<div class="rehab-contact-form__embed"></div>',
@@ -362,7 +396,9 @@ function rehab_parent_seo_meta(): void {
 	$url         = $is_single && $post ? get_permalink( $post ) : home_url( '/' );
 	$type        = ( $is_single && ! $is_front ) ? 'article' : 'website';
 
-	$brand_default_description = 'Doctor-led, residential drug and alcohol rehab in Hua Hin, Thailand. Maximum 12 clients at a time, absolute confidentiality, lifetime aftercare. Voted #1 by The Thaiger.';
+	// Per-brand default; falls back to the site tagline. Diamond sets its own via
+	// a theme_mod filter in the child theme (REH-46).
+	$brand_default_description = get_theme_mod( 'rehab_default_description', '' ) ?: get_bloginfo( 'description' );
 
 	if ( $post ) {
 		// Description priority: Rank Math → manual excerpt → first <p> → default.
@@ -528,8 +564,11 @@ function rehab_parent_jsonld(): void {
 
 	$blocks = [];
 
-	// Sitewide: MedicalBusiness organization.
-	$blocks[] = [
+	// Sitewide: MedicalBusiness organization. All brand-specific identity comes
+	// from theme_mods so each brand emits its own; optional blocks are omitted
+	// when unset rather than emitting empty/placeholder data (REH-46). This only
+	// renders when Rank Math is inactive (the early return above).
+	$org = [
 		'@context'    => 'https://schema.org',
 		'@type'       => 'MedicalBusiness',
 		'@id'         => $site_url . '#org',
@@ -538,30 +577,46 @@ function rehab_parent_jsonld(): void {
 		'description' => $site_desc,
 		'logo'        => $logo_url,
 		'image'       => $logo_url,
-		// Derive from the phone setting so every brand child emits its own number
-		// (and so this fallback stays correct if RankMath is briefly inactive, e.g.
-		// during the Pro re-registration at cutover) — REH-45.
-		'telephone'   => get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' ),
-		'address'     => [
-			'@type'           => 'PostalAddress',
-			'streetAddress'   => '8 Moo 14, Soi Mon Mai Hin Lek Fai',
-			'addressLocality' => 'Hua Hin',
-			'addressRegion'   => 'Prachuap Khiri Khan',
-			'postalCode'      => '77110',
-			'addressCountry'  => 'TH',
-		],
-		'geo'         => [
-			'@type'     => 'GeoCoordinates',
-			'latitude'  => 12.5556,
-			'longitude' => 99.9131,
-		],
-		'sameAs'      => [
-			'https://www.facebook.com/diamondrehabthailand',
-			'https://www.instagram.com/diamondrehabthailand',
-		],
 		'medicalSpecialty' => [ 'Addiction Medicine', 'Psychiatry' ],
 		'priceRange'  => '$$$$',
 	];
+
+	$telephone = get_theme_mod( 'rehab_phone_display', '' );
+	if ( $telephone ) {
+		$org['telephone'] = $telephone;
+	}
+
+	$address = array_filter( [
+		'streetAddress'   => get_theme_mod( 'rehab_addr_street', '' ),
+		'addressLocality' => get_theme_mod( 'rehab_addr_locality', '' ),
+		'addressRegion'   => get_theme_mod( 'rehab_addr_region', '' ),
+		'postalCode'      => get_theme_mod( 'rehab_addr_postal', '' ),
+		'addressCountry'  => get_theme_mod( 'rehab_addr_country', '' ),
+	] );
+	if ( $address ) {
+		$org['address'] = [ '@type' => 'PostalAddress' ] + $address;
+	}
+
+	$lat = get_theme_mod( 'rehab_geo_lat', '' );
+	$lng = get_theme_mod( 'rehab_geo_lng', '' );
+	if ( '' !== $lat && '' !== $lng ) {
+		$org['geo'] = [ '@type' => 'GeoCoordinates', 'latitude' => (float) $lat, 'longitude' => (float) $lng ];
+	}
+
+	$same_as = array_values( array_filter( [
+		get_theme_mod( 'rehab_social_facebook', '' ),
+		get_theme_mod( 'rehab_social_instagram', '' ),
+		get_theme_mod( 'rehab_social_x', '' ),
+		get_theme_mod( 'rehab_social_linkedin', '' ),
+		get_theme_mod( 'rehab_social_youtube', '' ),
+		get_theme_mod( 'rehab_social_pinterest', '' ),
+		get_theme_mod( 'rehab_social_threads', '' ),
+	] ) );
+	if ( $same_as ) {
+		$org['sameAs'] = $same_as;
+	}
+
+	$blocks[] = $org;
 
 	// Sitewide: WebSite with SearchAction.
 	$blocks[] = [

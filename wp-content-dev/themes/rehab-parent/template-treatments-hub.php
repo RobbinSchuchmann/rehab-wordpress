@@ -142,7 +142,7 @@ while ( have_posts() ) :
 		// Closing dark concierge band — the single conversion moment shared with
 		// every other page. Rendered through the existing rehab/cta-band block so
 		// styling stays in lock-step with the rest of the site.
-		$rehab_tx_phone = get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' );
+		$rehab_tx_phone = get_theme_mod( 'rehab_phone_display', '' );
 		$rehab_tx_cta   = [
 			'background'   => 'dark',
 			'eyebrow'      => 'Not sure where to start',
