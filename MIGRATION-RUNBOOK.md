@@ -48,7 +48,7 @@
 
 ## Phase 2 — Deploy code from git (clean — no old plugins)
 
-- [ ] Connect **Cloudways Git deployment** to `RobbinSchuchmann/rehab-wordpress`, or `git clone` + copy. Deploy only the repo's `wp-content` payload:
+- [ ] **Add the server's deploy secrets** (`CLOUDWAYS_HOST/USER/PATH/SSH_KEY`) so the GitHub Actions workflow (`.github/workflows/deploy.yml` → `scripts/deploy-to-cloudways.sh`) rsyncs the allowlist over SSH on merge to `main` (per-brand routing via `BRAND`, REH-47). It ships only the repo's `wp-content` payload:
   - `themes/rehab-parent` + `themes/<CHILD_THEME>`
   - `plugins/rehab-blocks` (the `build/` dir is tracked — no npm step needed unless you change source)
   - mu-plugins — **triaged**, see below
@@ -214,12 +214,12 @@ Point the scripts at `https://<NEW_DOMAIN>` and confirm parity with the dev box:
 
 *The phases above are the **one-time** migration. Once a server is running, every ongoing change follows this much shorter loop. The golden rule: **code deploys itself on merge; DB/template/content changes are applied on the server by hand.***
 
-> **How code actually reaches the server (verified 17 Jun 2026).** The Cloudways app is **not** a git checkout — it's a standard WP install (normal `wp-content`, no `.git`). Code lands via **Cloudways Git auto-deploy**: merging to `main` makes the new files appear on disk automatically (all bulk-stamped at deploy time). There is **no `git pull` step** — don't go looking for a repo on the server. What auto-deploy *can't* do is touch the database, so anything DB-shaped is a manual WP-CLI step.
+> **How code actually reaches the server (corrected — GitHub Actions, not Cloudways git).** The Cloudways app is **not** a git checkout — it's a standard WP install (normal `wp-content`, no `.git`). Code lands via a **GitHub Actions allowlist rsync** (REH-19/47): merging to `main` triggers `.github/workflows/deploy.yml`, which runs `scripts/deploy-to-cloudways.sh` to `rsync` only the allowlisted dirs over SSH (stamped at deploy time). There is **no `git pull` step** and no Cloudways git integration — don't go looking for a repo on the server. What the deploy *can't* do is touch the database, so anything DB-shaped is a manual WP-CLI step.
 
 ### The deploy loop
 
 1. **Build + verify on the dev stack** (localhost:8081), exactly as you did for the original build.
-2. **Land it in git the normal way:** issue → `reh-NN-…` branch → PR → merge to `main`. (Linear status rides the git events.) **The merge is the code deploy** — Cloudways pulls it onto each server on its own.
+2. **Land it in git the normal way:** issue → `reh-NN-…` branch → PR → merge to `main`. (Linear status rides the git events.) **The merge triggers the deploy** — the GitHub Actions workflow rsyncs the allowlist to the brand's server (`BRAND` selects the child theme, REH-47).
 3. **Confirm the code arrived** over SSH (`ssh -i ~/.ssh/cw_deploy_key master_<…>@<server-ip>`), then from `<APP_PATH>`:
 
    ```bash
@@ -227,7 +227,7 @@ Point the scripts at `https://<NEW_DOMAIN>` and confirm parity with the dev box:
    wp eval 'echo file_exists(get_template_directory()."/<changed-file>.php") ? "OK\n" : "MISSING — deploy not through yet\n";'
    ```
 
-4. **Apply any DB/template/content step by hand** — auto-deploy moves *code only*. Anything that lives in the DB (page-template assignment, an option, content) must be run with WP-CLI on the server, because **`zz-oneshot.php` is not deployed to prod** (Phase 2 triage). Example — repointing a page at a new template:
+4. **Apply any DB/template/content step by hand** — the deploy moves *code only*. Anything that lives in the DB (page-template assignment, an option, content) must be run with WP-CLI on the server, because **`zz-oneshot.php` is not deployed to prod** (Phase 2 triage). Example — repointing a page at a new template:
 
    ```bash
    ID=$(wp post list --post_type=page --name=<slug> --field=ID)
@@ -252,7 +252,7 @@ Point the scripts at `https://<NEW_DOMAIN>` and confirm parity with the dev box:
 
 ### Rollback
 
-- **Code:** `git revert` the commit → merge → auto-deploy ships the revert → purge.
+- **Code:** `git revert` the commit → merge → the deploy workflow ships the revert → purge.
 - **A DB/template switch:** just set the meta back — it's reversible and content is untouched. E.g. `wp post meta update "$ID" _wp_page_template <old-template>.php`, then `wp breeze purge --cache=all`.
 
 ### Worked example — REH-24 "All Treatments hub" (17 Jun 2026)
