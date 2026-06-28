@@ -97,6 +97,8 @@ See `diamond-child/functions.php` (`diamond_child_brand_contact()`) for a filled
 
 If the brand ships the editable homepage (the `rehab/home-*` blocks, REH-37), copy the `drt_homepage_*` enqueue block from `diamond-child/functions.php` into the child (it loads the shared homepage CSS from the parent + the brand's JS/images), and produce a brand `homepage-seed.html` for its content. Otherwise skip.
 
+**Page templates that pull brand data via filters.** Some shared page templates are data-driven by the child. If the brand uses the **Treatments Hub** (`template-treatments-hub.php`, the `/all-treatments/` directory), provide its programs via the `rehab_treatments_hub_categories` filter in the child — see `diamond_child_treatments_hub_categories()` for the shape (REH-49). Without it the hub renders its hero + concierge band but no program list.
+
 ## Step 6 — Content build (decision)
 
 The Diamond content tooling (`mu-plugins/zz-oneshot.php`, `aa-block-builders.php`, `aa-treatment-v3-specs.php`) is **Diamond-bespoke and never deployed to prod** — it's dev-only scaffolding. Content is **per-site (DB)**, built on the dev factory and seeded to the server. Two approaches:

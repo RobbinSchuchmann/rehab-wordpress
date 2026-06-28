@@ -230,3 +230,89 @@ diamond_child_brand_contact( [
 	'rehab_geo_lat'            => '12.5556',
 	'rehab_geo_lng'            => '99.9131',
 ] );
+
+/**
+ * Diamond's All-Treatments hub directory (REH-49). The shared
+ * template-treatments-hub.php is brand-agnostic and pulls its categories from
+ * this filter. Each link is [ label, '/site-relative-path/' ]; the three former
+ * standalone headings (Alcohol detox / Process addiction / Stages of change) are
+ * grouped as "Core programs" per the design.
+ */
+function diamond_child_treatments_hub_categories( array $categories ): array {
+	return [
+		[
+			'id'      => 'cat-core',
+			'eyebrow' => 'Core programs',
+			'heading' => 'Core programs',
+			'bg'      => 'white',
+			'links'   => [
+				[ 'Alcohol detox', '/alcohol-addiction/' ],
+				[ 'Process addiction rehab', '/process-addiction-treatment/' ],
+				[ 'Stages of change addiction', '/stages-of-change-addiction/' ],
+			],
+		],
+		[
+			'id'      => 'cat-substance',
+			'eyebrow' => '01 — Substance addiction',
+			'heading' => 'Substance addiction treatment',
+			'bg'      => 'parch',
+			'links'   => [
+				[ 'Cocaine addiction treatment', '/cocaine-addiction-treatment-rehab-thailand/' ],
+				[ 'Meth &amp; ice addiction treatment', '/ice-addiction-treatment-rehab-thailand/' ],
+				[ 'Heroin &amp; opiate addiction treatment', '/heroin-rehab-thailand/' ],
+				[ 'Crack addiction treatment &amp; detox', '/crack-rehab-thailand/' ],
+				[ 'Ecstasy (MDMA) addiction treatment', '/mdma-ecstasy-rehab-thailand/' ],
+				[ 'GHB (Fishies) addiction treatment &amp; detox', '/ghb-addiction-rehab-thailand/' ],
+				[ 'Ketamine addiction treatment', '/ketamine-addiction-rehab/' ],
+				[ 'Marijuana (Weed) addiction treatment', '/marijuana-addiction-rehab/' ],
+			],
+		],
+		[
+			'id'      => 'cat-prescription',
+			'eyebrow' => '02 — Prescription drugs',
+			'heading' => 'Prescription drug rehab',
+			'bg'      => 'white',
+			'links'   => [
+				[ 'Xanax (Alprazolam) addiction treatment', '/xanax-rehab-thailand/' ],
+				[ 'OxyContin (Oxycodone) addiction treatment', '/oxycodone-rehab/' ],
+				[ 'Valium (Diazepam) addiction treatment', '/valium-rehab-thailand/' ],
+				[ 'Tramadol addiction treatment &amp; detox', '/tramadol-rehab-thailand/' ],
+				[ 'Ritalin (Methylphenidate) addiction treatment', '/ritalin-rehab-thailand/' ],
+			],
+		],
+		[
+			'id'      => 'cat-mental',
+			'eyebrow' => '03 — Mental health',
+			'heading' => 'Mental health rehab',
+			'bg'      => 'parch',
+			'links'   => [
+				[ 'Anxiety treatment and rehab', '/anxiety-rehab-thailand/' ],
+				[ 'PTSD &amp; trauma treatment', '/ptsd-trauma-retreat/' ],
+				[ 'Sex addiction treatment', '/sex-addiction-treatment-thailand/' ],
+				[ 'Codependency treatment', '/codependency-treatment-thailand/' ],
+				[ 'Insomnia &amp; sleep disorder treatment', '/insomnia-treatment-thailand/' ],
+				[ 'Burnout treatment for executives', '/luxury-executive-burnout-thailand/' ],
+				[ 'Depression treatment', '/depression-retreat-thailand/' ],
+				[ 'Gambling addiction treatment', '/gambling-addiction-treatment-thailand/' ],
+				[ 'Internet &amp; gaming addiction treatment', '/gaming-addiction-treatment-thailand/' ],
+				[ 'Internet addiction treatment', '/internet-addiction-rehab-thailand/' ],
+				[ 'Cryptocurrency addiction treatment', '/what-is-crypto-addiction/' ],
+				[ 'Luxury traumatic reenactment treatment', '/traumatic-reenactment/' ],
+				[ 'Couples treatment', '/couples-treatment-thailand/' ],
+				[ 'Dialectical behaviour treatment', '/dbt-treatment/' ],
+			],
+		],
+		[
+			'id'      => 'cat-eating',
+			'eyebrow' => '04 — Eating disorders',
+			'heading' => 'Eating disorder rehab',
+			'bg'      => 'white',
+			'links'   => [
+				[ 'Anorexia treatment center', '/anorexia-rehab-treatment-thailand/' ],
+				[ 'Bulimia treatment center', '/bulimia-rehab-thailand/' ],
+				[ 'Overeating disorders', '/treatment-for-overeating-disorders/' ],
+			],
+		],
+	];
+}
+add_filter( 'rehab_treatments_hub_categories', 'diamond_child_treatments_hub_categories' );
