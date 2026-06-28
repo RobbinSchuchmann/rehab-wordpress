@@ -6,6 +6,11 @@ name: Deploy to Cloudways
 on:
   push:
     branches: [main]
+    # The brand auto-deployed on push is set by the `DEPLOY_BRAND` repo variable
+    # (default 'diamond'). Only the shared engine + that brand's child theme are
+    # watched. When a second brand gets its own Cloudways server, add its
+    # `themes/<brand>-child/**` path here and move the deploy job to a matrix so
+    # the right brand routes to the right server (see "Deploy allowlist" below).
     paths:
       - 'wp-content-dev/themes/rehab-parent/**'
       - 'wp-content-dev/themes/diamond-child/**'
@@ -17,13 +22,18 @@ on:
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
     inputs:
+      brand:
+        description: 'Brand to deploy (themes/<brand>-child)'
+        type: string
+        default: diamond
       dry_run:
         description: 'Dry run (preview, no changes)'
         type: boolean
         default: false
 
 concurrency:
-  group: deploy-cloudways
+  # Per-brand so deploys to different brands' servers don't block each other.
+  group: deploy-cloudways-${{ inputs.brand || vars.DEPLOY_BRAND || 'diamond' }}
   cancel-in-progress: false
 
 jobs:
@@ -38,8 +48,16 @@ jobs:
           printf '%s\n' "${{ secrets.CLOUDWAYS_SSH_KEY }}" > ~/.ssh/cw_deploy
           chmod 600 ~/.ssh/cw_deploy
 
+      # Single-brand today (Diamond is the only Cloudways server). The script is
+      # brand-parameterized via BRAND; to add a brand, give it its own server
+      # secrets and convert this step to a matrix, e.g.:
+      #   strategy: { matrix: { brand: [diamond, anker] } }
+      # reading each brand's host/user/path from per-brand secrets. (GitHub's
+      # secrets context can't be indexed by a dynamic name, so store each brand's
+      # target as one JSON secret — DEPLOY_TARGET_<BRAND> — and fromJSON() it.)
       - name: Deploy allowlist
         env:
+          BRAND: ${{ inputs.brand || vars.DEPLOY_BRAND || 'diamond' }}
           DEPLOY_HOST: ${{ secrets.CLOUDWAYS_HOST }}
           DEPLOY_USER: ${{ secrets.CLOUDWAYS_USER }}
           DEPLOY_PATH: ${{ secrets.CLOUDWAYS_PATH }}
