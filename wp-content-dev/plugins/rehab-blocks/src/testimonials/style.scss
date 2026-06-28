@@ -57,7 +57,7 @@
 .rehab-testimonial__stars {
 	display: flex;
 	gap: 2px;
-	color: #fbbf24;
+	color: var(--rehab-gold-star, #fbbf24);
 }
 
 .rehab-testimonial__stars svg {

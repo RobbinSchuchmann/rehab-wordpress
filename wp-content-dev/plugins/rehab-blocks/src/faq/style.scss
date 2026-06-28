@@ -49,7 +49,7 @@
 .rehab-faq-item summary::marker { content: ''; }
 
 .rehab-faq-item summary:hover {
-	background-color: #F6F7F2;
+	background-color: var(--rehab-surface-tint, #F6F7F2);
 	color: var(--rehab-sage-dark);
 	padding-left: 1rem;
 	padding-right: 1rem;
