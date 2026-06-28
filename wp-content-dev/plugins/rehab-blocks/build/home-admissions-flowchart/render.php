@@ -59,7 +59,7 @@ $wrapper = get_block_wrapper_attributes( array(
 		<div class="drt-admissions__desktop">
 			<!-- SVG S-Curve Path -->
 			<svg class="drt-admissions__path" viewBox="0 0 1200 72" preserveAspectRatio="none" fill="none" aria-hidden="true">
-				<path d="M 120 36 C 180 36, 220 12, 300 12 S 400 60, 480 60 S 560 12, 660 12 S 760 60, 840 36 S 920 12, 1020 12 C 1060 12, 1080 36, 1080 36" stroke="#BEB39E" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round" stroke-dasharray="8 6"/>
+				<path d="M 120 36 C 180 36, 220 12, 300 12 S 400 60, 480 60 S 560 12, 660 12 S 760 60, 840 36 S 920 12, 1020 12 C 1060 12, 1080 36, 1080 36" style="stroke: var(--rehab-tan, #BEB39E)" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round" stroke-dasharray="8 6"/>
 			</svg>
 
 			<div class="drt-admissions__steps">
