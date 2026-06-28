@@ -213,4 +213,20 @@ diamond_child_brand_contact( [
 	'rehab_social_x'        => 'https://twitter.com/rehab_thailand',
 	'rehab_social_pinterest'=> 'https://www.pinterest.com/diamondrehabthailand/',
 	'rehab_social_threads'  => 'https://www.threads.net/@diamondrehabthailand',
+
+	// Brand identity that used to be hardcoded in the parent theme (REH-46).
+	// Setting it here keeps Diamond pixel-identical while the parent stays
+	// brand-agnostic for the other child themes.
+	'rehab_menu_pitch_title'   => 'In-patient luxury rehab in Thailand',
+	'rehab_footer_address'     => "8, Moo 14, Soi Mon Mai Hin Lek Fai\nHua Hin District, Prachuap Khiri Khan\nThailand 77110",
+	'rehab_contact_email'      => 'info@diamondrehabthailand.com',
+	'rehab_default_description'=> 'Doctor-led, residential drug and alcohol rehab in Hua Hin, Thailand. Maximum 12 clients at a time, absolute confidentiality, lifetime aftercare. Voted #1 by The Thaiger.',
+	// LocalBusiness schema (fallback JSON-LD — RankMath emits the live schema).
+	'rehab_addr_street'        => '8 Moo 14, Soi Mon Mai Hin Lek Fai',
+	'rehab_addr_locality'      => 'Hua Hin',
+	'rehab_addr_region'        => 'Prachuap Khiri Khan',
+	'rehab_addr_postal'        => '77110',
+	'rehab_addr_country'       => 'TH',
+	'rehab_geo_lat'            => '12.5556',
+	'rehab_geo_lng'            => '99.9131',
 ] );

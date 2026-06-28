@@ -6,9 +6,9 @@
  */
 
 $brand_name      = get_bloginfo( 'name' );
-$address         = get_theme_mod( 'rehab_footer_address', "8, Moo 14, Soi Mon Mai Hin Lek Fai\nHua Hin District, Prachuap Khiri Khan\nThailand 77110" );
-$phone_text      = get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' );
-$phone_number    = get_theme_mod( 'rehab_phone_number', '+66965823832' );
+$address         = get_theme_mod( 'rehab_footer_address', '' );
+$phone_text      = get_theme_mod( 'rehab_phone_display', '' );
+$phone_number    = get_theme_mod( 'rehab_phone_number', '' );
 $phone_tel       = preg_replace( '/[^0-9+]/', '', $phone_number );
 $international   = get_theme_mod( 'rehab_footer_intl_phones', '' ); // multiline "Label|+number"
 $copyright       = get_theme_mod( 'rehab_footer_copyright', sprintf( '&copy; %d %s', gmdate( 'Y' ), $brand_name ) );
@@ -164,7 +164,7 @@ $intl_lines = array_filter(
 // Sticky bottom-of-screen mobile CTA. Hidden on viewports ≥720px via CSS.
 // The homepage ships its own scroll-triggered CTA (`.drt-mobile-sticky`), so
 // this generic bar is suppressed there via CSS to avoid two stacked bars.
-$sticky_phone_tel = preg_replace( '/[^0-9+]/', '', get_theme_mod( 'rehab_phone_number', '+66965823832' ) );
+$sticky_phone_tel = preg_replace( '/[^0-9+]/', '', get_theme_mod( 'rehab_phone_number', '' ) );
 // "Free assessment" target. Defaulted to the contact page — the old `#assessment`
 // anchor pointed at an element that doesn't exist on most pages, so the button
 // did nothing (REH-44). Override per-brand via the customizer if a dedicated

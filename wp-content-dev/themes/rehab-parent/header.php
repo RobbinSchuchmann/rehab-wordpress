@@ -18,8 +18,8 @@
 <a class="rehab-skip-link rehab-visually-hidden" href="#main"><?php esc_html_e( 'Skip to content', 'rehab-parent' ); ?></a>
 
 <?php
-$phone_text   = get_theme_mod( 'rehab_phone_display', '+66 96 582 3832' );
-$phone_number = get_theme_mod( 'rehab_phone_number', '+66965823832' );
+$phone_text   = get_theme_mod( 'rehab_phone_display', '' );
+$phone_number = get_theme_mod( 'rehab_phone_number', '' );
 $phone_tel    = preg_replace( '/[^0-9+]/', '', $phone_number );
 
 // Site-wide utility bar (top). Items filterable per-brand via 'rehab_utility_bar_items'.
@@ -140,7 +140,7 @@ $nav_cta_url  = get_theme_mod( 'rehab_nav_cta_url', '/contact-us/' );
 		<aside class="rehab-mega-menu__sidebar">
 			<div class="rehab-mega-menu__pitch">
 				<?php
-				$pitch_title = get_theme_mod( 'rehab_menu_pitch_title', __( 'In-patient luxury rehab in Thailand', 'rehab-parent' ) );
+				$pitch_title = get_theme_mod( 'rehab_menu_pitch_title', __( 'Private residential rehab', 'rehab-parent' ) );
 				$pitch_body  = get_theme_mod( 'rehab_menu_pitch_body', __( 'Doctor-led, evidence-based recovery in a private 5-star sanctuary. We take a personalised approach to every client.', 'rehab-parent' ) );
 				?>
 				<p class="rehab-mega-menu__pitch-title"><?php echo esc_html( $pitch_title ); ?></p>
