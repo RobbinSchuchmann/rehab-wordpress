@@ -23,6 +23,17 @@
 	--rehab-surface-muted: #F5F5F0;
 	--rehab-divider-warm: #DFD9CE;
 
+	/* RGB triplets for translucent brand colors, used as rgba(var(--…-rgb), .a)
+	   (REH-50). Keep in sync with the matching hex token above when rebranding —
+	   a child that overrides --rehab-sage should also override --rehab-sage-rgb. */
+	--rehab-sage-rgb: 186, 195, 161;
+	--rehab-sage-dark-rgb: 138, 150, 116;
+	--rehab-sage-text-rgb: 122, 133, 106;
+	--rehab-tan-rgb: 190, 179, 158;
+	--rehab-warm-charcoal-rgb: 44, 44, 44;
+	--rehab-soft-charcoal-rgb: 74, 74, 74;
+	--rehab-cream-warm-rgb: 249, 247, 242;
+
 	/* Easing & shadows */
 	--rehab-ease: cubic-bezier(0.4, 0, 0.2, 1);
 	--rehab-ease-out: cubic-bezier(0, 0, 0.2, 1);

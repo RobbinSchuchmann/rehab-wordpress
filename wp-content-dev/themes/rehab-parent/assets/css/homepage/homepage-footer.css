@@ -13,7 +13,7 @@ body.page-template-page-homepage .site-footer {
 /* --- Footer logo block --- */
 body:has(.drt-homepage) .drt-footer-logo-block,
 body.page-template-page-homepage .drt-footer-logo-block {
-	border-bottom-color: rgba(190, 179, 158, 0.2);
+	border-bottom-color: rgba(var(--rehab-tan-rgb), 0.2);
 }
 
 /* --- Hide parent theme footer logo on homepage (we have the centered one) --- */

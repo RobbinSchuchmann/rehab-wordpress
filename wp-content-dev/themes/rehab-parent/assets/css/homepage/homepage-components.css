@@ -38,13 +38,13 @@
 .drt-btn--outline {
 	background: transparent;
 	color: var(--rehab-warm-charcoal);
-	border: 1px solid rgba(186, 195, 161, 0.4);
+	border: 1px solid rgba(var(--rehab-sage-rgb), 0.4);
 	padding: 0.625rem 1.5rem;
 }
 
 .drt-btn--outline:hover {
-	background: rgba(186, 195, 161, 0.1);
-	border-color: rgba(186, 195, 161, 0.6);
+	background: rgba(var(--rehab-sage-rgb), 0.1);
+	border-color: rgba(var(--rehab-sage-rgb), 0.6);
 	color: var(--rehab-warm-charcoal);
 	text-decoration: none;
 }
@@ -88,11 +88,11 @@
 	white-space: nowrap;
 	transition: all 0.3s var(--rehab-ease);
 	border-left: 2px solid transparent;
-	color: rgba(74, 74, 74, 0.5);
+	color: rgba(var(--rehab-soft-charcoal-rgb), 0.5);
 }
 
 .drt-tabs__trigger:hover {
-	color: rgba(74, 74, 74, 0.8);
+	color: rgba(var(--rehab-soft-charcoal-rgb), 0.8);
 }
 
 .drt-tabs__trigger.is-active {
@@ -113,7 +113,7 @@
 	.drt-tabs__nav--horizontal {
 		flex-direction: row;
 		justify-content: center;
-		border-bottom: 1px solid rgba(190, 179, 158, 0.4);
+		border-bottom: 1px solid rgba(var(--rehab-tan-rgb), 0.4);
 		max-width: 40rem;
 		margin-left: auto;
 		margin-right: auto;
@@ -195,11 +195,11 @@
 }
 
 .drt-accordion__item {
-	border-top: 1px solid rgba(190, 179, 158, 0.3);
+	border-top: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 }
 
 .drt-accordion__item:last-child {
-	border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+	border-bottom: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 }
 
 /* FAQ accordion text stays 1rem at all breakpoints to match Loveable */
@@ -208,7 +208,7 @@
 .drt-card--treatment {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	overflow: hidden;
 	transition: border-color 0.3s var(--rehab-ease);
 	text-decoration: none;
@@ -218,7 +218,7 @@
 }
 
 .drt-card--treatment:hover {
-	border-color: rgba(190, 179, 158, 0.4);
+	border-color: rgba(var(--rehab-tan-rgb), 0.4);
 	text-decoration: none;
 	color: inherit;
 }
@@ -291,7 +291,7 @@
 /* ---- Review Cards ---- */
 .drt-card--review {
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	padding: 1.25rem;
 	display: flex;
 	flex-direction: column;
@@ -500,7 +500,7 @@
 
 .drt-card--article__image {
 	overflow: hidden;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	margin-bottom: 0.75rem;
 }
 

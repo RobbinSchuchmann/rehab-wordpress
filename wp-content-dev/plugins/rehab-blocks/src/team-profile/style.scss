@@ -77,7 +77,7 @@
 
 .rehab-team-profile__portrait-placeholder {
 	background: var(--rehab-ethereal-sage, #ECF0E8);
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	min-height: clamp(360px, 42vw, 480px);
 	display: flex;
 	align-items: center;
@@ -156,7 +156,7 @@
 
 .rehab-team-profile__card {
 	background: var(--rehab-sage-mist-2, #F1F3E9);
-	border: 1px solid rgba(190, 179, 158, 0.4);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.4);
 	padding: clamp(28px, 2.6vw, 36px);
 }
 
@@ -233,7 +233,7 @@
 }
 
 .rehab-team-profile__field input::placeholder {
-	color: rgba(74, 74, 74, 0.45);
+	color: rgba(var(--rehab-soft-charcoal-rgb), 0.45);
 }
 
 .rehab-team-profile__field input:focus,
@@ -266,7 +266,7 @@
 .rehab-team-profile__trust {
 	margin-top: 18px;
 	padding-top: 16px;
-	border-top: 1px solid rgba(186, 195, 161, 0.3);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	display: grid;
 	gap: 10px;
 }

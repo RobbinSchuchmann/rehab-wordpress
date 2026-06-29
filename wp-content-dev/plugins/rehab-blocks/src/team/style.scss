@@ -35,7 +35,7 @@
 	position: relative;
 	aspect-ratio: 3 / 4;
 	overflow: hidden;
-	background: rgba(186, 195, 161, 0.1);
+	background: rgba(var(--rehab-sage-rgb), 0.1);
 	cursor: default;
 }
 

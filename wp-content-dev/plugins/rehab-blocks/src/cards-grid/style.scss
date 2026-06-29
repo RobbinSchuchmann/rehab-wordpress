@@ -45,7 +45,7 @@
 .rehab-card {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	overflow: hidden;
 	text-decoration: none;
 	color: inherit;
@@ -55,7 +55,7 @@
 }
 
 a.rehab-card:hover {
-	border-color: rgba(190, 179, 158, 0.4);
+	border-color: rgba(var(--rehab-tan-rgb), 0.4);
 	text-decoration: none;
 	color: inherit;
 }

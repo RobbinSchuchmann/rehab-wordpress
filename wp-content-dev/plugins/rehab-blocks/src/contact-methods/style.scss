@@ -46,7 +46,7 @@
 	align-items: center;
 	gap: 18px;
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	padding: 20px 24px;
 	text-decoration: none;
 	color: inherit;
@@ -56,7 +56,7 @@
 }
 
 .rehab-contact-method:hover {
-	border-color: rgba(190, 179, 158, 0.4);
+	border-color: rgba(var(--rehab-tan-rgb), 0.4);
 	transform: translateY(-1px);
 	text-decoration: none;
 }
@@ -120,7 +120,7 @@
 .rehab-contact-methods__next {
 	margin-top: 30px;
 	background: var(--rehab-ethereal-sage, #ECF0E8);
-	border: 1px solid rgba(186, 195, 161, 0.3);
+	border: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	padding: 30px 32px;
 }
 
@@ -164,7 +164,7 @@
 .rehab-contact-methods__follow {
 	margin-top: 34px;
 	padding-top: 26px;
-	border-top: 1px solid rgba(186, 195, 161, 0.3);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 }
 
 .rehab-contact-methods__follow p {
@@ -197,7 +197,7 @@
 .rehab-contact-methods__follow-row a:hover {
 	border-color: var(--rehab-sage-dark, #8A9674);
 	color: var(--rehab-sage-dark, #8A9674);
-	background: rgba(186, 195, 161, 0.12);
+	background: rgba(var(--rehab-sage-rgb), 0.12);
 }
 
 .rehab-contact-methods__follow-row svg {
@@ -208,7 +208,7 @@
 // ---------- Form card ----------
 .rehab-contact-methods__form-card {
 	background: var(--rehab-sage-mist-2, #F1F3E9);
-	border: 1px solid rgba(190, 179, 158, 0.4);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.4);
 	padding: clamp(30px, 3vw, 44px);
 	scroll-margin-top: 110px;
 }
@@ -292,7 +292,7 @@
 
 .rehab-contact-methods__field input::placeholder,
 .rehab-contact-methods__field textarea::placeholder {
-	color: rgba(74, 74, 74, 0.45);
+	color: rgba(var(--rehab-soft-charcoal-rgb), 0.45);
 }
 
 .rehab-contact-methods__field input:focus,
@@ -323,7 +323,7 @@
 	gap: 8px;
 	font-family: var(--rehab-font-body);
 	font-size: 0.8125rem;
-	color: rgba(44, 44, 44, 0.72);
+	color: rgba(var(--rehab-warm-charcoal-rgb), 0.72);
 	letter-spacing: 0.02em;
 	margin: 14px 0 0;
 }

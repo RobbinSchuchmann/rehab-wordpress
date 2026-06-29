@@ -54,13 +54,13 @@
 
 .rehab-checklist-card {
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	padding: 2.25rem 2.125rem;
 	transition: border-color 0.35s var(--rehab-ease);
 }
 
 .rehab-checklist-card:hover {
-	border-color: rgba(190, 179, 158, 0.4);
+	border-color: rgba(var(--rehab-tan-rgb), 0.4);
 }
 
 .rehab-checklist-card__icon {
@@ -126,7 +126,7 @@
 .rehab-checklist-cards__panel {
 	margin-top: 1.75rem;
 	background: var(--rehab-ethereal-sage, #ECF0E8);
-	border: 1px solid rgba(186, 195, 161, 0.3);
+	border: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	padding: clamp(34px, 4vw, 52px);
 	display: grid;
 	grid-template-columns: 0.85fr 1.15fr;

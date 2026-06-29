@@ -121,11 +121,11 @@
 
 /* ---- Borders ---- */
 .drt-border-sage {
-	border-color: rgba(186, 195, 161, 0.3);
+	border-color: rgba(var(--rehab-sage-rgb), 0.3);
 }
 
 .drt-border-tan {
-	border-color: rgba(190, 179, 158, 0.3);
+	border-color: rgba(var(--rehab-tan-rgb), 0.3);
 }
 
 /* ---- Text balance utility ---- */

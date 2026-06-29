@@ -61,7 +61,7 @@
 	flex-direction: column;
 	gap: 0.125rem;
 	padding-top: 1.5rem;
-	border-top: 1px solid rgba(186, 195, 161, 0.4);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.4);
 }
 
 .rehab-founder__name {

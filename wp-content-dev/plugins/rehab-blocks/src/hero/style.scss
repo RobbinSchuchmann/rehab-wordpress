@@ -79,7 +79,7 @@
 
 .rehab-hero__cta-helper {
 	font-size: 0.75rem;
-	color: rgba(44, 44, 44, 0.7);
+	color: rgba(var(--rehab-warm-charcoal-rgb), 0.7);
 	margin: 0.75rem 0 0;
 }
 
@@ -153,7 +153,7 @@
 .rehab-hero__overlay {
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(to top right, rgba(186, 195, 161, 0.3), transparent, transparent);
+	background: linear-gradient(to top right, rgba(var(--rehab-sage-rgb), 0.3), transparent, transparent);
 	pointer-events: none;
 }
 
@@ -179,7 +179,7 @@
 
 .rehab-hero__image-wrap:hover .rehab-hero__play svg {
 	transform: scale(1.1);
-	box-shadow: 0 0 30px rgba(186, 195, 161, 0.4);
+	box-shadow: 0 0 30px rgba(var(--rehab-sage-rgb), 0.4);
 }
 
 .rehab-hero__deco {
@@ -188,7 +188,7 @@
 	left: -1rem;
 	width: 6rem;
 	height: 6rem;
-	border: 1px solid rgba(186, 195, 161, 0.4);
+	border: 1px solid rgba(var(--rehab-sage-rgb), 0.4);
 }
 
 // Buttons, typography, layout primitives all live in parent theme CSS.

@@ -35,6 +35,8 @@ themes/<brand>-child/
 
 Redefine **only** `--rehab-*` tokens — no new selectors, no layout, no block CSS. The full token set lives in `themes/rehab-parent/assets/css/tokens.css`; override the brand-distinctive ones (surfaces, sage→accent, charcoal, tan, mist, gold). See `anker-child/style.css` for a worked navy/teal example.
 
+> **Also override the `-rgb` triplet tokens.** Translucent borders/overlays use `--rehab-*-rgb` (e.g. `--rehab-sage-rgb: 79, 109, 122;`) via `rgba(var(--rehab-sage-rgb), .x)` (REH-50). Override each alongside its hex counterpart, or the semi-transparent variants stay the previous brand's colour.
+
 ## Step 3 — Brand identity (`theme_mod` filters) — **the REH-46 map**
 
 The parent reads **27 `theme_mod`s** for all brand identity (phone, socials, contact, footer, nav, schema). Set them in the child via the brand-filter pattern so they ship in code (the deploy is git-based — values set only in the DB wouldn't travel). Copy this into the child `functions.php` and fill in the brand's values:
