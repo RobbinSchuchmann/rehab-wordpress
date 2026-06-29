@@ -187,9 +187,9 @@ wp db query "DROP DATABASE live_scratch;"
 
 Point the scripts at `https://<NEW_DOMAIN>` and confirm parity with the dev box:
 
-- [ ] `audit-seo.sh` — schema + meta on every page, 0 gaps
-- [ ] `validate-sweep.js` — 0 invalid-block recoveries
-- [ ] `audit-responsive.js` — 0 overflow / overlap / zero-area buttons
+- [ ] `tools/audit-seo.sh` — schema + meta on every page, 0 gaps
+- [ ] `tools/validate-sweep.js` — 0 invalid-block recoveries
+- [ ] `tools/audit-responsive.js` — 0 overflow / overlap / zero-area buttons
 
 ---
 

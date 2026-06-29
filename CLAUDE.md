@@ -10,7 +10,7 @@ This directory (`dev-stack/`) is the **git root** (remote: `RobbinSchuchmann/reh
   - `plugins/rehab-blocks/` — the custom Gutenberg block library (`src/` is source, `build/` is the compiled output the site loads; both are tracked). Build with `npm run build` inside that folder.
   - `mu-plugins/` — `aa-block-builders.php` (PHP helpers that emit block markup), `zz-oneshot.php` (named maintenance/rebuild tasks, hit via `?rehab_oneshot=<task>`), `aa-treatment-v3-specs.php` (per-page content specs).
   - `themes/rehab-parent/` — shared parent theme; `*-child/` — per-brand child themes (token overrides).
-- The stack runs at `http://localhost:8081` (and `http://5.223.87.211:8081` externally). After a page rebuild, run `node recover-demo.js <id>` then `node check-editor.js <id>` (expect 0 "Attempt recovery").
+- The stack runs at `http://localhost:8081` (and `http://5.223.87.211:8081` externally). After a page rebuild, run `node tools/recover-demo.js <id>` then `node tools/check-editor.js <id>` (expect 0 "Attempt recovery").
 - The SQL dump + uploads live in the sibling `../diamond-rehab-wordpress-folder/` and are **not** in this repo.
 
 ## Linear workflow protocol

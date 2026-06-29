@@ -112,7 +112,7 @@ If several brands end up sharing structure, generalize the builders/specs to be 
 
 ## Step 7 — Verify on the dev stack
 
-Browse `localhost:8081` with the brand child active. Re-use the existing audit scripts (`audit-responsive.js`, `validate-sweep.js`, `audit-seo.sh`) and confirm the footer/header/schema show the brand's identity (not Diamond's).
+Browse `localhost:8081` with the brand child active. Re-use the existing audit scripts (`tools/audit-responsive.js`, `tools/validate-sweep.js`, `tools/audit-seo.sh`) and confirm the footer/header/schema show the brand's identity (not Diamond's).
 
 ## Step 8 — Deploy the code (REH-47)
 
