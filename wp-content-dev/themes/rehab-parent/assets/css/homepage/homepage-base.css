@@ -52,7 +52,7 @@ body.page-template-page-homepage .explore-navbar:not(.-exposed) .header_light_lo
 body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed),
 body.page-template-page-homepage .explore-navbar.headroom--pinned:not(.-exposed) {
 	background-color: #fff;
-	border-bottom: 1px solid rgba(186, 195, 161, 0.3);
+	border-bottom: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 }
 
 body:has(.drt-homepage) .explore-navbar.headroom--pinned:not(.-exposed) .explore-navbar_cell_item,

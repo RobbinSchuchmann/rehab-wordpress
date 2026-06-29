@@ -43,7 +43,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 0;
-	border: 1px solid rgba(190, 179, 158, 0.3);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 	margin: 0;
 	padding: 0;
 
@@ -55,7 +55,7 @@
 .rehab-treatment-phases__tab {
 	background: transparent;
 	border: 0;
-	border-right: 1px solid rgba(190, 179, 158, 0.3);
+	border-right: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 	padding: 1.5rem 1.25rem;
 	cursor: pointer;
 	font-family: var(--rehab-font-display);
@@ -69,7 +69,7 @@
 
 	@media (max-width: 720px) {
 		border-right: 0;
-		border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+		border-bottom: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 		&:last-child { border-bottom: 0; }
 	}
 }
@@ -108,7 +108,7 @@
 	grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
 	gap: 3rem;
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.3);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 	border-top: 0;
 	padding: 3rem;
 	animation: rehab-treatment-phases-fade 0.4s var(--rehab-ease) both;

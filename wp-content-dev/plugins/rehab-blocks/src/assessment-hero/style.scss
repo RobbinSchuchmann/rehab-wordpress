@@ -94,7 +94,7 @@
 	flex-wrap: wrap;
 	margin-top: 30px;
 	padding-top: 28px;
-	border-top: 1px solid rgba(186, 195, 161, 0.3);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 }
 
 .rehab-assessment-hero__signal .num {
@@ -118,7 +118,7 @@
 // ---------- Form card ----------
 .rehab-assessment-hero__form-card {
 	background: var(--rehab-sage-mist-2, #F1F3E9);
-	border: 1px solid rgba(190, 179, 158, 0.4);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.4);
 	padding: clamp(26px, 2.6vw, 36px);
 	scroll-margin-top: 110px;
 
@@ -200,7 +200,7 @@
 }
 
 .rehab-assessment-hero__field input::placeholder {
-	color: rgba(74, 74, 74, 0.45);
+	color: rgba(var(--rehab-soft-charcoal-rgb), 0.45);
 }
 
 .rehab-assessment-hero__field input:focus,
@@ -237,7 +237,7 @@
 .rehab-assessment-hero__consent {
 	font-family: var(--rehab-font-body);
 	font-size: 0.6875rem;
-	color: rgba(44, 44, 44, 0.55);
+	color: rgba(var(--rehab-warm-charcoal-rgb), 0.55);
 	line-height: 1.5;
 	margin: 16px 0 0;
 }

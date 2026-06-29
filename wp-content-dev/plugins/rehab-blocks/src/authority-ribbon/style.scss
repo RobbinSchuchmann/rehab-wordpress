@@ -1,6 +1,6 @@
 .rehab-authority-ribbon {
-	border-top: 1px solid rgba(186, 195, 161, 0.3);
-	border-bottom: 1px solid rgba(186, 195, 161, 0.3);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
+	border-bottom: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	background: var(--rehab-color-cream, #F7F4EC);
 	padding: 2.5rem 0;
 }
@@ -10,7 +10,7 @@
 	font-size: 0.72rem;
 	letter-spacing: 0.25em;
 	text-transform: uppercase;
-	color: rgba(74, 74, 74, 0.7);
+	color: rgba(var(--rehab-soft-charcoal-rgb), 0.7);
 	margin: 0 0 1.5rem;
 }
 

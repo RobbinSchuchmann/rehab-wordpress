@@ -22,7 +22,7 @@
 .rehab-columns--divided .rehab-columns__col:first-child {
 	@media (min-width: 1024px) {
 		padding-right: 3rem;
-		border-right: 1px solid rgba(186, 195, 161, 0.3);
+		border-right: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	}
 }
 

@@ -2,8 +2,8 @@
 
 .rehab-stat-band {
 	background: var(--rehab-cream-warm, #F9F7F2);
-	border-top: 1px solid rgba(186, 195, 161, 0.3);
-	border-bottom: 1px solid rgba(186, 195, 161, 0.3);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
+	border-bottom: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	padding: clamp(44px, 5vw, 76px) 0;
 }
 
@@ -27,7 +27,7 @@
 	top: 12%;
 	height: 76%;
 	width: 1px;
-	background: rgba(186, 195, 161, 0.3);
+	background: rgba(var(--rehab-sage-rgb), 0.3);
 
 	@media (max-width: 980px) { display: none; }
 }

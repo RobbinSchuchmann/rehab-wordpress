@@ -1,4 +1,4 @@
 .rehab-gallery [contenteditable='true']:focus {
-	outline: 1px dashed rgba(122, 133, 106, 0.4);
+	outline: 1px dashed rgba(var(--rehab-sage-text-rgb), 0.4);
 	outline-offset: 4px;
 }

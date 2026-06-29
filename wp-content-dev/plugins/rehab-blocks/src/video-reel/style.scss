@@ -83,12 +83,12 @@
 .rehab-video-card {
 	overflow: hidden;
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	transition: border-color 0.35s var(--rehab-ease);
 }
 
 .rehab-video-card:hover {
-	border-color: rgba(190, 179, 158, 0.4);
+	border-color: rgba(var(--rehab-tan-rgb), 0.4);
 }
 
 .rehab-video-card:hover .rehab-video-card__play {

@@ -103,7 +103,7 @@
 	overflow: hidden;
 	aspect-ratio: 4 / 5;
 	background: var(--rehab-ethereal-sage, #ECF0E8);
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	border-top-left-radius: 64px;
 
 	@media (max-width: 600px) { border-top-left-radius: 48px; }

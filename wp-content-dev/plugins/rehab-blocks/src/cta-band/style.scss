@@ -43,7 +43,7 @@
 	margin: 0 auto 1.6rem;
 }
 
-.rehab-cta-band--sage .rehab-cta-band__lede { color: rgba(44, 44, 44, 0.82); }
+.rehab-cta-band--sage .rehab-cta-band__lede { color: rgba(var(--rehab-warm-charcoal-rgb), 0.82); }
 .rehab-cta-band--dark .rehab-cta-band__lede { color: rgba(255, 255, 255, 0.62); }
 
 .rehab-cta-band__actions {
@@ -86,7 +86,7 @@
 
 .rehab-cta-band--sage .rehab-phone-link { color: var(--rehab-warm-charcoal, #2C2C2C); }
 .rehab-cta-band--sage .rehab-phone-link svg { stroke: var(--rehab-warm-charcoal, #2C2C2C); }
-.rehab-cta-band--sage .rehab-phone-link u { text-decoration-color: rgba(44, 44, 44, 0.4); }
+.rehab-cta-band--sage .rehab-phone-link u { text-decoration-color: rgba(var(--rehab-warm-charcoal-rgb), 0.4); }
 .rehab-cta-band--dark .rehab-phone-link { color: #fff; }
 .rehab-cta-band--dark .rehab-phone-link svg { stroke: var(--rehab-sage, #BAC3A1); }
 
@@ -109,7 +109,7 @@
 	flex: none;
 }
 
-.rehab-cta-band--sage .rehab-cta-band__helper { color: rgba(44, 44, 44, 0.72); }
+.rehab-cta-band--sage .rehab-cta-band__helper { color: rgba(var(--rehab-warm-charcoal-rgb), 0.72); }
 .rehab-cta-band--sage .rehab-cta-band__helper::before { background: var(--rehab-warm-charcoal, #2C2C2C); }
 .rehab-cta-band--dark .rehab-cta-band__helper { color: rgba(255, 255, 255, 0.55); }
 
@@ -120,7 +120,7 @@
 
 .rehab-cta-band__card {
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.4);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.4);
 	padding: clamp(40px, 5vw, 64px);
 	box-shadow: var(--rehab-shadow-subtle);
 }
@@ -143,7 +143,7 @@
 }
 
 .rehab-cta-band--card .rehab-cta-band__helper {
-	color: rgba(44, 44, 44, 0.72);
+	color: rgba(var(--rehab-warm-charcoal-rgb), 0.72);
 }
 
 .rehab-cta-band--card .rehab-phone-link {
@@ -154,7 +154,7 @@
 .rehab-cta-band--card .rehab-btn--dark {
 	background: var(--rehab-sage, #BAC3A1);
 	color: var(--rehab-warm-charcoal, #2C2C2C);
-	box-shadow: 0 10px 24px -10px rgba(138, 150, 116, 0.7);
+	box-shadow: 0 10px 24px -10px rgba(var(--rehab-sage-dark-rgb), 0.7);
 }
 
 .rehab-cta-band--card .rehab-btn--dark:hover {
@@ -169,7 +169,7 @@
 	background: var(--rehab-warm-charcoal, #2C2C2C);
 	color: #fff;
 	padding: 1.05rem 2.25rem;
-	box-shadow: 0 10px 24px -12px rgba(44, 44, 44, 0.6);
+	box-shadow: 0 10px 24px -12px rgba(var(--rehab-warm-charcoal-rgb), 0.6);
 }
 
 .rehab-btn--dark:hover {

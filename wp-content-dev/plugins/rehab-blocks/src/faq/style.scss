@@ -22,11 +22,11 @@
    Design language ported from drt-accordion: tan borders top+bottom, ivymode
    trigger text, chevron rotation on expand, soft hover background. */
 .rehab-faq-item {
-	border-top: 1px solid rgba(190, 179, 158, 0.3);
+	border-top: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 }
 
 .rehab-faq-item:last-child {
-	border-bottom: 1px solid rgba(190, 179, 158, 0.3);
+	border-bottom: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
 }
 
 .rehab-faq-item summary {

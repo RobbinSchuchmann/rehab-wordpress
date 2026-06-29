@@ -41,7 +41,7 @@
 /* Single testimonial card */
 .rehab-testimonial {
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.2);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.2);
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
@@ -50,7 +50,7 @@
 }
 
 .rehab-testimonial:hover {
-	border-color: rgba(190, 179, 158, 0.4);
+	border-color: rgba(var(--rehab-tan-rgb), 0.4);
 	box-shadow: var(--rehab-shadow-subtle);
 }
 
@@ -85,7 +85,7 @@
 	flex-direction: column;
 	gap: 0.125rem;
 	padding-top: 0.5rem;
-	border-top: 1px solid rgba(186, 195, 161, 0.2);
+	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.2);
 }
 
 .rehab-testimonial__name {

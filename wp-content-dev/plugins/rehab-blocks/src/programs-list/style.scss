@@ -31,7 +31,7 @@
 /* Single program card */
 .rehab-program {
 	background: #fff;
-	border: 1px solid rgba(190, 179, 158, 0.25);
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.25);
 	padding: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -40,7 +40,7 @@
 }
 
 .rehab-program:hover {
-	border-color: rgba(186, 195, 161, 0.6);
+	border-color: rgba(var(--rehab-sage-rgb), 0.6);
 	box-shadow: var(--rehab-shadow-subtle);
 }
 
