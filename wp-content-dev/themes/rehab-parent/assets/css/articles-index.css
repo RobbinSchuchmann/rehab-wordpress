@@ -1,3 +1,19 @@
+/* This stylesheet uses a numbered space scale that isn't defined in tokens.css
+   (only the named --rehab-space-xs/sm/md/lg/xl exist), so every var(--rehab-space-N)
+   below was invalid — collapsing the grid gap and all spacing to 0 (REH-51).
+   Define the scale locally, scoped to this page so treatment.css (which has the
+   same latent dependency) is untouched. */
+.rehab-articles-index,
+.rehab-articles-index__hero {
+	--rehab-space-2: 0.5rem;
+	--rehab-space-3: 0.75rem;
+	--rehab-space-5: 1.5rem;
+	--rehab-space-6: 1.75rem;
+	--rehab-space-7: 2.5rem;
+	--rehab-space-8: 3.5rem;
+	--rehab-space-9: 4rem;
+}
+
 .rehab-articles-index__hero {
 	padding-block: var(--rehab-space-8) var(--rehab-space-7);
 	text-align: center;
