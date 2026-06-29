@@ -18,8 +18,10 @@ $articles_query = new WP_Query( [
 	'paged'          => $paged,
 	'meta_key'       => '_wp_page_template',
 	'meta_value'     => 'template-article.php',
-	'orderby'        => 'modified',
-	'order'          => 'DESC',
+	// Alphabetical by title — a scannable order, vs the previous 'modified DESC'
+	// which read as random to visitors (REH-51).
+	'orderby'        => 'title',
+	'order'          => 'ASC',
 ] );
 
 while ( have_posts() ) :
