@@ -11,7 +11,7 @@ editor.
 ```
 dev-stack/
   docker-compose.yml             WP 6.4 + MariaDB on localhost:8081
-  recover-demo.js                Playwright helper: canonicalize block markup
+  tools/recover-demo.js                Playwright helper: canonicalize block markup
                                  via wp.data after bulk-edit migrations
   screenshot-*.js                Playwright helpers for visual QA
   wp-content-dev/
@@ -105,7 +105,7 @@ Block markup saved by PHP migration tasks may not be fully canonical
 (e.g. attribute order, whitespace). Run the canonicalizer:
 
 ```bash
-node recover-demo.js <post_id>
+node tools/recover-demo.js <post_id>
 ```
 
 This loads the post in Gutenberg via Playwright, lets `wp.data` re-render
