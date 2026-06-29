@@ -38,7 +38,7 @@
     },
     "primaryUrl": {
       "type": "string",
-      "default": "#assessment"
+      "default": "/contact-us/"
     },
     "secondaryText": {
       "type": "string",
@@ -46,7 +46,7 @@
     },
     "secondaryUrl": {
       "type": "string",
-      "default": "#program"
+      "default": "/programme/"
     },
     "helper": {
       "type": "string",
