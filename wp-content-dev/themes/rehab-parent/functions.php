@@ -104,6 +104,13 @@ function rehab_parent_enqueue(): void {
 		$asset_ver( 'js/image-fallback.js' ),
 		true
 	);
+	wp_enqueue_script(
+		'rehab-contact-sheet',
+		"$base_uri/js/contact-sheet.js",
+		[],
+		$asset_ver( 'js/contact-sheet.js' ),
+		true
+	);
 }
 add_action( 'wp_enqueue_scripts', 'rehab_parent_enqueue' );
 
