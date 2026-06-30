@@ -314,7 +314,8 @@
 	}
 	.rehab-treatment-phases__panel.is-open .rehab-treatment-phases__main {
 		display: block;
-		padding: 0 1.25rem 1.5rem;
+		/* Even top/bottom spacing so the content doesn't hug the phase header. */
+		padding: 1.5rem 1.25rem;
 	}
 	.rehab-treatment-phases__panel.is-open .rehab-treatment-phases__aside {
 		display: flex;
