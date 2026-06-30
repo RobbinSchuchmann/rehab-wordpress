@@ -60,4 +60,20 @@ rsync -az $DRY -e "$ssh_cmd" \
   "$SRC/mu-plugins/zz-mail-from.php" \
   "$DEST/mu-plugins/"
 
+# Purge Breeze cache so the new code is visible to visitors. Breeze caches the
+# page HTML + the combined CSS/JS bundle behind Varnish, so a deploy won't show
+# until purged (the master user has no varnishadm/sudo, so the Breeze CLI is the
+# only way — REH-56). Non-fatal: the code has already shipped by this point, so a
+# purge failure warns rather than failing the deploy. Skipped on dry runs.
+if [ -z "$DRY" ]; then
+  echo "  -> purging Breeze cache (wp breeze purge --cache=all)"
+  if $ssh_cmd "$DEPLOY_USER@$DEPLOY_HOST" "cd '$DEPLOY_PATH' && wp breeze purge --cache=all"; then
+    echo "     cache purged"
+  else
+    echo "WARNING: cache purge failed — purge manually via 'wp breeze purge --cache=all' or the Cloudways panel (Purge Varnish)." >&2
+  fi
+else
+  echo "  -> (dry run) skipping cache purge"
+fi
+
 echo "Done."
