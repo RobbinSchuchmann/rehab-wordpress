@@ -128,6 +128,17 @@ function rehab_contact_form_submit( WP_REST_Request $req ) {
 	$subject_tpl = (string) get_theme_mod( 'rehab_form_subject', 'New enquiry — %name%' );
 	$subject = strtr( $subject_tpl, [ '%name%' => $name, '%email%' => $email ] );
 
+	// Resolve the submitting page to a human-readable title so the team can tell
+	// at a glance which page produced the lead, not just its raw URL.
+	$source_url = $source ?: ( wp_get_referer() ?: '' );
+	$page_title = '';
+	if ( $source_url ) {
+		$src_pid = url_to_postid( $source_url );
+		if ( $src_pid ) {
+			$page_title = get_the_title( $src_pid );
+		}
+	}
+
 	$body  = "A new contact form submission:\n\n";
 	$body .= "Name:    $name\n";
 	$body .= "Email:   $email\n";
@@ -135,7 +146,8 @@ function rehab_contact_form_submit( WP_REST_Request $req ) {
 	if ( $country ) $body .= "Country: $country\n";
 	if ( $message ) $body .= "\nMessage:\n$message\n";
 	$body .= "\n----\n";
-	$body .= "Source:  " . ( $source ?: wp_get_referer() ) . "\n";
+	if ( $page_title ) $body .= "Page:    $page_title\n";
+	$body .= "Source:  " . $source_url . "\n";
 	if ( $post_id ) $body .= "Admin:   " . admin_url( 'post.php?action=edit&post=' . $post_id ) . "\n";
 
 	$headers = [
