@@ -224,3 +224,100 @@
 	from { opacity: 0; transform: translateY(4px); }
 	to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Injected accordion header — hidden on desktop, the control surface on mobile.
+   See view.js: one is cloned from each tab into the top of its panel. */
+.rehab-treatment-phases__acc { display: none; }
+
+/* ── Mobile: tabs become an accordion ──────────────────────────────────────
+   Each phase expands directly under its own header, following the downward
+   scroll, instead of all content appearing beneath the row of boxes. */
+@media (max-width: 720px) {
+	/* The top row of phase boxes is replaced by the per-panel headers. */
+	.rehab-treatment-phases__nav { display: none; }
+
+	.rehab-treatment-phases__panels {
+		border: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
+	}
+
+	/* Override the desktop grid/[hidden] rules (selectors below are scoped to the
+	   block root so they win on specificity, regardless of [hidden] state). */
+	.rehab-treatment-phases .rehab-treatment-phases__panel,
+	.rehab-treatment-phases .rehab-treatment-phases__panel[hidden] {
+		display: block;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		border-bottom: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
+		animation: none;
+	}
+	.rehab-treatment-phases .rehab-treatment-phases__panel:last-child {
+		border-bottom: 0;
+	}
+
+	.rehab-treatment-phases__acc {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		width: 100%;
+		background: transparent;
+		border: 0;
+		padding: 1.35rem 1.25rem;
+		cursor: pointer;
+		text-align: left;
+		font-family: var(--rehab-font-display);
+		font-weight: 300;
+		font-size: 1.15rem;
+		color: var(--rehab-soft-charcoal);
+		transition: background 0.25s var(--rehab-ease), color 0.25s var(--rehab-ease);
+	}
+
+	.rehab-treatment-phases__acc .num {
+		font-family: var(--rehab-font-body);
+		font-size: 0.72rem;
+		letter-spacing: 0.18em;
+		color: var(--rehab-sage-text);
+		font-weight: 500;
+		text-transform: uppercase;
+		display: block;
+		margin-bottom: 0.25rem;
+	}
+
+	.rehab-treatment-phases__acc-icon {
+		flex: none;
+		width: 0.7rem;
+		height: 0.7rem;
+		border-right: 1.5px solid currentColor;
+		border-bottom: 1.5px solid currentColor;
+		transform: rotate(45deg);
+		transition: transform 0.25s var(--rehab-ease);
+		margin-top: -0.2rem;
+	}
+
+	.rehab-treatment-phases__panel.is-open > .rehab-treatment-phases__acc {
+		background: var(--rehab-warm-charcoal);
+		color: #fff;
+	}
+	.rehab-treatment-phases__panel.is-open > .rehab-treatment-phases__acc .num {
+		color: var(--rehab-sage);
+	}
+	.rehab-treatment-phases__panel.is-open .rehab-treatment-phases__acc-icon {
+		transform: rotate(-135deg);
+		margin-top: 0.2rem;
+	}
+
+	/* Collapsed by default; the body shows only when its header is open. */
+	.rehab-treatment-phases__main,
+	.rehab-treatment-phases__aside {
+		display: none;
+	}
+	.rehab-treatment-phases__panel.is-open .rehab-treatment-phases__main {
+		display: block;
+		padding: 0 1.25rem 1.5rem;
+	}
+	.rehab-treatment-phases__panel.is-open .rehab-treatment-phases__aside {
+		display: flex;
+		margin: 0 1.25rem 1.5rem;
+	}
+}
