@@ -101,3 +101,142 @@
 		padding-bottom: 76px;
 	}
 }
+
+/* ── Mobile contact chooser (bottom sheet) ─────────────────────────────────
+   Opened from the sticky "Talk with admissions" CTA. Lets people pick how to
+   reach us (call / form / WhatsApp) instead of being bounced to another page. */
+.rehab-contact-sheet {
+	position: fixed;
+	inset: 0;
+	z-index: 80;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+.rehab-contact-sheet[hidden] {
+	display: none;
+}
+body.rehab-sheet-open {
+	overflow: hidden;
+}
+
+.rehab-contact-sheet__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(31, 29, 26, 0.5);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+.rehab-contact-sheet.is-open .rehab-contact-sheet__backdrop {
+	opacity: 1;
+}
+
+.rehab-contact-sheet__panel {
+	position: relative;
+	width: 100%;
+	max-width: 520px;
+	background: #fff;
+	border-radius: 18px 18px 0 0;
+	padding: 1.75rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
+	box-shadow: 0 -10px 40px -10px rgba(0, 0, 0, 0.25);
+	transform: translateY(100%);
+	transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rehab-contact-sheet.is-open .rehab-contact-sheet__panel {
+	transform: translateY(0);
+}
+
+.rehab-contact-sheet__title {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.35rem;
+	color: var(--rehab-warm-charcoal);
+	margin: 0 0 1.1rem;
+}
+
+.rehab-contact-sheet__close {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	width: 2.25rem;
+	height: 2.25rem;
+	border: 0;
+	background: transparent;
+	font-size: 1.7rem;
+	line-height: 1;
+	color: var(--rehab-soft-charcoal);
+	cursor: pointer;
+}
+
+.rehab-contact-sheet__options {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.rehab-contact-sheet__option {
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+	padding: 0.9rem 1rem;
+	border: 1px solid rgba(190, 179, 158, 0.4);
+	border-radius: 12px;
+	text-decoration: none;
+	color: var(--rehab-warm-charcoal);
+	transition: background 0.2s ease, border-color 0.2s ease;
+}
+.rehab-contact-sheet__option:hover,
+.rehab-contact-sheet__option:focus-visible {
+	background: var(--rehab-color-cream, #f7f4ec);
+	border-color: var(--rehab-sage);
+}
+
+.rehab-contact-sheet__icon {
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.4rem;
+	height: 2.4rem;
+	border-radius: 50%;
+	background: var(--rehab-ethereal-sage, #eef1ea);
+	color: var(--rehab-sage-text);
+}
+.rehab-contact-sheet__icon svg {
+	width: 1.2rem;
+	height: 1.2rem;
+}
+
+.rehab-contact-sheet__label {
+	display: flex;
+	flex-direction: column;
+}
+.rehab-contact-sheet__label-main {
+	font-size: 1rem;
+	font-weight: 500;
+}
+.rehab-contact-sheet__label-sub {
+	font-size: 0.8rem;
+	color: var(--rehab-soft-charcoal);
+}
+
+.rehab-contact-sheet__assurance {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 1.1rem 0 0;
+	font-size: 0.82rem;
+	color: var(--rehab-soft-charcoal);
+}
+.rehab-contact-sheet__assurance svg {
+	width: 0.95rem;
+	height: 0.95rem;
+	flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rehab-contact-sheet__panel,
+	.rehab-contact-sheet__backdrop {
+		transition: none;
+	}
+}
