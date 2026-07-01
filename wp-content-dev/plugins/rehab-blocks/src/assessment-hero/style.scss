@@ -62,6 +62,17 @@
 	margin-bottom: 26px;
 }
 
+/* On desktop the form card sits beside the copy (grid is 2-col above 980px), so
+   the "Talk with admissions" CTA — which only jumps to that same form — is
+   redundant. Hide it there; it stays at <=980px where the form stacks below the
+   copy and the CTA is a useful jump to it. The phone link and the form's own
+   submit button (scoped elsewhere) are unaffected. (REH-60) */
+@media (min-width: 981px) {
+	.rehab-assessment-hero__cta-row .rehab-btn--luxury {
+		display: none;
+	}
+}
+
 .rehab-assessment-hero__rating {
 	display: inline-flex;
 	align-items: center;
