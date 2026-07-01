@@ -552,6 +552,33 @@ function rehab_breadcrumb_category( int $post_id ): string {
 }
 
 /**
+ * Resolve a breadcrumb category name to its treatments-hub section anchor, so the
+ * subcategory crumb points somewhere distinct from the parent "Treatments" crumb
+ * (which links to /all-treatments/). The hub (template-treatments-hub.php) renders
+ * one `id="cat-*"` section per category from the `rehab_treatments_hub_categories`
+ * filter; match the name against each section's eyebrow/heading. Falls back to the
+ * plain hub URL when nothing matches. (REH-58)
+ */
+function rehab_breadcrumb_category_url( string $name ): string {
+	$hub  = home_url( '/all-treatments/' );
+	$name = trim( $name );
+	if ( '' === $name ) return $hub;
+
+	$cats = apply_filters( 'rehab_treatments_hub_categories', [] );
+	if ( is_array( $cats ) ) {
+		$needle = strtolower( $name );
+		foreach ( $cats as $cat ) {
+			if ( empty( $cat['id'] ) ) continue;
+			$haystack = strtolower( ( $cat['eyebrow'] ?? '' ) . ' ' . ( $cat['heading'] ?? '' ) );
+			if ( '' !== $haystack && false !== strpos( $haystack, $needle ) ) {
+				return $hub . '#' . $cat['id'];
+			}
+		}
+	}
+	return $hub;
+}
+
+/**
  * Emit JSON-LD structured data: Organization (sitewide), WebSite with
  * SearchAction (sitewide), Article (on template-article pages),
  * BreadcrumbList (on template-treatment pages).
