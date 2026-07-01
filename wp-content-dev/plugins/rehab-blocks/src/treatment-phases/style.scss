@@ -224,3 +224,61 @@
 	from { opacity: 0; transform: translateY(4px); }
 	to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Injected per-phase heading — hidden on desktop (tabs handle labelling);
+   shown in the mobile vertical list below (see view.js). */
+.rehab-treatment-phases__phase-heading { display: none; }
+
+/* ── Mobile: show every phase in full, as a simple vertical list ───────────
+   No tabs, no toggles — each phase's heading followed by its content, in
+   reading order, so it follows the natural downward scroll. */
+@media (max-width: 720px) {
+	.rehab-treatment-phases__nav { display: none; }
+
+	/* Reveal every panel (override the tabs' [hidden]) and drop the card chrome
+	   so phases read as plain stacked content, not boxes. Selectors are scoped to
+	   the block root so they beat the desktop `:not([hidden])` / `[hidden]` rules. */
+	.rehab-treatment-phases .rehab-treatment-phases__panel,
+	.rehab-treatment-phases .rehab-treatment-phases__panel[hidden] {
+		display: block;
+		background: transparent;
+		border: 0;
+		padding: 0;
+		margin: 0;
+		animation: none;
+	}
+	.rehab-treatment-phases .rehab-treatment-phases__panel + .rehab-treatment-phases__panel {
+		margin-top: 2.5rem;
+		padding-top: 2.5rem;
+		border-top: 1px solid rgba(var(--rehab-tan-rgb), 0.3);
+	}
+
+	.rehab-treatment-phases__phase-heading {
+		display: block;
+		margin-bottom: 1rem;
+	}
+	.rehab-treatment-phases__phase-heading .num {
+		display: block;
+		font-family: var(--rehab-font-body);
+		font-size: 0.72rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--rehab-sage-text);
+		font-weight: 500;
+		margin-bottom: 0.4rem;
+	}
+	.rehab-treatment-phases__phase-heading .label {
+		display: block;
+		font-family: var(--rehab-font-display);
+		font-weight: 300;
+		font-size: 1.5rem;
+		line-height: 1.15;
+		letter-spacing: -0.01em;
+		color: var(--rehab-warm-charcoal);
+	}
+
+	/* Pull-quote keeps its styled box, just spaced below the phase body. */
+	.rehab-treatment-phases__aside {
+		margin-top: 1.5rem;
+	}
+}
