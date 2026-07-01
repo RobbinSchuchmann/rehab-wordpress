@@ -38,7 +38,7 @@ while ( have_posts() ) :
 					<?php if ( ! $is_landing ) : ?>
 						<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>">Treatments</a></li>
 						<?php if ( $crumb_cat ) : ?>
-							<li><a href="<?php echo esc_url( home_url( '/all-treatments/' ) ); ?>"><?php echo esc_html( $crumb_cat ); ?></a></li>
+							<li><a href="<?php echo esc_url( rehab_breadcrumb_category_url( $crumb_cat ) ); ?>"><?php echo esc_html( $crumb_cat ); ?></a></li>
 						<?php endif; ?>
 					<?php endif; ?>
 					<li aria-current="page"><?php the_title(); ?></li>
