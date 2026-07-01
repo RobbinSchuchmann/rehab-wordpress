@@ -247,9 +247,23 @@
 }
 
 .rehab-team-profile__card-phone {
+	display: inline-flex;
+	align-items: center;
 	justify-content: center;
+	gap: 8px;
 	margin-top: 16px;
 	width: 100%;
+}
+
+/* The shared .rehab-phone-link base + icon sizing live in the assessment-hero
+   stylesheet, which isn't enqueued on team pages — so without this the SVG has
+   no size and renders at the flex-container width (~300px). Size + tint it to
+   match the site convention (cf. feature-split / cta-band). */
+.rehab-team-profile__card-phone svg {
+	width: 16px;
+	height: 16px;
+	flex: none;
+	stroke: var(--rehab-sage-dark, #8A9674);
 }
 
 .rehab-team-profile__form-status {
