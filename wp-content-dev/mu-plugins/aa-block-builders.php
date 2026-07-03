@@ -763,7 +763,8 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		'eyebrow' => 'The advantage of inpatient care',
 		'heading' => 'Why distance makes recovery possible',
 	], $spec['inpatient'] ?? [] ) );
-	$blocks .= rehab_block_benefits_numbered( [
+	// Benefits: shared copy by default; specs override per condition via $spec['benefits'].
+	$blocks .= rehab_block_benefits_numbered( $spec['benefits'] ?? [
 		[ 'title' => 'Distance from triggers', 'body' => 'Away from the people, places and routines that keep the cycle turning.' ],
 		[ 'title' => 'Round-the-clock supervision', 'body' => 'Resort-calm surroundings backed by qualified medical staff, day and night.' ],
 		[ 'title' => 'A plan built for you', 'body' => 'A program tailored to your clinical picture, not a fixed curriculum.' ],
@@ -826,16 +827,26 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		$blocks .= rehab_block_cards_grid( 'Other conditions we treat', '', $cards, 3, 'white' );
 	}
 
-	// FAQ: cptIds pass through; faqNew items are created in the FAQ CPT
-	// (or matched by exact title) so the CPT stays the single source of truth.
-	$faq_items = array_map( static fn( $id ) => [ 'cptId' => (int) $id ], $spec['faqCptIds'] ?? [] );
-	foreach ( $spec['faqNew'] ?? [] as $df ) {
-		$match  = get_posts( [ 'post_type' => 'faq', 'title' => $df['question'], 'posts_per_page' => 1, 'fields' => 'ids' ] );
+	// FAQ: $spec['faqs'] is an ordered list mixing [ 'cptId' => N ] refs to
+	// shared FAQ posts and [ 'question' => …, 'answer' => … ] page-local items.
+	// Page-local posts are created with post_parent = page id and matched by
+	// title *within that page*, so condition-specific answers to a question
+	// shared across pages never collide (REH-64). Legacy faqCptIds + faqNew
+	// keys still work and behave like the old cptIds-then-new ordering.
+	$faq_defs = $spec['faqs'] ?? array_merge(
+		array_map( static fn( $id ) => [ 'cptId' => (int) $id ], $spec['faqCptIds'] ?? [] ),
+		$spec['faqNew'] ?? []
+	);
+	$faq_items = [];
+	foreach ( $faq_defs as $df ) {
+		if ( isset( $df['cptId'] ) ) { $faq_items[] = [ 'cptId' => (int) $df['cptId'] ]; continue; }
+		$match  = get_posts( [ 'post_type' => 'faq', 'title' => $df['question'], 'post_parent' => $page_id, 'posts_per_page' => 1, 'fields' => 'ids' ] );
 		$faq_id = $match ? (int) $match[0] : wp_insert_post( [
 			'post_type'    => 'faq',
 			'post_status'  => 'publish',
 			'post_title'   => $df['question'],
 			'post_content' => $df['answer'],
+			'post_parent'  => $page_id,
 		] );
 		if ( $faq_id && ! is_wp_error( $faq_id ) ) {
 			$faq_items[] = [ 'cptId' => $faq_id ];
