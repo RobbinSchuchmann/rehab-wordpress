@@ -47,15 +47,17 @@ echo "Deploying BRAND='$BRAND' -> $DEPLOY_HOST:$DEPLOY_PATH/wp-content ${DRY:+(D
 # The shared engine plus exactly one brand's child theme.
 for d in themes/rehab-parent "$CHILD_THEME" plugins/rehab-blocks; do
   echo "  -> $d"
-  rsync -az --delete $DRY -e "$ssh_cmd" "$SRC/$d/" "$DEST/$d/"
+  # node_modules is dev-only tooling — never ship it to the public plugin dir.
+  rsync -az --delete --exclude node_modules $DRY -e "$ssh_cmd" "$SRC/$d/" "$DEST/$d/"
 done
 
 # mu-plugins: ONLY the production-safe files, and crucially NO --delete,
 # so server-only files (e.g. zz-staging-noindex.php) are never removed and the
 # dangerous dev mu-plugins are never introduced.
-echo "  -> mu-plugins (zz-contact-form.php, zz-redirects.php, zz-mail-from.php)"
+echo "  -> mu-plugins (zz-contact-form.php, zz-intake-form.php, zz-redirects.php, zz-mail-from.php)"
 rsync -az $DRY -e "$ssh_cmd" \
   "$SRC/mu-plugins/zz-contact-form.php" \
+  "$SRC/mu-plugins/zz-intake-form.php" \
   "$SRC/mu-plugins/zz-redirects.php" \
   "$SRC/mu-plugins/zz-mail-from.php" \
   "$DEST/mu-plugins/"

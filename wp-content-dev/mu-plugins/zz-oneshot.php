@@ -3214,6 +3214,19 @@ add_action( 'init', function () {
 			}
 			break;
 
+		case 'rebuild-intake-form':
+			// REH-65: replace the intake page's content with the native
+			// rehab/intake-form block (rebuild of the legacy Forminator wizard).
+			// Backup: previous content is kept as a revision by wp_update_post.
+			$page_id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 5440;
+			$post    = get_post( $page_id );
+			if ( ! $post ) { echo "no post $page_id\n"; break; }
+			$blocks = "<!-- wp:rehab/intake-form {\"anchorId\":\"intake\"} /-->\n";
+			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => $blocks ], true );
+			if ( is_wp_error( $res ) ) { echo 'FAIL: ' . $res->get_error_message() . "\n"; break; }
+			echo "OK rebuilt page $page_id ({$post->post_name}) with rehab/intake-form (" . strlen( $blocks ) . " bytes)\n";
+			break;
+
 		default:
 			echo "unknown task\n";
 	}
