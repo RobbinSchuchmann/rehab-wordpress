@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/intake-form",
+  "version": "0.1.0",
+  "title": "Intake Form",
+  "category": "rehab",
+  "icon": "clipboard",
+  "description": "Multi-step admissions intake questionnaire (native rebuild of the legacy Forminator intake form): personal, travel, medical, addiction and billing sections with conditional fields and e-signature. Field structure lives in assets/intake-spec.json.",
+  "keywords": ["intake", "form", "admissions", "questionnaire"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "anchorId":  { "type": "string", "default": "intake" },
+    "eyebrow":   { "type": "string", "default": "Confidential admissions" },
+    "heading":   { "type": "string", "default": "Intake form" },
+    "lead":      { "type": "string", "default": "Everything you share here is treated as strictly confidential and is only used by our clinical and admissions team to prepare your stay." }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "viewScript":   "file:./view.js",
+  "render":       "file:./render.php"
+}

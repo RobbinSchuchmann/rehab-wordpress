@@ -1,0 +1,412 @@
+/**
+ * rehab/intake-form — multi-step intake wizard.
+ * Follows the shared rehab token set (see rehab-parent theme).
+ */
+
+.rehab-intake {
+	padding: clamp(3rem, 6vw, 5.5rem) 1.25rem;
+
+	// Author display rules on fields/groups would otherwise beat the UA's
+	// [hidden] { display: none } — conditions and step switching rely on it.
+	[hidden] {
+		display: none !important;
+	}
+
+	&__inner {
+		max-width: 860px;
+		margin: 0 auto;
+	}
+
+	&__header {
+		text-align: center;
+		margin-bottom: 2.5rem;
+	}
+
+	&__eyebrow {
+		font-size: 0.8125rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--rehab-sage-dark);
+		margin: 0 0 0.75rem;
+	}
+
+	&__heading {
+		font-family: var(--rehab-font-display);
+		font-size: clamp(2rem, 4.5vw, 2.75rem);
+		color: var(--rehab-warm-charcoal);
+		margin: 0 0 1rem;
+	}
+
+	&__lead {
+		max-width: 560px;
+		margin: 0 auto;
+		color: rgba(var(--rehab-soft-charcoal-rgb), 0.85);
+		line-height: 1.6;
+	}
+
+	&__form {
+		background: #fff;
+		border: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.12);
+		border-radius: 16px;
+		padding: clamp(1.5rem, 4vw, 2.75rem);
+		box-shadow: 0 18px 45px rgba(var(--rehab-soft-charcoal-rgb), 0.07);
+	}
+
+	// -- progress -----------------------------------------------------------
+	&__progress {
+		height: 6px;
+		border-radius: 999px;
+		background: rgba(var(--rehab-sage-rgb), 0.18);
+		overflow: hidden;
+	}
+
+	&__progress-fill {
+		height: 100%;
+		border-radius: 999px;
+		background: var(--rehab-sage-dark);
+		transition: width 0.35s ease;
+	}
+
+	&__step-count {
+		font-size: 0.8125rem;
+		color: rgba(var(--rehab-soft-charcoal-rgb), 0.65);
+		margin: 0.5rem 0 1.75rem;
+	}
+
+	// -- structure ------------------------------------------------------------
+	&__step {
+		border: 0;
+		padding: 0;
+		margin: 0;
+		min-inline-size: auto;
+	}
+
+	&__row {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: 0.35rem 1.25rem;
+		margin-bottom: 1.1rem;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	.is-cols-3  { grid-column: span 3; }
+	.is-cols-6  { grid-column: span 6; }
+	.is-cols-12 { grid-column: span 12; }
+
+	@media (max-width: 640px) {
+		.is-cols-3 { grid-column: span 6; }
+		.is-cols-6, .is-cols-3.is-mobile-full { grid-column: span 12; }
+	}
+
+	&__section {
+		border-bottom: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.12);
+		padding-bottom: 0.75rem;
+		margin-bottom: 0.5rem;
+
+		h2 {
+			font-family: var(--rehab-font-display);
+			font-size: 1.375rem;
+			color: var(--rehab-warm-charcoal);
+			margin: 0;
+		}
+
+		p {
+			margin: 0.5rem 0 0;
+			color: rgba(var(--rehab-soft-charcoal-rgb), 0.75);
+			font-size: 0.9375rem;
+			line-height: 1.55;
+		}
+	}
+
+	// -- fields ---------------------------------------------------------------
+	&__field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	&__label {
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: var(--rehab-warm-charcoal);
+		line-height: 1.45;
+	}
+
+	&__sublabel {
+		display: block;
+		font-size: 0.8125rem;
+		color: rgba(var(--rehab-soft-charcoal-rgb), 0.65);
+		margin-bottom: 0.25rem;
+	}
+
+	&__req {
+		color: #b3541e;
+	}
+
+	&__desc {
+		font-size: 0.875rem;
+		color: rgba(var(--rehab-soft-charcoal-rgb), 0.7);
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="tel"],
+	input[type="number"],
+	select,
+	textarea {
+		font: inherit;
+		font-size: 0.9688rem;
+		color: var(--rehab-warm-charcoal);
+		background: #fff;
+		border: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.25);
+		border-radius: 10px;
+		padding: 0.65rem 0.85rem;
+		width: 100%;
+
+		&:focus {
+			outline: 2px solid var(--rehab-sage);
+			outline-offset: 1px;
+			border-color: var(--rehab-sage-dark);
+		}
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 120px;
+	}
+
+	.has-error input,
+	.has-error select,
+	.has-error textarea,
+	.has-error &__signature canvas {
+		border-color: #b3541e;
+	}
+
+	&__error {
+		font-size: 0.8125rem;
+		color: #b3541e;
+		margin: 0;
+		min-height: 0;
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	// -- radios --------------------------------------------------------------
+	&__radios {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	&__radio {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		border: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.25);
+		border-radius: 999px;
+		padding: 0.45rem 0.9rem;
+		font-size: 0.9063rem;
+		cursor: pointer;
+		user-select: none;
+
+		input {
+			accent-color: var(--rehab-sage-dark);
+			margin: 0;
+		}
+
+		&:has(input:checked) {
+			border-color: var(--rehab-sage-dark);
+			background: rgba(var(--rehab-sage-rgb), 0.12);
+		}
+	}
+
+	// -- date ------------------------------------------------------------------
+	&__date {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1.4fr;
+		gap: 0.75rem;
+	}
+
+	// -- groups -----------------------------------------------------------------
+	&__group {
+		border: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.14);
+		border-radius: 12px;
+		padding: 1.1rem 1.25rem 1.25rem;
+		background: rgba(var(--rehab-tan-rgb), 0.06);
+	}
+
+	&__group-title {
+		font-family: var(--rehab-font-display);
+		font-size: 1.0625rem;
+		color: var(--rehab-warm-charcoal);
+		margin: 0 0 0.35rem;
+	}
+
+	&__group-item {
+		position: relative;
+		padding-top: 0.75rem;
+
+		+ .rehab-intake__group-item {
+			border-top: 1px dashed rgba(var(--rehab-soft-charcoal-rgb), 0.2);
+			margin-top: 0.75rem;
+		}
+	}
+
+	&__group-add,
+	&__group-remove,
+	&__sig-clear {
+		font: inherit;
+		font-size: 0.875rem;
+		color: var(--rehab-sage-dark);
+		background: none;
+		border: 1px solid rgba(var(--rehab-sage-rgb), 0.45);
+		border-radius: 999px;
+		padding: 0.35rem 0.95rem;
+		cursor: pointer;
+		width: fit-content;
+
+		&:hover {
+			background: rgba(var(--rehab-sage-rgb), 0.1);
+		}
+	}
+
+	&__group-add {
+		margin-top: 0.85rem;
+	}
+
+	&__group-remove {
+		margin-top: 0.5rem;
+	}
+
+	// -- content blocks -----------------------------------------------------------
+	&__content {
+		background: rgba(var(--rehab-sage-rgb), 0.08);
+		border-radius: 12px;
+		padding: 1.1rem 1.35rem;
+		font-size: 0.9375rem;
+		line-height: 1.6;
+		color: var(--rehab-warm-charcoal);
+
+		h3 {
+			font-family: var(--rehab-font-display);
+			font-size: 1.0625rem;
+			margin: 0 0 0.5rem;
+		}
+
+		ul {
+			margin: 0.25rem 0 0.25rem 1.1rem;
+			padding: 0;
+		}
+
+		li {
+			margin-bottom: 0.3rem;
+		}
+	}
+
+	// -- signature -------------------------------------------------------------------
+	&__signature {
+		canvas {
+			display: block;
+			width: 100%;
+			background: #fff;
+			border: 1px dashed rgba(var(--rehab-soft-charcoal-rgb), 0.35);
+			border-radius: 10px;
+			touch-action: none;
+			cursor: crosshair;
+		}
+
+		.rehab-intake__sig-clear {
+			margin-top: 0.5rem;
+		}
+	}
+
+	// -- nav / submit -----------------------------------------------------------------
+	&__nav {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-top: 2rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.1);
+	}
+
+	&__prev {
+		font: inherit;
+		font-size: 0.9375rem;
+		color: var(--rehab-warm-charcoal);
+		background: none;
+		border: 1px solid rgba(var(--rehab-soft-charcoal-rgb), 0.3);
+		border-radius: 999px;
+		padding: 0.7rem 1.5rem;
+		cursor: pointer;
+	}
+
+	&__next,
+	&__submit {
+		font: inherit;
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: var(--rehab-sage-text, #fff);
+		background: var(--rehab-sage-dark);
+		border: 0;
+		border-radius: 999px;
+		padding: 0.7rem 1.75rem;
+		cursor: pointer;
+		margin-left: auto;
+
+		&:hover {
+			filter: brightness(1.06);
+		}
+
+		&:disabled {
+			opacity: 0.55;
+			cursor: default;
+		}
+	}
+
+	// -- misc ------------------------------------------------------------------------------
+	&__hp {
+		position: absolute !important;
+		left: -9999px !important;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+	}
+
+	&__status {
+		margin: 1rem 0 0;
+		font-size: 0.9375rem;
+
+		&[data-state="error"] {
+			color: #b3541e;
+		}
+
+		&[data-state="pending"] {
+			color: rgba(var(--rehab-soft-charcoal-rgb), 0.7);
+		}
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	&__thankyou {
+		max-width: 620px;
+		margin: 0 auto;
+		text-align: center;
+		background: #fff;
+		border: 1px solid rgba(var(--rehab-sage-rgb), 0.4);
+		border-radius: 16px;
+		padding: 3rem 2rem;
+		font-family: var(--rehab-font-display);
+		font-size: 1.25rem;
+		color: var(--rehab-warm-charcoal);
+	}
+}

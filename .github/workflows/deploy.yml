@@ -16,6 +16,7 @@ on:
       - 'wp-content-dev/themes/diamond-child/**'
       - 'wp-content-dev/plugins/rehab-blocks/**'
       - 'wp-content-dev/mu-plugins/zz-contact-form.php'
+      - 'wp-content-dev/mu-plugins/zz-intake-form.php'
       - 'wp-content-dev/mu-plugins/zz-redirects.php'
       - 'wp-content-dev/mu-plugins/zz-mail-from.php'
       - 'scripts/deploy-to-cloudways.sh'
