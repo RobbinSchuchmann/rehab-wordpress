@@ -205,6 +205,10 @@ add_action( 'init', function () {
 			// hardcoded to the staging host. This rebuilds via the builders (correct
 			// escaping), faithful to the live content, restoring the dropped sections
 			// + a final-cta enquiry form, all images on relative uploads paths.
+			// REH-70: reworked the body to match the Hua Hin rhythm — an "As featured
+			// in" authority ribbon under the hero, and the formerly-stacked text
+			// sections rebuilt as alternating image + text article rows. Wording
+			// unchanged; the two ATO/considerations criteria lists are now row lists.
 			$pid = 8973;
 			$p   = get_post( $pid );
 			if ( ! $p ) { echo "no page $pid\n"; break; }
@@ -229,32 +233,63 @@ add_action( 'init', function () {
 				'badgeText'     => 'Ministry of Public Health · Hospital-affiliated detox',
 			] );
 
-			$out .= rehab_block_intro_doctor_card( [
-				'background' => 'white',
-				'heading'    => 'Accessing superannuation',
-				'body'       => "To qualify for early funds release on compassionate grounds, a person is required to:\n\nProvide evidence that the treatment is not available through the public healthcare system. Registered mental health specialists must confirm this.\n\nDemonstrate necessity by proving that treatment is essential for improving the condition and quality of life.",
+			// REH-70: authority ribbon under the hero, mirroring the Hua Hin page.
+			$out .= rehab_block_authority_ribbon( 'As featured in', [
+				[ 'url' => $brand . 'business-insider.png', 'alt' => 'Business Insider' ],
+				[ 'url' => $brand . 'yahoo-finance.png',    'alt' => 'Yahoo Finance' ],
+				[ 'url' => $brand . 'well-good.png',        'alt' => 'Well+Good' ],
+				[ 'url' => $brand . 'psych-central.png',    'alt' => 'Psych Central' ],
+				[ 'url' => $brand . 'recovery-com.webp',    'alt' => 'Recovery.com' ],
+				[ 'url' => $brand . 'bangkok-hospital.png', 'alt' => 'Bangkok Hospital' ],
 			] );
 
-			$out .= rehab_block_prose(
-				"We're here to help",
-				[ 'At The Diamond Rehab Thailand, we assist with the complex superannuation application process. Our team collaborates with experts familiar with ATO requirements, including:' ],
-				[
+			// REH-70: the three formerly-stacked text sections, rebuilt as alternating
+			// image + text article rows so the page carries the same rhythm as Hua Hin.
+			$out .= rehab_block_article_row( [
+				'background'  => 'white',
+				'imageSide'   => 'left',
+				'imageAspect' => 'wide',
+				'imageUrl'    => $up . '2024/05/Meeting-Room-Session-Room-scaled.jpg',
+				'imageAlt'    => 'Meeting room at The Diamond Rehab Thailand',
+				'eyebrow'     => 'Eligibility',
+				'heading'     => 'Accessing superannuation',
+				'body'        => 'To qualify for early funds release on compassionate grounds, a person is required to:',
+				'listItems'   => [
+					'Provide evidence that the treatment is not available through the public healthcare system. Registered mental health specialists must confirm this.',
+					'Demonstrate necessity by proving that treatment is essential for improving the condition and quality of life.',
+				],
+			] );
+
+			$out .= rehab_block_article_row( [
+				'background'  => 'cream',
+				'imageSide'   => 'right',
+				'imageAspect' => 'wide',
+				'imageUrl'    => $up . '2025/12/Irene-Support-Staff-_-Admissions-1-scaled.png',
+				'imageAlt'    => 'Admissions support staff at The Diamond Rehab Thailand',
+				'eyebrow'     => 'ATO assistance',
+				'heading'     => "We're here to help",
+				'body'        => 'At The Diamond Rehab Thailand, we assist with the complex superannuation application process. Our team collaborates with experts familiar with ATO requirements, including:',
+				'listItems'   => [
 					'Eligibility guidance: providing information on qualifying for compassionate release.',
 					'Medical documentation assistance: help with the necessary reports on mental-health issues and treatment plans.',
 					'Psychiatrist evaluations: help scheduling the evaluations required for approval.',
 				],
-				'', '', 'white', 'stacked'
-			);
-
-			$out .= rehab_block_prose(
-				'The Diamond Rehab Thailand & Release My Super partnership',
-				[ "To help you access funds for treatment, we've partnered with Release My Super. For more information, contact our admissions team or visit Release My Super's website." ],
-				[], '', '', 'cream', 'stacked'
-			);
+			] );
 
 			$out .= rehab_block_article_row( [
 				'background'  => 'white',
 				'imageSide'   => 'left',
+				'imageAspect' => 'wide',
+				'imageUrl'    => $up . '2024/05/Balcony-bungalow-scaled.jpg',
+				'imageAlt'    => 'Private bungalow balcony at The Diamond Rehab Thailand',
+				'eyebrow'     => 'Partnership',
+				'heading'     => 'The Diamond Rehab Thailand & Release My Super partnership',
+				'body'        => "To help you access funds for treatment, we've partnered with Release My Super. For more information, contact our admissions team or visit Release My Super's website.",
+			] );
+
+			$out .= rehab_block_article_row( [
+				'background'  => 'cream',
+				'imageSide'   => 'right',
 				'imageAspect' => 'wide',
 				'imageUrl'    => $up . '2024/05/Beach-Hua-Hin-3-scaled.jpg',
 				'imageAlt'    => 'Beach near The Diamond Rehab Thailand, Hua Hin',
@@ -272,8 +307,8 @@ add_action( 'init', function () {
 			] );
 
 			$out .= rehab_block_article_row( [
-				'background'  => 'cream',
-				'imageSide'   => 'right',
+				'background'  => 'white',
+				'imageSide'   => 'left',
 				'imageAspect' => 'wide',
 				'imageUrl'    => $up . '2025/12/Poolview-scaled.jpg',
 				'imageAlt'    => 'Pool view at The Diamond Rehab Thailand',
