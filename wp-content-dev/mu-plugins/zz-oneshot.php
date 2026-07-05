@@ -68,6 +68,134 @@ add_action( 'init', function () {
 			echo "OK reverted homepage page $pid to template " . ( $ptpl ?: 'page-homepage.php' ) . "\n";
 			break;
 
+		case 'rebuild-huahin-location':
+			// REH-67: rebuild the Hua Hin location page (8177) as a clean, coherent
+			// "why Hua Hin" page. The migrated content had put a *location* brochure
+			// onto template-treatment.php with a duplicated hero + CTA, three
+			// orphaned heading-only intro-doctor-cards, and several activity
+			// sections dropped entirely (Golf, Kite surfing, Cicada Market). This
+			// rebuilds from the canonical live content: one hero, the full
+			// 13-activity set as consistent alternating article-rows, a "why this
+			// setting supports recovery" band, the first-week journey, one final
+			// CTA. All image URLs are stable relative uploads paths (identical
+			// dev/prod); press logos + the ministry badge use the REH-66
+			// uploads/brand path. Original content backed up to meta for revert.
+			$pid = 8177;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+			if ( ! function_exists( 'rehab_block_treatment_hero' ) ) { echo "builders not loaded (aa-block-builders.php)\n"; break; }
+
+			$up    = '/wp-content/uploads/2024/05/';
+			$brand = '/wp-content/uploads/brand/';
+
+			$out  = rehab_block_treatment_hero( [
+				'eyebrow'       => 'The Diamond Rehab · Hua Hin, Thailand',
+				'headline'      => 'Discover Hua Hin: the perfect setting for recovery',
+				'lede'          => "Hua Hin, often called the Saint Tropez of Thailand, is renowned for its stunning beaches and beautiful nature. Just a three-hour drive from Suvarnabhumi Airport in Bangkok, it's conveniently accessible without the need for a domestic flight. Hua Hin boasts excellent private hospitals, shopping malls, and vibrant night markets, all while maintaining a laid-back and peaceful atmosphere.",
+				'primaryText'   => 'Schedule a free assessment', 'primaryUrl' => '#assessment',
+				'secondaryText' => 'Call +66 3 313 5303',        'secondaryUrl' => 'tel:+6633135303',
+				'stat1Num'      => '12',   'stat1Label' => 'Maximum clients on site at any time',
+				'stat2Num'      => '24/7', 'stat2Label' => 'Doctor & clinical team on site',
+				'stat3Num'      => '3 hr', 'stat3Label' => 'From Bangkok — no domestic flight',
+				'imageUrl'      => $up . 'Bungalow-evening.jpg',
+				'imageAlt'      => 'The Diamond Rehab bungalow in the evening, Hua Hin',
+				'badgeImageUrl' => $brand . 'ministry-public-health-badge.webp',
+				'badgeTitle'    => 'Thai-licensed facility',
+				'badgeText'     => 'Ministry of Public Health · Hospital-affiliated detox',
+			] );
+
+			$out .= rehab_block_authority_ribbon( 'As featured in', [
+				[ 'url' => $brand . 'business-insider.png', 'alt' => 'Business Insider' ],
+				[ 'url' => $brand . 'yahoo-finance.png',    'alt' => 'Yahoo Finance' ],
+				[ 'url' => $brand . 'well-good.png',        'alt' => 'Well+Good' ],
+				[ 'url' => $brand . 'psych-central.png',    'alt' => 'Psych Central' ],
+				[ 'url' => $brand . 'recovery-com.webp',    'alt' => 'Recovery.com' ],
+				[ 'url' => $brand . 'bangkok-hospital.png', 'alt' => 'Bangkok Hospital' ],
+			] );
+
+			$out .= rehab_block_prose(
+				'Recovery, surrounded by the best of Thailand',
+				[ "At The Diamond Rehab, we recognise the importance of a comprehensive approach to recovery. Our individualised programs offer many activities and excursions for you to explore, ensuring there's something for everyone. Whether it's a peaceful morning meditation beach walk, an exhilarating game of Padel, or a scenic mountain biking adventure along a 30km beach road, the options are endless." ],
+				[], '', '', 'cream', 'stacked'
+			);
+
+			// The full activity set, in a logical order (nature → water → beach → sport → culture).
+			$acts = [
+				[ 'Nature & wildlife', 'Wild Elephant Excursions – Kui Buri National Park', "Ever wanted to see wild elephants in their natural habitat? Kui Buri National Park, just an hour's drive from our rehab center, offers you that breathtaking opportunity. If you love nature, we'll definitely take you there to experience the majesty of these incredible creatures up close.", 'Wild-Elephant-Excursions-Kui-Buri-National-Park.png', 'Wild elephants at Kui Buri National Park' ],
+				[ 'Nature & wildlife', 'Pa La-U waterfalls', "Just a 60-minute drive from our rehab center, you will find the breathtaking Pa La-U Waterfalls. This stunning natural wonder offers the perfect escape, where you can take a refreshing dive into the crystal-clear waters and feel as if you've stepped into heaven on Earth. Thai people from all over the country come to visit these magnificent waterfalls, and we are fortunate to have them almost in our backyard. Embrace this serene experience as part of your journey to recovery, reconnecting with nature and rejuvenating your spirit.", 'pa-la-u-waterfalls-new.png', 'Pa La-U waterfalls near Hua Hin' ],
+				[ 'Nature & wildlife', 'Khao Sam Roi Yot National Park', "Khao Sam Roi Yot National Park, located just 45 km from our center, is a paradise for adventure enthusiasts. Explore stunning caves and discover hidden temples, take a serene boat ride through winding rivers, and relax on the picturesque Laem Sala Beach. This outing is a must-see for those seeking a blend of adventure and tranquillity.", 'Khao-Sam-Roi-Yot-National-Park.png', 'Khao Sam Roi Yot National Park' ],
+				[ 'Nature & wildlife', 'Pranburi River excursions', "Just 45 minutes from our rehab center, the Pranburi River offers an exciting yet meditative outing. Take a boat ride and immerse yourself in the stunning natural scenery from the water. This excursion is perfect for clients who love photography and seek tranquillity, providing a unique opportunity to capture breathtaking moments and enjoy the peaceful surroundings.", 'Pranburi-River-Excursions.png', 'Pranburi River near Hua Hin' ],
+				[ 'Sun & water', 'Waterpark adventures in Hua Hin', "For our adventurous clients, Hua Hin boasts two exciting waterparks. Spend a day filled with thrilling slides and endless fun, or simply relax in the sun, as they say in Thailand, “sabai sabai.” These waterparks provide a perfect blend of excitement and relaxation.", 'Waterpark-Adventures-in-Hua-Hin.png', 'Waterpark in Hua Hin' ],
+				[ 'Sun & water', 'Diving adventures in Hua Hin', "Hua Hin offers breathtaking underwater experiences, perfect for those looking to explore marine life. If you're an experienced diver, you can hop on a boat and start your underwater adventure. For beginners, Hua Hin has many diving schools where you can learn the ropes. You can even earn your PADI license during your stay. Dive into recovery and emerge clean, sober, and certified!", 'Diving-Adventures-in-Hua-Hin.png', 'Diving in Hua Hin' ],
+				[ 'Sun & water', 'Seaside escapes in Hua Hin', "Situated in the Gulf of Thailand, Hua Hin boasts stunning beach views that are best experienced from the water. Why not rent a boat for a day and indulge in snorkelling, fishing, or simply relax while enjoying lunch and dinner on board, topped off with a mesmerizing sunset view? It's the perfect way to unwind and conclude a week of hard work in your recovery journey.", 'Seaside-Escapes-in-Hua-Hin.png', 'Seaside escape by boat in Hua Hin' ],
+				[ 'Sun & water', 'Kite surfing in Hua Hin', "Hua Hin is a premier destination for kite surfing, attracting enthusiasts from around the world due to its perfect wind conditions for six months of the year. If you're an experienced kite surfer, this is the ideal adrenaline kick for your day off. For those new to the sport but eager to learn, Hua Hin offers excellent schools where you can master the basics. Whether you're a seasoned pro or a beginner, kite surfing in Hua Hin provides an exhilarating experience that complements your journey to recovery.", 'Kite-Surfing-in-Hua-Hin.png', 'Kite surfing in Hua Hin' ],
+				[ 'On the beach', 'Horseback riding adventures on the beach', "Everywhere you look on the beaches of Hua Hin, you will spot people riding horses, showcasing the deep connection between this city and equestrian pursuits. Hua Hin even hosts a yearly horse-riding competition, adding to its allure for horse enthusiasts. If you're a beginner, fear not! Professional instructors are available to teach you the basics and guide you along the sandy shores. For experienced riders, saddle up and experience the exhilarating sensation of riding full speed through the water, embracing the freedom that comes with recovery.", 'Horseback-Riding-Adventures-on-the-beach.png', 'Horseback riding on the beach in Hua Hin' ],
+				[ 'Sport & leisure', 'Golf paradise in Hua Hin', "Hua Hin is a golf paradise, boasting some of the best golf courses in Thailand and Southeast Asia. With over 10 different courses all within 30 minutes from our rehab center, there's something for everyone. Whether you prefer a 9-hole course, an 18-hole course, or just want to practice on a driving range, Hua Hin offers it all. From beginners to pros, every golfer can find their perfect game here, making it an ideal activity to enhance your recovery experience.", 'Golf-Paradise-in-Hua-Hin.png', 'Golf course in Hua Hin' ],
+				[ 'Thai culture', 'Temple visits in Hua Hin', "Thailand's rich Buddhist heritage is evident in its vast array of temples, with over 40,000 spread across the country. In Hua Hin, you have the unique opportunity to visit temples that overlook both the majestic mountains and the serene sea. The choice is yours: whether you seek spiritual solace, breathtaking views, or simply wish to immerse yourself in Thai culture, a visit to these temples can provide the freedom and peace you're searching for. We take pride in offering a holistic approach to recovery, acknowledging the importance of cultural immersion and spiritual well-being in your journey towards healing.", 'Thai-Culture-Temple-Visits-in-Hua-Hin-e1716535657236.png', 'Temple visit in Hua Hin' ],
+				[ 'Thai culture', 'Explore Cicada Market', "Cicada Market in Hua Hin is truly one of a kind, renowned across Thailand for its vibrant atmosphere and diverse offerings. This evening market is a haven for food enthusiasts, offering a delectable selection of both Thai and Western cuisine. But it doesn't stop there—Cicada Market also showcases local music, art, and entertainment, creating an unforgettable experience for visitors. As a group, let's venture out to Cicada Market and revel in the choices we've made for ourselves on the path to recovery. It's an opportunity to slowly reintegrate into normal life without the urge for mood-altering substances. And what better way to unwind than with a refreshing fresh coconut, the perfect companion for an evening of exploration and enjoyment!", 'Explore-Cicada-Market-.png', 'Cicada Market in Hua Hin' ],
+				[ 'Thai culture', 'A royal experience', "The late King of Thailand often spent many months each year at his summer residence, Klai Kang Won Palace, located right on the beach in Hua Hin. This beautiful palace is open to visitors and offers a unique opportunity to learn about the Thai monarchy and its rich cultural heritage. Definitely worth a visit, Klai Kang Won Palace allows you to immerse yourself in the history and traditions of Thailand, adding a meaningful dimension to your recovery journey.", 'Klai-Kang-Won-Palace-.png', 'Klai Kang Won Palace in Hua Hin' ],
+			];
+			foreach ( $acts as $i => $a ) {
+				$out .= rehab_block_article_row( [
+					'background'  => ( $i % 2 ) ? 'cream' : 'white',
+					'imageSide'   => ( $i % 2 ) ? 'right' : 'left',
+					'imageAspect' => 'wide',
+					'imageUrl'    => $up . $a[3],
+					'imageAlt'    => $a[4],
+					'eyebrow'     => $a[0],
+					'heading'     => $a[1],
+					'body'        => $a[2],
+				] );
+			}
+
+			$out .= rehab_block_pillars(
+				'Why the location matters',
+				'A setting built for recovery',
+				'Being far from old routines — and surrounded by nature — is part of the clinical design, not a bonus.',
+				[
+					[ 'num' => '01', 'title' => 'Distance from triggers', 'body' => 'Isolating from your usual lifestyle and social circles eliminates the risk of giving in to cravings during the most fragile early weeks.' ],
+					[ 'num' => '02', 'title' => 'Round-the-clock supervision', 'body' => 'Resort-style amenities backed by a full team of qualified medical professionals with extensive experience treating addiction.' ],
+					[ 'num' => '03', 'title' => 'Custom-built treatment plan', 'body' => 'Our addiction experts guide you through the crucial first weeks of a custom-made program tailored to your specific clinical picture.' ],
+					[ 'num' => '04', 'title' => 'A genuine therapeutic community', 'body' => 'With a hard cap of 12 clients, you receive deeper attention and form trusted connections that support your long-term recovery.' ],
+				],
+				'sage-mist'
+			);
+
+			$out .= rehab_block_journey_steps(
+				'Your first week',
+				'What to expect when you reach out',
+				"From the first confidential call to your arrival in Hua Hin — here's what you can expect in your first week with The Diamond Rehab.",
+				[
+					[ 'label' => 'STEP 01', 'title' => 'Confidential call', 'body' => 'A free, no-obligation consultation with our intake team. We listen, answer questions, and take the time to understand your situation.' ],
+					[ 'label' => 'STEP 02', 'title' => 'Clinical assessment', 'body' => 'Our psychiatrist evaluates the severity of the addiction, mental-health needs, and recommends a length of stay that fits your case.' ],
+					[ 'label' => 'STEP 03', 'title' => 'Arrival & onboarding', 'body' => 'We arrange airport collection, settle you into private accommodation, and walk you through the next 28 days of structured care.' ],
+					[ 'label' => 'STEP 04', 'title' => 'Treatment begins', 'body' => 'Detox if required, then your bespoke program — therapy, holistic work, fitness, and continuous adjustment of your recovery plan.' ],
+				],
+				'white'
+			);
+
+			$out .= rehab_block_final_cta( [
+				'eyebrow' => 'Take the next step',
+				'heading' => 'Are you ready to take the next step?',
+			] );
+
+			if ( '' === (string) get_post_meta( $pid, '_reh67_prev_content', true ) ) {
+				update_post_meta( $pid, '_reh67_prev_content', wp_slash( $p->post_content ) );
+			}
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $out ) ], true );
+			if ( is_wp_error( $res ) ) { echo 'ERROR: ' . $res->get_error_message() . "\n"; break; }
+			echo "OK rebuilt Hua Hin $pid: " . substr_count( $out, '<!-- wp:rehab/' ) . " blocks, " . count( $acts ) . " activity rows. Backup in _reh67_prev_content.\n";
+			break;
+
+		case 'revert-huahin-location':
+			// REH-67: restore page 8177 to its pre-rebuild content.
+			$pid  = 8177;
+			$prev = get_post_meta( $pid, '_reh67_prev_content', true );
+			if ( '' === (string) $prev ) { echo "no backup in _reh67_prev_content; nothing reverted\n"; break; }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $prev ) ] );
+			echo "OK reverted Hua Hin $pid to pre-REH-67 content\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
