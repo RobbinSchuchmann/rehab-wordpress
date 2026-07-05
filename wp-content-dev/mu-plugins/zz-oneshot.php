@@ -196,6 +196,115 @@ add_action( 'init', function () {
 			echo "OK reverted Hua Hin $pid to pre-REH-67 content\n";
 			break;
 
+		case 'rebuild-superannuation':
+			// REH-68: rebuild the Superannuation page (8973). Its migrated body
+			// had the backslashes stripped from every </> JSON escape, so
+			// "<p>" rendered as literal "u003cpu003e" garbage text (52×). It also
+			// dropped two sections (the "We're here to help" ATO-assistance list and
+			// the Release My Super partnership) and carried no lead form, with images
+			// hardcoded to the staging host. This rebuilds via the builders (correct
+			// escaping), faithful to the live content, restoring the dropped sections
+			// + a final-cta enquiry form, all images on relative uploads paths.
+			$pid = 8973;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+			if ( ! function_exists( 'rehab_block_treatment_hero' ) ) { echo "builders not loaded (aa-block-builders.php)\n"; break; }
+
+			$up    = '/wp-content/uploads/';
+			$brand = '/wp-content/uploads/brand/';
+
+			$out  = rehab_block_treatment_hero( [
+				'eyebrow'       => 'The Diamond Rehab · Hua Hin, Thailand',
+				'headline'      => 'Superannuation and mental health treatment',
+				'lede'          => 'In Australia and New Zealand, superannuation funds provide financial support during retirement. In some cases, early access to these funds may be available for medical expenses, including mental health treatment. This requires meeting certain criteria and acquiring approval from the Australian Taxation Office (ATO).',
+				'primaryText'   => 'Enquire about funding', 'primaryUrl' => '#assessment',
+				'secondaryText' => 'Call +66 3 313 5303',  'secondaryUrl' => 'tel:+6633135303',
+				'stat1Num'      => '12',   'stat1Label' => 'Maximum clients on site at any time',
+				'stat2Num'      => '24/7', 'stat2Label' => 'Doctor & clinical team on site',
+				'stat3Num'      => '5★',   'stat3Label' => 'Private residential facility, Hua Hin',
+				'imageUrl'      => $up . '2024/05/Entrance-gate-2-scaled.jpg',
+				'imageAlt'      => 'The Diamond Rehab Thailand entrance',
+				'badgeImageUrl' => $brand . 'ministry-public-health-badge.webp',
+				'badgeTitle'    => 'Thai-licensed facility',
+				'badgeText'     => 'Ministry of Public Health · Hospital-affiliated detox',
+			] );
+
+			$out .= rehab_block_intro_doctor_card( [
+				'background' => 'white',
+				'heading'    => 'Accessing superannuation',
+				'body'       => "To qualify for early funds release on compassionate grounds, a person is required to:\n\nProvide evidence that the treatment is not available through the public healthcare system. Registered mental health specialists must confirm this.\n\nDemonstrate necessity by proving that treatment is essential for improving the condition and quality of life.",
+			] );
+
+			$out .= rehab_block_prose(
+				"We're here to help",
+				[ 'At The Diamond Rehab Thailand, we assist with the complex superannuation application process. Our team collaborates with experts familiar with ATO requirements, including:' ],
+				[
+					'Eligibility guidance: providing information on qualifying for compassionate release.',
+					'Medical documentation assistance: help with the necessary reports on mental-health issues and treatment plans.',
+					'Psychiatrist evaluations: help scheduling the evaluations required for approval.',
+				],
+				'', '', 'white', 'stacked'
+			);
+
+			$out .= rehab_block_prose(
+				'The Diamond Rehab Thailand & Release My Super partnership',
+				[ "To help you access funds for treatment, we've partnered with Release My Super. For more information, contact our admissions team or visit Release My Super's website." ],
+				[], '', '', 'cream', 'stacked'
+			);
+
+			$out .= rehab_block_article_row( [
+				'background'  => 'white',
+				'imageSide'   => 'left',
+				'imageAspect' => 'wide',
+				'imageUrl'    => $up . '2024/05/Beach-Hua-Hin-3-scaled.jpg',
+				'imageAlt'    => 'Beach near The Diamond Rehab Thailand, Hua Hin',
+				'eyebrow'     => 'Before you apply',
+				'heading'     => 'Important considerations before applying',
+				'body'        => 'Early access to your super is a significant decision. Weigh these points — and get independent advice — before you begin:',
+				'listItems'   => [
+					'Impact on your super balance: early access reduces your overall superannuation.',
+					'Explore other support options: consider charities or other organisations first.',
+					'Tax implications: withdrawn funds are taxed (17% to 22% for those under 60).',
+					'Superannuation fund policies: not all funds allow early access; switching may be required.',
+					'Seek financial advice: consult a free financial counsellor or our team for advice.',
+					'For free financial counselling in Australia, contact the National Debt Helpline at 1800 007 007.',
+				],
+			] );
+
+			$out .= rehab_block_article_row( [
+				'background'  => 'cream',
+				'imageSide'   => 'right',
+				'imageAspect' => 'wide',
+				'imageUrl'    => $up . '2025/12/Poolview-scaled.jpg',
+				'imageAlt'    => 'Pool view at The Diamond Rehab Thailand',
+				'eyebrow'     => '5-star rehab facility',
+				'heading'     => 'Our center',
+				'body'        => "At The Diamond Rehab Thailand, we're firm believers that a comfortable environment plays an important role in the recovery process and your overall experience.\n\nThat's why we offer luxury accommodation options designed to meet the specific requirements of our discerning clients. Wake up in your private bungalow, cool off in the swimming pool, immerse yourself in Thailand's stunning natural beauty or take a stroll around our immaculately manicured gardens.\n\nYou can rest assured discretion is of the utmost importance to us. Regardless of who you are or where you're from, we always go to great lengths to ensure your privacy is valued and protected during your stay at The Diamond Rehab in Thailand.\n\nYour environment can have a significant impact on both your physical and mental health. We invite you to relax and enjoy our slice of paradise as you embark on your journey to recovery. The Diamond Rehab Thailand is located in a peaceful region of tropical Hua Hin, a stunning resort near the sea where you can experience all the best that Thailand has to offer. Our five-star rehab facility is in unison with the nature — the perfect backdrop for change, reflection and recovery.",
+			] );
+
+			$out .= rehab_block_final_cta( [
+				'eyebrow' => 'Superannuation enquiry',
+				'heading' => 'Enquire about funding your treatment',
+				'lead'    => "Tell us a little about your situation and our admissions team will call you back, confidentially, to talk through superannuation access and next steps.",
+			] );
+
+			if ( '' === (string) get_post_meta( $pid, '_reh68_prev_content', true ) ) {
+				update_post_meta( $pid, '_reh68_prev_content', wp_slash( $p->post_content ) );
+			}
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $out ) ], true );
+			if ( is_wp_error( $res ) ) { echo 'ERROR: ' . $res->get_error_message() . "\n"; break; }
+			echo "OK rebuilt Superannuation $pid: " . substr_count( $out, '<!-- wp:rehab/' ) . " rehab blocks. Backup in _reh68_prev_content.\n";
+			break;
+
+		case 'revert-superannuation':
+			// REH-68: restore page 8973 to its pre-rebuild content.
+			$pid  = 8973;
+			$prev = get_post_meta( $pid, '_reh68_prev_content', true );
+			if ( '' === (string) $prev ) { echo "no backup in _reh68_prev_content; nothing reverted\n"; break; }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $prev ) ] );
+			echo "OK reverted Superannuation $pid to pre-REH-68 content\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
