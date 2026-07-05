@@ -41,7 +41,11 @@ $wrapper = get_block_wrapper_attributes( [
 						<?php endif; ?>
 						<h3 class="rehab-checklist-card__title"><?php echo esc_html( $card['title'] ); ?></h3>
 						<ul class="rehab-checklist-card__list">
-							<?php foreach ( (array) $card['items'] as $item ) : ?>
+							<?php foreach ( (array) $card['items'] as $item ) :
+								if ( '' === trim( (string) $item ) ) {
+									continue;
+								}
+								?>
 								<li><?php echo $check; // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $item ); ?></span></li>
 							<?php endforeach; ?>
 						</ul>
@@ -62,7 +66,11 @@ $wrapper = get_block_wrapper_attributes( [
 					<?php endif; ?>
 				</div>
 				<ul class="rehab-checklist-cards__panel-list">
-					<?php foreach ( (array) $a['panelItems'] as $item ) : ?>
+					<?php foreach ( (array) $a['panelItems'] as $item ) :
+						if ( '' === trim( (string) $item ) ) {
+							continue;
+						}
+						?>
 						<li><?php echo $check; // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $item ); ?></span></li>
 					<?php endforeach; ?>
 				</ul>

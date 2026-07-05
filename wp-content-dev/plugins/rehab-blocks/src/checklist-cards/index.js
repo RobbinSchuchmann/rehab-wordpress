@@ -34,7 +34,7 @@ registerBlockType( metadata.name, {
 							<TextareaControl
 								label="Checklist items (one per line)"
 								value={ ( card.items || [] ).join( '\n' ) }
-								onChange={ ( v ) => setCard( i, 'items' )( v.split( '\n' ).filter( ( s ) => s.trim() !== '' ) ) }
+								onChange={ ( v ) => setCard( i, 'items' )( v.split( '\n' ) ) }
 								rows={ 6 }
 							/>
 							<Button isDestructive variant="secondary" onClick={ () => setAttributes( { cards: cards.filter( ( _, j ) => j !== i ) } ) }>Remove card</Button>
@@ -50,7 +50,7 @@ registerBlockType( metadata.name, {
 						<TextareaControl
 							label="Panel checklist (one per line)"
 							value={ ( a.panelItems || [] ).join( '\n' ) }
-							onChange={ ( v ) => setAttributes( { panelItems: v.split( '\n' ).filter( ( s ) => s.trim() !== '' ) } ) }
+							onChange={ ( v ) => setAttributes( { panelItems: v.split( '\n' ) } ) }
 							rows={ 6 }
 						/>
 					</PanelBody>
@@ -70,7 +70,7 @@ registerBlockType( metadata.name, {
 										<div className="rehab-checklist-card__kick">{ card.kick }</div>
 										<h3 className="rehab-checklist-card__title">{ card.title }</h3>
 										<ul className="rehab-checklist-card__list">
-											{ ( card.items || [] ).map( ( item, j ) => <li key={ j }>✓ { item }</li> ) }
+											{ ( card.items || [] ).filter( ( s ) => s.trim() !== '' ).map( ( item, j ) => <li key={ j }>✓ { item }</li> ) }
 										</ul>
 									</div>
 								) ) }
@@ -83,7 +83,7 @@ registerBlockType( metadata.name, {
 										<p>{ a.panelBody }</p>
 									</div>
 									<ul className="rehab-checklist-cards__panel-list">
-										{ ( a.panelItems || [] ).map( ( item, j ) => <li key={ j }>✓ { item }</li> ) }
+										{ ( a.panelItems || [] ).filter( ( s ) => s.trim() !== '' ).map( ( item, j ) => <li key={ j }>✓ { item }</li> ) }
 									</ul>
 								</div>
 							) : null }
