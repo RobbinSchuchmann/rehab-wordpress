@@ -645,6 +645,30 @@ JSON;
 			echo "OK reverted Careers $pid to pre-REH-71 content\n";
 			break;
 
+		case 'clear-faq-header-image':
+			// REH-75: remove the header image on the FAQ page (1197) — clear the
+			// page-header block's imageUrl/imageAlt so it renders text-only.
+			$pid = 1197;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+			$blocks  = parse_blocks( $p->post_content );
+			$changed = false;
+			foreach ( $blocks as &$b ) {
+				if ( 'rehab/page-header' === ( $b['blockName'] ?? '' ) ) {
+					if ( ! empty( $b['attrs']['imageUrl'] ) || ! empty( $b['attrs']['imageAlt'] ) ) {
+						unset( $b['attrs']['imageUrl'], $b['attrs']['imageAlt'] );
+						$changed = true;
+					}
+				}
+			}
+			unset( $b );
+			if ( ! $changed ) { echo "no page-header image to clear on $pid\n"; break; }
+			$out = '';
+			foreach ( $blocks as $b ) { $out .= serialize_block( $b ); }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $out ) ] );
+			echo "OK cleared FAQ page-header image on $pid\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show

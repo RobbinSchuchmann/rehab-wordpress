@@ -39,10 +39,6 @@ registerBlockType( metadata.name, {
 					<PanelBody title="Categories" initialOpen={ false }>
 						<Button variant="primary" onClick={ () => setAttributes( { categories: [ ...cats, { id: `cat-${ cats.length + 1 }`, label: 'New category', items: [] } ] } ) }>Add category</Button>
 					</PanelBody>
-					<PanelBody title="Prompt" initialOpen={ false }>
-						<TextControl label="Button URL" value={ a.promptBtnUrl } onChange={ set( 'promptBtnUrl' ) } />
-						<TextControl label="Phone href" value={ a.phoneHref } onChange={ set( 'phoneHref' ) } />
-					</PanelBody>
 				</InspectorControls>
 				<div { ...blockProps }>
 					<section className={ `rehab-faq-page rehab-bg-${ a.background }` }>
@@ -64,17 +60,6 @@ registerBlockType( metadata.name, {
 											</div>
 										</div>
 									) ) }
-									<div className="rehab-faq-page__prompt">
-										<div className="rehab-faq-page__prompt-text">
-											<RichText tagName="h3" value={ a.promptTitle } onChange={ set( 'promptTitle' ) } placeholder="Prompt title…" allowedFormats={ [] } />
-											<RichText tagName="p" value={ a.promptBody } onChange={ set( 'promptBody' ) } placeholder="Prompt body…" allowedFormats={ [] } />
-										</div>
-										<div className="rehab-faq-page__prompt-actions">
-											<span className="rehab-btn rehab-btn--luxury">
-												<RichText tagName="span" value={ a.promptBtnText } onChange={ set( 'promptBtnText' ) } allowedFormats={ [] } />
-											</span>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
