@@ -26,17 +26,9 @@
       "type": "string",
       "default": "intake"
     },
-    "eyebrow": {
-      "type": "string",
-      "default": "Confidential admissions"
-    },
     "heading": {
       "type": "string",
       "default": "Intake form"
-    },
-    "lead": {
-      "type": "string",
-      "default": "Everything you share here is treated as strictly confidential and is only used by our clinical and admissions team to prepare your stay."
     }
   },
   "editorScript": "file:./index.js",
