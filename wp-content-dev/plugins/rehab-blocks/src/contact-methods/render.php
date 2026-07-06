@@ -65,14 +65,17 @@ $wrapper = get_block_wrapper_attributes( [
 					</div>
 				<?php endif; ?>
 
-				<?php if ( $socials ) : ?>
+				<?php
+				// Socials mirror the footer exactly (REH-76): same set + icons, from
+				// the shared rehab_social_links() helper (Customizer theme mods).
+				$social_links = function_exists( 'rehab_social_links' ) ? rehab_social_links() : [];
+				?>
+				<?php if ( $social_links ) : ?>
 					<div class="rehab-contact-methods__follow">
 						<p><?php echo esc_html( $a['followLabel'] ); ?></p>
 						<div class="rehab-contact-methods__follow-row">
-							<?php foreach ( $socials as $s ) :
-								$s = array_merge( [ 'network' => 'website', 'url' => '#' ], (array) $s );
-								?>
-								<a href="<?php echo esc_url( $s['url'] ); ?>" aria-label="<?php echo esc_attr( ucfirst( $s['network'] ) ); ?>" target="_blank" rel="noopener"><?php echo $icons[ $s['network'] ] ?? $icons['website']; // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
+							<?php foreach ( $social_links as $s ) : ?>
+								<a href="<?php echo esc_url( $s['url'] ); ?>" aria-label="<?php echo esc_attr( $s['label'] ); ?>" target="_blank" rel="noopener"><?php echo $s['icon']; // phpcs:ignore WordPress.Security.EscapeOutput -- static brand SVGs. ?></a>
 							<?php endforeach; ?>
 						</div>
 					</div>
