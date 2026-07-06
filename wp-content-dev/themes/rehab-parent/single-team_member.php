@@ -10,6 +10,13 @@
  * @package RehabParent
  */
 
+// Byline-only members (e.g. external medical reviewers) have no public profile —
+// send their /team/{slug}/ URL to the team page.
+if ( have_posts() && get_post_meta( get_queried_object_id(), '_rehab_member_byline_only', true ) ) {
+	wp_safe_redirect( home_url( '/team/' ), 301 );
+	exit;
+}
+
 get_header();
 
 while ( have_posts() ) :
