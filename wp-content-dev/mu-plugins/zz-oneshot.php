@@ -503,6 +503,148 @@ add_action( 'init', function () {
 			echo 'OK restored ' . count( $ids ) . " member pages\n";
 			break;
 
+		case 'rebuild-careers-jobs':
+			// REH-71: the Careers page (9015) rendered its 7 job openings three
+			// inconsistent ways — the clinical psychologist as a treatment-phases
+			// TABS block, five roles as heading-only intro-doctor-cards (no image),
+			// and Peer Support Specialist as a lone article-row. Replace all of them
+			// with ONE rehab/job-listings block so every role reads identically
+			// (image left, eyebrow + title + text right, alternating white/cream).
+			// Keeps the hero, the "Why work here" article-row, and the two trailing
+			// SEO Q&A rows. Image URLs normalised to relative. Backup to meta.
+			$pid = 9015;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+
+			// Faithful job copy extracted from the existing blocks (bodies as plain
+			// \n\n paragraphs), with themed relative images assigned per role.
+			$jobs_json = <<<'JSON'
+[
+  {
+    "imageUrl": "/wp-content/uploads/2024/05/1-1-session-room-1-scaled.jpg",
+    "imageAlt": "Therapy session room at The Diamond Rehab Thailand",
+    "eyebrow": "",
+    "title": "Full-time clinical psychologist",
+    "body": "The candidate should have at least five years of experience. Ideally, they should focus on dialectical behavior therapy (DBT), cognitive behavioral therapy (CBT), and eye movement desensitization and reprocessing (EMDR). The candidate must offer outstanding care and develop individualized treatment plans to assist clients in overcoming obstacles and recovering from prior traumas. Among the duties are leading group therapy sessions and giving psychoeducational talks in a caring, all-encompassing setting. The job comes with a good pay, chances to grow professionally, and the chance to work in a calm, diverse environment with top-notch tools.",
+    "applyText": "",
+    "applyUrl": ""
+  },
+  {
+    "imageUrl": "/wp-content/uploads/2024/10/addiction-recovery-counselor.png",
+    "imageAlt": "Addiction recovery counsellor at The Diamond Rehab Thailand",
+    "eyebrow": "",
+    "title": "Addiction Counsellor",
+    "body": "Addiction psychology therapists use evidence-based treatment approaches to diagnose and treat the psychological components of addiction. Using techniques like cognitive-behavioral therapy (CBT) to handle the emotional and mental health issues related to addiction is one of the obligations of an addiction psychology therapist.\n\nIt is additionally their responsibility to evaluate patients, administer therapy, and oversee recovery progress. In certain states, a master's or doctoral degree in psychology, counseling, or a related discipline is mandatory and is regarded as an advantage, as it allows professionals to offer a wider range of services to their clients.\n\nAdditionally, state licensure as a psychologist and specialized training in addiction is often necessary.",
+    "applyText": "",
+    "applyUrl": ""
+  },
+  {
+    "imageUrl": "/wp-content/uploads/2024/05/1-1-session-room-2-scaled.jpg",
+    "imageAlt": "One-to-one session room at The Diamond Rehab Thailand",
+    "eyebrow": "",
+    "title": "Psychiatrist",
+    "body": "Nurses in addiction recovery care for patients undergoing detoxification and provide ongoing medical and emotional support throughout the recovery process. They help patients receive treatment consistently, resulting in better patient care and reducing stigma.\n\nMedication administration, vital sign monitoring, recovery education, and treatment plan development are all tasks performed by addiction nurses in conjunction with the medical team. Addiction-focused nurses additionally help with crisis management and interventions.\n\nAn associate or bachelor's degree in nursing (ADN or BSN) is required, along with licensure as a Registered Nurse (RN). Certification in addictions nursing (CARN) is often pursued for specialized roles.",
+    "applyText": "",
+    "applyUrl": ""
+  },
+  {
+    "imageUrl": "/wp-content/uploads/2024/10/peer-specialist-e1730378638853.png",
+    "imageAlt": "Peer support specialist at The Diamond Rehab Thailand",
+    "eyebrow": "",
+    "title": "Peer Support Specialist",
+    "body": "Peer support specialists are people in recovery who offer direction and emotional support to others dealing with comparable addiction issues. Peer support workers assist individuals in becoming and remaining involved in the recovery process and lower the risk of relapse by fostering mutual empowerment, respect, and understanding, according to an article titled, “Peer Support Workers for those in Recovery” last updated in May 2024 by the Substance Abuse and Mental Health Services Administration (SAMHSA).\n\nThey help patients make goals, share their own recovery stories, offer personal insights, and offer encouragement every step of the way. The sixth chapter of a 2023 publication titled, “Incorporating Peer Support Into Substance Use Disorder Treatment Services” from the Substance Abuse and Mental Health Services Administration added that a peer support specialist functions as a resource expert, facilitating connections between clients of the treatment program and services by offering information and accompanying them to appointments. These services encompass housing, childcare, transportation, employment, legal assistance, education, healthcare, and social services.\n\nPotential peer support specialists must have a high school diploma or pass the General Education Development (GED) exam; an associate's degree or higher is preferable. Most positions require lived experience with addiction recovery and completion of a peer support certification program, such as those offered by the National Association for Alcoholism and Drug Abuse Counselors (NAADAC).",
+    "applyText": "",
+    "applyUrl": ""
+  },
+  {
+    "imageUrl": "/wp-content/uploads/2025/12/Irene-Support-Staff-_-Admissions-1-scaled.png",
+    "imageAlt": "Case manager and admissions support at The Diamond Rehab Thailand",
+    "eyebrow": "",
+    "title": "Case manager",
+    "body": "Recovery coaches are non-clinical professionals who guide individuals through the recovery process, helping them set goals, make lifestyle changes, and maintain long-term sobriety.\n\nEncouragement, accountability, and assistance in the development of recovery plans are all provided by a recovery coach, who likewise helps clients in overcoming potential obstacles to sobriety. They frequently take on the role of a mentor.\n\nAccording to a publication titled, “Peers Supporting Recovery from Substance Use Disorders” published in 2017 by the Substance Abuse and Mental Health Services Administration, existing evidence indicates that individuals receiving peer recovery support experience decreased substance use, enhanced treatment retention, improved relationships with treatment providers, lower relapse rates, and increased housing stability.\n\nIn addition to a high school degree or GED, a recovery coach ideally needs post-secondary education in social work or psychology. Being certified as a recovery coach is advantageous and is typically acquired from a recognized organization.",
+    "applyText": "",
+    "applyUrl": ""
+  },
+  {
+    "imageUrl": "/wp-content/uploads/2024/05/Meeting-Room-Session-Room-scaled.jpg",
+    "imageAlt": "Meeting room at The Diamond Rehab Thailand",
+    "eyebrow": "",
+    "title": "Behavioral Health Technician",
+    "body": "An addiction medicine physician is a medical professional who is responsible for the diagnosis and treatment of substance use disorders and related conditions. Those who are impacted by a loved one's substance abuse or addiction are likewise entitled to assistance from an addiction medicine physician.\n\nThese medical doctors manage withdrawal symptoms, diagnose and treat addiction, write prescriptions for drugs like methadone or buprenorphine for opioid dependency. Holistic treatment is ensured through their close collaboration with psychiatrists and therapists.\n\nA medical degree like Doctor of Medicine, or M.D., or Doctor of Osteopathic Medicine, or D.O., completion of a four-year residency in a relevant field, such as family medicine or internal medicine, and board certification in addiction medicine from the American Board of Addiction Medicine (ABAM) are required.",
+    "applyText": "",
+    "applyUrl": ""
+  },
+  {
+    "imageUrl": "/wp-content/uploads/2025/12/Team-Picture-scaled.png",
+    "imageAlt": "The Diamond Rehab Thailand team",
+    "eyebrow": "",
+    "title": "Addiction Treatment Facility Administrator",
+    "body": "Recovery program directors are responsible for the formulation and execution of addiction recovery initiatives within treatment facilities. They supervise and control addiction rehabilitation initiatives so that people in need get efficient and all-encompassing treatments.\n\nAs part of the job duties of a recovery program director comes the responsibility of developing program strategies, overseeing clinical personnel, assessing program effectiveness, and making sure that treatment standards are followed. Directors are responsible for securing funding and managing budgets as well.\n\nA master’s degree in psychology, social work, or healthcare management is often required, along with experience in clinical supervision and program management.",
+    "applyText": "",
+    "applyUrl": ""
+  }
+]
+JSON;
+			$jobs = json_decode( $jobs_json, true );
+			if ( ! is_array( $jobs ) ) { echo "ERROR: bad jobs JSON (" . json_last_error_msg() . ")\n"; break; }
+
+			// Dynamic block (save:null) → self-closing comment carrying attrs only.
+			$jl_attrs = [
+				'background'  => 'cream',
+				'imageAspect' => 'wide',
+				'eyebrow'     => 'Open roles',
+				'heading'     => 'What are the key careers in addiction recovery?',
+				'lede'        => '',
+				'jobs'        => $jobs,
+			];
+			$jl_block = '<!-- wp:rehab/job-listings ' . serialize_block_attributes( $jl_attrs ) . ' /-->';
+
+			// Reassemble: keep hero + "Why work" row + the two trailing SEO rows;
+			// drop the tabs, every intro-doctor-card, and the Peer Support article-row
+			// (all folded into job-listings). Insert job-listings after "Why work".
+			$blocks = parse_blocks( $p->post_content );
+			$out    = '';
+			$dropped = 0;
+			foreach ( $blocks as $b ) {
+				$name = $b['blockName'] ?? null;
+				if ( null === $name ) { continue; }
+				$h = $b['attrs']['heading'] ?? '';
+				if ( 'rehab/treatment-phases' === $name
+					|| 'rehab/intro-doctor-card' === $name
+					|| ( 'rehab/article-row' === $name && 'Peer Support Specialist' === $h ) ) {
+					$dropped++;
+					continue;
+				}
+				$out .= serialize_block( $b ) . "\n\n";
+				if ( 'rehab/article-row' === $name && 'Why work at The Diamond Rehab Thailand?' === $h ) {
+					$out .= $jl_block . "\n\n";
+				}
+			}
+			// Normalise dev-host image URLs to relative (both raw and JSON-escaped).
+			$out = str_replace(
+				[ 'http://5.223.87.211:8081', 'http:\/\/5.223.87.211:8081', 'https://5.223.87.211:8081', 'https:\/\/5.223.87.211:8081' ],
+				'', $out
+			);
+			$out = trim( $out ) . "\n";
+
+			if ( '' === (string) get_post_meta( $pid, '_reh71_prev_content', true ) ) {
+				update_post_meta( $pid, '_reh71_prev_content', wp_slash( $p->post_content ) );
+			}
+			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $out ) ], true );
+			if ( is_wp_error( $res ) ) { echo 'ERROR: ' . $res->get_error_message() . "\n"; break; }
+			echo 'OK rebuilt Careers ' . $pid . ': ' . count( $jobs ) . ' jobs in 1 job-listings block; dropped ' . $dropped . ' old job blocks; '
+				. substr_count( $out, '<!-- wp:rehab/' ) . " top-level rehab blocks remain. Backup in _reh71_prev_content.\n";
+			break;
+
+		case 'revert-careers-jobs':
+			// REH-71: restore page 9015 to its pre-rebuild content.
+			$pid  = 9015;
+			$prev = get_post_meta( $pid, '_reh71_prev_content', true );
+			if ( '' === (string) $prev ) { echo "no backup in _reh71_prev_content; nothing reverted\n"; break; }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $prev ) ] );
+			echo "OK reverted Careers $pid to pre-REH-71 content\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
