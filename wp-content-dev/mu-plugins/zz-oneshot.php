@@ -340,6 +340,169 @@ add_action( 'init', function () {
 			echo "OK reverted Superannuation $pid to pre-REH-68 content\n";
 			break;
 
+		case 'migrate-team-cpt':
+			// REH-72 Stage 2: build/reconcile team_member CPT records from the member
+			// pages under /team/ (722). Each page's rehab/team-profile block supplies
+			// name/role/first/quote/photo/bio; the curated team-grid on 722 supplies
+			// which members are featured + their discipline. Existing CPT entries are
+			// matched by slug and updated in place (so blog-byline references survive).
+			$team_page = 722;
+
+			// 1. Curated grid on 722 → slug => [cat, order].
+			$curated = [];
+			$grid    = get_post( $team_page );
+			if ( $grid ) {
+				foreach ( parse_blocks( $grid->post_content ) as $b ) {
+					if ( 'rehab/team-grid' === ( $b['blockName'] ?? '' ) ) {
+						foreach ( (array) ( $b['attrs']['members'] ?? [] ) as $i => $m ) {
+							$slug = basename( trim( (string) ( $m['url'] ?? '' ), '/' ) );
+							if ( '' !== $slug ) { $curated[ $slug ] = [ 'cat' => (string) ( $m['cat'] ?? '' ), 'order' => (int) $i, 'excerpt' => (string) ( $m['excerpt'] ?? '' ) ]; }
+						}
+					}
+				}
+			}
+
+			// 2. Member pages (children of 722).
+			$pages = get_posts( [
+				'post_type'      => 'page',
+				'post_parent'    => $team_page,
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+			] );
+
+			$created = 0; $updated = 0; $nophoto = []; $log = [];
+			foreach ( $pages as $pg ) {
+				// Flatten all blocks (some legacy stubs nest rehab/team-member inside a
+				// rehab/team wrapper), then extract from the best available block: the
+				// v3 team-profile, else a legacy intro-doctor-card, else a team-member.
+				$flat  = [];
+				$stack = array_reverse( parse_blocks( $pg->post_content ) );
+				while ( $stack ) {
+					$b = array_pop( $stack );
+					$flat[] = $b;
+					if ( ! empty( $b['innerBlocks'] ) ) {
+						foreach ( array_reverse( $b['innerBlocks'] ) as $ib ) { $stack[] = $ib; }
+					}
+				}
+				$src = null; $type = '';
+				foreach ( $flat as $b ) {
+					$bn = $b['blockName'] ?? '';
+					if ( 'rehab/team-profile' === $bn ) { $src = $b['attrs']; $type = 'profile'; break; }
+					if ( 'rehab/intro-doctor-card' === $bn && null === $src ) { $src = $b['attrs']; $type = 'intro'; }
+					if ( 'rehab/team-member' === $bn && null === $src ) { $src = $b['attrs']; $type = 'member'; }
+				}
+				if ( null === $src ) { $log[] = "skip {$pg->post_name} (no recognised member block)"; continue; }
+
+				$strip = static fn( $v ) => trim( wp_strip_all_tags( (string) $v ) );
+				$slug  = $pg->post_name;
+				$role = ''; $first = ''; $photo = ''; $palt = ''; $quote = ''; $qsrc = ''; $bio = '';
+				if ( 'profile' === $type ) {
+					$name  = $strip( $src['name'] ?? $pg->post_title );
+					$role  = (string) ( $src['role'] ?? '' );
+					$first = (string) ( $src['firstName'] ?? '' );
+					$photo = (string) ( $src['photoUrl'] ?? '' );
+					$palt  = (string) ( $src['photoAlt'] ?? '' );
+					$quote = (string) ( $src['quote'] ?? '' );
+					$qsrc  = (string) ( $src['quoteSrc'] ?? '' );
+					$bio   = (string) ( $src['bio'] ?? '' );
+				} elseif ( 'intro' === $type ) {
+					$name  = $strip( $src['heading'] ?? $pg->post_title );
+					$photo = (string) ( $src['imageUrl'] ?? '' );
+					$body  = (string) ( $src['body'] ?? '' );
+					if ( preg_match_all( '/<p[^>]*>(.*?)<\/p>/s', $body, $mm ) && ! empty( $mm[1] ) ) {
+						$bio = implode( "\n\n", array_map( $strip, $mm[1] ) );
+					} else {
+						$bio = $strip( $body );
+					}
+				} else { // member stub
+					$name  = $strip( $src['name'] ?? $pg->post_title );
+					$role  = (string) ( $src['role'] ?? '' );
+					$photo = (string) ( $src['imageUrl'] ?? '' );
+					$palt  = (string) ( $src['imageAlt'] ?? '' );
+				}
+				// Normalise any dev-host photo URL to relative before attachment lookup.
+				$photo = str_replace( [ 'http://5.223.87.211:8081', 'https://5.223.87.211:8081' ], '', $photo );
+				$paras = array_filter( array_map( 'trim', preg_split( "/\n\s*\n/", $bio ) ) );
+				$content = implode( "\n\n", array_map(
+					static fn( $p ) => '<!-- wp:paragraph --><p>' . esc_html( $p ) . '</p><!-- /wp:paragraph -->',
+					$paras
+				) );
+
+				$cur      = $curated[ $slug ] ?? null;
+				$existing = get_page_by_path( $slug, OBJECT, 'team_member' );
+				$data = [
+					'post_type'    => 'team_member',
+					'post_status'  => 'publish',
+					'post_title'   => $name,
+					'post_name'    => $slug,
+					'post_content' => $content,
+					'post_excerpt' => $cur['excerpt'] ?? '',
+				];
+				if ( $existing ) { $data['ID'] = $existing->ID; }
+				$mid = wp_insert_post( wp_slash( $data ), true );
+				if ( is_wp_error( $mid ) ) { $log[] = "ERR {$slug}: " . $mid->get_error_message(); continue; }
+				$existing ? $updated++ : $created++;
+
+				// Featured image from the profile photo URL (try a few URL variants).
+				$att = 0;
+				if ( '' !== $photo && ! has_post_thumbnail( $mid ) ) {
+					foreach ( [ $photo, home_url( $photo ), site_url( $photo ) ] as $cand ) {
+						$att = attachment_url_to_postid( $cand );
+						if ( $att ) { break; }
+					}
+					if ( ! $att ) {
+						// Edited/scaled variants (…-scaled, …-eNNNN) resolve to the base attachment.
+						$base = preg_replace( '/-(scaled|e\d+|\d+x\d+)(?=\.[a-z]+$)/i', '', $photo );
+						if ( $base !== $photo ) { $att = attachment_url_to_postid( home_url( $base ) ); }
+					}
+					if ( $att ) { set_post_thumbnail( $mid, $att ); } else { $nophoto[] = $slug; }
+				}
+
+				update_post_meta( $mid, '_rehab_member_role', $role );
+				update_post_meta( $mid, '_rehab_member_first', $first );
+				update_post_meta( $mid, '_rehab_member_quote', $quote );
+				update_post_meta( $mid, '_rehab_member_quote_src', $qsrc );
+				update_post_meta( $mid, '_rehab_member_discipline', $cur['cat'] ?? '' );
+				update_post_meta( $mid, '_rehab_member_featured', $cur ? 1 : 0 );
+				update_post_meta( $mid, '_rehab_member_order', $cur['order'] ?? 99 );
+				update_post_meta( $mid, '_reh72_source_page', $pg->ID );
+
+				$log[] = ( $existing ? 'upd' : 'new' ) . " {$slug} feat=" . ( $cur ? 1 : 0 ) . " cat=" . ( $cur['cat'] ?? '-' ) . " photo=" . ( $att ?: 'none' );
+			}
+			flush_rewrite_rules( false );
+			echo "OK migrate-team-cpt: created $created, updated $updated of " . count( $pages ) . " pages; featured=" . count( $curated ) . "; photos-missing=" . count( $nophoto ) . "\n";
+			if ( $nophoto ) { echo 'no photo: ' . implode( ', ', $nophoto ) . "\n"; }
+			echo implode( "\n", $log ) . "\n";
+			break;
+
+		case 'retire-team-pages':
+			// REH-72 Stage 3: trash the legacy member pages under /team/ now that the
+			// CPT serves those URLs. Only pages with a matching CPT member are retired.
+			$pages = get_posts( [ 'post_type' => 'page', 'post_parent' => 722, 'post_status' => 'publish', 'posts_per_page' => -1 ] );
+			$n = 0; $kept = [];
+			foreach ( $pages as $pg ) {
+				if ( get_page_by_path( $pg->post_name, OBJECT, 'team_member' ) ) {
+					wp_trash_post( $pg->ID );
+					$n++;
+				} else {
+					$kept[] = $pg->post_name;
+				}
+			}
+			flush_rewrite_rules( false );
+			echo "OK retired $n member pages to trash" . ( $kept ? '; kept (no CPT match): ' . implode( ', ', $kept ) : '' ) . "\n";
+			break;
+
+		case 'restore-team-pages':
+			// REH-72: untrash the retired member pages (revert Stage 3).
+			global $wpdb;
+			$ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type='page' AND post_parent=%d AND post_status='trash'", 722 ) );
+			foreach ( $ids as $id ) { wp_untrash_post( (int) $id ); wp_update_post( [ 'ID' => (int) $id, 'post_status' => 'publish' ] ); }
+			flush_rewrite_rules( false );
+			echo 'OK restored ' . count( $ids ) . " member pages\n";
+			break;
+
 		case 'rebuild-careers-jobs':
 			// REH-71: the Careers page (9015) rendered its 7 job openings three
 			// inconsistent ways — the clinical psychologist as a treatment-phases
