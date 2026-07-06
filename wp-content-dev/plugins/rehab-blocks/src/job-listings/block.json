@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/job-listings",
+  "version": "0.1.0",
+  "title": "Job Listings",
+  "category": "rehab",
+  "icon": "groups",
+  "description": "A careers section with an optional heading and a repeatable list of job openings. Each job renders like the Article row (image left, eyebrow + title + text right), with alternating white/cream backgrounds. Add or remove jobs in the inspector.",
+  "keywords": ["jobs", "careers", "vacancies", "roles", "openings"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background":  { "type": "string", "default": "cream", "enum": ["white", "cream", "sage-mist"] },
+    "imageAspect": { "type": "string", "default": "wide", "enum": ["tall", "wide"] },
+    "eyebrow":     { "type": "string", "default": "" },
+    "heading":     { "type": "string", "default": "" },
+    "lede":        { "type": "string", "default": "" },
+    "jobs": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "object" }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}
