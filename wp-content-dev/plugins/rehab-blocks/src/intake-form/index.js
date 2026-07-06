@@ -20,19 +20,9 @@ registerBlockType( metadata.name, {
 				<InspectorControls>
 					<PanelBody title={ __( 'Intake form', 'rehab-blocks' ) }>
 						<TextControl
-							label={ __( 'Eyebrow', 'rehab-blocks' ) }
-							value={ attributes.eyebrow }
-							onChange={ ( v ) => setAttributes( { eyebrow: v } ) }
-						/>
-						<TextControl
 							label={ __( 'Heading', 'rehab-blocks' ) }
 							value={ attributes.heading }
 							onChange={ ( v ) => setAttributes( { heading: v } ) }
-						/>
-						<TextControl
-							label={ __( 'Lead', 'rehab-blocks' ) }
-							value={ attributes.lead }
-							onChange={ ( v ) => setAttributes( { lead: v } ) }
 						/>
 						<TextControl
 							label={ __( 'Anchor id', 'rehab-blocks' ) }

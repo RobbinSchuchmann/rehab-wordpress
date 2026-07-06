@@ -14,7 +14,7 @@
 		const steps = [ ...form.querySelectorAll( '.rehab-intake__step' ) ];
 		const progressFill = form.querySelector( '.rehab-intake__progress-fill' );
 		const progress = form.querySelector( '.rehab-intake__progress' );
-		const stepNow = form.querySelector( '[data-step-now]' );
+		const progressPct = form.querySelector( '[data-progress-pct]' );
 		const status = form.querySelector( '.rehab-intake__status' );
 		let current = 0;
 
@@ -104,7 +104,7 @@
 			const pct = ( ( current + 1 ) / steps.length ) * 100;
 			progressFill.style.width = pct + '%';
 			progress.setAttribute( 'aria-valuenow', String( current + 1 ) );
-			stepNow.textContent = String( current + 1 );
+			if ( progressPct ) progressPct.textContent = Math.round( pct ) + '%';
 			applyConditions();
 			form.scrollIntoView( { behavior: 'smooth', block: 'start' } );
 		};
