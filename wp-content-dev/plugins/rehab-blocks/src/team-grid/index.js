@@ -1,38 +1,28 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, RichText, InspectorControls } from '@wordpress/block-editor';
-import { Button, PanelBody, SelectControl, TextControl, TextareaControl } from '@wordpress/components';
+import { PanelBody, SelectControl, Notice } from '@wordpress/components';
 import metadata from './block.json';
 import './style.scss';
-
-const EMPTY_MEMBER = { cat: 'support', name: '', role: '', excerpt: '', photoUrl: '', photoAlt: '', url: '' };
 
 registerBlockType( metadata.name, {
 	edit( { attributes, setAttributes } ) {
 		const blockProps = useBlockProps();
 		const a = attributes;
 		const set = ( k ) => ( v ) => setAttributes( { [ k ]: v } );
-		const members = a.members || [];
-		const cats = ( a.filters || [] ).filter( ( f ) => f.cat !== 'all' );
-		const setMember = ( i, key ) => ( v ) => {
-			const next = members.map( ( m, idx ) => ( idx === i ? { ...m, [ key ]: v } : m ) );
-			setAttributes( { members: next } );
-		};
+		const filters = a.filters || [];
 		return (
 			<>
 				<InspectorControls>
-					{ members.map( ( m, i ) => (
-						<PanelBody key={ i } title={ `${ i + 1 }. ${ m.name || 'New member' }` } initialOpen={ false }>
-							<TextControl label="Name" value={ m.name } onChange={ setMember( i, 'name' ) } />
-							<TextControl label="Role" value={ m.role } onChange={ setMember( i, 'role' ) } />
-							<SelectControl label="Discipline" value={ m.cat } options={ cats.map( ( c ) => ( { label: c.label, value: c.cat } ) ) } onChange={ setMember( i, 'cat' ) } />
-							<TextareaControl label="Excerpt" value={ m.excerpt } onChange={ setMember( i, 'excerpt' ) } rows={ 3 } />
-							<TextControl label="Photo URL" value={ m.photoUrl } onChange={ setMember( i, 'photoUrl' ) } />
-							<TextControl label="Profile URL" value={ m.url } onChange={ setMember( i, 'url' ) } />
-							<Button isDestructive variant="secondary" onClick={ () => setAttributes( { members: members.filter( ( _, j ) => j !== i ) } ) }>Remove member</Button>
-						</PanelBody>
-					) ) }
-					<PanelBody title="Members" initialOpen={ false }>
-						<Button variant="primary" onClick={ () => setAttributes( { members: [ ...members, { ...EMPTY_MEMBER } ] } ) }>Add member</Button>
+					<PanelBody title="Section" initialOpen>
+						<SelectControl
+							label="Background"
+							value={ a.background }
+							options={ [ { label: 'Cream', value: 'cream' }, { label: 'White', value: 'white' }, { label: 'Sage mist', value: 'sage-mist' } ] }
+							onChange={ set( 'background' ) }
+						/>
+						<Notice status="info" isDismissible={ false }>
+							Team members are managed under <strong>Team</strong> in the admin sidebar. This grid automatically shows every member flagged <em>“Feature on team page”</em>, ordered by their sort order, with discipline filter chips built from the roster.
+						</Notice>
 					</PanelBody>
 				</InspectorControls>
 				<div { ...blockProps }>
@@ -44,17 +34,10 @@ registerBlockType( metadata.name, {
 								<RichText tagName="p" className="rehab-team-grid__lede" value={ a.lede } onChange={ set( 'lede' ) } placeholder="Lede…" allowedFormats={ [] } />
 							</div>
 							<div className="rehab-team-grid__filter">
-								{ ( a.filters || [] ).map( ( f, i ) => <button key={ i } type="button" className={ i === 0 ? 'on' : '' }>{ f.label }</button> ) }
+								{ filters.map( ( f, i ) => <button key={ i } type="button" className={ i === 0 ? 'on' : '' }>{ f.label }</button> ) }
 							</div>
-							<div className="rehab-team-grid__grid">
-								{ members.map( ( m, i ) => (
-									<div className="rehab-team-card" key={ i }>
-										<div className="rehab-team-card__photo">{ m.photoUrl ? <img src={ m.photoUrl } alt={ m.name } /> : null }</div>
-										<div className="rehab-team-card__head"><h3 className="rehab-team-card__name">{ m.name }</h3><span className="rehab-team-card__arrow">↗</span></div>
-										<p className="rehab-team-card__role">{ m.role }</p>
-										<p className="rehab-team-card__excerpt">{ m.excerpt }</p>
-									</div>
-								) ) }
+							<div className="rehab-team-grid__editor-note">
+								Team members render here on the front end, pulled live from the <strong>Team</strong> records flagged “Feature on team page”. Edit a member (photo, role, bio, discipline, order, feature toggle) under Team in the sidebar.
 							</div>
 						</div>
 					</section>

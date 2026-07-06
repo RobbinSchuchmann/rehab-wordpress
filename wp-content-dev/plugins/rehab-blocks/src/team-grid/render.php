@@ -11,7 +11,57 @@
 
 $a       = $attributes;
 $filters = is_array( $a['filters'] ?? null ) ? $a['filters'] : [];
-$members = is_array( $a['members'] ?? null ) ? $a['members'] : [];
+
+/*
+ * Members come from the team_member CPT (REH-72): every member flagged "feature
+ * on team page", ordered by the sort-order meta. Falls back to the block's
+ * stored `members` JSON if the CPT is empty (e.g. before migration runs).
+ */
+$members = [];
+if ( post_type_exists( 'team_member' ) ) {
+	$q = new WP_Query( [
+		'post_type'      => 'team_member',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'meta_key'       => '_rehab_member_order', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		'orderby'        => [ 'meta_value_num' => 'ASC', 'title' => 'ASC' ],
+		'meta_query'     => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			[ 'key' => '_rehab_member_featured', 'value' => '1' ],
+		],
+		'no_found_rows'  => true,
+	] );
+	foreach ( $q->posts as $p ) {
+		$members[] = [
+			'cat'      => (string) get_post_meta( $p->ID, '_rehab_member_discipline', true ) ?: 'all',
+			'name'     => get_the_title( $p ),
+			'role'     => (string) get_post_meta( $p->ID, '_rehab_member_role', true ),
+			'excerpt'  => get_the_excerpt( $p ),
+			'photoUrl' => (string) ( get_the_post_thumbnail_url( $p, 'medium_large' ) ?: '' ),
+			'photoAlt' => get_the_title( $p ),
+			'url'      => (string) get_permalink( $p ),
+		];
+	}
+	wp_reset_postdata();
+}
+if ( empty( $members ) && is_array( $a['members'] ?? null ) ) {
+	$members = $a['members'];
+}
+
+// Rebuild the filter chips from the disciplines actually present, so chips
+// always match the roster. Falls back to the block's stored filters.
+if ( $members && function_exists( 'rehab_team_disciplines' ) ) {
+	$present = [];
+	foreach ( $members as $m ) {
+		$cat = (string) ( $m['cat'] ?? '' );
+		if ( '' !== $cat && 'all' !== $cat ) { $present[ $cat ] = true; }
+	}
+	if ( $present ) {
+		$filters = [ [ 'cat' => 'all', 'label' => __( 'All', 'rehab-blocks' ) ] ];
+		foreach ( rehab_team_disciplines() as $cat => $label ) {
+			if ( isset( $present[ $cat ] ) ) { $filters[] = [ 'cat' => $cat, 'label' => $label ]; }
+		}
+	}
+}
 
 $arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
 

@@ -356,7 +356,7 @@ add_action( 'init', function () {
 					if ( 'rehab/team-grid' === ( $b['blockName'] ?? '' ) ) {
 						foreach ( (array) ( $b['attrs']['members'] ?? [] ) as $i => $m ) {
 							$slug = basename( trim( (string) ( $m['url'] ?? '' ), '/' ) );
-							if ( '' !== $slug ) { $curated[ $slug ] = [ 'cat' => (string) ( $m['cat'] ?? '' ), 'order' => (int) $i ]; }
+							if ( '' !== $slug ) { $curated[ $slug ] = [ 'cat' => (string) ( $m['cat'] ?? '' ), 'order' => (int) $i, 'excerpt' => (string) ( $m['excerpt'] ?? '' ) ]; }
 						}
 					}
 				}
@@ -430,6 +430,7 @@ add_action( 'init', function () {
 					$paras
 				) );
 
+				$cur      = $curated[ $slug ] ?? null;
 				$existing = get_page_by_path( $slug, OBJECT, 'team_member' );
 				$data = [
 					'post_type'    => 'team_member',
@@ -437,6 +438,7 @@ add_action( 'init', function () {
 					'post_title'   => $name,
 					'post_name'    => $slug,
 					'post_content' => $content,
+					'post_excerpt' => $cur['excerpt'] ?? '',
 				];
 				if ( $existing ) { $data['ID'] = $existing->ID; }
 				$mid = wp_insert_post( wp_slash( $data ), true );
@@ -458,7 +460,6 @@ add_action( 'init', function () {
 					if ( $att ) { set_post_thumbnail( $mid, $att ); } else { $nophoto[] = $slug; }
 				}
 
-				$cur = $curated[ $slug ] ?? null;
 				update_post_meta( $mid, '_rehab_member_role', $role );
 				update_post_meta( $mid, '_rehab_member_first', $first );
 				update_post_meta( $mid, '_rehab_member_quote', $quote );
@@ -474,6 +475,32 @@ add_action( 'init', function () {
 			echo "OK migrate-team-cpt: created $created, updated $updated of " . count( $pages ) . " pages; featured=" . count( $curated ) . "; photos-missing=" . count( $nophoto ) . "\n";
 			if ( $nophoto ) { echo 'no photo: ' . implode( ', ', $nophoto ) . "\n"; }
 			echo implode( "\n", $log ) . "\n";
+			break;
+
+		case 'retire-team-pages':
+			// REH-72 Stage 3: trash the legacy member pages under /team/ now that the
+			// CPT serves those URLs. Only pages with a matching CPT member are retired.
+			$pages = get_posts( [ 'post_type' => 'page', 'post_parent' => 722, 'post_status' => 'publish', 'posts_per_page' => -1 ] );
+			$n = 0; $kept = [];
+			foreach ( $pages as $pg ) {
+				if ( get_page_by_path( $pg->post_name, OBJECT, 'team_member' ) ) {
+					wp_trash_post( $pg->ID );
+					$n++;
+				} else {
+					$kept[] = $pg->post_name;
+				}
+			}
+			flush_rewrite_rules( false );
+			echo "OK retired $n member pages to trash" . ( $kept ? '; kept (no CPT match): ' . implode( ', ', $kept ) : '' ) . "\n";
+			break;
+
+		case 'restore-team-pages':
+			// REH-72: untrash the retired member pages (revert Stage 3).
+			global $wpdb;
+			$ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type='page' AND post_parent=%d AND post_status='trash'", 722 ) );
+			foreach ( $ids as $id ) { wp_untrash_post( (int) $id ); wp_update_post( [ 'ID' => (int) $id, 'post_status' => 'publish' ] ); }
+			flush_rewrite_rules( false );
+			echo 'OK restored ' . count( $ids ) . " member pages\n";
 			break;
 
 		case 'list-rehab-pages':
