@@ -6,7 +6,7 @@
   "title": "FAQ Page (categorised)",
   "category": "rehab",
   "icon": "editor-help",
-  "description": "Full FAQ page body: sticky category navigation, categorised accordion groups and a 'still have a question?' prompt.",
+  "description": "Full FAQ page body: sticky category navigation and categorised accordion groups.",
   "keywords": [
     "faq",
     "questions",
@@ -40,30 +40,6 @@
       "items": {
         "type": "object"
       }
-    },
-    "promptTitle": {
-      "type": "string",
-      "default": "Still have a question?"
-    },
-    "promptBody": {
-      "type": "string",
-      "default": "A confidential call is the easiest place to start, free and no-obligation."
-    },
-    "promptBtnText": {
-      "type": "string",
-      "default": "Talk with admissions"
-    },
-    "promptBtnUrl": {
-      "type": "string",
-      "default": "/contact-us/"
-    },
-    "phoneText": {
-      "type": "string",
-      "default": "+66 3 313 5303"
-    },
-    "phoneHref": {
-      "type": "string",
-      "default": "tel:+6633135303"
     }
   },
   "editorScript": "file:./index.js",

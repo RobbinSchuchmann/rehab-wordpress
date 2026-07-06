@@ -1,4 +1,4 @@
-// Categorised FAQ page — sticky nav, grouped accordions, closing prompt.
+// Categorised FAQ page — sticky nav, grouped accordions.
 
 .rehab-faq-page {
 	padding: 5rem 0;
@@ -178,41 +178,4 @@
 
 .rehab-faq-page__answer a {
 	color: var(--rehab-sage-dark, #8A9674);
-}
-
-// ---------- Closing prompt ----------
-.rehab-faq-page__prompt {
-	margin-top: clamp(40px, 5vw, 64px);
-	padding: clamp(30px, 3.5vw, 44px);
-	background: var(--rehab-ethereal-sage, #ECF0E8);
-	border: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 26px;
-	flex-wrap: wrap;
-}
-
-.rehab-faq-page__prompt-text h3 {
-	font-family: var(--rehab-font-display);
-	font-weight: 300;
-	font-size: 1.5rem;
-	letter-spacing: -0.015em;
-	color: var(--rehab-warm-charcoal, #2C2C2C);
-	margin: 0 0 6px;
-}
-
-.rehab-faq-page__prompt-text p {
-	font-family: var(--rehab-font-body);
-	font-weight: 300;
-	font-size: 0.9375rem;
-	color: var(--rehab-soft-charcoal, #4A4A4A);
-	margin: 0;
-}
-
-.rehab-faq-page__prompt-actions {
-	display: flex;
-	align-items: center;
-	gap: 18px;
-	flex-wrap: wrap;
 }
