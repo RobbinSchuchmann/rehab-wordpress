@@ -81,6 +81,10 @@ add_action(
 			'type' => 'boolean', 'single' => true, 'show_in_rest' => true,
 			'auth_callback' => static fn() => current_user_can( 'edit_posts' ),
 		] );
+		register_post_meta( 'team_member', '_rehab_member_byline_only', [
+			'type' => 'boolean', 'single' => true, 'show_in_rest' => true,
+			'auth_callback' => static fn() => current_user_can( 'edit_posts' ),
+		] );
 
 		// The /team/ page (grid landing) and its legacy child pages otherwise
 		// swallow every /team/* request before the CPT rewrite is reached. This
@@ -129,6 +133,7 @@ function rehab_parent_member_meta_box( WP_Post $post ): void {
 	$order       = get_post_meta( $post->ID, '_rehab_member_order', true );
 	$discipline  = get_post_meta( $post->ID, '_rehab_member_discipline', true );
 	$featured    = get_post_meta( $post->ID, '_rehab_member_featured', true );
+	$byline_only = get_post_meta( $post->ID, '_rehab_member_byline_only', true );
 	$first       = get_post_meta( $post->ID, '_rehab_member_first', true );
 	$quote       = get_post_meta( $post->ID, '_rehab_member_quote', true );
 	$quote_src   = get_post_meta( $post->ID, '_rehab_member_quote_src', true );
@@ -137,6 +142,10 @@ function rehab_parent_member_meta_box( WP_Post $post ): void {
 	<p>
 		<label><strong><?php esc_html_e( 'Feature on team page', 'rehab-parent' ); ?></strong></label><br>
 		<label><input type="checkbox" name="rehab_member_featured" value="1" <?php checked( (bool) $featured ); ?>> <?php esc_html_e( 'Show this member in the /team/ grid', 'rehab-parent' ); ?></label>
+	</p>
+	<p>
+		<label><strong><?php esc_html_e( 'Byline only', 'rehab-parent' ); ?></strong></label><br>
+		<label><input type="checkbox" name="rehab_member_byline_only" value="1" <?php checked( (bool) $byline_only ); ?>> <?php esc_html_e( 'No public /team/ profile — use for blog bylines only', 'rehab-parent' ); ?></label>
 	</p>
 	<p>
 		<label for="rehab_member_discipline"><strong><?php esc_html_e( 'Discipline', 'rehab-parent' ); ?></strong></label>
@@ -195,6 +204,7 @@ add_action(
 		}
 		update_post_meta( $post_id, '_rehab_member_quote', isset( $_POST['rehab_member_quote'] ) ? sanitize_textarea_field( wp_unslash( $_POST['rehab_member_quote'] ) ) : '' );
 		update_post_meta( $post_id, '_rehab_member_featured', isset( $_POST['rehab_member_featured'] ) ? 1 : 0 );
+		update_post_meta( $post_id, '_rehab_member_byline_only', isset( $_POST['rehab_member_byline_only'] ) ? 1 : 0 );
 	}
 );
 

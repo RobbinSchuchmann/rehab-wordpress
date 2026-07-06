@@ -89,11 +89,14 @@ function rehab_parent_render_credit_cell( int $member_id, string $label ): void 
 	}
 	$name     = get_the_title( $member );
 	$role     = get_post_meta( $member_id, '_rehab_member_role', true );
-	$link     = get_permalink( $member_id ) ?: '#';
 	$photo    = get_the_post_thumbnail( $member_id, 'thumbnail', [ 'class' => 'rehab-credit__avatar-img', 'alt' => $name ] );
 	$initials = rehab_parent_initials( $name );
+	// Byline-only members (external reviewers, no public profile) render unlinked.
+	$byline_only = (bool) get_post_meta( $member_id, '_rehab_member_byline_only', true );
+	$link        = ( ! $byline_only && 'publish' === $member->post_status ) ? ( get_permalink( $member_id ) ?: '' ) : '';
+	$tag         = $link ? 'a' : 'span';
 	?>
-	<a class="rehab-credit__cell" href="<?php echo esc_url( $link ); ?>">
+	<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="rehab-credit__cell<?php echo $link ? '' : ' rehab-credit__cell--static'; ?>"<?php echo $link ? ' href="' . esc_url( $link ) . '"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 		<span class="rehab-credit__avatar">
 			<?php if ( $photo ) : ?>
 				<?php echo $photo; // phpcs:ignore WordPress.Security.EscapeOutput ?>
@@ -108,7 +111,7 @@ function rehab_parent_render_credit_cell( int $member_id, string $label ): void 
 				<span class="rehab-credit__role"><?php echo esc_html( $role ); ?></span>
 			<?php endif; ?>
 		</span>
-	</a>
+	</<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<?php
 }
 
