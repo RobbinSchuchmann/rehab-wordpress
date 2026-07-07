@@ -24,6 +24,11 @@
       "type": "string",
       "default": "text",
       "enum": ["text", "narrow", "default"]
+    },
+    "layout": {
+      "type": "string",
+      "default": "stacked",
+      "enum": ["stacked", "split", "split-reverse"]
     }
   },
   "editorScript": "file:./index.js",
