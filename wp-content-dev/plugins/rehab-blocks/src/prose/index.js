@@ -29,16 +29,31 @@ const TEMPLATE = [
 	[ 'core/paragraph', { content: 'Drop your article content here. This block uses the rehab typography system: serif Ivymode for headings, Inter for body, with comfortable line height and reading width.' } ],
 ];
 
+const proseClass = ( background, width, layout ) =>
+	`rehab-prose rehab-bg-${ background } rehab-prose--${ width }` +
+	( layout && layout !== 'stacked' ? ` rehab-prose--${ layout }` : '' );
+
 function Edit( { attributes, setAttributes } ) {
-	const { background, width } = attributes;
+	const { background, width, layout } = attributes;
 	const blockProps = useBlockProps( {
-		className: `rehab-prose rehab-bg-${ background } rehab-prose--${ width }`,
+		className: proseClass( background, width, layout ),
 	} );
 
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Prose settings', 'rehab-blocks' ) } initialOpen>
+					<SelectControl
+						label={ __( 'Image position', 'rehab-blocks' ) }
+						help={ __( 'Only applies when the block contains an image. Side-by-side layouts kick in on desktop; images stack + center on mobile.', 'rehab-blocks' ) }
+						value={ layout }
+						options={ [
+							{ label: 'Stacked (image in the text flow)', value: 'stacked' },
+							{ label: 'Image left, text right', value: 'split' },
+							{ label: 'Text left, image right', value: 'split-reverse' },
+						] }
+						onChange={ ( v ) => setAttributes( { layout: v } ) }
+					/>
 					<SelectControl
 						label={ __( 'Width', 'rehab-blocks' ) }
 						value={ width }
@@ -77,9 +92,9 @@ function Edit( { attributes, setAttributes } ) {
 }
 
 function save( { attributes } ) {
-	const { background, width } = attributes;
+	const { background, width, layout } = attributes;
 	const blockProps = useBlockProps.save( {
-		className: `rehab-prose rehab-bg-${ background } rehab-prose--${ width }`,
+		className: proseClass( background, width, layout ),
 	} );
 	return (
 		<section { ...blockProps }>

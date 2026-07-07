@@ -729,6 +729,33 @@ JSON;
 			echo "OK converted $converted core/html SEO blocks to rehab/prose on $pid\n";
 			break;
 
+		case 'set-whyus-prose-split':
+			// REH-78: set the Why-us page (825) prose block to image-right
+			// (split-reverse). Adds the layout attr + the CSS class; run recover-demo
+			// afterwards to normalise the saved markup to the block's save() output.
+			$pid = 825;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+			$blocks = parse_blocks( $p->post_content );
+			$done   = false;
+			foreach ( $blocks as &$b ) {
+				if ( 'rehab/prose' === ( $b['blockName'] ?? '' ) ) {
+					$b['attrs']['layout'] = 'split-reverse';
+					$fix = static fn( $s ) => is_string( $s ) ? preg_replace( '/(class="rehab-prose rehab-bg-\w+ rehab-prose--[\w-]+)"/', '$1 rehab-prose--split-reverse"', $s, 1 ) : $s;
+					$b['innerHTML'] = $fix( $b['innerHTML'] );
+					foreach ( $b['innerContent'] as $k => $c ) { $b['innerContent'][ $k ] = $fix( $c ); }
+					$done = true;
+					break;
+				}
+			}
+			unset( $b );
+			if ( ! $done ) { echo "no prose block on $pid\n"; break; }
+			$out = '';
+			foreach ( $blocks as $b ) { $out .= serialize_block( $b ); }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $out ) ] );
+			echo "OK set Why-us prose to split-reverse (image right)\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
