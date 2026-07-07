@@ -669,6 +669,66 @@ JSON;
 			echo "OK cleared FAQ page-header image on $pid\n";
 			break;
 
+		case 'rebuild-careers-seo':
+			// REH-77: the Careers page (9015) SEO Q&A sections carry rehab-prose
+			// markup but are stored as core/html — so the rehab/prose stylesheet
+			// never enqueues and they render full-bleed/unstyled ("messy"). Convert
+			// them to real rehab/prose blocks (proper inner core blocks, inline HTML
+			// preserved) so they're styled + consistent. Hero, why-work article-row,
+			// job-listings and the two content article-rows are left untouched.
+			$pid = 9015;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+
+			$to_prose = static function ( string $html ): ?string {
+				preg_match( '/rehab-bg-([a-z-]+)/', $html, $bgm );
+				$bg = $bgm[1] ?? 'white';
+				if ( ! preg_match( '/rehab-prose__inner">(.*?)<\/div>\s*<\/div>\s*<\/section>/s', $html, $im ) ) {
+					return null;
+				}
+				$inner = $im[1];
+				$out   = '';
+				if ( preg_match( '/<h2[^>]*>(.*?)<\/h2>/s', $inner, $hm ) ) {
+					$out  .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">" . trim( $hm[1] ) . "</h2>\n<!-- /wp:heading -->\n\n";
+					$inner = preg_replace( '/<h2[^>]*>.*?<\/h2>/s', '', $inner, 1 );
+				}
+				preg_match_all( '/<(p|ul|h3|h4)\b[^>]*>.*?<\/\1>/s', $inner, $els, PREG_SET_ORDER );
+				foreach ( $els as $el ) {
+					$frag = trim( $el[0] );
+					$tag  = $el[1];
+					if ( 'p' === $tag ) {
+						$out .= "<!-- wp:paragraph -->\n{$frag}\n<!-- /wp:paragraph -->\n\n";
+					} elseif ( 'ul' === $tag ) {
+						$lw = preg_replace_callback( '/<li\b[^>]*>(.*?)<\/li>/s', static fn( $m ) => "<!-- wp:list-item -->\n<li>" . trim( $m[1] ) . "</li>\n<!-- /wp:list-item -->\n", $frag );
+						$lw = preg_replace( '/^<ul\b[^>]*>/', '<ul class="wp-block-list">', $lw, 1 );
+						$out .= "<!-- wp:list -->\n{$lw}\n<!-- /wp:list -->\n\n";
+					} else {
+						$lvl  = 'h3' === $tag ? 3 : 4;
+						$out .= "<!-- wp:heading {\"level\":{$lvl}} -->\n{$frag}\n<!-- /wp:heading -->\n\n";
+					}
+				}
+				$section = '<section class="wp-block-rehab-prose rehab-prose rehab-bg-' . $bg . ' rehab-prose--text"><div class="rehab-container rehab-container--text"><div class="rehab-prose__inner">' . trim( $out ) . '</div></div></section>';
+				return "<!-- wp:rehab/prose {\"background\":\"" . $bg . "\",\"width\":\"text\"} -->\n" . $section . "\n<!-- /wp:rehab/prose -->";
+			};
+
+			$blocks    = parse_blocks( $p->post_content );
+			$out_c     = '';
+			$converted = 0;
+			foreach ( $blocks as $b ) {
+				if ( 'core/html' === ( $b['blockName'] ?? '' ) && false !== strpos( $b['innerHTML'], 'wp-block-rehab-prose' ) ) {
+					$conv = $to_prose( $b['innerHTML'] );
+					if ( null !== $conv ) { $out_c .= $conv . "\n\n"; $converted++; continue; }
+				}
+				$out_c .= serialize_block( $b ) . "\n\n";
+			}
+			if ( ! $converted ) { echo "no core/html prose blocks to convert on $pid\n"; break; }
+			if ( '' === (string) get_post_meta( $pid, '_reh77_careers_seo_prev', true ) ) {
+				update_post_meta( $pid, '_reh77_careers_seo_prev', wp_slash( $p->post_content ) );
+			}
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( trim( $out_c ) . "\n" ) ] );
+			echo "OK converted $converted core/html SEO blocks to rehab/prose on $pid\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
