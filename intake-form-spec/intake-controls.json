@@ -1,0 +1,810 @@
+[
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "name-1",
+  "required": true,
+  "value": "",
+  "placeholder": "Full Name"
+ },
+ {
+  "tag": "input",
+  "type": "email",
+  "name": "email-1",
+  "required": true,
+  "value": "",
+  "placeholder": "E-mail"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "phone-1",
+  "required": true,
+  "value": "",
+  "placeholder": "Phone Number"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-1-street_address",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. 42 Wallaby Way"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-1-address_line",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-1-city",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. Sydney"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-1-state",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. New South Wales"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-1-zip",
+  "required": false,
+  "value": "",
+  "placeholder": "E.g. 2000"
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "address-1-country",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-1-day",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-1-month",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-1-year",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-1",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-2",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-3",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-2-day",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-2-month",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-2-year",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-1",
+  "required": false,
+  "value": "Instagram",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-1",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-1",
+  "required": false,
+  "value": "Reddit",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-1",
+  "required": false,
+  "value": "two",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-1",
+  "required": false,
+  "value": "Other",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-4",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. text placeholder"
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-9",
+  "required": false,
+  "value": "Instagram",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-9",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-9",
+  "required": false,
+  "value": "Reddit",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-10",
+  "required": false,
+  "value": "Instagram",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-10",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-10",
+  "required": false,
+  "value": "Reddit",
+  "placeholder": ""
+ },
+ {
+  "tag": "textarea",
+  "type": "textarea",
+  "name": "textarea-5",
+  "required": false,
+  "value": "",
+  "placeholder": "Write it down here."
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "name-2",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "phone-2",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. +1 300 400 5000"
+ },
+ {
+  "tag": "input",
+  "type": "email",
+  "name": "email-2",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. john@doe.com"
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-2",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-2",
+  "required": false,
+  "value": "two",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-2",
+  "required": false,
+  "value": "Child",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-2",
+  "required": false,
+  "value": "Sibling",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-2",
+  "required": false,
+  "value": "Other",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-5",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. text placeholder"
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-7",
+  "required": false,
+  "value": "Same as emergency contact",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-7",
+  "required": false,
+  "value": "Another family member or supporter",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "name-4",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "email",
+  "name": "email-4",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. john@doe.com"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "phone-4",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-6",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-6",
+  "required": false,
+  "value": "two",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-6",
+  "required": false,
+  "value": "Child",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-6",
+  "required": false,
+  "value": "Sibling",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-6",
+  "required": false,
+  "value": "Other",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-8",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-5",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-5",
+  "required": false,
+  "value": "two",
+  "placeholder": ""
+ },
+ {
+  "tag": "textarea",
+  "type": "textarea",
+  "name": "textarea-1",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "textarea",
+  "type": "textarea",
+  "name": "textarea-2",
+  "required": false,
+  "value": "",
+  "placeholder": "eg: allergies, disabilities etc"
+ },
+ {
+  "tag": "textarea",
+  "type": "textarea",
+  "name": "textarea-3",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-7",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-8",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "number",
+  "name": "number-1",
+  "required": true,
+  "value": "",
+  "placeholder": "Your weight"
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "select-2",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "number",
+  "name": "number-2",
+  "required": true,
+  "value": "",
+  "placeholder": "Your height"
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "select-1",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-9",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-10",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-11",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-12",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-13",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-14",
+  "required": true,
+  "value": "",
+  "placeholder": "Food, gambling, love / sex, shopping etc."
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-3",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-3",
+  "required": false,
+  "value": "two",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-3",
+  "required": false,
+  "value": "Not-sure",
+  "placeholder": ""
+ },
+ {
+  "tag": "textarea",
+  "type": "textarea",
+  "name": "textarea-4",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "name-3",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "phone-3",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. +1 300 400 5000"
+ },
+ {
+  "tag": "input",
+  "type": "email",
+  "name": "email-3",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-15",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-16",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-3-street_address",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. 42 Wallaby Way"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-3-address_line",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-3-city",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. Sydney"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-3-state",
+  "required": true,
+  "value": "",
+  "placeholder": "E.g. New South Wales"
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "address-3-zip",
+  "required": false,
+  "value": "",
+  "placeholder": "E.g. 2000"
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "address-3-country",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-4",
+  "required": false,
+  "value": "one",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-4",
+  "required": false,
+  "value": "two",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-4",
+  "required": false,
+  "value": "84",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "radio",
+  "name": "radio-4",
+  "required": false,
+  "value": "Other",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "text-17",
+  "required": true,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "field-signature-1",
+  "required": false,
+  "value": "6a4786c594dbf",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-3-day",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-3-month",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "select",
+  "type": "select",
+  "name": "date-3-year",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "referer_url",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "forminator_nonce",
+  "required": false,
+  "value": "dd83eb71b8",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "form_id",
+  "required": false,
+  "value": "11745",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "page_id",
+  "required": false,
+  "value": "5440",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "form_type",
+  "required": false,
+  "value": "default",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "current_url",
+  "required": false,
+  "value": "https://diamondrehabthailand.com/intake-",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "render_id",
+  "required": false,
+  "value": "0",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "hidden",
+  "name": "action",
+  "required": false,
+  "value": "forminator_submit_form_custom-forms",
+  "placeholder": ""
+ },
+ {
+  "tag": "input",
+  "type": "text",
+  "name": "input_59",
+  "required": false,
+  "value": "",
+  "placeholder": ""
+ }
+]
