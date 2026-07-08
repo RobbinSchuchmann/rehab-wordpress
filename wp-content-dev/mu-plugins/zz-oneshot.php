@@ -756,6 +756,30 @@ JSON;
 			echo "OK set Why-us prose to split-reverse (image right)\n";
 			break;
 
+		case 'set-team-grid-breadcrumb':
+			// REH-79: replace the Team page (722) feature-split "Our people" eyebrow
+			// with a Home / Team breadcrumb. feature-split is dynamic, so setting the
+			// eyebrow attribute is enough (it renders via wp_kses_post).
+			$pid = 722;
+			$p   = get_post( $pid );
+			if ( ! $p ) { echo "no page $pid\n"; break; }
+			$blocks = parse_blocks( $p->post_content );
+			$done   = false;
+			foreach ( $blocks as &$b ) {
+				if ( 'rehab/feature-split' === ( $b['blockName'] ?? '' ) ) {
+					$b['attrs']['eyebrow'] = '<a href="/">Home</a> / Team';
+					$done = true;
+					break;
+				}
+			}
+			unset( $b );
+			if ( ! $done ) { echo "no feature-split on $pid\n"; break; }
+			$out = '';
+			foreach ( $blocks as $b ) { $out .= serialize_block( $b ); }
+			wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $out ) ] );
+			echo "OK set Team grid eyebrow to Home / Team breadcrumb\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
