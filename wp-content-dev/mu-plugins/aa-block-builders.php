@@ -320,7 +320,7 @@ function rehab_block_journey_steps( string $eyebrow, string $heading, string $su
 		$label = ! empty( $item['label'] ) ? $item['label'] : ( 'STEP ' . str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) );
 		$h .= '<div class="rehab-journey-step">';
 		$h .= '<span class="rehab-journey-step__num">' . esc_html( $label ) . '</span>';
-		$h .= '<h4 class="rehab-journey-step__title">' . esc_html( $item['title'] ) . '</h4>';
+		$h .= '<h3 class="rehab-journey-step__title">' . esc_html( $item['title'] ) . '</h3>';
 		$h .= '<p class="rehab-journey-step__body">' . esc_html( $item['body'] ) . '</p>';
 		$h .= '</div>';
 	}
@@ -338,7 +338,7 @@ function rehab_block_benefits_numbered( array $items ): string {
 	foreach ( $items as $i => $item ) {
 		$h .= '<div class="rehab-benefit">';
 		$h .= '<div class="rehab-benefit__num">' . str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) . '</div>';
-		$h .= '<div class="rehab-benefit__body"><h4>' . esc_html( $item['title'] ) . '</h4><p>' . esc_html( $item['body'] ) . '</p></div>';
+		$h .= '<div class="rehab-benefit__body"><h3>' . esc_html( $item['title'] ) . '</h3><p>' . esc_html( $item['body'] ) . '</p></div>';
 		$h .= '</div>';
 	}
 	$h .= '</div>';

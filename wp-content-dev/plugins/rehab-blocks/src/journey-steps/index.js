@@ -44,7 +44,7 @@ registerBlockType( metadata.name, {
 								{ items.map( ( item, i ) => (
 									<div className="rehab-journey-step" key={ i }>
 										<RichText tagName="span" className="rehab-journey-step__num" value={ item.label || `STEP ${ String( i + 1 ).padStart( 2, '0' ) }` } onChange={ ( v ) => update( i, 'label', v ) } placeholder="STEP 01" allowedFormats={ [] } />
-										<RichText tagName="h4" className="rehab-journey-step__title" value={ item.title } onChange={ ( v ) => update( i, 'title', v ) } placeholder="Step title" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
+										<RichText tagName="h3" className="rehab-journey-step__title" value={ item.title } onChange={ ( v ) => update( i, 'title', v ) } placeholder="Step title" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
 										<RichText tagName="p" className="rehab-journey-step__body" value={ item.body } onChange={ ( v ) => update( i, 'body', v ) } placeholder="Step body…" allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] } />
 									</div>
 								) ) }
@@ -70,7 +70,7 @@ registerBlockType( metadata.name, {
 						{ items.map( ( item, i ) => (
 							<div className="rehab-journey-step" key={ i }>
 								<RichText.Content tagName="span" className="rehab-journey-step__num" value={ item.label || `STEP ${ String( i + 1 ).padStart( 2, '0' ) }` } />
-								<RichText.Content tagName="h4" className="rehab-journey-step__title" value={ item.title } />
+								<RichText.Content tagName="h3" className="rehab-journey-step__title" value={ item.title } />
 								<RichText.Content tagName="p" className="rehab-journey-step__body" value={ item.body } />
 							</div>
 						) ) }
