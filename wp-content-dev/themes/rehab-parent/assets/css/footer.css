@@ -120,14 +120,16 @@
 	justify-content: center;
 	width: 2.25rem;
 	height: 2.25rem;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.08);
-	transition: background 0.2s var(--rehab-ease);
+	/* Squared, bordered treatment to match the contact block sitewide (REH-80).
+	   Border/fill adapt to the dark footer; icon colour stays light for legibility. */
+	border: 1px solid rgba(var(--rehab-tan-rgb), 0.5);
+	transition: border-color 0.2s var(--rehab-ease), background 0.2s var(--rehab-ease), color 0.2s var(--rehab-ease);
 }
 
 .rehab-site-footer__socials a:hover {
-	background: var(--rehab-sage);
-	color: var(--rehab-warm-charcoal);
+	border-color: var(--rehab-sage);
+	background: rgba(var(--rehab-sage-rgb), 0.15);
+	color: var(--rehab-sage);
 }
 
 /* Menu columns */
