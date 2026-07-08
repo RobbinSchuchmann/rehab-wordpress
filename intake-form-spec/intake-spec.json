@@ -1,0 +1,1436 @@
+{
+  "form": {
+    "name": "Intake Form",
+    "slug": "intake-form",
+    "sourceFormId": 11745,
+    "submitText": "Submit intake form",
+    "invalidFormMessage": "Error: Your form is not valid, please fix the errors!",
+    "paginationHeader": {
+      "type": "bar",
+      "design": "show"
+    },
+    "paginationLabels": [
+      "Finish",
+      "Page  1",
+      "Page  2",
+      "Page  3",
+      "Page  4",
+      "Page  5",
+      "Page  6"
+    ],
+    "thankYouMessage": "<p>Thank you for providing all the necessary information! Your journey has begun! </p>",
+    "submissionBehaviour": "behaviour-thankyou",
+    "redirectUrl": "/schedule-thank-you/",
+    "autoclose": true,
+    "autocloseTime": 5,
+    "validation": "on_submit",
+    "validationInline": true,
+    "honeypot": true,
+    "honeypotControl": "input_59",
+    "storeSubmissions": true,
+    "ajax": true
+  },
+  "notification": {
+    "label": "Admin Email",
+    "recipients": [
+      "info@diamondrehabthailand.com",
+      "thediamondrehabth@gmail.com",
+      "sergio@diamondrehabthailand.com"
+    ],
+    "cc": [],
+    "bcc": [
+      "marketing@diamondrehabthailand.com"
+    ],
+    "subject": "Intake Form {name-1} (#{submission_id})",
+    "bodyTemplate": "<p>You have a new intake form (Diamond):</p>\n<p>See attached PDF file. All info also here below<br><br>{all_fields} <br>---<br>This message was sent from {site_url}.</p>",
+    "replyTo": null,
+    "fromName": null,
+    "fromEmail": null,
+    "attachSubmissionPdf": true,
+    "pdfTemplateIds": [
+      "11790"
+    ],
+    "conditions": null
+  },
+  "steps": [
+    {
+      "label": "Finish",
+      "pageBreakName": "page-break-6",
+      "elements": [
+        {
+          "kind": "field",
+          "element_id": "name-1",
+          "type": "name",
+          "label": null,
+          "description": null,
+          "placeholder": "Full Name",
+          "required": true,
+          "row": 0,
+          "cols": 12,
+          "conditions": null,
+          "subfields": null,
+          "multipleName": false
+        },
+        {
+          "kind": "field",
+          "element_id": "email-1",
+          "type": "email",
+          "label": null,
+          "description": null,
+          "placeholder": "E-mail",
+          "required": true,
+          "row": 1,
+          "cols": 6,
+          "conditions": null,
+          "validation": true
+        },
+        {
+          "kind": "field",
+          "element_id": "phone-1",
+          "type": "phone",
+          "label": null,
+          "description": null,
+          "placeholder": "Phone Number",
+          "required": false,
+          "row": 1,
+          "cols": 6,
+          "conditions": null,
+          "validation": "none"
+        }
+      ],
+      "nextButtonText": "Next Step »",
+      "prevButtonText": "« Previous Step"
+    },
+    {
+      "label": "Page  1",
+      "pageBreakName": "page-break-2",
+      "elements": [
+        {
+          "kind": "section",
+          "element_id": "section-4",
+          "title": "Personal Information",
+          "row": 0
+        },
+        {
+          "kind": "field",
+          "element_id": "address-1",
+          "type": "address",
+          "label": null,
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 1,
+          "cols": 12,
+          "conditions": null,
+          "subfields": [
+            {
+              "key": "street_address",
+              "name": "address-1-street_address",
+              "label": "Street Address",
+              "required": false,
+              "placeholder": "E.g. 42 Wallaby Way"
+            },
+            {
+              "key": "address_line",
+              "name": "address-1-address_line",
+              "label": "Apartment, suite, etc",
+              "required": false,
+              "placeholder": ""
+            },
+            {
+              "key": "city",
+              "name": "address-1-city",
+              "label": "City",
+              "required": false,
+              "placeholder": "E.g. Sydney"
+            },
+            {
+              "key": "state",
+              "name": "address-1-state",
+              "label": "State/Province",
+              "required": false,
+              "placeholder": "E.g. New South Wales"
+            },
+            {
+              "key": "zip",
+              "name": "address-1-zip",
+              "label": "ZIP / Postal Code",
+              "required": false,
+              "placeholder": "E.g. 2000"
+            },
+            {
+              "key": "country",
+              "name": "address-1-country",
+              "label": "Country",
+              "required": false,
+              "placeholder": "Select country",
+              "defaultValue": "Australia",
+              "optionsSource": "country-list"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-2",
+          "row": 2
+        },
+        {
+          "kind": "field",
+          "element_id": "date-1",
+          "type": "date",
+          "label": "Date of Birth",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 3,
+          "cols": 12,
+          "conditions": null,
+          "fieldType": "select",
+          "dateFormat": "dd/mm/yy",
+          "defaultDate": "none",
+          "subfields": [
+            {
+              "key": "day",
+              "name": "date-1-day",
+              "label": "",
+              "placeholder": "E.g. 01"
+            },
+            {
+              "key": "month",
+              "name": "date-1-month",
+              "label": "",
+              "placeholder": "E.g. 01"
+            },
+            {
+              "key": "year",
+              "name": "date-1-year",
+              "label": "",
+              "placeholder": "E.g. 2000"
+            }
+          ]
+        },
+        {
+          "kind": "field",
+          "element_id": "text-1",
+          "type": "text",
+          "label": "Gender",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 4,
+          "cols": 6,
+          "conditions": null
+        },
+        {
+          "kind": "field",
+          "element_id": "text-2",
+          "type": "text",
+          "label": "Occupation",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 4,
+          "cols": 6,
+          "conditions": null
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-3",
+          "row": 5
+        },
+        {
+          "kind": "group",
+          "element_id": "group-4",
+          "label": "Travel information",
+          "description": null,
+          "repeatable": false,
+          "fields": [
+            {
+              "kind": "field",
+              "element_id": "text-3",
+              "type": "text",
+              "label": "Passport Number",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 12,
+              "conditions": null
+            },
+            {
+              "kind": "field",
+              "element_id": "date-2",
+              "type": "date",
+              "label": "Passport Expiry Date",
+              "description": null,
+              "placeholder": "Choose Date",
+              "required": false,
+              "row": 1,
+              "cols": 12,
+              "conditions": null,
+              "fieldType": "select",
+              "dateFormat": "dd-mm-yy",
+              "defaultDate": "none",
+              "subfields": [
+                {
+                  "key": "day",
+                  "name": "date-2-day",
+                  "label": "",
+                  "placeholder": "E.g. 01"
+                },
+                {
+                  "key": "month",
+                  "name": "date-2-month",
+                  "label": "",
+                  "placeholder": "E.g. 01"
+                },
+                {
+                  "key": "year",
+                  "name": "date-2-year",
+                  "label": "",
+                  "placeholder": "E.g. 2000"
+                }
+              ]
+            }
+          ],
+          "row": 6,
+          "conditions": null
+        },
+        {
+          "kind": "html",
+          "element_id": "html-15",
+          "row": 7,
+          "label": "Important note",
+          "html": "<p>Please check your passport and see if it has at least six months of validity left on departure. If it is not, then a new passport should be requested as soon as possible.</p>"
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-6",
+          "row": 8
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-1",
+          "type": "radio",
+          "label": "How did you hear about us?",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 9,
+          "cols": 6,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Friend",
+              "value": "Instagram"
+            },
+            {
+              "label": "Google",
+              "value": "one"
+            },
+            {
+              "label": "Reddit",
+              "value": "Reddit"
+            },
+            {
+              "label": "Social Media",
+              "value": "two"
+            },
+            {
+              "label": "Other",
+              "value": "Other"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "text-4",
+          "type": "text",
+          "label": "Please specify",
+          "description": null,
+          "placeholder": "E.g. text placeholder",
+          "required": false,
+          "row": 9,
+          "cols": 6,
+          "conditions": {
+            "action": "show",
+            "rule": "all",
+            "rules": [
+              {
+                "field": "radio-1",
+                "operator": "is",
+                "value": "Other"
+              }
+            ]
+          }
+        }
+      ],
+      "nextButtonText": "Next Step »",
+      "prevButtonText": "« Previous Step"
+    },
+    {
+      "label": "Page  2",
+      "pageBreakName": "page-break-7",
+      "elements": [
+        {
+          "kind": "section",
+          "element_id": "section-6",
+          "title": "Mental Health & Safety",
+          "row": 0,
+          "subtitle": "We ask the following questions to better understand how to support you. Your honesty helps us provide the most appropriate care. Please answer only what you feel comfortable with."
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-9",
+          "type": "radio",
+          "label": "In the past few weeks, have you experienced any thoughts of ending your life?",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 1,
+          "cols": 12,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Instagram"
+            },
+            {
+              "label": "No",
+              "value": "one"
+            },
+            {
+              "label": "Prefer not to say",
+              "value": "Reddit"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-10",
+          "type": "radio",
+          "label": "Have you ever attempted to take your own life in the past?",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 2,
+          "cols": 12,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Instagram"
+            },
+            {
+              "label": "No",
+              "value": "one"
+            },
+            {
+              "label": "Prefer not to say",
+              "value": "Reddit"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "textarea-5",
+          "type": "textarea",
+          "label": null,
+          "description": "Please indicate when this occurred and whether you received support after the attempt. You may share as much or as little as you feel comfortable.",
+          "placeholder": "Write it down here.",
+          "required": true,
+          "row": 3,
+          "cols": 12,
+          "conditions": {
+            "action": "show",
+            "rule": "all",
+            "rules": [
+              {
+                "field": "radio-10",
+                "operator": "is",
+                "value": "Instagram"
+              }
+            ]
+          },
+          "limit": null,
+          "limitType": "characters"
+        }
+      ],
+      "nextButtonText": "Next Step »",
+      "prevButtonText": "« Previous Step"
+    },
+    {
+      "label": "Page  3",
+      "pageBreakName": "page-break-3",
+      "elements": [
+        {
+          "kind": "section",
+          "element_id": "section-1",
+          "title": "Emergency contact",
+          "row": 0,
+          "customClass": "emergency-title"
+        },
+        {
+          "kind": "field",
+          "element_id": "name-2",
+          "type": "name",
+          "label": "Name",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 1,
+          "cols": 12,
+          "conditions": null,
+          "subfields": null,
+          "multipleName": false
+        },
+        {
+          "kind": "field",
+          "element_id": "phone-2",
+          "type": "phone",
+          "label": "Phone",
+          "description": null,
+          "placeholder": "E.g. +1 300 400 5000",
+          "required": false,
+          "row": 2,
+          "cols": 6,
+          "conditions": null,
+          "validation": "none",
+          "limit": 10,
+          "limitType": "characters"
+        },
+        {
+          "kind": "field",
+          "element_id": "email-2",
+          "type": "email",
+          "label": "Email Address",
+          "description": null,
+          "placeholder": "E.g. john@doe.com",
+          "required": false,
+          "row": 2,
+          "cols": 6,
+          "conditions": null,
+          "validation": false
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-2",
+          "type": "radio",
+          "label": "Relationship",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 3,
+          "cols": 6,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Spouse/Partner",
+              "value": "one"
+            },
+            {
+              "label": "Parent",
+              "value": "two"
+            },
+            {
+              "label": "Child",
+              "value": "Child"
+            },
+            {
+              "label": "Sibling",
+              "value": "Sibling"
+            },
+            {
+              "label": "Other",
+              "value": "Other"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "text-5",
+          "type": "text",
+          "label": "Specify",
+          "description": null,
+          "placeholder": "E.g. text placeholder",
+          "required": false,
+          "row": 3,
+          "cols": 6,
+          "conditions": {
+            "action": "show",
+            "rule": "all",
+            "rules": [
+              {
+                "field": "radio-2",
+                "operator": "is",
+                "value": "Other"
+              }
+            ]
+          }
+        }
+      ],
+      "nextButtonText": "Next Step »",
+      "prevButtonText": "« Previous Step"
+    },
+    {
+      "label": "Page  4",
+      "pageBreakName": "page-break-5",
+      "elements": [
+        {
+          "kind": "section",
+          "element_id": "section-5",
+          "title": "Support",
+          "row": 0,
+          "subtitle": "When families are included—even just through updates and education—it strengthens your recovery and reduces stress later on."
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-7",
+          "type": "radio",
+          "label": "Who in your family or support system would you like us to keep informed during your stay at The Diamond Rehab?",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 1,
+          "cols": 12,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Same as emergency contact",
+              "value": "Same as emergency contact"
+            },
+            {
+              "label": "Another family member or supporter",
+              "value": "Another family member or supporter"
+            }
+          ],
+          "layout": "horizontal",
+          "optionsExpanded": true
+        },
+        {
+          "kind": "field",
+          "element_id": "name-4",
+          "type": "name",
+          "label": "Name",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 2,
+          "cols": 12,
+          "conditions": {
+            "action": "show",
+            "rule": "any",
+            "rules": [
+              {
+                "field": "radio-7",
+                "operator": "is",
+                "value": "Another family member or supporter"
+              }
+            ]
+          },
+          "subfields": null,
+          "multipleName": false
+        },
+        {
+          "kind": "field",
+          "element_id": "email-4",
+          "type": "email",
+          "label": "Email Address",
+          "description": null,
+          "placeholder": "E.g. john@doe.com",
+          "required": false,
+          "row": 3,
+          "cols": 6,
+          "conditions": {
+            "action": "show",
+            "rule": "any",
+            "rules": [
+              {
+                "field": "radio-7",
+                "operator": "is",
+                "value": "Another family member or supporter"
+              }
+            ]
+          },
+          "validation": false
+        },
+        {
+          "kind": "field",
+          "element_id": "phone-4",
+          "type": "phone",
+          "label": "Phone number",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 3,
+          "cols": 6,
+          "conditions": {
+            "action": "show",
+            "rule": "any",
+            "rules": [
+              {
+                "field": "radio-7",
+                "operator": "is",
+                "value": "Another family member or supporter"
+              }
+            ]
+          },
+          "validation": "none",
+          "limit": 10,
+          "limitType": "characters"
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-6",
+          "type": "radio",
+          "label": "Relationship",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 4,
+          "cols": 12,
+          "conditions": {
+            "action": "show",
+            "rule": "any",
+            "rules": [
+              {
+                "field": "radio-7",
+                "operator": "is",
+                "value": "Another family member or supporter"
+              }
+            ]
+          },
+          "options": [
+            {
+              "label": "Spouse/Partner",
+              "value": "one"
+            },
+            {
+              "label": "Parent",
+              "value": "two"
+            },
+            {
+              "label": "Child",
+              "value": "Child"
+            },
+            {
+              "label": "Sibling",
+              "value": "Sibling"
+            },
+            {
+              "label": "Other",
+              "value": "Other"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-8",
+          "type": "radio",
+          "label": "Do you give The Diamond Rehab permission to contact and share limited updates with the person above regarding my treatment, as appropriate.",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 5,
+          "cols": 12,
+          "conditions": {
+            "action": "show",
+            "rule": "any",
+            "rules": [
+              {
+                "field": "radio-7",
+                "operator": "is",
+                "value": "Same as emergency contact"
+              },
+              {
+                "field": "radio-7",
+                "operator": "is",
+                "value": "Another family member or supporter"
+              }
+            ]
+          },
+          "options": [
+            {
+              "label": "Yes",
+              "value": "one"
+            }
+          ],
+          "layout": "horizontal"
+        }
+      ],
+      "nextButtonText": "Next Step »",
+      "prevButtonText": "« Previous Step"
+    },
+    {
+      "label": "Page  5",
+      "pageBreakName": "page-break-1",
+      "elements": [
+        {
+          "kind": "section",
+          "element_id": "section-2",
+          "title": "General Medical Information",
+          "row": 0,
+          "customClass": "medical-title"
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-5",
+          "type": "radio",
+          "label": "Are you a smoker?",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 1,
+          "cols": 12,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Yes",
+              "value": "one"
+            },
+            {
+              "label": "No",
+              "value": "two"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "textarea-1",
+          "type": "textarea",
+          "label": "Please provide details of all existing medical condition/s:",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 2,
+          "cols": 12,
+          "conditions": null,
+          "limit": null,
+          "limitType": "characters",
+          "defaultHeight": 140
+        },
+        {
+          "kind": "field",
+          "element_id": "textarea-2",
+          "type": "textarea",
+          "label": "Please specify any other important medical details:",
+          "description": null,
+          "placeholder": "eg: allergies, disabilities etc",
+          "required": false,
+          "row": 3,
+          "cols": 12,
+          "conditions": null,
+          "limit": null,
+          "limitType": "characters",
+          "defaultHeight": 140
+        },
+        {
+          "kind": "field",
+          "element_id": "textarea-3",
+          "type": "textarea",
+          "label": "Please provide details of and dietary requirements:",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 4,
+          "cols": 12,
+          "conditions": null,
+          "limit": null,
+          "limitType": "characters",
+          "defaultHeight": 140
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-8",
+          "row": 5
+        },
+        {
+          "kind": "group",
+          "element_id": "group-1",
+          "label": "Current medications",
+          "description": "To ensure our medical staff can provide you with your prescribed medications without delay, please bring a valid prescription with you.",
+          "repeatable": true,
+          "fields": [
+            {
+              "kind": "field",
+              "element_id": "text-7",
+              "type": "text",
+              "label": "Medication Name",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 12,
+              "conditions": null
+            },
+            {
+              "kind": "field",
+              "element_id": "text-8",
+              "type": "text",
+              "label": "Daily Dosage",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 1,
+              "cols": 12,
+              "conditions": null
+            }
+          ],
+          "row": 6,
+          "conditions": null,
+          "min": 1,
+          "max": null,
+          "addButtonText": "Add medication",
+          "removeButtonText": "Remove medication"
+        },
+        {
+          "kind": "field",
+          "element_id": "number-1",
+          "type": "number",
+          "label": "Weight",
+          "description": null,
+          "placeholder": "Your weight",
+          "required": false,
+          "row": 7,
+          "cols": 3,
+          "conditions": null,
+          "min": 10,
+          "max": 900
+        },
+        {
+          "kind": "field",
+          "element_id": "select-2",
+          "type": "select",
+          "label": "Units",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 7,
+          "cols": 3,
+          "conditions": null,
+          "options": [
+            {
+              "label": "kgs",
+              "value": "one",
+              "default": true
+            },
+            {
+              "label": "lbs",
+              "value": "two"
+            }
+          ]
+        },
+        {
+          "kind": "field",
+          "element_id": "number-2",
+          "type": "number",
+          "label": "Height",
+          "description": null,
+          "placeholder": "Your height",
+          "required": false,
+          "row": 7,
+          "cols": 3,
+          "conditions": null,
+          "min": 1,
+          "max": 300
+        },
+        {
+          "kind": "field",
+          "element_id": "select-1",
+          "type": "select",
+          "label": "Units",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 7,
+          "cols": 3,
+          "conditions": null,
+          "options": [
+            {
+              "label": "cm",
+              "value": "one",
+              "default": true
+            },
+            {
+              "label": "inches",
+              "value": "two"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-10",
+          "row": 8
+        },
+        {
+          "kind": "group",
+          "element_id": "group-2",
+          "label": "Previous treatment history",
+          "description": null,
+          "repeatable": true,
+          "fields": [
+            {
+              "kind": "field",
+              "element_id": "text-9",
+              "type": "text",
+              "label": "Treatment facility/professional",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 6,
+              "conditions": null
+            },
+            {
+              "kind": "field",
+              "element_id": "text-10",
+              "type": "text",
+              "label": "Year",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 6,
+              "conditions": null
+            }
+          ],
+          "row": 9,
+          "conditions": null,
+          "min": 1,
+          "max": null,
+          "addButtonText": "Add facility",
+          "removeButtonText": "Remove facility"
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-9",
+          "row": 10
+        },
+        {
+          "kind": "group",
+          "element_id": "group-3",
+          "label": "Type of addiction",
+          "description": null,
+          "repeatable": true,
+          "fields": [
+            {
+              "kind": "field",
+              "element_id": "text-11",
+              "type": "text",
+              "label": "Substance",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 6,
+              "conditions": null
+            },
+            {
+              "kind": "field",
+              "element_id": "text-12",
+              "type": "text",
+              "label": "Daily consumption",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 6,
+              "conditions": null
+            }
+          ],
+          "row": 11,
+          "conditions": null,
+          "min": 1,
+          "max": null,
+          "addButtonText": "Add a substance",
+          "removeButtonText": "Remove a substance"
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-11",
+          "row": 12
+        },
+        {
+          "kind": "field",
+          "element_id": "text-13",
+          "type": "text",
+          "label": "Length of addiction",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 13,
+          "cols": 12,
+          "conditions": null
+        },
+        {
+          "kind": "field",
+          "element_id": "text-14",
+          "type": "text",
+          "label": "Do you struggle with any process addictions?",
+          "description": null,
+          "placeholder": "Food, gambling, love / sex, shopping etc.",
+          "required": false,
+          "row": 14,
+          "cols": 12,
+          "conditions": null
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-12",
+          "row": 15
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-3",
+          "type": "radio",
+          "label": "Do you require detoxification?",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 16,
+          "cols": 12,
+          "conditions": null,
+          "options": [
+            {
+              "label": "Yes",
+              "value": "one"
+            },
+            {
+              "label": "No",
+              "value": "two"
+            },
+            {
+              "label": "Not sure",
+              "value": "Not-sure"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-13",
+          "row": 17
+        },
+        {
+          "kind": "group",
+          "element_id": "group-5",
+          "label": "Background information",
+          "description": "Please provide us with a concise summary of the primary issues you're facing, including any psychiatric incidents or hospital admissions. This information is crucial for appropriate treatment. Additionally, you can add any other information you would like to share with us.",
+          "repeatable": false,
+          "fields": [
+            {
+              "kind": "field",
+              "element_id": "textarea-4",
+              "type": "textarea",
+              "label": "Background summary",
+              "description": null,
+              "placeholder": null,
+              "required": false,
+              "row": 0,
+              "cols": 12,
+              "conditions": null,
+              "limit": null,
+              "limitType": "characters"
+            }
+          ],
+          "row": 18,
+          "conditions": null
+        }
+      ],
+      "nextButtonText": "Next Step »",
+      "prevButtonText": "« Previous Step"
+    },
+    {
+      "label": "Page  6",
+      "pageBreakName": null,
+      "elements": [
+        {
+          "kind": "section",
+          "element_id": "section-3",
+          "title": "Account and Billing Information",
+          "row": 0
+        },
+        {
+          "kind": "field",
+          "element_id": "name-3",
+          "type": "name",
+          "label": "Name and Surname of Person Responsible for Account:",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 1,
+          "cols": 12,
+          "conditions": null,
+          "subfields": null,
+          "multipleName": false
+        },
+        {
+          "kind": "field",
+          "element_id": "phone-3",
+          "type": "phone",
+          "label": "Phone",
+          "description": null,
+          "placeholder": "E.g. +1 300 400 5000",
+          "required": true,
+          "row": 2,
+          "cols": 6,
+          "conditions": null,
+          "validation": "none",
+          "limit": 10,
+          "limitType": "characters"
+        },
+        {
+          "kind": "field",
+          "element_id": "email-3",
+          "type": "email",
+          "label": "Email Address",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 2,
+          "cols": 6,
+          "conditions": null,
+          "validation": false
+        },
+        {
+          "kind": "field",
+          "element_id": "text-15",
+          "type": "text",
+          "label": "Invoice to be made out to:",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 3,
+          "cols": 6,
+          "conditions": null
+        },
+        {
+          "kind": "field",
+          "element_id": "text-16",
+          "type": "text",
+          "label": "VAT number (If applicable)",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 3,
+          "cols": 6,
+          "conditions": null
+        },
+        {
+          "kind": "field",
+          "element_id": "address-3",
+          "type": "address",
+          "label": null,
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 4,
+          "cols": 12,
+          "conditions": null,
+          "subfields": [
+            {
+              "key": "street_address",
+              "name": "address-3-street_address",
+              "label": "Street Address",
+              "required": true,
+              "placeholder": "E.g. 42 Wallaby Way"
+            },
+            {
+              "key": "address_line",
+              "name": "address-3-address_line",
+              "label": "Apartment, suite, etc",
+              "required": false,
+              "placeholder": ""
+            },
+            {
+              "key": "city",
+              "name": "address-3-city",
+              "label": "City",
+              "required": false,
+              "placeholder": "E.g. Sydney"
+            },
+            {
+              "key": "state",
+              "name": "address-3-state",
+              "label": "State/Province",
+              "required": false,
+              "placeholder": "E.g. New South Wales"
+            },
+            {
+              "key": "zip",
+              "name": "address-3-zip",
+              "label": "ZIP / Postal Code",
+              "required": false,
+              "placeholder": "E.g. 2000"
+            },
+            {
+              "key": "country",
+              "name": "address-3-country",
+              "label": "Country",
+              "required": false,
+              "placeholder": "Select country",
+              "optionsSource": "country-list"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-14",
+          "row": 5
+        },
+        {
+          "kind": "field",
+          "element_id": "radio-4",
+          "type": "radio",
+          "label": "Specify Preferred Time Frame",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 6,
+          "cols": 6,
+          "conditions": null,
+          "options": [
+            {
+              "label": "28 days",
+              "value": "one"
+            },
+            {
+              "label": "56 days",
+              "value": "two"
+            },
+            {
+              "label": "84 days",
+              "value": "84"
+            },
+            {
+              "label": "Other",
+              "value": "Other"
+            }
+          ],
+          "layout": "horizontal"
+        },
+        {
+          "kind": "field",
+          "element_id": "text-17",
+          "type": "text",
+          "label": "Please specify",
+          "description": null,
+          "placeholder": null,
+          "required": false,
+          "row": 6,
+          "cols": 6,
+          "conditions": {
+            "action": "show",
+            "rule": "all",
+            "rules": [
+              {
+                "field": "radio-4",
+                "operator": "is",
+                "value": "Other"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-5",
+          "row": 7
+        },
+        {
+          "kind": "html",
+          "element_id": "html-1",
+          "row": 8,
+          "label": "What does your investment include:",
+          "html": "<div class=\"heading-block-body\"><ul><li>Initial assessment and follow-up assessment with a psychiatrist</li><li>3 individual sessions per week with a Clinical Psychologist and/or a Clinical Counselor</li><li>Mandatory daily psycho-educational group sessions, interactive didactic lectures and therapeutic groups</li><li>One-hour massage per week</li><li>One outing per week</li><li>Gourmet dining: three exquisite meals daily</li><li>Daily physical activities: Gym twice a day</li><li>Two yoga sessions per week</li><li>Use of icebath and sauna</li><li>24/7 free fiber optic WIFI access</li><li>Complimentary airport transfers</li><li>Weekly park walk/hike</li><li>Comprehensive aftercare plan</li><li>Relapse prevention guarantee program (included in 12+ week programs only) <ul><li>MCMI test (Millon Clinical Multiaxial Inventory test)</li></ul></li><li>Full check-up that includes: <ul><li>Blood pressure</li><li>BMI</li><li>Complete blood count</li><li>Fasting blood glucose</li><li>Total lipid profile</li><li>Kidney function test</li><li>Liver function test</li><li>Inflammation marker (CRP)</li><li>Urine examination</li><li>CRP test</li></ul></li></ul></div>"
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-7",
+          "row": 9
+        },
+        {
+          "kind": "field",
+          "element_id": "signature-1",
+          "type": "signature",
+          "label": "Applicant Signature",
+          "description": null,
+          "placeholder": null,
+          "required": true,
+          "row": 10,
+          "cols": 12,
+          "conditions": null,
+          "signature": {
+            "filetype": "png",
+            "height": 180,
+            "thickness": 2,
+            "icon": true,
+            "hiddenControl": "field-signature-1"
+          }
+        },
+        {
+          "kind": "html",
+          "collapseToggle": true,
+          "element_id": "html-4",
+          "row": 11
+        },
+        {
+          "kind": "field",
+          "element_id": "date-3",
+          "type": "date",
+          "label": "Date",
+          "description": null,
+          "placeholder": "Choose Date",
+          "required": true,
+          "row": 12,
+          "cols": 12,
+          "conditions": null,
+          "fieldType": "select",
+          "dateFormat": "dd-mm-yy",
+          "defaultDate": "today",
+          "subfields": [
+            {
+              "key": "day",
+              "name": "date-3-day",
+              "label": "Day",
+              "placeholder": "E.g. 01"
+            },
+            {
+              "key": "month",
+              "name": "date-3-month",
+              "label": "Month",
+              "placeholder": "E.g. 01"
+            },
+            {
+              "key": "year",
+              "name": "date-3-year",
+              "label": "Year",
+              "placeholder": "E.g. 2000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unmapped": {
+    "parsedFieldsNotInDom": [],
+    "domControlsNotInSpec": []
+  }
+}
