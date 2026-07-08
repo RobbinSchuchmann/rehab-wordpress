@@ -227,11 +227,20 @@ function rehab_block_treatment_hero( array $a ): string {
  */
 function rehab_block_authority_ribbon( string $label, array $logos ): string {
 	$attrs = rehab_block_attrs( [ 'label' => $label, 'logos' => $logos ] );
-	$h  = '<section class="wp-block-rehab-authority-ribbon rehab-authority-ribbon"><div class="rehab-container">';
+	// Class must byte-match the block's JS save() output (`rehab-authority-ribbon`,
+	// no `wp-block-` prefix) or the static block fails editor validation (REH-85).
+	$h  = '<section class="rehab-authority-ribbon"><div class="rehab-container">';
 	$h .= '<p class="rehab-authority-ribbon__label">' . esc_html( $label ) . '</p>';
 	$h .= '<div class="rehab-authority-ribbon__logos">';
 	foreach ( $logos as $logo ) {
-		$h .= '<img src="' . esc_url( $logo['url'] ) . '" alt="' . esc_attr( $logo['alt'] ?? '' ) . '"/>';
+		$img = '<img src="' . esc_url( $logo['url'] ) . '" alt="' . esc_attr( $logo['alt'] ?? '' ) . '"/>';
+		// Wrap in a data-tooltip host when a tip is set (CSS-only hover popover,
+		// same pattern as the homepage press strip — REH-85).
+		if ( ! empty( $logo['tip'] ) ) {
+			$h .= '<span class="rehab-authority-ribbon__item" data-tooltip="' . esc_attr( $logo['tip'] ) . '">' . $img . '</span>';
+		} else {
+			$h .= $img;
+		}
 	}
 	$h .= '</div></div></section>';
 	return "<!-- wp:rehab/authority-ribbon " . $attrs . " -->\n" . $h . "\n<!-- /wp:rehab/authority-ribbon -->\n\n";
@@ -685,12 +694,12 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 	], $hero ) );
 
 	$blocks .= rehab_block_authority_ribbon( 'As featured in', [
-		[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider' ],
-		[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
-		[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good' ],
-		[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central' ],
-		[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
-		[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
+		[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider', 'tip' => 'Business Insider featured insights from The Diamond Rehab Thailand experts on the vital connection between environment and long-term recovery success.' ],
+		[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance', 'tip' => 'Yahoo Finance recognized The Diamond Rehab Thailand as a global leader for its unique fusion of luxury hospitality and rigorous Western clinical standards.' ],
+		[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good', 'tip' => 'Well+Good recognized The Diamond Rehab Thailand for its holistic, high-end approach to restoring physical, emotional, and mental balance in a tropical setting.' ],
+		[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central', 'tip' => 'PsychCentral acknowledged The Diamond Rehab Thailand for its pioneering integration of evidence-based medical therapy and holistic mindfulness meditation.' ],
+		[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com', 'tip' => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centres for luxury residential addiction treatment.' ],
+		[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner', 'tip' => 'The Diamond Rehab Thailand is partnered with Bangkok Hospital for comprehensive medical support and 24/7 emergency care for all residential clients.' ],
 	] );
 
 	$blocks .= rehab_block_signs_grid( array_merge( [

@@ -34,6 +34,60 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'add-authority-tooltips':
+			// REH-85: give the "As featured in" ribbon (rehab/authority-ribbon)
+			// the same hover tooltips the homepage press strip has. Map each
+			// logo's alt -> tip and regenerate the block via the updated builder
+			// so the stored innerHTML + block attrs stay in sync (valid block).
+			// Only logos we have copy for get a tip; others are left untouched.
+			if ( ! function_exists( 'rehab_block_authority_ribbon' ) ) { echo "builders not loaded\n"; break; }
+			$tips = [
+				'Business Insider'         => 'Business Insider featured insights from The Diamond Rehab Thailand experts on the vital connection between environment and long-term recovery success.',
+				'Yahoo Finance'            => 'Yahoo Finance recognized The Diamond Rehab Thailand as a global leader for its unique fusion of luxury hospitality and rigorous Western clinical standards.',
+				'Well + Good'              => 'Well+Good recognized The Diamond Rehab Thailand for its holistic, high-end approach to restoring physical, emotional, and mental balance in a tropical setting.',
+				'Psych Central'            => 'PsychCentral acknowledged The Diamond Rehab Thailand for its pioneering integration of evidence-based medical therapy and holistic mindfulness meditation.',
+				'Recovery.com'             => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centres for luxury residential addiction treatment.',
+				'Bangkok Hospital partner' => 'The Diamond Rehab Thailand is partnered with Bangkok Hospital for comprehensive medical support and 24/7 emergency care for all residential clients.',
+			];
+			$q = new WP_Query( [ 'post_type' => [ 'page', 'post' ], 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids' ] );
+			$changed = 0;
+			$scanned = 0;
+			foreach ( $q->posts as $pid ) {
+				$c = get_post_field( 'post_content', $pid );
+				if ( false === strpos( $c, 'wp:rehab/authority-ribbon' ) ) {
+					continue;
+				}
+				$scanned++;
+				$new = preg_replace_callback(
+					'#<!-- wp:rehab/authority-ribbon (\{.*?\}) -->.*?<!-- /wp:rehab/authority-ribbon -->\s*#s',
+					static function ( $m ) use ( $tips ) {
+						$attrs = json_decode( $m[1], true );
+						if ( ! is_array( $attrs ) || empty( $attrs['logos'] ) ) {
+							return $m[0];
+						}
+						foreach ( $attrs['logos'] as &$logo ) {
+							$alt = $logo['alt'] ?? '';
+							if ( isset( $tips[ $alt ] ) ) {
+								$logo['tip'] = $tips[ $alt ];
+							}
+						}
+						unset( $logo );
+						return rehab_block_authority_ribbon( $attrs['label'] ?? 'As featured in', $attrs['logos'] );
+					},
+					$c
+				);
+				if ( $new !== $c ) {
+					// Write raw so KSES can't reformat void tags (e.g. `<img/>` -> `<img />`),
+					// which would break the static block's byte-exact validation (REH-85).
+					global $wpdb;
+					$wpdb->update( $wpdb->posts, [ 'post_content' => $new ], [ 'ID' => $pid ] );
+					clean_post_cache( $pid );
+					$changed++;
+					echo "updated: {$pid} — " . get_the_title( $pid ) . "\n";
+				}
+			}
+			echo "\nscanned {$scanned} page(s) with the ribbon; updated {$changed}.\n";
+			break;
 		case 'fix-heading-levels-v3':
 			// REH-84: benefits-numbered + journey-steps item titles were <h4>
 			// sitting directly under an <h2> section (heading-level skip). Rewrite
