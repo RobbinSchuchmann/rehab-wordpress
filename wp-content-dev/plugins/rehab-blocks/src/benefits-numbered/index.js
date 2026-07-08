@@ -35,7 +35,7 @@ registerBlockType( metadata.name, {
 							<div className="rehab-benefit" key={ i }>
 								<div className="rehab-benefit__num">{ String( i + 1 ).padStart( 2, '0' ) }</div>
 								<div className="rehab-benefit__body">
-									<RichText tagName="h4" value={ item.title } onChange={ ( v ) => update( i, 'title', v ) } placeholder="Benefit title" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
+									<RichText tagName="h3" value={ item.title } onChange={ ( v ) => update( i, 'title', v ) } placeholder="Benefit title" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
 									<RichText tagName="p" value={ item.body } onChange={ ( v ) => update( i, 'body', v ) } placeholder="Benefit body…" allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] } />
 								</div>
 							</div>
@@ -54,7 +54,7 @@ registerBlockType( metadata.name, {
 					<div className="rehab-benefit" key={ i }>
 						<div className="rehab-benefit__num">{ String( i + 1 ).padStart( 2, '0' ) }</div>
 						<div className="rehab-benefit__body">
-							<RichText.Content tagName="h4" value={ item.title } />
+							<RichText.Content tagName="h3" value={ item.title } />
 							<RichText.Content tagName="p" value={ item.body } />
 						</div>
 					</div>

@@ -34,6 +34,35 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'fix-heading-levels-v3':
+			// REH-84: benefits-numbered + journey-steps item titles were <h4>
+			// sitting directly under an <h2> section (heading-level skip). Rewrite
+			// the stored markup H4 → H3 in place. Targeted regex on each block's
+			// own wrapper so no other heading can be touched. Idempotent.
+			$q = new WP_Query( [
+				'post_type'      => [ 'page', 'post' ],
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+			] );
+			$changed = 0;
+			$scanned = 0;
+			foreach ( $q->posts as $pid ) {
+				$c = get_post_field( 'post_content', $pid );
+				if ( false === strpos( $c, 'rehab-journey-step__title' ) && false === strpos( $c, 'rehab-benefit__body' ) ) {
+					continue;
+				}
+				$scanned++;
+				$new = preg_replace( '#<h4(\s+class="rehab-journey-step__title")\s*>(.*?)</h4>#s', '<h3$1>$2</h3>', $c );
+				$new = preg_replace( '#(<div class="rehab-benefit__body">)<h4>(.*?)</h4>#s', '$1<h3>$2</h3>', $new );
+				if ( $new !== $c ) {
+					wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $new ) ] );
+					$changed++;
+					echo "updated: {$pid} — " . get_the_title( $pid ) . "\n";
+				}
+			}
+			echo "\nscanned {$scanned} page(s) using these blocks; updated {$changed}.\n";
+			break;
 		case 'seed-homepage-blocks':
 			// REH-37: replace the homepage (page 6) content with the editable
 			// rehab/home-* block markup that reproduces the hardcoded design,
