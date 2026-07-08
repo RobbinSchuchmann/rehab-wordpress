@@ -210,6 +210,8 @@ diamond_child_brand_contact( [
 	'rehab_phone_number'    => '+61279082277',
 	'rehab_social_facebook' => 'https://www.facebook.com/profile.php?id=100062157021886',
 	'rehab_social_instagram'=> 'https://www.instagram.com/diamondrehabthailand/',
+	'rehab_social_linkedin' => 'https://www.linkedin.com/company/the-diamond-rehab-thailand',
+	'rehab_social_youtube'  => 'https://www.youtube.com/@thediamondrehab',
 	'rehab_social_x'        => 'https://twitter.com/rehab_thailand',
 	'rehab_social_pinterest'=> 'https://www.pinterest.com/diamondrehabthailand/',
 	'rehab_social_threads'  => 'https://www.threads.net/@diamondrehabthailand',
