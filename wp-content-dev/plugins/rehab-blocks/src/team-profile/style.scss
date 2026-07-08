@@ -1,4 +1,4 @@
-// Individual team-member profile — bio main + sticky "[Name] is part of our team" form rail.
+// Individual team-member profile — breadcrumb + single-column bio.
 
 .rehab-team-profile {
 	padding: clamp(36px, 4vw, 60px) 0 5rem;
@@ -6,36 +6,36 @@
 	@media (max-width: 768px) { padding-bottom: 3rem; }
 }
 
-.rehab-team-profile__back {
-	display: inline-flex;
-	align-items: center;
-	gap: 9px;
+.rehab-team-profile__crumb {
 	font-family: var(--rehab-font-body);
 	font-weight: 500;
 	font-size: 0.75rem;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: var(--rehab-sage-dark, #8A9674);
-	text-decoration: none;
+	color: var(--rehab-sage-text, #7A856A);
 	margin-bottom: 22px;
+
+	a {
+		color: var(--rehab-sage-dark, #8A9674);
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: var(--rehab-warm-charcoal, #2C2C2C);
+	}
 }
 
-.rehab-team-profile__back svg {
-	width: 15px;
-	height: 15px;
+.rehab-team-profile__crumb-sep {
+	margin: 0 0.5em;
+	color: var(--rehab-tan, #BEB39E);
 }
 
-.rehab-team-profile__back:hover {
+.rehab-team-profile__crumb-current {
 	color: var(--rehab-warm-charcoal, #2C2C2C);
 }
 
 .rehab-team-profile__layout {
-	display: grid;
-	grid-template-columns: 1fr 380px;
-	gap: clamp(40px, 5vw, 72px);
-	align-items: start;
-
-	@media (max-width: 980px) { grid-template-columns: 1fr; }
+	max-width: 760px;
 }
 
 .rehab-team-profile__role {
@@ -144,161 +144,4 @@
 
 .rehab-team-profile__bio p:last-child {
 	margin-bottom: 0;
-}
-
-// ---------- Sticky conversion rail ----------
-.rehab-team-profile__rail {
-	position: sticky;
-	top: 100px;
-
-	@media (max-width: 980px) { position: static; max-width: 520px; }
-}
-
-.rehab-team-profile__card {
-	background: var(--rehab-sage-mist-2, #F1F3E9);
-	border: 1px solid rgba(var(--rehab-tan-rgb), 0.4);
-	padding: clamp(28px, 2.6vw, 36px);
-}
-
-.rehab-team-profile__card-eyebrow {
-	font-family: var(--rehab-font-body);
-	font-weight: 500;
-	font-size: 0.75rem;
-	letter-spacing: 0.18em;
-	text-transform: uppercase;
-	color: var(--rehab-sage-text, #7A856A);
-	display: block;
-}
-
-.rehab-team-profile__card-name {
-	font-family: var(--rehab-font-display);
-	font-weight: 300;
-	font-size: 1.5rem;
-	letter-spacing: -0.015em;
-	color: var(--rehab-warm-charcoal, #2C2C2C);
-	line-height: 1.25;
-	margin: 10px 0 8px;
-}
-
-.rehab-team-profile__card-name b {
-	font-weight: 300;
-	color: var(--rehab-sage-dark, #8A9674);
-}
-
-.rehab-team-profile__card-sub {
-	font-family: var(--rehab-font-body);
-	font-weight: 300;
-	font-size: 0.875rem;
-	color: var(--rehab-soft-charcoal, #4A4A4A);
-	line-height: 1.6;
-	margin: 0 0 22px;
-}
-
-.rehab-team-profile__hp {
-	position: absolute;
-	left: -9999px;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
-}
-
-.rehab-team-profile__field {
-	margin-bottom: 16px;
-}
-
-.rehab-team-profile__field label {
-	display: block;
-	font-family: var(--rehab-font-body);
-	font-weight: 500;
-	font-size: 0.6875rem;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-	color: var(--rehab-warm-charcoal, #2C2C2C);
-	margin-bottom: 8px;
-}
-
-.rehab-team-profile__field input,
-.rehab-team-profile__field select {
-	width: 100%;
-	font-family: var(--rehab-font-body);
-	font-weight: 300;
-	font-size: 1rem;
-	color: var(--rehab-warm-charcoal, #2C2C2C);
-	padding: 10px 2px;
-	border: 0;
-	border-bottom: 1px solid var(--rehab-tan, #BEB39E);
-	background: transparent;
-	border-radius: 0;
-	transition: border-color 0.3s var(--rehab-ease);
-}
-
-.rehab-team-profile__field input::placeholder {
-	color: rgba(var(--rehab-soft-charcoal-rgb), 0.45);
-}
-
-.rehab-team-profile__field input:focus,
-.rehab-team-profile__field select:focus {
-	outline: none;
-	border-bottom-color: var(--rehab-sage-dark, #8A9674);
-}
-
-.rehab-team-profile__card .rehab-btn {
-	margin-top: 12px;
-}
-
-.rehab-team-profile__card-phone {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	margin-top: 16px;
-	width: 100%;
-}
-
-/* The shared .rehab-phone-link base + icon sizing live in the assessment-hero
-   stylesheet, which isn't enqueued on team pages — so without this the SVG has
-   no size and renders at the flex-container width (~300px). Size + tint it to
-   match the site convention (cf. feature-split / cta-band). */
-.rehab-team-profile__card-phone svg {
-	width: 16px;
-	height: 16px;
-	flex: none;
-	stroke: var(--rehab-sage-dark, #8A9674);
-}
-
-.rehab-team-profile__form-status {
-	font-family: var(--rehab-font-body);
-	font-size: 0.8125rem;
-	margin: 12px 0 0;
-	min-height: 1em;
-	text-align: center;
-}
-
-.rehab-team-profile__form-status[data-state="error"] { color: #9c3c25; }
-.rehab-team-profile__form-status[data-state="success"] { color: var(--rehab-sage-dark, #8A9674); }
-
-.rehab-team-profile__trust {
-	margin-top: 18px;
-	padding-top: 16px;
-	border-top: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
-	display: grid;
-	gap: 10px;
-}
-
-.rehab-team-profile__trust div {
-	display: flex;
-	gap: 10px;
-	align-items: flex-start;
-	font-family: var(--rehab-font-body);
-	font-weight: 300;
-	font-size: 0.8125rem;
-	color: var(--rehab-soft-charcoal, #4A4A4A);
-	line-height: 1.4;
-}
-
-.rehab-team-profile__trust .gem {
-	color: var(--rehab-sage, #BAC3A1);
-	flex: none;
-	font-size: 0.7em;
-	margin-top: 5px;
 }

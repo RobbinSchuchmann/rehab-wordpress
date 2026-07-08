@@ -62,6 +62,16 @@
 	color: var(--rehab-sage-text, #7A856A);
 	display: block;
 	margin-bottom: 1rem;
+
+	// Breadcrumb links when the eyebrow carries a Home / … trail.
+	a {
+		color: var(--rehab-sage-dark, #8A9674);
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: var(--rehab-warm-charcoal, #2C2C2C);
+	}
 }
 
 .rehab-feature-split__heading {
