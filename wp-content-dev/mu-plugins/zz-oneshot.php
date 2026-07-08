@@ -34,6 +34,25 @@ add_action( 'init', function () {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 
 	switch ( $task ) {
+		case 'fix-treatment-page-templates':
+			// REH-86: these pages open with a full-width rehab/treatment-hero but were
+			// assigned template-article.php, whose narrow editorial column crushes the
+			// hero. Move them to template-treatment.php. Backs up the prior template.
+			$targets = [ 1323, 1327, 1334, 1339, 2853 ];
+			$done = 0;
+			foreach ( $targets as $pid ) {
+				if ( 'page' !== get_post_type( $pid ) ) { echo "skip {$pid} (not a page)\n"; continue; }
+				$current = (string) get_post_meta( $pid, '_wp_page_template', true );
+				if ( 'template-treatment.php' === $current ) { echo "ok {$pid} (already treatment)\n"; continue; }
+				if ( ! get_post_meta( $pid, '_rehab_template_backup', true ) ) {
+					update_post_meta( $pid, '_rehab_template_backup', $current ?: '(default)' );
+				}
+				update_post_meta( $pid, '_wp_page_template', 'template-treatment.php' );
+				$done++;
+				echo "updated {$pid} — " . get_the_title( $pid ) . " ({$current} -> template-treatment.php)\n";
+			}
+			echo "\nDONE. templates changed: {$done}.\n";
+			break;
 		case 'add-authority-tooltips':
 			// REH-85: give the "As featured in" ribbon (rehab/authority-ribbon)
 			// the same hover tooltips the homepage press strip has. Map each
