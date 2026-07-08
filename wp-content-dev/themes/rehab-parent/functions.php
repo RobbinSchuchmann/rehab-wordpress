@@ -738,23 +738,30 @@ function rehab_parent_jsonld(): void {
 add_action( 'wp_head', 'rehab_parent_jsonld', 6 );
 
 /**
- * Replace WP's default site-icon `<link>` tags with a theme-bundled SVG favicon
- * that lives in the active child theme. Avoids 404s when the Customizer's
- * uploaded site icon files are missing on this environment.
+ * Frontend favicon — match the admin by using the real WP Site Icon.
+ *
+ * We emit a single `<link>` to the Site Icon's full-size URL rather than letting
+ * core's `wp_site_icon()` run, because the generated sub-sizes (…-32x32.png,
+ * …-192x192.png, apple-touch, ms-tile) are missing from this environment's media
+ * set and would 404. The full-size original resolves fine, so the frontend shows
+ * the same brand icon as the dashboard. Falls back to the theme-bundled SVG only
+ * when no Site Icon is set (keeps a favicon and avoids a 404).
  */
 function rehab_parent_favicon(): void {
-	$svg_path = get_stylesheet_directory() . '/assets/img/favicon.svg';
-	if ( ! file_exists( $svg_path ) ) return;
-
-	$svg_url  = get_stylesheet_directory_uri() . '/assets/img/favicon.svg';
-	echo "\n\t<link rel=\"icon\" type=\"image/svg+xml\" href=\"" . esc_url( $svg_url ) . "\">\n";
+	$icon_url = get_site_icon_url();
+	if ( ! $icon_url ) {
+		$svg_path = get_stylesheet_directory() . '/assets/img/favicon.svg';
+		if ( ! file_exists( $svg_path ) ) return;
+		$icon_url = get_stylesheet_directory_uri() . '/assets/img/favicon.svg';
+	}
+	echo "\n\t<link rel=\"icon\" href=\"" . esc_url( $icon_url ) . "\">\n";
 }
 add_action( 'wp_head', 'rehab_parent_favicon', 1 );
 
 /**
- * Suppress the WP-managed `<link rel="icon">` tags that point at the missing
- * Customizer-uploaded site icon. We replace them with our theme-bundled SVG
- * via `rehab_parent_favicon()` above.
+ * Suppress core's `wp_site_icon()` — its multi-size `<link>`/meta tags point at
+ * generated icon sizes that are absent from this media set (they 404). We emit
+ * a single working link via `rehab_parent_favicon()` above instead.
  */
 remove_action( 'wp_head', 'wp_site_icon', 99 );
 
