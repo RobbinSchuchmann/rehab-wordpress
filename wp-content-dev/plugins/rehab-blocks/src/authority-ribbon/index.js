@@ -12,7 +12,9 @@ function Markup( { a } ) {
 				<p className="rehab-authority-ribbon__label">{ a.label }</p>
 				<div className="rehab-authority-ribbon__logos">
 					{ logos.map( ( logo, i ) => (
-						<img key={ i } src={ logo.url } alt={ logo.alt || '' } />
+						logo.tip
+							? <span key={ i } className="rehab-authority-ribbon__item" data-tooltip={ logo.tip }><img src={ logo.url } alt={ logo.alt || '' } /></span>
+							: <img key={ i } src={ logo.url } alt={ logo.alt || '' } />
 					) ) }
 				</div>
 			</div>
