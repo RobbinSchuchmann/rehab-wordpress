@@ -37,6 +37,27 @@ function rehab_blocks_register(): void {
 add_action( 'init', 'rehab_blocks_register' );
 
 /**
+ * Feed the brand social links into the block editor.
+ *
+ * The `rehab/contact-methods` frontend renders socials from the shared
+ * rehab_social_links() helper (Customizer theme mods), NOT from the block's
+ * own attributes. The editor preview is hand-built, so without this it can't
+ * see those links and the socials row shows up empty. Expose the same set as
+ * a JS global so the editor canvas mirrors the frontend exactly (REH-80).
+ */
+function rehab_blocks_editor_socials(): void {
+	if ( ! function_exists( 'rehab_social_links' ) ) {
+		return;
+	}
+	wp_add_inline_script(
+		'rehab-contact-methods-editor-script',
+		'window.rehabContactSocials = ' . wp_json_encode( rehab_social_links() ) . ';',
+		'before'
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'rehab_blocks_editor_socials' );
+
+/**
  * Add a "Rehab" block category so all our blocks group together in the inserter.
  */
 function rehab_blocks_category( array $categories ): array {

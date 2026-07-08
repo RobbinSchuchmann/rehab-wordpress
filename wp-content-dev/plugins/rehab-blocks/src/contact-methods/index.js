@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, RichText, InspectorControls } from '@wordpress/block-editor';
-import { Button, PanelBody, SelectControl, TextControl, TextareaControl } from '@wordpress/components';
+import { PanelBody, SelectControl, TextControl, TextareaControl } from '@wordpress/components';
 import metadata from './block.json';
 import './style.scss';
 
@@ -10,14 +10,13 @@ registerBlockType( metadata.name, {
 		const a = attributes;
 		const set = ( k ) => ( v ) => setAttributes( { [ k ]: v } );
 		const methods = a.methods || [];
-		const socials = a.socials || [];
+		// Socials mirror the frontend: they come from the shared brand social
+		// links (Customizer theme mods), exposed as a JS global by the plugin —
+		// NOT from a per-block attribute (REH-80).
+		const brandSocials = ( typeof window !== 'undefined' && window.rehabContactSocials ) || [];
 		const setMethod = ( i, key ) => ( v ) => {
 			const next = methods.map( ( m, idx ) => ( idx === i ? { ...m, [ key ]: v } : m ) );
 			setAttributes( { methods: next } );
-		};
-		const setSocial = ( i, key ) => ( v ) => {
-			const next = socials.map( ( s, idx ) => ( idx === i ? { ...s, [ key ]: v } : s ) );
-			setAttributes( { socials: next } );
 		};
 		return (
 			<>
@@ -43,20 +42,11 @@ registerBlockType( metadata.name, {
 							rows={ 4 }
 						/>
 					</PanelBody>
-					{ socials.map( ( s, i ) => (
-						<PanelBody key={ `s${ i }` } title={ `Social — ${ s.network }` } initialOpen={ false }>
-							<SelectControl
-								label="Network"
-								value={ s.network }
-								options={ [ 'facebook', 'instagram', 'twitter', 'pinterest', 'website' ].map( ( v ) => ( { label: v, value: v } ) ) }
-								onChange={ setSocial( i, 'network' ) }
-							/>
-							<TextControl label="URL" value={ s.url } onChange={ setSocial( i, 'url' ) } />
-							<Button isDestructive variant="secondary" onClick={ () => setAttributes( { socials: socials.filter( ( _, j ) => j !== i ) } ) }>Remove</Button>
-						</PanelBody>
-					) ) }
-					<PanelBody title="Socials" initialOpen={ false }>
-						<Button variant="primary" onClick={ () => setAttributes( { socials: [ ...socials, { network: 'website', url: '' } ] } ) }>Add social link</Button>
+					<PanelBody title="Follow / socials" initialOpen={ false }>
+						<TextControl label="Follow label" value={ a.followLabel } onChange={ set( 'followLabel' ) } />
+						<p style={ { color: '#757575', fontSize: '12px', marginTop: '8px' } }>
+							The social icons come from the brand&rsquo;s links (shared with the site footer). To change which networks show or their URLs, edit them under <strong>Appearance → Customize</strong>.
+						</p>
 					</PanelBody>
 					<PanelBody title="Form" initialOpen={ false }>
 						<TextControl label="Anchor id" value={ a.anchorId } onChange={ set( 'anchorId' ) } />
@@ -85,6 +75,16 @@ registerBlockType( metadata.name, {
 										<RichText tagName="h3" value={ a.nextTitle } onChange={ set( 'nextTitle' ) } placeholder="Reassurance title…" allowedFormats={ [] } />
 										<ul>{ ( a.nextItems || [] ).map( ( item, i ) => <li key={ i }>✓ { item }</li> ) }</ul>
 									</div>
+									{ brandSocials.length > 0 && (
+										<div className="rehab-contact-methods__follow">
+											<p>{ a.followLabel }</p>
+											<div className="rehab-contact-methods__follow-row">
+												{ brandSocials.map( ( s, i ) => (
+													<a key={ i } href={ s.url } aria-label={ s.label } onClick={ ( e ) => e.preventDefault() } dangerouslySetInnerHTML={ { __html: s.icon } } />
+												) ) }
+											</div>
+										</div>
+									) }
 								</div>
 								<aside className="rehab-contact-methods__form-card">
 									<RichText tagName="span" className="rehab-contact-methods__form-eyebrow" value={ a.formEyebrow } onChange={ set( 'formEyebrow' ) } placeholder="Form eyebrow…" allowedFormats={ [] } />
