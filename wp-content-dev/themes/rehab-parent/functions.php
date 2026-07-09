@@ -225,6 +225,7 @@ require_once get_template_directory() . '/inc/cpt-team-member.php';
 require_once get_template_directory() . '/inc/social-links.php';
 require_once get_template_directory() . '/inc/article-helpers.php';
 require_once get_template_directory() . '/inc/page-categories.php';
+require_once get_template_directory() . '/inc/rank-math-schema.php';
 
 /**
  * Inject a fallback (email + phone CTA) into rehab/contact-form blocks when no
