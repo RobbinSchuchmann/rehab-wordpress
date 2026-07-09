@@ -18,7 +18,7 @@
     "methods": {
       "type": "array",
       "default": [
-        { "icon": "phone",    "kick": "Call us · fastest, 24/7",              "value": "+66 3 313 5303",  "href": "tel:+6633135303" },
+        { "icon": "phone",    "kick": "Call us · fastest, 24/7",              "value": "+61 2 7908 2277",  "href": "tel:+61279082277" },
         { "icon": "whatsapp", "kick": "WhatsApp · for privacy & timezones",   "value": "Message us now",  "href": "https://wa.me/66965823832" },
         { "icon": "email",    "kick": "Email · we reply within hours",        "value": "Send a message",  "href": "mailto:info@diamondrehabthailand.com" }
       ],

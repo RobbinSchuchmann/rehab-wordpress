@@ -40,11 +40,11 @@
     },
     "phoneText": {
       "type": "string",
-      "default": "+66 3 313 5303"
+      "default": "+61 2 7908 2277"
     },
     "phoneHref": {
       "type": "string",
-      "default": "tel:+6633135303"
+      "default": "tel:+61279082277"
     },
     "whatsappText": {
       "type": "string",

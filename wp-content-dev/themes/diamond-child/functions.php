@@ -216,6 +216,10 @@ diamond_child_brand_contact( [
 	'rehab_social_pinterest'=> 'https://www.pinterest.com/diamondrehabthailand/',
 	'rehab_social_threads'  => 'https://www.threads.net/@diamondrehabthailand',
 
+	// Footer secondary numbers. Main number (+61) is the primary above; the Thai
+	// line is demoted here alongside the international call-back numbers (REH-88).
+	'rehab_footer_intl_phones' => "Thailand|+66 96 582 3832\nAustralia|+61 2 7908 2277\nUSA / Canada|+1 330 822 5340\nUK|+44 330 822 5340\nEurope|+31 20 532 2548",
+
 	// Brand identity that used to be hardcoded in the parent theme (REH-46).
 	// Setting it here keeps Diamond pixel-identical while the parent stays
 	// brand-agnostic for the other child themes.
