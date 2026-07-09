@@ -114,7 +114,7 @@
     },
     "phoneHref": {
       "type": "string",
-      "default": "tel:+6633135303"
+      "default": "tel:+61279082277"
     }
   },
   "editorScript": "file:./index.js",

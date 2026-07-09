@@ -48,11 +48,11 @@
     },
     "phoneText": {
       "type": "string",
-      "default": "+66 3 313 5303"
+      "default": "+61 2 7908 2277"
     },
     "phoneHref": {
       "type": "string",
-      "default": "tel:+6633135303"
+      "default": "tel:+61279082277"
     },
     "showRating": {
       "type": "boolean",
@@ -108,7 +108,7 @@
     },
     "formPhoneLabel": {
       "type": "string",
-      "default": "Or call +66 3 313 5303"
+      "default": "Or call +61 2 7908 2277"
     },
     "formConsent": {
       "type": "string",

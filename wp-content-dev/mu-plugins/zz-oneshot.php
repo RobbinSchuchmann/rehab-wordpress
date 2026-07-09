@@ -195,7 +195,7 @@ add_action( 'init', function () {
 				'headline'      => 'Discover Hua Hin: the perfect setting for recovery',
 				'lede'          => "Hua Hin, often called the Saint Tropez of Thailand, is renowned for its stunning beaches and beautiful nature. Just a three-hour drive from Suvarnabhumi Airport in Bangkok, it's conveniently accessible without the need for a domestic flight. Hua Hin boasts excellent private hospitals, shopping malls, and vibrant night markets, all while maintaining a laid-back and peaceful atmosphere.",
 				'primaryText'   => 'Schedule a free assessment', 'primaryUrl' => '#assessment',
-				'secondaryText' => 'Call +66 3 313 5303',        'secondaryUrl' => 'tel:+6633135303',
+				'secondaryText' => 'Call +61 2 7908 2277',        'secondaryUrl' => 'tel:+61279082277',
 				'stat1Num'      => '12',   'stat1Label' => 'Maximum clients on site at any time',
 				'stat2Num'      => '24/7', 'stat2Label' => 'Doctor & clinical team on site',
 				'stat3Num'      => '3 hr', 'stat3Label' => 'From Bangkok — no domestic flight',
@@ -324,7 +324,7 @@ add_action( 'init', function () {
 				'headline'      => 'Superannuation and mental health treatment',
 				'lede'          => 'In Australia and New Zealand, superannuation funds provide financial support during retirement. In some cases, early access to these funds may be available for medical expenses, including mental health treatment. This requires meeting certain criteria and acquiring approval from the Australian Taxation Office (ATO).',
 				'primaryText'   => 'Enquire about funding', 'primaryUrl' => '#assessment',
-				'secondaryText' => 'Call +66 3 313 5303',  'secondaryUrl' => 'tel:+6633135303',
+				'secondaryText' => 'Call +61 2 7908 2277',  'secondaryUrl' => 'tel:+61279082277',
 				'stat1Num'      => '12',   'stat1Label' => 'Maximum clients on site at any time',
 				'stat2Num'      => '24/7', 'stat2Label' => 'Doctor & clinical team on site',
 				'stat3Num'      => '5★',   'stat3Label' => 'Private residential facility, Hua Hin',
@@ -1022,7 +1022,7 @@ JSON;
 
 		case 'fix-footer':
 			$address = "8 Moo 14, Soi Mon Mai Hin Lek Fai\nHua Hin District, Prachuap Khiri Khan\nThailand 77110";
-			$intl = "Australia|+61 2 7908 2277\nUSA / Canada|+1 330 822 5340\nUK|+44 330 822 5340\nEurope|+31 20 532 2548";
+			$intl = "Thailand|+66 96 582 3832\nAustralia|+61 2 7908 2277\nUSA / Canada|+1 330 822 5340\nUK|+44 330 822 5340\nEurope|+31 20 532 2548";
 			set_theme_mod( 'rehab_footer_address', $address );
 			set_theme_mod( 'rehab_footer_intl_phones', $intl );
 			set_theme_mod( 'rehab_footer_copyright', '&copy; ' . gmdate( 'Y' ) . ' The Diamond Rehab Thailand. All rights reserved.' );
@@ -2278,7 +2278,7 @@ JSON;
 				'doctorImageAlt' => 'Theo de Vries, Founder',
 				'doctorLabel' => 'Speak with our Director',
 				'doctorName' => 'Theo de Vries',
-				'doctorPhone' => '+66 3 313 5303',
+				'doctorPhone' => '+61 2 7908 2277',
 			] );
 
 			// 4. PILLARS — Why Diamond
@@ -2483,7 +2483,7 @@ JSON;
 				'formTitle'   => 'Talk with our admissions team',
 				'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
 				'formSubmit'  => 'Talk with admissions',
-				'formPhoneLabel' => 'Or call +66 3 313 5303',
+				'formPhoneLabel' => 'Or call +61 2 7908 2277',
 				'formConsent' => 'By submitting you agree to a confidential call-back. We never share your details.',
 			] );
 
@@ -2880,7 +2880,7 @@ JSON;
 				'headline' => 'Transparent, all-inclusive care: one private fee',
 				'lede'     => 'No hidden extras and nothing itemised after you arrive. Accommodation, clinical care, therapy, meals, wellness and excursions are gathered into a single, transparent figure, which we share with you on a confidential call.',
 				'primaryText' => 'Check availability', 'primaryUrl' => '#pricing',
-				'secondaryText' => '+66 3 313 5303', 'secondaryUrl' => 'tel:+6633135303',
+				'secondaryText' => '+61 2 7908 2277', 'secondaryUrl' => 'tel:+61279082277',
 				'helper' => 'Free, confidential, and no-obligation.',
 				'stat1Num' => '1',  'stat1Label' => 'All-inclusive fee, no hidden extras',
 				'stat2Num' => '12', 'stat2Label' => 'Private bungalows, never more',
@@ -3089,7 +3089,7 @@ JSON;
 				'railEyebrow' => 'Speak with us directly',
 				'railHeading' => "However you'd rather reach us",
 				'methods' => [
-					[ 'icon' => 'phone',    'kick' => 'Call us · fastest, 24/7',            'value' => '+66 3 313 5303', 'href' => 'tel:+6633135303' ],
+					[ 'icon' => 'phone',    'kick' => 'Call us · fastest, 24/7',            'value' => '+61 2 7908 2277', 'href' => 'tel:+61279082277' ],
 					[ 'icon' => 'whatsapp', 'kick' => 'WhatsApp · for privacy & timezones', 'value' => 'Message us now', 'href' => 'https://wa.me/66965823832' ],
 					[ 'icon' => 'email',    'kick' => 'Email · we reply within hours',      'value' => 'Send a message', 'href' => 'mailto:info@diamondrehabthailand.com' ],
 				],
@@ -3222,7 +3222,7 @@ JSON;
 				'gemItems' => [ 'Hiking and national parks', 'Horse riding on the beach', 'Golf', 'Kite surfing', 'Snorkelling', 'Waterfalls and sightseeing' ],
 				'footnote' => 'Our kitchen serves Thai and Western food to a high standard, and any special diet or allergy is catered for personally.',
 				'primaryText' => 'Get a consultation', 'primaryUrl' => '/contact-us/',
-				'phoneText' => '+66 3 313 5303', 'phoneHref' => 'tel:+6633135303',
+				'phoneText' => '+61 2 7908 2277', 'phoneHref' => 'tel:+61279082277',
 			] );
 
 			// 7. LICENSE PROOF
@@ -3276,7 +3276,7 @@ JSON;
 				'heading' => 'The Diamond Rehab Thailand team',
 				'body' => 'Meet the world-class professionals behind your care, where dedication meets diversity. Our multidisciplinary team brings decades of collective experience across CBT, DBT, trauma counselling, dual-diagnosis treatment and specialist care for depression, anxiety and burnout.',
 				'primaryText' => 'Contact us', 'primaryUrl' => '/contact-us/',
-				'phoneText' => '+66 3 313 5303', 'phoneHref' => 'tel:+6633135303',
+				'phoneText' => '+61 2 7908 2277', 'phoneHref' => 'tel:+61279082277',
 			] );
 
 			// 2. FILTERABLE TEAM GRID — real roster

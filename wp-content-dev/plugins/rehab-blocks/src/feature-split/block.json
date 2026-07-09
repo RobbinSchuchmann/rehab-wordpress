@@ -28,7 +28,7 @@
     "primaryText": { "type": "string", "default": "" },
     "primaryUrl":  { "type": "string", "default": "" },
     "phoneText":   { "type": "string", "default": "" },
-    "phoneHref":   { "type": "string", "default": "tel:+6633135303" }
+    "phoneHref":   { "type": "string", "default": "tel:+61279082277" }
   },
   "editorScript": "file:./index.js",
   "style":        "file:./style-index.css",

@@ -520,7 +520,7 @@ function rehab_block_final_cta( array $a = [] ): string {
 		'eyebrow' => 'Take the next step',
 		'heading' => 'Are you ready to begin?',
 		'lead' => "Fill out the form and our client relations team will call you back, confidentially, within an hour during business hours. No pressure, no commitment — just a conversation.",
-		'phoneText' => '+66 3 313 5303', 'phoneHref' => 'tel:+6633135303',
+		'phoneText' => '+61 2 7908 2277', 'phoneHref' => 'tel:+61279082277',
 		'whatsappText' => '+66 96 582 3832', 'whatsappHref' => 'https://wa.me/66965823832',
 		'emailText' => 'info@diamondrehabthailand.com', 'emailHref' => 'mailto:info@diamondrehabthailand.com',
 		'formTitle' => 'Free, confidential assessment',
@@ -689,7 +689,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		'formTitle'   => 'Talk with our admissions team',
 		'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
 		'formSubmit'  => 'Talk with admissions',
-		'formPhoneLabel' => 'Or call +66 3 313 5303',
+		'formPhoneLabel' => 'Or call +61 2 7908 2277',
 		'formConsent' => 'By submitting you agree to a confidential call-back. We never share your details.',
 	], $hero ) );
 

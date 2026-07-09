@@ -22,8 +22,8 @@
     "primaryUrl":    { "type": "string", "default": "#assessment" },
     "secondaryText": { "type": "string", "default": "" },
     "secondaryUrl":  { "type": "string", "default": "" },
-    "phoneText":     { "type": "string", "default": "+66 3 313 5303" },
-    "phoneHref":     { "type": "string", "default": "tel:+6633135303" },
+    "phoneText":     { "type": "string", "default": "+61 2 7908 2277" },
+    "phoneHref":     { "type": "string", "default": "tel:+61279082277" },
     "helper":        { "type": "string", "default": "Free, confidential, and no-obligation." }
   },
   "editorScript": "file:./index.js",
