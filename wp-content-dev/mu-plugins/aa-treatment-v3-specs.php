@@ -235,7 +235,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when it matters most',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean support is always close by for each partner individually, through cravings, difficult nights and the harder conversations couples in recovery need to have.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean support is always close by for each partner individually, through cravings, difficult nights and the harder conversations couples in recovery need to have.',
 				],
 			],
 			'holistic' => [
@@ -396,7 +396,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Support when old patterns resurface',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean support is always close by, through flashbacks, difficult nights and the moments when old patterns resurface.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean support is always close by, through flashbacks, difficult nights and the moments when old patterns resurface.',
 				],
 			],
 			'holistic' => [
@@ -556,7 +556,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the crash, the cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the crash, the cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -716,7 +716,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through cravings, difficult nights and the hardest moments of alcohol withdrawal.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through cravings, difficult nights and the hardest moments of alcohol withdrawal.',
 				],
 			],
 			'holistic' => [
@@ -877,7 +877,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -1040,7 +1040,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the crash, the cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the crash, the cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -1202,7 +1202,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through cravings, restless nights and the hardest moments of cannabis withdrawal.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through cravings, restless nights and the hardest moments of cannabis withdrawal.',
 				],
 			],
 			'holistic' => [
@@ -1360,7 +1360,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through cravings, sleepless nights and the hardest moments of ketamine withdrawal.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through cravings, sleepless nights and the hardest moments of ketamine withdrawal.',
 				],
 			],
 			'holistic' => [
@@ -1520,7 +1520,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the comedown, the cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the comedown, the cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -1683,7 +1683,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -1846,7 +1846,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through rebound anxiety, restless nights and the hardest moments of the taper.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through rebound anxiety, restless nights and the hardest moments of the taper.',
 				],
 			],
 			'holistic' => [
@@ -2009,7 +2009,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through rebound anxiety, sleepless nights and the hardest moments of Valium withdrawal.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through rebound anxiety, sleepless nights and the hardest moments of Valium withdrawal.',
 				],
 			],
 			'holistic' => [
@@ -2172,7 +2172,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -2335,7 +2335,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights of tramadol detox.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights of tramadol detox.',
 				],
 			],
 			'holistic' => [
@@ -2495,7 +2495,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the stimulant crash, the cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the stimulant crash, the cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -2659,7 +2659,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when cravings hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through withdrawal, cravings and the hardest nights.',
 				],
 			],
 			'holistic' => [
@@ -2825,7 +2825,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care on the hardest days',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, through the sleepless nights and the lowest moments of depression.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, through the sleepless nights and the lowest moments of depression.',
 				],
 			],
 			'holistic' => [
@@ -3010,7 +3010,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care on the hardest days',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, through panic, difficult nights and the most anxious moments.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, through panic, difficult nights and the most anxious moments.',
 				],
 			],
 			'holistic' => [
@@ -3204,7 +3204,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care on the hardest days',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, through flashbacks, nightmares and the most difficult moments.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, through flashbacks, nightmares and the most difficult moments.',
 				],
 			],
 			'holistic' => [
@@ -3400,7 +3400,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Discretion executives can rely on',
-					'body' => 'A 4:1 staff-to-client ratio, 24/7 support and a private coastal retreat with the calm of a 5-star hotel, offering the discretion and flexibility a demanding executive career requires.',
+					'body' => 'A 2:1 staff-to-client ratio, 24/7 support and a private coastal retreat with the calm of a 5-star hotel, offering the discretion and flexibility a demanding executive career requires.',
 				],
 			],
 			'holistic' => [
@@ -3598,7 +3598,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care through the longest nights',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean support is always close by, including at three in the morning when sleep will not come.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean support is always close by, including at three in the morning when sleep will not come.',
 				],
 			],
 			'holistic' => [
@@ -3791,7 +3791,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care whenever you need it',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, including the moments when old codependent patterns pull hardest.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, including the moments when old codependent patterns pull hardest.',
 				],
 			],
 			'holistic' => [
@@ -4184,7 +4184,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care at every hour',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 support mean someone is always there, through restless evenings, difficult nights and the urge to log back in.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 support mean someone is always there, through restless evenings, difficult nights and the urge to log back in.',
 				],
 			],
 			'holistic' => [
@@ -4379,7 +4379,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care at every hour',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 support mean someone is always there, through restless evenings and the moments when the pull of the screen feels strongest.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 support mean someone is always there, through restless evenings and the moments when the pull of the screen feels strongest.',
 				],
 			],
 			'holistic' => [
@@ -4773,7 +4773,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when urges hit hardest',
-					'body' => 'Crypto markets run day and night, and so do the urges they create. A 4:1 staff-to-client ratio and 24/7 support mean someone is there in the moments when the pull to open the next trade is strongest.',
+					'body' => 'Crypto markets run day and night, and so do the urges they create. A 2:1 staff-to-client ratio and 24/7 support mean someone is there in the moments when the pull to open the next trade is strongest.',
 				],
 			],
 			'holistic' => [
@@ -4968,7 +4968,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care when urges hit hardest',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the night, the strongest urges and the hardest moments.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the night, the strongest urges and the hardest moments.',
 				],
 			],
 			'holistic' => [
@@ -5165,7 +5165,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Medical monitoring day and night',
-					'body' => 'Eating disorders carry real physical risk, which is why a 4:1 staff-to-client ratio and 24/7 clinical cover mean your health is watched over at every hour, and gently supported at every meal.',
+					'body' => 'Eating disorders carry real physical risk, which is why a 2:1 staff-to-client ratio and 24/7 clinical cover mean your health is watched over at every hour, and gently supported at every meal.',
 				],
 			],
 			'holistic' => [
@@ -5567,7 +5567,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Medical monitoring day and night',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, including in the difficult moments after meals when the bulimia cycle pulls hardest.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 clinical cover mean someone is always there, including in the difficult moments after meals when the bulimia cycle pulls hardest.',
 				],
 			],
 			'holistic' => [
@@ -5767,7 +5767,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '03 · Support around the clock',
 					'title' => 'Care at the hard moments',
-					'body' => 'A 4:1 staff-to-client ratio and 24/7 support from a compassionate team mean someone is always there, including at the times of day when the urge to binge feels strongest.',
+					'body' => 'A 2:1 staff-to-client ratio and 24/7 support from a compassionate team mean someone is always there, including at the times of day when the urge to binge feels strongest.',
 				],
 			],
 			'holistic' => [

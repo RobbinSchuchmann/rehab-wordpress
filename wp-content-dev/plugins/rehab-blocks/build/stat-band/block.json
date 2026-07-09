@@ -32,7 +32,7 @@
     },
     "stat2Num": {
       "type": "string",
-      "default": "4:1"
+      "default": "2:1"
     },
     "stat2Label": {
       "type": "string",
@@ -40,7 +40,7 @@
     },
     "stat3Num": {
       "type": "string",
-      "default": "50+"
+      "default": "35"
     },
     "stat3Label": {
       "type": "string",

@@ -6,8 +6,8 @@
 
 $stats = array(
 	array( 'value' => '12+', 'label' => 'Years of clinical leadership' ),
-	array( 'value' => '50+', 'label' => 'Specialized staff members' ),
-	array( 'value' => '4:1', 'label' => 'Staff-to-client ratio' ),
+	array( 'value' => '35', 'label' => 'Specialized staff members' ),
+	array( 'value' => '2:1', 'label' => 'Staff-to-client ratio' ),
 	array( 'value' => '30%', 'label' => 'More annual sunshine (Hua Hin)' ),
 );
 ?>

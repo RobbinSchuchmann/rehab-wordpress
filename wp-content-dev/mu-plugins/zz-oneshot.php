@@ -2765,6 +2765,31 @@ JSON;
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt page {$pid} ({$specs[$pid]['slug']}, design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
+		case 'rebuild-treatment-v3-all':
+			// Bulk design-v3 rebuild for every treatment page that has a spec in
+			// aa-treatment-v3-specs.php. Used to re-seed baked post_content after a
+			// source change (e.g. REH-87 trust-stat unification). Keeps the one-time
+			// pre-v3 backup per page, exactly like the single-page rebuild-treatment-v3.
+			$specs = rehab_treatment_v3_specs();
+			$ok = 0; $skipped = 0;
+			foreach ( $specs as $pid => $spec ) {
+				$post = get_post( $pid );
+				if ( ! $post ) { echo "SKIP {$pid}: no post\n"; $skipped++; continue; }
+				if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
+					update_post_meta( $pid, '_rehab_design_v2_backup', $post->post_content );
+				}
+				$blocks = rehab_build_treatment_v3( $pid, $spec );
+				$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $blocks ) ], true );
+				if ( is_wp_error( $res ) ) { echo "ERR {$pid}: " . $res->get_error_message() . "\n"; $skipped++; continue; }
+				if ( get_page_template_slug( $pid ) !== 'template-treatment.php' ) {
+					update_post_meta( $pid, '_wp_page_template', 'template-treatment.php' );
+				}
+				echo "OK {$pid} ({$spec['slug']}, " . strlen( $blocks ) . " bytes)\n";
+				$ok++;
+			}
+			echo "--- rebuilt {$ok}, skipped {$skipped} of " . count( $specs ) . " ---\n";
+			break;
+
 		case 'restore-treatment-v3':
 			// Roll any v3-rebuilt page back to its pre-v3 content.
 			$pid = (int) ( $_GET['id'] ?? 0 );

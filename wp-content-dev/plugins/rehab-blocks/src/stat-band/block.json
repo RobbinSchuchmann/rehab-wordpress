@@ -13,9 +13,9 @@
   "attributes": {
     "stat1Num":   { "type": "string", "default": "12" },
     "stat1Label": { "type": "string", "default": "Client cap, always" },
-    "stat2Num":   { "type": "string", "default": "4:1" },
+    "stat2Num":   { "type": "string", "default": "2:1" },
     "stat2Label": { "type": "string", "default": "Staff-to-client ratio" },
-    "stat3Num":   { "type": "string", "default": "50+" },
+    "stat3Num":   { "type": "string", "default": "35" },
     "stat3Label": { "type": "string", "default": "Specialist staff" },
     "stat4Num":   { "type": "string", "default": "28" },
     "stat4Label": { "type": "string", "default": "Day core program" }

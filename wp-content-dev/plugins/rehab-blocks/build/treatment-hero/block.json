@@ -70,7 +70,7 @@
     },
     "stat3Num": {
       "type": "string",
-      "default": "14+"
+      "default": "12+"
     },
     "stat3Label": {
       "type": "string",
