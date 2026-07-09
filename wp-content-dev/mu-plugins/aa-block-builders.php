@@ -185,7 +185,7 @@ function rehab_block_treatment_hero( array $a ): string {
 		'helper' => 'Free, confidential, no-obligation · Replies within 1 hour',
 		'stat1Num' => '12', 'stat1Label' => 'Maximum clients on site at any time',
 		'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team availability',
-		'stat3Num' => '14+', 'stat3Label' => 'Years treating cocaine addiction',
+		'stat3Num' => '12+', 'stat3Label' => 'Years treating cocaine addiction',
 		'imageUrl' => '', 'imageAlt' => '',
 		'badgeImageUrl' => '', 'badgeTitle' => 'Thai-licensed facility',
 		'badgeText' => 'Ministry of Public Health · Hospital-affiliated detox',
@@ -684,7 +684,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		'ratingScore' => '4.9', 'ratingText' => 'from 120+ Google reviews · families & alumni',
 		'stat1Num' => '12',   'stat1Label' => 'Maximum clients on site at any time',
 		'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team on call',
-		'stat3Num' => '14+',
+		'stat3Num' => '12+',
 		'formEyebrow' => 'Free & confidential',
 		'formTitle'   => 'Talk with our admissions team',
 		'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
@@ -720,7 +720,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		$spec['pillars'] ?? [
 			[ 'num' => '01 · Evidence-based & holistic', 'title' => 'Western clinical care, Eastern calm', 'body' => 'Medical detox and proven therapies including CBT, trauma work and family therapy, alongside fitness, nutrition and mindfulness that rebuild the whole person.' ],
 			[ 'num' => '02 · Never templated', 'title' => 'A program shaped around you', 'body' => 'With only twelve clients on site, your plan is built by a psychiatrist for your history, not slotted into a fixed curriculum.' ],
-			[ 'num' => '03 · Support around the clock', 'title' => 'Care when cravings hit hardest', 'body' => 'A 4:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the night and the hardest moments.' ],
+			[ 'num' => '03 · Support around the clock', 'title' => 'Care when cravings hit hardest', 'body' => 'A 2:1 staff-to-client ratio and 24/7 medical cover mean someone is always there, through the night and the hardest moments.' ],
 		],
 		'white'
 	);
@@ -807,8 +807,8 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 
 	$blocks .= rehab_block_stat_band( [
 		'stat1Num' => '12',  'stat1Label' => 'Client cap, always',
-		'stat2Num' => '4:1', 'stat2Label' => 'Staff-to-client ratio',
-		'stat3Num' => '50+', 'stat3Label' => 'Specialist staff',
+		'stat2Num' => '2:1', 'stat2Label' => 'Staff-to-client ratio',
+		'stat3Num' => '35', 'stat3Label' => 'Specialist staff',
 		'stat4Num' => '28',  'stat4Label' => 'Day core program',
 	] );
 

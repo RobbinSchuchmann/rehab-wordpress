@@ -76,7 +76,7 @@ $faq_categories = array(
 			),
 			array(
 				'question' => 'What is the staff-to-client ratio at your facility?',
-				'answer'   => 'We maintain an exceptional 4:1 staff-to-client ratio, ensuring personalized attention and care. With a maximum of 12 clients at any time, you receive truly individualized treatment from our multidisciplinary team.',
+				'answer'   => 'We maintain an exceptional 2:1 staff-to-client ratio, ensuring personalized attention and care. With a maximum of 12 clients at any time, you receive truly individualized treatment from our multidisciplinary team.',
 			),
 			array(
 				'question' => 'Do you treat co-occurring mental health disorders?',

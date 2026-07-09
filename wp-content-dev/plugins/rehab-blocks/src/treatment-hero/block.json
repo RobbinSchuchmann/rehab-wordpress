@@ -23,7 +23,7 @@
     "stat1Label":  { "type": "string", "default": "Maximum clients on site at any time" },
     "stat2Num":    { "type": "string", "default": "24/7" },
     "stat2Label":  { "type": "string", "default": "Doctor & clinical team availability" },
-    "stat3Num":    { "type": "string", "default": "14+" },
+    "stat3Num":    { "type": "string", "default": "12+" },
     "stat3Label":  { "type": "string", "default": "Years treating cocaine addiction" },
     "imageUrl":    { "type": "string", "default": "" },
     "imageAlt":    { "type": "string", "default": "" },
