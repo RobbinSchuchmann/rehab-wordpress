@@ -233,8 +233,8 @@ diamond_child_brand_contact( [
 	'rehab_addr_region'        => 'Prachuap Khiri Khan',
 	'rehab_addr_postal'        => '77110',
 	'rehab_addr_country'       => 'TH',
-	'rehab_geo_lat'            => '12.5556',
-	'rehab_geo_lng'            => '99.9131',
+	'rehab_geo_lat'            => '12.5737202',
+	'rehab_geo_lng'            => '99.9074386',
 ] );
 
 /**

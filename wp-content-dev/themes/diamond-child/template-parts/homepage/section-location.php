@@ -3,7 +3,7 @@
  * Homepage Section: Location
  * Address + embedded Google Map.
  */
-$maps_url = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.5!2d99.9497!3d12.5764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30fdab2f7c4b9a85%3A0x8c5e2f09c8b4d4e2!2sThe%20Diamond%20Rehab%20Thailand!5e0!3m2!1sen!2sth!4v1703000000000!5m2!1sen!2sth';
+$maps_url = 'https://www.google.com/maps?q=12.5737202,99.9074386&z=16&output=embed';
 ?>
 <section class="drt-location drt-bg-white drt-section" aria-label="Getting here">
 	<div class="drt-container drt-container--narrow">
