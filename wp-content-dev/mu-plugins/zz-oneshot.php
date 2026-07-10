@@ -2896,7 +2896,6 @@ JSON;
 			}
 
 			$base   = '/wp-content/uploads/';
-			$theme  = wp_make_link_relative( get_stylesheet_directory_uri() );
 			$blocks = '';
 
 			// 1. HERO (photo + all-inclusive badge; CTA wording = Check availability)
@@ -2917,12 +2916,10 @@ JSON;
 				'badgeText'  => 'Accommodation · care · therapy · meals',
 			] );
 
-			// 2. ACCREDITATION RIBBON (real logo files only; Cigna/BlueCross/IC&RC pending assets)
-			$blocks .= rehab_block_authority_ribbon( 'Accredited & recognised by', [
-				[ 'url' => $theme . '/assets/img/treatment/ministry-public-health-badge.webp', 'alt' => 'Thai Ministry of Public Health', 'tip' => 'Licensed by Thailand\'s Ministry of Public Health, the government authority that regulates and accredits the country\'s medical and addiction-treatment facilities.' ],
-				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital', 'tip' => 'The Diamond Rehab Thailand is partnered with Bangkok Hospital for comprehensive medical support and 24/7 emergency care for all residential clients.' ],
-				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com', 'tip' => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centres for luxury residential addiction treatment.' ],
-			] );
+			// 2. PRESS RIBBON — same shared logo set as every treatment page (REH-93).
+			// (Replaced the 3-logo "Accredited & recognised by" variant; the planned
+			// Cigna/BlueCross/IC&RC accreditation assets never arrived.)
+			$blocks .= rehab_block_authority_ribbon( 'As featured in', rehab_press_ribbon_logos() );
 
 			// 3. WHAT'S INCLUDED (3 themed cards + medical check-up panel)
 			$blocks .= rehab_block_checklist_cards( [
