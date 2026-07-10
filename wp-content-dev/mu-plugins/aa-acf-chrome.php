@@ -18,15 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Logo strip slotted in directly after the treatment-hero.
- * URLs point at the theme's bundled press-mention assets so they survive
- * uploads-folder mutations.
+ * URLs point at the Media Library (uploads/brand) so the editorial team can
+ * find and swap the press-mention assets like any other image (REH-66).
  */
 function rehab_chrome_authority_ribbon(): string {
-	$base = get_template_directory_uri() === get_stylesheet_directory_uri()
-		? get_template_directory_uri()
-		: get_stylesheet_directory_uri();
-	// Press/affiliate badges live under the diamond-child theme.
-	$badge_base = home_url( '/wp-content/themes/diamond-child/assets/img/treatment' );
+	// Press/affiliate badges live in the Media Library under uploads/brand.
+	$badge_base = home_url( '/wp-content/uploads/brand' );
 	return rehab_block_authority_ribbon(
 		'As featured in',
 		[
