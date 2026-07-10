@@ -21,6 +21,7 @@
     "cardBig":     { "type": "string", "default": "" },
     "cardSub":     { "type": "string", "default": "" },
     "terms":       { "type": "array", "default": [], "items": { "type": "string" } },
+    "cardNote":    { "type": "string", "default": "" },
     "cardBtnText": { "type": "string", "default": "" },
     "cardBtnUrl":  { "type": "string", "default": "" }
   },

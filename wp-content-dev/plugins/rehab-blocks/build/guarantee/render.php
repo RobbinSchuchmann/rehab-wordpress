@@ -49,6 +49,9 @@ $wrapper = get_block_wrapper_attributes( [
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>
+				<?php if ( '' !== ( $a['cardNote'] ?? '' ) ) : ?>
+					<p class="rehab-guarantee__card-note"><?php echo wp_kses_post( $a['cardNote'] ); ?></p>
+				<?php endif; ?>
 				<?php if ( '' !== $a['cardBtnText'] ) : ?>
 					<a class="rehab-btn rehab-btn--luxury rehab-btn--block" href="<?php echo esc_url( $a['cardBtnUrl'] ?: '#' ); ?>"><?php echo wp_kses_post( $a['cardBtnText'] ); ?></a>
 				<?php endif; ?>

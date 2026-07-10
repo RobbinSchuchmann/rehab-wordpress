@@ -113,3 +113,29 @@
 	margin-top: 2px;
 	stroke: var(--rehab-sage, #BAC3A1);
 }
+
+// Standalone qualifier note — a condition, not a perk. Set apart from the
+// checkmark terms (its own tinted box + tan asterisk) so it can't be mistaken
+// for a benefit. (REH-92)
+.rehab-guarantee__card-note {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	margin: 0 0 24px;
+	padding: 12px 14px;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.06);
+	font-family: var(--rehab-font-body);
+	font-size: 0.85rem;
+	line-height: 1.5;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+.rehab-guarantee__card-note::before {
+	content: "*";
+	flex: none;
+	font-weight: 700;
+	font-size: 1.1rem;
+	line-height: 1.1;
+	color: var(--rehab-tan, #c8a55b);
+}
