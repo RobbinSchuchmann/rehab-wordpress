@@ -70,6 +70,10 @@
         "type": "string"
       }
     },
+    "cardNote": {
+      "type": "string",
+      "default": ""
+    },
     "cardBtnText": {
       "type": "string",
       "default": ""

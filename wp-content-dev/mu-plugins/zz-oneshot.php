@@ -2919,9 +2919,9 @@ JSON;
 
 			// 2. ACCREDITATION RIBBON (real logo files only; Cigna/BlueCross/IC&RC pending assets)
 			$blocks .= rehab_block_authority_ribbon( 'Accredited & recognised by', [
-				[ 'url' => $theme . '/assets/img/treatment/ministry-public-health-badge.webp', 'alt' => 'Thai Ministry of Public Health' ],
-				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital' ],
-				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
+				[ 'url' => $theme . '/assets/img/treatment/ministry-public-health-badge.webp', 'alt' => 'Thai Ministry of Public Health', 'tip' => 'Licensed by Thailand\'s Ministry of Public Health, the government authority that regulates and accredits the country\'s medical and addiction-treatment facilities.' ],
+				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital', 'tip' => 'The Diamond Rehab Thailand is partnered with Bangkok Hospital for comprehensive medical support and 24/7 emergency care for all residential clients.' ],
+				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com', 'tip' => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centres for luxury residential addiction treatment.' ],
 			] );
 
 			// 3. WHAT'S INCLUDED (3 themed cards + medical check-up panel)
@@ -3007,15 +3007,15 @@ JSON;
 				'eyebrow' => 'Our promise',
 				'heading' => 'The Relapse Prevention Guarantee',
 				'body' => "We recognise the complexities of the recovery journey. On completing treatment with us, clients leave with the support, knowledge and tools to live a life of sustainable recovery, one that is genuinely worth living.\n\nIn the unfortunate event of a relapse within twelve months of discharge, the client is eligible to return for a complimentary twenty-eight-day refresher course, at no cost. This period helps identify areas of concern and recommence the path to recovery, underscoring our trust in the program and our commitment to our clients' wellbeing.",
-				'ghostText' => 'Contact the admissions team', 'ghostUrl' => '/contact-us/',
+				'ghostText' => '', 'ghostUrl' => '',
 				'cardEyebrow' => 'Included · 12+ week programs',
 				'cardBig' => '28 days, complimentary',
 				'cardSub' => "If relapse occurs within a year of discharge, you're welcome back for a full refresher course.",
 				'terms' => [
 					'A complimentary 28-day refresher course',
 					'Available within twelve months of discharge',
-					'Requires a minimum 12-week initial stay to qualify',
 				],
+				'cardNote' => 'Requires a minimum 12-week initial stay to qualify',
 				'cardBtnText' => 'Ask about the guarantee', 'cardBtnUrl' => '/contact-us/',
 			] );
 
