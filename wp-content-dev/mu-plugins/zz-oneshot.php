@@ -27,6 +27,38 @@ add_action( 'wp_enqueue_scripts', function () {
 	);
 }, 100 );
 
+/**
+ * Rebuild guard (REH-95). Full-page rebuilds regenerate post_content from the
+ * PHP specs, silently reverting anything edited in the DB since the last bake
+ * (editorial changes, targeted migrations like REH-66/REH-94). Now that the
+ * DB is the content source of truth, a rebuild must prove it isn't clobbering:
+ * every guarded rebuild stamps `_rehab_baked_at` on success, and the next run
+ * refuses when the post was modified after that stamp (1h grace for the
+ * immediate recover-demo editor normalisation) or when no stamp exists at all.
+ * `&force=1` overrides — a deliberate from-scratch redo stays one flag away.
+ *
+ * @return string|null Refusal message, or null when the rebuild may proceed.
+ */
+function rehab_rebuild_guard( int $pid ): ?string {
+	if ( ! empty( $_GET['force'] ) ) {
+		return null;
+	}
+	$baked = (int) get_post_meta( $pid, '_rehab_baked_at', true );
+	if ( ! $baked ) {
+		return "REFUSED {$pid}: no bake record — content may carry manual/editorial edits the spec doesn't know about. Diff first, then add &force=1 to overwrite.";
+	}
+	$modified = (int) get_post_modified_time( 'U', true, $pid );
+	if ( $modified > $baked + HOUR_IN_SECONDS ) {
+		return "REFUSED {$pid}: modified " . gmdate( 'Y-m-d H:i', $modified ) . " UTC, after last bake " . gmdate( 'Y-m-d H:i', $baked ) . " UTC (+1h grace) — likely post-bake edits. Add &force=1 to overwrite.";
+	}
+	return null;
+}
+
+/** Record a successful bake so the guard has a baseline (REH-95). */
+function rehab_mark_baked( int $pid ): void {
+	update_post_meta( $pid, '_rehab_baked_at', time() );
+}
+
 add_action( 'init', function () {
 	if ( ! isset( $_GET['rehab_oneshot'] ) ) return;
 	$task = sanitize_key( $_GET['rehab_oneshot'] );
@@ -2748,6 +2780,7 @@ JSON;
 			if ( ! $post ) { echo "no post {$pid}\n"; break; }
 			$specs = rehab_treatment_v3_specs();
 			if ( empty( $specs[ $pid ] ) ) { echo "no v3 spec for page {$pid}\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $pid ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
 				update_post_meta( $pid, '_rehab_design_v2_backup', $post->post_content );
@@ -2760,6 +2793,7 @@ JSON;
 				update_post_meta( $pid, '_wp_page_template', 'template-treatment.php' );
 				echo "set template-treatment.php\n";
 			}
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $pid );
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt page {$pid} ({$specs[$pid]['slug']}, design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
@@ -2769,10 +2803,11 @@ JSON;
 			// source change (e.g. REH-87 trust-stat unification). Keeps the one-time
 			// pre-v3 backup per page, exactly like the single-page rebuild-treatment-v3.
 			$specs = rehab_treatment_v3_specs();
-			$ok = 0; $skipped = 0;
+			$ok = 0; $skipped = 0; $refused = 0;
 			foreach ( $specs as $pid => $spec ) {
 				$post = get_post( $pid );
 				if ( ! $post ) { echo "SKIP {$pid}: no post\n"; $skipped++; continue; }
+				if ( $refuse = rehab_rebuild_guard( $pid ) ) { echo $refuse . "\n"; $refused++; continue; }
 				if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
 					update_post_meta( $pid, '_rehab_design_v2_backup', $post->post_content );
 				}
@@ -2782,10 +2817,11 @@ JSON;
 				if ( get_page_template_slug( $pid ) !== 'template-treatment.php' ) {
 					update_post_meta( $pid, '_wp_page_template', 'template-treatment.php' );
 				}
+				rehab_mark_baked( $pid );
 				echo "OK {$pid} ({$spec['slug']}, " . strlen( $blocks ) . " bytes)\n";
 				$ok++;
 			}
-			echo "--- rebuilt {$ok}, skipped {$skipped} of " . count( $specs ) . " ---\n";
+			echo "--- rebuilt {$ok}, refused {$refused} (guard; &force=1 overrides), skipped {$skipped} of " . count( $specs ) . " ---\n";
 			break;
 
 		case 'import-treatment-brand-media':
@@ -3007,6 +3043,7 @@ JSON;
 			$page_id = 834;
 			$post = get_post( $page_id );
 			if ( ! $post ) { echo "no post 834\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $page_id ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
 				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
@@ -3192,6 +3229,7 @@ JSON;
 			] );
 
 			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $page_id );
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt cost page (design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
@@ -3202,6 +3240,7 @@ JSON;
 			$page_id = 1189;
 			$post = get_post( $page_id );
 			if ( ! $post ) { echo "no post 1189\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $page_id ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
 				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
@@ -3266,6 +3305,7 @@ JSON;
 			] );
 
 			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $page_id );
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt contact page (design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
@@ -3276,6 +3316,7 @@ JSON;
 			$page_id = 825;
 			$post = get_post( $page_id );
 			if ( ! $post ) { echo "no post 825\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $page_id ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
 				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
@@ -3386,6 +3427,7 @@ JSON;
 			] );
 
 			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $page_id );
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt why-us page (design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
@@ -3396,6 +3438,7 @@ JSON;
 			$page_id = 722;
 			$post = get_post( $page_id );
 			if ( ! $post ) { echo "no post 722\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $page_id ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
 				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
@@ -3461,6 +3504,7 @@ JSON;
 			] );
 
 			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $page_id );
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt team page (design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
@@ -3470,6 +3514,7 @@ JSON;
 			$page_id = 1197;
 			$post = get_post( $page_id );
 			if ( ! $post ) { echo "no post 1197\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $page_id ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $page_id, '_rehab_design_v2_backup', true ) ) {
 				update_post_meta( $page_id, '_rehab_design_v2_backup', $post->post_content );
@@ -3568,6 +3613,7 @@ JSON;
 			] );
 
 			$res = wp_update_post( [ 'ID' => $page_id, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $page_id );
 			echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "OK rebuilt FAQ page (design v3, " . strlen( $blocks ) . " bytes)\n";
 			break;
 
@@ -3629,6 +3675,7 @@ JSON;
 			if ( ! $pid ) { echo "pass &id=<member_page_id>\n"; break; }
 			$post = get_post( $pid );
 			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			if ( $refuse = rehab_rebuild_guard( $pid ) ) { echo $refuse . "\n"; break; }
 
 			if ( ! get_post_meta( $pid, '_rehab_design_v2_backup', true ) ) {
 				// Slash so the block-comment JSON keeps its backslash escapes
@@ -3667,6 +3714,7 @@ JSON;
 			] );
 
 			$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( $blocks ) ], true );
+			if ( ! is_wp_error( $res ) ) rehab_mark_baked( $pid );
 			echo is_wp_error( $res )
 				? "ERR: " . $res->get_error_message() . "\n"
 				: "OK rebuilt profile {$pid}: {$m['name']} (" . ( $role ?: 'NO ROLE' ) . ( $m['quote'] ? ', quote pulled' : ', no quote' ) . ", " . strlen( $blocks ) . " bytes)\n";
