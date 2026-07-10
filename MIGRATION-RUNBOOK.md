@@ -258,3 +258,27 @@ Point the scripts at `https://<NEW_DOMAIN>` and confirm parity with the dev box:
 ### Worked example — REH-24 "All Treatments hub" (17 Jun 2026)
 
 `template-treatments-hub.php` + `treatments-hub.css` + a `functions.php` enqueue line. Merging to `main` auto-deployed all three to the server; the page stayed broken until the **manual** DB step: `wp post meta update 1219 _wp_page_template template-treatments-hub.php` → `wp breeze purge --cache=all` → verified 5 `rehab-tx-section` / 33 `rehab-tx-link` through Varnish. The page's old plain-list content was left in the DB as a one-command rollback (`… template-treatment.php`).
+
+### Worked example — REH-66 "Brand images → Media Library" (4 Jul 2026)
+
+9 treatment-page brand assets (press/partner logos, ministry badge, hero, founder photo) were baked into `themes/diamond-child/assets/img/treatment/` where the editorial team couldn't manage them. Fix: relocate to the Media Library at the **stable** path `uploads/brand/<file>` (not a month folder — keeps URLs identical dev↔prod). The dev builders + baked `post_content` were repointed on the dev stack via two oneshots (`import-treatment-brand-media`, then `repoint-brand-image-urls&apply=1`). **Prod is DB + media, so it does NOT use those oneshots** — port the effect to WP-CLI from `<APP_PATH>`:
+
+```bash
+# 1. Upload the 9 files (uploads are not code-deployed — scp/rsync them in):
+#    scp wp-content-dev/themes/diamond-child/assets/img/treatment/{business-insider.png,yahoo-finance.png,\
+#    well-good.png,psych-central.png,recovery-com.webp,bangkok-hospital.png,\
+#    ministry-public-health-badge.webp,hero-pool-pavilion.avif,founder-theo.avif} \
+#    <ssh>:<APP_PATH>/wp-content/uploads/brand/
+# 2. Register each as a Media Library attachment in place (no copy, no month folder):
+for f in <APP_PATH>/wp-content/uploads/brand/*; do wp media import "$f" --skip-copy; done
+# 3. Repoint the baked-in page markup (the builders emit static HTML into post_content).
+#    Run BOTH forms: freshly-baked block attrs carry JSON-escaped slashes (\/wp-content\/…)
+#    until an editor save normalises them, and a plain replace misses those rows:
+wp search-replace '/wp-content/themes/diamond-child/assets/img/treatment/' '/wp-content/uploads/brand/' \
+  --precise --skip-columns=guid --report-changed-only
+wp search-replace '\/wp-content\/themes\/diamond-child\/assets\/img\/treatment\/' '\/wp-content\/uploads\/brand\/' \
+  --precise --skip-columns=guid --report-changed-only
+wp breeze purge --cache=all
+```
+
+Rollback: `wp search-replace` the two paths in reverse (the theme files are left in place, so the old URL still resolves).

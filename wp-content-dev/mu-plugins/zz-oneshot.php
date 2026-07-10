@@ -2237,7 +2237,6 @@ JSON;
 			if ( ! $post ) { echo "no post 853\n"; break; }
 
 			$base = '/wp-content/uploads/';
-			$theme = wp_make_link_relative( get_stylesheet_directory_uri() );
 			$blocks = '';
 
 			// 1. TREATMENT HERO
@@ -2251,21 +2250,21 @@ JSON;
 				'stat1Num' => '12', 'stat1Label' => 'Maximum clients on site at any time',
 				'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team availability',
 				'stat3Num' => '14+', 'stat3Label' => 'Years treating cocaine addiction',
-				'imageUrl' => $theme . '/assets/img/treatment/hero-pool-pavilion.avif',
+				'imageUrl' => '/wp-content/uploads/brand/hero-pool-pavilion.avif',
 				'imageAlt' => 'Luxury private pavilion at The Diamond Rehab Thailand',
-				'badgeImageUrl' => $theme . '/assets/img/treatment/ministry-public-health-badge.webp',
+				'badgeImageUrl' => '/wp-content/uploads/brand/ministry-public-health-badge.webp',
 				'badgeTitle' => 'Thai-licensed facility',
 				'badgeText' => 'Ministry of Public Health · Hospital-affiliated detox',
 			] );
 
 			// 2. AUTHORITY RIBBON
 			$blocks .= rehab_block_authority_ribbon( 'As featured in', [
-				[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider' ],
-				[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
-				[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good' ],
-				[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central' ],
-				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
-				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
+				[ 'url' => '/wp-content/uploads/brand/business-insider.png', 'alt' => 'Business Insider' ],
+				[ 'url' => '/wp-content/uploads/brand/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
+				[ 'url' => '/wp-content/uploads/brand/well-good.png', 'alt' => 'Well + Good' ],
+				[ 'url' => '/wp-content/uploads/brand/psych-central.png', 'alt' => 'Psych Central' ],
+				[ 'url' => '/wp-content/uploads/brand/recovery-com.webp', 'alt' => 'Recovery.com' ],
+				[ 'url' => '/wp-content/uploads/brand/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
 			] );
 
 			// 3. INTRO + DOCTOR CARD
@@ -2274,7 +2273,7 @@ JSON;
 				'eyebrow' => 'Overcome cocaine addiction in Thailand',
 				'heading' => 'This is where life-changing transformations happen.',
 				'body' => "Nestled in the peaceful mountains of tropical Hua Hin, our five-star cocaine rehab centre is the perfect place to start your treatment and recovery journey. Fully equipped facilities, five-star accommodation and world-class addiction experts — we've assembled everything you need to overcome your cocaine addiction. The only thing missing is you.\n\nContact us today to learn more about our admission process, or read on to find out how our cocaine rehab treatment program can help you kickstart your recovery.",
-				'doctorImageUrl' => $theme . '/assets/img/treatment/founder-theo.avif',
+				'doctorImageUrl' => '/wp-content/uploads/brand/founder-theo.avif',
 				'doctorImageAlt' => 'Theo de Vries, Founder',
 				'doctorLabel' => 'Speak with our Director',
 				'doctorName' => 'Theo de Vries',
@@ -2465,7 +2464,6 @@ JSON;
 			}
 
 			$base   = '/wp-content/uploads/';
-			$theme  = wp_make_link_relative( get_stylesheet_directory_uri() );
 			$blocks = '';
 
 			// 1. ASSESSMENT-FIRST HERO (form in hero, anchor #assessment)
@@ -2489,12 +2487,12 @@ JSON;
 
 			// 2. AUTHORITY RIBBON (press logos)
 			$blocks .= rehab_block_authority_ribbon( 'As featured in', [
-				[ 'url' => $theme . '/assets/img/treatment/business-insider.png', 'alt' => 'Business Insider' ],
-				[ 'url' => $theme . '/assets/img/treatment/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
-				[ 'url' => $theme . '/assets/img/treatment/well-good.png', 'alt' => 'Well + Good' ],
-				[ 'url' => $theme . '/assets/img/treatment/psych-central.png', 'alt' => 'Psych Central' ],
-				[ 'url' => $theme . '/assets/img/treatment/recovery-com.webp', 'alt' => 'Recovery.com' ],
-				[ 'url' => $theme . '/assets/img/treatment/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
+				[ 'url' => '/wp-content/uploads/brand/business-insider.png', 'alt' => 'Business Insider' ],
+				[ 'url' => '/wp-content/uploads/brand/yahoo-finance.png', 'alt' => 'Yahoo Finance' ],
+				[ 'url' => '/wp-content/uploads/brand/well-good.png', 'alt' => 'Well + Good' ],
+				[ 'url' => '/wp-content/uploads/brand/psych-central.png', 'alt' => 'Psych Central' ],
+				[ 'url' => '/wp-content/uploads/brand/recovery-com.webp', 'alt' => 'Recovery.com' ],
+				[ 'url' => '/wp-content/uploads/brand/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner' ],
 			] );
 
 			// 3. SYMPTOM CHECKLIST (moved up: symptom hook early) + dark CTA
@@ -2788,6 +2786,126 @@ JSON;
 				$ok++;
 			}
 			echo "--- rebuilt {$ok}, skipped {$skipped} of " . count( $specs ) . " ---\n";
+			break;
+
+		case 'import-treatment-brand-media':
+			// REH-66: the treatment-page brand assets (press/partner logos, ministry
+			// badge, hero, founder photo) were baked into the theme dir, where the
+			// editorial team could not manage them. Relocate them into the Media
+			// Library at the stable path uploads/brand/<file> so the templates (now
+			// pointing there) render and the team can swap them like any other image.
+			//
+			// Idempotent: re-running skips files already imported (via _rehab_brand_media
+			// meta). Source files are read from the deployed theme, so this runs the
+			// same on prod (read-write uploads → copies the file in) and dev (read-only
+			// uploads → file is pre-placed host-side; only the attachment is registered).
+			require_once ABSPATH . 'wp-admin/includes/image.php';
+			$src_dir = trailingslashit( get_stylesheet_directory() ) . 'assets/img/treatment/';
+			$updir   = wp_upload_dir();
+			$brandsub = 'brand';
+			$mimes = [ 'png' => 'image/png', 'webp' => 'image/webp', 'avif' => 'image/avif', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg' ];
+			$assets = [
+				'business-insider.png'              => 'Business Insider',
+				'yahoo-finance.png'                 => 'Yahoo Finance',
+				'well-good.png'                     => 'Well + Good',
+				'psych-central.png'                 => 'Psych Central',
+				'recovery-com.webp'                 => 'Recovery.com',
+				'bangkok-hospital.png'              => 'Bangkok Hospital',
+				'ministry-public-health-badge.webp' => 'Thai Ministry of Public Health',
+				'hero-pool-pavilion.avif'           => 'Luxury private pavilion at The Diamond Rehab Thailand',
+				'founder-theo.avif'                 => 'Theo de Vries, Founder',
+			];
+			$uploads_writable = wp_is_writable( $updir['basedir'] );
+			echo "uploads basedir " . ( $uploads_writable ? "writable" : "READ-ONLY (dev: files must be pre-placed)" ) . "\n";
+			foreach ( $assets as $fname => $title ) {
+				$destrel = $brandsub . '/' . $fname;                 // brand/business-insider.png
+				$destabs = trailingslashit( $updir['basedir'] ) . $destrel;
+
+				// Already imported? Report and skip.
+				$existing = get_posts( [ 'post_type' => 'attachment', 'post_status' => 'inherit', 'posts_per_page' => 1, 'fields' => 'ids', 'meta_key' => '_rehab_brand_media', 'meta_value' => $fname, 'no_found_rows' => true ] );
+				if ( $existing ) { echo "skip {$fname} (att {$existing[0]}) -> " . wp_get_attachment_url( $existing[0] ) . "\n"; continue; }
+
+				// Ensure the physical file is in uploads/brand/.
+				if ( ! file_exists( $destabs ) ) {
+					$src = $src_dir . $fname;
+					if ( ! file_exists( $src ) ) { echo "MISSING source {$src}\n"; continue; }
+					if ( ! $uploads_writable ) { echo "MISSING dest {$destabs} and uploads read-only — pre-place it host-side, then re-run\n"; continue; }
+					wp_mkdir_p( dirname( $destabs ) );
+					if ( ! copy( $src, $destabs ) ) { echo "ERR copy {$fname}\n"; continue; }
+				}
+
+				// Register the Media Library attachment pointing at that file.
+				$ext  = strtolower( pathinfo( $fname, PATHINFO_EXTENSION ) );
+				$att  = [
+					'guid'           => trailingslashit( $updir['baseurl'] ) . $destrel,
+					'post_mime_type' => $mimes[ $ext ] ?? 'application/octet-stream',
+					'post_title'     => $title,
+					'post_status'    => 'inherit',
+				];
+				$id = wp_insert_attachment( $att, $destabs );
+				if ( is_wp_error( $id ) || ! $id ) { echo "ERR attach {$fname}\n"; continue; }
+				update_post_meta( $id, '_wp_attached_file', $destrel );
+				update_post_meta( $id, '_wp_attachment_image_alt', $title );
+				update_post_meta( $id, '_rehab_brand_media', $fname );
+				// Sub-size/metadata generation writes into uploads; only attempt when writable.
+				if ( $uploads_writable ) {
+					$meta = wp_generate_attachment_metadata( $id, $destabs );
+					if ( $meta ) wp_update_attachment_metadata( $id, $meta );
+				}
+				echo "OK {$fname} (att {$id}) -> " . wp_get_attachment_url( $id ) . "\n";
+			}
+			echo "done. Templates already reference /wp-content/uploads/brand/…\n";
+			break;
+
+		case 'repoint-brand-image-urls':
+			// REH-66: rewrite already-built page content so the brand assets baked
+			// into post_content point at the Media Library (uploads/brand) instead of
+			// the old theme dir. The v3 builders emit static markup, so existing pages
+			// keep the old URL until rewritten here. Idempotent — a second run matches 0.
+			global $wpdb;
+			$from = '/wp-content/themes/diamond-child/assets/img/treatment/';
+			$to   = '/wp-content/uploads/brand/';
+			// Fresh bakes carry the JSON-escaped variant (\/wp-content\/…) in block
+			// attrs until an editor save normalises them — rewrite both (REH-94).
+			$pairs = [
+				$from => $to,
+				str_replace( '/', '\\/', $from ) => str_replace( '/', '\\/', $to ),
+			];
+			// Slash-free LIKE segments so both the plain and the JSON-escaped
+			// (backslashed) form of the path match.
+			$like = '%diamond-child%assets%img%treatment%';
+			$dry  = ! isset( $_GET['apply'] );
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type NOT IN ('revision') AND post_content LIKE %s",
+				$like
+			) );
+			echo ( $dry ? "DRY RUN (add &apply=1 to write) — " : "APPLYING — " ) . count( $rows ) . " post(s) reference the old theme path\n";
+			foreach ( $rows as $r ) {
+				echo "  - {$r->ID} · {$r->post_title}\n";
+				if ( $dry ) continue;
+				$post = get_post( $r->ID );
+				$new  = str_replace( array_keys( $pairs ), array_values( $pairs ), $post->post_content );
+				if ( $new !== $post->post_content ) {
+					$res = wp_update_post( [ 'ID' => $r->ID, 'post_content' => wp_slash( $new ) ], true );
+					echo is_wp_error( $res ) ? "      ERR: " . $res->get_error_message() . "\n" : "      repointed\n";
+				}
+			}
+			// Also fix any postmeta values holding the old path (e.g. cached ACF image URLs).
+			$meta_rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT meta_id, post_id, meta_key FROM {$wpdb->postmeta} WHERE meta_value LIKE %s",
+				$like
+			) );
+			echo count( $meta_rows ) . " postmeta value(s) reference the old theme path\n";
+			foreach ( $meta_rows as $m ) {
+				echo "  - meta {$m->meta_id} (post {$m->post_id} · {$m->meta_key})\n";
+				if ( $dry ) continue;
+				$val = get_metadata_by_mid( 'post', $m->meta_id );
+				if ( $val && is_string( $val->meta_value ) ) {
+					update_metadata_by_mid( 'post', $m->meta_id, str_replace( array_keys( $pairs ), array_values( $pairs ), $val->meta_value ) );
+					echo "      repointed\n";
+				}
+			}
+			echo $dry ? "done (dry run — nothing written).\n" : "done.\n";
 			break;
 
 		case 'restore-treatment-v3':
@@ -3165,7 +3283,6 @@ JSON;
 			}
 
 			$base   = '/wp-content/uploads/';
-			$theme  = wp_make_link_relative( get_stylesheet_directory_uri() );
 			$blocks = '';
 
 			// 1. PAGE HEADER (left-aligned, full-width feature image)
@@ -3204,7 +3321,7 @@ JSON;
 			// 4. FOUNDER STORY
 			$blocks .= rehab_block_feature_split( [
 				'background' => 'cream', 'imageSide' => 'left',
-				'imageUrl' => $theme . '/assets/img/treatment/founder-theo.avif',
+				'imageUrl' => '/wp-content/uploads/brand/founder-theo.avif',
 				'imageAlt' => 'Theo de Vries, founder of The Diamond Rehab Thailand',
 				'eyebrow' => 'Our founder',
 				'heading' => 'Why Theo de Vries built The Diamond',
@@ -3252,7 +3369,7 @@ JSON;
 				'Fully licensed by the Thai Ministry of Public Health',
 				[ 'The Diamond Rehab Thailand is officially licensed by the Thai Ministry of Public Health, Hin Lek Fai, Hua Hin.' ],
 				[],
-				$theme . '/assets/img/treatment/ministry-public-health-badge.webp',
+				'/wp-content/uploads/brand/ministry-public-health-badge.webp',
 				'Thai Ministry of Public Health licence',
 				'white'
 			);
