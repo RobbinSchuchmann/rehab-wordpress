@@ -275,6 +275,13 @@ function rehab_parent_map_iframe( string $block_content, array $block ): string 
 	}
 	$embed_url = trim( $block['attrs']['embedUrl'] ?? '' );
 	if ( ! $embed_url ) {
+		// Fall back to the block's registered default (the facility map) so a
+		// rehab/map block inserted without an explicit embed still shows the
+		// right location instead of rendering an empty box.
+		$type      = WP_Block_Type_Registry::get_instance()->get_registered( 'rehab/map' );
+		$embed_url = $type ? trim( (string) ( $type->attributes['embedUrl']['default'] ?? '' ) ) : '';
+	}
+	if ( ! $embed_url ) {
 		return $block_content;
 	}
 	$heading = $block['attrs']['heading'] ?? 'Find us';
