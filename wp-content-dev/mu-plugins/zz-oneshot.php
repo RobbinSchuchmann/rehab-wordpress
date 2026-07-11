@@ -2944,6 +2944,61 @@ JSON;
 			echo $dry ? "done (dry run — nothing written).\n" : "done.\n";
 			break;
 
+		case 'unify-trust-stats':
+			// REH-96: REH-87 unified the trust stats in SOURCE (block defaults,
+			// builders, specs) to the homepage-canonical numbers, but stored
+			// post_content still carries the old figures on pages baked earlier —
+			// notably the old v2 treatment-hero trust row (which is now also
+			// editor-INVALID, because save() renders the block.json default 12+
+			// against the stored 14+ markup). Targeted migration, not a re-bake:
+			// only context-anchored strings are replaced, so prose like the
+			// comparison-table "Often 20–50+ clients", "14+ years" team bios,
+			// Suboxone's "4:1 ratio" and "aged 14+" epidemiology stay untouched.
+			global $wpdb;
+			$pairs = [
+				// old v2 hero trust row (HTML; label text varies per page)
+				'<div class="num">14+</div><div class="lbl">Years treating'      => '<div class="num">12+</div><div class="lbl">Years treating',
+				'<div class="num">4:1</div><div class="lbl">Staff-to-client'     => '<div class="num">2:1</div><div class="lbl">Staff-to-client',
+				'<div class="num">50+</div><div class="lbl">Specialist staff'    => '<div class="num">35</div><div class="lbl">Specialist staff',
+				// pillars body copy (identical text in attrs JSON and HTML)
+				'A 4:1 staff-to-client ratio and 24/7'                           => 'A 2:1 staff-to-client ratio and 24/7',
+				// explicit block attrs, where a page baked them in
+				'"stat3Num":"14+"'                                               => '"stat3Num":"12+"',
+				'"stat2Num":"4:1"'                                               => '"stat2Num":"2:1"',
+				'"stat3Num":"50+"'                                               => '"stat3Num":"35"',
+			];
+			// Fresh bakes carry JSON-escaped slashes (24\/7, <\/div>) in attrs
+			// until an editor save normalises them — add escaped twins.
+			foreach ( $pairs as $lhs => $rhs ) {
+				if ( false !== strpos( $lhs, '/' ) ) {
+					$pairs[ str_replace( '/', '\\/', $lhs ) ] = str_replace( '/', '\\/', $rhs );
+				}
+			}
+			$dry  = ! isset( $_GET['apply'] );
+			$rows = $wpdb->get_results(
+				"SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type NOT IN ('revision')
+				 AND ( post_content LIKE '%14+%' OR post_content LIKE '%4:1%' OR post_content LIKE '%50+%' )"
+			);
+			echo ( $dry ? "DRY RUN (add &apply=1 to write) — " : "APPLYING — " ) . count( $rows ) . " candidate post(s) contain an old figure\n";
+			$changed = 0;
+			foreach ( $rows as $r ) {
+				$post = get_post( $r->ID );
+				$hits = [];
+				foreach ( $pairs as $lhs => $rhs ) {
+					$n = substr_count( $post->post_content, $lhs );
+					if ( $n ) $hits[] = "{$n}× " . substr( $lhs, 0, 40 ) . "…";
+				}
+				if ( ! $hits ) { echo "  - {$r->ID} · {$r->post_title} — candidate only, no safe pattern (left untouched)\n"; continue; }
+				echo "  - {$r->ID} · {$r->post_title} — " . implode( ' | ', $hits ) . "\n";
+				if ( $dry ) continue;
+				$new = str_replace( array_keys( $pairs ), array_values( $pairs ), $post->post_content );
+				$res = wp_update_post( [ 'ID' => $r->ID, 'post_content' => wp_slash( $new ) ], true );
+				echo is_wp_error( $res ) ? "      ERR: " . $res->get_error_message() . "\n" : "      unified\n";
+				if ( ! is_wp_error( $res ) ) $changed++;
+			}
+			echo $dry ? "done (dry run — nothing written).\n" : "done — {$changed} post(s) updated.\n";
+			break;
+
 		case 'restore-treatment-v3':
 			// Roll any v3-rebuilt page back to its pre-v3 content.
 			$pid = (int) ( $_GET['id'] ?? 0 );
