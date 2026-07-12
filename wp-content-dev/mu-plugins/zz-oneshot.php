@@ -2999,6 +2999,34 @@ JSON;
 			echo $dry ? "done (dry run — nothing written).\n" : "done — {$changed} post(s) updated.\n";
 			break;
 
+		case 'fix-cost-blood-tests':
+			// REH-97: /cost/ listed blood tests as both included (the "Included
+			// on arrival" health-screening panel) and excluded ("Full medical
+			// assessment with ECG and blood tests ... (optional)") — a
+			// contradiction inherited from the original page. Source fixed in
+			// rebuild-cost-v3; this patches the baked post_content the same way
+			// (targeted string replace, never a re-bake — REH-95). The sentence
+			// is unique to the cost page's exclusions-list attrs JSON, so a
+			// site-wide sweep is safe.
+			global $wpdb;
+			$old = 'Full medical assessment with ECG and blood tests on arrival (optional, if necessary)';
+			$new = 'Extended medical assessment with ECG (optional, if necessary)';
+			$dry  = ! isset( $_GET['apply'] );
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type NOT IN ('revision') AND post_content LIKE %s",
+				'%' . $wpdb->esc_like( $old ) . '%'
+			) );
+			echo ( $dry ? "DRY RUN (add &apply=1 to write) — " : "APPLYING — " ) . count( $rows ) . " post(s) carry the old exclusion line\n";
+			foreach ( $rows as $r ) {
+				echo "  - {$r->ID} · {$r->post_title}\n";
+				if ( $dry ) continue;
+				$post = get_post( $r->ID );
+				$res  = wp_update_post( [ 'ID' => $r->ID, 'post_content' => wp_slash( str_replace( $old, $new, $post->post_content ) ) ], true );
+				echo is_wp_error( $res ) ? "      ERR: " . $res->get_error_message() . "\n" : "      fixed\n";
+			}
+			echo $dry ? "done (dry run — nothing written).\n" : "done.\n";
+			break;
+
 		case 'restore-treatment-v3':
 			// Roll any v3-rebuilt page back to its pre-v3 content.
 			$pid = (int) ( $_GET['id'] ?? 0 );
@@ -3196,7 +3224,7 @@ JSON;
 				'lede'    => "In the interest of clarity, a short list of things that aren't part of the program fee. We'll always be open about anything extra before it's arranged.",
 				'items' => [
 					'Flights to and from Bangkok',
-					'Full medical assessment with ECG and blood tests on arrival (optional, if necessary)',
+					'Extended medical assessment with ECG (optional, if necessary)',
 					'Extra massages',
 					'Extra sessions with the psychologist, therapist or psychiatrist',
 					'Extra yoga classes',
