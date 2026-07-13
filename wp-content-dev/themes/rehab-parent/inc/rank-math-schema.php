@@ -170,15 +170,15 @@ function rehab_breadcrumb_schema_items( WP_Post $post ) {
 }
 
 /**
- * Extract FAQ Question entities from every rehab/faq block in the post, mirroring
- * the block's render.php: CPT-pull (`cptIds`) takes precedence, else the inline
- * faq-item innerblocks.
+ * Extract FAQ Question entities from every rehab/faq and rehab/faq-page block in
+ * the post, mirroring each block's render.php: rehab/faq is CPT-pull (`cptIds`)
+ * first, else inline faq-item innerblocks; rehab/faq-page is inline attrs only.
  *
  * @param WP_Post $post Current post.
  * @return array<int,array>
  */
 function rehab_faq_schema_entities( WP_Post $post ) {
-	if ( ! has_block( 'rehab/faq', $post ) ) {
+	if ( ! has_block( 'rehab/faq', $post ) && ! has_block( 'rehab/faq-page', $post ) ) {
 		return array();
 	}
 
@@ -227,6 +227,20 @@ function rehab_collect_faq_blocks( array $blocks, array &$entities ) {
 			}
 
 			// The faq block's children are handled above; no need to recurse in.
+			continue;
+		}
+
+		// The /faq/ archive block (rehab/faq-page) keeps its Q/A pairs inline in
+		// attrs: categories[].items[].q/a (mirrors its render.php).
+		if ( 'rehab/faq-page' === ( $block['blockName'] ?? '' ) ) {
+			foreach ( (array) ( $block['attrs']['categories'] ?? array() ) as $cat ) {
+				foreach ( (array) ( $cat['items'] ?? array() ) as $item ) {
+					$entities[] = rehab_faq_question_entity(
+						(string) ( $item['q'] ?? '' ),
+						(string) ( $item['a'] ?? '' )
+					);
+				}
+			}
 			continue;
 		}
 
