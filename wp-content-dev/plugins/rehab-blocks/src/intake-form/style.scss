@@ -363,7 +363,9 @@
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.09em;
-		color: var(--rehab-sage-text, #fff);
+		// Cream on sage-dark (cf. buttons.css .rehab-btn--luxury:hover) — the
+		// previous sage-text token is a dark sage and vanished on this background.
+		color: var(--rehab-color-cream, #fff);
 		background: var(--rehab-sage-dark);
 		border: 0;
 		border-radius: 999px;

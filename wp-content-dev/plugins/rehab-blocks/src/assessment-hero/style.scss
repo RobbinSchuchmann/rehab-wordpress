@@ -241,8 +241,17 @@
 	color: #9c3c25;
 }
 
+/* Success gets a prominent tinted box — the plain small line was easy to miss (REH-104). */
 .rehab-assessment-hero__form-status[data-state="success"] {
 	color: var(--rehab-sage-dark, #8A9674);
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.5;
+	padding: 14px 18px;
+	margin-top: 16px;
+	background: rgba(138, 150, 116, 0.12);
+	border: 1px solid rgba(138, 150, 116, 0.35);
+	border-radius: 6px;
 }
 
 .rehab-assessment-hero__consent {
