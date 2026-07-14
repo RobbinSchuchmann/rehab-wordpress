@@ -65,6 +65,8 @@ add_action( 'rest_api_init', function () {
 			'email'   => [ 'type' => 'string', 'required' => true,  'sanitize_callback' => 'sanitize_email' ],
 			'phone'   => [ 'type' => 'string', 'required' => true,  'sanitize_callback' => 'sanitize_text_field' ],
 			'country' => [ 'type' => 'string', 'required' => false, 'sanitize_callback' => 'sanitize_text_field' ],
+			// Treatment-page assessment forms: "Who is this enquiry for?" select.
+			'enquiry_for' => [ 'type' => 'string', 'required' => false, 'sanitize_callback' => 'sanitize_text_field' ],
 			'message' => [ 'type' => 'string', 'required' => false, 'sanitize_callback' => 'sanitize_textarea_field' ],
 			'source'  => [ 'type' => 'string', 'required' => false, 'sanitize_callback' => 'sanitize_text_field' ],
 			// Honeypot: real users won't fill this; bots will.
@@ -83,6 +85,7 @@ function rehab_contact_form_submit( WP_REST_Request $req ) {
 	$email   = $req->get_param( 'email' );
 	$phone   = $req->get_param( 'phone' );
 	$country = (string) $req->get_param( 'country' );
+	$enquiry = (string) $req->get_param( 'enquiry_for' );
 	$message = (string) $req->get_param( 'message' );
 	$source  = (string) $req->get_param( 'source' );
 
@@ -109,12 +112,13 @@ function rehab_contact_form_submit( WP_REST_Request $req ) {
 		'post_title'   => $name . ' — ' . $email,
 		'post_content' => $message,
 		'meta_input'   => [
-			'_email'   => $email,
-			'_phone'   => $phone,
-			'_country' => $country,
-			'_source'  => $source ?: ( wp_get_referer() ?: '' ),
-			'_ip'      => $ip,
-			'_ua'      => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ) : '',
+			'_email'       => $email,
+			'_phone'       => $phone,
+			'_country'     => $country,
+			'_enquiry_for' => $enquiry,
+			'_source'      => $source ?: ( wp_get_referer() ?: '' ),
+			'_ip'          => $ip,
+			'_ua'          => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ) : '',
 		],
 	], true );
 
@@ -144,6 +148,7 @@ function rehab_contact_form_submit( WP_REST_Request $req ) {
 	$body .= "Email:   $email\n";
 	$body .= "Phone:   $phone\n";
 	if ( $country ) $body .= "Country: $country\n";
+	if ( $enquiry ) $body .= "Enquiry for: $enquiry\n";
 	if ( $message ) $body .= "\nMessage:\n$message\n";
 	$body .= "\n----\n";
 	if ( $page_title ) $body .= "Page:    $page_title\n";
@@ -164,14 +169,121 @@ function rehab_contact_form_submit( WP_REST_Request $req ) {
 }
 
 /**
- * Show submitted email + phone in the admin list view.
+ * Show submitted email, phone, country, enquiry and form type in the admin
+ * list view (REH-103 — country/enquiry were stored but surfaced nowhere).
  */
 add_filter( 'manage_rehab_submission_posts_columns', function ( $cols ) {
-	$cols['email'] = __( 'Email', 'rehab-parent' );
-	$cols['phone'] = __( 'Phone', 'rehab-parent' );
+	$cols['email']   = __( 'Email', 'rehab-parent' );
+	$cols['phone']   = __( 'Phone', 'rehab-parent' );
+	$cols['country'] = __( 'Country', 'rehab-parent' );
+	$cols['enquiry'] = __( 'Enquiry for', 'rehab-parent' );
+	$cols['form']    = __( 'Form', 'rehab-parent' );
 	return $cols;
 } );
 add_action( 'manage_rehab_submission_posts_custom_column', function ( $col, $post_id ) {
-	if ( $col === 'email' ) echo esc_html( get_post_meta( $post_id, '_email', true ) );
-	if ( $col === 'phone' ) echo esc_html( get_post_meta( $post_id, '_phone', true ) );
+	if ( $col === 'email' )   echo esc_html( get_post_meta( $post_id, '_email', true ) );
+	if ( $col === 'phone' )   echo esc_html( get_post_meta( $post_id, '_phone', true ) );
+	if ( $col === 'country' ) echo esc_html( get_post_meta( $post_id, '_country', true ) );
+	if ( $col === 'enquiry' ) echo esc_html( get_post_meta( $post_id, '_enquiry_for', true ) );
+	if ( $col === 'form' )    echo esc_html( get_post_meta( $post_id, '_form', true ) ?: 'contact' );
 }, 10, 2 );
+
+/**
+ * Read-only "Submission details" meta box on the edit screen — every stored
+ * field in one place, so nobody needs the (hidden) custom-fields UI.
+ */
+add_action( 'add_meta_boxes_rehab_submission', function () {
+	add_meta_box( 'rehab-submission-details', __( 'Submission details', 'rehab-parent' ), function ( $post ) {
+		$rows = [
+			'Email'       => get_post_meta( $post->ID, '_email', true ),
+			'Phone'       => get_post_meta( $post->ID, '_phone', true ),
+			'Country'     => get_post_meta( $post->ID, '_country', true ),
+			'Enquiry for' => get_post_meta( $post->ID, '_enquiry_for', true ),
+			'Form'        => get_post_meta( $post->ID, '_form', true ) ?: 'contact',
+			'Source'      => get_post_meta( $post->ID, '_source', true ),
+			'Signature'   => get_post_meta( $post->ID, '_signature', true ),
+			'IP'          => get_post_meta( $post->ID, '_ip', true ),
+			'Browser'     => get_post_meta( $post->ID, '_ua', true ),
+		];
+		echo '<table class="widefat striped" style="border:0">';
+		foreach ( $rows as $label => $value ) {
+			if ( '' === (string) $value ) continue;
+			$out = ( 0 === strpos( (string) $value, 'http' ) )
+				? '<a href="' . esc_url( $value ) . '" target="_blank" rel="noopener">' . esc_html( $value ) . '</a>'
+				: esc_html( $value );
+			echo '<tr><td style="width:120px"><strong>' . esc_html( $label ) . '</strong></td><td>' . $out . '</td></tr>';
+		}
+		echo '</table>';
+	}, 'rehab_submission', 'normal', 'high' );
+} );
+
+/**
+ * Lock submissions against accidental edits (REH-103): the edit screen opens
+ * read-only (title, message editor and Update button disabled) with an
+ * "Unlock editing" button. The unlock lasts only for the current page load —
+ * closing or reloading locks it again. Client-side guard against fat-finger
+ * edits, not a permission boundary (the CPT is admin-only anyway).
+ */
+add_action( 'admin_footer-post.php', function () {
+	if ( 'rehab_submission' !== get_post_type() ) return;
+	?>
+	<style>
+		.rehab-sub-locked #title,
+		.rehab-sub-locked #content { pointer-events: none; background: #f6f7f7; }
+		.rehab-sub-locked #wp-content-editor-tools,
+		.rehab-sub-locked .mce-toolbar-grp { opacity: 0.4; pointer-events: none; }
+		#rehab-sub-lock-notice { display: flex; align-items: center; gap: 12px; }
+	</style>
+	<script>
+	( function () {
+		var wrap = document.getElementById( 'poststuff' );
+		var publish = document.getElementById( 'publish' );
+		if ( ! wrap ) return;
+
+		function setLocked( locked ) {
+			wrap.classList.toggle( 'rehab-sub-locked', locked );
+			[ 'title', 'content' ].forEach( function ( id ) {
+				var el = document.getElementById( id );
+				if ( el ) el.readOnly = locked;
+			} );
+			if ( publish ) publish.disabled = locked;
+			var btn = document.getElementById( 'rehab-sub-unlock' );
+			if ( btn ) btn.textContent = locked ? 'Unlock editing' : 'Lock again';
+			// TinyMCE 4 (WP bundled) exposes setMode(); TinyMCE 5+ mode.set().
+			var mce = window.tinymce && tinymce.get( 'content' );
+			if ( mce ) {
+				try {
+					var mode = locked ? 'readonly' : 'design';
+					if ( mce.mode && mce.mode.set ) mce.mode.set( mode );
+					else if ( mce.setMode ) mce.setMode( mode );
+				} catch ( err ) { /* CSS pointer-events guard still applies */ }
+			}
+		}
+
+		var notice = document.createElement( 'div' );
+		notice.id = 'rehab-sub-lock-notice';
+		notice.className = 'notice notice-info';
+		notice.innerHTML = '<p style="margin:8px 0"><strong>Submission is read-only.</strong> Lead data is locked against accidental edits; unlocking lasts until this page is closed or reloaded.</p>' +
+			'<button type="button" class="button" id="rehab-sub-unlock">Unlock editing</button>';
+		var heading = document.querySelector( '.wrap h1' );
+		if ( heading ) heading.insertAdjacentElement( 'afterend', notice );
+
+		var locked = true;
+		document.getElementById( 'rehab-sub-unlock' ).addEventListener( 'click', function () {
+			locked = ! locked;
+			setLocked( locked );
+		} );
+
+		// TinyMCE boots after the footer — wait for it before applying the lock.
+		var tries = 0;
+		( function apply() {
+			if ( window.tinymce && tinymce.get( 'content' ) || tries++ > 40 ) {
+				setLocked( locked );
+			} else {
+				setTimeout( apply, 250 );
+			}
+		} )();
+	} )();
+	</script>
+	<?php
+} );
