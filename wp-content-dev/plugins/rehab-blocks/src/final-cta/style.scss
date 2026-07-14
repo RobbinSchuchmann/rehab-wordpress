@@ -193,7 +193,18 @@
 	&:empty { display: none; }
 
 	&[data-state="pending"] { color: rgba(var(--rehab-soft-charcoal-rgb), 0.7); }
-	&[data-state="success"] { color: var(--rehab-sage-dark); font-weight: 500; }
 	&[data-state="error"]   { color: #b54040; }
+
+	// Success gets a prominent tinted box — the plain small line was easy to miss (REH-104).
+	&[data-state="success"] {
+		color: var(--rehab-sage-dark);
+		font-size: 1rem;
+		font-weight: 500;
+		padding: 14px 18px;
+		margin-top: 12px;
+		background: rgba(138, 150, 116, 0.12);
+		border: 1px solid rgba(138, 150, 116, 0.35);
+		border-radius: 6px;
+	}
 }
 
