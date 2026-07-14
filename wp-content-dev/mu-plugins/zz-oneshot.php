@@ -3085,6 +3085,68 @@ JSON;
 			}
 			break;
 
+		case 'fix-programme-phases-heading':
+			// REH-101: the treatment-phases block on /programme/ carries an
+			// unattributed decorative quote ("An ode to discovery…") invented
+			// during the block migration — it's not on the original page. Swap
+			// it for the block's usual eyebrow + descriptive heading (as on the
+			// treatment pages). Static block: attrs AND baked HTML must move
+			// together, so parse → mutate → serialize (REH-95: targeted, no
+			// re-bake).
+			$pid  = (int) ( $_GET['id'] ?? 857 );
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			$dry = ! isset( $_GET['apply'] );
+
+			$new_eyebrow = 'The program in depth';
+			$new_heading = 'Our 12 step recovery program';
+			$old_needle  = 'An ode to discovery';
+
+			$blocks = parse_blocks( $post->post_content );
+			$hit    = false;
+			foreach ( $blocks as &$b ) {
+				if ( 'rehab/treatment-phases' !== ( $b['blockName'] ?? '' ) ) continue;
+				if ( false === strpos( (string) ( $b['attrs']['heading'] ?? '' ), $old_needle ) ) continue;
+
+				$b['attrs']['eyebrow'] = $new_eyebrow;
+				$b['attrs']['heading'] = $new_heading;
+
+				// Rebuild the __head div exactly as the block's save() renders it
+				// (span only when eyebrow is set, no whitespace between tags).
+				$new_head = '<div class="rehab-treatment-phases__head">'
+					. '<span class="rehab-treatment-phases__eyebrow">' . esc_html( $new_eyebrow ) . '</span>'
+					. '<h2 class="rehab-treatment-phases__heading">' . esc_html( $new_heading ) . '</h2>'
+					. '</div>';
+				$html = preg_replace(
+					'#<div class="rehab-treatment-phases__head">.*?</div>#s',
+					$new_head,
+					$b['innerHTML'],
+					1
+				);
+				if ( null === $html || $html === $b['innerHTML'] ) { echo "head div not found in block HTML — aborting\n"; break 2; }
+				$b['innerHTML'] = $html;
+				foreach ( $b['innerContent'] as &$chunk ) {
+					if ( is_string( $chunk ) && false !== strpos( $chunk, $old_needle ) ) {
+						$chunk = preg_replace( '#<div class="rehab-treatment-phases__head">.*?</div>#s', $new_head, $chunk, 1 );
+					}
+				}
+				unset( $chunk );
+				$hit = true;
+				break;
+			}
+			unset( $b );
+
+			if ( ! $hit ) { echo "no treatment-phases block with the quote heading on {$pid} — nothing to do\n"; break; }
+			echo ( $dry ? "DRY RUN (add &apply=1 to write) — " : "APPLYING — " )
+				. "replacing quote heading with '{$new_eyebrow} / {$new_heading}'\n";
+			if ( ! $dry ) {
+				$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( serialize_blocks( $blocks ) ) ], true );
+				echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "done — page {$pid} updated.\n";
+			} else {
+				echo "done (dry run — nothing written).\n";
+			}
+			break;
+
 		case 'restore-treatment-v3':
 			// Roll any v3-rebuilt page back to its pre-v3 content.
 			$pid = (int) ( $_GET['id'] ?? 0 );
