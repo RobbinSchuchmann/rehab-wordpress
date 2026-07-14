@@ -45,7 +45,8 @@
       "default": "horizontal",
       "enum": [
         "horizontal",
-        "vertical"
+        "vertical",
+        "process"
       ]
     },
     "heading": {

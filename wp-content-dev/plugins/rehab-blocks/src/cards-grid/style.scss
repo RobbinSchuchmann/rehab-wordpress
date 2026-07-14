@@ -112,6 +112,123 @@ a.rehab-card:hover .rehab-card__title {
 	overflow: hidden;
 }
 
+/* Process card layout — steps sitting on a continuous line (the original
+   Diamond Approach treatment): a diamond marker per step, the middle row of
+   four reversed, and U-turn arcs joining the rows into one snaking path.
+   Desktop assumes rows of 4 (12 items); below 1024px it degrades to a plain
+   stacked list of steps on line segments (no snake, no arcs). */
+.rehab-cards-grid--card-process .rehab-cards-grid__grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+}
+
+.rehab-cards-grid--card-process .rehab-card {
+	border: 0;
+	border-top: 1px solid rgba(var(--rehab-tan-rgb), 0.55);
+	background: transparent;
+	min-height: 0;
+	height: auto;
+	width: 100%;
+	padding: 1.6rem 2.25rem 2.4rem 0;
+	position: relative;
+	overflow: visible;
+}
+
+/* Diamond marker sitting on the line at each step's start. */
+.rehab-cards-grid--card-process .rehab-card::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0.5rem;
+	height: 0.5rem;
+	transform: translateY(-50%) rotate(45deg);
+	background: rgba(var(--rehab-tan-rgb), 0.9);
+}
+
+.rehab-cards-grid--card-process .rehab-card__body {
+	padding: 0;
+}
+
+.rehab-cards-grid--card-process .rehab-card__title {
+	font-size: 1.15rem;
+	font-style: italic;
+	font-weight: 300;
+}
+
+.rehab-cards-grid--card-process .rehab-card__description {
+	display: block;
+	-webkit-line-clamp: unset;
+	overflow: visible;
+}
+
+@media (min-width: 1024px) {
+	.rehab-cards-grid--card-process .rehab-card {
+		width: 25%;
+	}
+
+	/* Snake: reverse the middle row (items 5–8) so the path reads
+	   1→4, drops down, runs 5→8 right-to-left, drops down, runs 9→12. */
+	.rehab-cards-grid--card-process .rehab-card:nth-child(1) { order: 1; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(2) { order: 2; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(3) { order: 3; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(4) { order: 4; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(5) { order: 8; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(6) { order: 7; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(7) { order: 6; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(8) { order: 5; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(9)  { order: 9; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(10) { order: 10; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(11) { order: 11; }
+	.rehab-cards-grid--card-process .rehab-card:nth-child(12) { order: 12; }
+
+	/* U-turn arcs joining the rows: item 4 curls the line down the right
+	   edge into the reversed middle row; item 8 (visually leftmost in that
+	   row) curls it down the left edge into the final row. Each arc spans
+	   its card's full height, so it meets the next row's line exactly. */
+	.rehab-cards-grid--card-process .rehab-card:nth-child(4)::after,
+	.rehab-cards-grid--card-process .rehab-card:nth-child(8)::after {
+		content: '';
+		position: absolute;
+		top: -1px;
+		width: 4.5rem;
+		height: calc(100% + 2px);
+		border: 1px solid rgba(var(--rehab-tan-rgb), 0.55);
+		pointer-events: none;
+	}
+
+	.rehab-cards-grid--card-process .rehab-card:nth-child(4)::after {
+		left: calc(100% - 2.25rem);
+		border-left: 0;
+		border-radius: 0 999px 999px 0;
+	}
+
+	.rehab-cards-grid--card-process .rehab-card:nth-child(8)::after {
+		right: calc(100% - 2.25rem);
+		border-right: 0;
+		border-radius: 999px 0 0 999px;
+	}
+
+	/* The reversed row reads right-to-left, so its steps hang their
+	   breathing room on the other side. */
+	.rehab-cards-grid--card-process .rehab-card:nth-child(5),
+	.rehab-cards-grid--card-process .rehab-card:nth-child(6),
+	.rehab-cards-grid--card-process .rehab-card:nth-child(7),
+	.rehab-cards-grid--card-process .rehab-card:nth-child(8) {
+		padding-right: 0;
+		padding-left: 2.25rem;
+	}
+
+	.rehab-cards-grid--card-process .rehab-card:nth-child(5)::before,
+	.rehab-cards-grid--card-process .rehab-card:nth-child(6)::before,
+	.rehab-cards-grid--card-process .rehab-card:nth-child(7)::before,
+	.rehab-cards-grid--card-process .rehab-card:nth-child(8)::before {
+		left: auto;
+		right: 0;
+	}
+}
+
 /* Horizontal card layout — image left, text right (used by default in cards-grid) */
 .rehab-cards-grid--card-horizontal .rehab-card {
 	@media (min-width: 640px) {

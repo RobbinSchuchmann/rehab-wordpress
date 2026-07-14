@@ -3027,6 +3027,64 @@ JSON;
 			echo $dry ? "done (dry run — nothing written).\n" : "done.\n";
 			break;
 
+		case 'merge-programme-steps':
+			// REH-100: the ACF migration flattened the 12 Diamond Approach steps
+			// on /programme/ into three consecutive rehab/cards-grid blocks of 4
+			// plain boxed cards, losing the original connected process-line
+			// design. Merge them into ONE cards-grid with cardLayout "process"
+			// (the new snaking-line variant); the cards themselves are untouched.
+			// Targeted migration, not a re-bake (REH-95).
+			$pid  = (int) ( $_GET['id'] ?? 857 );
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			$dry = ! isset( $_GET['apply'] );
+
+			$blocks  = parse_blocks( $post->post_content );
+			$out     = [];
+			$anchor  = null; // index in $out of the merge-target grid
+			$merged  = 0;
+			foreach ( $blocks as $b ) {
+				$name = $b['blockName'] ?? null;
+				if ( 'rehab/cards-grid' === $name ) {
+					$first_title = $b['innerBlocks'][0]['attrs']['title'] ?? '';
+					if ( null === $anchor && 0 === strpos( $first_title, 'Self-awareness' ) ) {
+						$anchor = count( $out );
+						$out[]  = $b;
+						continue;
+					}
+					if ( null !== $anchor && $merged < 2 ) {
+						$out[ $anchor ]['innerBlocks'] = array_merge( $out[ $anchor ]['innerBlocks'], $b['innerBlocks'] );
+						$merged++;
+						continue;
+					}
+				}
+				// Whitespace-only freeform blocks between the grids vanish with them.
+				if ( null === $name && null !== $anchor && $merged < 2 && '' === trim( $b['innerHTML'] ) ) {
+					continue;
+				}
+				$out[] = $b;
+			}
+
+			if ( null === $anchor ) { echo "anchor grid (first card 'Self-awareness…') not found on {$pid} — nothing to do\n"; break; }
+			$n = count( $out[ $anchor ]['innerBlocks'] );
+			$out[ $anchor ]['attrs']['cardLayout'] = 'process';
+			$out[ $anchor ]['innerHTML']    = '';
+			$out[ $anchor ]['innerContent'] = array_fill( 0, $n, null );
+
+			echo ( $dry ? "DRY RUN (add &apply=1 to write) — " : "APPLYING — " )
+				. "merged {$merged} extra grid(s) into the anchor; it now holds {$n} cards (cardLayout=process)\n";
+			if ( $merged !== 2 || 12 !== $n ) {
+				echo "REFUSING: expected to absorb 2 grids for 12 cards total — page structure differs, review by hand\n";
+				break;
+			}
+			if ( ! $dry ) {
+				$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( serialize_blocks( $out ) ) ], true );
+				echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "done — page {$pid} updated.\n";
+			} else {
+				echo "done (dry run — nothing written).\n";
+			}
+			break;
+
 		case 'restore-treatment-v3':
 			// Roll any v3-rebuilt page back to its pre-v3 content.
 			$pid = (int) ( $_GET['id'] ?? 0 );

@@ -28,7 +28,7 @@
     "cardLayout": {
       "type": "string",
       "default": "horizontal",
-      "enum": ["horizontal", "vertical"]
+      "enum": ["horizontal", "vertical", "process"]
     },
     "heading": {
       "type": "string",

@@ -46,6 +46,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						options={ [
 							{ label: 'Horizontal (image | text)', value: 'horizontal' },
 							{ label: 'Vertical (image on top)', value: 'vertical' },
+							{ label: 'Process (steps on a connected line)', value: 'process' },
 						] }
 						onChange={ ( v ) => setAttributes( { cardLayout: v } ) }
 					/>
