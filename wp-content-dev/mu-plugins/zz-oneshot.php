@@ -3147,6 +3147,60 @@ JSON;
 			}
 			break;
 
+		case 'fix-programme-phases-quote':
+			// REH-102: the /programme/ treatment-phases asides repeat a quote
+			// that starts mid-sentence ("Rehab Thailand, our comprehensive…" —
+			// the leading "At The Diamond" was lost in the block migration),
+			// attributed "Quoted by / Team of Diamond Rehab". Complete the
+			// sentence, wrap it in quotes and switch the meta to the
+			// treatment-page convention (Statement / The Diamond Rehab Team).
+			// Static block: the same strings live in attrs AND baked HTML, so
+			// replace within the matched block only, then reserialize.
+			$pid  = (int) ( $_GET['id'] ?? 857 );
+			$post = get_post( $pid );
+			if ( ! $post ) { echo "no post {$pid}\n"; break; }
+			$dry = ! isset( $_GET['apply'] );
+
+			$old_quote = 'Rehab Thailand, our comprehensive treatment plans for alcohol and drug addiction are created by a team of clinicians based on an evaluation of your condition, concerns, and personal preferences.';
+			$new_quote = '"At The Diamond Rehab Thailand, our comprehensive treatment plans for alcohol and drug addiction are created by a team of clinicians based on an evaluation of your condition, concerns, and personal preferences."';
+			$pairs = [
+				$old_quote              => $new_quote,
+				'Quoted by'             => 'Statement',
+				'Team of Diamond Rehab' => 'The Diamond Rehab Team',
+			];
+
+			$blocks = parse_blocks( $post->post_content );
+			$hits   = 0;
+			foreach ( $blocks as &$b ) {
+				if ( 'rehab/treatment-phases' !== ( $b['blockName'] ?? '' ) ) continue;
+				if ( false === strpos( $b['innerHTML'], $old_quote ) ) continue;
+
+				foreach ( (array) ( $b['attrs']['phases'] ?? [] ) as $i => $phase ) {
+					foreach ( [ 'asideQuote', 'asideMetaLabel', 'asideMetaValue' ] as $k ) {
+						if ( isset( $phase[ $k ] ) ) {
+							$b['attrs']['phases'][ $i ][ $k ] = strtr( $phase[ $k ], $pairs );
+						}
+					}
+				}
+				$b['innerHTML'] = strtr( $b['innerHTML'], $pairs );
+				foreach ( $b['innerContent'] as &$chunk ) {
+					if ( is_string( $chunk ) ) $chunk = strtr( $chunk, $pairs );
+				}
+				unset( $chunk );
+				$hits++;
+			}
+			unset( $b );
+
+			if ( ! $hits ) { echo "no treatment-phases block with the truncated quote on {$pid} — nothing to do\n"; break; }
+			echo ( $dry ? "DRY RUN (add &apply=1 to write) — " : "APPLYING — " ) . "{$hits} block(s) updated (quote completed, meta -> Statement / The Diamond Rehab Team)\n";
+			if ( ! $dry ) {
+				$res = wp_update_post( [ 'ID' => $pid, 'post_content' => wp_slash( serialize_blocks( $blocks ) ) ], true );
+				echo is_wp_error( $res ) ? "ERR: " . $res->get_error_message() . "\n" : "done — page {$pid} updated.\n";
+			} else {
+				echo "done (dry run — nothing written).\n";
+			}
+			break;
+
 		case 'restore-treatment-v3':
 			// Roll any v3-rebuilt page back to its pre-v3 content.
 			$pid = (int) ( $_GET['id'] ?? 0 );
