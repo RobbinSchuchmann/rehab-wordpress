@@ -10,6 +10,7 @@ get_header();
 
 while ( have_posts() ) :
 	the_post();
+	rehab_render_breadcrumb();
 	get_template_part( 'template-parts/article-page' );
 endwhile;
 

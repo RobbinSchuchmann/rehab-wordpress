@@ -26,6 +26,7 @@ $articles_query = new WP_Query( [
 
 while ( have_posts() ) :
 	the_post();
+	rehab_render_breadcrumb();
 	?>
 	<section class="rehab-articles-index__hero rehab-bg-sage-mist">
 		<div class="rehab-container rehab-container--narrow">

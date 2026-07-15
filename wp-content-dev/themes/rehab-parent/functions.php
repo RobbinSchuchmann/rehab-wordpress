@@ -588,6 +588,56 @@ function rehab_breadcrumb_category_url( string $name ): string {
 }
 
 /**
+ * Render the shared breadcrumb nav: Home / …middle crumbs… / current page.
+ *
+ * The treatment/hub/article templates carry their own bespoke breadcrumb (with
+ * category logic); this is the generic renderer for every other template
+ * (page.php, the articles index, single posts, team profiles) so they stop
+ * shipping without a breadcrumb. Markup + CSS match `.rehab-breadcrumb`.
+ *
+ * @param string $current_label Label for the current (non-linked) page. Defaults to the post title.
+ * @param array  $middle        Ordered intermediate crumbs, each [ 'label' => string, 'url' => string ].
+ */
+function rehab_render_breadcrumb( string $current_label = '', array $middle = [] ): void {
+	if ( '' === $current_label ) {
+		$current_label = wp_strip_all_tags( get_the_title() );
+	}
+	?>
+	<nav class="rehab-breadcrumb" aria-label="Breadcrumb">
+		<div class="rehab-container">
+			<ol class="rehab-breadcrumb__list">
+				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+				<?php foreach ( $middle as $crumb ) : ?>
+					<?php if ( ! empty( $crumb['label'] ) ) : ?>
+						<li><a href="<?php echo esc_url( $crumb['url'] ?? home_url( '/' ) ); ?>"><?php echo esc_html( $crumb['label'] ); ?></a></li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				<li aria-current="page"><?php echo esc_html( $current_label ); ?></li>
+			</ol>
+		</div>
+	</nav>
+	<?php
+}
+
+/**
+ * Build breadcrumb "middle" crumbs from a page's ancestors (top-most first), so
+ * nested pages read Home / Parent / Child / … Top-level pages return [].
+ *
+ * @param int $post_id Page ID.
+ * @return array<int, array{label:string, url:string}>
+ */
+function rehab_breadcrumb_ancestors( int $post_id ): array {
+	$middle = [];
+	foreach ( array_reverse( get_post_ancestors( $post_id ) ) as $ancestor_id ) {
+		$middle[] = [
+			'label' => wp_strip_all_tags( get_the_title( $ancestor_id ) ),
+			'url'   => get_permalink( $ancestor_id ),
+		];
+	}
+	return $middle;
+}
+
+/**
  * Emit JSON-LD structured data: Organization (sitewide), WebSite with
  * SearchAction (sitewide), Article (on template-article pages),
  * BreadcrumbList (on template-treatment pages).

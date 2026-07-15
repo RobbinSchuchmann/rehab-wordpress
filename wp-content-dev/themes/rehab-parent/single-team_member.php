@@ -23,6 +23,12 @@ while ( have_posts() ) :
 	the_post();
 	$id = get_the_ID();
 
+	// Home / Team / {member name}
+	rehab_render_breadcrumb(
+		wp_strip_all_tags( get_the_title() ),
+		[ [ 'label' => 'Team', 'url' => home_url( '/team/' ) ] ]
+	);
+
 	// Bio: the member's editor content, flattened to plain paragraphs the
 	// team-profile block expects (bios are plain prose, no rich formatting).
 	$bio_html = apply_filters( 'the_content', get_the_content() );

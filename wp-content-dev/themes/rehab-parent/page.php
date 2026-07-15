@@ -11,6 +11,7 @@ get_header();
 
 while ( have_posts() ) :
 	the_post();
+	rehab_render_breadcrumb( '', rehab_breadcrumb_ancestors( get_the_ID() ) );
 	the_content();
 endwhile;
 
