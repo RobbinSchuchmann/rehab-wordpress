@@ -54,12 +54,13 @@ done
 # mu-plugins: ONLY the production-safe files, and crucially NO --delete,
 # so server-only files (e.g. zz-staging-noindex.php) are never removed and the
 # dangerous dev mu-plugins are never introduced.
-echo "  -> mu-plugins (zz-contact-form.php, zz-intake-form.php, zz-redirects.php, zz-mail-from.php)"
+echo "  -> mu-plugins (zz-contact-form.php, zz-intake-form.php, zz-redirects.php, zz-mail-from.php, zz-tracking.php)"
 rsync -az $DRY -e "$ssh_cmd" \
   "$SRC/mu-plugins/zz-contact-form.php" \
   "$SRC/mu-plugins/zz-intake-form.php" \
   "$SRC/mu-plugins/zz-redirects.php" \
   "$SRC/mu-plugins/zz-mail-from.php" \
+  "$SRC/mu-plugins/zz-tracking.php" \
   "$DEST/mu-plugins/"
 
 # Purge Breeze cache so the new code is visible to visitors. Breeze caches the

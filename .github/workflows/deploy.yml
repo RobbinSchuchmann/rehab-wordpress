@@ -19,6 +19,7 @@ on:
       - 'wp-content-dev/mu-plugins/zz-intake-form.php'
       - 'wp-content-dev/mu-plugins/zz-redirects.php'
       - 'wp-content-dev/mu-plugins/zz-mail-from.php'
+      - 'wp-content-dev/mu-plugins/zz-tracking.php'
       - 'scripts/deploy-to-cloudways.sh'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
