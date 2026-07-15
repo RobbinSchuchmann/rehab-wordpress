@@ -53,3 +53,7 @@ docker-compose.override.yml
 
 # Linear/gh workflow — local secrets (keep .mcp.json and .mcp.env.example tracked)
 .mcp.env
+
+# Live/dev DB dumps — never commit
+*.sql
+*.sql.gz
