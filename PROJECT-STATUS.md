@@ -89,12 +89,12 @@ Re-run `tools/audit-seo.sh` after toggle #1 to confirm `rel="canonical"` appears
   - **Enable at go-live (prod server, WP-CLI)** — after confirming each subscription is still active:
     ```
     wp option update rehab_gtm_id 'GTM-WBCJPZ4'                                   # GA4 rides inside this
-    wp option update rehab_lead_pixel_account '76381674'                          # CONFIRM Internet Dominators sub active first
-    wp option update rehab_whatsapp_widget_id '5edf62f4-6471-425b-948e-327b551420d2'  # CONFIRM Elfsight sub active first
+    wp option update rehab_lead_pixel_account '76381674'                          # confirmed active (Robbin, 15 Jul)
+    # rehab_whatsapp_widget_id — DROPPED for Diamond (Robbin, 15 Jul); code kept but not enabled
     # rehab_gsc_verification — leave unset (RankMath already emits one)
     # rehab_ga4_id — leave unset unless the GTM container does NOT carry the GA4 tag
     ```
-  - **Open confirmations (business, at enablement time):** (1) Internet Dominators lead-pixel subscription (acct 76381674) still active/billed? (2) Elfsight WhatsApp widget subscription still active? (3) confirm the live GTM container still fires GA4 `G-4443JC04QD` (so no separate gtag needed). (4) UA-163880106-1 retired (GA Universal is EOL anyway).
+  - **Decisions (15 Jul 2026):** lead pixel **kept** (subscription confirmed active); Elfsight WhatsApp widget **dropped** for Diamond (code retained, just not enabled). Still worth a final check at enablement: confirm the live GTM container still fires GA4 `G-4443JC04QD` (so no separate gtag needed); UA-163880106-1 stays retired (GA Universal is EOL).
 - **Article table of contents — 🟡 gap.** Old **Easy-TOC**; new articles have no TOC. UX/SEO nicety on long articles. (Out of REH-15 scope — separate item if wanted.)
 - **CallTrackingMetrics — 🟡 dropped.** Dynamic call-tracking phone numbers gone; numbers now static (lose call attribution). Business decision.
 - **Google Reviews widget — 🟡 dropped.** Tied to the deferred **Testimonials** page (content-gated).
