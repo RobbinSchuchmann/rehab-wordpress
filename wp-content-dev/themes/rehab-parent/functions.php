@@ -802,16 +802,42 @@ remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 function rehab_parent_walker_menu_no_hash( string $item_html, $item, int $depth, $args ): string {
 	$classes      = is_array( $item->classes ?? null ) ? $item->classes : [];
 	$has_children = in_array( 'menu-item-has-children', $classes, true );
-	$url          = isset( $item->url ) ? trim( $item->url ) : '';
 
-	if ( ! $has_children || ( $url !== '' && $url !== '#' ) ) {
+	// Leaf items are plain links — nothing to disclose.
+	if ( ! $has_children ) {
 		return $item_html;
 	}
 
-	$attrs = 'role="button" tabindex="0" aria-haspopup="true" aria-expanded="false"';
-	// Drop the placeholder href (`#` or empty) if present, then mark as a button.
-	$item_html = preg_replace( '/\s*href="(?:#|)"/', '', $item_html, 1 );
-	$item_html = preg_replace( '/<a\b/', '<a ' . $attrs, $item_html, 1 );
+	$url = isset( $item->url ) ? trim( $item->url ) : '';
+
+	// Parent with NO real destination (authored as "#" or an empty URL, e.g. "About"):
+	// the whole item is a disclosure button — it opens its submenu and never navigates.
+	if ( $url === '' || $url === '#' ) {
+		$attrs = 'role="button" tabindex="0" aria-haspopup="true" aria-expanded="false"';
+		// Drop the placeholder href (`#` or empty) if present, then mark as a button.
+		$item_html = preg_replace( '/\s*href="(?:#|)"/', '', $item_html, 1 );
+		$item_html = preg_replace( '/<a\b/', '<a ' . $attrs, $item_html, 1 );
+		return $item_html;
+	}
+
+	// Parent that DOES point somewhere (REH-105): keep the anchor navigable and append
+	// a separate caret button that toggles the submenu. Desktop reveals it on hover
+	// (CSS) and hides this caret; on touch, tapping the link navigates while the caret
+	// opens the submenu. header.js wires any control carrying aria-haspopup.
+	$label = wp_strip_all_tags( $item->title );
+	$caret = sprintf(
+		'<button type="button" class="rehab-nav__disclosure" aria-haspopup="true" aria-expanded="false" aria-label="%s"></button>',
+		esc_attr( sprintf(
+			/* translators: %s: parent menu item label */
+			__( 'Toggle %s submenu', 'rehab-parent' ),
+			$label
+		) )
+	);
+	// Insert right after this item's own anchor, before the walker appends the submenu.
+	$pos = strpos( $item_html, '</a>' );
+	if ( false !== $pos ) {
+		$item_html = substr_replace( $item_html, '</a>' . $caret, $pos, strlen( '</a>' ) );
+	}
 
 	return $item_html;
 }
