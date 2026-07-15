@@ -152,6 +152,13 @@ body.rehab-menu-open .rehab-navbar {
 	cursor: pointer;
 }
 
+/* Link-parents (REH-105) carry a separate caret button for touch. On the desktop
+   inline navbar it's redundant — hover opens the dropdown and a::after shows the
+   caret — so hide it here; it only does work in the mobile mega-menu. */
+.rehab-navbar__menu .rehab-nav__disclosure {
+	display: none;
+}
+
 .rehab-navbar__menu .sub-menu a {
 	display: block;
 	padding: 0.55rem 1.25rem;
@@ -343,6 +350,46 @@ body.rehab-menu-open .rehab-mega-menu {
 
 .rehab-mega-menu__list li.is-open > [aria-haspopup="true"]::after {
 	transform: rotate(180deg);
+}
+
+/* Link-parents (REH-105): the header itself is a real link, with a separate
+   caret button beside it that toggles the submenu. Lay each row out as flex so
+   the link fills the row, the caret sits at the end, and the submenu (when open)
+   wraps to its own full-width line below. Depth-agnostic — nested link-parents
+   get the same treatment. */
+.rehab-mega-menu__list li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.rehab-mega-menu__list li > a {
+	flex: 1 1 auto;
+}
+
+.rehab-mega-menu__list li > .sub-menu {
+	flex: 0 0 100%;
+}
+
+.rehab-mega-menu__list .rehab-nav__disclosure {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 3.25rem;
+	align-self: stretch;
+	padding: 0;
+	background: none;
+	border: 0;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* The caret glyph comes from the shared [aria-haspopup]::after rule above; drop
+   its inline left margin here since the button already centres it. */
+.rehab-mega-menu__list .rehab-nav__disclosure::after {
+	margin-left: 0;
+	font-size: 0.9rem;
 }
 
 .rehab-mega-menu__list .sub-menu a {
