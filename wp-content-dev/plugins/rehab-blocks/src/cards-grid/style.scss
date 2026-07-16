@@ -127,6 +127,15 @@ a.rehab-card:hover .rehab-card__title {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0;
+
+	// The snake's U-turn arcs (steps 4 & 8 ::after) draw ~2.25rem past the outer
+	// column. Inset the grid so those arcs curve INSIDE the visible area instead
+	// of hitting the container edge and getting trimmed by overflow-x: clip
+	// (REH-113). Arc ends ~12px inside the content edge — full curve, no overflow.
+	@media (min-width: 1024px) {
+		padding-left: 3rem;
+		padding-right: 3rem;
+	}
 }
 
 .rehab-cards-grid--card-process .rehab-card {
