@@ -42,3 +42,67 @@
 	padding-left: 0;
 	padding-right: 0;
 }
+
+/* ---- Top-level core blocks in the canvas (REH-119) ---------------------
+   Mirrors the frontend "loose core blocks" rules (treatment.css): plain
+   paragraphs / headings / lists dropped between rehab/* sections render
+   centered at a readable measure with the article type scale, so what the
+   editor sees matches what ships. Scoped to root-level blocks only —
+   core blocks nested inside rehab blocks keep their block's own styling. */
+.editor-styles-wrapper .is-root-container > p,
+.editor-styles-wrapper .is-root-container > h2,
+.editor-styles-wrapper .is-root-container > h3,
+.editor-styles-wrapper .is-root-container > h4,
+.editor-styles-wrapper .is-root-container > h5,
+.editor-styles-wrapper .is-root-container > h6,
+.editor-styles-wrapper .is-root-container > ul,
+.editor-styles-wrapper .is-root-container > ol,
+.editor-styles-wrapper .is-root-container > blockquote {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: min(56rem, 100%);
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1.0625rem;
+	line-height: 1.78;
+	color: var(--rehab-soft-charcoal);
+}
+
+.editor-styles-wrapper .is-root-container > h2 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 2rem;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+	color: var(--rehab-warm-charcoal);
+}
+
+.editor-styles-wrapper .is-root-container > h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.5rem;
+	letter-spacing: -0.015em;
+	color: var(--rehab-warm-charcoal);
+}
+
+.editor-styles-wrapper .is-root-container > h4 {
+	font-family: var(--rehab-font-display);
+	font-weight: 400;
+	font-size: 1.25rem;
+	letter-spacing: -0.01em;
+	line-height: 1.3;
+	color: var(--rehab-warm-charcoal);
+}
+
+.editor-styles-wrapper .is-root-container > h5,
+.editor-styles-wrapper .is-root-container > h6 {
+	font-family: var(--rehab-font-body);
+	font-weight: 600;
+	font-size: 1.125rem;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal);
+}

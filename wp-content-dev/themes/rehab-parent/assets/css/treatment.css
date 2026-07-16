@@ -109,3 +109,117 @@
 	font-size: 1.2rem;
 	margin-left: var(--rehab-space-3);
 }
+
+/* ---- Loose core blocks between sections (REH-119) ----------------------
+   Editors can drop plain paragraphs / headings / lists between the custom
+   treatment sections. Every rehab/* block wraps itself in .rehab-container,
+   but a top-level core block has no wrapper — unstyled it spans the full
+   viewport in browser-default type. Center these on the page at a readable
+   measure (never wider than the blocks' container) and give them the same
+   typography as the article body, so they read as prose within the flow. */
+.rehab-treatment > p,
+.rehab-treatment > h2,
+.rehab-treatment > h3,
+.rehab-treatment > h4,
+.rehab-treatment > h5,
+.rehab-treatment > h6,
+.rehab-treatment > ul,
+.rehab-treatment > ol,
+.rehab-treatment > blockquote {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: min(56rem, var(--rehab-container-max));
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	font-family: var(--rehab-font-body);
+	font-weight: 300;
+	font-size: 1.0625rem;
+	line-height: 1.78;
+	color: var(--rehab-soft-charcoal);
+	overflow-wrap: break-word;
+}
+
+@media (min-width: 1024px) {
+	.rehab-treatment > p,
+	.rehab-treatment > h2,
+	.rehab-treatment > h3,
+	.rehab-treatment > h4,
+	.rehab-treatment > h5,
+	.rehab-treatment > h6,
+	.rehab-treatment > ul,
+	.rehab-treatment > ol,
+	.rehab-treatment > blockquote {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
+.rehab-treatment > p { margin-top: 0; margin-bottom: 1.5rem; }
+
+/* Type scale mirrors .rehab-article__body (article.css) so mixed pages
+   stay consistent; h4-h6 sized above body so they never read smaller than
+   the text they head. */
+.rehab-treatment > h2 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.75rem;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+	color: var(--rehab-warm-charcoal);
+	margin-top: 3.25rem;
+	margin-bottom: 1.25rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
+.rehab-treatment > h3 {
+	font-family: var(--rehab-font-display);
+	font-weight: 300;
+	font-size: 1.375rem;
+	letter-spacing: -0.015em;
+	color: var(--rehab-warm-charcoal);
+	margin-top: 2.5rem;
+	margin-bottom: 1rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
+.rehab-treatment > h4 {
+	font-family: var(--rehab-font-display);
+	font-weight: 400;
+	font-size: 1.25rem;
+	letter-spacing: -0.01em;
+	line-height: 1.3;
+	color: var(--rehab-warm-charcoal);
+	margin-top: 2rem;
+	margin-bottom: 0.75rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
+.rehab-treatment > h5,
+.rehab-treatment > h6 {
+	font-family: var(--rehab-font-body);
+	font-weight: 600;
+	font-size: 1.125rem;
+	line-height: 1.4;
+	color: var(--rehab-warm-charcoal);
+	margin-top: 1.75rem;
+	margin-bottom: 0.6rem;
+	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
+}
+
+@media (min-width: 768px) {
+	.rehab-treatment > h2 { font-size: 2rem; }
+	.rehab-treatment > h3 { font-size: 1.5rem; }
+}
+
+.rehab-treatment > ul,
+.rehab-treatment > ol {
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+}
+
+.rehab-treatment > ul li,
+.rehab-treatment > ol li {
+	margin-bottom: 0.5rem;
+}
