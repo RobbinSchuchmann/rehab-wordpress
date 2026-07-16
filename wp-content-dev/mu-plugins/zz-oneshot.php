@@ -4485,6 +4485,64 @@ JSON;
 			echo "OK rebuilt page $page_id ({$post->post_name}) with rehab/intake-form (" . strlen( $blocks ) . " bytes)\n";
 			break;
 
+		case 'enable-team-seo':
+			// REH-117: the team_member CPT (REH-72) postdates the RankMath
+			// options, so it was never enabled in the XML sitemap and 10 of
+			// the 34 profiles have no meta description (the other 24 carry
+			// rank_math_description inherited from the retired legacy pages).
+			// 1) Register the CPT in RankMath's sitemap + titles settings
+			//    (mirrors the pt_page_* keys); 2) upsert descriptions for the
+			//    10 (live-site copy where it exists, role/bio-derived
+			//    otherwise). Idempotent: existing values are left alone.
+			$sitemap = get_option( 'rank-math-options-sitemap', [] );
+			$titles  = get_option( 'rank-math-options-titles', [] );
+			$set = static function ( array &$opt, string $key, $value ) {
+				if ( isset( $opt[ $key ] ) ) { echo "  keep  {$key}\n"; return; }
+				$opt[ $key ] = $value;
+				echo "  set   {$key}\n";
+			};
+			$set( $sitemap, 'pt_team_member_sitemap', 'on' );
+			$set( $titles, 'pt_team_member_title', '%title% %sep% %sitename%' );
+			$set( $titles, 'pt_team_member_description', '%excerpt%' );
+			$set( $titles, 'pt_team_member_robots', [ 'index' ] );
+			$set( $titles, 'pt_team_member_custom_robots', 'on' );
+			$set( $titles, 'pt_team_member_add_meta_box', 'on' );
+			update_option( 'rank-math-options-sitemap', $sitemap );
+			update_option( 'rank-math-options-titles', $titles );
+
+			$descriptions = [
+				// Reused verbatim from the live site where it has one.
+				'jessica-waller'           => "Jessica holds a master's degree in Counselling & Psychotherapy and is trained in the Person-Centred theory of practice in the UK. At The Diamond Rehab in Thailand, Jessica continues to apply the Person-Centred approach.",
+				'isuru-bogodwatta'         => 'Isuru Bogodawatta, Head Nurse at Diamond Rehab, trained at Kandy Nursing School and National Institute of Mental Health Sri Lanka.',
+				'derrick-kwa'              => 'Singaporean Derrick Kwa, Executive Chef at The Diamond Rehab, boasts global culinary roles including Restaurant Gaig, Wilde & Co, collaborations with Chef Ace Tan, and Michelin-starred stages.',
+				'navneth-mendis'           => 'Navneth Mendis, Consulting Clinical Psychologist at Diamond Rehab, is an EMDR practitioner with CBT certification from Samutthana and Psychological First Aid training.',
+				// Derived from the profile's role/bio (no live description exists).
+				'ahmed-zayed-md'           => 'Ahmed Zayed, MD, is a physician and medical writer who reviews addiction and mental health content for The Diamond Rehab Thailand.',
+				'jeerumporn-choutrakun'    => 'Jeerumporn Choutrakun (Jeje) brings years of hospitality experience to The Diamond Rehab Thailand, caring for guests with warmth and genuine connection.',
+				'natjittra-chathaisong'    => 'Natjittra Chathaisong (Ae) supports guests at The Diamond Rehab Thailand with a deep passion for recovery, going above and beyond in her care.',
+				'prasong-homkong'          => 'Prasong Homkong brings over two decades of five-star culinary expertise to The Diamond Rehab Thailand, leading the kitchen team.',
+				'dr-ngamwong-jarusuraisin' => 'Ngamwong Jarusuraisin, M.D., is a psychiatrist at The Diamond Rehab Thailand, supporting guests with addiction and mental health treatment.',
+				'shehan-williams'          => 'Professor Shehan Williams is a psychiatrist at The Diamond Rehab Thailand, bringing academic and clinical expertise to addiction treatment.',
+			];
+			foreach ( $descriptions as $slug => $desc ) {
+				$posts = get_posts( [ 'name' => $slug, 'post_type' => 'team_member', 'post_status' => 'publish', 'numberposts' => 1 ] );
+				if ( ! $posts ) { echo "  MISS  {$slug} (no published team_member)\n"; continue; }
+				$pid = $posts[0]->ID;
+				if ( get_post_meta( $pid, 'rank_math_description', true ) ) { echo "  keep  {$slug} #{$pid} (already has description)\n"; continue; }
+				update_post_meta( $pid, 'rank_math_description', $desc );
+				echo "  desc  {$slug} #{$pid}\n";
+			}
+
+			// New sitemap provider -> drop RankMath's cached sitemap XML +
+			// refresh rewrites so /team_member-sitemap.xml resolves.
+			if ( class_exists( '\\RankMath\\Sitemap\\Cache' ) && method_exists( '\\RankMath\\Sitemap\\Cache', 'invalidate_storage' ) ) {
+				\RankMath\Sitemap\Cache::invalidate_storage();
+				echo "  sitemap cache invalidated\n";
+			}
+			flush_rewrite_rules();
+			echo "OK team_member SEO enabled\n";
+			break;
+
 		default:
 			echo "unknown task\n";
 	}
