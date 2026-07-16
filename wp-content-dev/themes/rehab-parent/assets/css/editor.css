@@ -91,11 +91,12 @@
 
 .editor-styles-wrapper .is-root-container > h4 {
 	font-family: var(--rehab-font-display);
-	font-weight: 400;
-	font-size: 1.25rem;
-	letter-spacing: -0.01em;
-	line-height: 1.3;
+	font-weight: 300;
+	font-size: clamp(1.875rem, 3vw, 2.5rem);
+	letter-spacing: -0.02em;
+	line-height: 1.1;
 	color: var(--rehab-warm-charcoal);
+	text-wrap: balance;
 }
 
 .editor-styles-wrapper .is-root-container > h5,

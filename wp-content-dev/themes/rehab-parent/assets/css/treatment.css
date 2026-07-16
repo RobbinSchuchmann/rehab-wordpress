@@ -184,15 +184,19 @@
 	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
 }
 
+/* Loose h4s act as section headings on these pages — match the
+   article-row section-heading scale so they hold their own between the
+   full sections (REH-119 follow-up). */
 .rehab-treatment > h4 {
 	font-family: var(--rehab-font-display);
-	font-weight: 400;
-	font-size: 1.25rem;
-	letter-spacing: -0.01em;
-	line-height: 1.3;
+	font-weight: 300;
+	font-size: clamp(1.875rem, 3vw, 2.5rem);
+	letter-spacing: -0.02em;
+	line-height: 1.1;
 	color: var(--rehab-warm-charcoal);
-	margin-top: 2rem;
-	margin-bottom: 0.75rem;
+	text-wrap: balance;
+	margin-top: 3rem;
+	margin-bottom: 1.25rem;
 	scroll-margin-top: calc(var(--rehab-header-height, 5rem) + 1rem);
 }
 
