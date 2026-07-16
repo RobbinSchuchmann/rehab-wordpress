@@ -172,6 +172,27 @@ wp db query "DROP DATABASE live_scratch;"
 
 ⚠️ Double-check the 6 reclassified therapy-method pages (CBT/DBT/Mindfulness/EMDR/Stages-of-change/sniffing-coke) aren't unintentionally clobbered — confirm they should take live content too.
 
+### 8b — Uploads delta-sync (mandatory after ANY content re-sync)
+
+A content re-sync imports HTML that may reference media uploaded to live **after** the Phase 7 rsync — those files 404 until fetched (REH-115: 47 images across 15 pages, mostly a `2026/06/` month folder that postdated the seed). Content re-syncs can also **clobber earlier content-fix oneshots** on the same posts (REH-116: the REH-6 canada-dry fix) — re-verify any content migration that predates the re-sync.
+
+```bash
+# 1. Find referenced-but-missing media: crawl every public URL, collect
+#    <img>/<source>/<a> targets under /wp-content/uploads/, HEAD-check each.
+#    (tools/ has the pieces; the pre-launch audit link sweep does exactly this.)
+
+# 2. No SSH to the old host is needed — the files are public. Fetch by path:
+while read -r rel; do
+  mkdir -p "uploads/$(dirname "$rel")"
+  curl -sf -o "uploads/$rel" "https://<OLD_DOMAIN>/wp-content/uploads/$rel"
+done < missing-uploads.txt
+
+# 3. Push the delta to the server (never --delete):
+rsync -az --files-from=missing-uploads.txt uploads/ <ssh>:<APP_PATH>/wp-content/uploads/
+
+# 4. Re-run the link sweep: expect 0 missing.
+```
+
 ---
 
 ## Phase 9 — Production hardening
