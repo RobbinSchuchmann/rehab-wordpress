@@ -85,7 +85,15 @@ $map = array(
  * form) — restored verbatim after the general US conversion so we don't rename them.
  */
 $rehab_proper_nouns = array(
-	'Canadian Pediatric Society' => 'Canadian Paediatric Society',
+	// Cited organisations whose official names keep UK spelling.
+	'Canadian Pediatric Society'             => 'Canadian Paediatric Society',
+	'Organization for Economic Co-operation' => 'Organisation for Economic Co-operation', // OECD
+	'Joint United Nations Program'           => 'Joint United Nations Programme',          // UNAIDS
+	'European Monitoring Center'             => 'European Monitoring Centre',              // EMCDDA
+	'National Collaborating Center'          => 'National Collaborating Centre',
+	'National Drug Treatment Center'         => 'National Drug Treatment Centre',
+	'Joint Research Center'                  => 'Joint Research Centre',
+	'Crossroads Center'                      => 'Crossroads Centre',
 );
 
 /** Apply the case of $src onto $dst. */
@@ -132,8 +140,10 @@ foreach ( $rows as $r ) {
 				$back = substr( $orig, max( 0, $off - 80 ), min( 80, $off ) );
 				$after_char = substr( $orig, $off + strlen( $word ), 1 );
 				$before_char = $off > 0 ? substr( $orig, $off - 1, 1 ) : '';
-				// URL context OR the word is a slash-adjacent path segment (e.g. /programme/).
-				$is_url = ( '/' === $before_char || '/' === $after_char )
+				// The slash-adjacency guard is for the /programme/ page slug ONLY — other
+				// words have no URL-slug and must not be skipped for a plain "word/word".
+				$slug_risk = in_array( strtolower( $word ), array( 'programme', 'programmes', 'program', 'programs' ), true );
+				$is_url = ( $slug_risk && ( '/' === $before_char || '/' === $after_char ) )
 					|| (bool) preg_match( '/(href|src|url|Url|imageUrl)"?\s*[:=]\s*"[^"]*$/', $back );
 				$us = rehab_case_like( $word, $map[ $uk_lc ] );
 				if ( $is_url ) { $url_skipped[ $uk_lc ] = ( $url_skipped[ $uk_lc ] ?? 0 ) + 1; continue; }
