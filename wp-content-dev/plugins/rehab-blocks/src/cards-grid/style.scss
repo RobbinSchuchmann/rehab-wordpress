@@ -118,24 +118,15 @@ a.rehab-card:hover .rehab-card__title {
 	overflow: hidden;
 }
 
-/* Process card layout — steps sitting on a continuous line (the original
-   Diamond Approach treatment): a diamond marker per step, the middle row of
-   four reversed, and U-turn arcs joining the rows into one snaking path.
-   Desktop assumes rows of 4 (12 items); below 1024px it degrades to a plain
-   stacked list of steps on line segments (no snake, no arcs). */
+/* Process card layout — steps sitting on a line: a diamond marker per step and
+   a horizontal rule along the top of each row. Desktop lays them out in rows of
+   four (12 items) reading left-to-right; below 1024px it stacks into a plain
+   list of steps on line segments. (REH-114 dropped the earlier U-turn "snake"
+   loops, which rendered as rounded rectangles with an ugly straight segment.) */
 .rehab-cards-grid--card-process .rehab-cards-grid__grid {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0;
-
-	// The snake's U-turn arcs (steps 4 & 8 ::after) draw ~2.25rem past the outer
-	// column. Inset the grid so those arcs curve INSIDE the visible area instead
-	// of hitting the container edge and getting trimmed by overflow-x: clip
-	// (REH-113). Arc ends ~12px inside the content edge — full curve, no overflow.
-	@media (min-width: 1024px) {
-		padding-left: 3rem;
-		padding-right: 3rem;
-	}
 }
 
 .rehab-cards-grid--card-process .rehab-card {
@@ -179,68 +170,10 @@ a.rehab-card:hover .rehab-card__title {
 }
 
 @media (min-width: 1024px) {
+	/* Four steps per row, all reading left-to-right (DOM order is the logical
+	   1→12 sequence). No row reversal, no U-turn arcs — just the line + diamonds. */
 	.rehab-cards-grid--card-process .rehab-card {
 		width: 25%;
-	}
-
-	/* Snake: reverse the middle row (items 5–8) so the path reads
-	   1→4, drops down, runs 5→8 right-to-left, drops down, runs 9→12. */
-	.rehab-cards-grid--card-process .rehab-card:nth-child(1) { order: 1; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(2) { order: 2; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(3) { order: 3; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(4) { order: 4; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(5) { order: 8; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(6) { order: 7; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(7) { order: 6; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(8) { order: 5; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(9)  { order: 9; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(10) { order: 10; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(11) { order: 11; }
-	.rehab-cards-grid--card-process .rehab-card:nth-child(12) { order: 12; }
-
-	/* U-turn arcs joining the rows: item 4 curls the line down the right
-	   edge into the reversed middle row; item 8 (visually leftmost in that
-	   row) curls it down the left edge into the final row. Each arc spans
-	   its card's full height, so it meets the next row's line exactly. */
-	.rehab-cards-grid--card-process .rehab-card:nth-child(4)::after,
-	.rehab-cards-grid--card-process .rehab-card:nth-child(8)::after {
-		content: '';
-		position: absolute;
-		top: -1px;
-		width: 4.5rem;
-		height: calc(100% + 2px);
-		border: 1px solid rgba(var(--rehab-tan-rgb), 0.55);
-		pointer-events: none;
-	}
-
-	.rehab-cards-grid--card-process .rehab-card:nth-child(4)::after {
-		left: calc(100% - 2.25rem);
-		border-left: 0;
-		border-radius: 0 999px 999px 0;
-	}
-
-	.rehab-cards-grid--card-process .rehab-card:nth-child(8)::after {
-		right: calc(100% - 2.25rem);
-		border-right: 0;
-		border-radius: 999px 0 0 999px;
-	}
-
-	/* The reversed row reads right-to-left, so its steps hang their
-	   breathing room on the other side. */
-	.rehab-cards-grid--card-process .rehab-card:nth-child(5),
-	.rehab-cards-grid--card-process .rehab-card:nth-child(6),
-	.rehab-cards-grid--card-process .rehab-card:nth-child(7),
-	.rehab-cards-grid--card-process .rehab-card:nth-child(8) {
-		padding-right: 0;
-		padding-left: 2.25rem;
-	}
-
-	.rehab-cards-grid--card-process .rehab-card:nth-child(5)::before,
-	.rehab-cards-grid--card-process .rehab-card:nth-child(6)::before,
-	.rehab-cards-grid--card-process .rehab-card:nth-child(7)::before,
-	.rehab-cards-grid--card-process .rehab-card:nth-child(8)::before {
-		left: auto;
-		right: 0;
 	}
 }
 
