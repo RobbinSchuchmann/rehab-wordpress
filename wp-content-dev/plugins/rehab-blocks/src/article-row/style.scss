@@ -74,6 +74,23 @@
 	z-index: 2;
 }
 
+// Imageless article-row: save() still bakes the "Image" placeholder (it belongs
+// in the editor, not the front end). Hide the media column, collapse the row to
+// one full-width column, and cap the text width for readability. (REH-112)
+.rehab-article-row:has(.rehab-article-row__media-placeholder) {
+	@media (min-width: 900px) {
+		grid-template-columns: 1fr;
+	}
+
+	.rehab-article-row__media {
+		display: none;
+	}
+
+	.rehab-article-row__text {
+		max-width: 60rem;
+	}
+}
+
 .rehab-article-row__eyebrow {
 	font-family: var(--rehab-font-body);
 	font-weight: 500;
