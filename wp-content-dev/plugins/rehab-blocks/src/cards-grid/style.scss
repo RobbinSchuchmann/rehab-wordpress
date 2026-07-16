@@ -3,6 +3,12 @@
 
 	@media (min-width: 768px) { padding: 5rem 0; }
 	@media (min-width: 1024px) { padding: 7rem 0; }
+
+	// The --card-process snake draws its U-turn arcs (::after on steps 4 & 8) a
+	// little past the outer step into the gutter, which pokes ~4px past the
+	// viewport at 1024/1280 and lets the page scroll sideways. The arcs sit in the
+	// gutter, so clipping the horizontal overflow trims nothing visible. (REH-108)
+	overflow-x: clip;
 }
 
 .rehab-cards-grid__header {

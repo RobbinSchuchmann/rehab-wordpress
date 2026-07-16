@@ -3,6 +3,11 @@
 	border-bottom: 1px solid rgba(var(--rehab-sage-rgb), 0.3);
 	background: var(--rehab-color-cream, #F7F4EC);
 	padding: 2.5rem 0;
+	// The centred, wrapping logo flex row reports phantom horizontal overflow at
+	// narrow widths (justify-content:center + gap), which lets the whole page
+	// scroll sideways ~76px on ≤768. The logos genuinely wrap and fit, so clipping
+	// the phantom overflow hides nothing real. (REH-108)
+	overflow-x: clip;
 }
 
 .rehab-authority-ribbon__label {
