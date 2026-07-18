@@ -21,7 +21,7 @@
     "phoneHref":   { "type": "string", "default": "tel:+61279082277" },
     "showRating":  { "type": "boolean", "default": true },
     "ratingScore": { "type": "string", "default": "4.9" },
-    "ratingText":  { "type": "string", "default": "from 120+ Google reviews · families & alumni" },
+    "ratingText":  { "type": "string", "default": "from 48 Google reviews · families & alumni" },
     "stat1Num":    { "type": "string", "default": "12" },
     "stat1Label":  { "type": "string", "default": "Maximum clients on site at any time" },
     "stat2Num":    { "type": "string", "default": "24/7" },

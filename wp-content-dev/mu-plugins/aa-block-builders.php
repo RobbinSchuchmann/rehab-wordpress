@@ -699,7 +699,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 	$blocks .= rehab_block_assessment_hero( array_merge( [
 		'anchorId'    => 'assessment',
 		'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
-		'ratingScore' => '4.9', 'ratingText' => 'from 120+ Google reviews · families & alumni',
+		'ratingScore' => '4.9', 'ratingText' => 'from 48 Google reviews · families & alumni',
 		'stat1Num' => '12',   'stat1Label' => 'Maximum clients on site at any time',
 		'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team on call',
 		'stat3Num' => '12+',
@@ -766,7 +766,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		'background' => 'cream',
 		'eyebrow'    => 'Real stories',
 		'heading'    => 'Recovery, in their own words',
-		'ratingScore' => '4.9', 'ratingText' => '· 120+ Google reviews',
+		'ratingScore' => '4.9', 'ratingText' => '· 48 Google reviews',
 		'items' => [
 			[ 'name' => 'James · ' . $program_tag, 'duration' => '2:14', 'tone' => '1', 'quote' => '"They gave me my life back."', 'who' => 'Filmed with consent', 'videoUrl' => '', 'posterUrl' => '' ],
 			[ 'name' => 'Anonymous · privacy-protected', 'duration' => '1:48', 'tone' => '4', 'quote' => '"I didn\'t think I could stop. I was wrong."', 'who' => 'Silhouette format', 'videoUrl' => '', 'posterUrl' => '' ],

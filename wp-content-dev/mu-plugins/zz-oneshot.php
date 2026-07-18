@@ -962,6 +962,38 @@ JSON;
 			}
 			break;
 
+		case 'reviews-48-sweep':
+			// REH-159: the hero/reel rating text claimed "120+ Google reviews";
+			// the real count is 48. Both blocks are dynamic (attrs-only in
+			// post_content), so a plain replace in the block comments suffices.
+			// REH-162: also regenerate the missing medium_large derivative for
+			// attachment 8179 (Discover Hua Hin banner) so re-baked related-page
+			// cards stop pointing at a 404.
+			global $wpdb;
+			$ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%120+ Google reviews%' AND post_status = 'publish'" );
+			foreach ( $ids as $pid ) {
+				$c = get_post_field( 'post_content', $pid );
+				$n = str_replace( '120+ Google reviews', '48 Google reviews', $c );
+				if ( $n !== $c ) {
+					$wpdb->update( $wpdb->posts, [ 'post_content' => $n ], [ 'ID' => $pid ] );
+					clean_post_cache( $pid );
+					echo "updated: {$pid}\n";
+				}
+			}
+			echo count( $ids ) . " page(s) swept.\n";
+			$file = get_attached_file( 8179 );
+			if ( $file && file_exists( $file ) ) {
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+				// Full regen — wp_create_image_subsizes resumes from existing
+				// metadata, which already (wrongly) lists the missing size.
+				$meta = wp_generate_attachment_metadata( 8179, $file );
+				wp_update_attachment_metadata( 8179, $meta );
+				echo "regenerated metadata for 8179: " . implode( ', ', array_keys( $meta['sizes'] ?? [] ) ) . "\n";
+			} else {
+				echo "attachment 8179 file missing — skipped regen\n";
+			}
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
@@ -2553,7 +2585,7 @@ JSON;
 				'headline'    => 'Break the grip of cocaine, privately, in Thailand',
 				'lede'        => "A discreet, doctor-led residential program at Thailand's leading luxury rehab. Medical detox, evidence-based therapy and a hard cap of twelve clients, so recovery is built around you and never a template.",
 				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
-				'ratingScore' => '4.9', 'ratingText' => 'from 120+ Google reviews · families & alumni',
+				'ratingScore' => '4.9', 'ratingText' => 'from 48 Google reviews · families & alumni',
 				'stat1Num' => '12',   'stat1Label' => 'Maximum clients on site at any time',
 				'stat2Num' => '24/7', 'stat2Label' => 'Doctor & clinical team on call',
 				'stat3Num' => '14+',  'stat3Label' => 'Years treating stimulant addiction',
@@ -2688,7 +2720,7 @@ JSON;
 				'background' => 'cream',
 				'eyebrow'    => 'Real stories',
 				'heading'    => 'Recovery, in their own words',
-				'ratingScore' => '4.9', 'ratingText' => '· 120+ Google reviews',
+				'ratingScore' => '4.9', 'ratingText' => '· 48 Google reviews',
 			] );
 
 			// 9. INPATIENT ADVANTAGE (text-first split + 4-up numbered)

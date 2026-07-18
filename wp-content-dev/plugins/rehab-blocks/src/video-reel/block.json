@@ -16,7 +16,7 @@
     "heading":     { "type": "string", "default": "Recovery, in their own words" },
     "showRating":  { "type": "boolean", "default": true },
     "ratingScore": { "type": "string", "default": "4.9" },
-    "ratingText":  { "type": "string", "default": "· 120+ Google reviews" },
+    "ratingText":  { "type": "string", "default": "· 48 Google reviews" },
     "items": {
       "type": "array",
       "default": [
