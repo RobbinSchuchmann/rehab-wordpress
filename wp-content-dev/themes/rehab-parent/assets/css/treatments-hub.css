@@ -74,8 +74,15 @@
 @media (max-width: 860px) {
 	.rehab-tx-nav {
 		position: sticky;
-		top: 0;
+		/* Below the fixed header while it shows; the header auto-hides on
+		   scroll-down, so follow it up with its own easing (REH-135). */
+		top: var(--rehab-header-height, 4.5rem);
 		z-index: 30;
+		transition: top 0.3s var(--rehab-ease);
+	}
+
+	body:has(.rehab-navbar.is-hidden) .rehab-tx-nav {
+		top: 0;
 	}
 }
 
