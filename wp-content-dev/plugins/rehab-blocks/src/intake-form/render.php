@@ -36,11 +36,16 @@ $countries = $rehab_intake_spec['countryList'] ?? [];
 $years     = $rehab_intake_spec['dateYears'] ?? [ 'from' => 2126, 'to' => 1926 ];
 $form_cfg  = $rehab_intake_spec['form'];
 
-/** <select> for one date part (numeric day/month, descending years — matches the legacy form). */
-$rehab_intake_date_select = static function ( array $sub, string $part, bool $required ) use ( $years ): string {
+/** <select> for one date part. Years run from `from` to `to` in either direction
+ *  (DOB descends into the past, passport expiry ascends into the future); each
+ *  date element may override the global range via a `years` key (REH-129). */
+$rehab_intake_date_select = static function ( array $sub, string $part, bool $required, array $range ): string {
 	$opts = '<option value="">' . esc_html( 'Select ' . $part ) . '</option>';
 	if ( $part === 'year' ) {
-		for ( $y = (int) $years['from']; $y >= (int) $years['to']; $y-- ) {
+		$from = (int) $range['from'];
+		$to   = (int) $range['to'];
+		$step = $from <= $to ? 1 : -1;
+		for ( $y = $from; $step > 0 ? $y <= $to : $y >= $to; $y += $step ) {
 			$opts .= '<option value="' . $y . '">' . $y . '</option>';
 		}
 	} else {
@@ -132,7 +137,7 @@ $rehab_intake_field = static function ( array $el ) use ( $countries, $rehab_int
 		case 'date':
 			$parts = '';
 			foreach ( $el['subfields'] as $sub ) {
-				$parts .= $rehab_intake_date_select( $sub, $sub['key'], $required );
+				$parts .= $rehab_intake_date_select( $sub, $sub['key'], $required, $el['years'] ?? $years );
 			}
 			$out = $label_html . $desc_html
 				. '<div class="rehab-intake__date" data-date-field="' . esc_attr( $id ) . '"'

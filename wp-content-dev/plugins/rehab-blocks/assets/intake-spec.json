@@ -182,6 +182,10 @@
      "label": "Date of Birth",
      "description": null,
      "placeholder": null,
+     "years": {
+      "from": 2006,
+      "to": 1926
+     },
      "required": false,
      "row": 3,
      "cols": 12,
@@ -266,6 +270,10 @@
        "label": "Passport Expiry Date",
        "description": null,
        "placeholder": "Choose Date",
+       "years": {
+        "from": 2026,
+        "to": 2046
+       },
        "required": false,
        "row": 1,
        "cols": 12,
@@ -1685,7 +1693,7 @@
   "Zimbabwe"
  ],
  "dateYears": {
-  "from": 2126,
+  "from": 2026,
   "to": 1926
  }
 }
