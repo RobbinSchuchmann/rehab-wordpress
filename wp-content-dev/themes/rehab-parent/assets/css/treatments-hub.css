@@ -34,13 +34,13 @@
 	color: var(--rehab-soft-charcoal);
 }
 
-/* ---------- Category jump chips (sticky lightweight nav) ---------- */
+/* ---------- Category jump chips (lightweight nav) ----------
+   Scrolls away with the page on desktop (it pinned itself below the header
+   and floated over the content — REH-134); still sticky on mobile, where
+   the long directory benefits from the always-reachable jump chips. */
 .rehab-tx-nav {
 	background: var(--rehab-color-cream);
 	border-bottom: 1px solid rgba(190, 179, 158, 0.30);
-	position: sticky;
-	top: var(--rehab-header-height, 84px);
-	z-index: 30;
 }
 .rehab-tx-nav__inner {
 	display: flex;
@@ -72,14 +72,23 @@
 	color: var(--rehab-warm-charcoal);
 }
 @media (max-width: 860px) {
-	.rehab-tx-nav { top: 0; }
+	.rehab-tx-nav {
+		position: sticky;
+		top: 0;
+		z-index: 30;
+	}
 }
 
 /* ---------- Category section ---------- */
 .rehab-tx-section {
 	padding-top: clamp(40px, 4.4vw, 64px);
 	padding-bottom: clamp(40px, 4.4vw, 64px);
-	scroll-margin-top: calc(var(--rehab-header-height, 84px) + 4rem);
+	/* Clear the fixed header on desktop; on mobile also the sticky chip bar. */
+	scroll-margin-top: calc(var(--rehab-header-height, 84px) + 1.5rem);
+
+	@media (max-width: 860px) {
+		scroll-margin-top: calc(var(--rehab-header-height, 84px) + 4rem);
+	}
 }
 .rehab-tx-section--white { background: var(--rehab-color-bg); }
 .rehab-tx-section--parch { background: var(--rehab-color-cream); }
