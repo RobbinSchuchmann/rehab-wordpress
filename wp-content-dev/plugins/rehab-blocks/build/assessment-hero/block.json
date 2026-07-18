@@ -64,7 +64,7 @@
     },
     "ratingText": {
       "type": "string",
-      "default": "from 120+ Google reviews · families & alumni"
+      "default": "from 48 Google reviews · families & alumni"
     },
     "stat1Num": {
       "type": "string",

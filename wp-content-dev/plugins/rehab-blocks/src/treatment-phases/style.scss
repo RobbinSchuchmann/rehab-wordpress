@@ -214,7 +214,10 @@
 }
 
 .rehab-treatment-phases__aside .meta strong {
-	display: block;
+	/* The baked label ("Statement" on treatment pages, "Quoted by" on job ads)
+	   reads as template cruft above the attribution — hidden globally
+	   (REH-161/REH-157); the attribution value below it stays. */
+	display: none;
 	font-weight: 500;
 	color: var(--rehab-warm-charcoal);
 	margin-bottom: 0.25rem;
