@@ -65,12 +65,8 @@
 	}
 }
 
-/* Discover Hua Hin drops the shield icons (REH-138). The icon markup is baked
-   into the static block on 37 pages — the shields stay part of the treatment
-   design elsewhere, so hide them for this page only. */
-.page-id-8177 .rehab-pillar__icon {
-	display: none;
-}
+/* (The REH-138 page-scoped icon hiding used to live here — superseded by the
+   sitewide removal in the .rehab-pillar__icon rule below, REH-160.) */
 
 .rehab-pillar {
 	background: #fff;
@@ -91,7 +87,9 @@
 	width: 56px;
 	height: 56px;
 	background: var(--rehab-ethereal-sage);
-	display: grid;
+	/* Shield icons removed sitewide (REH-160) — swap back to `grid` to
+	   restore them; the SVG markup is still baked in the stored content. */
+	display: none;
 	place-items: center;
 	color: var(--rehab-sage-dark);
 }
