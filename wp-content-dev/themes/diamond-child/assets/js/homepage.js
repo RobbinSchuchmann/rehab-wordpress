@@ -198,8 +198,11 @@
 
 		Fancybox.bind('[data-fancybox="gallery"]', {
 			Thumbs: false,
+			// Fancybox v5 wants an object of {left,middle,right} arrays here — a
+			// bare array throws during render and leaves the lightbox empty
+			// (REH-145).
 			Toolbar: {
-				display: ['close'],
+				display: { left: [], middle: [], right: ['close'] },
 			},
 		});
 

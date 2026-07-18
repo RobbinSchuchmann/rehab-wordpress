@@ -154,6 +154,14 @@ body.page-template-page-homepage .custom-button-super {
 	font-weight: 300 !important;
 }
 
+/* …except buttons: CTAs match the treatment pages' .rehab-btn weight — the
+   thin 300 made them washed out next to the newer pages (REH-152). */
+.drt-homepage a.drt-btn,
+.drt-homepage button.drt-btn,
+.drt-homepage .drt-btn span {
+	font-weight: 500 !important;
+}
+
 .drt-eyebrow {
 	font-family: 'Inter', sans-serif;
 	font-weight: 500;

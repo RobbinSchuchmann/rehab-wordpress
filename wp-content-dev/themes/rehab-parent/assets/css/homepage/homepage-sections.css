@@ -1014,12 +1014,8 @@ th.drt-comparison__th--diamond {
 	opacity: 1;
 }
 
-/* Touch devices can't hover, so keep the label visible there. */
-@media (hover: none) {
-	.drt-team__overlay {
-		opacity: 1;
-	}
-}
+/* Touch devices: names stay hidden by default too (REH-149) — the grid links
+   through to the team page where every name is visible. */
 
 /* The base `.drt-homepage h3` rule would otherwise repaint the name charcoal;
    scope here wins so the name stays legible on the dark gradient (REH-44). */
@@ -1355,4 +1351,19 @@ th.drt-comparison__th--diamond {
 
 .drt-swiper-dots .swiper-pagination-bullet-active {
 	background: var(--rehab-sage-dark);
+}
+
+/* Phones: ~20 bullets at 8px + gaps overflow the 342px row and wrap — shrink
+   them (and kill Swiper's own per-bullet gap) so they stay on one line
+   (REH-150). */
+@media (max-width: 767px) {
+	.drt-swiper-dots {
+		gap: 2px;
+		--swiper-pagination-bullet-horizontal-gap: 0;
+	}
+
+	.drt-swiper-dots .swiper-pagination-bullet {
+		width: 6px;
+		height: 6px;
+	}
 }
