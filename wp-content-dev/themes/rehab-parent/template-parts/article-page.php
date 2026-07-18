@@ -40,6 +40,12 @@ $reviewed_label = get_the_modified_date( 'M j, Y' );
 $category_label = function_exists( 'rehab_breadcrumb_category' )
 	? rehab_breadcrumb_category( $post_id )
 	: '';
+// Most articles sit in the generic "Article" bucket, which resolves to no
+// category — fall back to the page title so every article still gets a
+// Home / Articles / … breadcrumb (REH-166).
+if ( ! $category_label ) {
+	$category_label = wp_strip_all_tags( get_the_title( $post_id ) );
+}
 $related_posts  = rehab_parent_resolve_related( $post_id, 4 );
 ?>
 
@@ -172,8 +178,8 @@ $related_posts  = rehab_parent_resolve_related( $post_id, 4 );
 							</svg>
 						</div>
 						<div class="rehab-article__talk-text">
-							<h2 class="rehab-article__talk-title"><?php esc_html_e( 'Wondering if this sounds like someone you love?', 'rehab-parent' ); ?></h2>
-							<p class="rehab-article__talk-sub"><?php esc_html_e( 'A short, confidential call with our admissions team — no pressure, no obligation.', 'rehab-parent' ); ?></p>
+							<h2 class="rehab-article__talk-title"><?php esc_html_e( 'Does this sound like someone you love?', 'rehab-parent' ); ?></h2>
+							<p class="rehab-article__talk-sub"><?php esc_html_e( 'A short, confidential call with our admissions team - no pressure, no obligation.', 'rehab-parent' ); ?></p>
 						</div>
 						<a class="rehab-btn rehab-btn--luxury rehab-article__talk-btn" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>">
 							<?php esc_html_e( 'Talk to a clinician', 'rehab-parent' ); ?>
@@ -185,7 +191,7 @@ $related_posts  = rehab_parent_resolve_related( $post_id, 4 );
 				<aside class="rehab-article__sidebar" aria-label="<?php esc_attr_e( 'Resources', 'rehab-parent' ); ?>">
 					<div class="rehab-article__sidebar-inner">
 
-						<div class="rehab-article__cta">
+						<div class="rehab-article__cta rehab-article__cta--photo">
 							<div class="rehab-article__cta-media">
 								<span class="rehab-article__cta-overline"><?php esc_html_e( 'A Sanctuary of Serenity', 'rehab-parent' ); ?></span>
 								<h2 class="rehab-article__cta-title"><?php

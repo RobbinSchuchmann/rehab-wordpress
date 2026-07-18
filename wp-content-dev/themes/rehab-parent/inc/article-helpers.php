@@ -149,19 +149,20 @@ function rehab_parent_strip_leading_duplicate_image( string $content, int $thumb
 	}
 	$trimmed = ltrim( $content );
 
-	// Block-editor variant: <!-- wp:image {"id":N,...} --> … <!-- /wp:image -->
-	if ( preg_match( '/^<!--\s*wp:image\s+(\{[^}]*\})\s*-->/', $trimmed, $m ) ) {
-		// Cheap "does it mention the right id" check — avoids decoding the JSON.
-		if ( preg_match( '/"id"\s*:\s*' . $thumb_id . '\b/', $m[1] ) ) {
-			$end = strpos( $trimmed, '<!-- /wp:image -->' );
-			if ( $end !== false ) {
-				return ltrim( substr( $trimmed, $end + strlen( '<!-- /wp:image -->' ) ) );
-			}
+	// Block-editor variant: <!-- wp:image {...} --> … <!-- /wp:image -->.
+	// Strip regardless of the block's `id`: the template already renders the
+	// featured hero, and the migrated pages' leading blocks are usually the
+	// same graphic as a DIFFERENT attachment (or carry no id at all), so an
+	// id-equality check silently misses most duplicates (REH-167).
+	if ( preg_match( '/^<!--\s*wp:image[\s{]/', $trimmed ) ) {
+		$end = strpos( $trimmed, '<!-- /wp:image -->' );
+		if ( $end !== false ) {
+			return ltrim( substr( $trimmed, $end + strlen( '<!-- /wp:image -->' ) ) );
 		}
 	}
 
-	// Classic / non-block variant: a leading <figure>...wp-image-N...</figure>
-	if ( preg_match( '/^<figure\b[^>]*>.*?wp-image-' . $thumb_id . '\b.*?<\/figure>/s', $trimmed ) ) {
+	// Classic / non-block variant: a leading <figure><img …></figure>.
+	if ( preg_match( '/^<figure\b[^>]*>(?:(?!<\/figure>).)*<img\b(?:(?!<\/figure>).)*<\/figure>/s', $trimmed ) ) {
 		return ltrim( preg_replace( '/^<figure\b[^>]*>.*?<\/figure>/s', '', $trimmed, 1 ) );
 	}
 
