@@ -51,6 +51,27 @@
 	}
 }
 
+/* 4-item grids (e.g. Discover Hua Hin's "A setting built for recovery") sit
+   in one row rather than 3+1, dropping to 2×2 on tablet (REH-138). */
+.rehab-pillars__grid:has(> .rehab-pillar:nth-child(4)) {
+	grid-template-columns: repeat(4, 1fr);
+
+	@media (max-width: 1100px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 640px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Discover Hua Hin drops the shield icons (REH-138). The icon markup is baked
+   into the static block on 37 pages — the shields stay part of the treatment
+   design elsewhere, so hide them for this page only. */
+.page-id-8177 .rehab-pillar__icon {
+	display: none;
+}
+
 .rehab-pillar {
 	background: #fff;
 	border: 1px solid rgba(var(--rehab-tan-rgb), 0.3);

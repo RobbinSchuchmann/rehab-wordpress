@@ -97,9 +97,14 @@ add_action( 'init', function () {
 				'Yahoo Finance'            => 'Yahoo Finance recognized The Diamond Rehab Thailand as a global leader for its unique fusion of luxury hospitality and rigorous Western clinical standards.',
 				'Well + Good'              => 'Well+Good recognized The Diamond Rehab Thailand for its holistic, high-end approach to restoring physical, emotional, and mental balance in a tropical setting.',
 				'Psych Central'            => 'PsychCentral acknowledged The Diamond Rehab Thailand for its pioneering integration of evidence-based medical therapy and holistic mindfulness meditation.',
-				'Recovery.com'             => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centres for luxury residential addiction treatment.',
+				'Recovery.com'             => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centers for luxury residential addiction treatment.',
 				'Bangkok Hospital partner' => 'The Diamond Rehab Thailand is partnered with Bangkok Hospital for comprehensive medical support and 24/7 emergency care for all residential clients.',
 			];
+			// Alt-text aliases: the pre-REH-93 bakes (certificates-mentions,
+			// discover-hua-hin, superannuation) spell these two differently, which
+			// is why the original run skipped them (REH-137).
+			$tips['Well+Good']        = $tips['Well + Good'];
+			$tips['Bangkok Hospital'] = $tips['Bangkok Hospital partner'];
 			$q = new WP_Query( [ 'post_type' => [ 'page', 'post' ], 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids' ] );
 			$changed = 0;
 			$scanned = 0;
@@ -3623,7 +3628,7 @@ JSON;
 				'imageAlt' => 'Theo de Vries, founder of The Diamond Rehab Thailand',
 				'eyebrow' => 'Our founder',
 				'heading' => 'Why Theo de Vries built The Diamond',
-				'body' => "A pioneer in the rehab industry, Theo started one of Thailand's first and most successful centres in the north of the country eleven years ago. During a six-month sabbatical in 2019, he set out to create something new: a centre that didn't yet exist in Thailand, at a fair price.\n\nAfter months of searching for the right location, he found what he calls The Diamond: a centre offering two schedules, a shared weekly programme and a fully individual one, something not seen elsewhere in Thailand.",
+				'body' => "A pioneer in the rehab industry, Theo started one of Thailand's first and most successful centers in the north of the country eleven years ago. During a six-month sabbatical in 2019, he set out to create something new: a centre that didn't yet exist in Thailand, at a fair price.\n\nAfter months of searching for the right location, he found what he calls The Diamond: a centre offering two schedules, a shared weekly programme and a fully individual one, something not seen elsewhere in Thailand.",
 				'quote' => 'The substance is rarely the only problem. The underlying issues need to be resolved for recovery to last.',
 				'quoteSrc' => 'The philosophy behind The Diamond',
 				'stats' => [
@@ -3725,7 +3730,7 @@ JSON;
 				'heading' => 'Expertise, experience & genuine care',
 				'lede'    => "Each team member's work is grounded in the will to help. Filter by discipline to find the specialist relevant to your care.",
 				'members' => [
-					[ 'cat' => 'lead', 'name' => 'Theo & Panwadee de Vries', 'role' => 'Founders', 'excerpt' => 'More than twelve years running Thai rehab centres, supporting over 2,000 clients on their path to recovery.', 'photoUrl' => $base . '2025/12/Theo-Panwadee-de-Vries-Founders-scaled.jpg', 'url' => '/team/theo-and-panwadee-de-vries/' ],
+					[ 'cat' => 'lead', 'name' => 'Theo & Panwadee de Vries', 'role' => 'Founders', 'excerpt' => 'More than twelve years running Thai rehab centers, supporting over 2,000 clients on their path to recovery.', 'photoUrl' => $base . '2025/12/Theo-Panwadee-de-Vries-Founders-scaled.jpg', 'url' => '/team/theo-and-panwadee-de-vries/' ],
 					[ 'cat' => 'lead', 'name' => 'Sergio Pereira', 'role' => 'Director', 'excerpt' => 'Executive responsibility for governance, staff leadership, ethical integrity of admissions and organisational excellence.', 'photoUrl' => $base . '2026/01/Sergio-Website-pic--scaled-e1776766410877.jpeg', 'url' => '/team/sergio-pereira/' ],
 					[ 'cat' => 'clinical', 'name' => "Augustine D'Ewes", 'role' => 'Clinical Supervisor / Psychologist', 'excerpt' => 'Over four decades as clinician, supervisor and mentor, with an MA in Clinical Psychology and deep clinical wisdom.', 'photoUrl' => $base . '2025/12/Augustine-Supervision-scaled.png', 'url' => '/team/augustine-dewes/' ],
 					[ 'cat' => 'lead', 'name' => 'Jiraporn Takonchai', 'role' => 'General Manager', 'excerpt' => 'Seven years in addiction services, keeping the rehab running seamlessly, from housekeeping to admission schedules.', 'photoUrl' => $base . '2024/10/Jiraporn-Takonchai-new-profile-picture-scaled.jpg', 'url' => '/team/aor-general-manager/' ],
@@ -3736,7 +3741,7 @@ JSON;
 					[ 'cat' => 'therapy', 'name' => 'James Donovan', 'role' => 'Addiction Counsellor', 'excerpt' => '11 years in personal recovery and 9 in the profession, with a passion for supporting substance-use disorders.', 'photoUrl' => $base . '2025/12/James-Addiction-Counsellor-scaled.png', 'url' => '/team/james-donovan/' ],
 					[ 'cat' => 'nursing', 'name' => 'Thipada Sritongkom', 'role' => 'Nurse', 'excerpt' => '22+ years of nursing, the last 8 focused on mental health, with a lifelong mission to promote wellbeing.', 'photoUrl' => $base . '2024/05/Thipada-Sritongkom-Pui-nurse-e1718802196691.jpg', 'url' => '/team/thipada-sritongkom-nurse/' ],
 					[ 'cat' => 'nursing', 'name' => 'Ponsuppat Udom', 'role' => 'Nurse', 'excerpt' => '13+ years across emergency, geriatric and rehabilitation settings, compassionate and devoted to her clients.', 'photoUrl' => $base . '2024/10/Ponsuppat-Udom-new-profile-picture-scaled.jpg', 'url' => '/team/ponsuppat-udom-nurse/' ],
-					[ 'cat' => 'nursing', 'name' => 'Bongkotkarn Sirijunchuen', 'role' => 'Nurse', 'excerpt' => 'Over a decade specialising in addiction care, supporting recovery at centres across Thailand.', 'photoUrl' => $base . '2024/10/Bongkotkarn-Sirijunchuen-new-profile-picture-scaled.jpg', 'url' => '/team/bongkotkarn-sirijunchuen/' ],
+					[ 'cat' => 'nursing', 'name' => 'Bongkotkarn Sirijunchuen', 'role' => 'Nurse', 'excerpt' => 'Over a decade specialising in addiction care, supporting recovery at centers across Thailand.', 'photoUrl' => $base . '2024/10/Bongkotkarn-Sirijunchuen-new-profile-picture-scaled.jpg', 'url' => '/team/bongkotkarn-sirijunchuen/' ],
 					[ 'cat' => 'wellness', 'name' => 'Kittikawin "Kwin" Rachawong', 'role' => 'Head Chef', 'excerpt' => 'A decade in professional European kitchens, crafting refined Thai and European cuisine from premium ingredients.', 'photoUrl' => $base . '2025/12/Chef-scaled.png', 'url' => '/team/kittikawin-kwin-rachawong/' ],
 					[ 'cat' => 'support', 'name' => 'Irene Grace Maghopoy', 'role' => 'Support Worker / Admissions', 'excerpt' => 'Psychology graduate and licensed psychometrician pairing empathy with evidence-based care.', 'photoUrl' => $base . '2025/12/Irene-Support-Staff-_-Admissions-1-scaled.png', 'url' => '/team/irene-grace-maghopoy/' ],
 					[ 'cat' => 'support', 'name' => 'Supanni Sanli', 'role' => 'Support Worker', 'excerpt' => 'A lifelong passion for service and hospitality, here to help clients every step of the way.', 'photoUrl' => $base . '2024/10/Ping-new-support-worker-text-will-follow-scaled.jpg', 'url' => '/team/supanni-sanli/' ],
