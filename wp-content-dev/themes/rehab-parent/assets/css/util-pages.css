@@ -130,3 +130,28 @@
 	color: var(--rehab-soft-charcoal, #4A4A4A);
 	margin: 0 0 var(--rehab-space-5, 2rem);
 }
+
+/* Search pagination (REH-158) — mirrors the articles-index pager look. */
+.rehab-search__pagination .nav-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: center;
+	margin-top: 2.5rem;
+}
+
+.rehab-search__pagination .page-numbers {
+	font-family: var(--rehab-font-body);
+	font-size: 0.875rem;
+	color: var(--rehab-warm-charcoal);
+	background: #fff;
+	border: 1px solid rgba(190, 179, 158, 0.4);
+	padding: 0.5rem 0.9rem;
+	text-decoration: none;
+}
+
+.rehab-search__pagination .page-numbers.current,
+.rehab-search__pagination .page-numbers:hover {
+	background: var(--rehab-sage);
+	border-color: var(--rehab-sage-dark);
+}

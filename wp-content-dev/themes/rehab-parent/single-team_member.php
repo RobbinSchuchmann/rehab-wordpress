@@ -23,11 +23,9 @@ while ( have_posts() ) :
 	the_post();
 	$id = get_the_ID();
 
-	// Home / Team / {member name}
-	rehab_render_breadcrumb(
-		wp_strip_all_tags( get_the_title() ),
-		[ [ 'label' => 'Team', 'url' => home_url( '/team/' ) ] ]
-	);
+	// No theme breadcrumb here — the team-profile block renders its own
+	// Home / Team / {name} crumb, and the two stacked (REH-144). The
+	// BreadcrumbList schema still ships via the Rank Math filter.
 
 	// Bio: the member's editor content, flattened to plain paragraphs the
 	// team-profile block expects (bios are plain prose, no rich formatting).

@@ -107,8 +107,10 @@
 	font-size: 0.8125rem;
 	letter-spacing: 0.02em;
 	color: var(--rehab-warm-charcoal, #2C2C2C);
-	background: #fff;
-	border: 1px solid var(--rehab-tan, #BEB39E);
+	/* Soft tag look — the old white pill with a tan border read as a button
+	   (REH-142); these are plain feature labels, not clickable. */
+	background: rgba(var(--rehab-tan-rgb, 190, 179, 158), 0.16);
+	border: 0;
 	padding: 9px 16px;
 }
 

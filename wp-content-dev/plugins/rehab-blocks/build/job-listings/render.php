@@ -20,7 +20,14 @@ $jobs = is_array( $a['jobs'] ?? null ) ? $a['jobs'] : [];
 
 $aspect_class = ( ( $a['imageAspect'] ?? 'wide' ) === 'wide' ) ? ' rehab-article-row__media--wide' : '';
 
-$wrapper = get_block_wrapper_attributes( [ 'class' => 'rehab-job-listings' ] );
+// Emit the anchor id explicitly — dynamic blocks don't get it from the
+// `supports.anchor` declaration alone, and the careers hero links to
+// #OpenPositions (REH-156).
+$wrapper_attrs = [ 'class' => 'rehab-job-listings' ];
+if ( ! empty( $a['anchor'] ) ) {
+	$wrapper_attrs['id'] = $a['anchor'];
+}
+$wrapper = get_block_wrapper_attributes( $wrapper_attrs );
 
 $has_head = '' !== ( $a['eyebrow'] ?? '' ) || '' !== ( $a['heading'] ?? '' ) || '' !== ( $a['lede'] ?? '' );
 ?>

@@ -994,6 +994,54 @@ JSON;
 			}
 			break;
 
+		case 'hero-cta-round':
+			// REH-153/154/156/157/143: hero CTA retargets (static treatment-hero
+			// blocks — attrs JSON and baked HTML must change together), the
+			// careers job-listings anchor, and the two team-member "About …"
+			// values. Guarded per-edit on exact occurrence counts; idempotent.
+			$pages = [
+				834  => [ // Cost: primary goes straight to contact (REH-153)
+					[ '"primaryText":"Check availability","primaryUrl":"#pricing"', '"primaryText":"Check cost","primaryUrl":"/contact-us/"', 1 ],
+					[ '<a href="#pricing" class="rehab-btn rehab-btn--luxury">Check availability</a>', '<a href="/contact-us/" class="rehab-btn rehab-btn--luxury">Check cost</a>', 1 ],
+				],
+				857  => [ // Programme: secondary self-link becomes all-treatments (REH-154)
+					[ '{"eyebrow":"A program built around you"', '{"secondaryText":"Explore all treatments","secondaryUrl":"/all-treatments/","eyebrow":"A program built around you"', 1 ],
+					[ '<a href="/programme/" class="rehab-btn rehab-btn--outline">Explore the program</a>', '<a href="/all-treatments/" class="rehab-btn rehab-btn--outline">Explore all treatments</a>', 1 ],
+				],
+				9015 => [ // Careers: openings CTA + listings anchor (REH-156)
+					[ '{"eyebrow":"","headline":"Careers in Addiction Recovery"', '{"primaryText":"See current job openings","primaryUrl":"#OpenPositions","secondaryText":"Contact us","secondaryUrl":"/contact-us/","eyebrow":"","headline":"Careers in Addiction Recovery"', 1 ],
+					[ '<a href="/contact-us/" class="rehab-btn rehab-btn--luxury">Schedule a free assessment</a><a href="/programme/" class="rehab-btn rehab-btn--outline">Explore the program</a>', '<a href="#OpenPositions" class="rehab-btn rehab-btn--luxury">See current job openings</a><a href="/contact-us/" class="rehab-btn rehab-btn--outline">Contact us</a>', 1 ],
+					[ '<!-- wp:rehab/job-listings {', '<!-- wp:rehab/job-listings {"anchor":"OpenPositions",', 1 ],
+				],
+				9182 => [ // Job ad: clinic CTAs become job-relevant ones (REH-157)
+					[ '{"eyebrow":"","headline":"Clinical Psychologist"', '{"primaryText":"See all openings","primaryUrl":"/careers/#OpenPositions","secondaryText":"Contact us","secondaryUrl":"/contact-us/","eyebrow":"","headline":"Clinical Psychologist"', 1 ],
+					[ '<a href="/contact-us/" class="rehab-btn rehab-btn--luxury">Schedule a free assessment</a><a href="/programme/" class="rehab-btn rehab-btn--outline">Explore the program</a>', '<a href="/careers/#OpenPositions" class="rehab-btn rehab-btn--luxury">See all openings</a><a href="/contact-us/" class="rehab-btn rehab-btn--outline">Contact us</a>', 1 ],
+				],
+			];
+			foreach ( $pages as $pid => $edits ) {
+				$c = get_post_field( 'post_content', $pid );
+				if ( ! $c ) { echo "no post {$pid}\n"; continue; }
+				$new = $c;
+				foreach ( $edits as $i => [ $old, $rep, $expect ] ) {
+					$n = substr_count( $new, $old );
+					if ( $n !== $expect ) { echo "{$pid}#{$i}: found {$n}, expected {$expect} — skipped\n"; continue; }
+					$new = str_replace( $old, $rep, $new );
+					echo "{$pid}#{$i}: replaced\n";
+				}
+				if ( $new !== $c ) {
+					global $wpdb;
+					$wpdb->update( $wpdb->posts, [ 'post_content' => $new ], [ 'ID' => $pid ] );
+					clean_post_cache( $pid );
+					echo "updated {$pid}\n";
+				}
+			}
+			// Team "About …" heading values (REH-143).
+			foreach ( [ 13617 => 'Theo & Panwadee', 13464 => 'Dr Asif' ] as $mid => $first ) {
+				update_post_meta( $mid, '_rehab_member_first', $first );
+				echo "member {$mid} first => {$first}\n";
+			}
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show

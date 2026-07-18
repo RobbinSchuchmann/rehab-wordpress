@@ -36,6 +36,17 @@ $found  = (int) ( $GLOBALS['wp_query']->found_posts ?? 0 );
 					</li>
 				<?php endwhile; ?>
 			</ol>
+			<?php
+			// REH-158: deeper pages were unreachable — no pagination existed.
+			the_posts_pagination(
+				[
+					'mid_size'  => 2,
+					'prev_text' => '‹ Previous',
+					'next_text' => 'Next ›',
+					'class'     => 'rehab-search__pagination',
+				]
+			);
+			?>
 		<?php else : ?>
 			<p class="rehab-search__none">No results for "<?php echo esc_html( $query ); ?>". Try a different keyword, or browse <a href="<?php echo esc_url( home_url( '/all-articles/' ) ); ?>">all articles</a>.</p>
 		<?php endif; ?>
