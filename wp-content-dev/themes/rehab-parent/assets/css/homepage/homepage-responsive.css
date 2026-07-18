@@ -202,9 +202,10 @@
 
 /* ---- lg: 1024px ---- */
 @media (min-width: 1024px) {
-	/* Reduce hero top padding on desktop */
+	/* The body already clears the fixed header; keep only a modest hero
+	   breathing space on top of that (REH-148). */
 	.drt-hero {
-		padding-top: 100px;
+		padding-top: 2.5rem;
 	}
 
 	/* Move arrows outside carousel at large screens */
