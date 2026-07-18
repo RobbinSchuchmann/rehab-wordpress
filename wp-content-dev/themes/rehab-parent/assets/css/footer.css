@@ -216,3 +216,20 @@
 
 /* Reset margin-top of footer when used after a content area */
 .rehab-site-footer { margin-top: 0; }
+
+/* Clearance for the fixed bottom-right WhatsApp bubble (REH-124). The Elfsight
+   unit is a 64px button 20px off each edge, so it reaches 84px up the viewport
+   and would cover the legal links on interior pages (only 1.5rem of padding
+   below them). The homepage already reserves space via body:has(.drt-homepage)
+   rules in homepage-footer.css (REH-44); these mirror those exact values for
+   every page where the widget is active, so the whole site shares the live
+   site's left-shifted confidentiality-links geometry. */
+.rehab-site-footer--has-chat .rehab-site-footer__bottom {
+	padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+	.rehab-site-footer--has-chat .rehab-site-footer__legal-menu {
+		margin-right: 4.5rem;
+	}
+}

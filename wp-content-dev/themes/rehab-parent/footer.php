@@ -24,10 +24,15 @@ $intl_lines = array_filter(
 	array_map( 'trim', explode( "\n", $international ) ),
 	fn( $l ) => $l && str_contains( $l, '|' )
 );
+
+// Elfsight WhatsApp bubble (REH-124) — set per-brand via the theme-mod filter
+// map. When present, the footer gets a modifier class so footer.css can keep
+// the legal links clear of the fixed bottom-right bubble.
+$elfsight_id = get_theme_mod( 'rehab_elfsight_whatsapp_id', '' );
 ?>
 </main><?php // Closes the <main id="main"> opened in header.php ?>
 
-<footer class="rehab-site-footer" role="contentinfo">
+<footer class="rehab-site-footer<?php echo $elfsight_id ? ' rehab-site-footer--has-chat' : ''; ?>" role="contentinfo">
 	<div class="rehab-site-footer__top">
 		<div class="rehab-container">
 			<div class="rehab-site-footer__row">
@@ -182,6 +187,16 @@ $svg_kses = [ 'svg' => [ 'viewbox' => true, 'fill' => true, 'stroke' => true, 's
 	</div>
 </div>
 
+<?php
+// Floating WhatsApp chat bubble (Elfsight), same widget as the live site.
+// Renders only when a brand pins its widget ID — diamond-child does, via the
+// theme-mod filter map (REH-124). Elfsight injects a fixed bottom-right bubble
+// over the page; the footer bottom row reserves clearance for it (footer.css).
+if ( $elfsight_id ) :
+?>
+<script src="https://static.elfsightcdn.com/platform.js" defer></script>
+<div class="rehab-chat-bubble elfsight-app-<?php echo esc_attr( $elfsight_id ); ?>" data-elfsight-app-lazy></div>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 </html>
