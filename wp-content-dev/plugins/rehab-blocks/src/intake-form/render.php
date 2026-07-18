@@ -40,7 +40,9 @@ $form_cfg  = $rehab_intake_spec['form'];
  *  (DOB descends into the past, passport expiry ascends into the future); each
  *  date element may override the global range via a `years` key (REH-129). */
 $rehab_intake_date_select = static function ( array $sub, string $part, bool $required, array $range ): string {
-	$opts = '<option value="">' . esc_html( 'Select ' . $part ) . '</option>';
+	// Short placeholder — the three parts sit ~90px wide on phones, where
+	// "Select month" ran under the chevron (REH-132).
+	$opts = '<option value="">' . esc_html( ucfirst( $part ) ) . '</option>';
 	if ( $part === 'year' ) {
 		$from = (int) $range['from'];
 		$to   = (int) $range['to'];
@@ -61,7 +63,7 @@ $rehab_intake_date_select = static function ( array $sub, string $part, bool $re
 };
 
 /** One field (recursion-free — groups call it per inner field). */
-$rehab_intake_field = static function ( array $el ) use ( $countries, $rehab_intake_date_select ): string {
+$rehab_intake_field = static function ( array $el ) use ( $countries, $rehab_intake_date_select, $years ): string {
 	$id       = $el['element_id'];
 	$required = ! empty( $el['required'] );
 	$label    = $el['label'] ?? null;
