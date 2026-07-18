@@ -223,13 +223,26 @@
    below them). The homepage already reserves space via body:has(.drt-homepage)
    rules in homepage-footer.css (REH-44); these mirror those exact values for
    every page where the widget is active, so the whole site shares the live
-   site's left-shifted confidentiality-links geometry. */
-.rehab-site-footer--has-chat .rehab-site-footer__bottom {
-	padding-bottom: 5.5rem;
+   site's left-shifted confidentiality-links geometry. Desktop-only: the widget
+   is hidden below 721px (see .rehab-chat-bubble), so there is nothing to clear. */
+@media (min-width: 721px) {
+	.rehab-site-footer--has-chat .rehab-site-footer__bottom {
+		padding-bottom: 5.5rem;
+	}
 }
 
 @media (min-width: 768px) {
 	.rehab-site-footer--has-chat .rehab-site-footer__legal-menu {
 		margin-right: 4.5rem;
+	}
+}
+
+/* Mobile owns the bottom edge with the sticky "Talk with admissions" bar, whose
+   chooser already offers WhatsApp — the bubble would just sit on top of it, so
+   hide the widget there (REH-125). The host div wraps the injected UI (shadow
+   DOM is disabled on this widget), so hiding it hides the fixed bubble too. */
+@media (max-width: 720px) {
+	.rehab-chat-bubble {
+		display: none;
 	}
 }
