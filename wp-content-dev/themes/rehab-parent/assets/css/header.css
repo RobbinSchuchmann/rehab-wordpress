@@ -436,6 +436,15 @@ body.rehab-menu-open .rehab-mega-menu {
 	color: rgba(255, 255, 255, 0.92);
 }
 
+/* Below the two-column breakpoint the sidebar stacks under the full nav list,
+   and the pitch body copy pushed the phone CTA below the fold on phones — keep
+   just the title + number there. */
+@media (max-width: 1023px) {
+	.rehab-mega-menu__pitch-body { display: none; }
+	.rehab-mega-menu__pitch-title { margin-bottom: 1.25rem; }
+	.rehab-mega-menu__sidebar { padding: 2rem 1.5rem; }
+}
+
 /* Spacer below fixed navbar so content doesn't jump */
 body { padding-top: var(--rehab-header-height); }
 
