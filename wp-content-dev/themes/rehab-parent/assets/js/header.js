@@ -72,8 +72,18 @@
 		const inlineNav = document.querySelector( '.rehab-navbar__menu' );
 		if ( inlineNav ) {
 			const buttons = wireDisclosure( inlineNav, true );
-			document.addEventListener( 'click', ( e ) => {
+			const closeOutside = ( e ) => {
 				if ( ! inlineNav.contains( e.target ) ) buttons.forEach( closeDisclosure );
+			};
+			document.addEventListener( 'click', closeOutside );
+			document.addEventListener( 'auxclick', closeOutside );
+			// Middle-click opens a link in a background tab without navigating,
+			// but Chromium focuses the link on middle mousedown — :focus-within
+			// (header.css) then pins the dropdown open until the next left-click.
+			// Drop the lingering focus once the aux click completes.
+			inlineNav.addEventListener( 'auxclick', ( e ) => {
+				const link = e.target.closest( 'a' );
+				if ( link ) link.blur();
 			} );
 			inlineNav.addEventListener( 'keydown', ( e ) => {
 				if ( e.key === 'Escape' ) buttons.forEach( closeDisclosure );
