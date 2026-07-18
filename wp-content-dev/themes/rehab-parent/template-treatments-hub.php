@@ -42,18 +42,8 @@ while ( have_posts() ) :
 			</div>
 		</section>
 
-		<!-- Sticky category jump-nav -->
-		<?php if ( $rehab_tx_categories ) : ?>
-			<nav class="rehab-tx-nav" aria-label="Treatment categories">
-				<div class="rehab-container rehab-tx-nav__inner">
-					<?php foreach ( $rehab_tx_categories as $cat ) : ?>
-						<a class="rehab-tx-chip" href="#<?php echo esc_attr( $cat['id'] ); ?>"><?php echo esc_html( wp_strip_all_tags( html_entity_decode( preg_replace( '/^\d+\s*—\s*/u', '', $cat['eyebrow'] ) ) ) ); ?></a>
-					<?php endforeach; ?>
-				</div>
-			</nav>
-		<?php endif; ?>
-
-		<!-- Category sections -->
+		<!-- Category sections — a plain scroll, like the live site (REH-136;
+		     the chip jump-nav that used to sit here is gone). -->
 		<?php foreach ( $rehab_tx_categories as $cat ) : ?>
 			<section class="rehab-tx-section rehab-tx-section--<?php echo esc_attr( $cat['bg'] ); ?>" id="<?php echo esc_attr( $cat['id'] ); ?>">
 				<div class="rehab-container">
