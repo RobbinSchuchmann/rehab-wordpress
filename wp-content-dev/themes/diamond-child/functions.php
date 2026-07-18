@@ -216,6 +216,11 @@ diamond_child_brand_contact( [
 	'rehab_social_pinterest'=> 'https://www.pinterest.com/diamondrehabthailand/',
 	'rehab_social_threads'  => 'https://www.threads.net/@diamondrehabthailand',
 
+	// Elfsight WhatsApp chat bubble — the same widget instance the live site
+	// embeds (bottom-right, wa.me/66965823832). Parent footer.php renders the
+	// embed when this is set (REH-124).
+	'rehab_elfsight_whatsapp_id' => '5edf62f4-6471-425b-948e-327b551420d2',
+
 	// Footer secondary numbers. Main number (+61) is the primary above; the Thai
 	// line is demoted here alongside the international call-back numbers (REH-88).
 	'rehab_footer_intl_phones' => "Thailand|+66 96 582 3832\nAustralia|+61 2 7908 2277\nUSA / Canada|+1 330 822 5340\nUK|+44 330 822 5340\nEurope|+31 20 532 2548",
