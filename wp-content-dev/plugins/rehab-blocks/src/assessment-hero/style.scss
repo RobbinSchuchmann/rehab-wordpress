@@ -214,6 +214,19 @@
 	color: rgba(var(--rehab-soft-charcoal-rgb), 0.45);
 }
 
+/* Native select chrome sticks out from the underline fields — replace the OS
+   arrow with the theme chevron (REH-128). */
+.rehab-assessment-hero__field select {
+	appearance: none;
+	-webkit-appearance: none;
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%238A9674' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 4px center;
+	background-size: 12px 8px;
+	padding-right: 26px;
+	cursor: pointer;
+}
+
 .rehab-assessment-hero__field input:focus,
 .rehab-assessment-hero__field select:focus {
 	outline: none;
