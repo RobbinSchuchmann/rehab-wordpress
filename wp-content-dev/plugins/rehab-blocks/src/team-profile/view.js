@@ -36,7 +36,7 @@
 				} );
 				const body = await res.json().catch( () => ( {} ) );
 				if ( res.ok && body.ok ) {
-					setStatus( 'Thank you — our team will be in touch within the hour during business hours.', 'success' );
+					setStatus( 'Thank you! Our team will be in touch within the hour during business hours.', 'success' );
 					form.reset();
 				} else {
 					setStatus( body.error || body.message || 'Something went wrong. Please try again or call us directly.', 'error' );
