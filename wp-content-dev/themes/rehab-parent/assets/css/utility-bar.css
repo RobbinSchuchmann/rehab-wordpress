@@ -97,7 +97,9 @@
 	.rehab-sticky-cta {
 		display: flex;
 	}
-	body {
+	/* Reserve space for the bar only where it renders — the contact page
+	   suppresses it (REH-126). */
+	body:has(.rehab-sticky-cta) {
 		padding-bottom: 76px;
 	}
 }

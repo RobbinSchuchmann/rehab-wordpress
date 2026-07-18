@@ -150,6 +150,16 @@ $sticky_phone_tel = preg_replace( '/[^0-9+]/', '', get_theme_mod( 'rehab_phone_n
 $assessment_url  = get_theme_mod( 'rehab_assessment_url', '/contact-us/' );
 $whatsapp_number = preg_replace( '/[^0-9]/', '', get_theme_mod( 'rehab_whatsapp_number', '66965823832' ) );
 
+// On the contact page itself the sticky bar is redundant — the visitor is
+// already where the chooser's form option leads, with every contact route
+// on-page — so skip the CTA and its sheet entirely there (REH-126). Matched
+// against the assessment URL so per-brand contact pages follow their setting.
+$assessment_path = untrailingslashit( (string) wp_parse_url( $assessment_url, PHP_URL_PATH ) );
+$is_contact_page = is_page() && $assessment_path
+	&& untrailingslashit( (string) wp_parse_url( get_permalink(), PHP_URL_PATH ) ) === $assessment_path;
+
+if ( ! $is_contact_page ) :
+
 $icon_phone = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
 $icon_mail  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>';
 $icon_wa    = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A8 8 0 0 0 4 12a7.8 7.8 0 0 0 1.1 4L4 20l4.1-1.1a8 8 0 0 0 9.5-12.6Zm-5.6 12.4a7.1 7.1 0 0 1-3.6-1l-.3-.1L5.7 18l.6-2.4-.2-.3a6.6 6.6 0 1 1 5.9 3.4Zm3.7-4.9c-.2 0-1.2-.6-1.4-.7s-.3 0-.5.2-.5.6-.6.7-.3.1-.5 0a5.4 5.4 0 0 1-2.7-2.4c-.2-.3 0-.5.1-.6l.4-.4.1-.3v-.3l-.7-1.7c-.2-.4-.3-.4-.5-.4h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.7 1.8 4.3 4.3 0 0 0 .9 2.3 9.7 9.7 0 0 0 3.7 3.3 3.5 3.5 0 0 0 1.5.4 2.4 2.4 0 0 0 1.7-1 2 2 0 0 0 .1-1.2Z"/></svg>';
@@ -186,6 +196,7 @@ $svg_kses = [ 'svg' => [ 'viewbox' => true, 'fill' => true, 'stroke' => true, 's
 		<p class="rehab-contact-sheet__assurance"><?php echo wp_kses( $icon_lock, $svg_kses ); ?><?php esc_html_e( 'Your conversation is 100% confidential and secure.', 'rehab-parent' ); ?></p>
 	</div>
 </div>
+<?php endif; // ! $is_contact_page ?>
 
 <?php
 // Floating WhatsApp chat bubble (Elfsight), same widget as the live site.
