@@ -919,6 +919,49 @@ JSON;
 			echo "OK set Team grid eyebrow to Home / Team breadcrumb\n";
 			break;
 
+		case 'super-5star-rms-link':
+			// REH-140/141: two text fixes in Superannuation's (8973) baked blocks.
+			// 1. Hero stat "5★" -> "5-star" (attrs JSON + rendered HTML, 2 hits).
+			// 2. Link "Release My Super's website" in the partnership article-row
+			//    like the live site — body lives twice: unicode-escaped in the
+			//    block attrs and plain in the innerHTML; both must change in sync.
+			// Guarded on exact occurrence counts; idempotent (0/0/0 on rerun).
+			$pid = 8973;
+			$c   = get_post_field( 'post_content', $pid );
+			if ( ! $c ) { echo "no post {$pid}\n"; break; }
+			$edits = [
+				'star'      => [ '5★', '5-star', 2 ],
+				// Attrs copy of the body — unicode-escaped (<…) like the
+				// cost-page FAQ links; PHP single quotes keep the \u literal.
+				'link-attr' => [
+					'visit Release My Super\u0026#039;s website.\u003c/p\u003e',
+					'visit \u003ca href=\u0022https://www.releasemysuper.com.au/\u0022 target=\u0022_blank\u0022 rel=\u0022nofollow noopener\u0022\u003eRelease My Super\u0026#039;s website\u003c/a\u003e.\u003c/p\u003e',
+					1,
+				],
+				// Rendered innerHTML copy of the same sentence.
+				'link-html' => [
+					'visit Release My Super&#039;s website.</p>',
+					'visit <a href="https://www.releasemysuper.com.au/" target="_blank" rel="nofollow noopener">Release My Super&#039;s website</a>.</p>',
+					1,
+				],
+			];
+			$new = $c;
+			foreach ( $edits as $name => [ $old, $rep, $expect ] ) {
+				$n = substr_count( $new, $old );
+				if ( $n !== $expect ) { echo "{$name}: found {$n}, expected {$expect} — skipped\n"; continue; }
+				$new = str_replace( $old, $rep, $new );
+				echo "{$name}: replaced {$n}\n";
+			}
+			if ( $new !== $c ) {
+				global $wpdb;
+				$wpdb->update( $wpdb->posts, [ 'post_content' => $new ], [ 'ID' => $pid ] );
+				clean_post_cache( $pid );
+				echo "updated {$pid}\n";
+			} else {
+				echo "no changes\n";
+			}
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
