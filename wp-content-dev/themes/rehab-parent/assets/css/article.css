@@ -626,8 +626,13 @@
 	position: relative;
 }
 
-/* When the child theme ships a real photo, target it with a more specific
-   background-image override on a `.rehab-article__cta--photo` modifier. */
+/* Real photo behind the panel (REH-164) — the sage gradient stays as a wash
+   over it so the overline/title keep their contrast. */
+.rehab-article__cta--photo .rehab-article__cta-media {
+	background-image:
+		linear-gradient(135deg, rgba(122, 133, 106, 0.55), rgba(122, 133, 106, 0.25) 60%, transparent),
+		url("/wp-content/uploads/2024/05/Entrance-gate-2-scaled.jpg");
+}
 .rehab-article__cta-media::after {
 	content: "";
 	position: absolute;
