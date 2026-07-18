@@ -154,11 +154,14 @@ $whatsapp_number = preg_replace( '/[^0-9]/', '', get_theme_mod( 'rehab_whatsapp_
 // already where the chooser's form option leads, with every contact route
 // on-page — so skip the CTA and its sheet entirely there (REH-126). Matched
 // against the assessment URL so per-brand contact pages follow their setting.
+// Same on the intake-form page (REH-130): the visitor is already deep in the
+// funnel, and the bar would cover the bottom of a long form.
 $assessment_path = untrailingslashit( (string) wp_parse_url( $assessment_url, PHP_URL_PATH ) );
-$is_contact_page = is_page() && $assessment_path
-	&& untrailingslashit( (string) wp_parse_url( get_permalink(), PHP_URL_PATH ) ) === $assessment_path;
+$suppress_sticky = ( is_page() && $assessment_path
+	&& untrailingslashit( (string) wp_parse_url( get_permalink(), PHP_URL_PATH ) ) === $assessment_path )
+	|| ( is_singular() && has_block( 'rehab/intake-form' ) );
 
-if ( ! $is_contact_page ) :
+if ( ! $suppress_sticky ) :
 
 $icon_phone = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
 $icon_mail  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>';
@@ -196,7 +199,7 @@ $svg_kses = [ 'svg' => [ 'viewbox' => true, 'fill' => true, 'stroke' => true, 's
 		<p class="rehab-contact-sheet__assurance"><?php echo wp_kses( $icon_lock, $svg_kses ); ?><?php esc_html_e( 'Your conversation is 100% confidential and secure.', 'rehab-parent' ); ?></p>
 	</div>
 </div>
-<?php endif; // ! $is_contact_page ?>
+<?php endif; // ! $suppress_sticky ?>
 
 <?php
 // Floating WhatsApp chat bubble (Elfsight), same widget as the live site.
