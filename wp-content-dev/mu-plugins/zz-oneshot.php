@@ -1042,6 +1042,30 @@ JSON;
 			}
 			break;
 
+		case 'remove-programme-12step':
+			// REH-155: drop the "The program in depth — Our 12 step recovery
+			// program" section from /programme/ (857). It has no equivalent on
+			// the live page, nothing links to it (anchor sweep: 0), and the copy
+			// makes claims the team doesn't want. Guarded: exactly one
+			// treatment-phases block containing that heading.
+			$pid = 857;
+			$c   = get_post_field( 'post_content', $pid );
+			if ( ! $c ) { echo "no post {$pid}\n"; break; }
+			$re = '#<!-- wp:rehab/treatment-phases .*?<!-- /wp:rehab/treatment-phases -->\s*#s';
+			if ( ! preg_match_all( $re, $c, $m ) || count( $m[0] ) !== 1 ) {
+				echo 'guard: expected exactly 1 phases block, found ' . ( isset( $m[0] ) ? count( $m[0] ) : 0 ) . "\n";
+				break;
+			}
+			if ( false === strpos( $m[0][0], 'Our 12 step recovery program' ) ) {
+				echo "guard: block is not the 12-step section — aborted\n";
+				break;
+			}
+			global $wpdb;
+			$wpdb->update( $wpdb->posts, [ 'post_content' => str_replace( $m[0][0], '', $c ) ], [ 'ID' => $pid ] );
+			clean_post_cache( $pid );
+			echo 'removed ' . strlen( $m[0][0] ) . " chars from {$pid}\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
