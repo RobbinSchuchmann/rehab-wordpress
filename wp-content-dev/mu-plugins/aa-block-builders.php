@@ -260,7 +260,7 @@ function rehab_press_ribbon_logos(): array {
 		[ 'url' => '/wp-content/uploads/brand/yahoo-finance.png', 'alt' => 'Yahoo Finance', 'tip' => 'Yahoo Finance recognized The Diamond Rehab Thailand as a global leader for its unique fusion of luxury hospitality and rigorous Western clinical standards.' ],
 		[ 'url' => '/wp-content/uploads/brand/well-good.png', 'alt' => 'Well + Good', 'tip' => 'Well+Good recognized The Diamond Rehab Thailand for its holistic, high-end approach to restoring physical, emotional, and mental balance in a tropical setting.' ],
 		[ 'url' => '/wp-content/uploads/brand/psych-central.png', 'alt' => 'Psych Central', 'tip' => 'PsychCentral acknowledged The Diamond Rehab Thailand for its pioneering integration of evidence-based medical therapy and holistic mindfulness meditation.' ],
-		[ 'url' => '/wp-content/uploads/brand/recovery-com.webp', 'alt' => 'Recovery.com', 'tip' => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centres for luxury residential addiction treatment.' ],
+		[ 'url' => '/wp-content/uploads/brand/recovery-com.webp', 'alt' => 'Recovery.com', 'tip' => 'Recovery.com lists The Diamond Rehab Thailand among its recommended international centers for luxury residential addiction treatment.' ],
 		[ 'url' => '/wp-content/uploads/brand/bangkok-hospital.png', 'alt' => 'Bangkok Hospital partner', 'tip' => 'The Diamond Rehab Thailand is partnered with Bangkok Hospital for comprehensive medical support and 24/7 emergency care for all residential clients.' ],
 	];
 }
