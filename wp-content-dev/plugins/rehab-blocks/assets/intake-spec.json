@@ -4,7 +4,7 @@
   "slug": "intake-form",
   "sourceFormId": 11745,
   "submitText": "Submit intake form",
-  "invalidFormMessage": "Error: Your form is not valid, please fix the errors!",
+  "invalidFormMessage": "Please fill out the required fields before submitting the form.",
   "paginationHeader": {
    "type": "bar",
    "design": "show"
