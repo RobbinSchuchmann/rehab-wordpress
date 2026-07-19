@@ -2,7 +2,7 @@
 /**
  * ACF section → Gutenberg block mapper.
  *
- * Consumes the normalised sections produced by aa-acf-reader.php and emits
+ * Consumes the normalized sections produced by aa-acf-reader.php and emits
  * canonical block-comment serialised markup using the helpers in
  * aa-block-builders.php. The result is ready to drop into
  * `wp_posts.post_content`.
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Map a list of normalised sections to concatenated block markup.
+ * Map a list of normalized sections to concatenated block markup.
  *
  * @param array[] $sections Output of rehab_acf_get_sections().
  * @return string Block-serialised markup ready for post_content.
@@ -853,7 +853,7 @@ function rehab_acf_map_message( array $s ): string {
 
 function rehab_acf_map_map( array $s ): string {
 	// rehab/map is a registered block; render the canonical markup so the
-	// editor recognises it. Falls back to a plain address paragraph if
+	// editor recognizes it. Falls back to a plain address paragraph if
 	// coords are missing.
 	$lat     = (float) ( $s['lat'] ?? 0 );
 	$lng     = (float) ( $s['lng'] ?? 0 );
@@ -914,7 +914,7 @@ function rehab_acf_map_steps( array $s ): string {
 }
 
 function rehab_acf_map_contacts( array $s ): string {
-	// Drop the legacy forminator shortcode in favour of the rehab/
+	// Drop the legacy forminator shortcode in favor of the rehab/
 	// final-cta block (our REST-based contact form).
 	return rehab_block_final_cta( [
 		'heading' => (string) ( $s['title'] ?? 'Get in touch' ),

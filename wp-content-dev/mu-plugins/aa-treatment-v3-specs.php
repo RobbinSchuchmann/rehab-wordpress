@@ -42,7 +42,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating substance addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Substance use rarely feels like a problem at first. It fits around life, fills a gap, takes the edge off. By the time the pattern is visible, it has usually been building for a long time. If several of these feel familiar, a conversation may help.',
 				'card1Title' => 'Common signs of a substance use problem',
 				'card1Items' => [
@@ -105,7 +105,7 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Understanding why the substance took hold',
 						'paragraphs' => [
 							'Physical stabilisation clears the way for the real work: making sense of how the dependence developed and what has kept it in place.',
@@ -165,7 +165,7 @@ function rehab_treatment_v3_specs(): array {
 				'paragraphs' => [
 					'Substance abuse describes a pattern of using a substance in a way it was not designed for, or in amounts that cause harm to health, relationships or daily functioning. The substances involved range widely: alcohol, illicit drugs and prescription medication. Common examples include alcohol, opioids such as codeine, morphine and heroin, cocaine, marijuana and methamphetamine. Each carries its own risk profile, but all follow a similar path when use goes unchecked.',
 					'Misuse and dependence are not the same thing. In the early stages of misuse, a person often retains a degree of control and can, with effort, stop. Substance dependence, or substance use disorder, describes a state where control has slipped: the body or mind craves the substance, tolerance has built so that more is needed for the same effect, and stopping brings on withdrawal symptoms. At that stage, trying to stop alone is rarely enough.',
-					'The shift from misuse to dependence is rarely abrupt. Without timely intervention, casual use can progress to harmful abuse, and harmful abuse to entrenched dependence. Tolerance builds quietly. Withdrawal makes stopping feel worse than continuing. What began as a way to unwind, cope or function can become the main thing organising the day, even when the costs are clearly visible.',
+					'The shift from misuse to dependence is rarely abrupt. Without timely intervention, casual use can progress to harmful abuse, and harmful abuse to entrenched dependence. Tolerance builds quietly. Withdrawal makes stopping feel worse than continuing. What began as a way to unwind, cope or function can become the main thing organizing the day, even when the costs are clearly visible.',
 					'If any of this feels familiar, whether in your own life or in someone you care about, acknowledging it honestly is the most important step. Recovery from dependence is rarely sustainable without professional support. A medically supervised detox followed by structured, individualized therapy provides the safest and most effective foundation. Our team at The Diamond Rehab Thailand is available for a confidential conversation about whether residential treatment is the right path forward.',
 				],
 			],
@@ -184,11 +184,11 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Why choose residential treatment in Thailand?',
-					'answer' => 'Inpatient treatment removes you from the supply, routines and social environment that have sustained the pattern, during the weeks when you are most vulnerable. At The Diamond Rehab Thailand you recover in a private, resort-style setting in Hua Hin with round-the-clock access to doctors and therapists and a strict cap of twelve clients. High-standard residential treatment is also available here at a fraction of the cost of comparable programmes in the UK, Europe or Australia.',
+					'answer' => 'Inpatient treatment removes you from the supply, routines and social environment that have sustained the pattern, during the weeks when you are most vulnerable. At The Diamond Rehab Thailand you recover in a private, resort-style setting in Hua Hin with round-the-clock access to doctors and therapists and a strict cap of twelve clients. High-standard residential treatment is also available here at a fraction of the cost of comparable programs in the UK, Europe or Australia.',
 				],
 				[
 					'question' => 'What happens in the first week?',
-					'answer' => 'The process starts with a free, confidential call with our admissions team. A psychiatric assessment then establishes the nature and severity of the dependence, any mental health needs, and the appropriate length of stay. We arrange airport collection, settle you into private accommodation and begin your personalised programme. Where medically supervised detox is needed, it starts immediately under continuous clinical oversight.',
+					'answer' => 'The process starts with a free, confidential call with our admissions team. A psychiatric assessment then establishes the nature and severity of the dependence, any mental health needs, and the appropriate length of stay. We arrange airport collection, settle you into private accommodation and begin your personalized program. Where medically supervised detox is needed, it starts immediately under continuous clinical oversight.',
 				],
 			],
 		],
@@ -198,15 +198,15 @@ function rehab_treatment_v3_specs(): array {
 			'hero' => [
 				'eyebrow' => 'Couples treatment · Hua Hin',
 				'headline' => 'Recover together, before the relationship becomes part of the pattern',
-				'lede' => 'Couples rehab at The Diamond Rehab Thailand is a private, doctor-led residential program for two partners facing addiction at the same time. Individual therapy, joint couples counselling and a bespoke in-patient plan, capped at twelve clients, mean your recovery and your relationship are treated together, not as two separate problems to solve apart.',
+				'lede' => 'Couples rehab at The Diamond Rehab Thailand is a private, doctor-led residential program for two partners facing addiction at the same time. Individual therapy, joint couples counseling and a bespoke in-patient plan, capped at twelve clients, mean your recovery and your relationship are treated together, not as two separate problems to solve apart.',
 				'stat3Label' => 'Years treating couples in recovery',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'When two people are using substances together, addiction can be easy to mistake for normal life, since neither partner challenges the other\'s drinking or drug use. The signs of a couple struggling with addiction show up both in the substance use itself and in codependent patterns such as enabling, secrecy and growing mistrust. If several of these feel familiar, it\'s worth a confidential conversation about couples rehab.',
 				'card1Title' => 'Signs addiction is shaping your relationship',
 				'card1Items' => [
-					'Drinking or using has quietly become the centre of your time together',
+					'Drinking or using has quietly become the center of your time together',
 					'Arguments, broken promises and mistrust that keep resurfacing',
 					'One partner covering for, excusing or enabling the other',
 					'Financial or emotional strain that neither of you addresses directly',
@@ -241,7 +241,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Two people, one shared recovery',
 				'heading' => 'A holistic approach to couples treatment',
-				'body' => "Addiction rarely stays contained to one person, which is why couples rehab treats the substance use and the relationship as a single, connected problem. When both partners are using, one person's pattern reinforces the other's, and willpower alone seldom breaks a cycle that codependency and enabling keep resetting. Rehab for couples means working on those relationship patterns directly, alongside each partner's individual dependence.\n\nAt The Diamond, every couple's history and circumstances are assessed individually, and our therapists design a bespoke in-patient plan around you both. Recovery combines private individual therapy with joint couples counselling, supported by holistic practices such as yoga, beach walk meditation and art therapy, inside a private setting built for honest work between partners.",
+				'body' => "Addiction rarely stays contained to one person, which is why couples rehab treats the substance use and the relationship as a single, connected problem. When both partners are using, one person's pattern reinforces the other's, and willpower alone seldom breaks a cycle that codependency and enabling keep resetting. Rehab for couples means working on those relationship patterns directly, alongside each partner's individual dependence.\n\nAt The Diamond, every couple's history and circumstances are assessed individually, and our therapists design a bespoke in-patient plan around you both. Recovery combines private individual therapy with joint couples counseling, supported by holistic practices such as yoga, beach walk meditation and art therapy, inside a private setting built for honest work between partners.",
 			],
 			'phases' => [
 				'heading' => 'Three phases of couples recovery',
@@ -252,7 +252,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'A safe, steady start for both of you',
 						'paragraphs' => [
 							'Couples addiction treatment cannot begin while substances are still active in the body, so the first days of rehab focus on medical safety and stabilisation for each partner individually.',
-							'Where detox is needed, it is medically supervised by our doctor-led clinical team, with round-the-clock monitoring through the most physically demanding early days. Each partner is stabilised at their own pace and settled into a calm shared routine, giving the couples therapy that follows a stable foundation to build on.',
+							'Where detox is needed, it is medically supervised by our doctor-led clinical team, with round-the-clock monitoring through the most physically demanding early days. Each partner is stabilized at their own pace and settled into a calm shared routine, giving the couples therapy that follows a stable foundation to build on.',
 						],
 						'listItems' => [
 							'Medically supervised detox for each partner where required',
@@ -269,12 +269,12 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Healing as individuals, and as partners',
 						'paragraphs' => [
 							'The core of couples rehab is therapy that works on two levels simultaneously: each partner\'s individual addiction, and the shared relationship patterns that keep it going.',
-							'In private one-to-one sessions, each partner addresses their own dependence and its underlying causes, while joint couples counselling targets the enabling, mistrust and mutual triggering that often sustain addiction in a relationship. Using evidence-based approaches such as cognitive behavioural therapy and dialectical behaviour therapy, couples learn to recognise these patterns in real time and replace them with healthier ways of relating.',
+							'In private one-to-one sessions, each partner addresses their own dependence and its underlying causes, while joint couples counseling targets the enabling, mistrust and mutual triggering that often sustain addiction in a relationship. Using evidence-based approaches such as cognitive behavioral therapy and dialectical behavior therapy, couples learn to recognize these patterns in real time and replace them with healthier ways of relating.',
 						],
 						'listItems' => [
 							'Private individual sessions for each partner',
 							'Joint couples therapy to rebuild trust and communication',
-							'CBT and DBT to interrupt shared behavioural patterns',
+							'CBT and DBT to interrupt shared behavioral patterns',
 						],
 						'asideQuote' => '"Couples work asks each person to do their own recovery, then turn and face the relationship honestly. Both halves matter equally."',
 						'asideMetaLabel' => 'Statement',
@@ -325,23 +325,23 @@ function rehab_treatment_v3_specs(): array {
 				'heading' => 'Is it time to consider couples rehab?',
 				'paragraphs' => [
 					'Couples rehab is residential addiction treatment designed for two partners who are both struggling with alcohol or drug use and want to recover in the same place, at the same time. Rather than sending each partner to a separate facility, couples addiction treatment addresses each person\'s dependence and the relationship together, on the understanding that in a couple who uses together, the two are rarely separable.',
-					'What distinguishes rehab for couples from individual treatment is the relationship dynamic itself. When both partners use, one person\'s behaviour routinely triggers the other back into substance use, and codependency and enabling can quietly keep the whole cycle in place. Recovering apart often means returning home to the same relationship dynamics that reinforced the addiction, which is one reason couples counselling for addiction tends to produce more durable results.',
-					'At The Diamond, each couple\'s circumstances are assessed individually, and a team of experienced therapists and medical professionals builds a bespoke in-patient plan around the relationship. Couples addiction treatment here combines individual and joint therapy, using evidence-based approaches such as cognitive behavioural therapy and dialectical behaviour therapy, alongside complementary work like art therapy, beach walk meditation and yoga, so both the addiction and the relationship are treated together.',
+					'What distinguishes rehab for couples from individual treatment is the relationship dynamic itself. When both partners use, one person\'s behavior routinely triggers the other back into substance use, and codependency and enabling can quietly keep the whole cycle in place. Recovering apart often means returning home to the same relationship dynamics that reinforced the addiction, which is one reason couples counseling for addiction tends to produce more durable results.',
+					'At The Diamond, each couple\'s circumstances are assessed individually, and a team of experienced therapists and medical professionals builds a bespoke in-patient plan around the relationship. Couples addiction treatment here combines individual and joint therapy, using evidence-based approaches such as cognitive behavioral therapy and dialectical behavior therapy, alongside complementary work like art therapy, beach walk meditation and yoga, so both the addiction and the relationship are treated together.',
 					'Acknowledging that you both need help takes real courage, and neither partner has to find the way back alone. If addiction has settled into your relationship and cutting down on your own hasn\'t been enough, a confidential conversation about couples rehab with our admissions team is a good place to start.',
 				],
 			],
 			'faqs' => [
 				[
 					'question' => 'Can my partner and I attend rehab together?',
-					'answer' => 'Yes. Couples rehab at The Diamond Rehab Thailand is built for two partners who are both facing addiction and want to recover at the same time. Each partner is assessed individually, and our team designs a bespoke in-patient plan around your shared situation, combining private individual sessions with joint couples therapy. A hard cap of twelve clients keeps every couple in treatment receiving close, personalised attention throughout the stay.',
+					'answer' => 'Yes. Couples rehab at The Diamond Rehab Thailand is built for two partners who are both facing addiction and want to recover at the same time. Each partner is assessed individually, and our team designs a bespoke in-patient plan around your shared situation, combining private individual sessions with joint couples therapy. A hard cap of twelve clients keeps every couple in treatment receiving close, personalized attention throughout the stay.',
 				],
 				[
 					'question' => 'How is couples rehab different from individual treatment?',
-					'answer' => 'Couples rehab treats each partner\'s addiction and the relationship dynamic at the same time. You each do private, individual work to address your own dependence and its roots, while joint couples counselling focuses on the enabling, mistrust and triggering patterns between you. The aim of couples addiction treatment is to help you return home to a relationship that supports recovery, rather than one that quietly resets the cycle.',
+					'answer' => 'Couples rehab treats each partner\'s addiction and the relationship dynamic at the same time. You each do private, individual work to address your own dependence and its roots, while joint couples counseling focuses on the enabling, mistrust and triggering patterns between you. The aim of couples addiction treatment is to help you return home to a relationship that supports recovery, rather than one that quietly resets the cycle.',
 				],
 				[
 					'question' => 'What therapies are used in the couples program?',
-					'answer' => 'Couples addiction treatment here combines individual and joint therapy using evidence-based approaches, including cognitive behavioural therapy and dialectical behaviour therapy. These are supported by complementary and experiential work such as art therapy, beach walk meditation, couples yoga and guided meditation. Our therapists tailor the mix of couples counselling and individual sessions to each relationship, so both the addiction and the relationship dynamics are addressed.',
+					'answer' => 'Couples addiction treatment here combines individual and joint therapy using evidence-based approaches, including cognitive behavioral therapy and dialectical behavior therapy. These are supported by complementary and experiential work such as art therapy, beach walk meditation, couples yoga and guided meditation. Our therapists tailor the mix of couples counseling and individual sessions to each relationship, so both the addiction and the relationship dynamics are addressed.',
 				],
 				[
 					'question' => 'Do both partners need detox?',
@@ -363,9 +363,9 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating trauma',
 			],
 			'signs' => [
-				'heading' => 'Recognising the pattern is the first step',
+				'heading' => 'Recognizing the pattern is the first step',
 				'subheading' => 'Traumatic reenactment is largely unconscious, so this pattern of repeating old trauma often goes unnamed for years and can feel like fate rather than something treatable. If several of these signs of unresolved trauma feel familiar, it\'s worth a confidential conversation.',
-				'card1Title' => 'Emotional and behavioural signs',
+				'card1Title' => 'Emotional and behavioral signs',
 				'card1Items' => [
 					'Feeling drawn again and again to people who hurt you',
 					'Reliving old feelings of neglect, abuse, betrayal or abandonment',
@@ -379,7 +379,7 @@ function rehab_treatment_v3_specs(): array {
 					'Slipping into fixed roles of victim, rescuer or persecutor',
 					'Choosing partners or situations that echo an early wound',
 					'Difficulty trusting, setting boundaries or feeling safe',
-					'Turning to risky behaviours to numb feelings you cannot process',
+					'Turning to risky behaviors to numb feelings you cannot process',
 				],
 			],
 			'pillars' => [
@@ -429,15 +429,15 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Trauma-focused therapy',
 						'h3' => 'Getting to the root of the pattern',
 						'paragraphs' => [
-							'Trauma-focused psychotherapy sits at the centre of your days here, working to separate old trauma responses from what\'s actually happening in the present.',
-							'Through daily one-to-one sessions and optional small group work, you\'ll learn to recognise the traumatic reenactment pattern as it happens and respond differently, exploring the original wounds with experienced trauma therapists rather than being driven by them. No group session is ever mandatory, and the pace of treatment is always yours to set.',
+							'Trauma-focused psychotherapy sits at the center of your days here, working to separate old trauma responses from what\'s actually happening in the present.',
+							'Through daily one-to-one sessions and optional small group work, you\'ll learn to recognize the traumatic reenactment pattern as it happens and respond differently, exploring the original wounds with experienced trauma therapists rather than being driven by them. No group session is ever mandatory, and the pace of treatment is always yours to set.',
 						],
 						'listItems' => [
 							'Daily one-to-one sessions with experienced therapists',
 							'Trauma-focused work to address the original wound',
 							'Optional small group work, never mandatory',
 						],
-						'asideQuote' => '"Reenactment convinces you that the past is happening again. Therapy teaches you to recognise that voice, and then to answer it differently."',
+						'asideQuote' => '"Reenactment convinces you that the past is happening again. Therapy teaches you to recognize that voice, and then to answer it differently."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
@@ -486,7 +486,7 @@ function rehab_treatment_v3_specs(): array {
 				'paragraphs' => [
 					'Traumatic reenactment is the reexperiencing of unresolved feelings of neglect, abuse, betrayal or abandonment. It occurs in trauma survivors as a subconscious emotional response: because the original feelings were too intense to fully process, the mind recreates aspects of the original trauma in an attempt to finally master it.',
 					'In his work Beyond the Pleasure Principle, Sigmund Freud described this as repetition compulsion, an unconscious attempt to gain control over the psychological responses left behind by earlier trauma. In practice, traumatic reenactment often looks like being drawn, again and again, to the same toxic relationships and dynamics, while struggling to separate old trauma responses from what is actually happening in the present.',
-					'These dynamics are sometimes mapped using the trauma triangle, with its three roles of victim, rescuer and persecutor, each a different way of avoiding self-responsibility. The underlying trauma can be acute, following a single event, chronic, after repeated long-term harm such as domestic abuse, or complex, built from multiple traumatic experiences within relationships. Whatever its shape, unresolved trauma tends to entrench over time, and some people turn to alcohol or other risky behaviours to numb feelings they cannot otherwise process.',
+					'These dynamics are sometimes mapped using the trauma triangle, with its three roles of victim, rescuer and persecutor, each a different way of avoiding self-responsibility. The underlying trauma can be acute, following a single event, chronic, after repeated long-term harm such as domestic abuse, or complex, built from multiple traumatic experiences within relationships. Whatever its shape, unresolved trauma tends to entrench over time, and some people turn to alcohol or other risky behaviors to numb feelings they cannot otherwise process.',
 					'Acknowledging that the same pain keeps returning takes real courage, and you do not have to break the cycle of traumatic reenactment on your own. If this pattern has settled over your life, or the life of someone you love, and standard measures haven\'t been enough, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -497,11 +497,11 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'How is traumatic reenactment treated at a residential retreat?',
-					'answer' => 'Trauma treatment moves through clear steps: a thorough psychiatric assessment to understand your history, a personalised treatment plan, then daily trauma-focused psychotherapy supported by holistic practice, with the plan reviewed and adjusted as you progress. Therapy is the core of the program, one-to-one and in optional small groups, alongside complementary approaches such as mindfulness, fitness and nutrition. Before discharge we prepare a personal aftercare plan so your recovery continues at home.',
+					'answer' => 'Trauma treatment moves through clear steps: a thorough psychiatric assessment to understand your history, a personalized treatment plan, then daily trauma-focused psychotherapy supported by holistic practice, with the plan reviewed and adjusted as you progress. Therapy is the core of the program, one-to-one and in optional small groups, alongside complementary approaches such as mindfulness, fitness and nutrition. Before discharge we prepare a personal aftercare plan so your recovery continues at home.',
 				],
 				[
 					'question' => 'What is the trauma triangle?',
-					'answer' => 'The trauma triangle describes the relationship dynamics and roles often seen in trauma survivors, made up of three positions: the victim, who feels helpless and takes no responsibility; the rescuer, who controls the situation by focusing on others while neglecting their own feelings; and the persecutor, who blames others and reacts with anger. All three avoid self-responsibility in different ways, and recognising which role you fall into is often an important part of trauma therapy.',
+					'answer' => 'The trauma triangle describes the relationship dynamics and roles often seen in trauma survivors, made up of three positions: the victim, who feels helpless and takes no responsibility; the rescuer, who controls the situation by focusing on others while neglecting their own feelings; and the persecutor, who blames others and reacts with anger. All three avoid self-responsibility in different ways, and recognizing which role you fall into is often an important part of trauma therapy.',
 				],
 				[
 					'question' => 'What are the three types of trauma?',
@@ -523,15 +523,15 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating stimulant addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Methamphetamine and ice dependence change people visibly, in body, mind and behaviour, often faster than other substances. These are the signs of ice addiction that families and partners tend to notice first. If several feel familiar, it\'s worth a conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Methamphetamine and ice dependence change people visibly, in body, mind and behavior, often faster than other substances. These are the signs of ice addiction that families and partners tend to notice first. If several feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of ice addiction',
 				'card1Items' => [
 					'Severe weight loss and loss of appetite',
 					'Insomnia and memory problems',
 					'Skin problems, dental decay and irregular heart rate',
 					'Dishonesty, stealing and loss of motivation',
-					'Increased aggression and volatile behaviour',
+					'Increased aggression and volatile behavior',
 				],
 				'card2Title' => 'Withdrawal symptoms during detox',
 				'card2Items' => [
@@ -562,7 +562,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'A stubborn addiction',
 				'heading' => 'A holistic approach to one of the hardest dependencies',
-				'body' => "Ice is one of the most treatment-resistant addictions there is. Methamphetamine alters the brain's judgment, impulse control and reward pathways, which is why willpower alone so rarely works against meth cravings. Our ice addiction treatment program addresses the dependency and the reasons beneath it at the same time.\n\nYou'll move through medically supervised meth detox into one-to-one counselling, evidence-based behavioural therapy, exercise and mindfulness practice, all inside a calm, private setting in Hua Hin designed to make sustained recovery from methamphetamine possible.",
+				'body' => "Ice is one of the most treatment-resistant addictions there is. Methamphetamine alters the brain's judgment, impulse control and reward pathways, which is why willpower alone so rarely works against meth cravings. Our ice addiction treatment program addresses the dependency and the reasons beneath it at the same time.\n\nYou'll move through medically supervised meth detox into one-to-one counseling, evidence-based behavioral therapy, exercise and mindfulness practice, all inside a calm, private setting in Hua Hin designed to make sustained recovery from methamphetamine possible.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of ice recovery',
@@ -586,15 +586,15 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Getting to the core of the addiction',
 						'paragraphs' => [
 							'Quitting ice is not just a physical battle. Methamphetamine reshapes the brain regions that govern impulse control, which is why cravings can override even strong intentions to stop.',
-							'Through one-to-one counselling and group work, you will get to the psychological issues beneath the ice addiction and learn the social triggers and mental cues that drive methamphetamine use, so they lose their power over you.',
+							'Through one-to-one counseling and group work, you will get to the psychological issues beneath the ice addiction and learn the social triggers and mental cues that drive methamphetamine use, so they lose their power over you.',
 						],
 						'listItems' => [
-							'One-to-one counselling with addiction specialists',
-							'Evidence-based behavioural therapy',
+							'One-to-one counseling with addiction specialists',
+							'Evidence-based behavioral therapy',
 							'Understanding your triggers and mental cues',
 						],
 						'asideQuote' => '"Lasting recovery starts when you understand the patterns underneath the drug, not just the drug itself."',
@@ -646,7 +646,7 @@ function rehab_treatment_v3_specs(): array {
 				'paragraphs' => [
 					'Ice, also known as crystal methamphetamine, is a powerful stimulant and one of the most damaging drugs in circulation. Chronic meth use takes a visible toll on the body, from severe weight loss and dental decay to insomnia, memory loss and an irregular heart rate, while quietly reshaping how the brain works.',
 					'What makes ice so addictive is what methamphetamine does to the brain\'s chemistry. It floods the reward system with dopamine, and when meth use stops, dopamine levels plummet, making it hard to stay motivated or find pleasure in ordinary life. It also alters the regions of the brain that control impulses and judgment, which is why meth cravings so often win against willpower alone.',
-					'Over time, the changes from ice use spread beyond the body and into behaviour. Many families notice dishonesty, stealing, loss of motivation, aggression or volatility, and occasionally signs of stimulant psychosis, long before they understand the cause. By this stage, ice addiction has become extremely resistant to treatment, and attempting to quit without medical supervision can be dangerous and sharply raises the risk of relapse. Research consistently shows that inpatient treatment is one of the most effective ways to treat crystal meth addiction.',
+					'Over time, the changes from ice use spread beyond the body and into behavior. Many families notice dishonesty, stealing, loss of motivation, aggression or volatility, and occasionally signs of stimulant psychosis, long before they understand the cause. By this stage, ice addiction has become extremely resistant to treatment, and attempting to quit without medical supervision can be dangerous and sharply raises the risk of relapse. Research consistently shows that inpatient treatment is one of the most effective ways to treat crystal meth addiction.',
 					'Acknowledging the problem takes real courage, and you don\'t have to travel the path to ice addiction recovery on your own. If methamphetamine has taken hold of your life or the life of someone you love, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -683,7 +683,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating alcohol addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Alcohol dependence rarely announces itself all at once. It builds through years of what looks like ordinary, controlled drinking, and denial keeps the pattern going long after family and friends have noticed. If several of these signs of alcohol addiction feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of alcohol addiction',
 				'card1Items' => [
@@ -746,15 +746,15 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Getting to the root of drinking',
 						'paragraphs' => [
 							'Alcohol dependency rarely starts with alcohol itself. It starts with whatever alcohol is being used to manage, whether that\'s stress, anxiety or simply winding down at the end of the day.',
-							'Through cognitive behavioural therapy, one-to-one counselling and small group sessions, our psychologists work with you to understand why drinking took hold and to build healthier coping strategies that last well beyond alcohol rehab.',
+							'Through cognitive behavioral therapy, one-to-one counseling and small group sessions, our psychologists work with you to understand why drinking took hold and to build healthier coping strategies that last well beyond alcohol rehab.',
 						],
 						'listItems' => [
-							'Cognitive behavioural therapy',
-							'One-to-one counselling',
+							'Cognitive behavioral therapy',
+							'One-to-one counseling',
 							'Small group therapy sessions',
 						],
 						'asideQuote' => '"Detox clears the alcohol. Therapy is where we work out why it was there in the first place."',
@@ -844,7 +844,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating opioid addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Heroin dependence builds quickly and quietly, often starting with prescription painkillers long before anyone names it as addiction. These are the signs of heroin addiction that families and partners tend to notice first. If several feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of heroin addiction',
 				'card1Items' => [
@@ -883,7 +883,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'A complex addiction',
 				'heading' => 'A holistic approach to a powerful dependency',
-				'body' => "Heroin creates one of the strongest physical dependencies of any drug, which is why willpower alone so rarely holds against opioid cravings. Heroin targets the brain's opioid receptors and, over time, the brain stops producing normal amounts of dopamine, so using becomes less about pleasure and more about feeling normal. Our heroin addiction treatment program treats both sides of that equation: the physical dependence and the psychological issues underneath it.\n\nThe path runs from medication-assisted heroin detox under round-the-clock medical care, through daily therapy with Western-trained counsellors experienced in opioid addiction, into mindfulness, exercise and the habits that protect sobriety after you leave. All of it happens in a calm, private setting in Hua Hin, with a clinical team focused entirely on a small number of clients.",
+				'body' => "Heroin creates one of the strongest physical dependencies of any drug, which is why willpower alone so rarely holds against opioid cravings. Heroin targets the brain's opioid receptors and, over time, the brain stops producing normal amounts of dopamine, so using becomes less about pleasure and more about feeling normal. Our heroin addiction treatment program treats both sides of that equation: the physical dependence and the psychological issues underneath it.\n\nThe path runs from medication-assisted heroin detox under round-the-clock medical care, through daily therapy with Western-trained counselors experienced in opioid addiction, into mindfulness, exercise and the habits that protect sobriety after you leave. All of it happens in a calm, private setting in Hua Hin, with a clinical team focused entirely on a small number of clients.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of heroin recovery',
@@ -907,14 +907,14 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Treating the root cause',
 						'paragraphs' => [
 							'Detox breaks the physical dependence on heroin. Therapy addresses why it formed in the first place.',
-							'You\'ll work one-on-one with Western-trained counsellors experienced in opioid addiction, three sessions a week alongside daily lectures and neuroscience education. Together you\'ll confront the emotional and psychological factors behind the heroin addiction, map your triggers and destructive patterns, and build the honesty, communication and mindfulness that lasting recovery depends on.',
+							'You\'ll work one-on-one with Western-trained counselors experienced in opioid addiction, three sessions a week alongside daily lectures and neuroscience education. Together you\'ll confront the emotional and psychological factors behind the heroin addiction, map your triggers and destructive patterns, and build the honesty, communication and mindfulness that lasting recovery depends on.',
 						],
 						'listItems' => [
-							'Three one-to-one counselling sessions a week',
+							'Three one-to-one counseling sessions a week',
 							'Daily lectures and neuroscience education',
 							'Practical tools for triggers and cravings',
 						],
@@ -928,11 +928,11 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Built to last after you leave',
 						'paragraphs' => [
 							'Lasting recovery from heroin rests on overall health, not just abstinence.',
-							'Mindfulness practice, yoga and structured exercise rebuild the body and the daily routine that heroin dismantled. Before you leave, we put a personal aftercare plan in place: weekly online sessions with the counsellor who treated you, or an introduction to one of our aftercare partners near your home, wherever in the world that is.',
+							'Mindfulness practice, yoga and structured exercise rebuild the body and the daily routine that heroin dismantled. Before you leave, we put a personal aftercare plan in place: weekly online sessions with the counselor who treated you, or an introduction to one of our aftercare partners near your home, wherever in the world that is.',
 						],
 						'listItems' => [
 							'Mindfulness, yoga and structured exercise',
-							'Weekly online sessions with your counsellor after discharge',
+							'Weekly online sessions with your counselor after discharge',
 							'A worldwide network of aftercare partners',
 						],
 						'asideQuote' => '"Leaving treatment is not the end of recovery. The habits and support built here are what carry it home."',
@@ -984,7 +984,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Is there an aftercare program?',
-					'answer' => 'Aftercare is essential after heroin addiction treatment, and therefore we offer two ways to do aftercare. Option one is weekly Zoom sessions with your focal counsellor, who also treated you while at our centre. Option two is that we bring you in contact with one of our aftercare partners around the world, depending on where you live.',
+					'answer' => 'Aftercare is essential after heroin addiction treatment, and therefore we offer two ways to do aftercare. Option one is weekly Zoom sessions with your focal counselor, who also treated you while at our center. Option two is that we bring you in contact with one of our aftercare partners around the world, depending on where you live.',
 				],
 				[
 					'cptId' => 13219,
@@ -1007,8 +1007,8 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating stimulant addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Crack dependence moves quickly and rarely stays hidden for long. The short, intense highs and hard crashes change mood, money and behaviour in ways families and partners tend to notice first. If several of these signs of crack addiction feel familiar, it\'s worth a confidential conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Crack dependence moves quickly and rarely stays hidden for long. The short, intense highs and hard crashes change mood, money and behavior in ways families and partners tend to notice first. If several of these signs of crack addiction feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of crack addiction',
 				'card1Items' => [
 					'Crack has become a major priority in daily life',
@@ -1046,7 +1046,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'A complex addiction',
 				'heading' => 'A holistic approach to a relentless dependency',
-				'body' => "Crack delivers a rush of dopamine and a euphoria that lasts only minutes, followed by a crash that drives the next dose. Repeated crack use alters the chemistry of the brain, which is why willpower alone so rarely holds against the cravings. Our crack addiction treatment program treats the whole picture: the physical dependence, and the emotional and psychological patterns underneath it.\n\nThe path runs from supervised medical detox into daily one-on-one therapy with qualified addiction counsellors, blending evidence-based Western techniques with Eastern practice, alongside holistic work that rebuilds health and routine after crack cocaine. All of it happens in a calm, private setting in Hua Hin, designed so you can focus entirely on recovery.",
+				'body' => "Crack delivers a rush of dopamine and a euphoria that lasts only minutes, followed by a crash that drives the next dose. Repeated crack use alters the chemistry of the brain, which is why willpower alone so rarely holds against the cravings. Our crack addiction treatment program treats the whole picture: the physical dependence, and the emotional and psychological patterns underneath it.\n\nThe path runs from supervised medical detox into daily one-on-one therapy with qualified addiction counselors, blending evidence-based Western techniques with Eastern practice, alongside holistic work that rebuilds health and routine after crack cocaine. All of it happens in a calm, private setting in Hua Hin, designed so you can focus entirely on recovery.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of crack recovery',
@@ -1070,14 +1070,14 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Rewiring the patterns behind use',
 						'paragraphs' => [
 							'Detox clears the drug from your body. Therapy addresses why crack was there in the first place.',
-							'In one-on-one sessions, highly qualified addiction counsellors help you recognise and reprogramme the negative patterns that drive crack use, working through the emotional and environmental triggers behind it. Treating crack addiction at this level is what makes recovery hold for the long term.',
+							'In one-on-one sessions, highly qualified addiction counselors help you recognize and reprogram the negative patterns that drive crack use, working through the emotional and environmental triggers behind it. Treating crack addiction at this level is what makes recovery hold for the long term.',
 						],
 						'listItems' => [
-							'One-on-one sessions with qualified addiction counsellors',
+							'One-on-one sessions with qualified addiction counselors',
 							'Evidence-based Eastern and Western therapeutic techniques',
 							'Work on the emotional and environmental triggers of use',
 						],
@@ -1129,7 +1129,7 @@ function rehab_treatment_v3_specs(): array {
 				'heading' => 'Is it time to consider crack rehab?',
 				'paragraphs' => [
 					'Crack is a powerful, highly addictive stimulant derived from powdered cocaine and processed into a solid, smokable form. It is typically smoked, though it can also be snorted or injected. Smoking sends the drug to the brain almost instantly, which makes the crack high faster, more intense and far shorter than powder cocaine. Use peaked in the late 1980s, but crack cocaine remains a commonly abused substance in communities across the globe.',
-					'The addictive pull comes from what crack cocaine does to the brain. Each dose triggers a rush of dopamine, the neurochemical at the centre of the body\'s pleasure and reward systems, producing an intense euphoria that lasts only a few minutes. Unlike sedating drugs, crack heightens alertness and excitement, and when the high collapses into a debilitating crash, the fastest way to feel normal again appears to be another dose.',
+					'The addictive pull comes from what crack cocaine does to the brain. Each dose triggers a rush of dopamine, the neurochemical at the center of the body\'s pleasure and reward systems, producing an intense euphoria that lasts only a few minutes. Unlike sedating drugs, crack heightens alertness and excitement, and when the high collapses into a debilitating crash, the fastest way to feel normal again appears to be another dose.',
 					'That cycle escalates. Repeated crack use alters the chemistry of the brain, and as tolerance builds, users take increasingly larger doses to replicate the same effect. What begins as occasional use hardens into both a physical and a psychological dependence on crack, often with a profound impact on mental health, mood and judgement along the way.',
 					'That same impact on clear thinking is what makes crack addiction hard to admit. If crack has become a priority in your life, if your health, finances or relationships are suffering, or if you have tried to stop and could not stay off it, those are reasons enough to talk to someone. It is never too early or too late to seek help, and a confidential conversation with our team in Hua Hin is a quiet, pressure-free place to start.',
 				],
@@ -1169,7 +1169,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating cannabis addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Marijuana\'s reputation as a harmless drug makes cannabis dependence easy to miss, even in yourself. Families often notice the fading hobbies and shrinking social circle before the smoking looks like a problem. If several of these signs of marijuana addiction feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of marijuana addiction',
 				'card1Items' => [
@@ -1208,7 +1208,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Treating the whole person',
 				'heading' => 'A holistic approach to marijuana addiction',
-				'body' => "Marijuana dependence is primarily psychological, which is exactly why willpower alone so often fails against it. With repeated use the brain adapts to THC, tolerance builds, and cannabis quietly becomes the way you manage stress, sleep and mood. Many people also use marijuana to self-medicate depression or anxiety, so stopping means facing what the smoking was covering. Our marijuana addiction treatment program treats those roots, not just the habit.\n\nYour stay begins with a thorough psychiatric and medical assessment, then moves into daily one-to-one and group therapy built around cognitive behavioural therapy and dialectical behaviour therapy. Eastern wellness practices, yoga, mindfulness meditation and exercise therapy reconnect mind and body, all within a calm, private residence in Hua Hin where there is nothing to manage except your recovery from cannabis.",
+				'body' => "Marijuana dependence is primarily psychological, which is exactly why willpower alone so often fails against it. With repeated use the brain adapts to THC, tolerance builds, and cannabis quietly becomes the way you manage stress, sleep and mood. Many people also use marijuana to self-medicate depression or anxiety, so stopping means facing what the smoking was covering. Our marijuana addiction treatment program treats those roots, not just the habit.\n\nYour stay begins with a thorough psychiatric and medical assessment, then moves into daily one-to-one and group therapy built around cognitive behavioral therapy and dialectical behavior therapy. Eastern wellness practices, yoga, mindfulness meditation and exercise therapy reconnect mind and body, all within a calm, private residence in Hua Hin where there is nothing to manage except your recovery from cannabis.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of marijuana recovery',
@@ -1216,7 +1216,7 @@ function rehab_treatment_v3_specs(): array {
 					[
 						'phase' => 'PHASE 01',
 						'label' => 'Medical detox',
-						'h3' => 'Stabilise and rest',
+						'h3' => 'Stabilize and rest',
 						'paragraphs' => [
 							'Cannabis withdrawal is mild compared to most drugs, but it is real, and for regular users it is genuinely uncomfortable.',
 							'In the first days of marijuana detox our medical team focuses on restoring sleep, settling irritability and easing cravings under round-the-clock supervision. There is no dangerous physical withdrawal to fear, only a structured, comfortable reset while THC leaves your system.',
@@ -1232,14 +1232,14 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Retrain the patterns',
 						'paragraphs' => [
 							'This is the heart of marijuana addiction treatment, because cannabis dependence lives in habits and thinking, not in the body.',
-							'Daily cognitive behavioural therapy and dialectical behaviour therapy sessions explore the root issues driving marijuana use. Cannabis use overlaps strongly with depression, anxiety and psychosis, so our integrated model treats co-occurring conditions at the same time rather than leaving them to undermine your recovery.',
+							'Daily cognitive behavioral therapy and dialectical behavior therapy sessions explore the root issues driving marijuana use. Cannabis use overlaps strongly with depression, anxiety and psychosis, so our integrated model treats co-occurring conditions at the same time rather than leaving them to undermine your recovery.',
 						],
 						'listItems' => [
-							'One-to-one CBT and DBT with experienced counsellors',
+							'One-to-one CBT and DBT with experienced counselors',
 							'Integrated treatment for co-occurring mental health conditions',
 							'Practical coping skills for stress, sleep and social pressure',
 						],
@@ -1253,7 +1253,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Rebuild and return',
 						'paragraphs' => [
 							'A full, structured day is one of the strongest protections against marijuana relapse.',
-							'Yoga, mindfulness meditation, exercise therapy and spa treatments rebuild the mind-body connection while you practise daily life without cannabis. Before you leave, we build a tailor-made relapse prevention plan for marijuana addiction, so the calm you find here travels home with you.',
+							'Yoga, mindfulness meditation, exercise therapy and spa treatments rebuild the mind-body connection while you practice daily life without cannabis. Before you leave, we build a tailor-made relapse prevention plan for marijuana addiction, so the calm you find here travels home with you.',
 						],
 						'listItems' => [
 							'Daily yoga, mindfulness and exercise therapy',
@@ -1290,7 +1290,7 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider marijuana rehab?',
 				'paragraphs' => [
-					'Marijuana, also called cannabis, weed or pot, is a psychoactive drug from the Cannabis sativa plant. Its active compound, THC, produces relaxation and altered perception, and with regular use it can lead to cannabis use disorder: a recognised condition where a person keeps using marijuana despite clear harm to their health, relationships or work. Studies indicate that around 30 percent of people who use marijuana may have some degree of marijuana use disorder.',
+					'Marijuana, also called cannabis, weed or pot, is a psychoactive drug from the Cannabis sativa plant. Its active compound, THC, produces relaxation and altered perception, and with regular use it can lead to cannabis use disorder: a recognized condition where a person keeps using marijuana despite clear harm to their health, relationships or work. Studies indicate that around 30 percent of people who use marijuana may have some degree of marijuana use disorder.',
 					'Marijuana dependence develops because the brain adapts to the steady presence of THC. Tolerance builds, larger or more frequent doses are needed to feel the same effect, and over time cannabis becomes tied to sleep, appetite and mood regulation. The risk is significantly higher for people who start young: those who begin using marijuana before the age of 18 are about five times more likely to develop a use disorder than those who start as adults.',
 					'Because marijuana is widely accepted and often seen as harmless, escalating cannabis use tends to go unnoticed, including by people using it medicinally or to self-medicate anxiety, low mood or poor sleep. The pattern usually shows itself indirectly: hobbies fade, social circles narrow to other users, obligations slip, and attempts to cut back end in irritability, restless nights and a return to smoking.',
 					'If any of this sounds familiar, that recognition is the most important step, and it deserves a considered response rather than another attempt to quit marijuana alone. Our team can talk you through how private, doctor-led marijuana rehab in Hua Hin works, what a typical stay looks like, and whether it is the right fit for you. The conversation is confidential and there is no obligation.',
@@ -1327,14 +1327,14 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating ketamine addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Ketamine quietly warps your sense of what is normal, which is why ketamine dependence so often goes unnoticed by the person living with it. Families tend to spot the mood swings and memory lapses first. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of ketamine addiction',
 				'card1Items' => [
 					'Mood swings and sudden changes in personality',
 					'Loss of mental clarity and impaired memory',
 					'Painful urination or bladder problems',
-					'Engaging in risky behaviour while dissociated',
+					'Engaging in risky behavior while dissociated',
 					'Neglecting work, family or study because of ketamine',
 				],
 				'card2Title' => 'Withdrawal symptoms during detox',
@@ -1390,18 +1390,18 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Understand the why',
 						'paragraphs' => [
 							'Detox clears the ketamine. Therapy addresses what kept you reaching for it.',
-							'Working one-to-one with Western-trained counsellors, you\'ll use cognitive behavioural therapy and our 12-step program to explore the inner mechanisms of ketamine addiction, challenge the destructive thought patterns that drive use and build practical problem-solving skills for life without the drug.',
+							'Working one-to-one with Western-trained counselors, you\'ll use cognitive behavioral therapy and our 12-step program to explore the inner mechanisms of ketamine addiction, challenge the destructive thought patterns that drive use and build practical problem-solving skills for life without the drug.',
 						],
 						'listItems' => [
-							'Cognitive behavioural therapy (CBT)',
+							'Cognitive behavioral therapy (CBT)',
 							'A proven 12-step program',
 							'Tools to challenge destructive thinking',
 						],
-						'asideQuote' => '"Lasting recovery means breaking free from the psychological and behavioural patterns that drive drug use, not just stopping the drug itself."',
+						'asideQuote' => '"Lasting recovery means breaking free from the psychological and behavioral patterns that drive drug use, not just stopping the drug itself."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
@@ -1451,7 +1451,7 @@ function rehab_treatment_v3_specs(): array {
 					'Ketamine, sometimes sold as K, Special K or Ket, is a dissociative anaesthetic first developed in 1962 and still used legitimately in medicine. In a clinical setting it is generally regarded as safe. Used recreationally, usually as a fine white powder that is snorted, swallowed or injected, ketamine is a different story: regular use can slide into dependence faster than most people expect.',
 					'What makes ketamine so habit-forming is the escape it offers. As a powerful psychotropic, ketamine alters how you perceive reality, and that dissociation can become a refuge from stress, anxiety or low mood. The effects last only around an hour, and as tolerance builds, users feel compelled to take larger and more frequent doses to reach the same place, deepening the psychological grip of ketamine addiction.',
 					'Escalating ketamine use carries a real physical toll. Chronic use is linked to memory impairment, bladder damage, painful urination, respiratory issues, elevated blood pressure, seizures and psychosis. High doses can cause severe confusion, loss of consciousness and, in rare cases, fatal overdose, a risk that rises sharply when ketamine is mixed with alcohol or other drugs.',
-					'There is no right or wrong moment to seek help, and recognising a ketamine problem is harder with a drug that warps your sense of reality. If ketamine has started costing you your memory, your health or your relationships, that is reason enough to consider treatment. A quiet, confidential conversation with our admissions team about what ketamine rehab at The Diamond would look like is a good place to start, without obligation.',
+					'There is no right or wrong moment to seek help, and recognizing a ketamine problem is harder with a drug that warps your sense of reality. If ketamine has started costing you your memory, your health or your relationships, that is reason enough to consider treatment. A quiet, confidential conversation with our admissions team about what ketamine rehab at The Diamond would look like is a good place to start, without obligation.',
 				],
 			],
 			'faqs' => [
@@ -1487,7 +1487,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating party drug addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Many people still believe MDMA can\'t lead to dependency, which keeps ecstasy addiction hidden for years. Families often notice the crashes and low moods before the person using does. If several of these signs feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of ecstasy addiction',
 				'card1Items' => [
@@ -1526,7 +1526,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Our approach',
 				'heading' => 'A holistic approach to ecstasy recovery',
-				'body' => "People become dependent on MDMA for all sorts of reasons, so there is no one-size-fits-all ecstasy addiction treatment. The drug floods the brain with serotonin, dopamine and norepinephrine, and the crash that follows is longer than with most other stimulants. Willpower alone rarely carries someone through it, which is why our program treats the whole person: the comedown, the cravings and the anxiety, low mood or stress that ecstasy was masking.\n\nYour path runs from a supported MDMA detox through private counselling, group sessions and behavioural therapy, alongside exercise, nutrition and mindfulness practice. All of it happens in a calm, private setting by the sea in Hua Hin, where the focus stays on recovery from ecstasy rather than simply getting through it.",
+				'body' => "People become dependent on MDMA for all sorts of reasons, so there is no one-size-fits-all ecstasy addiction treatment. The drug floods the brain with serotonin, dopamine and norepinephrine, and the crash that follows is longer than with most other stimulants. Willpower alone rarely carries someone through it, which is why our program treats the whole person: the comedown, the cravings and the anxiety, low mood or stress that ecstasy was masking.\n\nYour path runs from a supported MDMA detox through private counseling, group sessions and behavioral therapy, alongside exercise, nutrition and mindfulness practice. All of it happens in a calm, private setting by the sea in Hua Hin, where the focus stays on recovery from ecstasy rather than simply getting through it.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of ecstasy recovery',
@@ -1550,15 +1550,15 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Getting to the root of it',
 						'paragraphs' => [
 							'Detox clears the MDMA. Therapy is what keeps it gone.',
-							'Working one to one with qualified psychotherapists and counsellors, and in small group sessions, you examine what ecstasy was doing for you: the stress, the social pressure, the low moods it papered over. Behavioural therapy then builds the practical skills to handle those triggers without MDMA.',
+							'Working one to one with qualified psychotherapists and counselors, and in small group sessions, you examine what ecstasy was doing for you: the stress, the social pressure, the low moods it papered over. Behavioral therapy then builds the practical skills to handle those triggers without MDMA.',
 						],
 						'listItems' => [
-							'Private counselling and small group therapy',
-							'Behavioural therapy targeting cravings and triggers',
+							'Private counseling and small group therapy',
+							'Behavioral therapy targeting cravings and triggers',
 							'Treatment for anxiety, depression and co-occurring issues',
 						],
 						'asideQuote' => '"Relapse prevention is just as crucial as detox. We treat the reasons behind the use, not only the use itself."',
@@ -1611,7 +1611,7 @@ function rehab_treatment_v3_specs(): array {
 					'MDMA, short for 3,4-methylenedioxymethamphetamine and better known as ecstasy or molly, is a synthetic stimulant with hallucinogenic properties. It is most familiar as a party drug in clubs and at festivals, popular with young adults, but people from every demographic can develop an MDMA addiction. Pills and powders sold as ecstasy are also frequently cut with other substances, which makes every dose an unknown quantity.',
 					'A persistent myth holds that MDMA is not addictive. In reality, ecstasy works by forcing the brain to release a surge of serotonin, dopamine and norepinephrine, and the days of depleted mood that follow leave many users reaching for the next dose just to feel normal again. Tolerance builds, doses creep up, and the gap between highs gets harder to sit through. The crash after ecstasy is also notably long compared with other stimulants.',
 					'As MDMA use escalates, the costs mount. Long-term ecstasy abuse is linked to anxiety, depression, paranoia, panic attacks and problems with memory and concentration, and in severe cases delusions or psychosis. Many users also drink heavily or combine MDMA with other drugs such as ketamine, compounding the risks. Responsibilities slip, relationships strain, and more and more time disappears into finding the drug or recovering from it.',
-					'Acknowledging that ecstasy has become a problem is the hardest step, and the most important one. Ecstasy addiction treatment that combines a supported detox with behavioural therapy and relapse prevention gives you the best chance of a lasting recovery from MDMA. If you recognise yourself or someone you love in any of this, a quiet, confidential conversation with our team is a good place to start.',
+					'Acknowledging that ecstasy has become a problem is the hardest step, and the most important one. Ecstasy addiction treatment that combines a supported detox with behavioral therapy and relapse prevention gives you the best chance of a lasting recovery from MDMA. If you recognize yourself or someone you love in any of this, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
 			'faqs' => [
@@ -1620,7 +1620,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'How can I help my loved one?',
-					'answer' => 'At The Diamond Rehab Thailand we are experienced in guiding loved ones into ecstasy addiction treatment. A good first step is to show them our website; many people take an interest once they see what a stay here actually looks like. If needed, we can also arrange an intervention at your home, led by a professional interventionist organised by The Diamond Rehab Thailand.',
+					'answer' => 'At The Diamond Rehab Thailand we are experienced in guiding loved ones into ecstasy addiction treatment. A good first step is to show them our website; many people take an interest once they see what a stay here actually looks like. If needed, we can also arrange an intervention at your home, led by a professional interventionist organized by The Diamond Rehab Thailand.',
 				],
 				[
 					'question' => 'What is the process of rehabilitation?',
@@ -1650,12 +1650,12 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating GHB addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'GHB dependence can build fast for a party drug, and because use is usually social, the signs are easy to dismiss. Families often notice the round-the-clock dosing first. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of GHB addiction',
 				'card1Items' => [
 					'Strong cravings, sometimes dosing around the clock',
-					'Relying on GHB to socialise or feel confident',
+					'Relying on GHB to socialize or feel confident',
 					'Taking larger or more frequent doses as tolerance builds',
 					'Trying to quit but failing, or using simply to hold off withdrawal',
 					'Relationships, work or education starting to suffer',
@@ -1689,7 +1689,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Our approach',
 				'heading' => 'A holistic approach to GHB recovery',
-				'body' => "Willpower alone rarely beats GHB, because the addiction is never only chemical. Rapid tolerance, round-the-clock dosing, disrupted sleep and the social settings the drug lives in all pull in the same direction, so our GHB addiction treatment program treats the whole person: the physical dependence, the thought patterns beneath it and the lifestyle around it.\n\nThe path runs from a medically supervised GHB detox through evidence-based therapy, including cognitive behavioural therapy and our 12-step program, into holistic work such as mindfulness, yoga and exercise therapy. All of it unfolds in a calm, private resort-style setting in Hua Hin, with a team that shapes your GHB treatment around your own goals rather than a fixed plan.",
+				'body' => "Willpower alone rarely beats GHB, because the addiction is never only chemical. Rapid tolerance, round-the-clock dosing, disrupted sleep and the social settings the drug lives in all pull in the same direction, so our GHB addiction treatment program treats the whole person: the physical dependence, the thought patterns beneath it and the lifestyle around it.\n\nThe path runs from a medically supervised GHB detox through evidence-based therapy, including cognitive behavioral therapy and our 12-step program, into holistic work such as mindfulness, yoga and exercise therapy. All of it unfolds in a calm, private resort-style setting in Hua Hin, with a team that shapes your GHB treatment around your own goals rather than a fixed plan.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of GHB recovery',
@@ -1713,14 +1713,14 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Understanding the why',
 						'paragraphs' => [
 							'Once the body is stable after detox, the real work of GHB addiction treatment begins.',
-							'Working closely with our experienced addiction therapists, you will explore the emotional, behavioural and mental patterns that underpin GHB use, then build practical strategies for handling stress, social pressure and cravings in a healthy, sustainable way, so the situations that once led to GHB lose their pull.',
+							'Working closely with our experienced addiction therapists, you will explore the emotional, behavioral and mental patterns that underpin GHB use, then build practical strategies for handling stress, social pressure and cravings in a healthy, sustainable way, so the situations that once led to GHB lose their pull.',
 						],
 						'listItems' => [
-							'Cognitive behavioural therapy',
+							'Cognitive behavioral therapy',
 							'One-to-one and group sessions',
 							'12-step and relapse-prevention work',
 						],
@@ -1774,7 +1774,7 @@ function rehab_treatment_v3_specs(): array {
 					'Gamma-hydroxybutyrate, better known as GHB, liquid ecstasy or fishies, is a central nervous system depressant first used as an anaesthetic in the 1960s. Today it circulates mainly as a recreational party drug, and among bodybuilders for its effect on growth hormone. Usually a clear liquid or white powder, GHB takes effect within about fifteen minutes and lasts three to six hours, producing an alcohol-like euphoria, confidence and heightened sex drive.',
 					'That easy euphoria comes from the way GHB acts on the brain\'s GABA system, slowing the central nervous system much as alcohol does. Tolerance builds quickly, so doses become larger and more frequent, and because the drug is metabolised rapidly, the effects fade within hours. Heavy users often end up dosing around the clock simply to keep GHB withdrawal at bay, which is how dependence can take hold far faster than most people expect.',
 					'Escalation carries two serious dangers. GHB is usually an unmarked liquid that is almost impossible to dose accurately, so overdose, particularly when GHB is mixed with alcohol or other drugs, can slow breathing, heart rate and blood pressure to dangerous levels. And once dependence is established, stopping abruptly is genuinely unsafe: GHB withdrawal can begin within hours of the last dose, last up to two weeks, and bring insomnia, severe anxiety, tremor, a racing heart and, in heavier users, confusion, hallucinations and delirium. This is why GHB detox should always be medically supervised.',
-					'Because GHB is usually taken socially, many people are slow to recognise that use has become an addiction. If you find yourself craving GHB between sessions, relying on it to socialise, or trying to stop and not managing to, those are signals worth taking seriously. A quiet, confidential conversation with our team in Hua Hin is a small step, and it may be the one that changes everything.',
+					'Because GHB is usually taken socially, many people are slow to recognize that use has become an addiction. If you find yourself craving GHB between sessions, relying on it to socialize, or trying to stop and not managing to, those are signals worth taking seriously. A quiet, confidential conversation with our team in Hua Hin is a small step, and it may be the one that changes everything.',
 				],
 			],
 			'faqs' => [
@@ -1813,7 +1813,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating benzodiazepine addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Xanax dependence is easy to miss when it began with a legitimate prescription. Families often notice the drowsiness, memory lapses and isolation before the person taking it does. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of Xanax addiction',
 				'card1Items' => [
@@ -1852,7 +1852,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Our approach',
 				'heading' => 'A holistic approach to Xanax addiction',
-				'body' => "Xanax dependence is rarely a question of willpower. For many of our clients it began as a legitimate prescription for anxiety or panic, and the drug did its job, until tolerance crept in and the body stopped knowing how to feel calm without it. Because Xanax changes how the central nervous system works, simply deciding to stop is not only ineffective, it can be dangerous.\n\nThe way through Xanax addiction is a slow, medically supervised taper, then honest therapeutic work on the anxiety that started it all. At The Diamond, benzodiazepine detox, one-to-one psychotherapy, group sessions, counselling and practices like meditation are woven into a single tailored Xanax treatment program, delivered in a calm, private setting by the sea in Hua Hin, so you can rebuild a life that no longer needs the prescription.",
+				'body' => "Xanax dependence is rarely a question of willpower. For many of our clients it began as a legitimate prescription for anxiety or panic, and the drug did its job, until tolerance crept in and the body stopped knowing how to feel calm without it. Because Xanax changes how the central nervous system works, simply deciding to stop is not only ineffective, it can be dangerous.\n\nThe way through Xanax addiction is a slow, medically supervised taper, then honest therapeutic work on the anxiety that started it all. At The Diamond, benzodiazepine detox, one-to-one psychotherapy, group sessions, counseling and practices like meditation are woven into a single tailored Xanax treatment program, delivered in a calm, private setting by the sea in Hua Hin, so you can rebuild a life that no longer needs the prescription.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of Xanax recovery',
@@ -1876,15 +1876,15 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Treating the anxiety underneath',
 						'paragraphs' => [
 							'Xanax almost always starts as an answer to anxiety. Lasting recovery means finding better ones.',
-							'Through one-to-one psychotherapy, group sessions and counselling, our psychologists and behavioural therapists work with you on the panic and worry that made the prescription feel necessary, and teach you healthy ways to manage anxiety so you never feel the need to return to Xanax.',
+							'Through one-to-one psychotherapy, group sessions and counseling, our psychologists and behavioral therapists work with you on the panic and worry that made the prescription feel necessary, and teach you healthy ways to manage anxiety so you never feel the need to return to Xanax.',
 						],
 						'listItems' => [
 							'One-to-one psychotherapy and CBT',
-							'Group sessions and counselling',
+							'Group sessions and counseling',
 							'Practical tools for managing anxiety and panic',
 						],
 						'asideQuote' => '"Until the anxiety underneath is treated, the pull back to Xanax remains. That is where the real work of recovery happens."',
@@ -1976,7 +1976,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating benzodiazepine addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Valium dependence builds quietly, even on a legitimate prescription, so the signs go unnoticed for months. Families tend to spot the drowsiness and growing reliance first. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of Valium addiction',
 				'card1Items' => [
@@ -2039,7 +2039,7 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Treating what the pill was quieting',
 						'paragraphs' => [
 							'Valium almost always starts as a solution, for anxiety, sleep or pain. Treating what the pill was quieting is what makes recovery hold.',
@@ -2139,7 +2139,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating opioid addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'OxyContin dependence often begins with a legitimate prescription for pain, which is why it can go unnoticed for so long. If several of these signs of oxycodone addiction feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of OxyContin addiction',
 				'card1Items' => [
@@ -2202,11 +2202,11 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Working on the why',
 						'paragraphs' => [
 							'Detox clears oxycodone from the body. Therapy addresses what kept you reaching for it.',
-							'Through individual and group sessions, including cognitive behavioural therapy and mindfulness, you learn to recognise and challenge the thought patterns behind the oxycodone dependence and build practical skills for managing pain and stress without opioids.',
+							'Through individual and group sessions, including cognitive behavioral therapy and mindfulness, you learn to recognize and challenge the thought patterns behind the oxycodone dependence and build practical skills for managing pain and stress without opioids.',
 						],
 						'listItems' => [
 							'One-to-one CBT sessions',
@@ -2263,7 +2263,7 @@ function rehab_treatment_v3_specs(): array {
 					'Oxycodone is a powerful opioid pain reliever, prescribed for moderate to severe pain under brand names including OxyContin, Percocet and Endocet. OxyContin is the extended-release form of oxycodone, designed to release the drug into the body slowly over many hours.',
 					'Oxycodone acts on the brain\'s opioid receptors, dulling pain and triggering a release of dopamine that can feel like deep calm or euphoria. The body adapts fast. Many people develop tolerance to oxycodone even while taking the medication exactly as prescribed, needing more of the drug to get the same relief and to keep withdrawal symptoms at bay.',
 					'From there, oxycodone use tends to escalate quietly: higher doses, prescriptions that run out early, requests to more than one doctor, and eventually tablets from other sources. Because oxycodone suppresses the respiratory system, this escalation is genuinely dangerous, and fatal opioid overdoses are tragically common.',
-					'Acknowledging that a medication has become a problem is hard, especially when it began with a legitimate prescription. If you recognise yourself or someone you love in this picture of OxyContin addiction, our team in Hua Hin will talk it through with you, confidentially and without obligation.',
+					'Acknowledging that a medication has become a problem is hard, especially when it began with a legitimate prescription. If you recognize yourself or someone you love in this picture of OxyContin addiction, our team in Hua Hin will talk it through with you, confidentially and without obligation.',
 				],
 			],
 			'faqs' => [
@@ -2302,7 +2302,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating opioid addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Tramadol dependence often begins with a legitimate prescription for pain, making the early signs easy to miss. Families usually notice the mood swings and drowsiness before anyone names the problem. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of tramadol addiction',
 				'card1Items' => [
@@ -2365,11 +2365,11 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Understanding why you use',
 						'paragraphs' => [
 							'Detox clears the tramadol from your body. Therapy addresses what kept you reaching for it.',
-							'In daily one-to-one and group sessions you\'ll explore the thought patterns, behaviours and unresolved trauma that often sit beneath tramadol and prescription drug dependence, then learn practical ways to recognise your triggers and respond differently.',
+							'In daily one-to-one and group sessions you\'ll explore the thought patterns, behaviors and unresolved trauma that often sit beneath tramadol and prescription drug dependence, then learn practical ways to recognize your triggers and respond differently.',
 						],
 						'listItems' => [
 							'One-to-one psychotherapy',
@@ -2386,7 +2386,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Skills for life after rehab',
 						'paragraphs' => [
 							'Recovery from tramadol addiction is a long-term process, not a 28-day event.',
-							'Alongside therapy you\'ll practise meditation, yoga and breathing exercises, skills that help you manage stress and pain without reaching for medication. You leave our tramadol rehab with a comprehensive aftercare plan to navigate triggers and prevent relapse in the years ahead.',
+							'Alongside therapy you\'ll practice meditation, yoga and breathing exercises, skills that help you manage stress and pain without reaching for medication. You leave our tramadol rehab with a comprehensive aftercare plan to navigate triggers and prevent relapse in the years ahead.',
 						],
 						'listItems' => [
 							'Meditation, yoga and breathwork',
@@ -2462,7 +2462,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating stimulant addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Ritalin dependence often hides behind a prescription or a demanding schedule. Colleagues and family tend to see the crashes, anxiety and climbing doses first. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of Ritalin addiction',
 				'card1Items' => [
@@ -2501,7 +2501,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Our approach',
 				'heading' => 'A holistic approach to Ritalin recovery',
-				'body' => "Ritalin dependence rarely looks like a stereotype. It often starts with a legitimate methylphenidate prescription, or with a student or professional borrowing a pill to push through a deadline, and quietly grows as tolerance builds and the doses climb. Because Ritalin is tied to performance, stopping can feel like giving up an edge, which is exactly why willpower alone so often fails: every demanding week becomes a reason to take it one more time.\n\nRitalin addiction treatment starts by taking that pressure away. At The Diamond, you stabilise under round-the-clock clinical supervision while sleep, appetite and mood recover from the stimulant crash, then work one-to-one with our therapists on the thinking and habits that kept the cycle turning. Daily holistic work, from yoga and personal training to meditation and massage, rebuilds energy and focus naturally, all within a calm, private residence in Hua Hin.",
+				'body' => "Ritalin dependence rarely looks like a stereotype. It often starts with a legitimate methylphenidate prescription, or with a student or professional borrowing a pill to push through a deadline, and quietly grows as tolerance builds and the doses climb. Because Ritalin is tied to performance, stopping can feel like giving up an edge, which is exactly why willpower alone so often fails: every demanding week becomes a reason to take it one more time.\n\nRitalin addiction treatment starts by taking that pressure away. At The Diamond, you stabilize under round-the-clock clinical supervision while sleep, appetite and mood recover from the stimulant crash, then work one-to-one with our therapists on the thinking and habits that kept the cycle turning. Daily holistic work, from yoga and personal training to meditation and massage, rebuilds energy and focus naturally, all within a calm, private residence in Hua Hin.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of Ritalin recovery',
@@ -2512,7 +2512,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'A supervised, steady start',
 						'paragraphs' => [
 							'Ritalin withdrawal is rarely dangerous, but the stimulant crash is real.',
-							'When regular Ritalin misuse stops, the body answers with deep fatigue, low mood, disturbed sleep and strong cravings, which is when most unsupported attempts to quit fail. In our fully equipped detox centre you stabilise under 24-hour care while our medical team focuses on restoring sleep, appetite and mood, so you reach therapy rested rather than running on empty.',
+							'When regular Ritalin misuse stops, the body answers with deep fatigue, low mood, disturbed sleep and strong cravings, which is when most unsupported attempts to quit fail. In our fully equipped detox center you stabilize under 24-hour care while our medical team focuses on restoring sleep, appetite and mood, so you reach therapy rested rather than running on empty.',
 						],
 						'listItems' => [
 							'24-hour nursing and medical oversight',
@@ -2525,14 +2525,14 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Rewiring the habit of reaching for a pill',
 						'paragraphs' => [
 							'Detox clears the Ritalin. Therapy addresses why you needed it.',
-							'Working one-to-one with our psychologists, you use cognitive behavioural therapy to unpick the distortions that drive Ritalin misuse: the belief that you cannot focus, perform or cope without the drug. You learn practical problem-solving techniques, healthier ways to manage stress and workload, and a realistic plan for the situations that used to send you back to the pills.',
+							'Working one-to-one with our psychologists, you use cognitive behavioral therapy to unpick the distortions that drive Ritalin misuse: the belief that you cannot focus, perform or cope without the drug. You learn practical problem-solving techniques, healthier ways to manage stress and workload, and a realistic plan for the situations that used to send you back to the pills.',
 						],
 						'listItems' => [
-							'Daily one-to-one cognitive behavioural therapy',
+							'Daily one-to-one cognitive behavioral therapy',
 							'Tools for stress, focus and performance pressure',
 							'A personal relapse-prevention plan',
 						],
@@ -2546,12 +2546,12 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Energy and focus, rebuilt naturally',
 						'paragraphs' => [
 							'Lasting recovery from Ritalin addiction needs more than abstinence.',
-							'Alongside therapy, your days include yoga, personal training, meditation and massage, habits that restore the energy and concentration Ritalin once promised artificially. Before you leave our rehab, we set up your aftercare: weekly online sessions with the counsellor who treated you, or an introduction to a trusted partner near home, so the structure continues after Hua Hin.',
+							'Alongside therapy, your days include yoga, personal training, meditation and massage, habits that restore the energy and concentration Ritalin once promised artificially. Before you leave our rehab, we set up your aftercare: weekly online sessions with the counselor who treated you, or an introduction to a trusted partner near home, so the structure continues after Hua Hin.',
 						],
 						'listItems' => [
 							'Yoga, personal training, meditation and massage',
 							'Healthy routines you take home with you',
-							'Weekly aftercare with your own counsellor',
+							'Weekly aftercare with your own counselor',
 						],
 						'asideQuote' => '"The goal is simple: by the time you leave, your best focus and energy come from your own routines, not from a prescription bottle."',
 						'asideMetaLabel' => 'Statement',
@@ -2560,7 +2560,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 			],
 			'inpatient' => [
-				'body' => 'Residential Ritalin addiction treatment removes you from the deadlines, prescriptions and pressures that keep methylphenidate misuse going. At our private estate in Hua Hin you live in your own villa with 24-hour specialised care, a full clinical and therapeutic team around you, and the time and quiet to focus entirely on recovery. With a strict cap on guest numbers, our staff-to-client ratio stays high, your program stays personal, and your stay stays completely private.',
+				'body' => 'Residential Ritalin addiction treatment removes you from the deadlines, prescriptions and pressures that keep methylphenidate misuse going. At our private estate in Hua Hin you live in your own villa with 24-hour specialized care, a full clinical and therapeutic team around you, and the time and quiet to focus entirely on recovery. With a strict cap on guest numbers, our staff-to-client ratio stays high, your program stays personal, and your stay stays completely private.',
 			],
 			'benefits' => [
 				[
@@ -2583,10 +2583,10 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider Ritalin rehab?',
 				'paragraphs' => [
-					'Ritalin is the brand name of methylphenidate, a prescription central nervous system stimulant most commonly used to treat attention deficit hyperactivity disorder and narcolepsy. It works on dopamine and norepinephrine, the brain chemicals involved in concentration, impulsivity and motivation. Taken as prescribed by a diagnosed individual, methylphenidate helps steady focus and behaviour. The problems begin when Ritalin is used outside those boundaries.',
+					'Ritalin is the brand name of methylphenidate, a prescription central nervous system stimulant most commonly used to treat attention deficit hyperactivity disorder and narcolepsy. It works on dopamine and norepinephrine, the brain chemicals involved in concentration, impulsivity and motivation. Taken as prescribed by a diagnosed individual, methylphenidate helps steady focus and behavior. The problems begin when Ritalin is used outside those boundaries.',
 					'Ritalin carries a high potential for misuse precisely because of how it works. In someone without ADHD, the same dopamine boost produces euphoria and a sense of sharpened performance rather than balance. People who misuse Ritalin typically take far larger doses than a doctor would prescribe, sometimes crushing tablets to snort or inject them for a stronger effect. Tolerance builds, doses climb, and once physical dependence sets in, cutting back triggers fatigue, depression and cravings that pull users straight back to the drug.',
 					'Ritalin misuse often escalates quietly. Students and professionals lean on the drug to study or work longer, which has made methylphenidate one of the most misused prescription drugs, and what starts as an occasional boost becomes something the working week cannot run without. Over time, heavy use brings anxiety, insomnia, appetite loss and paranoia, while taking too much strains the heart and, in some cases, can be fatal. The cost eventually reaches sleep, health, relationships and the very performance Ritalin was meant to protect.',
-					'If any of this feels familiar, that recognition is the most important step, and you do not have to take the next one alone. The Diamond Rehab Thailand offers personalised, medically supervised Ritalin addiction treatment in complete privacy, built around your circumstances rather than a standard template. Contact our admissions team for a confidential conversation about what your recovery from Ritalin could look like.',
+					'If any of this feels familiar, that recognition is the most important step, and you do not have to take the next one alone. The Diamond Rehab Thailand offers personalized, medically supervised Ritalin addiction treatment in complete privacy, built around your circumstances rather than a standard template. Contact our admissions team for a confidential conversation about what your recovery from Ritalin could look like.',
 				],
 			],
 			'faqs' => [
@@ -2599,7 +2599,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Is there an aftercare program?',
-					'answer' => 'Aftercare is essential to lasting recovery from Ritalin addiction, and therefore we offer two ways to continue it. Option one would be weekly online sessions with your focal counsellor, who also treated you while at our centre. Option two is that we bring you in contact with one of our aftercare partners around the world, depending on where you live.',
+					'answer' => 'Aftercare is essential to lasting recovery from Ritalin addiction, and therefore we offer two ways to continue it. Option one would be weekly online sessions with your focal counselor, who also treated you while at our center. Option two is that we bring you in contact with one of our aftercare partners around the world, depending on where you live.',
 				],
 				[
 					'question' => 'How can I help my loved one?',
@@ -2626,7 +2626,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating prescription drug addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Dependence on prescription medication often grows quietly out of a legitimate prescription. Families usually notice the early refills, secrecy and mood changes before the person taking the pills does. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of prescription drug addiction',
 				'card1Items' => [
@@ -2665,7 +2665,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Our approach',
 				'heading' => 'A holistic approach to prescription drug recovery',
-				'body' => "Prescription drug dependence rarely starts with a bad decision. It usually grows out of a legitimate prescription: a painkiller after surgery, a benzodiazepine for anxiety, a stimulant for focus, a pill to finally sleep. Because the medication came from a doctor and sits in a labelled bottle, prescription drug addiction is hard to recognise, and because the body adapts to the drug, willpower alone is rarely enough to quit.\n\nOur prescription drug addiction treatment meets each medication class on its own terms. Detox is medically supervised and designed around what you have been taking, followed by one-on-one therapy that works on the issues underneath the dependence, and wellness practices that rebuild sleep, calm and focus without a prescription. All of it happens in a private, resort-style setting in Hua Hin, with a clinical team beside you at every step.",
+				'body' => "Prescription drug dependence rarely starts with a bad decision. It usually grows out of a legitimate prescription: a painkiller after surgery, a benzodiazepine for anxiety, a stimulant for focus, a pill to finally sleep. Because the medication came from a doctor and sits in a labeled bottle, prescription drug addiction is hard to recognize, and because the body adapts to the drug, willpower alone is rarely enough to quit.\n\nOur prescription drug addiction treatment meets each medication class on its own terms. Detox is medically supervised and designed around what you have been taking, followed by one-on-one therapy that works on the issues underneath the dependence, and wellness practices that rebuild sleep, calm and focus without a prescription. All of it happens in a private, resort-style setting in Hua Hin, with a clinical team beside you at every step.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of prescription drug recovery',
@@ -2689,7 +2689,7 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Understanding why the medication took hold',
 						'paragraphs' => [
 							'Clearing the drug from your body is the start. The deeper work of prescription drug addiction treatment is understanding why you came to depend on it.',
@@ -2748,8 +2748,8 @@ function rehab_treatment_v3_specs(): array {
 				'heading' => 'Is it time to consider prescription drug rehab?',
 				'paragraphs' => [
 					'Prescription drug addiction is dependence on medication that was, in most cases, originally prescribed by a doctor. The main classes are opioid painkillers such as oxycodone, hydrocodone, codeine, tramadol and fentanyl, benzodiazepines such as diazepam, alprazolam and lorazepam, stimulants such as methylphenidate and dextroamphetamine prescribed for ADHD, and sleeping pills. Prescription drug abuse means using these medications in a way the prescribing doctor never intended: a higher dose, someone else\'s prescription, or taking the drug for its effects rather than the condition it was meant to treat.',
-					'These medications can be addictive even when taken exactly as prescribed. The body adapts: tolerance builds, so the same dose does less, and higher doses are needed to get the original effect. Stop suddenly and withdrawal symptoms appear, which makes it harder to quit and easier to keep taking the drug just to feel normal. Because the medication comes from a doctor and is socially accepted, many people develop a prescription drug dependence without realising they have a serious problem.',
-					'Prescription drug abuse tends to escalate in a recognisable pattern. Doses creep above what was prescribed. Refills are requested early, or the same prescription is sought from more than one doctor. When prescriptions run out, some people buy the medication without a prescription, and some who began with prescribed opioid painkillers move on to stronger and more dangerous opioids. By that point the original medical issue is no longer what is driving the use.',
+					'These medications can be addictive even when taken exactly as prescribed. The body adapts: tolerance builds, so the same dose does less, and higher doses are needed to get the original effect. Stop suddenly and withdrawal symptoms appear, which makes it harder to quit and easier to keep taking the drug just to feel normal. Because the medication comes from a doctor and is socially accepted, many people develop a prescription drug dependence without realizing they have a serious problem.',
+					'Prescription drug abuse tends to escalate in a recognizable pattern. Doses creep above what was prescribed. Refills are requested early, or the same prescription is sought from more than one doctor. When prescriptions run out, some people buy the medication without a prescription, and some who began with prescribed opioid painkillers move on to stronger and more dangerous opioids. By that point the original medical issue is no longer what is driving the use.',
 					'If any of this feels familiar, in your own life or in someone you love, acknowledging it is the hardest step, and the most important one. Relapse rates for people who try to quit prescription drugs alone are high; a medically supervised detox followed by structured therapy gives recovery a far stronger footing. Our team at The Diamond Rehab Thailand can talk you through the admissions process for prescription drug addiction treatment confidentially and help you decide whether residential rehab is the right next step.',
 				],
 			],
@@ -2790,7 +2790,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating depression',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Depression builds slowly and is easy to dismiss as a rough patch, which is why the signs often go unnamed for months. Families and partners frequently notice the withdrawal and flatness before the person does. If several feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Emotional signs of depression',
 				'card1Items' => [
@@ -2858,8 +2858,8 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Getting to the roots of the low',
 						'paragraphs' => [
-							'Psychotherapy is one of the most effective core treatments for depression, and it sits at the centre of your days here.',
-							'Through daily one-to-one sessions and small group work, you\'ll learn to recognise the negative thinking patterns that feed depression and replace them with workable alternatives, using cognitive behavioural therapy, DBT and trauma-focused work where your history calls for it.',
+							'Psychotherapy is one of the most effective core treatments for depression, and it sits at the center of your days here.',
+							'Through daily one-to-one sessions and small group work, you\'ll learn to recognize the negative thinking patterns that feed depression and replace them with workable alternatives, using cognitive behavioral therapy, DBT and trauma-focused work where your history calls for it.',
 						],
 						'listItems' => [
 							'Daily one-to-one sessions with experienced therapists',
@@ -2913,9 +2913,9 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider a depression retreat?',
 				'paragraphs' => [
-					'Clinical depression, or major depressive disorder, is far more than sadness. It is a recognised medical illness that affects mood, thinking and the body. The Mayo Clinic\'s list of common depression symptoms runs from feelings of worthlessness and loss of interest in once-loved activities to sleep disturbance, appetite changes, slowed thinking, unexplained physical problems and recurrent thoughts of death.',
-					'What separates depression from an ordinary low mood is duration, depth and loss of function. A rough patch lifts within days; clinical depression persists for weeks, drains pleasure from things you once enjoyed and begins to interfere with work, relationships and the ability to care for yourself. Researchers point to two forces behind depression: a systematic negative bias in thinking, and the patterns of a person\'s interaction with their environment. Cognitive behavioural therapy is so central to depression treatment because it works on both.',
-					'Left untreated, depression tends to deepen. Sleep disturbance worsens the low and the low worsens sleep, isolation grows, and some people turn to alcohol or other risky behaviours hoping to numb the symptoms, which only entrenches them. The encouraging news is that depression responds well to professional treatment. Psychotherapy is one of the most effective core approaches, and a meta-analysis in Psychiatry Research found cognitive behavioural therapy superior to medication for treatment-resistant depression, with medication helping as an adjunct to therapy when a psychiatrist recommends it.',
+					'Clinical depression, or major depressive disorder, is far more than sadness. It is a recognized medical illness that affects mood, thinking and the body. The Mayo Clinic\'s list of common depression symptoms runs from feelings of worthlessness and loss of interest in once-loved activities to sleep disturbance, appetite changes, slowed thinking, unexplained physical problems and recurrent thoughts of death.',
+					'What separates depression from an ordinary low mood is duration, depth and loss of function. A rough patch lifts within days; clinical depression persists for weeks, drains pleasure from things you once enjoyed and begins to interfere with work, relationships and the ability to care for yourself. Researchers point to two forces behind depression: a systematic negative bias in thinking, and the patterns of a person\'s interaction with their environment. Cognitive behavioral therapy is so central to depression treatment because it works on both.',
+					'Left untreated, depression tends to deepen. Sleep disturbance worsens the low and the low worsens sleep, isolation grows, and some people turn to alcohol or other risky behaviors hoping to numb the symptoms, which only entrenches them. The encouraging news is that depression responds well to professional treatment. Psychotherapy is one of the most effective core approaches, and a meta-analysis in Psychiatry Research found cognitive behavioral therapy superior to medication for treatment-resistant depression, with medication helping as an adjunct to therapy when a psychiatrist recommends it.',
 					'Acknowledging that you are struggling with depression takes real courage, and you do not have to find the way back on your own. If depression has settled over your life, or the life of someone you love, and standard measures haven\'t been enough, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -2953,11 +2953,11 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'How is depression treated at a residential retreat?',
-					'answer' => 'Depression treatment at a residential retreat moves through clear steps: a thorough psychiatric evaluation to confirm the diagnosis, a personalised treatment plan, then daily psychotherapy supported by holistic practice, with the plan reviewed and adjusted as you progress. Psychotherapy is the core of the depression program, one-to-one and in small groups, alongside complementary approaches such as yoga, meditation and other relaxation techniques. Before discharge we prepare a personal aftercare plan so your recovery continues at home.',
+					'answer' => 'Depression treatment at a residential retreat moves through clear steps: a thorough psychiatric evaluation to confirm the diagnosis, a personalized treatment plan, then daily psychotherapy supported by holistic practice, with the plan reviewed and adjusted as you progress. Psychotherapy is the core of the depression program, one-to-one and in small groups, alongside complementary approaches such as yoga, meditation and other relaxation techniques. Before discharge we prepare a personal aftercare plan so your recovery continues at home.',
 				],
 				[
 					'question' => 'Do I need medication to recover from depression?',
-					'answer' => 'Not necessarily. Medication can ease depressive symptoms by acting on neurotransmitters such as serotonin, but it should not be the main component of depression treatment; it works best as an adjunct to psychotherapy. Research published in Psychiatry Research found cognitive behavioural therapy superior to medication for treatment-resistant depression. Our psychiatrist reviews your situation, and any existing prescriptions, and recommends medication only where it genuinely supports your recovery from depression.',
+					'answer' => 'Not necessarily. Medication can ease depressive symptoms by acting on neurotransmitters such as serotonin, but it should not be the main component of depression treatment; it works best as an adjunct to psychotherapy. Research published in Psychiatry Research found cognitive behavioral therapy superior to medication for treatment-resistant depression. Our psychiatrist reviews your situation, and any existing prescriptions, and recommends medication only where it genuinely supports your recovery from depression.',
 				],
 				[
 					'question' => 'How long does depression treatment take?',
@@ -2975,7 +2975,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating anxiety disorders',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Everyone feels anxious from time to time, so an anxiety disorder is easy to mistake for ordinary stress, and many people carry it for years before seeking anxiety treatment. The signs show up in the mind and in the body, and partners and colleagues often notice the restlessness and avoidance first. If several feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Emotional signs of anxiety',
 				'card1Items' => [
@@ -2984,7 +2984,7 @@ function rehab_treatment_v3_specs(): array {
 					'Restlessness and a mind that will not switch off',
 					'Fear of being judged or embarrassed in social situations',
 					'Avoiding places that feel difficult to escape from',
-					'Obsessive thoughts that drive repetitive behaviour',
+					'Obsessive thoughts that drive repetitive behavior',
 				],
 				'card2Title' => 'Physical signs of anxiety',
 				'card2Items' => [
@@ -3027,7 +3027,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'A calm, careful start',
 						'paragraphs' => [
 							'Anxiety disorders differ considerably from person to person, so anxiety treatment begins with understanding yours.',
-							'Our psychiatrist starts with a comprehensive psychiatric assessment to identify the causes, symptoms and triggers that characterise your specific anxiety disorder, then builds a gentle early routine of rest, sleep and structure. Where appropriate, medication is reviewed and adjusted by the psychiatrist, always as a support to therapy rather than a replacement for it.',
+							'Our psychiatrist starts with a comprehensive psychiatric assessment to identify the causes, symptoms and triggers that characterize your specific anxiety disorder, then builds a gentle early routine of rest, sleep and structure. Where appropriate, medication is reviewed and adjusted by the psychiatrist, always as a support to therapy rather than a replacement for it.',
 						],
 						'listItems' => [
 							'Comprehensive psychiatric assessment on arrival',
@@ -3043,8 +3043,8 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Reprogramming the anxious mind',
 						'paragraphs' => [
-							'Evidence-based psychotherapy sits at the centre of anxiety treatment here, tailored to your diagnosis rather than a standard script.',
-							'Through daily one-to-one sessions and small group work, you\'ll learn to identify and reprogram the dysfunctional thought patterns that feed anxiety, using cognitive behavioural therapy, DBT, mindfulness therapy and carefully paced exposure-based work where your anxiety disorder calls for it.',
+							'Evidence-based psychotherapy sits at the center of anxiety treatment here, tailored to your diagnosis rather than a standard script.',
+							'Through daily one-to-one sessions and small group work, you\'ll learn to identify and reprogram the dysfunctional thought patterns that feed anxiety, using cognitive behavioral therapy, DBT, mindfulness therapy and carefully paced exposure-based work where your anxiety disorder calls for it.',
 						],
 						'listItems' => [
 							'Daily one-to-one sessions with experienced therapists',
@@ -3098,9 +3098,9 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider anxiety treatment?',
 				'paragraphs' => [
-					'Anxiety disorders are a category of mental health conditions characterised by extreme feelings of anxiety, fear or worry that can persist for extended periods of time. They take many forms: generalised anxiety disorder, the most common, brings chronic worry about nonspecific events; panic disorder produces sudden bursts of intense fear; social anxiety disorder centres on a fear of being judged or embarrassed; agoraphobia is a fear of situations that would be difficult to escape from; and obsessive-compulsive disorder pairs intrusive thoughts with repetitive behaviour. Anxiety disorders are among the most common mental health problems in the world, affecting about 264 million people globally.',
+					'Anxiety disorders are a category of mental health conditions characterized by extreme feelings of anxiety, fear or worry that can persist for extended periods of time. They take many forms: generalized anxiety disorder, the most common, brings chronic worry about nonspecific events; panic disorder produces sudden bursts of intense fear; social anxiety disorder centers on a fear of being judged or embarrassed; agoraphobia is a fear of situations that would be difficult to escape from; and obsessive-compulsive disorder pairs intrusive thoughts with repetitive behavior. Anxiety disorders are among the most common mental health problems in the world, affecting about 264 million people globally.',
 					'Anxiety itself is a normal human response to stress. It\'s natural to feel nervous before a job interview, an important presentation or a move to another country, and that kind of anxiety usually passes without leaving a mark. An anxiety disorder is different: the fear is out of proportion to the situation, it persists long after the stressful moment has gone, and it begins to interfere with work, relationships and daily life, which is the point at which professional anxiety treatment becomes worth considering.',
-					'Without proper anxiety treatment, an anxiety disorder tends to deepen rather than fade. It wears away at mood, attitude and behaviour, and the physical symptoms of anxiety can be frightening in their own right: a racing heart, sweating, shortness of breath and nausea can mimic a cardiac event, even though anxiety itself cannot kill you. The encouraging news is that anxiety disorders respond well to professional care. Evidence-based psychotherapy, tailored to your diagnosis and delivered consistently, helps you challenge the distorted thinking beneath the fear and build practical skills to manage stress, which is exactly what a structured residential anxiety program is designed to provide.',
+					'Without proper anxiety treatment, an anxiety disorder tends to deepen rather than fade. It wears away at mood, attitude and behavior, and the physical symptoms of anxiety can be frightening in their own right: a racing heart, sweating, shortness of breath and nausea can mimic a cardiac event, even though anxiety itself cannot kill you. The encouraging news is that anxiety disorders respond well to professional care. Evidence-based psychotherapy, tailored to your diagnosis and delivered consistently, helps you challenge the distorted thinking beneath the fear and build practical skills to manage stress, which is exactly what a structured residential anxiety program is designed to provide.',
 					'Acknowledging that the worry has grown bigger than you can manage takes real courage, and you do not have to find the way back on your own. If an anxiety disorder has settled over your life, or the life of someone you love, and standard measures haven\'t been enough, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -3151,7 +3151,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What type of therapy is best for anxiety disorders?',
-					'answer' => 'Given how considerably anxiety disorders differ, there is no single best therapy for anxiety. Treatment is tailored to your diagnosis, symptoms and unique needs, and several techniques may be used alone or in combination, including cognitive behavioural therapy, dialectical behaviour therapy, exposure therapy, mindfulness therapy and interpersonal therapy. Your psychiatrist and therapists will recommend the right mix after your initial assessment.',
+					'answer' => 'Given how considerably anxiety disorders differ, there is no single best therapy for anxiety. Treatment is tailored to your diagnosis, symptoms and unique needs, and several techniques may be used alone or in combination, including cognitive behavioral therapy, dialectical behavior therapy, exposure therapy, mindfulness therapy and interpersonal therapy. Your psychiatrist and therapists will recommend the right mix after your initial assessment.',
 				],
 				[
 					'question' => 'Can anxiety kill you?',
@@ -3169,7 +3169,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating trauma and PTSD',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Trauma rarely stays in the past on its own, and the signs of PTSD can surface within weeks of an event or take months and even years to appear. Partners and families often notice the jumpiness, detachment and disturbed sleep before the person connects them to what happened. If several feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of PTSD',
 				'card1Items' => [
@@ -3237,8 +3237,8 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Processing trauma at your pace',
 						'paragraphs' => [
-							'Unresolved trauma lies at the heart of PTSD, and processing it safely is the centre of your trauma treatment here.',
-							'Through one-to-one sessions with experienced trauma therapists, you\'ll explore, process and heal what happened using trauma-focused therapies such as EMDR and trauma-focused CBT, confronting the traumatic memory in a controlled way and learning to recognise and change the thinking patterns PTSD left behind.',
+							'Unresolved trauma lies at the heart of PTSD, and processing it safely is the center of your trauma treatment here.',
+							'Through one-to-one sessions with experienced trauma therapists, you\'ll explore, process and heal what happened using trauma-focused therapies such as EMDR and trauma-focused CBT, confronting the traumatic memory in a controlled way and learning to recognize and change the thinking patterns PTSD left behind.',
 						],
 						'listItems' => [
 							'One-to-one sessions with experienced trauma therapists',
@@ -3255,7 +3255,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Built for life after the retreat',
 						'paragraphs' => [
 							'Trauma recovery holds when mind and body learn to feel safe together.',
-							'Yoga, meditation and exercise therapy become part of your daily rhythm during treatment, and you\'ll practise the coping skills that keep PTSD symptoms manageable in a healthy, sustainable way. Before you leave we design a personal aftercare plan, so the steadiness you build here travels home with you.',
+							'Yoga, meditation and exercise therapy become part of your daily rhythm during treatment, and you\'ll practice the coping skills that keep PTSD symptoms manageable in a healthy, sustainable way. Before you leave we design a personal aftercare plan, so the steadiness you build here travels home with you.',
 						],
 						'listItems' => [
 							'Yoga, meditation and exercise therapy every day',
@@ -3294,7 +3294,7 @@ function rehab_treatment_v3_specs(): array {
 				'paragraphs' => [
 					'Post-traumatic stress disorder, or PTSD, is a mental health condition that some people develop after experiencing or witnessing a traumatic event. It brings uncontrollable thoughts and painful memories of the experience, and many people relive the event through realistic flashbacks and nightmares. Some develop complex PTSD, which follows repeated trauma rather than a single event and calls for the same careful, professional trauma treatment.',
 					'Almost any situation involving real danger can lead to PTSD, and it is still not fully understood why some people are affected and others are not; about 30 percent of people who experience severe trauma go on to develop the disorder. What separates PTSD from a normal stress response is what happens afterwards. The body reacts to danger by releasing stress hormones such as adrenaline and norepinephrine as part of its natural fight-or-flight response, and normally balance is restored once the event has passed. In PTSD, that state of hyperarousal persists long after the danger is over.',
-					'PTSD symptoms can develop within a few weeks of a traumatic event, or take months and even years to appear, and they tend to worsen without treatment. Left unaddressed, PTSD can change the way you think and feel, straining relationships, careers and day-to-day life, while prolonged hyperarousal feeds anxiety, insomnia and feelings of guilt and may affect the hippocampus, a part of the brain involved in emotional processing. The encouraging news is that PTSD responds to professional trauma treatment: trauma-focused therapies such as EMDR and cognitive behavioural therapy help you process the event in a controlled way, and a meta-analysis of 42 studies in Clinical Psychology Review found that around 44 percent of people fully recover after receiving treatment.',
+					'PTSD symptoms can develop within a few weeks of a traumatic event, or take months and even years to appear, and they tend to worsen without treatment. Left unaddressed, PTSD can change the way you think and feel, straining relationships, careers and day-to-day life, while prolonged hyperarousal feeds anxiety, insomnia and feelings of guilt and may affect the hippocampus, a part of the brain involved in emotional processing. The encouraging news is that PTSD responds to professional trauma treatment: trauma-focused therapies such as EMDR and cognitive behavioral therapy help you process the event in a controlled way, and a meta-analysis of 42 studies in Clinical Psychology Review found that around 44 percent of people fully recover after receiving treatment.',
 					'Reaching out about trauma takes real courage, and you do not have to carry it on your own. If a past event still shapes your days, or the days of someone you love, and standard measures haven\'t been enough, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -3348,7 +3348,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What is the most effective therapy for PTSD?',
-					'answer' => 'PTSD affects everyone differently, so the most effective therapy for one person may not be the best option for another. Depending on your needs, your trauma therapist may draw on cognitive behavioural therapy, prolonged exposure therapy, cognitive processing therapy, mindfulness therapy or EMDR. Trauma-focused CBT, one of the most widely used, helps you recognise and modify the thinking patterns that sustain PTSD and confront the trauma in a controlled manner.',
+					'answer' => 'PTSD affects everyone differently, so the most effective therapy for one person may not be the best option for another. Depending on your needs, your trauma therapist may draw on cognitive behavioral therapy, prolonged exposure therapy, cognitive processing therapy, mindfulness therapy or EMDR. Trauma-focused CBT, one of the most widely used, helps you recognize and modify the thinking patterns that sustain PTSD and confront the trauma in a controlled manner.',
 				],
 				[
 					'question' => 'What is the success rate of PTSD treatment?',
@@ -3366,7 +3366,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating executive burnout',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Burnout creeps up on capable people, and high-performing executives are often the last to admit it. The signs of burnout show up in mood and in the body, and colleagues and partners usually notice the change long before the person running on empty does. If several of these feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Mental and emotional signs of burnout',
 				'card1Items' => [
@@ -3390,7 +3390,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Comprehensive clinical assessment and proven therapies including CBT, counselling and stress management training, alongside fitness, spa treatments and mindfulness that restore the whole person after burnout, not just the symptoms.',
+					'body' => 'Comprehensive clinical assessment and proven therapies including CBT, counseling and stress management training, alongside fitness, spa treatments and mindfulness that restore the whole person after burnout, not just the symptoms.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -3434,10 +3434,10 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Working on what drives the burnout',
 						'paragraphs' => [
 							'Rest alone is not burnout recovery. Without addressing the working patterns that produced the exhaustion, burnout tends to come back once the pressure returns.',
-							'Through one-to-one sessions and small group work, you will examine the drivers beneath the burnout, perfectionism, weak boundaries and chronic workplace stress, using cognitive behavioural therapy, counselling and stress management training to rebuild an identity that is bigger than your job title.',
+							'Through one-to-one sessions and small group work, you will examine the drivers beneath the burnout, perfectionism, weak boundaries and chronic workplace stress, using cognitive behavioral therapy, counseling and stress management training to rebuild an identity that is bigger than your job title.',
 						],
 						'listItems' => [
-							'One-to-one cognitive behavioural therapy and counselling',
+							'One-to-one cognitive behavioral therapy and counseling',
 							'Stress management training and small group sessions',
 							'Boundaries, perfectionism and identity beyond work',
 						],
@@ -3488,9 +3488,9 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider burnout treatment?',
 				'paragraphs' => [
-					'Everybody feels stressed at work from time to time, but burnout is something more. Only relatively recently classified by the World Health Organisation as a serious occupational health hazard, burnout syndrome is a state of physical, mental and emotional exhaustion caused by chronic workplace stress, with common drivers including long working hours, tight deadlines, job insecurity, a lack of leadership and feeling undervalued or unfairly compensated.',
+					'Everybody feels stressed at work from time to time, but burnout is something more. Only relatively recently classified by the World Health Organization as a serious occupational health hazard, burnout syndrome is a state of physical, mental and emotional exhaustion caused by chronic workplace stress, with common drivers including long working hours, tight deadlines, job insecurity, a lack of leadership and feeling undervalued or unfairly compensated.',
 					'What separates burnout from ordinary tiredness is that rest stops working. The exhaustion persists after the demanding quarter ends, enthusiasm and focus do not return, and cynicism settles in where commitment used to be. Burnout is also often mistaken for depression; while chronic workplace stress can cause or worsen depression, burnout syndrome is tied specifically to work, yet its effects can spill over into almost every aspect of your life.',
-					'Left unaddressed, burnout tends to deepen. Sleep disturbance, frequent headaches and chronic fatigue take hold, performance and motivation slide, and many people become unmotivated, depressed and physically unwell. Short breaks, time away from digital devices and new hobbies can help in the early stages, but once chronic stress has become entrenched, recovering from burnout without specialist help can feel next to impossible. A structured residential burnout treatment program works because it combines clinical assessment, cognitive behavioural therapy and stress management with genuine rest, treating the exhaustion and its causes at the same time.',
+					'Left unaddressed, burnout tends to deepen. Sleep disturbance, frequent headaches and chronic fatigue take hold, performance and motivation slide, and many people become unmotivated, depressed and physically unwell. Short breaks, time away from digital devices and new hobbies can help in the early stages, but once chronic stress has become entrenched, recovering from burnout without specialist help can feel next to impossible. A structured residential burnout treatment program works because it combines clinical assessment, cognitive behavioral therapy and stress management with genuine rest, treating the exhaustion and its causes at the same time.',
 					'Acknowledging that you are running on empty takes real honesty, especially for executives used to being the one others rely on. If burnout has settled over your work and your life, or you are worried about a colleague or employee, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -3565,7 +3565,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating sleep disorders',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Chronic insomnia builds quietly, night by night, and the cost shows up long after dark. The signs of a sleep disorder appear in bed and follow you through the day, and partners often notice the exhaustion and irritability before the person losing sleep does. If several of these feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Signs of chronic insomnia',
 				'card1Items' => [
@@ -3588,7 +3588,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'CBT-I at the core, calm around it',
-					'body' => 'Cognitive behavioural therapy for insomnia (CBT-I) forms the basis of our sleep disorder treatment, alongside yoga, meditation and exercise that restore the whole person, not just the nights.',
+					'body' => 'Cognitive behavioral therapy for insomnia (CBT-I) forms the basis of our sleep disorder treatment, alongside yoga, meditation and exercise that restore the whole person, not just the nights.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -3631,8 +3631,8 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Retraining the mind for sleep',
 						'paragraphs' => [
-							'Cognitive behavioural therapy for insomnia (CBT-I) forms the basis of our treatment program, because it works on the thoughts that keep you awake as well as the habits.',
-							'In structured one-to-one CBT-I sessions you will learn to recognise and challenge the negative thinking that fuels sleeplessness, while practising proven techniques such as stimulus control, sleep restriction, sleep hygiene training and relaxation skills you can carry into the nights after treatment.',
+							'Cognitive behavioral therapy for insomnia (CBT-I) forms the basis of our treatment program, because it works on the thoughts that keep you awake as well as the habits.',
+							'In structured one-to-one CBT-I sessions you will learn to recognize and challenge the negative thinking that fuels sleeplessness, while practicing proven techniques such as stimulus control, sleep restriction, sleep hygiene training and relaxation skills you can carry into the nights after treatment.',
 						],
 						'listItems' => [
 							'Structured CBT-I sessions with experienced therapists',
@@ -3688,7 +3688,7 @@ function rehab_treatment_v3_specs(): array {
 				'paragraphs' => [
 					'Insomnia is an extremely common sleep disorder that affects about one in three people globally. It shows up as trouble falling asleep, staying asleep or getting adequate amounts of quality rest. Clinicians distinguish acute insomnia, a short-term condition usually triggered by a stressful event that tends to resolve on its own, from chronic insomnia, defined as disrupted sleep at least three nights per week for three months or longer. It is the chronic form of insomnia that benefits most from structured treatment.',
 					'Chronic insomnia rarely has a single cause. High levels of stress and mental health conditions such as anxiety and depression are common drivers, as are stimulants including caffeine, nicotine and alcohol. Lifestyle plays its part too: shift work, an irregular sleep schedule, napping during the day and watching screens before bed can all keep the sleep disorder going, and underlying medical issues sometimes sit beneath it.',
-					'Left unaddressed, chronic insomnia drains mood, energy and concentration and erodes your ability to function during the day. Sleeping medication can be useful for managing symptoms, but it fails to address the underlying issues that cause the sleep disorder. Cognitive behavioural therapy for insomnia is generally regarded as the most effective treatment: a therapist works with you to identify and modify the thoughts and beliefs that fuel sleeplessness, alongside practical techniques such as stimulus control, sleep restriction and sleep hygiene training.',
+					'Left unaddressed, chronic insomnia drains mood, energy and concentration and erodes your ability to function during the day. Sleeping medication can be useful for managing symptoms, but it fails to address the underlying issues that cause the sleep disorder. Cognitive behavioral therapy for insomnia is generally regarded as the most effective treatment: a therapist works with you to identify and modify the thoughts and beliefs that fuel sleeplessness, alongside practical techniques such as stimulus control, sleep restriction and sleep hygiene training.',
 					'If your insomnia has lasted longer than two weeks, or has started to affect your ability to function in day-to-day life, it is worth speaking to a doctor. Acknowledging that sleep has become a problem takes honesty, and you do not have to solve chronic insomnia on your own. A quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -3739,7 +3739,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What is the best treatment for insomnia?',
-					'answer' => 'Cognitive behavioural therapy for insomnia (CBT-I) is generally regarded as the most effective way to treat insomnia. Your therapist works with you to identify and modify the thoughts and beliefs that fuel sleeplessness, and helps you develop practical techniques for improving sleep habits, including stimulus control, sleep restriction and sleep hygiene training. Sleep medication can be useful for managing symptoms, but it fails to address the underlying issues that cause the disorder.',
+					'answer' => 'Cognitive behavioral therapy for insomnia (CBT-I) is generally regarded as the most effective way to treat insomnia. Your therapist works with you to identify and modify the thoughts and beliefs that fuel sleeplessness, and helps you develop practical techniques for improving sleep habits, including stimulus control, sleep restriction and sleep hygiene training. Sleep medication can be useful for managing symptoms, but it fails to address the underlying issues that cause the disorder.',
 				],
 				[
 					'question' => 'When should I seek help for insomnia?',
@@ -3757,8 +3757,8 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating codependency',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Codependency isn\'t always easy to recognise. Many people happily prioritise the needs of loved ones without realising the cost to themselves, and the pattern can look like devotion rather than something treatable. If several of these signs of codependency feel familiar, it\'s worth a confidential conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Codependency isn\'t always easy to recognize. Many people happily prioritize the needs of loved ones without realizing the cost to themselves, and the pattern can look like devotion rather than something treatable. If several of these signs of codependency feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of codependency',
 				'card1Items' => [
 					'Low self-esteem and a strong desire to please people',
@@ -3766,7 +3766,7 @@ function rehab_treatment_v3_specs(): array {
 					'Feeling responsible for other people\'s problems',
 					'Putting others\' needs ahead of your own, at your own cost',
 					'An excessive fear of rejection or abandonment',
-					'Allowing or enabling unhealthy behaviour in a loved one',
+					'Allowing or enabling unhealthy behavior in a loved one',
 				],
 				'card2Title' => 'How codependency feels day to day',
 				'card2Items' => [
@@ -3781,7 +3781,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Proven psychotherapies for codependency, including cognitive behavioural therapy and structured 12 step work, alongside mindfulness and holistic practice that restore balance to the whole person, not just the relationship pattern.',
+					'body' => 'Proven psychotherapies for codependency, including cognitive behavioral therapy and structured 12 step work, alongside mindfulness and holistic practice that restore balance to the whole person, not just the relationship pattern.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -3797,7 +3797,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'A learned pattern, not a flaw',
 				'heading' => 'A holistic approach to codependency',
-				'body' => "Codependency is a learned behaviour, not a character flaw. For many people it begins in childhood, in dysfunctional family systems where a child takes on the role of caregiver or carries the blame for the family's troubles, and the habit of earning love through self-sacrifice follows them into adult relationships.\n\nCodependency treatment here begins with a thorough clinical assessment and moves into one-to-one and group psychotherapy focused on boundaries, self-worth and the relationship patterns beneath the codependent behaviour, supported by mindfulness and holistic practice. The full program takes place inside a calm, private setting in Hua Hin, designed to make this personal work possible.",
+				'body' => "Codependency is a learned behavior, not a character flaw. For many people it begins in childhood, in dysfunctional family systems where a child takes on the role of caregiver or carries the blame for the family's troubles, and the habit of earning love through self-sacrifice follows them into adult relationships.\n\nCodependency treatment here begins with a thorough clinical assessment and moves into one-to-one and group psychotherapy focused on boundaries, self-worth and the relationship patterns beneath the codependent behavior, supported by mindfulness and holistic practice. The full program takes place inside a calm, private setting in Hua Hin, designed to make this personal work possible.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of codependency recovery',
@@ -3824,12 +3824,12 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Getting to the roots of the pattern',
 						'paragraphs' => [
-							'Codependency recovery is a journey of honesty and introspection, and psychotherapy sits at the centre of your days here.',
-							'Under the expert supervision of our therapists, you will look objectively at your relationships, explore the unresolved early experiences that often sit beneath codependency, and learn, through cognitive behavioural therapy and small group work, to set reasonable, healthy boundaries and challenge the negative thought patterns that fuel codependent behaviour.',
+							'Codependency recovery is a journey of honesty and introspection, and psychotherapy sits at the center of your days here.',
+							'Under the expert supervision of our therapists, you will look objectively at your relationships, explore the unresolved early experiences that often sit beneath codependency, and learn, through cognitive behavioral therapy and small group work, to set reasonable, healthy boundaries and challenge the negative thought patterns that fuel codependent behavior.',
 						],
 						'listItems' => [
 							'One-to-one sessions with experienced therapists',
-							'Cognitive behavioural therapy and structured group work',
+							'Cognitive behavioral therapy and structured group work',
 							'Learning to set reasonable, healthy boundaries',
 						],
 						'asideQuote' => '"Codependency teaches you that love must be earned through self-sacrifice. Therapy teaches you that it does not."',
@@ -3879,10 +3879,10 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider codependency treatment?',
 				'paragraphs' => [
-					'Codependency is a dysfunctional relationship pattern in which one person consistently puts another person\'s needs ahead of their own. People with codependent traits excessively crave validation from others and will do almost anything to gain their approval, even when that means enabling a loved one\'s unhealthy behaviour. Codependency is sometimes referred to as relationship addiction, and it is considered a behavioural condition rather than a mental illness.',
-					'Codependency is a learned behaviour. For many people it stems from childhood experiences in dysfunctional family systems: a child forced to take on the role of caregiver for a parent unable to care for themselves, or a child continuously blamed for the family\'s dysfunction, may develop codependent traits later in life. Where a partner is struggling with addiction, the codependent dynamic often deepens, because being needed creates a false sense of love and intimacy that holds a one-sided relationship in place.',
-					'Left unaddressed, codependency adversely affects both people in a relationship. The caretaker neglects their own needs, which can lead to low self-esteem, depression and a wide range of other physical and mental health issues, while their unconditional support quietly enables the other person\'s unhealthy behaviour. The encouraging news is that codependency responds well to talk-based therapy. Through codependency treatment approaches such as cognitive behavioural therapy and structured 12 step work, people learn to recognise problematic behaviour, set reasonable boundaries and build healthier relationships, both with themselves and with those around them.',
-					'Recognising codependency in yourself takes real honesty, precisely because from the inside it so often looks like love and loyalty. If codependent patterns feel familiar, in your own life or in a relationship you care about, a quiet, confidential conversation with our team is a good place to start.',
+					'Codependency is a dysfunctional relationship pattern in which one person consistently puts another person\'s needs ahead of their own. People with codependent traits excessively crave validation from others and will do almost anything to gain their approval, even when that means enabling a loved one\'s unhealthy behavior. Codependency is sometimes referred to as relationship addiction, and it is considered a behavioral condition rather than a mental illness.',
+					'Codependency is a learned behavior. For many people it stems from childhood experiences in dysfunctional family systems: a child forced to take on the role of caregiver for a parent unable to care for themselves, or a child continuously blamed for the family\'s dysfunction, may develop codependent traits later in life. Where a partner is struggling with addiction, the codependent dynamic often deepens, because being needed creates a false sense of love and intimacy that holds a one-sided relationship in place.',
+					'Left unaddressed, codependency adversely affects both people in a relationship. The caretaker neglects their own needs, which can lead to low self-esteem, depression and a wide range of other physical and mental health issues, while their unconditional support quietly enables the other person\'s unhealthy behavior. The encouraging news is that codependency responds well to talk-based therapy. Through codependency treatment approaches such as cognitive behavioral therapy and structured 12 step work, people learn to recognize problematic behavior, set reasonable boundaries and build healthier relationships, both with themselves and with those around them.',
+					'Recognizing codependency in yourself takes real honesty, precisely because from the inside it so often looks like love and loyalty. If codependent patterns feel familiar, in your own life or in a relationship you care about, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
 			'steps' => [
@@ -3934,7 +3934,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Is codependency a mental illness?',
-					'answer' => 'No. Codependency is considered a behavioural condition and is sometimes referred to as relationship addiction. It is a learned pattern, which is encouraging news for codependency treatment: what was learned can be unlearned, and talk-based therapies such as cognitive behavioural therapy help people recognise codependent behaviour, set reasonable boundaries and develop healthier relationships.',
+					'answer' => 'No. Codependency is considered a behavioral condition and is sometimes referred to as relationship addiction. It is a learned pattern, which is encouraging news for codependency treatment: what was learned can be unlearned, and talk-based therapies such as cognitive behavioral therapy help people recognize codependent behavior, set reasonable boundaries and develop healthier relationships.',
 				],
 				[
 					'question' => 'Can codependent people become narcissists?',
@@ -3952,7 +3952,7 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating gambling addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'For most people gambling stays a casual pastime, so the line between recreation and gambling addiction is easy to miss. The clearest difference is the urge to keep betting whether you are winning or losing, and families often notice the secrecy, the unexplained losses and the mood swings long before they understand the cause. If several of these signs of compulsive gambling feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of gambling addiction',
 				'card1Items' => [
@@ -3977,7 +3977,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Cognitive behavioural therapy for gambling addiction, led by Western-trained therapists, sits at the core, alongside mindfulness meditation, exercise therapy and integrated care for co-occurring depression, anxiety or substance use.',
+					'body' => 'Cognitive behavioral therapy for gambling addiction, led by Western-trained therapists, sits at the core, alongside mindfulness meditation, exercise therapy and integrated care for co-occurring depression, anxiety or substance use.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -3993,7 +3993,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'An addiction, not a weakness',
 				'heading' => 'A holistic approach to gambling addiction',
-				'body' => "Gambling hijacks the same reward system as drugs and alcohol. The rush of euphoria that follows a win comes from a sudden release of dopamine, and over time repeated gambling produces long-lasting changes to the brain's reward pathways, which is why willpower alone rarely holds against the urge to bet and why compulsive gambling can be every bit as harmful as substance abuse.\n\nGambling addiction treatment here moves through a thorough clinical assessment into daily therapy that works on your triggers, your money behaviours and any underlying depression or anxiety, supported by mindfulness meditation and exercise, all inside a calm, private setting in Hua Hin, far from every bookmaker and casino.",
+				'body' => "Gambling hijacks the same reward system as drugs and alcohol. The rush of euphoria that follows a win comes from a sudden release of dopamine, and over time repeated gambling produces long-lasting changes to the brain's reward pathways, which is why willpower alone rarely holds against the urge to bet and why compulsive gambling can be every bit as harmful as substance abuse.\n\nGambling addiction treatment here moves through a thorough clinical assessment into daily therapy that works on your triggers, your money behaviors and any underlying depression or anxiety, supported by mindfulness meditation and exercise, all inside a calm, private setting in Hua Hin, far from every bookmaker and casino.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of gambling recovery',
@@ -4017,16 +4017,16 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Reprogramming the urge to bet',
 						'paragraphs' => [
-							'Cognitive behavioural therapy sits at the centre of your days in gambling rehab, led by Western-trained behavioural health therapists with extensive experience in CBT for gambling addiction.',
-							'Through daily one-to-one sessions and small group work, you will learn to recognise the cognitive distortions that drive the urge to bet, take apart the dysfunctional behaviour around money, and build healthy problem-solving skills for coping with stressful situations, while integrated therapy addresses the strain compulsive gambling has placed on relationships, family and work.',
+							'Cognitive behavioral therapy sits at the center of your days in gambling rehab, led by Western-trained behavioral health therapists with extensive experience in CBT for gambling addiction.',
+							'Through daily one-to-one sessions and small group work, you will learn to recognize the cognitive distortions that drive the urge to bet, take apart the dysfunctional behavior around money, and build healthy problem-solving skills for coping with stressful situations, while integrated therapy addresses the strain compulsive gambling has placed on relationships, family and work.',
 						],
 						'listItems' => [
-							'Daily CBT with Western-trained behavioural therapists',
+							'Daily CBT with Western-trained behavioral therapists',
 							'One-to-one sessions and small group work',
-							'Work on money behaviours, relationships and family strain',
+							'Work on money behaviors, relationships and family strain',
 						],
 						'asideQuote' => '"Every compulsive gambler carries beliefs about luck, losses and the next big win. Therapy takes those beliefs apart, one by one."',
 						'asideMetaLabel' => 'Statement',
@@ -4075,10 +4075,10 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider gambling rehab?',
 				'paragraphs' => [
-					'Gambling addiction is a form of behavioural addiction that affects millions of people around the world. Whereas most people treat gambling as a fun, harmless activity, a person with a gambling disorder feels an uncontrollable urge to gamble continuously, even when they are fully aware that the behaviour is damaging their life. The clearest difference between a recreational gambler and a compulsive gambler is that the former can usually stick to a loss limit, while the latter feels an overwhelming urge to keep betting regardless of whether they are winning or losing.',
+					'Gambling addiction is a form of behavioral addiction that affects millions of people around the world. Whereas most people treat gambling as a fun, harmless activity, a person with a gambling disorder feels an uncontrollable urge to gamble continuously, even when they are fully aware that the behavior is damaging their life. The clearest difference between a recreational gambler and a compulsive gambler is that the former can usually stick to a loss limit, while the latter feels an overwhelming urge to keep betting regardless of whether they are winning or losing.',
 					'The pull of gambling is neurological, not a failure of character. Gambling has a profound effect on the brain\'s reward system: the rush of euphoria that accompanies a win is caused by a sudden release of dopamine, a neurotransmitter that plays an important role in your emotional responses. Over time, repeated gambling produces long-lasting changes to those reward pathways, so the urge to win back losses only grows sharper, and stopping without professional gambling addiction treatment becomes very difficult.',
-					'As gambling addiction escalates, bets grow larger to deliver the same enjoyment, money that can\'t be afforded is wagered and lost, and the behaviour is hidden behind lies while relationships, work and personal responsibilities suffer. Although gambling addiction is sometimes viewed as a less serious problem than drug or alcohol dependence, pathological gambling can be just as harmful to your health and wellbeing as substance abuse, and it rarely travels alone: depression, anxiety and substance use commonly run alongside compulsive gambling, each feeding the other in a continuous cycle.',
-					'Recognising that your gambling has developed from harmless fun into compulsive behaviour takes real honesty, and you do not have to regain control on your own. Overcoming gambling addiction is difficult, but it is possible, and a quiet, confidential conversation with our team is a good place to start.',
+					'As gambling addiction escalates, bets grow larger to deliver the same enjoyment, money that can\'t be afforded is wagered and lost, and the behavior is hidden behind lies while relationships, work and personal responsibilities suffer. Although gambling addiction is sometimes viewed as a less serious problem than drug or alcohol dependence, pathological gambling can be just as harmful to your health and wellbeing as substance abuse, and it rarely travels alone: depression, anxiety and substance use commonly run alongside compulsive gambling, each feeding the other in a continuous cycle.',
+					'Recognizing that your gambling has developed from harmless fun into compulsive behavior takes real honesty, and you do not have to regain control on your own. Overcoming gambling addiction is difficult, but it is possible, and a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
 			'steps' => [
@@ -4100,7 +4100,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'label' => 'STEP 04',
 					'title' => 'Treatment begins',
-					'body' => 'A bespoke program of behavioural therapy, holistic practice and rest, adjusted as you progress.',
+					'body' => 'A bespoke program of behavioral therapy, holistic practice and rest, adjusted as you progress.',
 				],
 			],
 			'faqs' => [
@@ -4147,10 +4147,10 @@ function rehab_treatment_v3_specs(): array {
 				'eyebrow' => 'Gaming addiction treatment · Hua Hin',
 				'headline' => 'Reclaim real life from gaming, privately, in Thailand',
 				'lede' => 'Gaming addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment, a structured digital detox and evidence-based therapy. A hard cap of twelve clients means your recovery from compulsive gaming is built around you, never a fixed template.',
-				'stat3Label' => 'Years treating behavioural addiction',
+				'stat3Label' => 'Years treating behavioral addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Gaming addiction builds quietly, one session at a time, and with no substances involved it is easy to dismiss as a hobby. Families often notice the lost sleep, abandoned interests and dishonesty about hours played first. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of gaming addiction',
 				'card1Items' => [
@@ -4174,7 +4174,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Cognitive behavioural therapy, one-to-one mental health counselling and group sessions alongside physical therapy and mindfulness meditation, treating the whole person behind the gaming addiction, not just the habit.',
+					'body' => 'Cognitive behavioral therapy, one-to-one mental health counseling and group sessions alongside physical therapy and mindfulness meditation, treating the whole person behind the gaming addiction, not just the habit.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -4214,15 +4214,15 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Getting to the root of the addiction',
 						'paragraphs' => [
 							'Gaming addiction is rarely about the game itself. For some the pull is social connection with players around the world; for others it is escape from depression, anxiety or a life that feels stuck.',
-							'Through one-to-one mental health counselling, cognitive behavioural therapy and group sessions, you will work on the underlying causes of the gaming addiction and learn healthier ways to cope with the problems that led you to compulsive gaming, so the urge to play loses its power over you.',
+							'Through one-to-one mental health counseling, cognitive behavioral therapy and group sessions, you will work on the underlying causes of the gaming addiction and learn healthier ways to cope with the problems that led you to compulsive gaming, so the urge to play loses its power over you.',
 						],
 						'listItems' => [
-							'One-to-one mental health counselling',
-							'Cognitive behavioural therapy for urges and triggers',
+							'One-to-one mental health counseling',
+							'Cognitive behavioral therapy for urges and triggers',
 							'Group sessions with people who understand',
 						],
 						'asideQuote' => '"Lasting recovery starts when you understand what the game was giving you, and find it in real life instead."',
@@ -4275,7 +4275,7 @@ function rehab_treatment_v3_specs(): array {
 					'Video gaming has been around for more than five decades, but online gaming is now more popular than ever, and gaming addiction is a real and growing problem. Because no substances are involved, many people assume compulsive gaming isn\'t a genuine threat. Yet when gaming takes up a significant portion of someone\'s time, dependence can develop, the lines between virtual reality and real life can blur, and careers, relationships and mental health begin to suffer.',
 					'People become dependent on gaming for very different reasons. Modern games are designed to keep the brain\'s reward system engaged, and for some players the hook is social, playing and communicating with people throughout the world. Others get drawn into compulsive gaming as a form of psychological escapism, using the game to numb depression or anxiety rather than face it.',
 					'Left unaddressed, a gaming disorder tends to escalate. Sessions grow longer, other hobbies fall away, and problems surface at school, at work and in relationships, often alongside dishonesty about how much time is really spent playing. In severe cases compulsive gaming shades into internet gambling, putting finances as well as wellbeing at risk, and stopping suddenly without support can bring on low mood, anxiety, irritability and restlessness that make abstaining feel almost impossible.',
-					'Recognising that gaming has taken over, in your own life or in someone you love, takes real honesty. Gaming addiction affects adults and teens alike, and you don\'t have to untangle this on your own. We can advise you on how to approach a family member or friend you\'re worried about, and a quiet, confidential conversation with our team in Hua Hin is a good place to start.',
+					'Recognizing that gaming has taken over, in your own life or in someone you love, takes real honesty. Gaming addiction affects adults and teens alike, and you don\'t have to untangle this on your own. We can advise you on how to approach a family member or friend you\'re worried about, and a quiet, confidential conversation with our team in Hua Hin is a good place to start.',
 				],
 			],
 			'steps' => [
@@ -4297,7 +4297,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'label' => 'STEP 04',
 					'title' => 'Treatment begins',
-					'body' => 'A bespoke program of behavioural therapy, holistic practice and rest, adjusted as you progress.',
+					'body' => 'A bespoke program of behavioral therapy, holistic practice and rest, adjusted as you progress.',
 				],
 			],
 			'faqs' => [
@@ -4326,7 +4326,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What does gaming addiction treatment at The Diamond involve?',
-					'answer' => 'Because people resort to compulsive gaming for very different reasons, there is no one-size-fits-all program. We start by getting to the root of your gaming addiction, then build a holistic plan that may include one-to-one mental health counselling, cognitive behavioural therapy, group sessions, a structured digital detox from gaming, physical therapy and mindfulness meditation, all aimed at lasting change and a minimised risk of relapse.',
+					'answer' => 'Because people resort to compulsive gaming for very different reasons, there is no one-size-fits-all program. We start by getting to the root of your gaming addiction, then build a holistic plan that may include one-to-one mental health counseling, cognitive behavioral therapy, group sessions, a structured digital detox from gaming, physical therapy and mindfulness meditation, all aimed at lasting change and a minimized risk of relapse.',
 				],
 				[
 					'question' => 'Do you treat gaming addiction in teenagers as well as adults?',
@@ -4341,11 +4341,11 @@ function rehab_treatment_v3_specs(): array {
 				'eyebrow' => 'Internet addiction treatment · Hua Hin',
 				'headline' => 'Take your life back from the screen, privately, in Thailand',
 				'lede' => 'Internet addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment, a structured digital detox and evidence-based therapy. A hard cap of twelve clients means your recovery from compulsive internet use is built around you, never a fixed template.',
-				'stat3Label' => 'Years treating behavioural addiction',
+				'stat3Label' => 'Years treating behavioral addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Many people slip into compulsive internet use without realising, so the signs are easy to dismiss as habit. Families often notice the lost hours, broken sleep and restlessness away from a screen first. If several of these feel familiar, it\'s worth a conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Many people slip into compulsive internet use without realizing, so the signs are easy to dismiss as habit. Families often notice the lost hours, broken sleep and restlessness away from a screen first. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of internet addiction',
 				'card1Items' => [
 					'Compulsively checking feeds, messages and notifications',
@@ -4369,7 +4369,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Counselling and proven therapies for internet addiction including CBT, mindfulness meditation, art, recreation and reality therapy, alongside fitness and physiotherapy that restore the body as well as the mind.',
+					'body' => 'Counseling and proven therapies for internet addiction including CBT, mindfulness meditation, art, recreation and reality therapy, alongside fitness and physiotherapy that restore the body as well as the mind.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -4409,11 +4409,11 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Working on the why, not just the wifi',
 						'paragraphs' => [
-							'Evidence-based therapy sits at the centre of your days here, focused on the compulsive online patterns that keep pulling you back to the screen.',
-							'Through daily one-to-one sessions and small group work, cognitive behavioural therapy helps you recognise the thoughts and urges behind compulsive internet use, while counselling addresses the underlying issues, such as anxiety, loneliness or low mood, that the internet has been covering over.',
+							'Evidence-based therapy sits at the center of your days here, focused on the compulsive online patterns that keep pulling you back to the screen.',
+							'Through daily one-to-one sessions and small group work, cognitive behavioral therapy helps you recognize the thoughts and urges behind compulsive internet use, while counseling addresses the underlying issues, such as anxiety, loneliness or low mood, that the internet has been covering over.',
 						],
 						'listItems' => [
 							'Daily one-to-one sessions with experienced therapists',
@@ -4492,7 +4492,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'label' => 'STEP 04',
 					'title' => 'Treatment begins',
-					'body' => 'A bespoke program of behavioural therapy, holistic practice and rest, adjusted as you progress.',
+					'body' => 'A bespoke program of behavioral therapy, holistic practice and rest, adjusted as you progress.',
 				],
 			],
 			'faqs' => [
@@ -4526,7 +4526,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Will I have to give up the internet completely?',
-					'answer' => 'No. Unlike some addictions, the internet is woven into modern work and life, so total abstinence is rarely realistic. The goal of internet addiction treatment is balance: you will learn how to manage your time online, recognise the urges behind compulsive internet use and avoid relapse, so you can go home using the internet as a tool rather than being controlled by it.',
+					'answer' => 'No. Unlike some addictions, the internet is woven into modern work and life, so total abstinence is rarely realistic. The goal of internet addiction treatment is balance: you will learn how to manage your time online, recognize the urges behind compulsive internet use and avoid relapse, so you can go home using the internet as a tool rather than being controlled by it.',
 				],
 				[
 					'question' => 'Is internet addiction serious enough to need residential treatment?',
@@ -4536,28 +4536,28 @@ function rehab_treatment_v3_specs(): array {
 		],
 		1112 => [
 			'slug' => 'sex-addiction',
-			'programTag' => 'behavioural program',
+			'programTag' => 'behavioral program',
 			'hero' => [
 				'eyebrow' => 'Sex addiction treatment · Hua Hin',
 				'headline' => 'Take back control, privately, in Thailand',
-				'lede' => 'Sex addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment and daily evidence-based therapy. A hard cap of twelve clients means your recovery from compulsive sexual behaviour is built around you, never a fixed template.',
-				'stat3Label' => 'Years treating behavioural addiction',
+				'lede' => 'Sex addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment and daily evidence-based therapy. A hard cap of twelve clients means your recovery from compulsive sexual behavior is built around you, never a fixed template.',
+				'stat3Label' => 'Years treating behavioral addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Because sex is a normal, healthy part of human behaviour, the boundary between a healthy sex life and compulsive sexual behaviour isn\'t always clear, which makes it hard to know when to seek help. Partners are often the first to feel the secrecy and distance, long before the addiction has a name. If several of these signs of sex addiction feel familiar, it\'s worth a confidential conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Because sex is a normal, healthy part of human behavior, the boundary between a healthy sex life and compulsive sexual behavior isn\'t always clear, which makes it hard to know when to seek help. Partners are often the first to feel the secrecy and distance, long before the addiction has a name. If several of these signs of sex addiction feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of sex addiction',
 				'card1Items' => [
 					'An inability to resist sexual urges, even when they interfere with daily life',
 					'An excessive preoccupation with sexual thoughts and fantasies',
-					'Behaviour that escalates over time, taking riskier or more extreme forms',
-					'Attempting to reduce sexual behaviour but being unable to do so',
-					'Lying about your behaviour or sexual activities to keep them hidden',
-					'Continuing despite knowing the behaviour harms you and those you love',
+					'Behavior that escalates over time, taking riskier or more extreme forms',
+					'Attempting to reduce sexual behavior but being unable to do so',
+					'Lying about your behavior or sexual activities to keep them hidden',
+					'Continuing despite knowing the behavior harms you and those you love',
 				],
 				'card2Title' => 'What it costs day to day',
 				'card2Items' => [
-					'Relationships consistently damaged by your sexual behaviour',
+					'Relationships consistently damaged by your sexual behavior',
 					'Feelings of guilt and shame that follow sexual activity',
 					'Emotional detachment from partners and the people closest to you',
 					'Engaging in unsafe sex or feeling unable to remain faithful to a partner',
@@ -4569,7 +4569,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Cognitive behavioural therapy and one-to-one sex addiction counselling sit at the core of treatment, alongside yoga, mindfulness meditation and exercise therapy, with integrated care for any co-occurring mental health or substance use issues.',
+					'body' => 'Cognitive behavioral therapy and one-to-one sex addiction counseling sit at the core of treatment, alongside yoga, mindfulness meditation and exercise therapy, with integrated care for any co-occurring mental health or substance use issues.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -4585,7 +4585,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'An addiction, not a moral failing',
 				'heading' => 'A holistic approach to sex addiction',
-				'body' => "Studies indicate that compulsive sexual behaviour affects the brain's reward system in the same way as substance addiction, which is why willpower alone rarely holds against sex addiction, even when you are fully conscious that the behaviour is harming you and the people you love. Beneath the compulsion there are almost always deeper drivers: unresolved trauma, underlying psychological issues, and the guilt and shame that keep the cycle running in secret.\n\nSex addiction treatment here begins with a thorough clinical assessment, then moves into daily therapy that works on those underlying factors rather than the symptoms alone, supported by yoga, mindfulness meditation and exercise therapy, all inside a private, judgment-free setting where every aspect of your health is treated together.",
+				'body' => "Studies indicate that compulsive sexual behavior affects the brain's reward system in the same way as substance addiction, which is why willpower alone rarely holds against sex addiction, even when you are fully conscious that the behavior is harming you and the people you love. Beneath the compulsion there are almost always deeper drivers: unresolved trauma, underlying psychological issues, and the guilt and shame that keep the cycle running in secret.\n\nSex addiction treatment here begins with a thorough clinical assessment, then moves into daily therapy that works on those underlying factors rather than the symptoms alone, supported by yoga, mindfulness meditation and exercise therapy, all inside a private, judgment-free setting where every aspect of your health is treated together.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of recovery',
@@ -4596,7 +4596,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Privacy, distance and a clear picture',
 						'paragraphs' => [
 							'Sex addiction takes many forms, so treatment begins with understanding exactly what yours looks like.',
-							'Our clinical team starts with a comprehensive assessment of the psychological issues that lie at the root of the addiction, including any co-occurring mental health or substance use problems. At the same time, the residential setting puts real distance between you and the social circles, routines and circumstances that fuel compulsive sexual behaviour, and a steady early rhythm of rest and structure lets the compulsion begin to quiet.',
+							'Our clinical team starts with a comprehensive assessment of the psychological issues that lie at the root of the addiction, including any co-occurring mental health or substance use problems. At the same time, the residential setting puts real distance between you and the social circles, routines and circumstances that fuel compulsive sexual behavior, and a steady early rhythm of rest and structure lets the compulsion begin to quiet.',
 						],
 						'listItems' => [
 							'Comprehensive clinical assessment on arrival',
@@ -4609,18 +4609,18 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
-						'h3' => 'Working on the drivers, not just the behaviour',
+						'label' => 'Behavioral therapy',
+						'h3' => 'Working on the drivers, not just the behavior',
 						'paragraphs' => [
-							'Cognitive behavioural therapy sits at the centre of your days in sex addiction treatment, delivered one-to-one by highly experienced addiction counsellors.',
-							'CBT helps you recognise the destructive thought patterns that influence your sexual behaviour and emotions, while deeper therapeutic work unravels the underlying factors and unresolved trauma that contribute to the addiction. You will build a clear understanding of the personal triggers behind compulsive sexual urges and learn how to exchange unhealthy habits for more constructive alternatives.',
+							'Cognitive behavioral therapy sits at the center of your days in sex addiction treatment, delivered one-to-one by highly experienced addiction counselors.',
+							'CBT helps you recognize the destructive thought patterns that influence your sexual behavior and emotions, while deeper therapeutic work unravels the underlying factors and unresolved trauma that contribute to the addiction. You will build a clear understanding of the personal triggers behind compulsive sexual urges and learn how to exchange unhealthy habits for more constructive alternatives.',
 						],
 						'listItems' => [
-							'Daily one-to-one cognitive behavioural therapy',
+							'Daily one-to-one cognitive behavioral therapy',
 							'Trauma work on the underlying drivers where indicated',
-							'Practical tools for recognising and managing personal triggers',
+							'Practical tools for recognizing and managing personal triggers',
 						],
-						'asideQuote' => '"Compulsive behaviour is rarely about sex itself. Therapy works on what sits underneath, and that is where recovery takes hold."',
+						'asideQuote' => '"Compulsive behavior is rarely about sex itself. Therapy works on what sits underneath, and that is where recovery takes hold."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
@@ -4667,10 +4667,10 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider sex addiction treatment?',
 				'paragraphs' => [
-					'Sex addiction, sometimes referred to as hypersexuality disorder, is a form of behavioural addiction characterised by a repetitive, compulsive urge to engage in sexual activities. People with sex addiction experience persistent sexual thoughts that can manifest in many ways, from compulsive pornography use and masturbation to unsafe sex, an inability to remain faithful to a partner, or sexual behaviour that grows steadily more extreme over time.',
-					'The pull of sex addiction is neurological, not a failure of character. Some studies indicate that compulsive sexual behaviour affects the brain\'s reward system in the same way as substance addiction, which may explain why people feel unable to resist sexual impulses even when they are fully conscious that the behaviour is harmful to themselves and those they love. Mental health authorities do not currently define sex addiction as a diagnosable medical condition, but that should not diminish its seriousness or the devastating impact it can have on a person\'s relationships, career and health.',
-					'Because sex is a normal, healthy and pleasurable part of human behaviour, the boundary between a healthy sex life and compulsion isn\'t always clear, and many people attempt to reduce their sexual behaviour repeatedly without success. As the addiction deepens, the costs mount: lying to hide sexual activities, feelings of guilt and shame after each episode, emotional detachment from partners, and a consistently negative impact on relationships, work and wellbeing.',
-					'Recognising that your behaviour has crossed from healthy into compulsive takes real honesty, and you do not have to regain control on your own. Whatever sex addiction looks like for you, treatment works, and a quiet, confidential conversation with our team is a good place to start.',
+					'Sex addiction, sometimes referred to as hypersexuality disorder, is a form of behavioral addiction characterized by a repetitive, compulsive urge to engage in sexual activities. People with sex addiction experience persistent sexual thoughts that can manifest in many ways, from compulsive pornography use and masturbation to unsafe sex, an inability to remain faithful to a partner, or sexual behavior that grows steadily more extreme over time.',
+					'The pull of sex addiction is neurological, not a failure of character. Some studies indicate that compulsive sexual behavior affects the brain\'s reward system in the same way as substance addiction, which may explain why people feel unable to resist sexual impulses even when they are fully conscious that the behavior is harmful to themselves and those they love. Mental health authorities do not currently define sex addiction as a diagnosable medical condition, but that should not diminish its seriousness or the devastating impact it can have on a person\'s relationships, career and health.',
+					'Because sex is a normal, healthy and pleasurable part of human behavior, the boundary between a healthy sex life and compulsion isn\'t always clear, and many people attempt to reduce their sexual behavior repeatedly without success. As the addiction deepens, the costs mount: lying to hide sexual activities, feelings of guilt and shame after each episode, emotional detachment from partners, and a consistently negative impact on relationships, work and wellbeing.',
+					'Recognizing that your behavior has crossed from healthy into compulsive takes real honesty, and you do not have to regain control on your own. Whatever sex addiction looks like for you, treatment works, and a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
 			'steps' => [
@@ -4692,7 +4692,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'label' => 'STEP 04',
 					'title' => 'Treatment begins',
-					'body' => 'A bespoke program of behavioural therapy, holistic practice and rest, adjusted as you progress.',
+					'body' => 'A bespoke program of behavioral therapy, holistic practice and rest, adjusted as you progress.',
 				],
 			],
 			'faqs' => [
@@ -4720,12 +4720,12 @@ function rehab_treatment_v3_specs(): array {
 					'answer' => 'No. Unlike substance abuse treatment, where the goal is usually long-term abstinence from the substance, the goal of sex addiction treatment isn\'t total abstinence. Our program aims to help you nurture a healthier relationship with sex and intimacy, and to develop practical tools for managing compulsive urges in the years ahead.',
 				],
 				[
-					'question' => 'Is sex addiction a recognised medical condition?',
-					'answer' => 'Mental health authorities do not currently define sex addiction as a diagnosable medical condition. That should not diminish its seriousness: some studies indicate that compulsive sexual behaviour affects the brain\'s reward system in the same way as substance addiction, and the impact on a person\'s relationships, career and health can be devastating. Treatment is effective regardless of how the condition is classified.',
+					'question' => 'Is sex addiction a recognized medical condition?',
+					'answer' => 'Mental health authorities do not currently define sex addiction as a diagnosable medical condition. That should not diminish its seriousness: some studies indicate that compulsive sexual behavior affects the brain\'s reward system in the same way as substance addiction, and the impact on a person\'s relationships, career and health can be devastating. Treatment is effective regardless of how the condition is classified.',
 				],
 				[
 					'question' => 'Can sex addiction be treated alongside other mental health or substance use issues?',
-					'answer' => 'Yes. People with sex addiction often have co-occurring disorders such as mental health issues or substance abuse problems, and to minimise the risk of relapse it is crucial that all underlying conditions are treated at the same time. Our team of mental health professionals helps you uncover any psychological issues that play a role in the addiction and monitors your progress as you work through your tailor-made program.',
+					'answer' => 'Yes. People with sex addiction often have co-occurring disorders such as mental health issues or substance abuse problems, and to minimize the risk of relapse it is crucial that all underlying conditions are treated at the same time. Our team of mental health professionals helps you uncover any psychological issues that play a role in the addiction and monitors your progress as you work through your tailor-made program.',
 				],
 			],
 		],
@@ -4736,10 +4736,10 @@ function rehab_treatment_v3_specs(): array {
 				'eyebrow' => 'Crypto addiction treatment · Hua Hin',
 				'headline' => 'Step away from the charts, privately, in Thailand',
 				'lede' => 'Crypto addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment and evidence-based therapy. A hard cap of twelve clients means your recovery from compulsive trading is built around you, never a fixed template.',
-				'stat3Label' => 'Years treating behavioural addiction',
+				'stat3Label' => 'Years treating behavioral addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Crypto addiction can develop rapidly, and while the gains and losses keep coming, the signs are easy to miss. Families often notice the late nights, secrecy and mood swings before they understand the cause. If several of these feel familiar, it\'s worth a conversation.',
 				'card1Title' => 'Common signs of crypto addiction',
 				'card1Items' => [
@@ -4748,7 +4748,7 @@ function rehab_treatment_v3_specs(): array {
 					'Hiding positions and losses, and borrowing money or selling things to keep trading',
 					'Thinking about crypto while doing everything else',
 					'Spending a lot of money on crypto, even when losing',
-					'Neglecting work, relationships and yourself in favour of trading',
+					'Neglecting work, relationships and yourself in favor of trading',
 				],
 				'card2Title' => 'What happens when you try to stop',
 				'card2Items' => [
@@ -4779,7 +4779,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'A casino in your pocket',
 				'heading' => 'A holistic approach to crypto addiction',
-				'body' => "Crypto markets never close, and their volatility works like a casino in your pocket. Every trade releases dopamine and serotonin through the same reward circuitry that drives gambling addiction, which is why crypto addiction, an impulse-control disorder, can take hold rapidly and why willpower alone so rarely beats it.\n\nCrypto addiction treatment here moves through a thorough clinical assessment into one-to-one therapy on the urges, the money behaviour and the drivers underneath them, from daily stress and boredom to underlying mental health conditions, supported by fitness and mindfulness inside a calm, private setting far away from the screens.",
+				'body' => "Crypto markets never close, and their volatility works like a casino in your pocket. Every trade releases dopamine and serotonin through the same reward circuitry that drives gambling addiction, which is why crypto addiction, an impulse-control disorder, can take hold rapidly and why willpower alone so rarely beats it.\n\nCrypto addiction treatment here moves through a thorough clinical assessment into one-to-one therapy on the urges, the money behavior and the drivers underneath them, from daily stress and boredom to underlying mental health conditions, supported by fitness and mindfulness inside a calm, private setting far away from the screens.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of recovery',
@@ -4803,14 +4803,14 @@ function rehab_treatment_v3_specs(): array {
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Getting to the root of the urge to trade',
 						'paragraphs' => [
 							'Crypto addiction is an impulse-control disorder, and the real work of treatment is understanding the beliefs and urges that keep you reaching for the next trade.',
-							'Through cognitive behavioural therapy you will identify the harmful thought and behaviour patterns behind your trading, while motivational interviewing, psychodynamic therapy, group work and family sessions address your money behaviour and the underlying drivers of crypto addiction, from daily stress and boredom to anxiety beneath the surface.',
+							'Through cognitive behavioral therapy you will identify the harmful thought and behavior patterns behind your trading, while motivational interviewing, psychodynamic therapy, group work and family sessions address your money behavior and the underlying drivers of crypto addiction, from daily stress and boredom to anxiety beneath the surface.',
 						],
 						'listItems' => [
-							'Cognitive behavioural therapy on trading beliefs and urges',
+							'Cognitive behavioral therapy on trading beliefs and urges',
 							'Motivational interviewing and psychodynamic therapy',
 							'Group therapy and family sessions for firm support',
 						],
@@ -4864,7 +4864,7 @@ function rehab_treatment_v3_specs(): array {
 					'Cryptocurrency addiction is an impulse-control disorder that causes negative consequences to your finances, personal relationships, work, self-esteem and overall health. Many experts consider crypto addiction a type of internet addiction, but it clearly carries elements of other addictions too, gambling above all. Not everybody who trades will develop a problem, but the fast-paced nature of crypto makes it a slippery slope, and the addiction can develop rapidly.',
 					'What makes crypto so hard to put down is what trading does to the brain. Researching and trading crypto release dopamine and serotonin, and in markets this volatile, open around the clock, every dip, rally and almost-win keeps that reward loop firing. Psychological factors such as daily stress, boredom and underlying mental health conditions feed the problem, and being surrounded by other crypto enthusiasts makes it feel normal, which is why the developing signs of crypto addiction are so easy to miss.',
 					'Over time the trading escalates. Losses lead to bigger risks in the hope of a higher return, then to borrowing money and selling possessions to stay in the market, then to debt, lying and isolation from the people around you. Left untreated, crypto addiction can lead to mental health problems, job loss, legal problems, suicidal tendencies and often other forms of addiction.',
-					'Recognising the problem and wanting help is the most important step towards crypto addiction recovery, and you don\'t have to take it alone. If you\'re unsure whether what you\'re experiencing is an addiction, a quiet, confidential conversation with our team will help you understand your situation, with no obligations on your side.',
+					'Recognizing the problem and wanting help is the most important step towards crypto addiction recovery, and you don\'t have to take it alone. If you\'re unsure whether what you\'re experiencing is an addiction, a quiet, confidential conversation with our team will help you understand your situation, with no obligations on your side.',
 				],
 			],
 			'steps' => [
@@ -4886,7 +4886,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'label' => 'STEP 04',
 					'title' => 'Treatment begins',
-					'body' => 'A bespoke program of behavioural therapy, holistic practice and rest, adjusted as you progress.',
+					'body' => 'A bespoke program of behavioral therapy, holistic practice and rest, adjusted as you progress.',
 				],
 			],
 			'faqs' => [
@@ -4916,54 +4916,54 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Is crypto addiction the same as gambling addiction?',
-					'answer' => 'They are closely related. Crypto addiction is an impulse-control disorder, and many experts consider it a type of internet addiction, but it carries clear elements of other behavioural addictions, gambling in particular: volatile prices, the urge to chase losses and the same reward circuitry in the brain. At The Diamond Rehab Thailand we treat impulse-control disorders with a combination of scientifically proven methods that teach you how to regain full control of your life.',
+					'answer' => 'They are closely related. Crypto addiction is an impulse-control disorder, and many experts consider it a type of internet addiction, but it carries clear elements of other behavioral addictions, gambling in particular: volatile prices, the urge to chase losses and the same reward circuitry in the brain. At The Diamond Rehab Thailand we treat impulse-control disorders with a combination of scientifically proven methods that teach you how to regain full control of your life.',
 				],
 				[
 					'question' => 'How is crypto addiction treated at The Diamond Rehab Thailand?',
-					'answer' => 'Crypto addiction treatment at The Diamond Rehab Thailand is built around evidence-based therapies: cognitive behavioural therapy to identify the harmful behaviour patterns and thoughts behind your trading, motivational interviewing to find the motivation you need, psychodynamic therapy to understand your underlying mental processes, and group therapy and family sessions for firm support on your road to recovery. Most importantly, we teach you how to get well and stay well.',
+					'answer' => 'Crypto addiction treatment at The Diamond Rehab Thailand is built around evidence-based therapies: cognitive behavioral therapy to identify the harmful behavior patterns and thoughts behind your trading, motivational interviewing to find the motivation you need, psychodynamic therapy to understand your underlying mental processes, and group therapy and family sessions for firm support on your road to recovery. Most importantly, we teach you how to get well and stay well.',
 				],
 			],
 		],
 		4372 => [
 			'slug' => 'process-addiction',
-			'programTag' => 'behavioural program',
+			'programTag' => 'behavioral program',
 			'hero' => [
 				'eyebrow' => 'Process addiction treatment · Hua Hin',
-				'headline' => 'Break the cycle of compulsive behaviour, privately, in Thailand',
-				'lede' => 'Process addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment and evidence-based behavioural therapy. A hard cap of twelve clients means your recovery is built around you and the specific behaviour you are facing, never a fixed template.',
-				'stat3Label' => 'Years treating behavioural addiction',
+				'headline' => 'Break the cycle of compulsive behavior, privately, in Thailand',
+				'lede' => 'Process addiction treatment at The Diamond Rehab Thailand is a private, doctor-led residential program built on thorough clinical assessment and evidence-based behavioral therapy. A hard cap of twelve clients means your recovery is built around you and the specific behavior you are facing, never a fixed template.',
+				'stat3Label' => 'Years treating behavioral addiction',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Process addictions come in many forms, from gambling and gaming to shopping and compulsive internet use, and sufferers are often skilled at hiding their habits, so families may only see the strain long after the behaviour has taken hold. If several of these signs of behavioural addiction feel familiar, it\'s worth a confidential conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Process addictions come in many forms, from gambling and gaming to shopping and compulsive internet use, and sufferers are often skilled at hiding their habits, so families may only see the strain long after the behavior has taken hold. If several of these signs of behavioral addiction feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Common signs of a process addiction',
 				'card1Items' => [
-					'Struggling to stop a compulsive behaviour despite trying',
+					'Struggling to stop a compulsive behavior despite trying',
 					'Escalating time and intensity spent on the activity',
-					'Preoccupation with the behaviour between sessions',
+					'Preoccupation with the behavior between sessions',
 					'Continuing despite serious financial, career or health consequences',
 					'Secrecy and denial, hiding the habit from family and colleagues',
 					'Growing strain on relationships at home or at work',
 				],
 				'card2Title' => 'What happens when you try to stop',
 				'card2Items' => [
-					'Restlessness and irritability when the behaviour is cut off',
+					'Restlessness and irritability when the behavior is cut off',
 					'Anxiety that builds until the urge wins out',
 					'A flat, low mood without the activity',
 					'Intense urges that override good intentions',
-					'Returning to the behaviour despite firm resolutions to stop',
+					'Returning to the behavior despite firm resolutions to stop',
 				],
 			],
 			'pillars' => [
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Proven therapies for process addiction, including CBT, one-to-one counselling and group work, alongside fitness, nutrition and mindfulness that rebuild the whole person, not just the behaviour.',
+					'body' => 'Proven therapies for process addiction, including CBT, one-to-one counseling and group work, alongside fitness, nutrition and mindfulness that rebuild the whole person, not just the behavior.',
 				],
 				[
 					'num' => '02 · Never templated',
 					'title' => 'A program shaped around you',
-					'body' => 'With only twelve clients on site, your process addiction treatment plan is built by a psychiatrist around your history and the specific behaviour you are facing, never slotted into a fixed curriculum.',
+					'body' => 'With only twelve clients on site, your process addiction treatment plan is built by a psychiatrist around your history and the specific behavior you are facing, never slotted into a fixed curriculum.',
 				],
 				[
 					'num' => '03 · Support around the clock',
@@ -4974,7 +4974,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'More than willpower',
 				'heading' => 'A holistic approach to process addictions',
-				'body' => "A process addiction works on the same reward system a substance does; the dependence forms on the feeling the behaviour provides, no substance required. That is why gambling, gaming, shopping or compulsive internet use can do as much damage to finances, relationships and careers as any drug, and why willpower alone so rarely ends a behavioural addiction.\n\nProcess addiction treatment here begins with a thorough clinical assessment, then targets the specific behaviour and the drivers underneath it through one-to-one counselling and evidence-based behavioural therapy, supported by mindfulness, meditation and exercise inside a calm, private setting designed to make the work possible.",
+				'body' => "A process addiction works on the same reward system a substance does; the dependence forms on the feeling the behavior provides, no substance required. That is why gambling, gaming, shopping or compulsive internet use can do as much damage to finances, relationships and careers as any drug, and why willpower alone so rarely ends a behavioral addiction.\n\nProcess addiction treatment here begins with a thorough clinical assessment, then targets the specific behavior and the drivers underneath it through one-to-one counseling and evidence-based behavioral therapy, supported by mindfulness, meditation and exercise inside a calm, private setting designed to make the work possible.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of recovery',
@@ -4982,34 +4982,34 @@ function rehab_treatment_v3_specs(): array {
 					[
 						'phase' => 'PHASE 01',
 						'label' => 'Assessment & stabilisation',
-						'h3' => 'Understanding the behaviour first',
+						'h3' => 'Understanding the behavior first',
 						'paragraphs' => [
-							'No two process addictions look the same, so treatment begins with a thorough clinical assessment to identify the specific behaviour, how far it has progressed, and any co-occurring mental or physical health issues feeding it.',
-							'From day one of treatment you step into a calm, structured routine away from the behaviour and its cues, with our team around you, so the compulsion loses its grip while the real work of recovery begins.',
+							'No two process addictions look the same, so treatment begins with a thorough clinical assessment to identify the specific behavior, how far it has progressed, and any co-occurring mental or physical health issues feeding it.',
+							'From day one of treatment you step into a calm, structured routine away from the behavior and its cues, with our team around you, so the compulsion loses its grip while the real work of recovery begins.',
 						],
 						'listItems' => [
 							'Comprehensive clinical assessment on arrival',
 							'Screening for co-occurring conditions',
-							'A structured daily routine away from the behaviour',
+							'A structured daily routine away from the behavior',
 						],
-						'asideQuote' => '"You cannot treat a behaviour you have not understood. The assessment tells us exactly what we are working with."',
+						'asideQuote' => '"You cannot treat a behavior you have not understood. The assessment tells us exactly what we are working with."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
 					[
 						'phase' => 'PHASE 02',
-						'label' => 'Behavioural therapy',
+						'label' => 'Behavioral therapy',
 						'h3' => 'Getting to the root of the compulsion',
 						'paragraphs' => [
-							'A process addiction is rarely about the activity itself. The behaviour becomes a way of coping, and the dependence forms on the feeling it provides rather than on any substance.',
-							'Through one-to-one counselling, group sessions and evidence-based behavioural therapy, you will uncover the drivers beneath the compulsive behaviour and learn to recognise the triggers and mental cues that set it off, so they lose their power over you.',
+							'A process addiction is rarely about the activity itself. The behavior becomes a way of coping, and the dependence forms on the feeling it provides rather than on any substance.',
+							'Through one-to-one counseling, group sessions and evidence-based behavioral therapy, you will uncover the drivers beneath the compulsive behavior and learn to recognize the triggers and mental cues that set it off, so they lose their power over you.',
 						],
 						'listItems' => [
-							'One-to-one counselling with experienced therapists',
-							'Group sessions and evidence-based behavioural therapy',
+							'One-to-one counseling with experienced therapists',
+							'Group sessions and evidence-based behavioral therapy',
 							'Understanding your triggers and mental cues',
 						],
-						'asideQuote' => '"Lasting change starts when you understand what the behaviour has been doing for you, not just what it has been doing to you."',
+						'asideQuote' => '"Lasting change starts when you understand what the behavior has been doing for you, not just what it has been doing to you."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
@@ -5019,21 +5019,21 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Built for life after rehab',
 						'paragraphs' => [
 							'Recovery from a process addiction holds when mind and body are rebuilt together, and when you leave with a plan rather than just willpower.',
-							'Mindfulness, meditation, exercise and wellness therapy become part of your day, and before you go home we design a tailor-made relapse prevention plan for your specific behaviour, so it has no easy way back into your life.',
+							'Mindfulness, meditation, exercise and wellness therapy become part of your day, and before you go home we design a tailor-made relapse prevention plan for your specific behavior, so it has no easy way back into your life.',
 						],
 						'listItems' => [
 							'Mindfulness, meditation and exercise woven into daily life',
 							'Wellness therapy in a peaceful, private setting',
 							'A tailor-made relapse prevention plan',
 						],
-						'asideQuote' => '"Recovery is a life-long journey. Our job is to make sure you leave with the tools to keep the behaviour out of your life for good."',
+						'asideQuote' => '"Recovery is a life-long journey. Our job is to make sure you leave with the tools to keep the behavior out of your life for good."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
 				],
 			],
 			'inpatient' => [
-				'body' => 'Trying to break a compulsive behaviour at home means staying within easy reach of it, surrounded by the cues, devices and routines that keep the cycle turning. Residential process addiction treatment removes that access entirely and replaces it with a peaceful, structured environment and round-the-clock support, so all of your energy goes into recovery.',
+				'body' => 'Trying to break a compulsive behavior at home means staying within easy reach of it, surrounded by the cues, devices and routines that keep the cycle turning. Residential process addiction treatment removes that access entirely and replaces it with a peaceful, structured environment and round-the-clock support, so all of your energy goes into recovery.',
 			],
 			'benefits' => [
 				[
@@ -5056,10 +5056,10 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider process addiction treatment?',
 				'paragraphs' => [
-					'A process addiction, also known as a behavioural addiction, affects people who compulsively engage in a behaviour or activity without being able to stop themselves, despite knowing the potential consequences. The most common forms of process addiction include gambling, gaming, internet use, shopping, sex and love addiction, exercise addiction, codependency and eating disorders, and together they affect even more people than substance addiction.',
-					'For a long time, addiction was thought of as a physical dependency on a substance, and even experts disputed whether behavioural addiction was a real disease. That has changed; process addiction is now widely accepted as a genuine health condition, recognised by many of the world\'s leading healthcare bodies. The dependence forms not on a drug but on the feeling a behaviour or activity provides, which is why the scientific and therapeutic communities now see little difference between process and substance addiction.',
-					'Left untreated, a process addiction tends to escalate. Sufferers are often skilled at hiding their habits, and many families only understand the cause after extreme consequences, such as having to sell a property to cover gambling debts. Strained relationships at home and at work, career problems and mounting mental and physical health issues are common, and behavioural addictions are on the rise as more of daily life moves online.',
-					'Acknowledging the problem takes real courage, and any addiction, no matter how challenging it may seem, can be overcome with the right process addiction treatment. If a compulsive behaviour has taken hold of your life or the life of someone you love, a quiet, confidential conversation with our team is a good place to start.',
+					'A process addiction, also known as a behavioral addiction, affects people who compulsively engage in a behavior or activity without being able to stop themselves, despite knowing the potential consequences. The most common forms of process addiction include gambling, gaming, internet use, shopping, sex and love addiction, exercise addiction, codependency and eating disorders, and together they affect even more people than substance addiction.',
+					'For a long time, addiction was thought of as a physical dependency on a substance, and even experts disputed whether behavioral addiction was a real disease. That has changed; process addiction is now widely accepted as a genuine health condition, recognized by many of the world\'s leading healthcare bodies. The dependence forms not on a drug but on the feeling a behavior or activity provides, which is why the scientific and therapeutic communities now see little difference between process and substance addiction.',
+					'Left untreated, a process addiction tends to escalate. Sufferers are often skilled at hiding their habits, and many families only understand the cause after extreme consequences, such as having to sell a property to cover gambling debts. Strained relationships at home and at work, career problems and mounting mental and physical health issues are common, and behavioral addictions are on the rise as more of daily life moves online.',
+					'Acknowledging the problem takes real courage, and any addiction, no matter how challenging it may seem, can be overcome with the right process addiction treatment. If a compulsive behavior has taken hold of your life or the life of someone you love, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
 			'steps' => [
@@ -5081,7 +5081,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'label' => 'STEP 04',
 					'title' => 'Treatment begins',
-					'body' => 'A bespoke program of behavioural therapy, holistic practice and rest, adjusted as you progress.',
+					'body' => 'A bespoke program of behavioral therapy, holistic practice and rest, adjusted as you progress.',
 				],
 			],
 			'faqs' => [
@@ -5107,16 +5107,16 @@ function rehab_treatment_v3_specs(): array {
 					'cptId' => 13221,
 				],
 				[
-					'question' => 'What types of behaviours can become process addictions?',
-					'answer' => 'Process addictions come in many shapes and forms. Common examples include gambling, gaming, internet use, shopping, sex and love addiction, exercise addiction, codependency and eating disorders. Such disorders are on the rise, especially as people spend more time online, so knowing the signs matters; if you are unsure whether a behaviour has crossed the line, our team can help you make sense of it.',
+					'question' => 'What types of behaviors can become process addictions?',
+					'answer' => 'Process addictions come in many shapes and forms. Common examples include gambling, gaming, internet use, shopping, sex and love addiction, exercise addiction, codependency and eating disorders. Such disorders are on the rise, especially as people spend more time online, so knowing the signs matters; if you are unsure whether a behavior has crossed the line, our team can help you make sense of it.',
 				],
 				[
 					'question' => 'Is a process addiction as serious as a substance addiction?',
-					'answer' => 'Yes. Many people still assume a process addiction has less impact on a person\'s life than a substance addiction, but the scientific and therapeutic communities now see little difference between the two. The dependence forms on the feeling the behaviour provides rather than on a drug, and left untreated the consequences are very similar: damaged finances, strained relationships, career problems and mental and physical health issues.',
+					'answer' => 'Yes. Many people still assume a process addiction has less impact on a person\'s life than a substance addiction, but the scientific and therapeutic communities now see little difference between the two. The dependence forms on the feeling the behavior provides rather than on a drug, and left untreated the consequences are very similar: damaged finances, strained relationships, career problems and mental and physical health issues.',
 				],
 				[
 					'question' => 'How is process addiction treated at The Diamond Rehab Thailand?',
-					'answer' => 'There is no single process addiction treatment that works for everyone, so we take the time to understand your situation and build a bespoke, long-term plan around the specific behaviour. Depending on your needs it may incorporate one-to-one counselling, group sessions, behavioural therapy, mindfulness programs, meditation, exercise and wellness therapy, delivered in a peaceful, private setting in Hua Hin by experienced therapists, psychologists and counselling specialists.',
+					'answer' => 'There is no single process addiction treatment that works for everyone, so we take the time to understand your situation and build a bespoke, long-term plan around the specific behavior. Depending on your needs it may incorporate one-to-one counseling, group sessions, behavioral therapy, mindfulness programs, meditation, exercise and wellness therapy, delivered in a peaceful, private setting in Hua Hin by experienced therapists, psychologists and counseling specialists.',
 				],
 			],
 		],
@@ -5130,9 +5130,9 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating eating disorders',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Eating disorders rarely announce themselves. They grow quietly, in private rules around food, weight and body shape, and families often sense something is wrong long before they can name it. If several of these signs feel familiar, it\'s worth a confidential conversation.',
-				'card1Title' => 'Behavioural and emotional signs',
+				'card1Title' => 'Behavioral and emotional signs',
 				'card1Items' => [
 					'Preoccupation with food, body weight or body shape',
 					'Rigid rules about what, when or how much you\'re allowed to eat',
@@ -5155,7 +5155,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Medical and psychiatric care, proven psychotherapies including cognitive behavioural therapy, and dedicated nutrition support, alongside wellness practices that heal the whole person, not just the symptoms of the eating disorder.',
+					'body' => 'Medical and psychiatric care, proven psychotherapies including cognitive behavioral therapy, and dedicated nutrition support, alongside wellness practices that heal the whole person, not just the symptoms of the eating disorder.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -5171,7 +5171,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'An illness, not a choice',
 				'heading' => 'A holistic approach to eating disorders',
-				'body' => "An eating disorder is a serious psychological illness, not a choice and not vanity. It takes hold of how a person thinks about food, weight and body shape, and it affects both mind and body, which is why willpower, diets and well-meaning advice so rarely work on their own. Left untreated, eating disorders can lead to serious health problems, which is also why eating disorder recovery should never be attempted without proper medical support.\n\nEating disorder treatment here begins with a thorough medical and psychiatric assessment, so any physical complications are identified, treated and monitored from day one. From there, regular psychotherapy and supported nutrition help you understand the thoughts, feelings and behaviours beneath the disorder, while holistic work in a calm, private setting rebuilds strength and self-trust.",
+				'body' => "An eating disorder is a serious psychological illness, not a choice and not vanity. It takes hold of how a person thinks about food, weight and body shape, and it affects both mind and body, which is why willpower, diets and well-meaning advice so rarely work on their own. Left untreated, eating disorders can lead to serious health problems, which is also why eating disorder recovery should never be attempted without proper medical support.\n\nEating disorder treatment here begins with a thorough medical and psychiatric assessment, so any physical complications are identified, treated and monitored from day one. From there, regular psychotherapy and supported nutrition help you understand the thoughts, feelings and behaviors beneath the disorder, while holistic work in a calm, private setting rebuilds strength and self-trust.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of recovery',
@@ -5199,11 +5199,11 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'Getting to the core of the issue',
 						'paragraphs' => [
 							'For lasting recovery from an eating disorder, treatment has to reach the core of the issue, not just the eating itself.',
-							'In regular one-to-one sessions and small group work, our highly qualified therapists use cognitive behavioural therapy and other evidence-based approaches to work through the behaviours, thoughts and feelings that sustain your eating disorder, including body image and the deeper drivers beneath it.',
+							'In regular one-to-one sessions and small group work, our highly qualified therapists use cognitive behavioral therapy and other evidence-based approaches to work through the behaviors, thoughts and feelings that sustain your eating disorder, including body image and the deeper drivers beneath it.',
 						],
 						'listItems' => [
 							'Regular one-to-one sessions with experienced therapists',
-							'Cognitive behavioural therapy and other evidence-based approaches',
+							'Cognitive behavioral therapy and other evidence-based approaches',
 							'Work on body image and the underlying drivers',
 						],
 						'asideQuote' => '"An eating disorder is never only about food. Therapy works on what the food has come to stand for."',
@@ -5216,7 +5216,7 @@ function rehab_treatment_v3_specs(): array {
 						'h3' => 'A relationship with food worth keeping',
 						'paragraphs' => [
 							'Eating disorder recovery holds when healthy eating stops being a set of rules and becomes a sustainable way of living.',
-							'You will learn to normalise your eating patterns and exchange unhealthy habits for sustainable alternatives, supported by nutrition education, gentle movement and mindfulness. Before you leave, we design a personal aftercare plan together, so the progress you make in treatment travels home with you.',
+							'You will learn to normalize your eating patterns and exchange unhealthy habits for sustainable alternatives, supported by nutrition education, gentle movement and mindfulness. Before you leave, we design a personal aftercare plan together, so the progress you make in treatment travels home with you.',
 						],
 						'listItems' => [
 							'A sustainable relationship with food and movement',
@@ -5253,7 +5253,7 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider eating disorder treatment?',
 				'paragraphs' => [
-					'An eating disorder is a psychological condition that causes unhealthy eating habits to develop, usually alongside a preoccupation with food, body weight or body shape. The most common types treated in our eating disorder program are anorexia nervosa, marked by extreme food restriction and a distorted view of one\'s own body; bulimia nervosa, where episodes of binge eating are followed by compensatory behaviours; binge or overeating disorder, a compulsion to eat large amounts with a sense of lost control, often followed by guilt; and other specified feeding or eating disorders, the diagnosis given when symptoms do not fit neatly into the other categories.',
+					'An eating disorder is a psychological condition that causes unhealthy eating habits to develop, usually alongside a preoccupation with food, body weight or body shape. The most common types treated in our eating disorder program are anorexia nervosa, marked by extreme food restriction and a distorted view of one\'s own body; bulimia nervosa, where episodes of binge eating are followed by compensatory behaviors; binge or overeating disorder, a compulsion to eat large amounts with a sense of lost control, often followed by guilt; and other specified feeding or eating disorders, the diagnosis given when symptoms do not fit neatly into the other categories.',
 					'Eating disorders are not about vanity. They are complex mental illnesses shaped by a combination of biological and environmental factors: genetics, impulsivity, nutritional deficiencies, societal and professional pressure to look a certain way, a history of severe trauma, and low self-esteem all raise the risk. They typically develop during adolescence but can affect people of any age and any gender, and they often occur alongside anxiety, depression or substance use, which is why eating disorder treatment has to look at the whole person rather than the eating alone.',
 					'Early, professional eating disorder treatment matters because these illnesses take a serious toll on physical health, mental health and quality of life, and left untreated they can lead to serious health problems and may even result in death. That is a reason for care, not for panic: with medical monitoring, psychotherapy and supported nutrition, recovery from an eating disorder is genuinely possible, and the sooner treatment begins, the more of that toll can be prevented or reversed.',
 					'Eating disorder recovery is challenging, but we want to reassure you that it is possible. You are capable of making great changes, and our team is here to make treatment a safe and comfortable experience from beginning to end. If any of this feels familiar, in your own life or in someone you love, a quiet, confidential conversation with our team is a good place to start.',
@@ -5306,7 +5306,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What is the difference between an eating disorder and disordered eating?',
-					'answer' => 'Disordered eating is not a formal clinical diagnosis, and its symptoms are usually less severe and less frequent than those of an eating disorder. An eating disorder is a recognised psychological condition involving unhealthy eating habits and a preoccupation with food, body weight or body shape, and it can seriously affect physical health, mental health and quality of life. If you are unsure where you or a loved one sits on that line, a confidential conversation with a clinician is the safest way to find out.',
+					'answer' => 'Disordered eating is not a formal clinical diagnosis, and its symptoms are usually less severe and less frequent than those of an eating disorder. An eating disorder is a recognized psychological condition involving unhealthy eating habits and a preoccupation with food, body weight or body shape, and it can seriously affect physical health, mental health and quality of life. If you are unsure where you or a loved one sits on that line, a confidential conversation with a clinician is the safest way to find out.',
 				],
 				[
 					'question' => 'What causes eating disorders?',
@@ -5328,9 +5328,9 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating eating disorders',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Anorexia tends to build quietly, through private rules and fears that are hard to see from the inside, because the illness often insists nothing is wrong. Families usually notice the signs before the person living with it can. If several feel familiar, it\'s worth a confidential conversation.',
-				'card1Title' => 'Behavioural and emotional signs',
+				'card1Title' => 'Behavioral and emotional signs',
 				'card1Items' => [
 					'An intense fear of gaining weight',
 					'Constant preoccupation with food, diet and weight',
@@ -5353,7 +5353,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Mind and body, treated together',
-					'body' => 'In our anorexia treatment program, medical and psychiatric care, cognitive behavioural therapy and gently supported nutrition work side by side, because lasting recovery from anorexia means healing both the mind and the body.',
+					'body' => 'In our anorexia treatment program, medical and psychiatric care, cognitive behavioral therapy and gently supported nutrition work side by side, because lasting recovery from anorexia means healing both the mind and the body.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -5396,11 +5396,11 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Working on what sits beneath',
 						'paragraphs' => [
-							'Cognitive behavioural therapy forms the core of our anorexia treatment program, because anorexia lives in thoughts and fears as much as in behaviour.',
+							'Cognitive behavioral therapy forms the core of our anorexia treatment program, because anorexia lives in thoughts and fears as much as in behavior.',
 							'In one-to-one sessions you will work gently on body image, the need for control and the stress and emotional difficulties the anorexia has been managing for you, always paced to your physical and emotional capacity rather than a fixed schedule.',
 						],
 						'listItems' => [
-							'One-to-one cognitive behavioural therapy with experienced therapists',
+							'One-to-one cognitive behavioral therapy with experienced therapists',
 							'Careful work on body image, fear and control',
 							'Sessions paced to where you are, never forced',
 						],
@@ -5452,9 +5452,9 @@ function rehab_treatment_v3_specs(): array {
 				'heading' => 'Is it time to consider anorexia treatment?',
 				'paragraphs' => [
 					'Anorexia nervosa, more commonly known simply as anorexia, is a serious eating disorder in which a person severely restricts how much they eat, driven by an intense fear of gaining weight and a distorted view of their own body. Although young women are disproportionately affected, anyone of any age, gender or cultural background can develop anorexia, and a related condition, atypical anorexia nervosa, shares almost all of its features in people whose weight appears unremarkable from the outside.',
-					'Although anorexia shows itself through eating, the underlying problem is rarely about food. Anorexia is a mental health condition: an unhealthy way of coping with stress and emotional difficulty, often bound up with a need for control. Because the disorder distorts how a person sees their own body and behaviour, it can be genuinely difficult to recognise from the inside, and many people do not realise how unwell they have become.',
+					'Although anorexia shows itself through eating, the underlying problem is rarely about food. Anorexia is a mental health condition: an unhealthy way of coping with stress and emotional difficulty, often bound up with a need for control. Because the disorder distorts how a person sees their own body and behavior, it can be genuinely difficult to recognize from the inside, and many people do not realize how unwell they have become.',
 					'Anorexia is among the most serious mental illnesses, and without effective anorexia treatment it takes a heavy toll on both physical and psychological health, which is why medical supervision matters so much. The encouraging news is that recovery is real: research suggests that about 46 percent of people with anorexia make a full recovery and a further 33 percent make a partial one, and the sooner treatment begins, the better the outlook.',
-					'Reaching out for anorexia treatment takes courage, especially when part of you is not sure anything is wrong. You do not have to be certain, and you do not have to do it alone. Whether you are worried about yourself or recognise these signs in someone you love, a quiet, confidential conversation with our eating disorder team is a good place to start.',
+					'Reaching out for anorexia treatment takes courage, especially when part of you is not sure anything is wrong. You do not have to be certain, and you do not have to do it alone. Whether you are worried about yourself or recognize these signs in someone you love, a quiet, confidential conversation with our eating disorder team is a good place to start.',
 				],
 			],
 			'steps' => [
@@ -5485,7 +5485,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What is the process of rehabilitation?',
-					'answer' => 'The process may differ, as programs are customised to what each person needs and the severity of the illness, but the goal of rehabilitation is always the same: your wellbeing. For anorexia, most treatment programs include a thorough evaluation, medical stabilisation and nutritional rehabilitation rather than a substance detox, psychological treatments such as cognitive behavioural therapy, education sessions, and supportive services. When you transition into outpatient care, you may continue one-to-one or group therapy sessions, and for some people that ongoing support continues long after residential treatment ends.',
+					'answer' => 'The process may differ, as programs are customised to what each person needs and the severity of the illness, but the goal of rehabilitation is always the same: your wellbeing. For anorexia, most treatment programs include a thorough evaluation, medical stabilisation and nutritional rehabilitation rather than a substance detox, psychological treatments such as cognitive behavioral therapy, education sessions, and supportive services. When you transition into outpatient care, you may continue one-to-one or group therapy sessions, and for some people that ongoing support continues long after residential treatment ends.',
 				],
 				[
 					'cptId' => 200,
@@ -5513,7 +5513,7 @@ function rehab_treatment_v3_specs(): array {
 					'answer' => 'Research suggests that about 46 percent of people with anorexia make a full recovery and an additional 33 percent make a partial recovery. The sooner a person begins anorexia treatment, the more likely they are to make a full recovery, so it is important to seek help as early as possible. Residential treatment for anorexia is generally regarded as more effective than outpatient therapy.',
 				],
 				[
-					'question' => 'Can you have anorexia and not realise it?',
+					'question' => 'Can you have anorexia and not realize it?',
 					'answer' => 'Yes. Anorexia can cause severe body image distortion and dramatically affect the way you think and feel about yourself and the world around you, which makes it very difficult to self-diagnose. Generally speaking, if you have a persistent fear of gaining weight or find yourself going to unhealthy lengths to lose it, it is worth talking to a professional. For a formal diagnosis, please see a doctor or another licensed professional.',
 				],
 				[
@@ -5532,9 +5532,9 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating eating disorders',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Bulimia is often invisible. Weight can fluctuate or look entirely normal, and most people work hard to keep the illness hidden, so even families and partners can miss the signs of bulimia for years. If several feel familiar, it\'s worth a confidential conversation.',
-				'card1Title' => 'Behavioural and emotional signs',
+				'card1Title' => 'Behavioral and emotional signs',
 				'card1Items' => [
 					'Cycles of bingeing followed by compensating, kept secret',
 					'Secrecy and unease around food and mealtimes',
@@ -5557,7 +5557,7 @@ function rehab_treatment_v3_specs(): array {
 				[
 					'num' => '01 · Evidence-based & holistic',
 					'title' => 'Western clinical care, Eastern calm',
-					'body' => 'Bulimia treatment here combines medical and psychiatric care with cognitive behavioural therapy, the most strongly evidenced psychotherapy for bulimia nervosa, alongside supported nutrition, mindfulness meditation and gentle movement that steady the whole person, not just the symptoms.',
+					'body' => 'Bulimia treatment here combines medical and psychiatric care with cognitive behavioral therapy, the most strongly evidenced psychotherapy for bulimia nervosa, alongside supported nutrition, mindfulness meditation and gentle movement that steady the whole person, not just the symptoms.',
 				],
 				[
 					'num' => '02 · Never templated',
@@ -5573,7 +5573,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'An illness, not a lack of discipline',
 				'heading' => 'A holistic approach to bulimia',
-				'body' => "Bulimia nervosa is a serious, recognised mental illness, not a failure of willpower. It runs on a self-reinforcing cycle: distress about body image drives bingeing, bingeing drives compensating, and each episode deepens the shame that triggers the next. That shame is also what keeps the illness hidden, so bulimia treatment here begins by lifting it. Nobody at the retreat will judge you, and nothing you share will surprise us.\n\nYour treatment starts with a thorough medical and psychiatric assessment, then moves into daily psychotherapy focused on the bulimia cycle and what drives it, supported by regular, gently structured meals and nutrition education. Around that clinical core, mindfulness, movement and rest in a calm, private setting give your body and mind the space to heal together.",
+				'body' => "Bulimia nervosa is a serious, recognized mental illness, not a failure of willpower. It runs on a self-reinforcing cycle: distress about body image drives bingeing, bingeing drives compensating, and each episode deepens the shame that triggers the next. That shame is also what keeps the illness hidden, so bulimia treatment here begins by lifting it. Nobody at the retreat will judge you, and nothing you share will surprise us.\n\nYour treatment starts with a thorough medical and psychiatric assessment, then moves into daily psychotherapy focused on the bulimia cycle and what drives it, supported by regular, gently structured meals and nutrition education. Around that clinical core, mindfulness, movement and rest in a calm, private setting give your body and mind the space to heal together.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of bulimia recovery',
@@ -5600,11 +5600,11 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Understanding the cycle, and what drives it',
 						'paragraphs' => [
-							'The most up-to-date research points to cognitive behavioural therapy as the most effective psychotherapy for bulimia nervosa, which is why it sits at the centre of your days in treatment here.',
+							'The most up-to-date research points to cognitive behavioral therapy as the most effective psychotherapy for bulimia nervosa, which is why it sits at the center of your days in treatment here.',
 							'Through daily one-to-one sessions and small group work, you will learn how the binge-and-compensate cycle sustains itself, gently challenge the thoughts about body image and self-worth that feed the bulimia, and build steadier ways of responding to the emotional triggers behind it.',
 						],
 						'listItems' => [
-							'Cognitive behavioural therapy, the gold standard for bulimia',
+							'Cognitive behavioral therapy, the gold standard for bulimia',
 							'Daily one-to-one sessions and small group work',
 							'Work on body image, self-worth and emotional triggers',
 						],
@@ -5655,9 +5655,9 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider bulimia treatment?',
 				'paragraphs' => [
-					'Bulimia nervosa is one of the three main eating disorders, and it is both a mental illness and an eating disorder. It is defined by recurrent episodes of binge eating, consuming far more food in a short window than most people would, followed by compensating behaviours intended to undo the episode. Because weight tends to fluctuate rather than fall, bulimia is often harder to identify than eating disorders like anorexia, and many people who live with it are in denial or become skilled at hiding the illness, which is why bulimia so often goes unrecognised even by those closest to them.',
+					'Bulimia nervosa is one of the three main eating disorders, and it is both a mental illness and an eating disorder. It is defined by recurrent episodes of binge eating, consuming far more food in a short window than most people would, followed by compensating behaviors intended to undo the episode. Because weight tends to fluctuate rather than fall, bulimia is often harder to identify than eating disorders like anorexia, and many people who live with it are in denial or become skilled at hiding the illness, which is why bulimia so often goes unrecognized even by those closest to them.',
 					'The bulimia cycle is usually driven by worry about body image in a world that constantly tells us how we should look. One study suggested that up to 40% of women have dieted to lose weight despite not being overweight in the first place, and research shows women and young adults face the highest risk of developing bulimia. Genetics, mental health and personality factors can all play a part. What matters most to understand is that the cycle is self-reinforcing: each episode deepens the distress and self-criticism that trigger the next, which is why willpower alone so rarely breaks it.',
-					'Professional bulimia treatment works because it addresses the underlying problem rather than the behaviour alone. Current research points to cognitive behavioural therapy as the most effective psychotherapy for bulimia nervosa, and the strongest programs combine it with counselling, support groups, nutrition education, mindfulness meditation and medication where appropriate. Left untreated, however, bulimia carries serious physical risks: cardiac complications ranging from an irregular heartbeat to heart failure, dehydration and the loss of essential minerals that keep the organs functioning, digestive problems, pancreatitis and ulcers, dental damage, and deep fatigue. In severe cases these complications can be life-threatening, which is why early bulimia treatment matters so much.',
+					'Professional bulimia treatment works because it addresses the underlying problem rather than the behavior alone. Current research points to cognitive behavioral therapy as the most effective psychotherapy for bulimia nervosa, and the strongest programs combine it with counseling, support groups, nutrition education, mindfulness meditation and medication where appropriate. Left untreated, however, bulimia carries serious physical risks: cardiac complications ranging from an irregular heartbeat to heart failure, dehydration and the loss of essential minerals that keep the organs functioning, digestive problems, pancreatitis and ulcers, dental damage, and deep fatigue. In severe cases these complications can be life-threatening, which is why early bulimia treatment matters so much.',
 					'Reaching out for bulimia treatment takes real courage, especially with an illness that grows in secrecy and shame. You will not be judged here, and nothing you tell us will shock us. If the cycle has taken hold of your life, or the life of someone you love, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -5719,7 +5719,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'What is the best treatment for bulimia nervosa?',
-					'answer' => 'The most up-to-date research suggests that cognitive behavioural therapy (CBT) is the most effective form of psychotherapy for bulimia nervosa. The strongest programs combine CBT with counselling, support groups, nutrition education, mindfulness meditation and, where appropriate, medication, within a structured daily routine that helps steady the cycle while the deeper work takes hold.',
+					'answer' => 'The most up-to-date research suggests that cognitive behavioral therapy (CBT) is the most effective form of psychotherapy for bulimia nervosa. The strongest programs combine CBT with counseling, support groups, nutrition education, mindfulness meditation and, where appropriate, medication, within a structured daily routine that helps steady the cycle while the deeper work takes hold.',
 				],
 			],
 		],
@@ -5733,9 +5733,9 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating eating disorders',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
+				'heading' => 'Recognizing the signs is the first step',
 				'subheading' => 'Almost everyone overindulges from time to time, so binge eating disorder is easy to dismiss as a habit. It is not. Compulsive overeating tends to live in private routines and quiet shame, which is why families and partners often sense something is wrong long before they can name it. If several of these signs of binge eating disorder feel familiar, it\'s worth a confidential conversation.',
-				'card1Title' => 'Behavioural and emotional signs',
+				'card1Title' => 'Behavioral and emotional signs',
 				'card1Items' => [
 					'Eating large amounts rapidly, or well past the point of comfortable fullness',
 					'Eating alone or in secret out of embarrassment',
@@ -5800,11 +5800,11 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Working on what drives the eating',
 						'paragraphs' => [
-							'Evidence-based psychotherapy for binge eating disorder sits at the centre of your days here, led by specialists in the field of eating disorders.',
-							'Through ongoing cognitive behavioural therapy, in one-to-one sessions and small group work, you will learn to identify the emotions and triggers behind binge eating episodes, restructure the unhelpful thought patterns that keep the disorder running, and rebuild the self-worth that compulsive overeating has worn away.',
+							'Evidence-based psychotherapy for binge eating disorder sits at the center of your days here, led by specialists in the field of eating disorders.',
+							'Through ongoing cognitive behavioral therapy, in one-to-one sessions and small group work, you will learn to identify the emotions and triggers behind binge eating episodes, restructure the unhelpful thought patterns that keep the disorder running, and rebuild the self-worth that compulsive overeating has worn away.',
 						],
 						'listItems' => [
-							'Ongoing cognitive behavioural therapy with eating disorder specialists',
+							'Ongoing cognitive behavioral therapy with eating disorder specialists',
 							'One-to-one sessions and small group work in a safe, judgment-free space',
 							'Practical tools for the emotions and triggers behind episodes',
 						],
@@ -5855,9 +5855,9 @@ function rehab_treatment_v3_specs(): array {
 			'prose' => [
 				'heading' => 'Is it time to consider binge eating treatment?',
 				'paragraphs' => [
-					'Compulsive overeating, sometimes referred to as binge eating disorder, is a condition characterised by uncontrolled episodes of overeating. Whether it is the holiday season or a celebration, almost everyone overindulges from time to time; binge eating disorder is different. It looks like eating large amounts of food even when you are not hungry, eating until you feel uncomfortably full, eating in secrecy, and feeling embarrassed, guilty or ashamed of your eating afterwards. The disorder typically begins in adolescence or young adulthood, though it can affect people of any age, and it is an illness, not gluttony and not a failure of willpower.',
+					'Compulsive overeating, sometimes referred to as binge eating disorder, is a condition characterized by uncontrolled episodes of overeating. Whether it is the holiday season or a celebration, almost everyone overindulges from time to time; binge eating disorder is different. It looks like eating large amounts of food even when you are not hungry, eating until you feel uncomfortably full, eating in secrecy, and feeling embarrassed, guilty or ashamed of your eating afterwards. The disorder typically begins in adolescence or young adulthood, though it can affect people of any age, and it is an illness, not gluttony and not a failure of willpower.',
 					'For many people with binge eating disorder, food becomes an escape or a coping mechanism. Researchers believe a combination of biological, psychological and social factors contributes to the disorder, and studies point to a close relationship with anxiety: some people overeat to temporarily relieve anxious feelings until it becomes an automatic response, and the guilt and shame that follow quietly set up the next episode. Over time, compulsive overeating wears on the whole person, affecting sleep, energy, focus, body image and mood.',
-					'This is also why diets so rarely help. Unlike other compulsions, total abstinence cannot be the goal, because food is a necessary part of life; the challenge lies in learning to appreciate food as nourishment rather than a coping mechanism for times of stress or difficulty. Professional binge eating disorder treatment works on the cause rather than the symptom: cognitive behavioural therapy helps you cope with the thoughts and feelings that trigger binge episodes, medication may be considered in moderate to severe cases under careful medical supervision, and nutrition education builds sustainable positive habits. A structured residential eating disorder program brings all of this together in one calm place.',
+					'This is also why diets so rarely help. Unlike other compulsions, total abstinence cannot be the goal, because food is a necessary part of life; the challenge lies in learning to appreciate food as nourishment rather than a coping mechanism for times of stress or difficulty. Professional binge eating disorder treatment works on the cause rather than the symptom: cognitive behavioral therapy helps you cope with the thoughts and feelings that trigger binge episodes, medication may be considered in moderate to severe cases under careful medical supervision, and nutrition education builds sustainable positive habits. A structured residential eating disorder program brings all of this together in one calm place.',
 					'Committing to binge eating disorder treatment takes courage, and judgment has absolutely no place in the healing process. If your relationship with food has become a source of distress, or you are worried about someone you love, a quiet, confidential conversation with our team is a good place to start.',
 				],
 			],
@@ -5908,7 +5908,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'How is compulsive overeating treated?',
-					'answer' => 'Compulsive overeating disorder is typically treated with a combination of approaches. Cognitive behavioural therapy helps you learn to better cope with the thoughts and feelings that trigger binge eating episodes, and in moderate to severe cases medication may be considered under careful medical supervision. Binge eating disorder treatment is not a diet program: the focus is on the emotional drivers of eating and on building a sustainable, healthier relationship with food.',
+					'answer' => 'Compulsive overeating disorder is typically treated with a combination of approaches. Cognitive behavioral therapy helps you learn to better cope with the thoughts and feelings that trigger binge eating episodes, and in moderate to severe cases medication may be considered under careful medical supervision. Binge eating disorder treatment is not a diet program: the focus is on the emotional drivers of eating and on building a sustainable, healthier relationship with food.',
 				],
 				[
 					'question' => 'Is overeating a sign of anxiety?',
@@ -5916,7 +5916,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Is binge eating disorder a real illness?',
-					'answer' => 'Yes. Compulsive overeating is a recognised condition in which people feel intense reward from eating and have little or no control over their eating habits, despite the effect on their lives. Naming it this way is not a judgment: it confirms that binge eating disorder is a genuine illness with effective, evidence-based treatment, not a question of willpower or character.',
+					'answer' => 'Yes. Compulsive overeating is a recognized condition in which people feel intense reward from eating and have little or no control over their eating habits, despite the effect on their lives. Naming it this way is not a judgment: it confirms that binge eating disorder is a genuine illness with effective, evidence-based treatment, not a question of willpower or character.',
 				],
 			],
 		],
@@ -5930,8 +5930,8 @@ function rehab_treatment_v3_specs(): array {
 				'stat3Label' => 'Years treating mental health',
 			],
 			'signs' => [
-				'heading' => 'Recognising the signs is the first step',
-				'subheading' => 'Mental illness rarely announces itself all at once. Whether it is depression, anxiety, trauma, burnout or insomnia, the signs surface gradually in mood, body and behaviour, and family and colleagues often notice the change before you do. If several of these signs feel familiar, it\'s worth a confidential conversation.',
+				'heading' => 'Recognizing the signs is the first step',
+				'subheading' => 'Mental illness rarely announces itself all at once. Whether it is depression, anxiety, trauma, burnout or insomnia, the signs surface gradually in mood, body and behavior, and family and colleagues often notice the change before you do. If several of these signs feel familiar, it\'s worth a confidential conversation.',
 				'card1Title' => 'Emotional and mental signs',
 				'card1Items' => [
 					'Persistent low mood that will not lift',
@@ -5941,11 +5941,11 @@ function rehab_treatment_v3_specs(): array {
 					'Feeling overwhelmed and unable to cope with daily challenges',
 					'A creeping sense of hopelessness about getting better',
 				],
-				'card2Title' => 'Physical and behavioural signs',
+				'card2Title' => 'Physical and behavioral signs',
 				'card2Items' => [
 					'Poor sleep, whether falling asleep, staying asleep or both',
 					'Decreased energy and physical and emotional exhaustion',
-					'Changes in appetite and unusual eating behaviour',
+					'Changes in appetite and unusual eating behavior',
 					'Reduced mental clarity and trouble concentrating',
 					'Relying on alcohol, drugs or other crutches to cope',
 					'Work, home and personal obligations starting to slip',
@@ -5971,7 +5971,7 @@ function rehab_treatment_v3_specs(): array {
 			'holistic' => [
 				'eyebrow' => 'Common, and treatable',
 				'heading' => 'A holistic approach to mental health',
-				'body' => "Mental health disorders are conditions that affect thinking, emotion and behaviour, causing real distress and wearing away at quality of life. They are far more common than most people admit, and they are treatable. Pushing through alone rarely works, because the illness itself erodes the energy and clarity that recovery demands.\n\nMental health treatment at our retreat moves through a thorough psychiatric assessment, often the first accurate diagnosis someone receives, into daily psychotherapy, one-to-one and in small groups, supported by yoga, meditation, fitness and nutrition, all inside a calm, private coastal setting in Hua Hin designed to make the work possible.",
+				'body' => "Mental health disorders are conditions that affect thinking, emotion and behavior, causing real distress and wearing away at quality of life. They are far more common than most people admit, and they are treatable. Pushing through alone rarely works, because the illness itself erodes the energy and clarity that recovery demands.\n\nMental health treatment at our retreat moves through a thorough psychiatric assessment, often the first accurate diagnosis someone receives, into daily psychotherapy, one-to-one and in small groups, supported by yoga, meditation, fitness and nutrition, all inside a calm, private coastal setting in Hua Hin designed to make the work possible.",
 			],
 			'phases' => [
 				'heading' => 'Three pillars of mental health recovery',
@@ -5998,8 +5998,8 @@ function rehab_treatment_v3_specs(): array {
 						'label' => 'Psychotherapy',
 						'h3' => 'Getting to the root causes',
 						'paragraphs' => [
-							'Evidence-based psychotherapy sits at the centre of your days at the retreat, tailored to your mental health diagnosis rather than a standard script.',
-							'Through daily one-to-one sessions, and small group work where it helps, you will get beneath the symptoms to the root causes of the mental health disorder, using cognitive behavioural therapy, DBT and trauma-focused work as your diagnosis calls for it.',
+							'Evidence-based psychotherapy sits at the center of your days at the retreat, tailored to your mental health diagnosis rather than a standard script.',
+							'Through daily one-to-one sessions, and small group work where it helps, you will get beneath the symptoms to the root causes of the mental health disorder, using cognitive behavioral therapy, DBT and trauma-focused work as your diagnosis calls for it.',
 						],
 						'listItems' => [
 							'Daily one-to-one sessions with experienced therapists',
@@ -6102,7 +6102,7 @@ function rehab_treatment_v3_specs(): array {
 				],
 				[
 					'question' => 'Which mental health conditions do you treat?',
-					'answer' => 'We treat the full range of common mental health conditions, including depression, anxiety disorders, PTSD and trauma, burnout and insomnia, as well as behavioural addictions, impulse control disorders and eating disorders. Because conditions often overlap, mental health treatment starts with a comprehensive psychiatric assessment so your program addresses everything that is actually going on, not just the most visible symptom.',
+					'answer' => 'We treat the full range of common mental health conditions, including depression, anxiety disorders, PTSD and trauma, burnout and insomnia, as well as behavioral addictions, impulse control disorders and eating disorders. Because conditions often overlap, mental health treatment starts with a comprehensive psychiatric assessment so your program addresses everything that is actually going on, not just the most visible symptom.',
 				],
 				[
 					'question' => 'What is dual diagnosis and do you treat it?',
