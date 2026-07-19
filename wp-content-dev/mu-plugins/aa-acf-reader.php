@@ -7,7 +7,7 @@
  * faq/global/cta) and a fixed set of sub-fields stored as flat postmeta keys
  * like `sections_0_heading_title`, `sections_0_side_image`, etc.
  *
- * This file exposes pure read helpers that return normalised PHP arrays —
+ * This file exposes pure read helpers that return normalized PHP arrays —
  * one entry per section, only the fields we actually need to render. The
  * section→block mapper (Phase C) consumes these arrays; this file does NOT
  * emit any markup.
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Return the ordered list of sections on a page (or global_section CPT).
  *
- * @return array[] List of normalised section arrays. Each carries `_idx`
+ * @return array[] List of normalized section arrays. Each carries `_idx`
  *                 (original position) and `_layout` (banner/article/…) plus
  *                 layout-specific fields. Returns [] if no flex content.
  */
@@ -81,7 +81,7 @@ function rehab_acf_image( int $attachment_id ): ?array {
  * -------------------------------------------------------------------------- */
 
 /**
- * Read a single section and return a normalised array shape.
+ * Read a single section and return a normalized array shape.
  *
  * Unknown layouts fall through to a raw shape with `_unknown => true` so the
  * mapper can decide whether to skip or warn.
@@ -368,7 +368,7 @@ function rehab_acf_read_section( int $post_id, int $idx, string $layout ): array
 
 		case 'contacts':
 			// Contact-form section. `form` is the legacy forminator
-			// shortcode — we drop it in favour of the rehab/final-cta
+			// shortcode — we drop it in favor of the rehab/final-cta
 			// REST-based form.
 			return $base + [
 				'title'    => (string) $get( 'heading_title' ),

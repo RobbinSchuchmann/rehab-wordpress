@@ -16,7 +16,7 @@
  *   2. Host-gated. Even if the options are set, injection is refused on any
  *      non-production host — localhost, the raw dev IP, and *.cloudwaysapps.com
  *      staging URLs. Only a real brand domain ever emits tracking. This is
- *      defence-in-depth: the options should only be set on the prod server, but
+ *      defense-in-depth: the options should only be set on the prod server, but
  *      if they leak onto staging the box still stays clean.
  *
  * Enable on the production server via WP-CLI (Diamond values shown):

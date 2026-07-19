@@ -705,7 +705,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		'stat3Num' => '12+',
 		'formEyebrow' => 'Free & confidential',
 		'formTitle'   => 'Talk with our admissions team',
-		'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
+		'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call center.',
 		'formSubmit'  => 'Talk with admissions',
 		'formPhoneLabel' => 'Or call +61 2 7908 2277',
 		'formConsent' => 'By submitting you agree to a confidential call-back. We never share your details.',
@@ -878,7 +878,7 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 	$blocks .= rehab_block_cta_band( [
 		'background' => 'dark',
 		'eyebrow'    => 'Take the next step',
-		'heading'    => "You've already done the hardest part: recognising it",
+		'heading'    => "You've already done the hardest part: recognizing it",
 		'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
 		'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
 		'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
@@ -1004,10 +1004,10 @@ function rehab_team_member_roles(): array {
 		11930 => 'Clinical Supervisor / Psychologist',
 		8124  => 'General Manager',
 		8414  => 'Consultant Psychiatrist',
-		11926 => 'Psychotherapist / Counselling Psychologist',
-		11933 => 'Addiction Counsellor',
-		11931 => 'Addiction Counsellor',
-		11932 => 'Addiction Counsellor',
+		11926 => 'Psychotherapist / Counseling Psychologist',
+		11933 => 'Addiction Counselor',
+		11931 => 'Addiction Counselor',
+		11932 => 'Addiction Counselor',
 		8125  => 'Nurse',
 		8126  => 'Nurse',
 		8407  => 'Nurse',
@@ -1046,7 +1046,7 @@ function rehab_extract_member_from_intro( string $content ): array {
 		if ( false !== strpos( $body, 'u003C' ) && false === strpos( $body, '<' ) ) {
 			$body = str_replace( [ 'u003C', 'u003E', 'u002F', 'u0026' ], [ '<', '>', '/', '&' ], $body );
 		}
-		// Split <p>…</p> paragraphs into plain text. Normalise em/en dashes to a
+		// Split <p>…</p> paragraphs into plain text. Normalize em/en dashes to a
 		// comma per the site-wide no-em-dash rule (these are real bios).
 		$norm = static function ( $t ) {
 			$t = trim( html_entity_decode( wp_strip_all_tags( $t ), ENT_QUOTES ) );

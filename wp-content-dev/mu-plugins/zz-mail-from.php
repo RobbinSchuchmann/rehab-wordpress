@@ -18,7 +18,7 @@
  *   wp option update rehab_mail_from_name 'The Diamond Rehab Thailand'   # optional
  *
  * Both filters are safe no-ops when the option is unset/invalid, so sites
- * without a configured brand address keep WordPress's default behaviour.
+ * without a configured brand address keep WordPress's default behavior.
  *
  * @package RehabParent
  */

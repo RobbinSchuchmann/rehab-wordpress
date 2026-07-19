@@ -254,7 +254,7 @@ add_action( 'init', function () {
 
 			$out .= rehab_block_prose(
 				'Recovery, surrounded by the best of Thailand',
-				[ "At The Diamond Rehab, we recognise the importance of a comprehensive approach to recovery. Our individualised programs offer many activities and excursions for you to explore, ensuring there's something for everyone. Whether it's a peaceful morning meditation beach walk, an exhilarating game of Padel, or a scenic mountain biking adventure along a 30km beach road, the options are endless." ],
+				[ "At The Diamond Rehab, we recognize the importance of a comprehensive approach to recovery. Our individualised programs offer many activities and excursions for you to explore, ensuring there's something for everyone. Whether it's a peaceful morning meditation beach walk, an exhilarating game of Padel, or a scenic mountain biking adventure along a 30km beach road, the options are endless." ],
 				[], '', '', 'cream', 'stacked'
 			);
 
@@ -437,11 +437,11 @@ add_action( 'init', function () {
 				'body'        => 'Early access to your super is a significant decision. Weigh these points — and get independent advice — before you begin:',
 				'listItems'   => [
 					'Impact on your super balance: early access reduces your overall superannuation.',
-					'Explore other support options: consider charities or other organisations first.',
+					'Explore other support options: consider charities or other organizations first.',
 					'Tax implications: withdrawn funds are taxed (17% to 22% for those under 60).',
 					'Superannuation fund policies: not all funds allow early access; switching may be required.',
-					'Seek financial advice: consult a free financial counsellor or our team for advice.',
-					'For free financial counselling in Australia, contact the National Debt Helpline at 1800 007 007.',
+					'Seek financial advice: consult a free financial counselor or our team for advice.',
+					'For free financial counseling in Australia, contact the National Debt Helpline at 1800 007 007.',
 				],
 			] );
 
@@ -532,7 +532,7 @@ add_action( 'init', function () {
 					if ( 'rehab/intro-doctor-card' === $bn && null === $src ) { $src = $b['attrs']; $type = 'intro'; }
 					if ( 'rehab/team-member' === $bn && null === $src ) { $src = $b['attrs']; $type = 'member'; }
 				}
-				if ( null === $src ) { $log[] = "skip {$pg->post_name} (no recognised member block)"; continue; }
+				if ( null === $src ) { $log[] = "skip {$pg->post_name} (no recognized member block)"; continue; }
 
 				$strip = static fn( $v ) => trim( wp_strip_all_tags( (string) $v ) );
 				$slug  = $pg->post_name;
@@ -561,7 +561,7 @@ add_action( 'init', function () {
 					$photo = (string) ( $src['imageUrl'] ?? '' );
 					$palt  = (string) ( $src['imageAlt'] ?? '' );
 				}
-				// Normalise any dev-host photo URL to relative before attachment lookup.
+				// Normalize any dev-host photo URL to relative before attachment lookup.
 				$photo = str_replace( [ 'http://5.223.87.211:8081', 'https://5.223.87.211:8081' ], '', $photo );
 				$paras = array_filter( array_map( 'trim', preg_split( "/\n\s*\n/", $bio ) ) );
 				$content = implode( "\n\n", array_map(
@@ -650,7 +650,7 @@ add_action( 'init', function () {
 			// with ONE rehab/job-listings block so every role reads identically
 			// (image left, eyebrow + title + text right, alternating white/cream).
 			// Keeps the hero, the "Why work here" article-row, and the two trailing
-			// SEO Q&A rows. Image URLs normalised to relative. Backup to meta.
+			// SEO Q&A rows. Image URLs normalized to relative. Backup to meta.
 			$pid = 9015;
 			$p   = get_post( $pid );
 			if ( ! $p ) { echo "no page $pid\n"; break; }
@@ -670,9 +670,9 @@ add_action( 'init', function () {
   },
   {
     "imageUrl": "/wp-content/uploads/2024/10/addiction-recovery-counselor.png",
-    "imageAlt": "Addiction recovery counsellor at The Diamond Rehab Thailand",
+    "imageAlt": "Addiction recovery counselor at The Diamond Rehab Thailand",
     "eyebrow": "",
-    "title": "Addiction Counsellor",
+    "title": "Addiction Counselor",
     "body": "Addiction psychology therapists use evidence-based treatment approaches to diagnose and treat the psychological components of addiction. Using techniques like cognitive-behavioral therapy (CBT) to handle the emotional and mental health issues related to addiction is one of the obligations of an addiction psychology therapist.\n\nIt is additionally their responsibility to evaluate patients, administer therapy, and oversee recovery progress. In certain states, a master's or doctoral degree in psychology, counseling, or a related discipline is mandatory and is regarded as an advantage, as it allows professionals to offer a wider range of services to their clients.\n\nAdditionally, state licensure as a psychologist and specialized training in addiction is often necessary.",
     "applyText": "",
     "applyUrl": ""
@@ -759,7 +759,7 @@ JSON;
 					$out .= $jl_block . "\n\n";
 				}
 			}
-			// Normalise dev-host image URLs to relative (both raw and JSON-escaped).
+			// Normalize dev-host image URLs to relative (both raw and JSON-escaped).
 			$out = str_replace(
 				[ 'http://5.223.87.211:8081', 'http:\/\/5.223.87.211:8081', 'https://5.223.87.211:8081', 'https:\/\/5.223.87.211:8081' ],
 				'', $out
@@ -871,7 +871,7 @@ JSON;
 		case 'set-whyus-prose-split':
 			// REH-78: set the Why-us page (825) prose block to image-right
 			// (split-reverse). Adds the layout attr + the CSS class; run recover-demo
-			// afterwards to normalise the saved markup to the block's save() output.
+			// afterwards to normalize the saved markup to the block's save() output.
 			$pid = 825;
 			$p   = get_post( $pid );
 			if ( ! $p ) { echo "no page $pid\n"; break; }
@@ -1004,7 +1004,7 @@ JSON;
 					[ '"primaryText":"Check availability","primaryUrl":"#pricing"', '"primaryText":"Check cost","primaryUrl":"/contact-us/"', 1 ],
 					[ '<a href="#pricing" class="rehab-btn rehab-btn--luxury">Check availability</a>', '<a href="/contact-us/" class="rehab-btn rehab-btn--luxury">Check cost</a>', 1 ],
 				],
-				857  => [ // Programme: secondary self-link becomes all-treatments (REH-154)
+				857  => [ // Program: secondary self-link becomes all-treatments (REH-154)
 					[ '{"eyebrow":"A program built around you"', '{"secondaryText":"Explore all treatments","secondaryUrl":"/all-treatments/","eyebrow":"A program built around you"', 1 ],
 					[ '<a href="/programme/" class="rehab-btn rehab-btn--outline">Explore the program</a>', '<a href="/all-treatments/" class="rehab-btn rehab-btn--outline">Explore all treatments</a>', 1 ],
 				],
@@ -1502,7 +1502,7 @@ JSON;
 			$team_parent    = 722;
 			$careers_parent = 9015;
 
-			$careers_slugs = [ 'addiction-counsellor', 'admissions-manager', 'clinical-psychologist' ];
+			$careers_slugs = [ 'addiction-counselor', 'admissions-manager', 'clinical-psychologist' ];
 
 			$team_slugs = [
 				'ananyalak-sonin', 'aor-general-manager', 'asif-baliyan-md', 'augustine-dewes',
@@ -1967,7 +1967,7 @@ JSON;
 					'intro_p' => '<p>Methamphetamine and "ice" addiction is among the most physically and psychologically demanding addictions to recover from — but a structured residential setting with intensive medical and psychological care makes long-term recovery realistic. Our meth addiction program at The Diamond Rehab Thailand combines medical stabilization, evidence-based psychotherapy, and lifestyle reconstruction in a private, secure 5-star facility. We accept only 12 clients at a time, so every program is fully tailored to you.</p>',
 					'detox'   => 'Meth detox can last 10 to 21 days because withdrawal hits both the brain and the body hard — extreme fatigue, deep depression, anxiety, vivid dreams, and severe cravings. Our 24/7 medical team manages symptoms with carefully selected supportive medications and round-the-clock nursing. You have a private bungalow, full meals from our chef, and immediate access to your therapist whenever cravings or low moods strike.',
 					'rehab'   => 'The active rehabilitation phase usually runs 8 to 12+ weeks. Meth recovery requires rebuilding both the dopamine system and the structures of daily life. You receive intensive individual therapy (CBT, motivational interviewing, trauma work), group therapy, structured wellness activities, fitness, nutrition support, and sleep restoration. Family therapy and re-integration planning are built into the second half of the program.',
-					'after'   => 'Sustained meth recovery requires long-term support. Every Diamond client receives a written, individualized aftercare plan, lifetime telehealth check-ins, alumni community access, and 24/7 on-call crisis support. Where helpful, we connect you with sober-living, outpatient counselling, and 12-step or SMART recovery groups in your home city. Aftercare is not an add-on — it is part of the program from day one.',
+					'after'   => 'Sustained meth recovery requires long-term support. Every Diamond client receives a written, individualized aftercare plan, lifetime telehealth check-ins, alumni community access, and 24/7 on-call crisis support. Where helpful, we connect you with sober-living, outpatient counseling, and 12-step or SMART recovery groups in your home city. Aftercare is not an add-on — it is part of the program from day one.',
 				],
 			];
 			foreach ( $treatments as $page_id => $copy ) {
@@ -2196,7 +2196,7 @@ JSON;
 				1219 => [
 					'eyebrow'  => 'Comprehensive addiction care',
 					'headline' => 'All treatments',
-					'body'     => 'We treat the full spectrum of substance and behavioural addictions: alcohol, cocaine, methamphetamine, opioids, prescription medications, cannabis, gambling, and process addictions. Every program is built individually around you.',
+					'body'     => 'We treat the full spectrum of substance and behavioral addictions: alcohol, cocaine, methamphetamine, opioids, prescription medications, cannabis, gambling, and process addictions. Every program is built individually around you.',
 					'image'    => '/assets/img/hero/pool-pavilion.avif',
 					'alt'      => 'The pool pavilion at The Diamond Rehab Thailand',
 					't1'       => '1-to-1 staff-to-client ratio',
@@ -2450,7 +2450,7 @@ JSON;
 			// 1. TREATMENT HERO
 			$blocks .= rehab_block_treatment_hero( [
 				'eyebrow'  => 'Cocaine addiction treatment · Hua Hin, Thailand',
-				'headline' => 'Effective cocaine addiction treatment at Thailand\'s leading luxury centre',
+				'headline' => 'Effective cocaine addiction treatment at Thailand\'s leading luxury center',
 				'lede'     => 'The Diamond Rehab Thailand provides evidence-based cocaine rehab treatment to help you break the cycle of addiction once and for all.',
 				'primaryText' => 'Schedule a free assessment', 'primaryUrl' => '#assessment',
 				'secondaryText' => 'Explore the program', 'secondaryUrl' => '#program',
@@ -2480,7 +2480,7 @@ JSON;
 				'background' => 'white',
 				'eyebrow' => 'Overcome cocaine addiction in Thailand',
 				'heading' => 'This is where life-changing transformations happen.',
-				'body' => "Nestled in the peaceful mountains of tropical Hua Hin, our five-star cocaine rehab centre is the perfect place to start your treatment and recovery journey. Fully equipped facilities, five-star accommodation and world-class addiction experts — we've assembled everything you need to overcome your cocaine addiction. The only thing missing is you.\n\nContact us today to learn more about our admission process, or read on to find out how our cocaine rehab treatment program can help you kickstart your recovery.",
+				'body' => "Nestled in the peaceful mountains of tropical Hua Hin, our five-star cocaine rehab center is the perfect place to start your treatment and recovery journey. Fully equipped facilities, five-star accommodation and world-class addiction experts — we've assembled everything you need to overcome your cocaine addiction. The only thing missing is you.\n\nContact us today to learn more about our admission process, or read on to find out how our cocaine rehab treatment program can help you kickstart your recovery.",
 				'doctorImageUrl' => '/wp-content/uploads/brand/founder-theo.avif',
 				'doctorImageAlt' => 'Theo de Vries, Founder',
 				'doctorLabel' => 'Speak with our Director',
@@ -2495,7 +2495,7 @@ JSON;
 				'Discreet, doctor-led and deeply personal — every aspect of our program is designed for sustainable, long-term sobriety.',
 				[
 					[ 'num' => '01 — Holistic & evidence-based', 'title' => 'Eastern and Western therapy, combined', 'body' => 'Our highly experienced clinicians use a combination of Eastern and Western therapeutic techniques — addressing both the symptoms of cocaine use and the underlying factors that fuel it: trauma, relationships, past experiences and mental health.' ],
-					[ 'num' => '02 — Personalised, never templated', 'title' => 'A program shaped to your condition', 'body' => 'There\'s no silver bullet for cocaine addiction. We provide fully customised cocaine rehab programs based on a clinical assessment, monitor your progress continuously and adjust your recovery plan as you advance.' ],
+					[ 'num' => '02 — Personalized, never templated', 'title' => 'A program shaped to your condition', 'body' => 'There\'s no silver bullet for cocaine addiction. We provide fully customised cocaine rehab programs based on a clinical assessment, monitor your progress continuously and adjust your recovery plan as you advance.' ],
 					[ 'num' => '03 — Supported around the clock', 'title' => 'Available 24/7 — when cravings hit hardest', 'body' => 'Our clinical team is fully committed to providing the support, expertise and guidance required to achieve a positive outcome. Inpatient care reduces the risk of relapse during the most critical first weeks of withdrawal.' ],
 				],
 				'sage-mist'
@@ -2512,13 +2512,13 @@ JSON;
 				'body' => "Cocaine rehab statistics show that professional intervention is the most effective treatment for cocaine addiction. Here at The Diamond Rehab Thailand, we take a holistic approach to treatment that addresses both the symptoms of cocaine use and the underlying factors — previous experiences, relationships, mental health issues, past trauma, and more — that contribute to addiction.\n\nOur highly experienced clinicians use a combination of Eastern and Western therapeutic techniques to effectively rehab cocaine addiction. Available 24/7, our clinical team is fully committed to providing you with the support, expertise, and guidance required to achieve a positive outcome.",
 			] );
 
-			// 6. ARTICLE: PERSONALISED (image left, wide aspect, sage bg)
+			// 6. ARTICLE: PERSONALIZED (image left, wide aspect, sage bg)
 			$blocks .= rehab_block_article_row( [
 				'background' => 'sage-mist',
 				'imageSide' => 'left', 'imageAspect' => 'wide',
 				'imageUrl' => $base . '2024/05/Closer-up-dining-2.jpg',
 				'imageAlt' => 'Dining pavilion',
-				'eyebrow' => 'Personalised program options',
+				'eyebrow' => 'Personalized program options',
 				'heading' => 'No two recovery plans look the same',
 				'body' => "As one of the leading cocaine rehab centers in Thailand, we understand that there's no silver bullet when it comes to treating cocaine addiction and achieving long-term sobriety.\n\nThat's why we provide fully customised cocaine rehab programs based on a clinical assessment of your condition. During your stay in our luxury cocaine rehab facilities, we'll continuously monitor your progress and adjust your recovery plan as you advance through your program to ensure your treatment is as effective as possible.",
 			] );
@@ -2535,7 +2535,7 @@ JSON;
 						'paragraphs' => [
 							'Depending on the severity of your addiction, our clinical team may recommend starting your coke rehab treatment program with a detox. We\'ll provide you with a safe environment and monitor your symptoms to make the process as comfortable as possible.',
 							'During the detoxification process, you may experience a range of cocaine withdrawal symptoms, including:',
-							'During withdrawal, the cravings for cocaine can be extremely intense. Entering inpatient care at a cocaine rehab center reduces the risk of relapse during this critical time. The detoxification process for cocaine is relatively quick compared to other drugs, but some symptoms may persist for weeks or months after completing your cocaine rehab programme.',
+							'During withdrawal, the cravings for cocaine can be extremely intense. Entering inpatient care at a cocaine rehab center reduces the risk of relapse during this critical time. The detoxification process for cocaine is relatively quick compared to other drugs, but some symptoms may persist for weeks or months after completing your cocaine rehab program.',
 						],
 						'listItems' => [ 'Strong cravings for cocaine', 'Depression', 'Suicidal thoughts', 'Restlessness', 'Lethargy', 'Nightmares' ],
 						'asideQuote' => '"The first question is not why the addiction — it\'s why the pain?"',
@@ -2543,15 +2543,15 @@ JSON;
 						'asideMetaValue' => 'Theo de Vries, Founder',
 					],
 					[
-						'phase' => 'PHASE 02', 'label' => 'Behavioural therapy',
-						'h3' => 'The role of behavioural therapy in rehab for cocaine addiction',
+						'phase' => 'PHASE 02', 'label' => 'Behavioral therapy',
+						'h3' => 'The role of behavioral therapy in rehab for cocaine addiction',
 						'paragraphs' => [
 							'Addiction is so much more than a physical dependence on drugs or alcohol. Many people with substance abuse and addiction disorders have deep-rooted psychological and emotional issues that must be addressed in order to achieve lasting wellness.',
 							'Therapy provides a crucial support system for people recovering from substance use disorders and is an important component of our substance abuse rehabilitation programs. We offer an intimate, judgment-free space where you can speak honestly about your past and ambitions for the future.',
 							'You\'ll learn to identify the personal triggers — stressors, environmental cues and social circles — that lead to relapse and, together with your therapist, develop a recovery plan to manage these triggers in the short and long term. Education and awareness give rise to positive change.',
 						],
 						'listItems' => [],
-						'asideQuote' => '"During rehab, our counsellors will help you dissect the behavioural issues and psychosocial factors that contribute to addiction."',
+						'asideQuote' => '"During rehab, our counselors will help you dissect the behavioral issues and psychosocial factors that contribute to addiction."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab clinical team',
 					],
@@ -2578,7 +2578,7 @@ JSON;
 			$blocks .= rehab_block_signs_grid( [
 				'background' => 'cream',
 				'eyebrow' => 'Is it time to consider rehab?',
-				'heading' => 'Recognise the signs of cocaine addiction',
+				'heading' => 'Recognize the signs of cocaine addiction',
 				'subheading' => 'Cocaine is notoriously addictive due to the profound impact it has on the chemistry of your brain. Acknowledging the signs is the first step towards recovery — for yourself or for someone you love.',
 				'card1Title' => 'Common signs of cocaine addiction',
 				'card1Items' => [ 'Nervousness and restlessness', 'Severe weight loss', 'Sexual dysfunction', 'Depression', 'Frequent nightmares', 'Decreased ability to focus', 'Increased or involuntary movements' ],
@@ -2628,7 +2628,7 @@ JSON;
 				'imageUrl' => $base . '2024/05/Bungalow-evening-2.jpg',
 				'imageAlt' => 'Quiet reading area',
 				'eyebrow' => 'Take the next step',
-				'heading' => "You've already done the hardest part — recognising it",
+				'heading' => "You've already done the hardest part — recognizing it",
 				'body' => "Recovering from cocaine addiction is hard work — but our exceptional cocaine rehab success rate proves that it's possible. Sometimes, all you need is a helping hand.\n\nIf you're ready to seek treatment, The Diamond Rehab Thailand is here to help. Drawing on our extensive experience as addiction experts, we'll guide you through a fully tailored treatment plan that sets the foundation for a healthy, positive and fulfilling life.",
 				'primaryText' => 'Schedule free assessment', 'primaryUrl' => '#assessment',
 				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
@@ -2687,7 +2687,7 @@ JSON;
 				'stat3Num' => '14+',  'stat3Label' => 'Years treating stimulant addiction',
 				'formEyebrow' => 'Free & confidential',
 				'formTitle'   => 'Talk with our admissions team',
-				'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call centre.',
+				'formSub'     => 'No pressure, no obligation. A clinician replies within the hour, not a call center.',
 				'formSubmit'  => 'Talk with admissions',
 				'formPhoneLabel' => 'Or call +61 2 7908 2277',
 				'formConsent' => 'By submitting you agree to a confidential call-back. We never share your details.',
@@ -2707,7 +2707,7 @@ JSON;
 			$blocks .= rehab_block_signs_grid( [
 				'background' => 'cream',
 				'eyebrow'    => 'Is this you, or someone you love?',
-				'heading'    => 'Recognising the signs is the first step',
+				'heading'    => 'Recognizing the signs is the first step',
 				'subheading' => "Cocaine dependence rarely announces itself. These are the patterns families notice first. If several feel familiar, it's worth a conversation.",
 				'card1Title' => 'Common signs of cocaine addiction',
 				'card1Items' => [
@@ -2774,14 +2774,14 @@ JSON;
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
 					[
-						'phase' => 'PHASE 02', 'label' => 'Behavioural therapy',
+						'phase' => 'PHASE 02', 'label' => 'Behavioral therapy',
 						'h3' => 'Understanding the why',
 						'paragraphs' => [
 							'Once detox is complete, the real work begins.',
 							'One-to-one and group therapy help you understand the triggers, beliefs and pain that drive use, then build practical tools to live differently.',
 						],
-						'listItems' => [ 'Cognitive behavioural therapy (CBT)', 'Trauma-focused and one-to-one sessions', 'Family therapy and relapse-prevention planning' ],
-						'asideQuote' => '"Our fully qualified counsellors work with you to dissect the behavioural issues and psychosocial factors that contribute to addiction."',
+						'listItems' => [ 'Cognitive behavioral therapy (CBT)', 'Trauma-focused and one-to-one sessions', 'Family therapy and relapse-prevention planning' ],
+						'asideQuote' => '"Our fully qualified counselors work with you to dissect the behavioral issues and psychosocial factors that contribute to addiction."',
 						'asideMetaLabel' => 'Statement',
 						'asideMetaValue' => 'The Diamond Rehab Team',
 					],
@@ -2843,7 +2843,7 @@ JSON;
 					'Cocaine is a powerful stimulant and one of the most addictive drugs in circulation. Once used as an ingredient in medicinal products, it is now a widely available party drug that carries a high potential for dependence.',
 					'It is so addictive because of the way it changes the chemistry of the brain. Cocaine triggers a surge of dopamine, the chemical behind feelings of pleasure and reward. When the effects wear off, that high is followed by a sharp crash of anxiety and fatigue, along with an intense urge to use again.',
 					'Occasional use can escalate into a pattern of misuse quickly. As tolerance builds, it takes more of the drug to reach the same effect, and the cravings become harder to resist on willpower alone.',
-					'Recognising that use has become a problem is often the hardest step, and many people reach that point with the help of those around them. If any of the signs above feel familiar, a confidential conversation is a safe place to start.',
+					'Recognizing that use has become a problem is often the hardest step, and many people reach that point with the help of those around them. If any of the signs above feel familiar, a confidential conversation is a safe place to start.',
 				],
 				[], '', '', 'cream'
 			);
@@ -2929,7 +2929,7 @@ JSON;
 			$blocks .= rehab_block_cta_band( [
 				'background' => 'dark',
 				'eyebrow'    => 'Take the next step',
-				'heading'    => "You've already done the hardest part: recognising it",
+				'heading'    => "You've already done the hardest part: recognizing it",
 				'lede'       => "A short, confidential call with our admissions team. We listen, we answer your questions, and we never sell. Whenever you're ready.",
 				'primaryText' => 'Talk with admissions', 'primaryUrl' => '#assessment',
 				'secondaryText' => 'WhatsApp us', 'secondaryUrl' => 'https://wa.me/66965823832',
@@ -3505,7 +3505,7 @@ JSON;
 			] );
 
 			// 2. PRESS RIBBON — same shared logo set as every treatment page (REH-93).
-			// (Replaced the 3-logo "Accredited & recognised by" variant; the planned
+			// (Replaced the 3-logo "Accredited & recognized by" variant; the planned
 			// Cigna/BlueCross/IC&RC accreditation assets never arrived.)
 			$blocks .= rehab_block_authority_ribbon( 'As featured in', rehab_press_ribbon_logos() );
 
@@ -3521,7 +3521,7 @@ JSON;
 						'title' => 'Doctor-led care',
 						'items' => [
 							'Initial and follow-up assessment with a psychiatrist',
-							'Three 1-on-1 sessions a week with a clinical psychologist or counsellor',
+							'Three 1-on-1 sessions a week with a clinical psychologist or counselor',
 							'Daily psycho-educational groups, lectures and therapeutic groups',
 							'MCMI (Millon Clinical Multiaxial Inventory) assessment',
 							'Comprehensive aftercare plan',
@@ -3544,7 +3544,7 @@ JSON;
 						'items' => [
 							'Private luxury bungalow accommodation',
 							'Gourmet dining, three exquisite meals daily',
-							'24/7 complimentary fibre-optic Wi-Fi',
+							'24/7 complimentary fiber-optic Wi-Fi',
 							'Complimentary airport transfers',
 						],
 					],
@@ -3591,7 +3591,7 @@ JSON;
 				'background' => 'white',
 				'eyebrow' => 'Our promise',
 				'heading' => 'The Relapse Prevention Guarantee',
-				'body' => "We recognise the complexities of the recovery journey. On completing treatment with us, clients leave with the support, knowledge and tools to live a life of sustainable recovery, one that is genuinely worth living.\n\nIn the unfortunate event of a relapse within twelve months of discharge, the client is eligible to return for a complimentary twenty-eight-day refresher course, at no cost. This period helps identify areas of concern and recommence the path to recovery, underscoring our trust in the program and our commitment to our clients' wellbeing.",
+				'body' => "We recognize the complexities of the recovery journey. On completing treatment with us, clients leave with the support, knowledge and tools to live a life of sustainable recovery, one that is genuinely worth living.\n\nIn the unfortunate event of a relapse within twelve months of discharge, the client is eligible to return for a complimentary twenty-eight-day refresher course, at no cost. This period helps identify areas of concern and recommence the path to recovery, underscoring our trust in the program and our commitment to our clients' wellbeing.",
 				'ghostText' => '', 'ghostUrl' => '',
 				'cardEyebrow' => 'Included · 12+ week programs',
 				'cardBig' => '28 days, complimentary',
@@ -3643,7 +3643,7 @@ JSON;
 				'Why we ask for a deposit upfront',
 				'With only twelve private bungalows, every booking matters to how we operate, and to the standard of care we can hold.',
 				[
-					[ 'num' => '01 · Limited availability', 'title' => 'Twelve bungalows, no more', 'body' => 'An unoccupied room significantly affects how we operate. If a booking is cancelled, it can take five to seven days to fill, leaving considerable downtime.' ],
+					[ 'num' => '01 · Limited availability', 'title' => 'Twelve bungalows, no more', 'body' => 'An unoccupied room significantly affects how we operate. If a booking is canceled, it can take five to seven days to fill, leaving considerable downtime.' ],
 					[ 'num' => '02 · Operational costs', 'title' => 'Arranged before you arrive', 'body' => 'On confirming your booking we arrange a luxury SUV airport collection and schedule your intake with a psychiatrist, services that require payment upfront from us.' ],
 					[ 'num' => '03 · Client care', 'title' => 'Room for the unexpected', 'body' => 'Travel delays happen. Securing your deposit lets us accommodate those situations without compromising our ability to serve you or other clients.' ],
 				],
@@ -3691,7 +3691,7 @@ JSON;
 				'background' => 'white',
 				'eyebrow' => "We're here, day or night",
 				'heading' => 'Get help with addiction',
-				'lede'    => 'Call The Diamond Rehab Thailand and start your journey to abstinence today. A real person, not a call centre. No pressure, and nothing to commit to.',
+				'lede'    => 'Call The Diamond Rehab Thailand and start your journey to abstinence today. A real person, not a call center. No pressure, and nothing to commit to.',
 			] );
 
 			// 2. CONTACT METHODS + FORM (phone first per CRO; socials = confirmed URLs only)
@@ -3707,7 +3707,7 @@ JSON;
 				],
 				'nextTitle' => 'What happens when you reach out',
 				'nextItems' => [
-					'A clinician replies within the hour, not a call centre',
+					'A clinician replies within the hour, not a call center',
 					'We listen, answer your questions, and never sell',
 					'Your enquiry is confidential, with no obligation to proceed',
 				],
@@ -3764,7 +3764,7 @@ JSON;
 				'background' => 'white',
 				'align'   => 'left',
 				'eyebrow' => 'Why The Diamond Rehab Thailand',
-				'heading' => 'A luxury rehabilitation centre, built around one client at a time',
+				'heading' => 'A luxury rehabilitation center, built around one client at a time',
 				'lede'    => 'A private sanctuary on the Gulf of Thailand in the quiet city of Hua Hin, where Western clinical excellence, Thai hospitality and a hard cap of twelve clients come together for a recovery shaped entirely around you.',
 				'imageUrl' => $base . '2024/05/Closer-up-dining-2.jpg',
 				'imageAlt' => 'The Diamond living and dining pavilion',
@@ -3777,8 +3777,8 @@ JSON;
 				'imageAlt' => 'Pool and private bungalow',
 				'eyebrow' => 'About the rehab',
 				'heading' => 'A luxury stay from start to abstinence',
-				'body' => "The Diamond Rehab Thailand is a unique centre near the coast of the Gulf of Thailand, in the peaceful city of Hua Hin. Every room is private and fitted with the amenities and creature comforts our clients need: SMART TV, 24/7 fibre-optic internet, fridge and more.\n\nAlongside your therapeutic programme, a range of outings lets you experience the rich culture and natural beauty Thailand has to offer, so the work of recovery happens inside a life worth returning to.",
-				'chips' => [ 'Private rooms', 'SMART TV', '24/7 fibre internet', 'Weekly outings' ],
+				'body' => "The Diamond Rehab Thailand is a unique center near the coast of the Gulf of Thailand, in the peaceful city of Hua Hin. Every room is private and fitted with the amenities and creature comforts our clients need: SMART TV, 24/7 fiber-optic internet, fridge and more.\n\nAlongside your therapeutic program, a range of outings lets you experience the rich culture and natural beauty Thailand has to offer, so the work of recovery happens inside a life worth returning to.",
+				'chips' => [ 'Private rooms', 'SMART TV', '24/7 fiber internet', 'Weekly outings' ],
 			] );
 
 			// 3. WHY HUA HIN / HOLISTIC APPROACH
@@ -3799,7 +3799,7 @@ JSON;
 				'imageAlt' => 'Theo de Vries, founder of The Diamond Rehab Thailand',
 				'eyebrow' => 'Our founder',
 				'heading' => 'Why Theo de Vries built The Diamond',
-				'body' => "A pioneer in the rehab industry, Theo started one of Thailand's first and most successful centers in the north of the country eleven years ago. During a six-month sabbatical in 2019, he set out to create something new: a centre that didn't yet exist in Thailand, at a fair price.\n\nAfter months of searching for the right location, he found what he calls The Diamond: a centre offering two schedules, a shared weekly programme and a fully individual one, something not seen elsewhere in Thailand.",
+				'body' => "A pioneer in the rehab industry, Theo started one of Thailand's first and most successful centers in the north of the country eleven years ago. During a six-month sabbatical in 2019, he set out to create something new: a center that didn't yet exist in Thailand, at a fair price.\n\nAfter months of searching for the right location, he found what he calls The Diamond: a center offering two schedules, a shared weekly program and a fully individual one, something not seen elsewhere in Thailand.",
 				'quote' => 'The substance is rarely the only problem. The underlying issues need to be resolved for recovery to last.',
 				'quoteSrc' => 'The philosophy behind The Diamond',
 				'stats' => [
@@ -3811,7 +3811,7 @@ JSON;
 
 			// 5. TREATMENT TYPES (real links; photos are stand-ins for category shots)
 			$blocks .= rehab_block_cards_grid(
-				'A personalised approach to every condition',
+				'A personalized approach to every condition',
 				'Made to measure for each client, because every recovery is different. Explore the programs we offer.',
 				[
 					[ 'title' => 'Substance addiction', 'description' => 'Doctor-led residential treatment for substance dependence.', 'imageUrl' => $base . '2024/05/1-1-session-room-2.jpg', 'imageAlt' => 'Substance addiction treatment', 'url' => '/substance-abuse-treatment/' ],
@@ -3844,7 +3844,7 @@ JSON;
 				[ 'The Diamond Rehab Thailand is officially licensed by the Thai Ministry of Public Health, Hin Lek Fai, Hua Hin.' ],
 				[],
 				'/wp-content/uploads/brand/ministry-public-health-badge.webp',
-				'Thai Ministry of Public Health licence',
+				'Thai Ministry of Public Health license',
 				'white'
 			);
 
@@ -3889,7 +3889,7 @@ JSON;
 				'imageAlt' => 'The full Diamond Rehab team, Hua Hin',
 				'eyebrow' => 'Our people',
 				'heading' => 'The Diamond Rehab Thailand team',
-				'body' => 'Meet the world-class professionals behind your care, where dedication meets diversity. Our multidisciplinary team brings decades of collective experience across CBT, DBT, trauma counselling, dual-diagnosis treatment and specialist care for depression, anxiety and burnout.',
+				'body' => 'Meet the world-class professionals behind your care, where dedication meets diversity. Our multidisciplinary team brings decades of collective experience across CBT, DBT, trauma counseling, dual-diagnosis treatment and specialist care for depression, anxiety and burnout.',
 				'primaryText' => 'Contact us', 'primaryUrl' => '/contact-us/',
 				'phoneText' => '+61 2 7908 2277', 'phoneHref' => 'tel:+61279082277',
 			] );
@@ -3902,17 +3902,17 @@ JSON;
 				'lede'    => "Each team member's work is grounded in the will to help. Filter by discipline to find the specialist relevant to your care.",
 				'members' => [
 					[ 'cat' => 'lead', 'name' => 'Theo & Panwadee de Vries', 'role' => 'Founders', 'excerpt' => 'More than twelve years running Thai rehab centers, supporting over 2,000 clients on their path to recovery.', 'photoUrl' => $base . '2025/12/Theo-Panwadee-de-Vries-Founders-scaled.jpg', 'url' => '/team/theo-and-panwadee-de-vries/' ],
-					[ 'cat' => 'lead', 'name' => 'Sergio Pereira', 'role' => 'Director', 'excerpt' => 'Executive responsibility for governance, staff leadership, ethical integrity of admissions and organisational excellence.', 'photoUrl' => $base . '2026/01/Sergio-Website-pic--scaled-e1776766410877.jpeg', 'url' => '/team/sergio-pereira/' ],
+					[ 'cat' => 'lead', 'name' => 'Sergio Pereira', 'role' => 'Director', 'excerpt' => 'Executive responsibility for governance, staff leadership, ethical integrity of admissions and organizational excellence.', 'photoUrl' => $base . '2026/01/Sergio-Website-pic--scaled-e1776766410877.jpeg', 'url' => '/team/sergio-pereira/' ],
 					[ 'cat' => 'clinical', 'name' => "Augustine D'Ewes", 'role' => 'Clinical Supervisor / Psychologist', 'excerpt' => 'Over four decades as clinician, supervisor and mentor, with an MA in Clinical Psychology and deep clinical wisdom.', 'photoUrl' => $base . '2025/12/Augustine-Supervision-scaled.png', 'url' => '/team/augustine-dewes/' ],
 					[ 'cat' => 'lead', 'name' => 'Jiraporn Takonchai', 'role' => 'General Manager', 'excerpt' => 'Seven years in addiction services, keeping the rehab running seamlessly, from housekeeping to admission schedules.', 'photoUrl' => $base . '2024/10/Jiraporn-Takonchai-new-profile-picture-scaled.jpg', 'url' => '/team/aor-general-manager/' ],
 					[ 'cat' => 'clinical', 'name' => 'Dr. Roshan Fernando', 'role' => 'Consultant Psychiatrist', 'excerpt' => 'MBBS, MDPsych with over 10 years in clinical, biological psychiatry and psychiatric epidemiology.', 'photoUrl' => $base . '2026/04/Dr.-Roshan-New-500x350-1.jpg', 'url' => '/team/dr-roshan-fernando/' ],
-					[ 'cat' => 'therapy', 'name' => 'Wei Ling', 'role' => 'Psychotherapist / Counselling Psychologist', 'excerpt' => '15+ years across clinical mental health, addiction and wellness. Advanced EMDR practitioner and family therapist.', 'photoUrl' => $base . '2025/12/Wei-Ling-Clinical-Psychologist-scaled.png', 'url' => '/team/wei-ling/' ],
-					[ 'cat' => 'therapy', 'name' => 'Eugene Pretorius', 'role' => 'Addiction Counsellor', 'excerpt' => 'Counselling as a vocation. Eight years in recovery himself, pursuing specialist ICDAC qualifications since 2020.', 'photoUrl' => $base . '2025/12/Eugine-Addiction-Counsellor-scaled.png', 'url' => '/team/eugene-pretorius/' ],
-					[ 'cat' => 'therapy', 'name' => 'Brian Tucker', 'role' => 'Addiction Counsellor', 'excerpt' => 'ICDAC-qualified counsellor from South Africa with 14+ years of sustained recovery and a decade in the field.', 'photoUrl' => $base . '2025/12/Brian-Addiction-Counsellor-scaled.png', 'url' => '/team/brian-tucker/' ],
-					[ 'cat' => 'therapy', 'name' => 'James Donovan', 'role' => 'Addiction Counsellor', 'excerpt' => '11 years in personal recovery and 9 in the profession, with a passion for supporting substance-use disorders.', 'photoUrl' => $base . '2025/12/James-Addiction-Counsellor-scaled.png', 'url' => '/team/james-donovan/' ],
+					[ 'cat' => 'therapy', 'name' => 'Wei Ling', 'role' => 'Psychotherapist / Counseling Psychologist', 'excerpt' => '15+ years across clinical mental health, addiction and wellness. Advanced EMDR practitioner and family therapist.', 'photoUrl' => $base . '2025/12/Wei-Ling-Clinical-Psychologist-scaled.png', 'url' => '/team/wei-ling/' ],
+					[ 'cat' => 'therapy', 'name' => 'Eugene Pretorius', 'role' => 'Addiction Counselor', 'excerpt' => 'Counseling as a vocation. Eight years in recovery himself, pursuing specialist ICDAC qualifications since 2020.', 'photoUrl' => $base . '2025/12/Eugine-Addiction-Counselor-scaled.png', 'url' => '/team/eugene-pretorius/' ],
+					[ 'cat' => 'therapy', 'name' => 'Brian Tucker', 'role' => 'Addiction Counselor', 'excerpt' => 'ICDAC-qualified counselor from South Africa with 14+ years of sustained recovery and a decade in the field.', 'photoUrl' => $base . '2025/12/Brian-Addiction-Counselor-scaled.png', 'url' => '/team/brian-tucker/' ],
+					[ 'cat' => 'therapy', 'name' => 'James Donovan', 'role' => 'Addiction Counselor', 'excerpt' => '11 years in personal recovery and 9 in the profession, with a passion for supporting substance-use disorders.', 'photoUrl' => $base . '2025/12/James-Addiction-Counselor-scaled.png', 'url' => '/team/james-donovan/' ],
 					[ 'cat' => 'nursing', 'name' => 'Thipada Sritongkom', 'role' => 'Nurse', 'excerpt' => '22+ years of nursing, the last 8 focused on mental health, with a lifelong mission to promote wellbeing.', 'photoUrl' => $base . '2024/05/Thipada-Sritongkom-Pui-nurse-e1718802196691.jpg', 'url' => '/team/thipada-sritongkom-nurse/' ],
 					[ 'cat' => 'nursing', 'name' => 'Ponsuppat Udom', 'role' => 'Nurse', 'excerpt' => '13+ years across emergency, geriatric and rehabilitation settings, compassionate and devoted to her clients.', 'photoUrl' => $base . '2024/10/Ponsuppat-Udom-new-profile-picture-scaled.jpg', 'url' => '/team/ponsuppat-udom-nurse/' ],
-					[ 'cat' => 'nursing', 'name' => 'Bongkotkarn Sirijunchuen', 'role' => 'Nurse', 'excerpt' => 'Over a decade specialising in addiction care, supporting recovery at centers across Thailand.', 'photoUrl' => $base . '2024/10/Bongkotkarn-Sirijunchuen-new-profile-picture-scaled.jpg', 'url' => '/team/bongkotkarn-sirijunchuen/' ],
+					[ 'cat' => 'nursing', 'name' => 'Bongkotkarn Sirijunchuen', 'role' => 'Nurse', 'excerpt' => 'Over a decade specializing in addiction care, supporting recovery at centers across Thailand.', 'photoUrl' => $base . '2024/10/Bongkotkarn-Sirijunchuen-new-profile-picture-scaled.jpg', 'url' => '/team/bongkotkarn-sirijunchuen/' ],
 					[ 'cat' => 'wellness', 'name' => 'Kittikawin "Kwin" Rachawong', 'role' => 'Head Chef', 'excerpt' => 'A decade in professional European kitchens, crafting refined Thai and European cuisine from premium ingredients.', 'photoUrl' => $base . '2025/12/Chef-scaled.png', 'url' => '/team/kittikawin-kwin-rachawong/' ],
 					[ 'cat' => 'support', 'name' => 'Irene Grace Maghopoy', 'role' => 'Support Worker / Admissions', 'excerpt' => 'Psychology graduate and licensed psychometrician pairing empathy with evidence-based care.', 'photoUrl' => $base . '2025/12/Irene-Support-Staff-_-Admissions-1-scaled.png', 'url' => '/team/irene-grace-maghopoy/' ],
 					[ 'cat' => 'support', 'name' => 'Supanni Sanli', 'role' => 'Support Worker', 'excerpt' => 'A lifelong passion for service and hospitality, here to help clients every step of the way.', 'photoUrl' => $base . '2024/10/Ping-new-support-worker-text-will-follow-scaled.jpg', 'url' => '/team/supanni-sanli/' ],
@@ -3920,7 +3920,7 @@ JSON;
 					[ 'cat' => 'support', 'name' => 'Saran Badod', 'role' => 'Admin / Support Worker', 'excerpt' => 'Manages internal operations and supports clients through treatment with comprehensive, joyful care.', 'photoUrl' => $base . '2025/12/Sunny-Administration-scaled.png', 'url' => '/team/saran-badod/' ],
 					[ 'cat' => 'wellness', 'name' => 'Ananyalak Sonin', 'role' => 'Yoga Teacher', 'excerpt' => 'A decade of holistic wellness experience and a 500-hour yoga certification from India.', 'photoUrl' => $base . '2024/10/Yoga-e1729503463291.png', 'url' => '/team/ananyalak-sonin/' ],
 					[ 'cat' => 'writers', 'name' => 'Dr. Harshi Dhingra', 'role' => 'Medical Writer · Doctor of Medicine', 'excerpt' => 'MBBS and MD in Pathology, with a decade of diagnostic, clinical, research and teaching experience.', 'photoUrl' => $base . '2023/02/Dr.-Harshi-Dhingra.png', 'url' => '/team/dr-harshi-dhingra/' ],
-					[ 'cat' => 'writers', 'name' => 'Vladimira Ivanova', 'role' => 'Medical Writer · Psychologist', 'excerpt' => 'Practises systemic individual, family and marital psychotherapy, raising awareness of addiction and recovery.', 'photoUrl' => $base . '2023/04/Psychologist-Vladimira-Ivanova.jpg', 'url' => '/team/vladimira-ivanova/' ],
+					[ 'cat' => 'writers', 'name' => 'Vladimira Ivanova', 'role' => 'Medical Writer · Psychologist', 'excerpt' => 'Practices systemic individual, family and marital psychotherapy, raising awareness of addiction and recovery.', 'photoUrl' => $base . '2023/04/Psychologist-Vladimira-Ivanova.jpg', 'url' => '/team/vladimira-ivanova/' ],
 					[ 'cat' => 'writers', 'name' => 'Dr. Asif Baliyan', 'role' => 'Medical Writer', 'excerpt' => 'Associate Consultant in Histopathology & Cytopathology with expertise in oncopathology and AI pathology.', 'photoUrl' => $base . '2024/05/Writer.jpg', 'url' => '/team/asif-baliyan-md/' ],
 				],
 			] );
@@ -3943,7 +3943,7 @@ JSON;
 
 		case 'rebuild-faqpage-v3':
 			// Approved hi-fi FAQ design (faq/FAQ.html, June 2026): page-header
-			// with feature image + categorised faq-page block + dark concierge.
+			// with feature image + categorized faq-page block + dark concierge.
 			$page_id = 1197;
 			$post = get_post( $page_id );
 			if ( ! $post ) { echo "no post 1197\n"; break; }
@@ -3968,14 +3968,14 @@ JSON;
 				'imageAlt' => 'Bungalow terraces and gardens, Hua Hin',
 			] );
 
-			// 2. CATEGORISED FAQ
+			// 2. CATEGORIZED FAQ
 			$blocks .= rehab_block_faq_page( [
 				'background' => 'cream',
 				'categories' => [
 					[
 						'id' => 'general', 'label' => 'General',
 						'items' => [
-							[ 'q' => 'Is The Diamond Rehab Thailand licensed?', 'a' => 'Yes. We are fully licensed by the Thai Ministry of Public Health as a private addiction rehabilitation centre in Hua Hin.' ],
+							[ 'q' => 'Is The Diamond Rehab Thailand licensed?', 'a' => 'Yes. We are fully licensed by the Thai Ministry of Public Health as a private addiction rehabilitation center in Hua Hin.' ],
 							[ 'q' => 'What about confidentiality?', 'a' => 'Discretion is fundamental to how we work. From your first call through your stay and aftercare, every detail is handled privately, accommodation is private, and your identity is protected.' ],
 							[ 'q' => 'Do you offer shared rooms or private rooms?', 'a' => 'Every client stays in their own private luxury bungalow. We never use shared rooms; privacy is part of the treatment.' ],
 							[ 'q' => 'What is rehabilitation?', 'a' => 'A structured, medically supported process: detox where needed, followed by therapy and holistic care that addresses both the addiction and the issues beneath it.' ],
@@ -3990,12 +3990,12 @@ JSON;
 					[
 						'id' => 'treatment', 'label' => 'Treatment',
 						'items' => [
-							[ 'q' => 'What is the process of rehabilitation?', 'a' => 'A confidential assessment, medically supervised detox where needed, then a personalised program of one-to-one therapy, group work and holistic care, followed by structured aftercare.' ],
+							[ 'q' => 'What is the process of rehabilitation?', 'a' => 'A confidential assessment, medically supervised detox where needed, then a personalized program of one-to-one therapy, group work and holistic care, followed by structured aftercare.' ],
 							[ 'q' => 'What is detox?', 'a' => 'Medically supervised withdrawal, with 24/7 nursing and physician oversight to keep you safe and comfortable while your body stabilises.' ],
 							[ 'q' => 'What does The Diamond treat?', 'a' => 'Substance and alcohol addiction, prescription-drug dependence, and co-occurring conditions such as depression, anxiety, burnout and eating disorders.' ],
 							[ 'q' => 'How long will it take?', 'a' => 'Length of stay depends on your history and goals; your psychiatrist recommends it after assessment. Many clients begin with a 28-day core program.' ],
 							[ 'q' => 'Am I free to leave treatment at any time?', 'a' => "Yes. Treatment is voluntary. We'll always encourage you to stay the course, but the choice is always yours." ],
-							[ 'q' => 'How much therapy do I get?', 'a' => 'Three individual sessions a week with a clinical psychologist or counsellor, plus daily group and psycho-educational sessions, with more one-to-one time on the fully individual schedule.' ],
+							[ 'q' => 'How much therapy do I get?', 'a' => 'Three individual sessions a week with a clinical psychologist or counselor, plus daily group and psycho-educational sessions, with more one-to-one time on the fully individual schedule.' ],
 							[ 'q' => "What if support groups and other rehabs didn't work in the past?", 'a' => 'Our made-to-measure approach goes to the root causes beneath the addiction. With only twelve clients, your plan is built around you, not slotted into a fixed curriculum.' ],
 							[ 'q' => 'Is there an aftercare program?', 'a' => 'Yes. Every program includes a comprehensive aftercare plan, plus our Relapse Prevention Guarantee on stays of twelve weeks or more.' ],
 							[ 'q' => 'What is your success rate?', 'a' => "Recovery is personal, and we never make unverifiable claims. We're glad to talk through what outcomes look like and what shapes them on a confidential call." ],
@@ -4005,7 +4005,7 @@ JSON;
 					[
 						'id' => 'location', 'label' => 'Location',
 						'items' => [
-							[ 'q' => 'How do I get to Thailand?', 'a' => 'Most clients fly into Bangkok (Suvarnabhumi). From there, we arrange a complimentary luxury transfer to our centre in Hua Hin.' ],
+							[ 'q' => 'How do I get to Thailand?', 'a' => 'Most clients fly into Bangkok (Suvarnabhumi). From there, we arrange a complimentary luxury transfer to our center in Hua Hin.' ],
 							[ 'q' => 'Where is The Diamond Rehab located in Thailand?', 'a' => 'In Hua Hin, on the Gulf of Thailand: 8, Moo 14, Soi Mon Mai Hin Lek Fai, Hua Hin District, Chang Wat Prachuap Khiri Khan, 77110.' ],
 							[ 'q' => 'Will I be picked up at the airport?', 'a' => 'Yes. A complimentary luxury airport transfer is included for every client.' ],
 							[ 'q' => 'What kind of visa do I need?', 'a' => 'Most visitors enter on a standard tourist visa or visa exemption. Our team will advise based on your nationality and intended length of stay.' ],
@@ -4688,7 +4688,7 @@ JSON;
 
 			$descriptions = [
 				// Reused verbatim from the live site where it has one.
-				'jessica-waller'           => "Jessica holds a master's degree in Counselling & Psychotherapy and is trained in the Person-Centred theory of practice in the UK. At The Diamond Rehab in Thailand, Jessica continues to apply the Person-Centred approach.",
+				'jessica-waller'           => "Jessica holds a master's degree in Counseling & Psychotherapy and is trained in the Person-Centered theory of practice in the UK. At The Diamond Rehab in Thailand, Jessica continues to apply the Person-Centered approach.",
 				'isuru-bogodwatta'         => 'Isuru Bogodawatta, Head Nurse at Diamond Rehab, trained at Kandy Nursing School and National Institute of Mental Health Sri Lanka.',
 				'derrick-kwa'              => 'Singaporean Derrick Kwa, Executive Chef at The Diamond Rehab, boasts global culinary roles including Restaurant Gaig, Wilde & Co, collaborations with Chef Ace Tan, and Michelin-starred stages.',
 				'navneth-mendis'           => 'Navneth Mendis, Consulting Clinical Psychologist at Diamond Rehab, is an EMDR practitioner with CBT certification from Samutthana and Psychological First Aid training.',
