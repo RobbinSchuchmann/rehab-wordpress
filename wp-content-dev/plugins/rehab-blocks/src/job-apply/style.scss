@@ -1,0 +1,52 @@
+/* rehab/job-apply — application box on job ad pages (REH-157). */
+
+.rehab-job-apply {
+	padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+.rehab-job-apply__card {
+	max-width: 640px;
+	margin: 0 auto;
+	background: #fff;
+	border: 1px solid rgba(var(--rehab-sage-rgb, 186, 195, 161), 0.35);
+	padding: clamp(2rem, 4vw, 3rem);
+	text-align: center;
+}
+
+.rehab-job-apply__card .rehab-eyebrow {
+	display: block;
+	margin-bottom: 0.8rem;
+}
+
+.rehab-job-apply__heading {
+	font-family: var(--rehab-font-display);
+	font-size: clamp(1.6rem, 3vw, 2.1rem);
+	color: var(--rehab-warm-charcoal, #2c2c2c);
+	margin: 0 0 0.9rem;
+}
+
+.rehab-job-apply__body {
+	font-family: var(--rehab-font-body);
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--rehab-soft-charcoal, #4a4a4a);
+	margin: 0 0 1.6rem;
+}
+
+.rehab-job-apply__btn {
+	min-width: 240px;
+}
+
+.rehab-job-apply__email {
+	font-family: var(--rehab-font-body);
+	font-size: 0.9375rem;
+	margin: 0.9rem 0 0;
+	color: var(--rehab-sage-dark, #8a9674);
+}
+
+.rehab-job-apply__helper {
+	font-family: var(--rehab-font-body);
+	font-size: 0.8125rem;
+	color: rgba(var(--rehab-soft-charcoal-rgb, 74, 74, 74), 0.7);
+	margin: 0.6rem 0 0;
+}

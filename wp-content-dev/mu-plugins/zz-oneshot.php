@@ -1066,6 +1066,30 @@ JSON;
 			echo 'removed ' . strlen( $m[0][0] ) . " chars from {$pid}\n";
 			break;
 
+		case 'insert-job-apply-box':
+			// REH-157: append the rehab/job-apply box to job ad pages. Dynamic
+			// block — the page only stores the self-closing comment. Guarded:
+			// skips pages that already have one. IDs via slug so the task is
+			// portable across dev/prod (post IDs diverge between the two).
+			$slugs = [ 'careers/clinical-psychologist' ];
+			foreach ( $slugs as $slug ) {
+				$p = get_page_by_path( $slug, OBJECT, 'page' );
+				if ( ! $p ) { echo "no page {$slug}\n"; continue; }
+				if ( false !== strpos( $p->post_content, 'wp:rehab/job-apply' ) ) {
+					echo "{$slug}: already has the box — skipped\n";
+					continue;
+				}
+				global $wpdb;
+				$wpdb->update(
+					$wpdb->posts,
+					[ 'post_content' => rtrim( $p->post_content ) . "\n\n<!-- wp:rehab/job-apply /-->\n" ],
+					[ 'ID' => $p->ID ]
+				);
+				clean_post_cache( $p->ID );
+				echo "{$slug} ({$p->ID}): job-apply box appended\n";
+			}
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show

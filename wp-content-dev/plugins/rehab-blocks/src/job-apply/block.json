@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rehab/job-apply",
+  "version": "0.1.0",
+  "title": "Job Apply Box",
+  "category": "rehab",
+  "icon": "email",
+  "description": "The application box for job ad pages: heading, short instructions and a mailto button. Drop it at the end of every job posting (REH-157).",
+  "keywords": ["job", "apply", "application", "careers", "vacancy"],
+  "textdomain": "rehab-blocks",
+  "supports": { "html": false, "anchor": true, "align": ["full"] },
+  "attributes": {
+    "background": { "type": "string", "default": "cream", "enum": ["white", "cream", "sage-mist"] },
+    "eyebrow":    { "type": "string", "default": "Join the team" },
+    "heading":    { "type": "string", "default": "Apply for this position" },
+    "body":       { "type": "string", "default": "Send your resume and a short cover letter telling us why this role fits you. We read every application and reply within a few working days." },
+    "email":      { "type": "string", "default": "sergio@diamondrehabthailand.com" },
+    "buttonText": { "type": "string", "default": "Apply by email" },
+    "helper":     { "type": "string", "default": "Please mention the position you are applying for in the subject line." }
+  },
+  "editorScript": "file:./index.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}
