@@ -204,6 +204,18 @@
 			Toolbar: {
 				display: { left: [], middle: [], right: ['close'] },
 			},
+			// No captions under the gallery images (REH-170).
+			caption: () => '',
+			backdropClick: 'close',
+		});
+
+		// Tapping the empty area around the image (the slide padding) closes the
+		// lightbox — on phones the slide fills the screen, so the default
+		// backdrop-only close never gets a hit area (REH-170).
+		document.addEventListener('click', (e) => {
+			if (e.target.classList && e.target.classList.contains('fancybox__slide')) {
+				Fancybox.close();
+			}
 		});
 
 		// Inline modal (CTA → #modal-free-assessment)
@@ -290,6 +302,26 @@
 	}
 
 	/* ================================================================
+	   7b. TEAM GALLERY — tap-to-reveal names on touch devices (REH-171).
+	   Names stay hidden until the member's photo is tapped, like the live
+	   site; tapping another member (or the same one again) toggles.
+	   ================================================================ */
+	function initTeamTapReveal() {
+		if (!window.matchMedia('(hover: none)').matches) return;
+		document.querySelectorAll('.drt-team__member').forEach(function (member) {
+			member.addEventListener('click', function () {
+				var wasOn = member.classList.contains('is-revealed');
+				document.querySelectorAll('.drt-team__member.is-revealed').forEach(function (m) {
+					m.classList.remove('is-revealed');
+				});
+				if (!wasOn) {
+					member.classList.add('is-revealed');
+				}
+			});
+		});
+	}
+
+	/* ================================================================
 	   8. INIT — run everything on DOMContentLoaded
 	   ================================================================ */
 	if (document.readyState === 'loading') {
@@ -302,7 +334,7 @@
 		// Fancybox + delegated handlers bind first and each step is isolated, so a
 		// throw inside one carousel's Swiper init can't stop the gallery lightbox
 		// from binding (the cause of "clicking a gallery image does nothing" — REH-44).
-		[ initFancybox, initVideoLightbox, initReviewCards, initSwipers, initMobileStickyFooter ].forEach( function ( fn ) {
+		[ initFancybox, initVideoLightbox, initReviewCards, initSwipers, initMobileStickyFooter, initTeamTapReveal ].forEach( function ( fn ) {
 			try {
 				fn();
 			} catch ( e ) {
