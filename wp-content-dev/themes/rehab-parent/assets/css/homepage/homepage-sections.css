@@ -1010,7 +1010,8 @@ th.drt-comparison__th--diamond {
 }
 
 .drt-team__member:hover .drt-team__overlay,
-.drt-team__member:focus-within .drt-team__overlay {
+.drt-team__member:focus-within .drt-team__overlay,
+.drt-team__member.is-revealed .drt-team__overlay {
 	opacity: 1;
 }
 
