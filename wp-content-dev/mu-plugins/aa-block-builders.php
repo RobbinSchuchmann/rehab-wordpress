@@ -664,6 +664,21 @@ function rehab_block_video_reel( array $a ): string {
 }
 
 /**
+ * The shared, approved testimonial reel items (REH-168) — the four consented
+ * YouTube Shorts Robbin finalised on the OxyContin page. Single source for
+ * the builder seed and the roll-out migration; posters auto-derive from the
+ * video ids in the block's render.php.
+ */
+function rehab_video_reel_items(): array {
+	return [
+		[ 'name' => '', 'duration' => '0:53', 'tone' => '1', 'quote' => '"This is why I could not cry for so long."', 'who' => '', 'videoUrl' => 'https://www.youtube.com/shorts/731wlg_mK34?feature=share', 'posterUrl' => '' ],
+		[ 'name' => '', 'duration' => '0:50', 'tone' => '4', 'quote' => '"This is why I am proud to be a recovering addict."', 'who' => '', 'videoUrl' => 'https://www.youtube.com/shorts/aV-5dFPwKsE?feature=share', 'posterUrl' => '' ],
+		[ 'name' => '', 'duration' => '0:44', 'tone' => '3', 'quote' => '"This is how I ended up in rehab with an addiction."', 'who' => '', 'videoUrl' => 'https://www.youtube.com/shorts/KVDVpTtRUPg?feature=share', 'posterUrl' => '' ],
+		[ 'name' => '', 'duration' => '0:52', 'tone' => '2', 'quote' => '"This is why I went to rehab."', 'who' => '', 'videoUrl' => 'https://www.youtube.com/shorts/xxk-PAqWPQk?feature=share', 'posterUrl' => '' ],
+	];
+}
+
+/**
  * Build a `rehab/stat-band` block (dynamic — self-closing comment).
  */
 function rehab_block_stat_band( array $a ): string {
@@ -761,18 +776,14 @@ function rehab_build_treatment_v3( int $page_id, array $spec ): string {
 		'helper'     => 'Free, confidential, and no-obligation.',
 	] );
 
-	$program_tag = $spec['programTag'] ?? 'program';
 	$blocks .= rehab_block_video_reel( [
 		'background' => 'cream',
 		'eyebrow'    => 'Real stories',
 		'heading'    => 'Recovery, in their own words',
 		'ratingScore' => '4.9', 'ratingText' => '· 48 Google reviews',
-		'items' => [
-			[ 'name' => 'James · ' . $program_tag, 'duration' => '2:14', 'tone' => '1', 'quote' => '"They gave me my life back."', 'who' => 'Filmed with consent', 'videoUrl' => '', 'posterUrl' => '' ],
-			[ 'name' => 'Anonymous · privacy-protected', 'duration' => '1:48', 'tone' => '4', 'quote' => '"I didn\'t think I could stop. I was wrong."', 'who' => 'Silhouette format', 'videoUrl' => '', 'posterUrl' => '' ],
-			[ 'name' => 'A father, on his son', 'duration' => '3:02', 'tone' => '3', 'quote' => '"We got our son back."', 'who' => 'Family perspective', 'videoUrl' => '', 'posterUrl' => '' ],
-			[ 'name' => 'Alumna · executive program', 'duration' => '2:31', 'tone' => '2', 'quote' => '"The twelve-client cap changed everything."', 'who' => 'Filmed with consent', 'videoUrl' => '', 'posterUrl' => '' ],
-		],
+		// The four real, consented testimonial Shorts (REH-168; approved copy
+		// from the OxyContin page). Posters auto-derive from the YouTube ids.
+		'items' => rehab_video_reel_items(),
 	] );
 
 	$blocks .= rehab_block_article_row( array_merge( [

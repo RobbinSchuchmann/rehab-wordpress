@@ -203,3 +203,12 @@
 	color: var(--rehab-sage-text, #7A856A);
 	margin-top: 10px;
 }
+
+/* In-card embed (REH-168): the iframe fills the 9:16 thumb. */
+.rehab-video-card__frame {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
