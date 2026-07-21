@@ -1090,6 +1090,39 @@ JSON;
 			}
 			break;
 
+		case 'rollout-reel-testimonials':
+			// REH-168: put the four approved testimonial Shorts (finalised by
+			// Robbin on the OxyContin page) into every rehab/video-reel block.
+			// Dynamic block — attrs-only rewrite of the self-closing comment;
+			// other attrs (ratingText etc.) are preserved. Idempotent.
+			if ( ! function_exists( 'rehab_video_reel_items' ) ) { echo "builders not loaded\n"; break; }
+			$canon = rehab_video_reel_items();
+			$q = new WP_Query( [ 'post_type' => [ 'page', 'post' ], 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids' ] );
+			$changed = 0; $scanned = 0;
+			foreach ( $q->posts as $pid ) {
+				$c = get_post_field( 'post_content', $pid );
+				if ( false === strpos( $c, 'wp:rehab/video-reel' ) ) { continue; }
+				$scanned++;
+				$new = preg_replace_callback(
+					'#<!-- wp:rehab/video-reel (\{.*?\}) /-->#s',
+					static function ( $m ) use ( $canon ) {
+						$attrs = json_decode( $m[1], true );
+						if ( ! is_array( $attrs ) ) { return $m[0]; }
+						$attrs['items'] = $canon;
+						return '<!-- wp:rehab/video-reel ' . rehab_block_attrs( $attrs ) . ' /-->';
+					},
+					$c
+				);
+				if ( $new !== $c ) {
+					global $wpdb;
+					$wpdb->update( $wpdb->posts, [ 'post_content' => $new ], [ 'ID' => $pid ] );
+					clean_post_cache( $pid );
+					$changed++;
+				}
+			}
+			echo "scanned {$scanned} reel page(s); updated {$changed}.\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show

@@ -15,6 +15,17 @@
 $a     = $attributes;
 $items = is_array( $a['items'] ?? null ) ? $a['items'] : [];
 
+/**
+ * YouTube id from a watch/shorts/youtu.be URL ('' when not YouTube) — used to
+ * auto-derive the card poster and drive the in-card embed (REH-168).
+ */
+$rehab_reel_yt_id = static function ( string $url ): string {
+	if ( preg_match( '#(?:youtube\.com/(?:shorts/|watch\?v=|embed/)|youtu\.be/)([A-Za-z0-9_-]{6,})#', $url, $m ) ) {
+		return $m[1];
+	}
+	return '';
+};
+
 $play_svg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 $star_svg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
 
@@ -41,14 +52,23 @@ $wrapper = get_block_wrapper_attributes( [
 		</div>
 		<div class="rehab-video-reel__grid">
 			<?php foreach ( $items as $item ) :
-				$item = array_merge( [ 'name' => '', 'duration' => '', 'tone' => '1', 'quote' => '', 'who' => '', 'videoUrl' => '', 'posterUrl' => '' ], (array) $item );
-				$tone = in_array( (string) $item['tone'], [ '1', '2', '3', '4' ], true ) ? (string) $item['tone'] : '1';
-				$tag  = '' !== $item['videoUrl'] ? 'a' : 'div';
+				$item  = array_merge( [ 'name' => '', 'duration' => '', 'tone' => '1', 'quote' => '', 'who' => '', 'videoUrl' => '', 'posterUrl' => '' ], (array) $item );
+				$tone  = in_array( (string) $item['tone'], [ '1', '2', '3', '4' ], true ) ? (string) $item['tone'] : '1';
+				$tag   = '' !== $item['videoUrl'] ? 'a' : 'div';
+				$yt_id = $rehab_reel_yt_id( (string) $item['videoUrl'] );
+				// No hand-set poster? Use YouTube's own thumbnail: oardefault is
+				// the vertical Shorts variant; hqdefault always exists as fallback.
+				$poster   = $item['posterUrl'];
+				$fallback = '';
+				if ( '' === $poster && '' !== $yt_id ) {
+					$poster   = 'https://i.ytimg.com/vi/' . rawurlencode( $yt_id ) . '/oardefault.jpg';
+					$fallback = 'https://i.ytimg.com/vi/' . rawurlencode( $yt_id ) . '/hqdefault.jpg';
+				}
 				?>
 				<div class="rehab-video-card">
-					<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="rehab-video-card__thumb rehab-video-card__thumb--tone-<?php echo esc_attr( $tone ); ?>"<?php echo '' !== $item['videoUrl'] ? ' href="' . esc_url( $item['videoUrl'] ) . '" data-rehab-video="' . esc_attr( $item['videoUrl'] ) . '"' : ''; ?>>
-						<?php if ( '' !== $item['posterUrl'] ) : ?>
-							<img class="rehab-video-card__poster" src="<?php echo esc_url( $item['posterUrl'] ); ?>" alt="" loading="lazy" decoding="async" />
+					<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="rehab-video-card__thumb rehab-video-card__thumb--tone-<?php echo esc_attr( $tone ); ?>"<?php echo '' !== $item['videoUrl'] ? ' href="' . esc_url( $item['videoUrl'] ) . '" data-rehab-video="' . esc_attr( $item['videoUrl'] ) . '"' . ( '' !== $yt_id ? ' data-rehab-video-id="' . esc_attr( $yt_id ) . '"' : '' ) : ''; ?>>
+						<?php if ( '' !== $poster ) : ?>
+							<img class="rehab-video-card__poster" src="<?php echo esc_url( $poster ); ?>" alt="" loading="lazy" decoding="async"<?php echo '' !== $fallback ? ' onerror="this.onerror=null;this.src=\'' . esc_url( $fallback ) . '\'"' : ''; ?> />
 						<?php endif; ?>
 						<?php if ( '' !== $item['duration'] ) : ?>
 							<span class="rehab-video-card__duration"><?php echo $play_svg; // phpcs:ignore WordPress.Security.EscapeOutput ?><?php echo esc_html( $item['duration'] ); ?></span>
