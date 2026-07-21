@@ -114,6 +114,14 @@
 	background: linear-gradient(180deg, rgba(20, 20, 18, 0) 42%, rgba(20, 20, 18, 0.68));
 }
 
+/* While a video plays, the gradient overlay must go away — pseudo-elements
+   paint above the injected iframe and their clicks belong to the card, so a
+   live overlay makes the player's pause/replay controls unreachable
+   (REH-172). */
+.rehab-video-card__thumb.is-playing::after {
+	display: none;
+}
+
 .rehab-video-card__poster {
 	position: absolute;
 	inset: 0;
