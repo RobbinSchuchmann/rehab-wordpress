@@ -56,12 +56,14 @@ $wrapper = get_block_wrapper_attributes( [
 				$tone  = in_array( (string) $item['tone'], [ '1', '2', '3', '4' ], true ) ? (string) $item['tone'] : '1';
 				$tag   = '' !== $item['videoUrl'] ? 'a' : 'div';
 				$yt_id = $rehab_reel_yt_id( (string) $item['videoUrl'] );
-				// No hand-set poster? Use YouTube's own thumbnail: oardefault is
-				// the vertical Shorts variant; hqdefault always exists as fallback.
+				// No hand-set poster? Use YouTube's own thumbnail. frame0 is the
+				// full-res first frame — vertical for Shorts, so it fits the
+				// 9:16 card (oardefault is NOT generated for these videos —
+				// REH-168 follow-up); hqdefault always exists as the fallback.
 				$poster   = $item['posterUrl'];
 				$fallback = '';
 				if ( '' === $poster && '' !== $yt_id ) {
-					$poster   = 'https://i.ytimg.com/vi/' . rawurlencode( $yt_id ) . '/oardefault.jpg';
+					$poster   = 'https://i.ytimg.com/vi/' . rawurlencode( $yt_id ) . '/frame0.jpg';
 					$fallback = 'https://i.ytimg.com/vi/' . rawurlencode( $yt_id ) . '/hqdefault.jpg';
 				}
 				?>
