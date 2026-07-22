@@ -601,7 +601,10 @@ function rehab_elfsight_embed( string $mod ): string {
 	if ( '' === $id ) {
 		return '';
 	}
-	return '<div class="rehab-elfsight elfsight-app-' . esc_attr( $id ) . '" data-elfsight-app-lazy></div>';
+	// The elfsight-app-* class MUST come first: platform.js discovers widgets
+	// with querySelectorAll('*[class^="elfsight-app"]'), so any styling hook in
+	// front of it makes the widget invisible to the loader (REH-178).
+	return '<div class="elfsight-app-' . esc_attr( $id ) . ' rehab-elfsight" data-elfsight-app-lazy></div>';
 }
 
 /**
