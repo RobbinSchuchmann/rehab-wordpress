@@ -52,6 +52,25 @@
 	}
 }
 
+/* The 3-column default assumes 3 phases. Let the column count follow the tab
+   count instead, or a 4-phase section wraps 3+1 (DBT) and a 1-2 phase section
+   leaves empty columns (REH-177). */
+.rehab-treatment-phases__nav:not(:has(> :nth-child(2))) {
+	grid-template-columns: 1fr;
+}
+
+.rehab-treatment-phases__nav:has(> :nth-child(2)):not(:has(> :nth-child(3))) {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.rehab-treatment-phases__nav:has(> :nth-child(4)) {
+	grid-template-columns: repeat(4, 1fr);
+
+	@media (max-width: 1100px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
 .rehab-treatment-phases__tab {
 	background: transparent;
 	border: 0;
