@@ -43,7 +43,13 @@ $wrapper = get_block_wrapper_attributes( [
 				<?php endif; ?>
 				<h2 class="rehab-video-reel__heading"><?php echo wp_kses_post( $a['heading'] ); ?></h2>
 			</div>
-			<?php if ( $a['showRating'] && '' !== $a['ratingScore'] ) : ?>
+			<?php
+			// Live Google-reviews badge when pinned (REH-169); static fallback.
+			$rehab_reel_badge = function_exists( 'rehab_elfsight_embed' ) ? rehab_elfsight_embed( 'rehab_elfsight_reviews_badge' ) : '';
+			?>
+			<?php if ( $a['showRating'] && '' !== $rehab_reel_badge ) : ?>
+				<div class="rehab-video-reel__rating rehab-video-reel__rating--live"><?php echo $rehab_reel_badge; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+			<?php elseif ( $a['showRating'] && '' !== $a['ratingScore'] ) : ?>
 				<div class="rehab-video-reel__rating">
 					<span class="rehab-video-reel__stars" aria-hidden="true"><?php echo str_repeat( $star_svg, 5 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
 					<span><strong><?php echo esc_html( $a['ratingScore'] ); ?></strong> <?php echo wp_kses_post( $a['ratingText'] ); ?></span>

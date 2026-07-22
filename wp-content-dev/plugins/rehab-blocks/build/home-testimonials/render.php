@@ -93,6 +93,14 @@ $wrapper = get_block_wrapper_attributes( [
 				<p class="drt-body"><?php echo wp_kses_post( $a['reviewsIntro'] ); ?></p>
 			</div>
 
+			<?php
+			// Live Google-reviews carousel when pinned (REH-169); the baked
+			// review cards below stay as the fallback.
+			$rehab_reviews_widget = function_exists( 'rehab_elfsight_embed' ) ? rehab_elfsight_embed( 'rehab_elfsight_reviews_carousel' ) : '';
+			?>
+			<?php if ( '' !== $rehab_reviews_widget ) : ?>
+				<div class="drt-testimonials__reviews-carousel drt-testimonials__reviews-carousel--live"><?php echo $rehab_reviews_widget; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+			<?php else : ?>
 			<div class="drt-testimonials__reviews-carousel">
 				<div class="swiper" data-drt-swiper="reviews">
 					<div class="swiper-wrapper">
@@ -149,6 +157,7 @@ $wrapper = get_block_wrapper_attributes( [
 				</button>
 				<div class="drt-swiper-dots drt-testimonials__dots"></div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
