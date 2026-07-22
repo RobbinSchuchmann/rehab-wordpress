@@ -86,6 +86,11 @@
 		margin: 0 auto 6rem;
 	}
 
+	/* Four testimonial videos sit 2×2 rather than 3+1 (REH-176). */
+	.drt-testimonials__videos-grid:has(> .drt-testimonials__video-item:nth-child(4)) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
 	.drt-testimonials__videos-mobile {
 		display: none;
 	}
