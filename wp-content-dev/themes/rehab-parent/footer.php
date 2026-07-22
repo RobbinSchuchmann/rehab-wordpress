@@ -209,7 +209,7 @@ $rehab_any_elfsight = $elfsight_id
 	|| get_theme_mod( 'rehab_elfsight_reviews_carousel', '' );
 if ( $rehab_any_elfsight ) :
 ?>
-<script src="https://static.elfsightcdn.com/platform.js" defer></script>
+<script src="https://elfsightcdn.com/platform.js" async></script>
 <?php endif; ?>
 <?php
 // Floating WhatsApp chat bubble (Elfsight), same widget as the live site.
