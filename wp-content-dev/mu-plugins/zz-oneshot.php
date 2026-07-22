@@ -1123,6 +1123,41 @@ JSON;
 			echo "scanned {$scanned} reel page(s); updated {$changed}.\n";
 			break;
 
+		case 'home-videos-update':
+			// REH-176: homepage testimonial videos become the four approved
+			// Shorts (same set as the treatment reels, REH-168), captions from
+			// the approved quotes. home-testimonials is dynamic → attrs-only.
+			$vids = [
+				[ 'id' => '731wlg_mK34', 'caption' => 'This is why I could not cry for so long.' ],
+				[ 'id' => 'aV-5dFPwKsE', 'caption' => 'This is why I am proud to be a recovering addict.' ],
+				[ 'id' => 'KVDVpTtRUPg', 'caption' => 'This is how I ended up in rehab with an addiction.' ],
+				[ 'id' => 'xxk-PAqWPQk', 'caption' => 'This is why I went to rehab.' ],
+			];
+			global $wpdb;
+			$ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%wp:rehab/home-testimonials%' AND post_status = 'publish'" );
+			foreach ( $ids as $pid ) {
+				$c   = get_post_field( 'post_content', $pid );
+				$new = preg_replace_callback(
+					'#<!-- wp:rehab/home-testimonials (\{.*?\}) /-->#s',
+					static function ( $m ) use ( $vids ) {
+						$attrs = json_decode( $m[1], true );
+						if ( ! is_array( $attrs ) ) { return $m[0]; }
+						$attrs['videos'] = $vids;
+						return '<!-- wp:rehab/home-testimonials ' . rehab_block_attrs( $attrs ) . ' /-->';
+					},
+					$c
+				);
+				if ( $new !== $c ) {
+					$wpdb->update( $wpdb->posts, [ 'post_content' => $new ], [ 'ID' => $pid ] );
+					clean_post_cache( $pid );
+					echo "updated {$pid}\n";
+				} else {
+					echo "no change on {$pid} (block not matched?)\n";
+				}
+			}
+			echo count( $ids ) . " page(s) scanned.\n";
+			break;
+
 		case 'list-rehab-pages':
 			// REH-10 validation sweep helper: list every published page whose
 			// content contains rehab/* custom blocks (the set that can show
