@@ -218,7 +218,8 @@ if ( $rehab_any_elfsight ) :
 // over the page; the footer bottom row reserves clearance for it (footer.css).
 if ( $elfsight_id ) :
 ?>
-<div class="rehab-chat-bubble elfsight-app-<?php echo esc_attr( $elfsight_id ); ?>" data-elfsight-app-lazy></div>
+<?php // elfsight-app-* first — the loader matches [class^="elfsight-app"] (REH-178). ?>
+<div class="elfsight-app-<?php echo esc_attr( $elfsight_id ); ?> rehab-chat-bubble" data-elfsight-app-lazy></div>
 <?php endif; ?>
 <?php wp_footer(); ?>
 </body>
