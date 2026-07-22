@@ -221,6 +221,12 @@ diamond_child_brand_contact( [
 	// embed when this is set (REH-124).
 	'rehab_elfsight_whatsapp_id' => '5edf62f4-6471-425b-948e-327b551420d2',
 
+	// Elfsight Google Reviews (REH-169): the compact rating badge replaces the
+	// static "4.9 · 48 Google reviews" line in assessment-hero + the reels
+	// corner; the carousel replaces the baked homepage review cards.
+	'rehab_elfsight_reviews_badge'    => '47cdcd48-2b08-47ad-bad1-7753a895d579',
+	'rehab_elfsight_reviews_carousel' => '215f0f85-7e21-4e81-822d-c394ab5a761c',
+
 	// Footer secondary numbers. Main number (+61) is the primary above; the Thai
 	// line is demoted here alongside the international call-back numbers (REH-88).
 	'rehab_footer_intl_phones' => "Thailand|+66 96 582 3832\nAustralia|+61 2 7908 2277\nUSA / Canada|+1 330 822 5340\nUK|+44 330 822 5340\nEurope|+31 20 532 2548",

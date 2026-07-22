@@ -202,13 +202,22 @@ $svg_kses = [ 'svg' => [ 'viewbox' => true, 'fill' => true, 'stroke' => true, 's
 <?php endif; // ! $suppress_sticky ?>
 
 <?php
+// Elfsight platform loader — one script serves every widget on the page (the
+// WhatsApp bubble here plus any review widgets rendered by blocks, REH-169).
+$rehab_any_elfsight = $elfsight_id
+	|| get_theme_mod( 'rehab_elfsight_reviews_badge', '' )
+	|| get_theme_mod( 'rehab_elfsight_reviews_carousel', '' );
+if ( $rehab_any_elfsight ) :
+?>
+<script src="https://static.elfsightcdn.com/platform.js" defer></script>
+<?php endif; ?>
+<?php
 // Floating WhatsApp chat bubble (Elfsight), same widget as the live site.
 // Renders only when a brand pins its widget ID — diamond-child does, via the
 // theme-mod filter map (REH-124). Elfsight injects a fixed bottom-right bubble
 // over the page; the footer bottom row reserves clearance for it (footer.css).
 if ( $elfsight_id ) :
 ?>
-<script src="https://static.elfsightcdn.com/platform.js" defer></script>
 <div class="rehab-chat-bubble elfsight-app-<?php echo esc_attr( $elfsight_id ); ?>" data-elfsight-app-lazy></div>
 <?php endif; ?>
 <?php wp_footer(); ?>

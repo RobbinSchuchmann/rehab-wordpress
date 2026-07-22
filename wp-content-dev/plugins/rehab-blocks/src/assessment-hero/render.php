@@ -47,7 +47,14 @@ $wrapper = get_block_wrapper_attributes( [
 						<a class="rehab-phone-link" href="<?php echo esc_url( $a['phoneHref'] ); ?>"><?php echo $phone_svg; // phpcs:ignore WordPress.Security.EscapeOutput ?><u><?php echo esc_html( $a['phoneText'] ); ?></u></a>
 					<?php endif; ?>
 				</div>
-				<?php if ( $a['showRating'] && '' !== $a['ratingScore'] ) : ?>
+				<?php
+				// Live Google-reviews badge when the brand pins one (REH-169);
+				// the static stars + count line is the fallback.
+				$rehab_rating_badge = function_exists( 'rehab_elfsight_embed' ) ? rehab_elfsight_embed( 'rehab_elfsight_reviews_badge' ) : '';
+				?>
+				<?php if ( $a['showRating'] && '' !== $rehab_rating_badge ) : ?>
+					<div class="rehab-assessment-hero__rating rehab-assessment-hero__rating--live"><?php echo $rehab_rating_badge; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+				<?php elseif ( $a['showRating'] && '' !== $a['ratingScore'] ) : ?>
 					<div class="rehab-assessment-hero__rating">
 						<span class="rehab-assessment-hero__stars" aria-hidden="true"><?php echo str_repeat( $star_svg, 5 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
 						<span><strong><?php echo esc_html( $a['ratingScore'] ); ?></strong> <?php echo wp_kses_post( $a['ratingText'] ); ?></span>

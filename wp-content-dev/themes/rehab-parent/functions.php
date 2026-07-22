@@ -588,6 +588,23 @@ function rehab_breadcrumb_category_url( string $name ): string {
 }
 
 /**
+ * Elfsight embed div for a theme-mod-pinned widget id (REH-169).
+ *
+ * Brands pin widget ids via the theme-mod filter map (diamond-child does for
+ * the WhatsApp bubble, the Google-reviews badge and the reviews carousel).
+ * The platform.js loader is printed once in footer.php whenever any Elfsight
+ * mod is set; this helper returns just the widget container ('' when the
+ * brand hasn't pinned one, letting callers keep their static fallback).
+ */
+function rehab_elfsight_embed( string $mod ): string {
+	$id = (string) get_theme_mod( $mod, '' );
+	if ( '' === $id ) {
+		return '';
+	}
+	return '<div class="rehab-elfsight elfsight-app-' . esc_attr( $id ) . '" data-elfsight-app-lazy></div>';
+}
+
+/**
  * Render the shared breadcrumb nav: Home / …middle crumbs… / current page.
  *
  * The treatment/hub/article templates carry their own bespoke breadcrumb (with
