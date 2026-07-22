@@ -124,10 +124,11 @@
 		text-align: center;
 		border-left: 0;
 		border-bottom: 2px solid transparent;
-		/* Symmetric padding — the underline spans the padding box, so a
-		   leftover right padding shifted it off the centred label (REH-146). */
-		padding-left: 0;
-		padding-right: 0;
+		/* Symmetric padding keeps the underline centred under the label
+		   (REH-146) — but it must stay non-zero, or adjacent labels run
+		   together with no gap between them (REH-179). */
+		padding-left: 1rem;
+		padding-right: 1rem;
 		margin-bottom: -1px;
 	}
 
