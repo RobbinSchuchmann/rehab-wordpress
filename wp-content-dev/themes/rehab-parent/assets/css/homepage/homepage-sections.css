@@ -953,6 +953,17 @@ th.drt-comparison__th--diamond {
 	text-align: center;
 }
 
+/* Home video reel (REH-180): the homepage now renders its testimonial clips
+   with the treatment pages' rehab/video-reel cards (compact, in-place play,
+   no lightbox) — identical 4-up grid. The card styling comes from the
+   rehab/video-reel block's style-index.css (enqueued by
+   home-testimonials/render.php); we only zero the reel's own section padding,
+   since it sits inside the already-padded drt section. */
+.drt-testimonials .rehab-video-reel--home {
+	padding: 0;
+	margin-bottom: 4rem;
+}
+
 .drt-testimonials__reviews {
 	max-width: 72rem;
 	margin: 0 auto;

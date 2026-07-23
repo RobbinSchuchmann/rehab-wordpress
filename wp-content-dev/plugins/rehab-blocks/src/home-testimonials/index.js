@@ -57,18 +57,26 @@ registerBlockType( metadata.name, {
 							<RichText tagName="p" className="drt-body" value={ a.videoIntro } onChange={ set( 'videoIntro' ) } placeholder="Video section intro…" allowedFormats={ [ 'core/bold', 'core/italic' ] } />
 						</div>
 
-						<div className="drt-testimonials__videos-grid">
-							{ videos.map( ( v, i ) => (
-								<div className="drt-testimonials__video-item" key={ i }>
-									<div className="drt-testimonials__video-thumb">
-										{ v.id ? <img src={ `https://img.youtube.com/vi/${ v.id }/maxresdefault.jpg` } alt={ v.caption || '' } /> : <div className="drt-testimonials__video-overlay" aria-hidden="true" /> }
-										<div className="drt-testimonials__play">
-											<svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><polygon points="5,3 19,12 5,21" /></svg>
+						{ /* Editor preview of the video-reel cards (REH-180); the
+						     front-end reuses rehab/video-reel's built CSS + view.js. */ }
+						<div className="rehab-video-reel rehab-video-reel--home">
+							<div className="rehab-video-reel__grid">
+								{ videos.map( ( v, i ) => (
+									<div className="rehab-video-card" key={ i }>
+										<div className="rehab-video-card__thumb rehab-video-card__thumb--tone-1">
+											{ v.id ? <img className="rehab-video-card__poster" src={ `https://i.ytimg.com/vi/${ v.id }/maxresdefault.jpg` } alt={ v.caption || '' } /> : null }
+											<span className="rehab-video-card__play" aria-hidden="true">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+											</span>
 										</div>
+										{ v.caption ? (
+											<div className="rehab-video-card__caption">
+												<div className="rehab-video-card__quote">{ v.caption }</div>
+											</div>
+										) : null }
 									</div>
-									<p className="drt-testimonials__video-caption">{ v.caption }</p>
-								</div>
-							) ) }
+								) ) }
+							</div>
 						</div>
 
 						<div className="drt-testimonials__reviews">
