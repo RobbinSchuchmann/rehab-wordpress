@@ -40,6 +40,11 @@ $reviewed_label = get_the_modified_date( 'M j, Y' );
 $category_label = function_exists( 'rehab_breadcrumb_category' )
 	? rehab_breadcrumb_category( $post_id )
 	: '';
+// Whether a real taxonomy/slug category was resolved. Only a real category
+// should render as the green eyebrow above the H1 — the title fallback below
+// is for the breadcrumb terminal only, otherwise the title prints twice
+// (green eyebrow + H1), a visible duplicate on fall-through articles (REH-182).
+$has_category = (bool) $category_label;
 // Most articles sit in the generic "Article" bucket, which resolves to no
 // category — fall back to the page title so every article still gets a
 // Home / Articles / … breadcrumb (REH-166).
@@ -69,7 +74,7 @@ $related_posts  = rehab_parent_resolve_related( $post_id, 4 );
 
 				<div class="rehab-article__column">
 
-					<?php if ( $category_label ) : ?>
+					<?php if ( $has_category ) : ?>
 						<p class="rehab-article__eyebrow"><?php echo esc_html( $category_label ); ?></p>
 					<?php endif; ?>
 
