@@ -2,12 +2,16 @@
 /**
  * Server-side render for `rehab/home-testimonials`.
  *
- * Emits the same drt- markup as the legacy section-testimonials.php
- * template-part: a video-testimonials header with a desktop grid + mobile
- * Swiper (data-drt-swiper="videos"), then a verified-review Swiper carousel
- * (data-drt-swiper="reviews"). Both Swipers, the data-drt-video lightbox
- * hooks and the data-review-card / data-review-toggle "read more" hooks are
- * preserved byte-identically so homepage.js still wires everything up.
+ * Video testimonials now reuse the treatment pages' `rehab/video-reel`
+ * presentation (REH-180): the same compact 9:16 card grid that plays in place
+ * (data-rehab-video-id → view.js swaps the thumb for a youtube-nocookie
+ * iframe), NOT the old oversized drt grid + Fancybox lightbox. We borrow the
+ * video-reel block's built style + view script by handle so the homepage gets
+ * the identical look and behaviour without duplicating CSS/JS.
+ *
+ * The verified-review Swiper carousel below (data-drt-swiper="reviews", the
+ * data-review-card / data-review-toggle "read more" hooks) is unchanged so
+ * homepage.js still wires it up.
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Unused.
@@ -17,6 +21,16 @@
 $a       = $attributes;
 $videos  = is_array( $a['videos'] ?? null ) ? $a['videos'] : [];
 $reviews = is_array( $a['reviews'] ?? null ) ? $a['reviews'] : [];
+
+// Borrow the video-reel block's compact card styling + in-place playback.
+// Both handles are registered when rehab/video-reel is registered on init, so
+// they are available to enqueue even though that block isn't on this page.
+if ( ! empty( $videos ) ) {
+	wp_enqueue_style( 'rehab-video-reel-style' );
+	wp_enqueue_script( 'rehab-video-reel-view-script' );
+}
+
+$reel_play_svg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 
 // Recovery.com icon — bundled homepage asset (fixed, not editable).
 $recovery_icon = get_stylesheet_directory_uri() . '/assets/images/homepage/logos/recovery-com-icon.png';
@@ -39,50 +53,36 @@ $wrapper = get_block_wrapper_attributes( [
 			<p class="drt-body"><?php echo wp_kses_post( $a['videoIntro'] ); ?></p>
 		</div>
 
-		<!-- Desktop: 3 videos grid -->
-		<div class="drt-testimonials__videos-grid">
-			<?php foreach ( $videos as $video ) : ?>
-				<div class="drt-testimonials__video-item">
-					<div class="drt-testimonials__video-thumb" data-drt-video="<?php echo esc_attr( $video['id'] ?? '' ); ?>">
-						<img
-							src="https://img.youtube.com/vi/<?php echo esc_attr( $video['id'] ?? '' ); ?>/maxresdefault.jpg"
-							alt="<?php echo esc_attr( $video['caption'] ?? '' ); ?>"
-							loading="lazy"
-						>
-						<div class="drt-testimonials__video-overlay" aria-hidden="true"></div>
-						<div class="drt-testimonials__play">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
-						</div>
-					</div>
-					<p class="drt-testimonials__video-caption"><?php echo esc_html( $video['caption'] ?? '' ); ?></p>
-				</div>
-			<?php endforeach; ?>
-		</div>
-
-		<!-- Mobile: Video Swiper -->
-		<div class="drt-testimonials__videos-mobile">
-			<div class="swiper" data-drt-swiper="videos">
-				<div class="swiper-wrapper">
-					<?php foreach ( $videos as $video ) : ?>
-						<div class="swiper-slide">
-							<div class="drt-testimonials__video-item">
-								<div class="drt-testimonials__video-thumb" data-drt-video="<?php echo esc_attr( $video['id'] ?? '' ); ?>">
-									<img
-										src="https://img.youtube.com/vi/<?php echo esc_attr( $video['id'] ?? '' ); ?>/maxresdefault.jpg"
-										alt="<?php echo esc_attr( $video['caption'] ?? '' ); ?>"
-										loading="lazy"
-									>
-									<div class="drt-testimonials__video-overlay" aria-hidden="true"></div>
-									<div class="drt-testimonials__play">
-										<svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
-									</div>
-								</div>
-								<p class="drt-testimonials__video-caption"><?php echo esc_html( $video['caption'] ?? '' ); ?></p>
+		<!-- Video reel: compact 9:16 cards, in-place playback (REH-180) -->
+		<div class="rehab-video-reel rehab-video-reel--home">
+			<div class="rehab-video-reel__grid">
+				<?php
+				foreach ( $videos as $video ) :
+					$vid     = (string) ( $video['id'] ?? '' );
+					$caption = (string) ( $video['caption'] ?? '' );
+					if ( '' === $vid ) {
+						continue;
+					}
+					?>
+					<div class="rehab-video-card">
+						<a class="rehab-video-card__thumb rehab-video-card__thumb--tone-1"
+							href="https://www.youtube.com/watch?v=<?php echo esc_attr( $vid ); ?>"
+							data-rehab-video="https://www.youtube.com/watch?v=<?php echo esc_attr( $vid ); ?>"
+							data-rehab-video-id="<?php echo esc_attr( $vid ); ?>">
+							<img class="rehab-video-card__poster"
+								src="https://i.ytimg.com/vi/<?php echo rawurlencode( $vid ); ?>/maxresdefault.jpg"
+								alt="<?php echo esc_attr( $caption ); ?>"
+								loading="lazy" decoding="async"
+								onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<?php echo rawurlencode( $vid ); ?>/hqdefault.jpg'" />
+							<span class="rehab-video-card__play" aria-hidden="true"><?php echo $reel_play_svg; // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+						</a>
+						<?php if ( '' !== $caption ) : ?>
+							<div class="rehab-video-card__caption">
+								<div class="rehab-video-card__quote"><?php echo esc_html( $caption ); ?></div>
 							</div>
-						</div>
-					<?php endforeach; ?>
-				</div>
-				<div class="drt-swiper-dots"></div>
+						<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 
