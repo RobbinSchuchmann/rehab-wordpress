@@ -237,12 +237,38 @@
 	}
 }
 
-/* Mobile owns the bottom edge with the sticky "Talk with admissions" bar, whose
-   chooser already offers WhatsApp — the bubble would just sit on top of it, so
-   hide the widget there (REH-125). The host div wraps the injected UI (shadow
-   DOM is disabled on this widget), so hiding it hides the fixed bubble too. */
+/* Mobile: the fixed sticky CTA bar owns the bottom edge, so the floating
+   WhatsApp widget must not sit on top of it.
+
+   IMPORTANT: Elfsight's platform.js injects the live button into its OWN fixed
+   portal at the end of <body> (`[class*="FloatingButton__FloatingButtonContainer"]`
+   / `[class*="FloatingWindow__Container"]`), NOT inside .rehab-chat-bubble.
+   Hiding the host div therefore does nothing to the visible button — that was
+   the mistaken REH-125 assumption. We target the injected portal directly:
+   lift the button clear of the sticky CTA bar (REH-181). The bar reserves ~76px
+   (body:has(.rehab-sticky-cta) padding-bottom, utility-bar.css), so 90px lands
+   the button just above it with a small gap. */
 @media (max-width: 720px) {
-	.rehab-chat-bubble {
-		display: none;
+	[class*="FloatingButton__FloatingButtonContainer"] {
+		bottom: 90px !important;
+	}
+}
+
+/* While the contact-sheet popup is open (contact-sheet.js toggles
+   body.rehab-sheet-open), hide the floating WhatsApp button and any open chat
+   window entirely — the sheet already offers WhatsApp, so the widget would be a
+   redundant overlap on top of the sheet (REH-181). */
+body.rehab-sheet-open [class*="FloatingButton__FloatingButtonContainer"],
+body.rehab-sheet-open [class*="FloatingWindow__Container"] {
+	display: none !important;
+}
+
+/* Mobile: give the footer's bottom row extra clearance so the lifted WhatsApp
+   button doesn't cover the copyright / Confidentiality Policy links at max
+   scroll. Mirrors the desktop has-chat clearance above; 4.5rem lands the legal
+   row just above the button, which sits ~132px up the viewport (REH-181). */
+@media (max-width: 720px) {
+	.rehab-site-footer--has-chat .rehab-site-footer__bottom {
+		padding-bottom: 4.5rem;
 	}
 }
